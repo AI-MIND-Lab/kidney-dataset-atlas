@@ -24,6 +24,17 @@ tasks:
   - segmentation
 annotations:
   - segmentation_masks
+features:
+  wsi:
+    status: absent
+    note: Fixture record documents no slides.
+  ctPhases:
+    status: present
+    phases: [invented arterial, invented portal venous]
+  clinicalData:
+    status: present
+  followUp:
+    status: not_documented
 access:
   mode: open_download
   registrationVisible: false

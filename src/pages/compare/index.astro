@@ -1,42 +1,343 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { catalog } from '../../lib/catalog';
-import { datasetPath, withBase } from '../../lib/site';
+import { compareEntries } from '../../lib/catalog';
+import { COMPARE_ROWS, MAX_COMPARE } from '../../lib/compare';
+import { withBase } from '../../lib/site';
 
-// Comparison itself (selection from the URL, difference mode, CSV export)
-// arrives in milestone 3. The no-JavaScript fallback below is the permanent
-// behaviour: the selection lives in the URL, which needs JavaScript to read,
-// and the dataset pages hold the same facts.
-const entries = await catalog();
+// Every published release travels with the page, so the comparison is built in
+// the browser from records rather than fetched. The selection lives in the URL.
+const entries = await compareEntries();
 ---
 
 <BaseLayout title="Compare" description="Compare two to four kidney dataset releases side by side.">
 	<h1>Compare releases</h1>
-	<p class="lede">Put two to four releases side by side and see where they differ.</p>
+	<p class="lede">
+		Put two to four releases side by side. Unknown values stay unknown: a release that does not document
+		something is never shown as not having it.
+	</p>
 
-	<div id="compare-app" hidden></div>
+	<script type="application/json" data-compare-entries set:html={JSON.stringify(entries)} />
+	<script type="application/json" data-compare-rows set:html={JSON.stringify(COMPARE_ROWS)} />
+
+	<div class="notice" data-compare-missing hidden>
+		<p data-compare-missing-text></p>
+	</div>
+
+	<form class="picker" data-compare-picker hidden>
+		<fieldset>
+			<legend>Releases (up to {MAX_COMPARE})</legend>
+			<div class="picker__options">
+				{
+					entries.map((entry) => (
+						<label>
+							<input type="checkbox" value={entry.id} data-compare-option />
+							{entry.name} <small>{entry.release}</small>
+						</label>
+					))
+				}
+			</div>
+		</fieldset>
+		<div class="picker__actions">
+			<label class="picker__toggle">
+				<input type="checkbox" data-compare-differences />
+				Show differences only
+			</label>
+			<button type="button" class="button" data-compare-csv>Download CSV</button>
+			<button type="button" class="link-button" data-compare-clear>Clear selection</button>
+		</div>
+	</form>
+
+	<div data-compare-result>
+		<div class="empty-state" data-compare-empty>
+			<p><strong>Choose two releases to compare.</strong></p>
+			<p>
+				Pick them above, or add them from the <a href={withBase('/')}>dataset explorer</a> and open the
+				comparison from its tray.
+			</p>
+		</div>
+		<div class="table-scroll" data-compare-table hidden></div>
+	</div>
 
 	<noscript>
 		<div class="notice">
-			<p>Comparison needs JavaScript, because the selected releases are read from the page address.</p>
+			<p>
+				Comparison needs JavaScript, because the selected releases are read from the page address. Every fact
+				below also appears on each dataset's own page.
+			</p>
 		</div>
-	</noscript>
-
-	<h2>Published datasets</h2>
-	{
-		entries.length === 0 ? (
-			<div class="empty-state">
-				<p>No datasets are published yet, so there is nothing to compare.</p>
-			</div>
-		) : (
-			<ul>
-				{entries.map(({ dataset, current }) => (
+		<ul>
+			{
+				entries.map((entry) => (
 					<li>
-						<a href={withBase(datasetPath(dataset.data.slug))}>{dataset.data.name}</a> — current release{' '}
-						{current.data.versionLabel}
+						<a href={withBase(entry.href)}>
+							{entry.name} — {entry.release}
+						</a>
 					</li>
-				))}
-			</ul>
-		)
-	}
+				))
+			}
+		</ul>
+	</noscript>
 </BaseLayout>
+
+<script>
+	import {
+		MAX_COMPARE,
+		compareCsv,
+		differingRows,
+		parseSelection,
+		visibleRows,
+		type CompareEntry,
+	} from '../../lib/compare';
+
+	const readJson = <T,>(selector: string): T =>
+		JSON.parse(document.querySelector<HTMLScriptElement>(selector)?.textContent ?? '[]');
+
+	const entries = readJson<CompareEntry[]>('[data-compare-entries]');
+	const picker = document.querySelector<HTMLFormElement>('[data-compare-picker]');
+	if (picker && entries.length > 0) {
+		const validIds = entries.map((entry) => entry.id);
+		const table = document.querySelector<HTMLElement>('[data-compare-table]')!;
+		const emptyState = document.querySelector<HTMLElement>('[data-compare-empty]')!;
+		const missingNotice = document.querySelector<HTMLElement>('[data-compare-missing]')!;
+		const missingText = document.querySelector<HTMLElement>('[data-compare-missing-text]')!;
+		const differencesToggle = document.querySelector<HTMLInputElement>('[data-compare-differences]')!;
+
+		picker.hidden = false;
+		picker.addEventListener('submit', (event) => event.preventDefault());
+
+		let selected: string[] = [];
+		let differencesOnly = false;
+
+		function readUrl() {
+			const params = new URLSearchParams(location.search);
+			const { selected: valid, missing } = parseSelection(params.get('releases'), validIds);
+			selected = valid;
+			differencesOnly = params.get('differences') === '1';
+			differencesToggle.checked = differencesOnly;
+
+			missingNotice.hidden = missing.length === 0;
+			if (missing.length > 0) {
+				missingText.textContent =
+					missing.length === 1
+						? `The release "${missing[0]}" is not in the catalog, so it was left out. It may have been withdrawn, or the link may be mistyped.`
+						: `${missing.length} selected releases are not in the catalog and were left out: ${missing.join(', ')}.`;
+			}
+		}
+
+		function writeUrl(push: boolean) {
+			const params = new URLSearchParams();
+			if (selected.length > 0) params.set('releases', selected.join(','));
+			if (differencesOnly) params.set('differences', '1');
+			const url = params.toString() ? `${location.pathname}?${params}` : location.pathname;
+			history[push ? 'pushState' : 'replaceState']({}, '', url);
+			try {
+				localStorage.setItem('atlas.compare', JSON.stringify(selected));
+			} catch {
+				/* storage blocked: the URL still carries the selection */
+			}
+		}
+
+		function chosen(): CompareEntry[] {
+			return selected
+				.map((id) => entries.find((entry) => entry.id === id))
+				.filter((entry): entry is CompareEntry => Boolean(entry));
+		}
+
+		function render() {
+			for (const box of picker!.querySelectorAll<HTMLInputElement>('[data-compare-option]')) {
+				box.checked = selected.includes(box.value);
+				box.disabled = !box.checked && selected.length >= MAX_COMPARE;
+			}
+
+			const columns = chosen();
+			const enough = columns.length >= 2;
+			emptyState.hidden = enough;
+			table.hidden = !enough;
+
+			if (!enough) {
+				emptyState.querySelector('strong')!.textContent =
+					columns.length === 1
+						? 'Choose one more release to compare.'
+						: 'Choose two releases to compare.';
+				return;
+			}
+
+			const rows = visibleRows(columns, differencesOnly);
+			const differing = differingRows(columns);
+
+			// Built with DOM methods, not markup strings: record text and the
+			// URL are data, and must never be parsed as HTML.
+			const element = <K extends keyof HTMLElementTagNameMap>(
+				tag: K,
+				text?: string,
+				className?: string,
+			): HTMLElementTagNameMap[K] => {
+				const node = document.createElement(tag);
+				if (text !== undefined) node.textContent = text;
+				if (className) node.className = className;
+				return node;
+			};
+
+			const headRow = element('tr');
+			headRow.append(Object.assign(element('th', 'Field'), { scope: 'col' }));
+			for (const entry of columns) {
+				const cell = element('th');
+				cell.scope = 'col';
+				const link = element('a', entry.name);
+				link.href = entry.href;
+				cell.append(link, element('br'), element('small', entry.release));
+				headRow.append(cell);
+			}
+
+			const body = element('tbody');
+			for (const row of rows) {
+				const tr = element('tr');
+				const header = element('th');
+				header.scope = 'row';
+				header.append(row.label);
+				if (differing.has(row.key)) header.append(' ', element('span', 'differs', 'badge'));
+				tr.append(header);
+				for (const entry of columns) {
+					const cell = entry.cells[row.key];
+					tr.append(element('td', cell?.text ?? '', cell?.unknown ? 'cell--unknown' : undefined));
+				}
+				body.append(tr);
+			}
+
+			const rendered = element('table', undefined, 'compare-table');
+			const head = element('thead');
+			head.append(headRow);
+			rendered.append(head, body);
+
+			table.replaceChildren(rendered);
+			if (rows.length === 0) {
+				table.append(element('p', 'These releases agree on every recorded field.', 'compare-note'));
+			}
+		}
+
+		for (const box of picker.querySelectorAll<HTMLInputElement>('[data-compare-option]')) {
+			box.addEventListener('change', () => {
+				selected = box.checked
+					? [...selected, box.value].slice(0, MAX_COMPARE)
+					: selected.filter((id) => id !== box.value);
+				writeUrl(true);
+				render();
+			});
+		}
+
+		differencesToggle.addEventListener('change', () => {
+			differencesOnly = differencesToggle.checked;
+			writeUrl(true);
+			render();
+		});
+
+		document.querySelector<HTMLButtonElement>('[data-compare-clear]')!.addEventListener('click', () => {
+			selected = [];
+			writeUrl(true);
+			render();
+		});
+
+		document.querySelector<HTMLButtonElement>('[data-compare-csv]')!.addEventListener('click', () => {
+			const columns = chosen();
+			if (columns.length === 0) return;
+			const csv = compareCsv(columns, visibleRows(columns, differencesOnly));
+			const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+			const link = document.createElement('a');
+			link.href = url;
+			link.download = `comparison-${columns.map((entry) => entry.id).join('-')}.csv`;
+			link.click();
+			URL.revokeObjectURL(url);
+		});
+
+		window.addEventListener('popstate', () => {
+			readUrl();
+			render();
+		});
+
+		readUrl();
+		writeUrl(false);
+		render();
+	}
+</script>
+
+<style>
+	.picker {
+		margin-bottom: 1.25rem;
+		display: grid;
+		gap: 0.75rem;
+	}
+
+	.picker fieldset {
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		background: var(--surface-muted);
+		padding: 0.6rem 0.9rem 0.8rem;
+		margin: 0;
+	}
+
+	.picker legend {
+		font-weight: 650;
+		font-size: 0.9rem;
+		color: var(--ink-muted);
+		padding-inline: 0.25rem;
+	}
+
+	.picker__options {
+		display: grid;
+		gap: 0.3rem;
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	}
+
+	.picker__options label {
+		display: flex;
+		align-items: baseline;
+		gap: 0.4rem;
+		font-size: 0.95rem;
+	}
+
+	.picker__options small {
+		color: var(--ink-muted);
+	}
+
+	.picker__actions {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.75rem 1.25rem;
+	}
+
+	.picker__toggle {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	/* The table is built by script, so these rules are global rather than
+	   scoped to markup rendered at build time. */
+	:global(.compare-table thead th) {
+		position: sticky;
+		top: 0;
+		background: var(--surface-muted);
+		z-index: 1;
+	}
+
+	:global(.compare-table th[scope='row']) {
+		font-weight: 650;
+		white-space: nowrap;
+	}
+
+	:global(.compare-table td) {
+		min-width: 12rem;
+	}
+
+	/* Unknown is marked in words as well as in colour. */
+	:global(.compare-table .cell--unknown) {
+		color: var(--ink-muted);
+		font-style: italic;
+	}
+
+	:global(.compare-note) {
+		padding: 0.75rem;
+		color: var(--ink-muted);
+	}
+</style>

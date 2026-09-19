@@ -16,6 +16,16 @@ tasks:
   - classification
 annotations:
   - pathology_labels
+features:
+  wsi:
+    status: present
+    note: Invented slide images.
+  ctPhases:
+    status: not_applicable
+  clinicalData:
+    status: not_documented
+  followUp:
+    status: not_documented
 access:
   mode: registration_required
   registrationVisible: true

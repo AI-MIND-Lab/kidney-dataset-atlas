@@ -7,16 +7,19 @@
  */
 import { getCollection, type CollectionEntry } from 'astro:content';
 import type { z } from 'astro/zod';
-import { overlap, qualityFinding, sample, source, studyUse, variable } from './schemas.mjs';
+import { count, overlap, qualityFinding, sample, source, studyUse, variable } from './schemas.mjs';
+import type { CompareCell, CompareEntry } from './compare';
+import { accessLabel, completenessLabel, countLabel, dateLabel, humanize, stateLabel } from './display';
 import { FACET_KEYS, type ExplorerEntry, type FacetKey } from './explorer';
 import { collectSourceIds } from './records';
-import { datasetPath, SITE } from './site';
+import { datasetPath, releasePath, SITE } from './site';
 
 export type Dataset = CollectionEntry<'datasets'>;
 export type Release = CollectionEntry<'releases'>;
 export type Paper = CollectionEntry<'papers'>;
 
 export type Variable = z.infer<typeof variable>;
+type Count = z.infer<typeof count>;
 export type StudyUse = z.infer<typeof studyUse>;
 export type Sample = z.infer<typeof sample>;
 export type QualityFinding = z.infer<typeof qualityFinding>;
@@ -192,6 +195,90 @@ export async function explorerEntries(): Promise<ExplorerEntry[]> {
 			preview: preview ? { src: preview.assets[0]!.path, alt: preview.alt } : null,
 		};
 	});
+}
+
+const KNOWN_CELL = (text: string): CompareCell => ({ text, unknown: false });
+const UNKNOWN_CELL = (text: string): CompareCell => ({ text, unknown: true });
+
+const countCell = (value: Count | undefined): CompareCell =>
+	value?.status === 'present' && value.value !== null
+		? KNOWN_CELL(value.value.toLocaleString('en-US'))
+		: UNKNOWN_CELL(countLabel(value));
+
+/** A documented feature, or the reason it is not known. */
+function featureCell(value: { status: string; note?: string } | undefined, extra?: string): CompareCell {
+	if (!value) return UNKNOWN_CELL('Not documented');
+	const label = stateLabel(value.status as Parameters<typeof stateLabel>[0]);
+	const text = [label, extra, value.note].filter(Boolean).join(' — ');
+	return value.status === 'present' || value.status === 'absent'
+		? KNOWN_CELL(text)
+		: UNKNOWN_CELL(text);
+}
+
+const listCell = (values: string[], empty: string): CompareCell =>
+	values.length > 0 ? KNOWN_CELL(values.join(', ')) : UNKNOWN_CELL(empty);
+
+/** One column of the comparison table, built from the records. */
+export async function compareEntries(): Promise<CompareEntry[]> {
+	const entries = await catalog();
+	const columns: CompareEntry[] = [];
+
+	for (const { dataset, releases } of entries) {
+		for (const release of releases) {
+			const data = release.data;
+			const pairings = data.pairing.filter((entry) => entry.status === 'present');
+			const overlaps = overlapsForRelease(data.id);
+			const phases = data.features?.ctPhases?.phases ?? [];
+
+			columns.push({
+				id: data.id,
+				name: dataset.data.name,
+				release: data.versionLabel,
+				href: releasePath(dataset.data.slug, data.id),
+				cells: {
+					release: KNOWN_CELL(data.versionLabel),
+					releaseDate: data.releaseDate
+						? KNOWN_CELL(dateLabel(data.releaseDate))
+						: UNKNOWN_CELL('Not documented'),
+					patients: countCell(data.counts.patients),
+					examinations: countCell(data.counts.examinations),
+					lesions: countCell(data.counts.lesions),
+					slices: countCell(data.counts.slices),
+					slides: countCell(data.counts.slides),
+					records: countCell(data.counts.records),
+					disease: listCell(dataset.data.diseaseTags.map(humanize), 'Not documented'),
+					modalities: listCell(data.modalities.map(humanize), 'Not documented'),
+					annotations: listCell(
+						data.annotations.filter((value) => value !== 'not_documented').map(humanize),
+						'Not documented',
+					),
+					ctPhases: featureCell(data.features?.ctPhases, phases.join(', ') || undefined),
+					wsi: featureCell(data.features?.wsi),
+					clinicalData: featureCell(data.features?.clinicalData),
+					followUp: featureCell(data.features?.followUp),
+					pairing:
+						pairings.length > 0
+							? KNOWN_CELL(pairings.map((entry) => humanize(entry.kind)).join(', '))
+							: UNKNOWN_CELL('No verified pairing documented'),
+					dictionary: KNOWN_CELL(completenessLabel(data.dictionary.completeness)),
+					access: KNOWN_CELL(accessLabel(data.access.mode)),
+					license: KNOWN_CELL(data.license.name),
+					verified: data.verifiedOn ? KNOWN_CELL(dateLabel(data.verifiedOn)) : UNKNOWN_CELL('Not verified'),
+					limitations: listCell(data.limitations, 'None recorded'),
+					overlap:
+						overlaps.length > 0
+							? KNOWN_CELL(
+									overlaps
+										.map((entry) => `${humanize(entry.type)}: ${entry.explanation}`)
+										.join(' · '),
+								)
+							: UNKNOWN_CELL('No documented overlap'),
+				},
+			});
+		}
+	}
+
+	return columns;
 }
 
 /** The values that actually occur, so no filter offers an empty result. */

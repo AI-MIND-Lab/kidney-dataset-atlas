@@ -1,0 +1,358 @@
+---
+import type { Release } from '../lib/catalog';
+import type { Variable } from '../lib/dictionary';
+import { indexEntry, PAGE_SIZE } from '../lib/dictionary';
+import { completenessLabel, humanize } from '../lib/display';
+import { withBase } from '../lib/site';
+
+interface Props {
+	release: Release;
+	variables: Variable[];
+}
+
+const { release, variables } = Astro.props;
+const dictionary = release.data.dictionary;
+
+// Every documented variable is written into the page: the dictionary then
+// works without JavaScript and Pagefind indexes it, so a site-wide search for
+// a variable name finds the datasets that document it.
+const index = variables.map(indexEntry);
+const unique = (values: string[]) => [...new Set(values)].sort();
+const groups = unique(variables.map((entry) => entry.group));
+const types = unique(variables.map((entry) => entry.type));
+const levels = unique(variables.map((entry) => entry.observationLevel));
+---
+
+<div class="dictionary" data-dictionary data-page-size={PAGE_SIZE}>
+	<script type="application/json" data-dictionary-index set:html={JSON.stringify(index)} />
+
+	<p class="dictionary__completeness">
+		<strong>Completeness:</strong> {completenessLabel(dictionary.completeness)}.
+		<strong>Inspected:</strong> {dictionary.inspectedScope}
+		{
+			dictionary.completeness !== 'complete_for_inspected_release' && (
+				<>
+					<br />
+					<small>This is not the dataset's full variable list. A variable missing here may still exist.</small>
+				</>
+			)
+		}
+	</p>
+
+	{
+		variables.length === 0 ? (
+			<div class="empty-state">
+				<p>No variables are documented for this release yet.</p>
+			</div>
+		) : (
+			<>
+				<div class="dictionary__controls" data-dictionary-controls hidden>
+					<label class="dictionary__search">
+						Search variables
+						<input type="search" placeholder="Name, meaning or coded value" autocomplete="off" data-dict-q />
+					</label>
+					<label>
+						Group
+						<select data-dict-filter="group">
+							<option value="">All</option>
+							{groups.map((value) => (
+								<option value={value}>{humanize(value)}</option>
+							))}
+						</select>
+					</label>
+					<label>
+						Type
+						<select data-dict-filter="type">
+							<option value="">All</option>
+							{types.map((value) => (
+								<option value={value}>{humanize(value)}</option>
+							))}
+						</select>
+					</label>
+					<label>
+						Level
+						<select data-dict-filter="level">
+							<option value="">All</option>
+							{levels.map((value) => (
+								<option value={value}>{humanize(value)}</option>
+							))}
+						</select>
+					</label>
+				</div>
+
+				<p class="dictionary__meta">
+					<span data-dict-count aria-live="polite">{variables.length} variables</span>
+					<span class="dictionary__downloads">
+						Download the full documented dictionary:
+						<a href={withBase(`/downloads/${release.data.id}/variables.csv`)}>CSV</a>
+						<a href={withBase(`/downloads/${release.data.id}/variables.json`)}>JSON</a>
+					</span>
+				</p>
+
+				<div class="table-scroll">
+					<table>
+						<thead>
+							<tr>
+								<th scope="col">Name</th>
+								<th scope="col">Definition</th>
+								<th scope="col">Type</th>
+								<th scope="col">Level</th>
+								<th scope="col">Group</th>
+							</tr>
+						</thead>
+						<tbody>
+							{variables.map((entry) => (
+								<tr id={`var-${entry.id}`} data-variable-id={entry.id}>
+									<th scope="row">
+										<code>{entry.originalName}</code>
+									</th>
+									<td>
+										{entry.definition}
+										<details>
+											<summary>Details</summary>
+											<dl>
+												<dt>Unit</dt>
+												<dd>{entry.unit ?? 'Not applicable'}</dd>
+												<dt>Coding</dt>
+												<dd>
+													{entry.coding.length === 0
+														? 'Not documented'
+														: entry.coding.map((code) => `${code.code} = ${code.meaning}`).join('; ')}
+												</dd>
+												<dt>Missing values</dt>
+												<dd>{entry.missingValues.join(', ') || 'Not documented'}</dd>
+												<dt>File</dt>
+												<dd>{entry.file ?? 'Not documented'}</dd>
+												<dt>Time point</dt>
+												<dd>{entry.timePoint ?? 'Not applicable'}</dd>
+												<dt>Role</dt>
+												<dd>{humanize(entry.role)}</dd>
+												<dt>Derivation</dt>
+												<dd>{humanize(entry.derivation)}</dd>
+												<dt>Normalized concept</dt>
+												<dd>{entry.normalizedConcept ?? 'Not mapped'}</dd>
+												<dt>Provenance</dt>
+												<dd>{entry.provenance ?? 'Not documented'}</dd>
+												<dt>Evidence</dt>
+												<dd>
+													{humanize(entry.evidence?.status ?? 'not_verified')}
+													{entry.evidence?.locator && <> — {entry.evidence.locator}</>}
+												</dd>
+											</dl>
+										</details>
+									</td>
+									<td>{humanize(entry.type)}</td>
+									<td>{humanize(entry.observationLevel)}</td>
+									<td>{humanize(entry.group)}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+
+				<div class="empty-state" data-dict-empty hidden>
+					<p>No documented variable matches that search.</p>
+				</div>
+
+				<nav class="dictionary__pages" data-dict-pages hidden aria-label="Dictionary pages">
+					<button type="button" data-dict-prev>Previous</button>
+					<span data-dict-page-label aria-live="polite" />
+					<button type="button" data-dict-next>Next</button>
+				</nav>
+			</>
+		)
+	}
+</div>
+
+<script>
+	import {
+		emptyFilters,
+		matchesVariable,
+		pageCount,
+		pageSlice,
+		type DictionaryFilters,
+		type DictionaryIndexEntry,
+	} from '../lib/dictionary';
+
+	for (const root of document.querySelectorAll<HTMLElement>('[data-dictionary]')) {
+		const dataScript = root.querySelector<HTMLScriptElement>('[data-dictionary-index]');
+		const controls = root.querySelector<HTMLElement>('[data-dictionary-controls]');
+		if (!dataScript || !controls) continue;
+
+		const index: DictionaryIndexEntry[] = JSON.parse(dataScript.textContent ?? '[]');
+		const pageSize = Number(root.dataset.pageSize) || 50;
+		const rows = new Map(
+			[...root.querySelectorAll<HTMLTableRowElement>('[data-variable-id]')].map((row) => [
+				row.dataset.variableId!,
+				row,
+			]),
+		);
+		const countText = root.querySelector<HTMLElement>('[data-dict-count]')!;
+		const emptyState = root.querySelector<HTMLElement>('[data-dict-empty]')!;
+		const pager = root.querySelector<HTMLElement>('[data-dict-pages]')!;
+		const pageLabel = root.querySelector<HTMLElement>('[data-dict-page-label]')!;
+
+		// Filters and paging appear only once they can work.
+		controls.hidden = false;
+
+		const filters: DictionaryFilters = emptyFilters();
+		let page = 1;
+
+		function render() {
+			const matching = index.filter((entry) => matchesVariable(entry, filters));
+			const total = pageCount(matching.length, pageSize);
+			page = Math.min(page, total);
+			const visible = new Set(pageSlice(matching, page, pageSize).map((entry) => entry.id));
+
+			for (const [id, row] of rows) row.hidden = !visible.has(id);
+
+			countText.textContent =
+				matching.length === index.length
+					? `${index.length} variable${index.length === 1 ? '' : 's'}`
+					: `${matching.length} of ${index.length} variables`;
+			emptyState.hidden = matching.length > 0;
+			pager.hidden = matching.length <= pageSize;
+			pageLabel.textContent = `Page ${page} of ${total}`;
+			(root.querySelector('[data-dict-prev]') as HTMLButtonElement).disabled = page <= 1;
+			(root.querySelector('[data-dict-next]') as HTMLButtonElement).disabled = page >= total;
+		}
+
+		const search = root.querySelector<HTMLInputElement>('[data-dict-q]')!;
+		let typing: number | undefined;
+		search.addEventListener('input', () => {
+			filters.q = search.value;
+			page = 1;
+			window.clearTimeout(typing);
+			typing = window.setTimeout(render, 120);
+		});
+
+		for (const select of root.querySelectorAll<HTMLSelectElement>('[data-dict-filter]')) {
+			select.addEventListener('change', () => {
+				const key = select.dataset.dictFilter as 'group' | 'type' | 'level';
+				filters[key] = select.value;
+				page = 1;
+				render();
+			});
+		}
+
+		root.querySelector<HTMLButtonElement>('[data-dict-prev]')!.addEventListener('click', () => {
+			page = Math.max(1, page - 1);
+			render();
+		});
+
+		root.querySelector<HTMLButtonElement>('[data-dict-next]')!.addEventListener('click', () => {
+			page = page + 1;
+			render();
+		});
+
+		// A link to a specific variable must not land on a hidden row.
+		const openTarget = () => {
+			const id = location.hash.replace('#var-', '');
+			if (!location.hash.startsWith('#var-') || !rows.has(id)) return;
+			const position = index.findIndex((entry) => entry.id === id);
+			if (position >= 0) {
+				page = Math.floor(position / pageSize) + 1;
+				render();
+				rows.get(id)!.scrollIntoView();
+			}
+		};
+
+		render();
+		openTarget();
+		window.addEventListener('hashchange', openTarget);
+	}
+</script>
+
+<style>
+	.dictionary__completeness {
+		margin-bottom: 0.75rem;
+	}
+
+	.dictionary__completeness small {
+		color: var(--ink-muted);
+	}
+
+	.dictionary__controls {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem 1rem;
+		align-items: end;
+		padding: 0.75rem;
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		background: var(--surface-muted);
+		margin-bottom: 0.75rem;
+	}
+
+	.dictionary__controls label {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+		font-size: 0.9rem;
+		font-weight: 650;
+	}
+
+	.dictionary__controls input,
+	.dictionary__controls select {
+		font: inherit;
+		font-weight: 400;
+		padding: 0.35rem 0.5rem;
+		border: 1px solid var(--border-strong);
+		border-radius: var(--radius);
+		background: var(--surface);
+	}
+
+	.dictionary__search {
+		flex: 1 1 16rem;
+	}
+
+	.dictionary__meta {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 0.5rem 1rem;
+		font-size: 0.9rem;
+		color: var(--ink-muted);
+	}
+
+	.dictionary__downloads a {
+		margin-left: 0.5rem;
+	}
+
+	.dictionary__pages {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin-top: 0.75rem;
+		font-size: 0.9rem;
+	}
+
+	.dictionary__pages button {
+		font: inherit;
+		padding: 0.25rem 0.7rem;
+		border: 1px solid var(--border-strong);
+		border-radius: var(--radius);
+		background: var(--surface);
+		cursor: pointer;
+	}
+
+	.dictionary__pages button[disabled] {
+		opacity: 0.5;
+		cursor: default;
+	}
+
+	dl dt {
+		font-weight: 650;
+		margin-top: 0.4rem;
+	}
+
+	dl dd {
+		margin: 0;
+	}
+
+	details summary {
+		cursor: pointer;
+		color: var(--accent-ink);
+		font-size: 0.9rem;
+	}
+</style>

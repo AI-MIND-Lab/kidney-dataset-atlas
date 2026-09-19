@@ -1,0 +1,275 @@
+---
+import type { Sample } from '../lib/catalog';
+import { withBase } from '../lib/site';
+
+interface Props {
+	samples: Sample[];
+	officialUrl: string;
+}
+
+const { samples, officialUrl } = Astro.props;
+
+/**
+ * A sample only gets a slider when it really has several slices, and a mask
+ * control when masks really exist for those slices. Controls that do nothing
+ * would imply the dataset offers something it may not.
+ */
+function viewerFor(sample: Sample) {
+	const images = sample.assets
+		.filter((asset) => asset.role === 'image')
+		.sort((a, b) => (a.sliceIndex ?? 0) - (b.sliceIndex ?? 0));
+	const masks = sample.assets.filter((asset) => asset.role !== 'image');
+	const maskFor = (sliceIndex: number | null) =>
+		masks.find((mask) => mask.sliceIndex === sliceIndex) ?? (masks.length === 1 ? masks[0] : undefined);
+
+	return {
+		images,
+		hasSlider: images.length > 1,
+		hasMask: images.some((image) => maskFor(image.sliceIndex)),
+		maskFor,
+	};
+}
+
+const viewers = samples.map((sample) => ({ sample, ...viewerFor(sample) }));
+---
+
+{
+	samples.length === 0 ? (
+		<div class="empty-state">
+			<p>No previews are published for this release.</p>
+			<p>
+				A preview appears only where reuse permission has been checked for that image. Until then, see the{' '}
+				<a href={officialUrl}>official source</a>.
+			</p>
+		</div>
+	) : (
+		<ul class="samples">
+			{viewers.map(({ sample, images, hasSlider, hasMask, maskFor }) => (
+				<li class="sample" data-sample>
+					<figure>
+						<div class="sample__frame">
+							{images.map((image, index) => {
+								const mask = maskFor(image.sliceIndex);
+								return (
+									<div class="sample__slice" data-slice={index} hidden={index !== 0}>
+										<img
+											src={withBase(image.path)}
+											alt={index === 0 ? sample.alt : ''}
+											width={image.width}
+											height={image.height}
+											loading="lazy"
+										/>
+										{mask && (
+											<img
+												class="sample__mask"
+												data-mask
+												src={withBase(mask.path)}
+												alt=""
+												width={mask.width}
+												height={mask.height}
+												loading="lazy"
+											/>
+										)}
+									</div>
+								);
+							})}
+							<button type="button" class="sample__zoom" data-zoom hidden>
+								Zoom
+							</button>
+						</div>
+
+						{(hasSlider || hasMask) && (
+							<div class="sample__controls" data-sample-controls hidden>
+								{hasSlider && (
+									<label>
+										Slice <span data-slice-label>1</span> of {images.length}
+										<input type="range" min="0" max={images.length - 1} value="0" step="1" data-slice-input />
+									</label>
+								)}
+								{hasMask && (
+									<>
+										<label class="sample__checkbox">
+											<input type="checkbox" checked data-mask-toggle />
+											Show mask
+										</label>
+										<label>
+											Mask opacity
+											<input type="range" min="0" max="100" value="60" step="5" data-mask-opacity />
+										</label>
+									</>
+								)}
+							</div>
+						)}
+
+						<figcaption>
+							<strong>{sample.kind === 'dataset_sample' ? 'Actual dataset sample' : 'Published figure'}.</strong>{' '}
+							{sample.caption}
+							<br />
+							<small>
+								{sample.attribution} · Reuse: {sample.reuseTerms}
+								{sample.alignment && <> · {sample.alignment}</>}
+							</small>
+						</figcaption>
+					</figure>
+				</li>
+			))}
+		</ul>
+	)
+}
+
+<dialog class="zoom-dialog" data-zoom-dialog>
+	<form method="dialog">
+		<button class="button" value="close">Close</button>
+	</form>
+	<img data-zoom-image alt="" />
+	<p data-zoom-caption></p>
+</dialog>
+
+<script>
+	const dialog = document.querySelector<HTMLDialogElement>('[data-zoom-dialog]');
+
+	for (const root of document.querySelectorAll<HTMLElement>('[data-sample]')) {
+		const slices = [...root.querySelectorAll<HTMLElement>('[data-slice]')];
+		const controls = root.querySelector<HTMLElement>('[data-sample-controls]');
+		const zoomButton = root.querySelector<HTMLButtonElement>('[data-zoom]');
+		if (controls) controls.hidden = false;
+		if (zoomButton && dialog) zoomButton.hidden = false;
+
+		const sliceInput = root.querySelector<HTMLInputElement>('[data-slice-input]');
+		const sliceLabel = root.querySelector<HTMLElement>('[data-slice-label]');
+		const maskToggle = root.querySelector<HTMLInputElement>('[data-mask-toggle]');
+		const maskOpacity = root.querySelector<HTMLInputElement>('[data-mask-opacity]');
+
+		const showSlice = (index: number) => {
+			slices.forEach((slice, position) => {
+				slice.hidden = position !== index;
+			});
+			if (sliceLabel) sliceLabel.textContent = String(index + 1);
+		};
+
+		const applyMask = () => {
+			const visible = maskToggle ? maskToggle.checked : true;
+			const opacity = maskOpacity ? Number(maskOpacity.value) / 100 : 0.6;
+			for (const mask of root.querySelectorAll<HTMLElement>('[data-mask]')) {
+				mask.style.opacity = visible ? String(opacity) : '0';
+			}
+		};
+
+		sliceInput?.addEventListener('input', () => showSlice(Number(sliceInput.value)));
+		maskToggle?.addEventListener('change', applyMask);
+		maskOpacity?.addEventListener('input', applyMask);
+		applyMask();
+
+		zoomButton?.addEventListener('click', () => {
+			const current = slices.find((slice) => !slice.hidden) ?? slices[0];
+			const image = current?.querySelector('img');
+			const zoomImage = dialog!.querySelector<HTMLImageElement>('[data-zoom-image]')!;
+			const caption = dialog!.querySelector<HTMLElement>('[data-zoom-caption]')!;
+			if (!image) return;
+			zoomImage.src = image.src;
+			zoomImage.alt = image.alt || 'Enlarged preview';
+			caption.textContent = root.querySelector('figcaption')?.textContent?.trim() ?? '';
+			dialog!.showModal();
+		});
+	}
+</script>
+
+<style>
+	.samples {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		gap: 1.5rem;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	}
+
+	figure {
+		margin: 0;
+	}
+
+	.sample__frame {
+		position: relative;
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		overflow: hidden;
+		background: #12161a;
+	}
+
+	.sample__slice img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	.sample__mask {
+		position: absolute;
+		inset: 0;
+		mix-blend-mode: screen;
+		pointer-events: none;
+	}
+
+	.sample__zoom {
+		position: absolute;
+		right: 0.5rem;
+		top: 0.5rem;
+		font: inherit;
+		font-size: 0.85rem;
+		padding: 0.15rem 0.6rem;
+		border: 1px solid var(--border-strong);
+		border-radius: var(--radius);
+		background: var(--surface);
+		cursor: pointer;
+	}
+
+	.sample__controls {
+		display: grid;
+		gap: 0.35rem;
+		margin-top: 0.5rem;
+		font-size: 0.9rem;
+	}
+
+	.sample__controls label {
+		display: grid;
+		gap: 0.15rem;
+	}
+
+	.sample__checkbox {
+		display: flex !important;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	figcaption {
+		margin-top: 0.5rem;
+		font-size: 0.92rem;
+	}
+
+	figcaption small {
+		color: var(--ink-muted);
+	}
+
+	.zoom-dialog {
+		border: 1px solid var(--border-strong);
+		border-radius: var(--radius);
+		padding: 1rem;
+		max-width: min(90vw, 40rem);
+	}
+
+	.zoom-dialog img {
+		width: 100%;
+		height: auto;
+		background: #12161a;
+		border-radius: var(--radius);
+	}
+
+	.zoom-dialog::backdrop {
+		background: rgb(15 42 68 / 0.6);
+	}
+
+	.zoom-dialog form {
+		display: flex;
+		justify-content: flex-end;
+		margin-bottom: 0.5rem;
+	}
+</style>

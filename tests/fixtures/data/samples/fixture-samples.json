@@ -1,0 +1,168 @@
+[
+	{
+		"id": "fixture-sample-stack",
+		"release": "fixture-renal-ct-v2",
+		"kind": "dataset_sample",
+		"assets": [
+			{
+				"path": "/previews/fixtures/ct-image-1.svg",
+				"role": "image",
+				"sliceIndex": 1,
+				"width": 256,
+				"height": 256
+			},
+			{
+				"path": "/previews/fixtures/ct-mask-1.svg",
+				"role": "mask",
+				"sliceIndex": 1,
+				"width": 256,
+				"height": 256
+			},
+			{
+				"path": "/previews/fixtures/ct-image-2.svg",
+				"role": "image",
+				"sliceIndex": 2,
+				"width": 256,
+				"height": 256
+			},
+			{
+				"path": "/previews/fixtures/ct-mask-2.svg",
+				"role": "mask",
+				"sliceIndex": 2,
+				"width": 256,
+				"height": 256
+			},
+			{
+				"path": "/previews/fixtures/ct-image-3.svg",
+				"role": "image",
+				"sliceIndex": 3,
+				"width": 256,
+				"height": 256
+			},
+			{
+				"path": "/previews/fixtures/ct-mask-3.svg",
+				"role": "mask",
+				"sliceIndex": 3,
+				"width": 256,
+				"height": 256
+			},
+			{
+				"path": "/previews/fixtures/ct-image-4.svg",
+				"role": "image",
+				"sliceIndex": 4,
+				"width": 256,
+				"height": 256
+			},
+			{
+				"path": "/previews/fixtures/ct-mask-4.svg",
+				"role": "mask",
+				"sliceIndex": 4,
+				"width": 256,
+				"height": 256
+			},
+			{
+				"path": "/previews/fixtures/ct-image-5.svg",
+				"role": "image",
+				"sliceIndex": 5,
+				"width": 256,
+				"height": 256
+			},
+			{
+				"path": "/previews/fixtures/ct-mask-5.svg",
+				"role": "mask",
+				"sliceIndex": 5,
+				"width": 256,
+				"height": 256
+			},
+			{
+				"path": "/previews/fixtures/ct-image-6.svg",
+				"role": "image",
+				"sliceIndex": 6,
+				"width": 256,
+				"height": 256
+			},
+			{
+				"path": "/previews/fixtures/ct-mask-6.svg",
+				"role": "mask",
+				"sliceIndex": 6,
+				"width": 256,
+				"height": 256
+			},
+			{
+				"path": "/previews/fixtures/ct-image-7.svg",
+				"role": "image",
+				"sliceIndex": 7,
+				"width": 256,
+				"height": 256
+			},
+			{
+				"path": "/previews/fixtures/ct-mask-7.svg",
+				"role": "mask",
+				"sliceIndex": 7,
+				"width": 256,
+				"height": 256
+			},
+			{
+				"path": "/previews/fixtures/ct-image-8.svg",
+				"role": "image",
+				"sliceIndex": 8,
+				"width": 256,
+				"height": 256
+			},
+			{
+				"path": "/previews/fixtures/ct-mask-8.svg",
+				"role": "mask",
+				"sliceIndex": 8,
+				"width": 256,
+				"height": 256
+			},
+			{
+				"path": "/previews/fixtures/ct-image-9.svg",
+				"role": "image",
+				"sliceIndex": 9,
+				"width": 256,
+				"height": 256
+			},
+			{
+				"path": "/previews/fixtures/ct-mask-9.svg",
+				"role": "mask",
+				"sliceIndex": 9,
+				"width": 256,
+				"height": 256
+			}
+		],
+		"caption": "Synthetic slice stack with an invented lesion mask, drawn to exercise the viewer.",
+		"alt": "A drawing of a cross-section with a pale oval marked as a lesion.",
+		"attribution": "Drawn for this fixture; no dataset involved.",
+		"reuseTerms": "Synthetic drawing; no reuse terms apply.",
+		"permissionApprovedBy": "i-sababishraq",
+		"permissionApprovedOn": "2026-09-19",
+		"alignment": "Mask drawn on the same 256x256 grid as its image.",
+		"sources": [
+			"fixture-source-1"
+		]
+	},
+	{
+		"id": "fixture-sample-figure",
+		"release": "fixture-renal-ct-v2",
+		"kind": "published_figure",
+		"assets": [
+			{
+				"path": "/previews/fixtures/figure.svg",
+				"role": "image",
+				"sliceIndex": null,
+				"width": 256,
+				"height": 256
+			}
+		],
+		"caption": "A single synthetic figure, with no slice stack and no mask, so the viewer shows no controls.",
+		"alt": "A drawing of a cross-section, labelled as a figure.",
+		"attribution": "Drawn for this fixture.",
+		"reuseTerms": "Synthetic drawing; no reuse terms apply.",
+		"permissionApprovedBy": "i-sababishraq",
+		"permissionApprovedOn": "2026-09-19",
+		"sources": [
+			"fixture-source-1"
+		]
+	}
+]

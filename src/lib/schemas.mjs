@@ -54,6 +54,13 @@ const eligibility = z.object({
 	samplePermission: eligibilityCheck,
 });
 
+/** A single documented fact: what the provider says, plus where it says it. */
+export const feature = z.object({
+	status: state,
+	note: z.string().optional(),
+	evidence: evidence.optional(),
+});
+
 export const MODALITIES = ['ct', 'mri', 'ultrasound', 'pathology', 'clinical_table', 'molecular', 'other'];
 export const DISEASES = [
 	'renal_tumor',
@@ -141,6 +148,19 @@ export const release = z.object({
 		completeness: z.enum(['complete_for_inspected_release', 'partial', 'documentation_only']),
 		inspectedScope: z.string(),
 	}),
+	/**
+	 * Facts the comparison asks about directly. Each is stated, never inferred:
+	 * pathology labels do not prove whole-slide images exist, and a CT modality
+	 * does not prove which phases were acquired.
+	 */
+	features: z
+		.object({
+			wsi: feature.optional(),
+			ctPhases: feature.extend({ phases: z.array(z.string()).default([]) }).optional(),
+			clinicalData: feature.optional(),
+			followUp: feature.optional(),
+		})
+		.default({}),
 	/** Files, formats, identifiers, joins and observation levels, in prose. */
 	structure: z.string().optional(),
 	citation: z.string().optional(),

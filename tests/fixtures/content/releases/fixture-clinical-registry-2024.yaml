@@ -17,6 +17,16 @@ tasks:
   - regression
 annotations:
   - outcome_labels
+features:
+  wsi:
+    status: absent
+  ctPhases:
+    status: not_applicable
+  clinicalData:
+    status: present
+  followUp:
+    status: present
+    note: Invented annual follow-up.
 access:
   mode: open_download
   registrationVisible: false

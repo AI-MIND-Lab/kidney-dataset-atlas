@@ -10,7 +10,9 @@ import {
 	studyUsesForRelease,
 	variablesForRelease,
 } from '../lib/catalog';
-import { accessLabel, completenessLabel, countLabel, dateLabel, humanize, stateLabel, trainTestLabel } from '../lib/display';
+import Dictionary from './Dictionary.astro';
+import Samples from './Samples.astro';
+import { accessLabel, countLabel, dateLabel, humanize, stateLabel, trainTestLabel } from '../lib/display';
 import { datasetPath, paperPath, releasePath, withBase } from '../lib/site';
 
 interface Props {
@@ -188,94 +190,12 @@ const countRows = [
 
 	<section id="dictionary" class="stack">
 		<h2>Data dictionary</h2>
-		<p>
-			<strong>Completeness:</strong> {completenessLabel(data.dictionary.completeness)}.{' '}
-			<strong>Inspected:</strong> {data.dictionary.inspectedScope}
-		</p>
-		{
-			variables.length === 0 ? (
-				<div class="empty-state">
-					<p>No variables are documented for this release yet.</p>
-				</div>
-			) : (
-				<div class="table-scroll">
-					<table>
-						<thead>
-							<tr>
-								<th scope="col">Name</th>
-								<th scope="col">Definition</th>
-								<th scope="col">Type</th>
-								<th scope="col">Level</th>
-								<th scope="col">Group</th>
-							</tr>
-						</thead>
-						<tbody>
-							{variables.map((entry) => (
-								<tr id={`var-${entry.id}`}>
-									<th scope="row"><code>{entry.originalName}</code></th>
-									<td>
-										{entry.definition}
-										<details>
-											<summary>Details</summary>
-											<dl>
-												<dt>Unit</dt>
-												<dd>{entry.unit ?? 'Not applicable'}</dd>
-												<dt>Missing values</dt>
-												<dd>{entry.missingValues.join(', ') || 'Not documented'}</dd>
-												<dt>Coding</dt>
-												<dd>
-													{entry.coding.length === 0
-														? 'Not documented'
-														: entry.coding.map((code) => `${code.code} = ${code.meaning}`).join('; ')}
-												</dd>
-												<dt>Provenance</dt>
-												<dd>{entry.provenance ?? 'Not documented'}</dd>
-											</dl>
-										</details>
-									</td>
-									<td>{humanize(entry.type)}</td>
-									<td>{humanize(entry.observationLevel)}</td>
-									<td>{humanize(entry.group)}</td>
-								</tr>
-							))}
-						</tbody>
-					</table>
-				</div>
-			)
-		}
+		<Dictionary release={release} variables={variables} />
 	</section>
 
 	<section id="samples" class="stack">
 		<h2>Samples</h2>
-		{
-			samples.length === 0 ? (
-				<div class="empty-state">
-					<p>No previews are published for this release.</p>
-					<p>
-						Previews appear only where reuse permission has been checked separately. Until then, see the{' '}
-						<a href={dataset.data.officialUrl}>official source</a>.
-					</p>
-				</div>
-			) : (
-				<ul class="sample-list">
-					{samples.map((entry) => (
-						<li>
-							<figure>
-								<img src={withBase(entry.assets[0]!.path)} alt={entry.alt} loading="lazy" />
-								<figcaption>
-									{entry.caption}
-									<br />
-									<small>
-										{entry.kind === 'dataset_sample' ? 'Actual dataset sample' : 'Published figure'} ·{' '}
-										{entry.attribution} · {entry.reuseTerms}
-									</small>
-								</figcaption>
-							</figure>
-						</li>
-					))}
-				</ul>
-			)
-		}
+		<Samples samples={samples} officialUrl={dataset.data.officialUrl} />
 	</section>
 
 	<section id="structure" class="stack">
