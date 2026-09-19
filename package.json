@@ -1,0 +1,33 @@
+{
+  "name": "kidney-dataset-atlas",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "dev:fixtures": "node scripts/with-fixtures.mjs dev",
+    "validate": "node scripts/validate.mjs",
+    "check": "astro check",
+    "build": "npm run validate && astro build && npm run search:index && node scripts/check-output.mjs",
+    "search:index": "pagefind --site dist",
+    "preview": "astro preview",
+    "preview:site": "npm run build && astro preview",
+    "test": "node --test \"tests/**/*.test.mjs\""
+  },
+  "dependencies": {
+    "astro": "^7.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@types/node": "^26.6.2",
+    "js-yaml": "^4.1.0",
+    "pagefind": "^1.5.0",
+    "typescript": "^5.9.2"
+  },
+  "allowScripts": {
+    "esbuild": true
+  }
+}

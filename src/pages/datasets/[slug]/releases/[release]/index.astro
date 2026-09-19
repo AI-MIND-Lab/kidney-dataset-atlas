@@ -1,0 +1,42 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { render } from 'astro:content';
+import BaseLayout from '../../../../../layouts/BaseLayout.astro';
+import ReleaseDetail from '../../../../../components/ReleaseDetail.astro';
+import { catalog } from '../../../../../lib/catalog';
+import { datasetPath } from '../../../../../lib/site';
+
+// Stable per-release URLs for citation. The current release renders the same
+// content as the dataset page, so it declares that page as its canonical URL
+// and stays out of the search index (see src/lib/site.ts and §4 of the brief).
+export const getStaticPaths = (async () => {
+	const entries = await catalog();
+	return entries.flatMap(({ dataset, releases, current }) =>
+		releases.map((release) => ({
+			params: { slug: dataset.data.slug, release: release.data.id },
+			props: { dataset, release, releases, current },
+		})),
+	);
+}) satisfies GetStaticPaths;
+
+const { dataset, release, releases, current } = Astro.props;
+const isCurrent = release.data.id === current.data.id;
+const { Content } = await render(dataset);
+---
+
+<BaseLayout
+	title={`${dataset.data.name} ${release.data.versionLabel}`}
+	description={dataset.data.summary}
+	canonicalPath={isCurrent ? datasetPath(dataset.data.slug) : undefined}
+	indexable={!isCurrent}
+>
+	<ReleaseDetail
+		dataset={dataset}
+		release={release}
+		releases={releases}
+		current={current}
+		isCanonical={false}
+	>
+		<Content />
+	</ReleaseDetail>
+</BaseLayout>

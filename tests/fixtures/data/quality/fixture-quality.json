@@ -1,0 +1,14 @@
+[
+	{
+		"id": "fixture-quality-1",
+		"release": "fixture-renal-ct-v2",
+		"category": "potential_check",
+		"description": "Invented check: confirm that every synthetic case has exactly one mask.",
+		"inspectedScope": "Nothing was inspected; this fixture exercises the quality section.",
+		"affected": { "value": null, "status": "not_verified" },
+		"detection": "Fixture record.",
+		"impact": "None; synthetic.",
+		"handling": "Fixture record.",
+		"sources": ["fixture-source-1"]
+	}
+]

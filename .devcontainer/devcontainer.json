@@ -1,0 +1,17 @@
+{
+	"name": "Kidney Dataset Atlas",
+	"image": "mcr.microsoft.com/devcontainers/javascript-node:1-24-bookworm",
+	"postCreateCommand": "npm ci",
+	"forwardPorts": [4321],
+	"portsAttributes": {
+		"4321": {
+			"label": "Atlas preview",
+			"onAutoForward": "notify"
+		}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": ["astro-build.astro-vscode"]
+		}
+	}
+}

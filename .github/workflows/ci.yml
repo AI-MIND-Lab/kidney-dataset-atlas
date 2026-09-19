@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# Checks only. Publishing is a separate, manually started workflow.
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: npm
+
+      - run: npm ci
+
+      - name: Validate records and curator approval
+        run: npm run validate
+
+      - name: Type and content checks
+        run: npm run check
+
+      - name: Tests
+        run: npm test
+
+      # Built under a repository sub-path, because that is where the public
+      # site will live: this catches links that ignore the base path.
+      - name: Build under a project base path
+        run: npm run build
+        env:
+          SITE_URL: https://i-sababishraq.github.io
+          BASE_PATH: /kidney-dataset-atlas

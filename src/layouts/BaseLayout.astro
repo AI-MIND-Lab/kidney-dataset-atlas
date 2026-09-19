@@ -1,0 +1,59 @@
+---
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { SITE, absoluteUrl, withBase } from '../lib/site';
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description?: string;
+	/** Path this page should be canonical to, when it is not itself canonical. */
+	canonicalPath?: string;
+	/**
+	 * Pagefind indexes only pages carrying data-pagefind-body once any page has
+	 * it, so every searchable page keeps the default. The current release's own
+	 * URL duplicates the dataset page, so it opts out.
+	 */
+	indexable?: boolean;
+}
+
+const { title, description = SITE.description, canonicalPath, indexable = true } = Astro.props;
+const canonical = canonicalPath
+	? absoluteUrl(canonicalPath)
+	: new URL(Astro.url.pathname, Astro.site ?? 'http://localhost:4321').href;
+const pageTitle = title === SITE.title ? title : `${title} · ${SITE.title}`;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{pageTitle}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical} />
+		<link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
+		{!SITE.isPublic && <meta name="robots" content="noindex, nofollow" />}
+	</head>
+	<body>
+		<div class="shell">
+			<a class="skip-link" href="#main">Skip to content</a>
+			<SiteHeader />
+			<main id="main" class="wrap" data-pagefind-body={indexable ? true : undefined}>
+				{
+					SITE.usingFixtures && (
+						<div class="notice notice--fixtures" data-atlas-fixture>
+							<p>
+								<strong>Fixture data.</strong> This build shows synthetic records used to develop the
+								interface. Nothing here is a real dataset.
+							</p>
+						</div>
+					)
+				}
+				<slot />
+			</main>
+			<SiteFooter />
+		</div>
+	</body>
+</html>

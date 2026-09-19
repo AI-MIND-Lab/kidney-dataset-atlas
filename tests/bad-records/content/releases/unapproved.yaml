@@ -1,0 +1,31 @@
+# Deliberately broken record used by tests/approval-gate.test.mjs: it claims to
+# be published without an approval, with an unresolved eligibility check, and
+# points at a dataset that does not exist.
+id: bad-release
+dataset: no-such-dataset
+versionLabel: v1
+access:
+  mode: open_download
+  instructions: Test record.
+license:
+  name: Test licence
+deidentification:
+  statement: Test record.
+  status: not_documented
+dictionary:
+  completeness: partial
+  inspectedScope: Test record.
+eligibility:
+  publicAccess:
+    status: unknown
+  deidentification:
+    status: pass
+  noPhiHosted:
+    status: pass
+  termsPermitUse:
+    status: pass
+  samplePermission:
+    status: pass
+catalogStatus: published
+verifiedOn: 2026-09-19
+researchedBy: agent

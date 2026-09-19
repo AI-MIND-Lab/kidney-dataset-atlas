@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../lib/site';
+---
+
+<BaseLayout title="Contribute" description="Suggest a dataset, a paper, or a correction.">
+	<div class="prose stack">
+		<h1>Contribute</h1>
+		<p class="lede">
+			Every record here is a file in a git repository, so suggestions and corrections go through the same
+			review as any other change.
+		</p>
+
+		<h2>What is useful</h2>
+		<ul>
+			<li>A dataset release that meets the rules on the <a href="../about/">About</a> page.</li>
+			<li>A paper whose use of a catalogued release can be checked in the paper itself.</li>
+			<li>A correction, especially a count, licence, or pairing claim that does not match its source.</li>
+		</ul>
+
+		<h2>What to include</h2>
+		<p>
+			A source for each claim: a link, and where in it the claim appears. Suggestions without a source stay
+			unpublished, because a curator cannot approve what cannot be checked.
+		</p>
+
+		<h2>How to send it</h2>
+		<p>
+			The repository is private while the catalog is being built, so issue forms are not open yet. Until then,
+			send corrections to the maintainer directly. Once the repository is public, this page will link to its
+			dataset, paper and correction forms at <code>{SITE.repoUrl}</code>.
+		</p>
+	</div>
+</BaseLayout>

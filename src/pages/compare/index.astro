@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { catalog } from '../../lib/catalog';
+import { datasetPath, withBase } from '../../lib/site';
+
+// Comparison itself (selection from the URL, difference mode, CSV export)
+// arrives in milestone 3. The no-JavaScript fallback below is the permanent
+// behaviour: the selection lives in the URL, which needs JavaScript to read,
+// and the dataset pages hold the same facts.
+const entries = await catalog();
+---
+
+<BaseLayout title="Compare" description="Compare two to four kidney dataset releases side by side.">
+	<h1>Compare releases</h1>
+	<p class="lede">Put two to four releases side by side and see where they differ.</p>
+
+	<div id="compare-app" hidden></div>
+
+	<noscript>
+		<div class="notice">
+			<p>Comparison needs JavaScript, because the selected releases are read from the page address.</p>
+		</div>
+	</noscript>
+
+	<h2>Published datasets</h2>
+	{
+		entries.length === 0 ? (
+			<div class="empty-state">
+				<p>No datasets are published yet, so there is nothing to compare.</p>
+			</div>
+		) : (
+			<ul>
+				{entries.map(({ dataset, current }) => (
+					<li>
+						<a href={withBase(datasetPath(dataset.data.slug))}>{dataset.data.name}</a> — current release{' '}
+						{current.data.versionLabel}
+					</li>
+				))}
+			</ul>
+		)
+	}
+</BaseLayout>

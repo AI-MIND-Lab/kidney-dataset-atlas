@@ -1,0 +1,173 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { publishedPapers, publishedReleases, studyUsesForPaper } from '../../../lib/catalog';
+import { humanize, stateLabel, trainTestLabel } from '../../../lib/display';
+import { releasePath, withBase } from '../../../lib/site';
+
+export const getStaticPaths = (async () => {
+	const papers = await publishedPapers();
+	return papers.map((paper) => ({ params: { slug: paper.data.slug }, props: { paper } }));
+}) satisfies GetStaticPaths;
+
+const { paper } = Astro.props;
+const { Content } = await render(paper);
+const uses = studyUsesForPaper(paper.data.id);
+const releases = await publishedReleases();
+const releaseFor = (id: string) => releases.find((release) => release.data.id === id);
+
+// Proposed models first, then variants, then baselines.
+const ORDER = { proposed: 0, variant: 1, baseline: 2 } as const;
+const models = [...paper.data.models].sort((a, b) => ORDER[a.role] - ORDER[b.role]);
+const resultsFor = (modelId: string) =>
+	uses.flatMap((use) => use.results.filter((result) => result.model === modelId).map((result) => ({ use, result })));
+---
+
+<BaseLayout title={paper.data.title} description={paper.data.methodSummary ?? paper.data.title}>
+	<article class="stack">
+		<h1>{paper.data.title}</h1>
+		<p class="lede">{paper.data.authors.join(', ')}</p>
+		<p>
+			{paper.data.year ?? 'Year not documented'} · {paper.data.venue ?? 'Venue not documented'} ·{' '}
+			{humanize(paper.data.publicationStatus)}
+			{paper.data.doi && <> · DOI <a href={`https://doi.org/${paper.data.doi}`}>{paper.data.doi}</a></>}
+			{!paper.data.doi && paper.data.url && <> · <a href={paper.data.url}>Official page</a></>}
+		</p>
+
+		<section id="method" class="stack">
+			<h2>Method</h2>
+			<div class="prose"><Content /></div>
+			{paper.data.methodSummary && <p class="prose">{paper.data.methodSummary}</p>}
+		</section>
+
+		<section id="datasets" class="stack">
+			<h2>Datasets used</h2>
+			{
+				uses.length === 0 ? (
+					<p>No dataset use is recorded for this paper yet.</p>
+				) : (
+					<div class="table-scroll">
+						<table>
+							<thead>
+								<tr>
+									<th scope="col">Release</th>
+									<th scope="col">Role</th>
+									<th scope="col">Subset</th>
+									<th scope="col">Train/test role</th>
+								</tr>
+							</thead>
+							<tbody>
+								{uses.map((use) => {
+									const release = releaseFor(use.release);
+									return (
+										<tr>
+											<th scope="row">
+												{release ? (
+													<a
+														href={withBase(
+															releasePath(release.data.dataset, release.data.id),
+														)}
+													>
+														{release.data.versionLabel}
+													</a>
+												) : (
+													use.release
+												)}
+											</th>
+											<td>{humanize(use.role)}</td>
+											<td>{use.subset ?? 'Not documented'}</td>
+											<td>{trainTestLabel(use.trainTestRole)}</td>
+										</tr>
+									);
+								})}
+							</tbody>
+						</table>
+					</div>
+				)
+			}
+		</section>
+
+		<section id="architectures" class="stack">
+			<h2>Architectures</h2>
+			{
+				models.length === 0 ? (
+					<p>No architectures are documented for this paper yet.</p>
+				) : (
+					models.map((model) => (
+						<section id={`model-${model.id}`} class="stack">
+							<h3>
+								{model.name} <span class="badge">{humanize(model.role)}</span>
+							</h3>
+							<dl>
+								<dt>Task</dt>
+								<dd>{humanize(model.task)}</dd>
+								<dt>Backbone</dt>
+								<dd>{model.backbone ?? 'Not documented'}</dd>
+								<dt>Input representation</dt>
+								<dd>{model.inputRepresentation ? model.inputRepresentation.toUpperCase() : 'Not documented'}</dd>
+								<dt>Preprocessing</dt>
+								<dd>{model.preprocessing ?? 'Not documented'}</dd>
+								<dt>Loss</dt>
+								<dd>{model.loss ?? 'Not documented'}</dd>
+								<dt>Outputs</dt>
+								<dd>{model.outputs ?? 'Not documented'}</dd>
+								<dt>Training inputs</dt>
+								<dd>{model.trainingInputs ?? 'Not documented'}</dd>
+								<dt>Inference inputs</dt>
+								<dd>{model.inferenceInputs ?? 'Not documented'}</dd>
+								<dt>Code</dt>
+								<dd>
+									{model.code?.url ? (
+										<a href={model.code.url}>{stateLabel(model.code.status)}</a>
+									) : (
+										stateLabel(model.code?.status ?? 'not_documented')
+									)}
+								</dd>
+								<dt>Weights</dt>
+								<dd>
+									{model.weights?.url ? (
+										<a href={model.weights.url}>{stateLabel(model.weights.status)}</a>
+									) : (
+										stateLabel(model.weights?.status ?? 'not_documented')
+									)}
+								</dd>
+							</dl>
+
+							{resultsFor(model.id).length > 0 && (
+								<div class="table-scroll">
+									<table>
+										<thead>
+											<tr>
+												<th scope="col">Metric</th>
+												<th scope="col">Value</th>
+												<th scope="col">Subset</th>
+												<th scope="col">Split</th>
+												<th scope="col">Evaluation</th>
+											</tr>
+										</thead>
+										<tbody>
+											{resultsFor(model.id).map(({ result }) => (
+												<tr>
+													<th scope="row">{result.metric}</th>
+													<td>
+														{result.value ?? 'Not documented'}
+														{result.units && ` ${result.units}`}
+														{result.confidenceInterval && ` (${result.confidenceInterval})`}
+													</td>
+													<td>{result.subset ?? 'Not documented'}</td>
+													<td>{result.split ?? 'Not documented'}</td>
+													<td>{humanize(result.evaluation)}</td>
+												</tr>
+											))}
+										</tbody>
+									</table>
+								</div>
+							)}
+						</section>
+					))
+				)
+			}
+		</section>
+	</article>
+</BaseLayout>

@@ -1,0 +1,45 @@
+id: fixture-renal-ct-v1
+dataset: fixture-renal-ct
+versionLabel: v1 (synthetic)
+releaseDate: 2025-05-01
+counts:
+  patients:
+    value: 80
+    status: present
+modalities:
+  - ct
+cohort: Smaller synthetic cohort, superseded by v2.
+tasks:
+  - segmentation
+access:
+  mode: open_download
+  registrationVisible: false
+  instructions: Fixture record; there is nothing to download.
+license:
+  name: Fixture licence
+deidentification:
+  statement: Fixture record; no human data exist.
+  status: not_applicable
+dictionary:
+  completeness: documentation_only
+  inspectedScope: Fixture release kept to exercise older-release handling.
+limitations:
+  - Entirely synthetic; superseded by the v2 fixture.
+eligibility:
+  publicAccess:
+    status: pass
+  deidentification:
+    status: pass
+  noPhiHosted:
+    status: pass
+  termsPermitUse:
+    status: pass
+  samplePermission:
+    status: pass
+catalogStatus: published
+verifiedOn: 2026-09-19
+researchedBy: agent
+approvedBy: i-sababishraq
+approvedOn: 2026-09-19
+sources:
+  - fixture-source-1

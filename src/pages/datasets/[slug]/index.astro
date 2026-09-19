@@ -1,0 +1,26 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ReleaseDetail from '../../../components/ReleaseDetail.astro';
+import { catalog } from '../../../lib/catalog';
+
+// The dataset page is the canonical page for the current release. Its
+// release-specific twin points here, so search and citations do not split.
+export const getStaticPaths = (async () => {
+	const entries = await catalog();
+	return entries.map(({ dataset, releases, current }) => ({
+		params: { slug: dataset.data.slug },
+		props: { dataset, releases, current },
+	}));
+}) satisfies GetStaticPaths;
+
+const { dataset, releases, current } = Astro.props;
+const { Content } = await render(dataset);
+---
+
+<BaseLayout title={dataset.data.name} description={dataset.data.summary}>
+	<ReleaseDetail dataset={dataset} release={current} releases={releases} isCanonical={true}>
+		<Content />
+	</ReleaseDetail>
+</BaseLayout>

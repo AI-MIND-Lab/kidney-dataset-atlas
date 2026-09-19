@@ -1,0 +1,49 @@
+[
+	{
+		"id": "fixture-var-case-id",
+		"release": "fixture-renal-ct-v2",
+		"originalName": "case_id",
+		"file": "cases.csv",
+		"definition": "Invented case identifier used to join the synthetic tables.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "identifier",
+		"group": "administrative",
+		"derivation": "raw",
+		"provenance": "Fixture record.",
+		"evidence": {
+			"sources": ["fixture-source-1"],
+			"locator": "fixture page 1",
+			"status": "verified",
+			"verifiedOn": "2026-09-19"
+		}
+	},
+	{
+		"id": "fixture-var-tumour-side",
+		"release": "fixture-renal-ct-v2",
+		"originalName": "tumour_side",
+		"file": "cases.csv",
+		"definition": "Invented laterality field, present only to exercise coded values.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{ "code": "L", "meaning": "Left (synthetic)" },
+			{ "code": "R", "meaning": "Right (synthetic)" }
+		],
+		"missingValues": ["NA"],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"provenance": "Fixture record.",
+		"evidence": {
+			"sources": ["fixture-source-1"],
+			"status": "not_verified"
+		}
+	}
+]

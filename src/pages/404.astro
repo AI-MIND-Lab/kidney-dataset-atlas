@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/site';
+---
+
+<BaseLayout title="Page not found" indexable={false}>
+	<div class="prose stack">
+		<h1>Page not found</h1>
+		<p>
+			That address does not exist here. A release URL can also disappear if its record was withdrawn, for
+			example when its eligibility could no longer be confirmed.
+		</p>
+		<ul>
+			<li><a href={withBase('/')}>All datasets</a></li>
+			<li><a href={withBase('/papers/')}>Papers</a></li>
+			<li><a href={withBase('/about/')}>About this catalog</a></li>
+		</ul>
+	</div>
+</BaseLayout>

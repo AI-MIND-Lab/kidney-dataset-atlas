@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { catalog } from '../lib/catalog';
+import { SITE, datasetPath, withBase } from '../lib/site';
+
+// The explorer (search, filters, sorting, card/table views, comparison tray)
+// arrives in milestone 2. This is the plain list it enhances.
+const entries = await catalog();
+---
+
+<BaseLayout title={SITE.title}>
+	<h1>{SITE.title}</h1>
+	<p class="lede">{SITE.description}</p>
+
+	<h2>Datasets<span class="badge" style="margin-left:.5rem">{entries.length}</span></h2>
+
+	{
+		entries.length === 0 ? (
+			<div class="empty-state stack">
+				<p>
+					<strong>No datasets are published yet.</strong>
+				</p>
+				<p>
+					Records appear here once a curator has checked their eligibility and approved them. See{' '}
+					<a href={withBase('/about/')}>About</a> for what that check covers.
+				</p>
+			</div>
+		) : (
+			<div class="table-scroll">
+				<table>
+					<thead>
+						<tr>
+							<th scope="col">Dataset</th>
+							<th scope="col">Release</th>
+							<th scope="col">Modalities</th>
+							<th scope="col">Access</th>
+						</tr>
+					</thead>
+					<tbody>
+						{entries.map(({ dataset, current }) => (
+							<tr>
+								<th scope="row">
+									<a href={withBase(datasetPath(dataset.data.slug))}>{dataset.data.name}</a>
+									<div>{dataset.data.summary}</div>
+								</th>
+								<td>{current.data.versionLabel}</td>
+								<td>{current.data.modalities.join(', ') || 'Not documented'}</td>
+								<td>{current.data.access.mode.replace(/_/g, ' ')}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
+		)
+	}
+</BaseLayout>

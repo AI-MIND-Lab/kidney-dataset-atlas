@@ -1,0 +1,10 @@
+[
+	{
+		"id": "fixture-overlap-1",
+		"releases": ["fixture-renal-ct-v1", "fixture-renal-ct-v2"],
+		"type": "superset",
+		"count": { "value": 80, "status": "present" },
+		"explanation": "The v2 fixture is described as containing every case from the v1 fixture.",
+		"evidence": { "sources": ["fixture-source-1"], "status": "not_verified" }
+	}
+]

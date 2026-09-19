@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { publishedPapers, studyUsesForPaper } from '../../lib/catalog';
+import { humanize } from '../../lib/display';
+import { paperPath, withBase } from '../../lib/site';
+
+const papers = await publishedPapers();
+const rows = papers.map((paper) => ({ paper, uses: studyUsesForPaper(paper.data.id) }));
+---
+
+<BaseLayout title="Papers" description="Papers and model architectures built with the catalogued datasets.">
+	<h1>Papers</h1>
+	<p class="lede">
+		Papers whose use of a dataset has been checked, not every paper that mentions one. Each title opens the
+		method and every architecture the paper reports.
+	</p>
+
+	{
+		rows.length === 0 ? (
+			<div class="empty-state">
+				<p>No papers are published yet.</p>
+			</div>
+		) : (
+			<div class="table-scroll">
+				<table>
+					<thead>
+						<tr>
+							<th scope="col">Paper</th>
+							<th scope="col">Year</th>
+							<th scope="col">Status</th>
+							<th scope="col">Architectures</th>
+							<th scope="col">Releases used</th>
+						</tr>
+					</thead>
+					<tbody>
+						{rows.map(({ paper, uses }) => (
+							<tr>
+								<th scope="row">
+									<a href={withBase(paperPath(paper.data.slug))}>{paper.data.title}</a>
+								</th>
+								<td>{paper.data.year ?? 'Not documented'}</td>
+								<td>{humanize(paper.data.publicationStatus)}</td>
+								<td>{paper.data.models.length}</td>
+								<td>{uses.length}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
+		)
+	}
+</BaseLayout>

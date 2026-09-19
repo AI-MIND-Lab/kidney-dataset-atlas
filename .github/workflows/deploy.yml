@@ -1,0 +1,52 @@
+name: Deploy to GitHub Pages
+
+# Manual start only. While the repository is private this workflow cannot
+# publish: GitHub Pages needs a public repository on the free plan, and a Pages
+# site is visible to anyone with the address even from a private repository.
+# During the private phase, collaborators run the site locally instead
+# (see README.md). Enable this once the repository is public.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: npm
+
+      - run: npm ci
+
+      - name: Validate, build, index and check output
+        run: npm run build
+        env:
+          SITE_URL: https://i-sababishraq.github.io
+          BASE_PATH: /kidney-dataset-atlas
+          SITE_PUBLIC: 'true'
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

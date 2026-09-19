@@ -1,0 +1,45 @@
+[
+	{
+		"id": "fixture-use-1",
+		"paper": "fixture-paper",
+		"release": "fixture-renal-ct-v2",
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": ["fixture-source-1"],
+			"locator": "fixture methods section",
+			"status": "verified",
+			"verifiedOn": "2026-09-19"
+		},
+		"subset": "Invented training subset",
+		"preprocessing": "Invented resampling",
+		"task": "segmentation",
+		"trainTestRole": "train_and_test",
+		"split": "Invented 80/20 split",
+		"results": [
+			{
+				"model": "fixture-model-proposed",
+				"metric": "Dice",
+				"value": 0.87,
+				"units": null,
+				"confidenceInterval": null,
+				"subset": "Invented test subset",
+				"split": "Invented 80/20 split",
+				"patientLevelHandling": "Invented patient-level split",
+				"evaluation": "internal",
+				"evidence": { "sources": ["fixture-source-1"], "status": "not_verified" }
+			},
+			{
+				"model": "fixture-model-baseline",
+				"metric": "Dice",
+				"value": 0.81,
+				"units": null,
+				"confidenceInterval": null,
+				"subset": "Invented test subset",
+				"split": "Invented 80/20 split",
+				"patientLevelHandling": "Invented patient-level split",
+				"evaluation": "internal",
+				"evidence": { "sources": ["fixture-source-1"], "status": "not_verified" }
+			}
+		]
+	}
+]

@@ -1,0 +1,9 @@
+[
+	{
+		"id": "fixture-source-1",
+		"url": "https://example.org/fixture-renal-ct",
+		"title": "Fixture Renal CT Collection documentation (synthetic)",
+		"locator": "fixture page 1",
+		"accessedOn": "2026-09-19"
+	}
+]

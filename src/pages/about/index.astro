@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE, withBase } from '../../lib/site';
+---
+
+<BaseLayout title="About" description="Scope, method, what verification covers, and the limits of this catalog.">
+	<div class="prose stack">
+		<h1>About</h1>
+		<p class="lede">{SITE.description}</p>
+
+		<h2>Scope</h2>
+		<p>
+			The catalog covers open kidney research datasets: renal tumors, segmentation, chronic and acute kidney
+			disease, stones, cysts, transplantation, dialysis and kidney outcomes, across CT, MRI, ultrasound,
+			pathology, clinical tables and molecular data. Coverage is deliberately narrow and deep rather than
+			exhaustive. This is not the first kidney dataset catalog and does not claim to list every dataset.
+		</p>
+
+		<h2>What gets published</h2>
+		<p>A dataset release appears here only when all of the following hold, each with a source:</p>
+		<ul>
+			<li>It is available by direct download or basic registration, without an approval committee.</li>
+			<li>Human data have authoritative documentation of de-identification from the provider.</li>
+			<li>This site collects and hosts no patient records.</li>
+			<li>The provider's terms permit the use made of the material here.</li>
+			<li>Every preview image shown has separately checked reuse permission and attribution.</li>
+		</ul>
+		<p>
+			Public and restricted parts of a collection are judged separately. Anything whose eligibility is unclear
+			stays unpublished rather than appearing with an "open" label.
+		</p>
+
+		<h2>De-identification is not an access level</h2>
+		<p>
+			HIPAA is a law, not a credential a dataset can hold. Nothing here is described as "HIPAA-free", and being
+			downloadable is not evidence that data were de-identified. Where a provider documents de-identification,
+			the record says so and cites where it says it. Licences and institutional obligations can still apply to
+			de-identified data.
+		</p>
+
+		<h2>What verification covers</h2>
+		<p>
+			A person, not an automated agent, approves each release before it is published. That approval covers the
+			five checks above, the reuse permission for every preview shown, and a check of the headline counts
+			against their sources. It does not mean every field has been independently reproduced: other fields carry
+			the source and the place within it, so you can check them yourself.
+		</p>
+		<p>
+			Each record shows when it was last verified and who approved it. Records the curator has not approved are
+			not published, and do not appear in the catalog, search, or exports.
+		</p>
+
+		<h2>How unknowns are written</h2>
+		<ul>
+			<li><strong>No</strong> — the source states this is absent.</li>
+			<li><strong>Not documented</strong> — the source does not say.</li>
+			<li><strong>Not verified</strong> — a claim exists but has not been checked here.</li>
+			<li><strong>Not applicable</strong> — the question does not apply to this release.</li>
+		</ul>
+		<p>
+			An unknown count is never shown as zero, and unknown is never turned into "no" when releases are compared.
+			Counts of patients, examinations, lesions, slices, slides and records are kept apart and never added
+			together across overlapping collections.
+		</p>
+
+		<h2>Limits</h2>
+		<ul>
+			<li>
+				Dictionary search covers documented variables only. Where a dictionary is partial, the page says so,
+				and a variable missing from search may still exist in the dataset.
+			</li>
+			<li>
+				An empty list of quality findings means nothing has been inspected, not that the data are free of
+				errors.
+			</li>
+			<li>Results from different papers are not scored against each other, because their evaluations differ.</li>
+			<li>This site grants no access to any dataset and cannot give permission on a provider's behalf.</li>
+		</ul>
+
+		<p>
+			Found something wrong? <a href={withBase('/contribute/')}>Send a correction</a>.
+		</p>
+	</div>
+</BaseLayout>
