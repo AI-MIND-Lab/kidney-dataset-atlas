@@ -229,6 +229,28 @@ main {
 	color: var(--accent-ink);
 }
 
+/* Filter and comparison chips are created by script, so they are styled here
+   rather than in the explorer component, whose styles are scoped to markup
+   rendered at build time. */
+.chip {
+	font: inherit;
+	font-size: 0.85rem;
+	border: 1px solid var(--accent);
+	background: var(--accent-weak);
+	color: var(--accent-ink);
+	border-radius: 999px;
+	padding: 0.15rem 0.6rem;
+	cursor: pointer;
+}
+
+.chip:hover {
+	background: var(--surface-sunken);
+}
+
+.chip__facet {
+	color: var(--ink-muted);
+}
+
 .table-scroll {
 	overflow-x: auto;
 	border: 1px solid var(--border);

@@ -8,7 +8,8 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import type { z } from 'astro/zod';
 import { overlap, qualityFinding, sample, source, studyUse, variable } from './schemas.mjs';
-import { SITE } from './site';
+import { FACET_KEYS, type ExplorerEntry, type FacetKey } from './explorer';
+import { datasetPath, SITE } from './site';
 
 export type Dataset = CollectionEntry<'datasets'>;
 export type Release = CollectionEntry<'releases'>;
@@ -139,4 +140,61 @@ export async function paperById(id: string): Promise<Paper | undefined> {
 export function patientCount(release: Release): number | null {
 	const patients = release.data.counts?.patients;
 	return patients?.status === 'present' ? (patients.value ?? null) : null;
+}
+
+/** What the explorer can filter on, derived from the records themselves. */
+function facetsFor(dataset: Dataset, release: Release): Record<FacetKey, string[]> {
+	const pairing = release.data.pairing;
+	const pairingValue = pairing.some((entry) => entry.status === 'present')
+		? 'verified'
+		: pairing.some((entry) => entry.status === 'not_documented')
+			? 'not_documented'
+			: 'none';
+
+	return {
+		disease: dataset.data.diseaseTags,
+		modality: release.data.modalities,
+		task: release.data.tasks,
+		annotations: release.data.annotations.length > 0 ? release.data.annotations : ['not_documented'],
+		pairing: [pairingValue],
+		access: [release.data.access.mode],
+		docs: [release.data.dictionary.completeness],
+	};
+}
+
+/** One row per dataset, describing its current release. */
+export async function explorerEntries(): Promise<ExplorerEntry[]> {
+	const entries = await catalog();
+	return entries.map(({ dataset, current }) => {
+		const preview = samplesForRelease(current.data.id)[0];
+		return {
+		id: current.data.id,
+		slug: dataset.data.slug,
+		name: dataset.data.name,
+		aliases: dataset.data.aliases,
+		summary: dataset.data.summary,
+		release: current.data.versionLabel,
+		href: datasetPath(dataset.data.slug),
+			patients: patientCount(current),
+			verified: current.data.verifiedOn?.getTime() ?? null,
+			facets: facetsFor(dataset, current),
+			preview: preview ? { src: preview.assets[0]!.path, alt: preview.alt } : null,
+		};
+	});
+}
+
+/** The values that actually occur, so no filter offers an empty result. */
+export function facetOptions(entries: ExplorerEntry[]): Record<FacetKey, string[]> {
+	const options = Object.fromEntries(FACET_KEYS.map((key) => [key, new Set<string>()])) as Record<
+		FacetKey,
+		Set<string>
+	>;
+	for (const entry of entries) {
+		for (const key of FACET_KEYS) {
+			for (const value of entry.facets[key]) options[key].add(value);
+		}
+	}
+	return Object.fromEntries(
+		FACET_KEYS.map((key) => [key, [...options[key]].sort()]),
+	) as Record<FacetKey, string[]>;
 }

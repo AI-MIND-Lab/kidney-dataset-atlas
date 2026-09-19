@@ -1,0 +1,627 @@
+---
+import type { ExplorerEntry, FacetKey } from '../lib/explorer';
+import { FACET_KEYS, FACET_LABELS, SORTS } from '../lib/explorer';
+import { countLabel, facetValueLabel } from '../lib/display';
+import { withBase } from '../lib/site';
+
+interface Props {
+	entries: ExplorerEntry[];
+	options: Record<FacetKey, string[]>;
+}
+
+const { entries, options } = Astro.props;
+
+// Every entry is rendered here, in both views. The browser script only decides
+// which ones are shown and in what order, so the full catalog is readable
+// without JavaScript and Pagefind can index it.
+const patients = (entry: ExplorerEntry) =>
+	entry.patients === null ? countLabel(undefined) : entry.patients.toLocaleString('en-US');
+---
+
+<section class="explorer" data-explorer>
+	<script type="application/json" data-entries set:html={JSON.stringify(entries)} />
+
+	<form class="controls" data-controls hidden>
+		<div class="controls__search">
+			<label for="explorer-q">Search datasets</label>
+			<input
+				id="explorer-q"
+				type="search"
+				name="q"
+				placeholder="Name, abbreviation or description"
+				autocomplete="off"
+				data-q
+			/>
+		</div>
+
+		<details class="controls__filters" data-filter-panel open>
+			<summary>Filters</summary>
+			<div class="controls__facets">
+				{
+					FACET_KEYS.filter((key) => options[key].length > 1).map((key) => (
+						<fieldset>
+							<legend>{FACET_LABELS[key]}</legend>
+							{options[key].map((value) => (
+								<label>
+									<input type="checkbox" name={key} value={value} data-facet={key} />
+									{facetValueLabel(key, value)}
+								</label>
+							))}
+						</fieldset>
+					))
+				}
+			</div>
+		</details>
+
+		<div class="controls__toolbar">
+			<label>
+				Sort
+				<select data-sort>
+					{SORTS.map((option) => <option value={option.key}>{option.label}</option>)}
+				</select>
+			</label>
+
+			<div class="view-switch" role="group" aria-label="View">
+				<button type="button" data-view-button="cards" aria-pressed="true">Cards</button>
+				<button type="button" data-view-button="table" aria-pressed="false">Table</button>
+			</div>
+
+			<button type="button" class="link-button" data-reset hidden>Reset filters</button>
+		</div>
+
+		<ul class="chips" data-chips aria-label="Active filters"></ul>
+	</form>
+
+	<p class="result-count" data-count aria-live="polite">
+		{entries.length} dataset{entries.length === 1 ? '' : 's'}
+	</p>
+
+	<ul class="cards" data-view="cards">
+		{
+			entries.map((entry) => (
+				<li class="card" data-entry-id={entry.id}>
+					{entry.preview && (
+						<img class="card__preview" src={withBase(entry.preview.src)} alt={entry.preview.alt} loading="lazy" />
+					)}
+					<h3>
+						<a href={withBase(entry.href)}>{entry.name}</a>
+					</h3>
+					<p class="card__summary">{entry.summary}</p>
+					<p class="card__meta">
+						<span class="badge badge--accent">{entry.release}</span>
+						{entry.facets.modality.map((value) => (
+							<span class="badge">{facetValueLabel('modality', value)}</span>
+						))}
+						<span class="badge">{facetValueLabel('access', entry.facets.access[0]!)}</span>
+					</p>
+					<p class="card__counts">Patients: {patients(entry)}</p>
+					<p class="card__actions">
+						<a class="button" href={withBase(entry.href)}>
+							View
+						</a>
+						<label class="compare-toggle">
+							<input type="checkbox" data-compare={entry.id} />
+							Compare
+						</label>
+					</p>
+				</li>
+			))
+		}
+	</ul>
+
+	<div class="table-scroll" data-view="table" hidden>
+		<table>
+			<thead>
+				<tr>
+					<th scope="col">Dataset</th>
+					<th scope="col">Release</th>
+					<th scope="col">Patients</th>
+					<th scope="col">Modalities</th>
+					<th scope="col">Annotations</th>
+					<th scope="col">Access</th>
+					<th scope="col">Compare</th>
+				</tr>
+			</thead>
+			<tbody>
+				{
+					entries.map((entry) => (
+						<tr data-entry-id={entry.id}>
+							<th scope="row">
+								<a href={withBase(entry.href)}>{entry.name}</a>
+							</th>
+							<td>{entry.release}</td>
+							<td>{patients(entry)}</td>
+							<td>{entry.facets.modality.map((v) => facetValueLabel('modality', v)).join(', ')}</td>
+							<td>{entry.facets.annotations.map((v) => facetValueLabel('annotations', v)).join(', ')}</td>
+							<td>{facetValueLabel('access', entry.facets.access[0]!)}</td>
+							<td>
+								<label class="compare-toggle">
+									<input type="checkbox" data-compare={entry.id} />
+									<span class="visually-hidden">Compare {entry.name}</span>
+								</label>
+							</td>
+						</tr>
+					))
+				}
+			</tbody>
+		</table>
+	</div>
+
+	<div class="empty-state" data-empty hidden>
+		<p><strong>No datasets match these filters.</strong></p>
+		<p>Try removing a filter, or <button type="button" class="link-button" data-reset>reset them all</button>.</p>
+	</div>
+
+	<aside class="tray" data-tray hidden aria-label="Comparison tray">
+		<div class="wrap tray__inner">
+			<p class="tray__label">Comparing <span data-tray-count>0</span> of 4</p>
+			<ul class="tray__items" data-tray-items></ul>
+			<a class="button" data-tray-go href={withBase('/compare/')}>Compare</a>
+			<button type="button" class="link-button" data-tray-clear>Clear</button>
+		</div>
+	</aside>
+</section>
+
+<script>
+	import {
+		MAX_COMPARE,
+		activeFilterCount,
+		defaultState,
+		matches,
+		paramsToState,
+		sortEntries,
+		stateToParams,
+		FACET_KEYS,
+		FACET_LABELS,
+		type ExplorerEntry,
+		type ExplorerState,
+		type FacetKey,
+	} from '../lib/explorer';
+	import { facetValueLabel } from '../lib/display';
+
+	const root = document.querySelector<HTMLElement>('[data-explorer]');
+	if (root) {
+		const entries: ExplorerEntry[] = JSON.parse(
+			root.querySelector<HTMLScriptElement>('[data-entries]')!.textContent ?? '[]',
+		);
+		const controls = root.querySelector<HTMLFormElement>('[data-controls]')!;
+		const queryInput = root.querySelector<HTMLInputElement>('[data-q]')!;
+		const sortSelect = root.querySelector<HTMLSelectElement>('[data-sort]')!;
+		const chipList = root.querySelector<HTMLUListElement>('[data-chips]')!;
+		const countText = root.querySelector<HTMLElement>('[data-count]')!;
+		const emptyState = root.querySelector<HTMLElement>('[data-empty]')!;
+		const views = {
+			cards: root.querySelector<HTMLElement>('[data-view="cards"]')!,
+			table: root.querySelector<HTMLElement>('[data-view="table"]')!,
+		};
+		const tray = root.querySelector<HTMLElement>('[data-tray]')!;
+		const trayItems = root.querySelector<HTMLUListElement>('[data-tray-items]')!;
+		const trayCount = root.querySelector<HTMLElement>('[data-tray-count]')!;
+		const trayGo = root.querySelector<HTMLAnchorElement>('[data-tray-go]')!;
+
+		// The controls are hidden until now, so a reader without JavaScript sees
+		// the whole catalog rather than dead filters.
+		controls.hidden = false;
+		controls.addEventListener('submit', (event) => event.preventDefault());
+
+		let state: ExplorerState = paramsToState(new URLSearchParams(location.search));
+		let selected: string[] = readSelection();
+
+		function readSelection(): string[] {
+			try {
+				const stored = JSON.parse(localStorage.getItem('atlas.compare') ?? '[]');
+				return Array.isArray(stored) ? stored.filter((id) => entries.some((e) => e.id === id)) : [];
+			} catch {
+				return [];
+			}
+		}
+
+		function saveSelection() {
+			try {
+				localStorage.setItem('atlas.compare', JSON.stringify(selected));
+			} catch {
+				/* private mode or blocked storage: the tray still works for this visit */
+			}
+		}
+
+		function writeUrl(replace: boolean) {
+			const params = stateToParams(state);
+			const url = params.toString() ? `${location.pathname}?${params}` : location.pathname;
+			history[replace ? 'replaceState' : 'pushState']({}, '', url);
+		}
+
+		function applyStateToControls() {
+			queryInput.value = state.q;
+			sortSelect.value = state.sort;
+			for (const box of root!.querySelectorAll<HTMLInputElement>('[data-facet]')) {
+				const key = box.dataset.facet as FacetKey;
+				box.checked = state.filters[key].includes(box.value);
+			}
+			for (const button of root!.querySelectorAll<HTMLButtonElement>('[data-view-button]')) {
+				button.setAttribute('aria-pressed', String(button.dataset.viewButton === state.view));
+			}
+			views.cards.hidden = state.view !== 'cards';
+			views.table.hidden = state.view !== 'table';
+		}
+
+		function renderChips() {
+			chipList.replaceChildren();
+			for (const key of FACET_KEYS) {
+				for (const value of state.filters[key]) {
+					const item = document.createElement('li');
+					const button = document.createElement('button');
+					button.type = 'button';
+					button.className = 'chip';
+					button.innerHTML = `<span class="chip__facet">${FACET_LABELS[key]}:</span> ${facetValueLabel(key, value)} <span aria-hidden="true">×</span>`;
+					button.setAttribute('aria-label', `Remove filter ${FACET_LABELS[key]}: ${facetValueLabel(key, value)}`);
+					button.addEventListener('click', () => {
+						state.filters[key] = state.filters[key].filter((entry) => entry !== value);
+						update(false);
+					});
+					item.append(button);
+					chipList.append(item);
+				}
+			}
+			const reset = root!.querySelector<HTMLButtonElement>('[data-controls] [data-reset]')!;
+			reset.hidden = activeFilterCount(state) === 0 && !state.q;
+		}
+
+		function renderResults() {
+			const visible = sortEntries(
+				entries.filter((entry) => matches(entry, state)),
+				state.sort,
+			);
+			const order = new Map(visible.map((entry, index) => [entry.id, index]));
+
+			for (const [name, container] of Object.entries(views)) {
+				const parent = name === 'cards' ? container : container.querySelector('tbody')!;
+				const rows = [...parent.querySelectorAll<HTMLElement>('[data-entry-id]')];
+				for (const row of rows) row.hidden = !order.has(row.dataset.entryId!);
+				rows
+					.filter((row) => order.has(row.dataset.entryId!))
+					.sort((a, b) => order.get(a.dataset.entryId!)! - order.get(b.dataset.entryId!)!)
+					.forEach((row) => parent.append(row));
+			}
+
+			countText.textContent =
+				`${visible.length} dataset${visible.length === 1 ? '' : 's'}` +
+				(visible.length === entries.length ? '' : ` of ${entries.length}`);
+			emptyState.hidden = visible.length > 0;
+		}
+
+		function renderTray() {
+			trayCount.textContent = String(selected.length);
+			tray.hidden = selected.length === 0;
+			trayItems.replaceChildren();
+			for (const id of selected) {
+				const entry = entries.find((candidate) => candidate.id === id);
+				if (!entry) continue;
+				const item = document.createElement('li');
+				const button = document.createElement('button');
+				button.type = 'button';
+				button.className = 'chip';
+				button.innerHTML = `${entry.name} <span aria-hidden="true">×</span>`;
+				button.setAttribute('aria-label', `Remove ${entry.name} from the comparison`);
+				button.addEventListener('click', () => setSelected(selected.filter((entry) => entry !== id)));
+				item.append(button);
+				trayItems.append(item);
+			}
+			trayGo.href = `${trayGo.dataset.base ?? trayGo.pathname}?releases=${selected.join(',')}`;
+			for (const box of root!.querySelectorAll<HTMLInputElement>('[data-compare]')) {
+				box.checked = selected.includes(box.dataset.compare!);
+				box.disabled = !box.checked && selected.length >= MAX_COMPARE;
+			}
+		}
+
+		function setSelected(next: string[]) {
+			selected = next;
+			saveSelection();
+			renderTray();
+		}
+
+		function update(replaceUrl: boolean) {
+			applyStateToControls();
+			renderChips();
+			renderResults();
+			writeUrl(replaceUrl);
+		}
+
+		let typing: number | undefined;
+		queryInput.addEventListener('input', () => {
+			state.q = queryInput.value;
+			window.clearTimeout(typing);
+			// Replace while typing so the back button does not walk letter by letter.
+			typing = window.setTimeout(() => update(true), 150);
+		});
+
+		for (const box of root.querySelectorAll<HTMLInputElement>('[data-facet]')) {
+			box.addEventListener('change', () => {
+				const key = box.dataset.facet as FacetKey;
+				state.filters[key] = box.checked
+					? [...state.filters[key], box.value]
+					: state.filters[key].filter((value) => value !== box.value);
+				update(false);
+			});
+		}
+
+		sortSelect.addEventListener('change', () => {
+			state.sort = sortSelect.value as ExplorerState['sort'];
+			update(false);
+		});
+
+		for (const button of root.querySelectorAll<HTMLButtonElement>('[data-view-button]')) {
+			button.addEventListener('click', () => {
+				state.view = button.dataset.viewButton as ExplorerState['view'];
+				update(false);
+			});
+		}
+
+		for (const button of root.querySelectorAll<HTMLButtonElement>('[data-reset]')) {
+			button.addEventListener('click', () => {
+				state = { ...defaultState(), view: state.view };
+				update(false);
+			});
+		}
+
+		for (const box of root.querySelectorAll<HTMLInputElement>('[data-compare]')) {
+			box.addEventListener('change', () => {
+				const id = box.dataset.compare!;
+				setSelected(box.checked ? [...selected, id].slice(0, MAX_COMPARE) : selected.filter((e) => e !== id));
+			});
+		}
+
+		root.querySelector<HTMLButtonElement>('[data-tray-clear]')!.addEventListener('click', () => setSelected([]));
+
+		// Back and forward restore the previous search, filters, sort and view.
+		window.addEventListener('popstate', () => {
+			state = paramsToState(new URLSearchParams(location.search));
+			applyStateToControls();
+			renderChips();
+			renderResults();
+		});
+
+		trayGo.dataset.base = trayGo.getAttribute('href') ?? '/compare/';
+		update(true);
+		renderTray();
+	}
+</script>
+
+<style>
+	.controls {
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 1rem;
+		margin-bottom: 1.25rem;
+		background: var(--surface-muted);
+		display: grid;
+		gap: 0.85rem;
+	}
+
+	.controls__search label {
+		display: block;
+		font-weight: 650;
+		margin-bottom: 0.25rem;
+	}
+
+	.controls__search input {
+		width: 100%;
+		max-width: 32rem;
+		padding: 0.5rem 0.65rem;
+		border: 1px solid var(--border-strong);
+		border-radius: var(--radius);
+		font: inherit;
+		background: var(--surface);
+	}
+
+	.controls__filters summary {
+		cursor: pointer;
+		font-weight: 650;
+	}
+
+	.controls__facets {
+		display: grid;
+		gap: 0.75rem;
+		grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+		margin-top: 0.75rem;
+	}
+
+	fieldset {
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 0.5rem 0.75rem 0.65rem;
+		margin: 0;
+		background: var(--surface);
+	}
+
+	legend {
+		font-size: 0.85rem;
+		font-weight: 650;
+		color: var(--ink-muted);
+		padding-inline: 0.25rem;
+	}
+
+	fieldset label {
+		display: flex;
+		align-items: baseline;
+		gap: 0.4rem;
+		font-size: 0.92rem;
+		padding-block: 0.1rem;
+	}
+
+	.controls__toolbar {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.75rem 1.25rem;
+	}
+
+	select {
+		font: inherit;
+		padding: 0.3rem 0.4rem;
+		border: 1px solid var(--border-strong);
+		border-radius: var(--radius);
+		background: var(--surface);
+	}
+
+	.view-switch {
+		display: inline-flex;
+		border: 1px solid var(--border-strong);
+		border-radius: var(--radius);
+		overflow: hidden;
+	}
+
+	.view-switch button {
+		font: inherit;
+		padding: 0.3rem 0.8rem;
+		border: 0;
+		background: var(--surface);
+		color: var(--ink-muted);
+		cursor: pointer;
+	}
+
+	.view-switch button[aria-pressed='true'] {
+		background: var(--accent-weak);
+		color: var(--accent-ink);
+		font-weight: 650;
+	}
+
+	.link-button {
+		font: inherit;
+		border: 0;
+		background: none;
+		padding: 0;
+		color: var(--accent-ink);
+		text-decoration: underline;
+		cursor: pointer;
+	}
+
+	.chips,
+	.tray__items {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.result-count {
+		color: var(--ink-muted);
+		font-size: 0.95rem;
+	}
+
+	.cards {
+		list-style: none;
+		margin: 0 0 1rem;
+		padding: 0;
+		display: grid;
+		gap: 1rem;
+		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	}
+
+	.card {
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 1rem;
+		background: var(--surface);
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+
+	.card h3 {
+		margin: 0;
+		font-size: 1.05rem;
+	}
+
+	.card__preview {
+		width: 100%;
+		height: 9rem;
+		object-fit: cover;
+		border-radius: var(--radius);
+		border: 1px solid var(--border);
+	}
+
+	.card__summary {
+		margin: 0;
+		color: var(--ink-muted);
+		font-size: 0.93rem;
+	}
+
+	.card__meta,
+	.card__counts,
+	.card__actions {
+		margin: 0;
+		font-size: 0.9rem;
+	}
+
+	.card__meta .badge + .badge {
+		margin-left: 0.3rem;
+	}
+
+	.card__actions {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin-top: auto;
+		padding-top: 0.5rem;
+	}
+
+	.button {
+		display: inline-block;
+		padding: 0.3rem 0.8rem;
+		border: 1px solid var(--accent);
+		border-radius: var(--radius);
+		background: var(--accent-weak);
+		color: var(--accent-ink);
+		text-decoration: none;
+		font-size: 0.9rem;
+	}
+
+	.compare-toggle {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3rem;
+		font-size: 0.9rem;
+	}
+
+	.tray {
+		position: sticky;
+		bottom: 0;
+		margin-top: 1.5rem;
+		border-top: 1px solid var(--border-strong);
+		background: var(--surface);
+		padding-block: 0.75rem;
+	}
+
+	.tray__inner {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.6rem 1rem;
+		padding-inline: 0;
+	}
+
+	.tray__label {
+		margin: 0;
+		font-weight: 650;
+	}
+
+	.visually-hidden {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+
+	@media (max-width: 600px) {
+		.controls__filters {
+			border: 1px solid var(--border);
+			border-radius: var(--radius);
+			padding: 0.5rem 0.75rem;
+			background: var(--surface);
+		}
+	}
+</style>

@@ -77,6 +77,15 @@ export const TASKS = [
 	'other',
 ];
 export const ACCESS_MODES = ['open_download', 'registration_required', 'restricted'];
+export const ANNOTATIONS = [
+	'segmentation_masks',
+	'bounding_boxes',
+	'classification_labels',
+	'pathology_labels',
+	'outcome_labels',
+	'none',
+	'not_documented',
+];
 
 export const dataset = z.object({
 	id: z.string(),
@@ -98,6 +107,8 @@ export const release = z.object({
 	modalities: z.array(z.enum(MODALITIES)).default([]),
 	cohort: z.string().optional(),
 	tasks: z.array(z.enum(TASKS)).default([]),
+	/** What is labelled, as documented by the provider. Empty means not documented. */
+	annotations: z.array(z.enum(ANNOTATIONS)).default([]),
 	access: z.object({
 		mode: z.enum(ACCESS_MODES),
 		registrationVisible: z.boolean().default(false),

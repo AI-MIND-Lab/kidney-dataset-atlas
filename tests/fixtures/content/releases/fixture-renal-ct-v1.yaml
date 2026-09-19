@@ -11,6 +11,8 @@ modalities:
 cohort: Smaller synthetic cohort, superseded by v2.
 tasks:
   - segmentation
+annotations:
+  - segmentation_masks
 access:
   mode: open_download
   registrationVisible: false

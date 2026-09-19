@@ -56,6 +56,22 @@ export const trainTestLabel = (value: string): string => TRAIN_TEST_LABELS[value
 /** Enum-ish values that read fine as plain words. */
 export const humanize = (value: string): string => value.replace(/_/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
 
+const PAIRING_LABELS: Record<string, string> = {
+	verified: 'Verified pairing',
+	not_documented: 'Pairing not documented',
+	none: 'No pairing documented',
+};
+
+/** Labels for the explorer's filter values, by facet. */
+export function facetValueLabel(facet: string, value: string): string {
+	if (facet === 'docs') return completenessLabel(value);
+	if (facet === 'access') return accessLabel(value);
+	if (facet === 'pairing') return PAIRING_LABELS[value] ?? humanize(value);
+	if (value === 'ct' || value === 'mri' || value === 'wsi') return value.toUpperCase();
+	if (value === 'ckd' || value === 'aki') return value.toUpperCase();
+	return humanize(value);
+}
+
 export function dateLabel(value: Date | null | undefined): string {
 	if (!value) return 'Not documented';
 	return value.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });

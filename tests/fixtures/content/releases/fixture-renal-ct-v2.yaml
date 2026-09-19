@@ -22,6 +22,8 @@ modalities:
 cohort: Synthetic adults with invented renal lesions.
 tasks:
   - segmentation
+annotations:
+  - segmentation_masks
 access:
   mode: open_download
   registrationVisible: false

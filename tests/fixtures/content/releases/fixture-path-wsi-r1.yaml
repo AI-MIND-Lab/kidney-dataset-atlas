@@ -1,0 +1,57 @@
+id: fixture-path-wsi-r1
+dataset: fixture-path-wsi
+versionLabel: release 1 (synthetic)
+releaseDate: 2026-01-15
+counts:
+  patients:
+    value: null
+    status: not_documented
+  slides:
+    value: 340
+    status: present
+modalities:
+  - pathology
+cohort: Invented slide set with no documented patient count.
+tasks:
+  - classification
+annotations:
+  - pathology_labels
+access:
+  mode: registration_required
+  registrationVisible: true
+  instructions: Fixture record; registration is invented.
+license:
+  name: Fixture licence
+  conditions: Synthetic record, no real terms apply.
+deidentification:
+  statement: Fixture record; no human data exist.
+  status: not_applicable
+pairing:
+  - kind: same_patient
+    modalities: [ct, pathology]
+    status: not_documented
+    note: Fixture record; pairing with the CT fixture is not documented.
+dictionary:
+  completeness: documentation_only
+  inspectedScope: Nothing inspected; fixture record.
+structure: One invented slide manifest keyed by slide_id.
+limitations:
+  - Entirely synthetic; patient count deliberately left unknown.
+eligibility:
+  publicAccess:
+    status: pass
+  deidentification:
+    status: pass
+  noPhiHosted:
+    status: pass
+  termsPermitUse:
+    status: pass
+  samplePermission:
+    status: pass
+catalogStatus: published
+verifiedOn: 2026-08-02
+researchedBy: agent
+approvedBy: i-sababishraq
+approvedOn: 2026-08-02
+sources:
+  - fixture-source-1

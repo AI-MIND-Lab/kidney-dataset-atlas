@@ -1,0 +1,52 @@
+id: fixture-clinical-registry-2024
+dataset: fixture-clinical-registry
+versionLabel: 2024 extract (synthetic)
+releaseDate: 2024-11-20
+counts:
+  patients:
+    value: 5400
+    status: present
+  records:
+    value: 61200
+    status: present
+modalities:
+  - clinical_table
+cohort: Invented registry of synthetic adults with chronic kidney disease.
+tasks:
+  - survival
+  - regression
+annotations:
+  - outcome_labels
+access:
+  mode: open_download
+  registrationVisible: false
+  instructions: Fixture record; there is nothing to download.
+license:
+  name: Fixture licence
+deidentification:
+  statement: Fixture record; no human data exist.
+  status: not_applicable
+dictionary:
+  completeness: complete_for_inspected_release
+  inspectedScope: Fixture dictionary covering the invented extract.
+structure: One invented table, one row per synthetic patient-year.
+limitations:
+  - Entirely synthetic; no imaging of any kind.
+eligibility:
+  publicAccess:
+    status: pass
+  deidentification:
+    status: pass
+  noPhiHosted:
+    status: pass
+  termsPermitUse:
+    status: pass
+  samplePermission:
+    status: pass
+catalogStatus: published
+verifiedOn: 2026-09-10
+researchedBy: agent
+approvedBy: i-sababishraq
+approvedOn: 2026-09-10
+sources:
+  - fixture-source-1
