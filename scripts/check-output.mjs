@@ -13,6 +13,7 @@ import { fileURLToPath } from 'node:url';
 const root = resolve(fileURLToPath(new URL('../', import.meta.url)));
 const dist = join(root, 'dist');
 const usingFixtures = process.env.ATLAS_FIXTURES === '1';
+const showingDrafts = process.env.ATLAS_DRAFTS === '1';
 
 /** GitHub Pages publishes at most 1 GB; warn before the site gets close. */
 const LIMIT_BYTES = 1024 ** 3;
@@ -56,6 +57,10 @@ for (const file of files.filter((path) => path.endsWith('.html'))) {
 
 	if (!usingFixtures && (/data-atlas-fixture/.test(html) || html.includes('/previews/fixtures/'))) {
 		errors.push(`${name}: contains fixture data, which must never reach a public build`);
+	}
+
+	if (!showingDrafts && /data-atlas-draft/.test(html)) {
+		errors.push(`${name}: contains an unapproved draft record, which must never reach a public build`);
 	}
 
 	if (!html.includes('data-pagefind-body')) continue;

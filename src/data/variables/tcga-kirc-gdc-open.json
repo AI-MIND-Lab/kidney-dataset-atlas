@@ -1,0 +1,195 @@
+[
+	{
+		"id": "kirc-submitter-id",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "submitter_id",
+		"file": "GDC case record",
+		"definition": "TCGA barcode for the case, such as TCGA-B0-5098. Joins clinical records, biospecimen records and slide images for the same patient.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "identifier",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": "patient identifier",
+		"provenance": "Returned by the GDC API for this project.",
+		"evidence": {
+			"sources": ["gdc-kirc-case-fields"],
+			"status": "verified",
+			"verifiedOn": "2026-09-19"
+		}
+	},
+	{
+		"id": "kirc-race",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "demographic.race",
+		"file": "GDC case record",
+		"definition": "Self-reported race of the patient, as recorded by the submitting centre.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{ "code": "white", "meaning": "White" },
+			{ "code": "black or african american", "meaning": "Black or African American" }
+		],
+		"missingValues": ["not reported"],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "race",
+		"provenance": "Values observed in returned case records; the coding list here shows only the values seen, not the full permitted set.",
+		"evidence": {
+			"sources": ["gdc-kirc-case-fields"],
+			"status": "verified",
+			"verifiedOn": "2026-09-19"
+		}
+	},
+	{
+		"id": "kirc-vital-status",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "demographic.vital_status",
+		"file": "GDC case record",
+		"definition": "Whether the patient was alive or dead at last contact.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{ "code": "Alive", "meaning": "Alive at last contact" },
+			{ "code": "Dead", "meaning": "Deceased" }
+		],
+		"missingValues": ["Not Reported"],
+		"observationLevel": "patient",
+		"timePoint": "Last contact",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": "vital status",
+		"provenance": "Values observed in returned case records.",
+		"evidence": {
+			"sources": ["gdc-kirc-case-fields"],
+			"status": "verified",
+			"verifiedOn": "2026-09-19"
+		}
+	},
+	{
+		"id": "kirc-age-at-diagnosis",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.age_at_diagnosis",
+		"file": "GDC case record",
+		"definition": "Age at diagnosis, recorded in days. A returned example held 19,620 days.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": ["null"],
+		"observationLevel": "patient",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "age at diagnosis",
+		"provenance": "Values observed in returned case records.",
+		"evidence": {
+			"sources": ["gdc-kirc-case-fields"],
+			"status": "verified",
+			"verifiedOn": "2026-09-19"
+		}
+	},
+	{
+		"id": "kirc-primary-diagnosis",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.primary_diagnosis",
+		"file": "GDC case record",
+		"definition": "Morphological diagnosis text, for example 'Clear cell adenocarcinoma, NOS'. A case may carry several diagnosis records.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": ["Not Reported"],
+		"observationLevel": "patient",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "primary diagnosis",
+		"provenance": "Values observed in returned case records.",
+		"evidence": {
+			"sources": ["gdc-kirc-case-fields"],
+			"status": "verified",
+			"verifiedOn": "2026-09-19"
+		}
+	},
+	{
+		"id": "kirc-ajcc-stage",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.ajcc_pathologic_stage",
+		"file": "GDC case record",
+		"definition": "AJCC pathologic stage recorded for the diagnosis, for example 'Stage I'. Which AJCC edition applies is not stated in the returned records.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [{ "code": "Stage I", "meaning": "AJCC pathologic stage I" }],
+		"missingValues": ["null"],
+		"observationLevel": "patient",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Values observed in returned case records; only the values seen are listed.",
+		"evidence": {
+			"sources": ["gdc-kirc-case-fields"],
+			"status": "verified",
+			"verifiedOn": "2026-09-19"
+		}
+	},
+	{
+		"id": "kirc-tumor-grade",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.tumor_grade",
+		"file": "GDC case record",
+		"definition": "Tumour grade recorded for the diagnosis, for example G1 or G3. The grading system behind these values is not stated in the returned records, so they should not be equated with another dataset's grades.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{ "code": "G1", "meaning": "Grade 1 as recorded" },
+			{ "code": "G3", "meaning": "Grade 3 as recorded" }
+		],
+		"missingValues": ["not reported"],
+		"observationLevel": "patient",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Values observed in returned case records; only the values seen are listed.",
+		"evidence": {
+			"sources": ["gdc-kirc-case-fields"],
+			"status": "verified",
+			"verifiedOn": "2026-09-19"
+		}
+	},
+	{
+		"id": "kirc-days-to-follow-up",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "follow_ups.days_to_follow_up",
+		"file": "GDC case record",
+		"definition": "Days from the reference date to a follow-up record. A case may hold several follow-up records; returned examples held two and five.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": ["null"],
+		"observationLevel": "record",
+		"timePoint": "Follow-up",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": "follow-up time",
+		"provenance": "Values observed in returned case records.",
+		"evidence": {
+			"sources": ["gdc-kirc-case-fields"],
+			"status": "verified",
+			"verifiedOn": "2026-09-19"
+		}
+	}
+]

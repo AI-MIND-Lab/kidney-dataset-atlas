@@ -1,0 +1,54 @@
+[
+	{
+		"id": "kits23-segmentation-label",
+		"release": "kits23",
+		"originalName": "segmentation label",
+		"file": "segmentation.nii.gz",
+		"definition": "Voxel label in the aggregated segmentation for a case. The configuration file names three foreground classes; 0 is background by the usual convention and is not listed there.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{ "code": "1", "meaning": "Kidney — parenchyma and non-adipose tissue within the hilum" },
+			{ "code": "2", "meaning": "Tumor — mass pre-operatively suspected of being malignant" },
+			{ "code": "3", "meaning": "Cyst — mass determined radiologically, or pathologically where available, to be a cyst" }
+		],
+		"missingValues": [],
+		"observationLevel": "slice",
+		"timePoint": "Pre-operative CT",
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": "segmentation class",
+		"provenance": "Class numbering from the repository's label configuration; class meanings from the challenge page.",
+		"evidence": {
+			"sources": ["kits23-labels", "kits23-challenge-page"],
+			"locator": "KITS_LABEL_NAMES; dataset description",
+			"status": "verified",
+			"verifiedOn": "2026-09-19"
+		}
+	},
+	{
+		"id": "kits23-case-id",
+		"release": "kits23",
+		"originalName": "case_XXXXX",
+		"file": "directory name under dataset/",
+		"definition": "Case identifier, used as the directory name holding that case's segmentation and annotation instances.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "identifier",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": "case identifier",
+		"provenance": "Repository directory listing.",
+		"evidence": {
+			"sources": ["kits23-case-listing"],
+			"locator": "dataset/case_00000",
+			"status": "verified",
+			"verifiedOn": "2026-09-19"
+		}
+	}
+]

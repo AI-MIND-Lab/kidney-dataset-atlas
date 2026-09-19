@@ -119,6 +119,18 @@ const countRows = [
 		}
 
 		{
+			data.catalogStatus !== 'published' && (
+				<div class="notice" data-atlas-draft>
+					<p>
+						<strong>Draft, not approved.</strong> This record was researched but no curator has checked its
+						eligibility and sources yet, so it is not published. Run <code>npm run validate</code> for its
+						approval checklist.
+					</p>
+				</div>
+			)
+		}
+
+		{
 			!isCanonical && isCurrent && (
 				<div class="notice">
 					<p>

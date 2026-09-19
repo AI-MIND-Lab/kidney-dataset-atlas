@@ -51,6 +51,16 @@ const pageTitle = title === SITE.title ? title : `${title} · ${SITE.title}`;
 						</div>
 					)
 				}
+				{
+					SITE.showingDrafts && (
+						<div class="notice notice--fixtures" data-atlas-draft>
+							<p>
+								<strong>Draft review build.</strong> This build includes records no curator has approved
+								yet. They are shown so they can be read and checked; they are not published.
+							</p>
+						</div>
+					)
+				}
 				<slot />
 			</main>
 			<SiteFooter />

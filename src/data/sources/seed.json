@@ -1,0 +1,107 @@
+[
+	{
+		"id": "kits23-challenge-page",
+		"url": "https://kits-challenge.org/kits23/",
+		"title": "KiTS23: The 2023 Kidney Tumor Segmentation Challenge",
+		"locator": "Dataset and licence sections",
+		"accessedOn": "2026-09-19"
+	},
+	{
+		"id": "kits23-readme",
+		"url": "https://github.com/neheller/kits23",
+		"title": "kits23 repository README",
+		"locator": "Data download and licence sections",
+		"accessedOn": "2026-09-19"
+	},
+	{
+		"id": "kits23-labels",
+		"url": "https://raw.githubusercontent.com/neheller/kits23/main/kits23/configuration/labels.py",
+		"title": "kits23 label configuration (labels.py)",
+		"locator": "KITS_LABEL_NAMES",
+		"accessedOn": "2026-09-19"
+	},
+	{
+		"id": "kits23-case-listing",
+		"url": "https://api.github.com/repos/neheller/kits23/contents/dataset/case_00000",
+		"title": "kits23 repository listing for case_00000",
+		"locator": "Directory contents",
+		"accessedOn": "2026-09-19"
+	},
+	{
+		"id": "kits21-paper",
+		"url": "https://arxiv.org/html/2307.01984",
+		"title": "The KiTS21 Challenge: Automatic segmentation of kidneys, renal tumors, and renal cysts in corticomedullary-phase CT",
+		"locator": "Cohort, annotation method and limitations sections",
+		"accessedOn": "2026-09-19"
+	},
+	{
+		"id": "kits23-winner-paper",
+		"url": "https://arxiv.org/abs/2310.04110",
+		"title": "Automated 3D Segmentation of Kidneys and Tumors in MICCAI KiTS 2023 Challenge",
+		"locator": "Abstract",
+		"accessedOn": "2026-09-19"
+	},
+	{
+		"id": "gdc-access-processes",
+		"url": "https://gdc.cancer.gov/access-data/data-access-processes-and-tools",
+		"title": "GDC data access processes and tools",
+		"locator": "Open access and controlled access definitions",
+		"accessedOn": "2026-09-19"
+	},
+	{
+		"id": "gdc-kirc-summary",
+		"url": "https://api.gdc.cancer.gov/projects/TCGA-KIRC?expand=summary,summary.data_categories",
+		"title": "GDC API project summary for TCGA-KIRC",
+		"locator": "summary.case_count and data_categories",
+		"accessedOn": "2026-09-19"
+	},
+	{
+		"id": "gdc-kirc-slides",
+		"url": "https://api.gdc.cancer.gov/files?filters=cases.project.project_id=TCGA-KIRC&data_type=Slide+Image&facets=experimental_strategy,access",
+		"title": "GDC API slide image facets for TCGA-KIRC",
+		"locator": "experimental_strategy and access facets",
+		"accessedOn": "2026-09-19"
+	},
+	{
+		"id": "gdc-kirc-case-fields",
+		"url": "https://api.gdc.cancer.gov/cases?filters=project.project_id=TCGA-KIRC&fields=submitter_id,demographic,diagnoses,follow_ups",
+		"title": "GDC API case records for TCGA-KIRC",
+		"locator": "Returned case fields",
+		"accessedOn": "2026-09-19"
+	},
+	{
+		"id": "tcga-kirc-nature-2013",
+		"url": "https://api.crossref.org/works/10.1038/nature12222",
+		"title": "Crossref record for 'Comprehensive molecular characterization of clear cell renal cell carcinoma'",
+		"locator": "Title, container-title, year",
+		"accessedOn": "2026-09-19"
+	},
+	{
+		"id": "nhanes-alb-cr-l",
+		"url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/ALB_CR_L.htm",
+		"title": "NHANES August 2021–August 2023: Albumin & Creatinine - Urine (ALB_CR_L) documentation and codebook",
+		"locator": "Codebook and analytic notes",
+		"accessedOn": "2026-09-19"
+	},
+	{
+		"id": "nhanes-biopro-l",
+		"url": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/BIOPRO_L.htm",
+		"title": "NHANES August 2021–August 2023: Standard Biochemistry Profile (BIOPRO_L) documentation and codebook",
+		"locator": "Codebook",
+		"accessedOn": "2026-09-19"
+	},
+	{
+		"id": "nchs-data-user-agreement",
+		"url": "https://www.cdc.gov/nchs/policy/data-user-agreement.html",
+		"title": "NCHS data user agreement",
+		"locator": "Terms of use",
+		"accessedOn": "2026-09-19"
+	},
+	{
+		"id": "nchs-data-release-policy",
+		"url": "https://www.cdc.gov/nchs/policy/data-release-policy.html",
+		"title": "NCHS data release policy",
+		"locator": "Disclosure Review Board review",
+		"accessedOn": "2026-09-19"
+	}
+]

@@ -1,0 +1,149 @@
+id: kits23
+dataset: kits
+versionLabel: KiTS23
+releaseDate: null
+counts:
+  patients:
+    value: 489
+    status: present
+    evidence:
+      sources: [kits23-challenge-page]
+      locator: "\"The dataset is composed of 599 cases with 489 allocated to the training set and 110 in the test set.\""
+      status: verified
+      verifiedOn: 2026-09-19
+      note: The 489 publicly downloadable training cases. The 110 test cases are not public and are not counted here.
+  examinations:
+    value: null
+    status: not_documented
+  lesions:
+    value: null
+    status: not_documented
+  slices:
+    value: null
+    status: not_documented
+  slides:
+    value: null
+    status: not_applicable
+  records:
+    value: null
+    status: not_applicable
+modalities:
+  - ct
+cohort: >-
+  Patients who underwent partial or radical nephrectomy for suspected renal malignancy, with
+  pre-operative CT available. The KiTS21 publication describes the training cohort as
+  University of Minnesota patients treated between January 2011 and June 2019, with the test
+  set contributed by the Cleveland Clinic.
+tasks:
+  - segmentation
+annotations:
+  - segmentation_masks
+features:
+  wsi:
+    status: not_applicable
+    note: A CT release; no slide images are part of it.
+  ctPhases:
+    status: present
+    phases: [corticomedullary, nephrogenic]
+    note: The KiTS23 page describes contrast-enhanced CT in either the corticomedullary or the nephrogenic phase. KiTS21 used corticomedullary phase only.
+    evidence:
+      sources: [kits23-challenge-page, kits21-paper]
+      status: verified
+      verifiedOn: 2026-09-19
+  clinicalData:
+    status: not_documented
+    note: No clinical table for the KiTS23 release was located in the repository or on the challenge page. Earlier KiTS editions released clinical context; that was not verified for this release.
+  followUp:
+    status: not_documented
+access:
+  mode: open_download
+  registrationVisible: false
+  instructions: >-
+    Clone the kits23 repository, install the package with pip, then run kits23_download_data,
+    which fetches the imaging. Segmentations are stored in the repository itself. This applies
+    to the 489 training cases. The 110 test cases were released only to challenge participants
+    through a request form and are not covered by this record.
+  evidence:
+    sources: [kits23-readme, kits23-challenge-page]
+    locator: Data download section
+    status: verified
+    verifiedOn: 2026-09-19
+license:
+  name: CC BY-NC-SA 4.0 (imaging and segmentations)
+  url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+  conditions: >-
+    Attribution, non-commercial use, and share-alike: anything derived from the images,
+    including preview pictures on a site like this one, must carry the same licence. The
+    repository code is separately licensed under MIT.
+deidentification:
+  statement: >-
+    The KiTS21 publication documents institutional review board approval (University of
+    Minnesota study 1611M00821). No statement describing the de-identification procedure
+    itself was found on the pages checked for this release.
+  status: not_documented
+  evidence:
+    sources: [kits21-paper]
+    locator: "\"After receiving approval from the University of Minnesota institutional review board (study 1611M00821)\""
+    status: verified
+    verifiedOn: 2026-09-19
+    note: A curator should read the KiTS19 data paper in full, which reportedly describes assigning random case numbers, before this release is published.
+pairing:
+  - kind: same_session_phases
+    modalities: [ct]
+    status: not_documented
+    note: Cases are described as single pre-operative scans. Whether multiple phases exist per case is not documented on the pages checked.
+dictionary:
+  completeness: partial
+  inspectedScope: >-
+    The label configuration file in the dataset repository (kits23/configuration/labels.py) and
+    the challenge page. The imaging itself was not downloaded, and no clinical table was located.
+structure: >-
+  Each case directory in the repository holds segmentation.nii.gz together with an instances
+  directory of individual annotation instances; the imaging volume is fetched separately by the
+  download command. Cases are identified by a case number such as case_00000.
+citation: KiTS23 — The 2023 Kidney Tumor Segmentation Challenge, https://kits-challenge.org/kits23/
+limitations:
+  - The 110-case test set is not publicly available; only the 489 training cases are.
+  - The KiTS21 publication reports roughly a 2:1 male-to-female imbalance in the cohort.
+  - The KiTS21 publication describes the training cohort as drawn largely from a single academic centre and predominantly Caucasian.
+  - Scanners and protocols vary, because many scans came from referring institutions.
+  - Six segmentation classes were originally planned; three were released after quality assurance.
+eligibility:
+  publicAccess:
+    status: pass
+    note: The 489 training cases download without registration or application. The test set is restricted and is excluded from this record.
+    evidence:
+      sources: [kits23-readme, kits23-challenge-page]
+      status: verified
+      verifiedOn: 2026-09-19
+  deidentification:
+    status: unknown
+    note: Institutional review board approval is documented, but a de-identification statement for this release was not located. This is what currently blocks publication.
+    evidence:
+      sources: [kits21-paper]
+      status: not_verified
+  noPhiHosted:
+    status: pass
+    note: This catalog stores descriptions and sources only.
+  termsPermitUse:
+    status: pass
+    note: >-
+      CC BY-NC-SA 4.0 permits non-commercial reuse with attribution. This record shows
+      descriptions and sources only. Any preview image added later must carry the same licence.
+    evidence:
+      sources: [kits23-challenge-page]
+      status: verified
+      verifiedOn: 2026-09-19
+  samplePermission:
+    status: pass
+    note: No preview images are shown for this release, so no per-image permission was needed.
+catalogStatus: draft
+verifiedOn: 2026-09-19
+researchedBy: agent
+approvedBy: null
+approvedOn: null
+sources:
+  - kits23-challenge-page
+  - kits23-readme
+  - kits21-paper
+  - kits23-case-listing

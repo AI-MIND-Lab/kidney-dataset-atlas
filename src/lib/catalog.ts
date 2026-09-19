@@ -33,7 +33,8 @@ export interface DatasetWithReleases {
 	current: Release;
 }
 
-const isPublished = (entry: { data: { catalogStatus: string } }) => entry.data.catalogStatus === 'published';
+const isPublished = (entry: { data: { catalogStatus: string } }) =>
+	entry.data.catalogStatus === 'published' || SITE.showingDrafts;
 
 type JsonModules = Record<string, unknown>;
 

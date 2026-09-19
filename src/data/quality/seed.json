@@ -1,0 +1,60 @@
+[
+	{
+		"id": "nhanes-2021-albumin-method-change",
+		"release": "nhanes-2021-2023-kidney",
+		"category": "published_report",
+		"description": "The urine albumin assay changed to LC-MS/MS. The provider reports that the new results average 6.20% higher than the previous fluorescence immunoassay, and supplies regression equations so that results can be compared across cycles.",
+		"inspectedScope": "The analytic notes of the ALB_CR_L codebook. No data file was examined.",
+		"affected": {
+			"value": null,
+			"status": "not_applicable",
+			"evidence": {
+				"sources": ["nhanes-alb-cr-l"],
+				"status": "verified",
+				"verifiedOn": "2026-09-19",
+				"note": "The change affects the measurement scale rather than a countable set of records."
+			}
+		},
+		"detection": "Documented by the provider in the file's analytic notes.",
+		"impact": "Comparing albumin or albumin-to-creatinine values across cycles without the provider's adjustment will overstate the change over time.",
+		"handling": "Apply the regression equations the provider supplies before comparing cycles.",
+		"sources": ["nhanes-alb-cr-l"]
+	},
+	{
+		"id": "nhanes-2021-missing-lab-results",
+		"release": "nhanes-2021-2023-kidney",
+		"category": "observed_issue",
+		"description": "Laboratory results are missing for a substantial minority of participants: 340 of 8,493 have no urine albumin or creatinine result, and 873 of 7,199 have no serum creatinine or urea nitrogen result.",
+		"inspectedScope": "Sample sizes and missing counts stated in the two codebooks. No data file was examined.",
+		"affected": {
+			"value": 873,
+			"status": "present",
+			"evidence": {
+				"sources": ["nhanes-biopro-l"],
+				"locator": "Codebook, LBXSCR missing count",
+				"status": "verified",
+				"verifiedOn": "2026-09-19",
+				"note": "The largest of the two missing counts; the urine file is missing 340."
+			}
+		},
+		"detection": "Stated in the published codebooks.",
+		"impact": "Analyses restricted to complete cases lose participants, and the loss may not be random.",
+		"handling": "Account for missingness, and use the survey design variables and weights.",
+		"sources": ["nhanes-alb-cr-l", "nhanes-biopro-l"]
+	},
+	{
+		"id": "kits23-annotation-method",
+		"release": "kits23",
+		"category": "potential_check",
+		"description": "Segmentations were produced by crowd workers following bounding boxes and reference pins placed by medical trainees, with three independent annotations per region of interest, rather than directly by radiologists. Anyone relying on boundary precision should check how the three annotations were combined.",
+		"inspectedScope": "The annotation method described in the KiTS21 publication. No segmentation file was examined, and this description may not hold for cases added after KiTS21.",
+		"affected": {
+			"value": null,
+			"status": "not_verified"
+		},
+		"detection": "Described by the dataset's own publication.",
+		"impact": "Unclear without inspection; it is a property of the annotation process, not a known error.",
+		"handling": "Inspect the per-case annotation instances in the repository before treating boundaries as a gold standard.",
+		"sources": ["kits21-paper", "kits23-case-listing"]
+	}
+]

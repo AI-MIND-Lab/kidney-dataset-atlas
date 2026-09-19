@@ -7,6 +7,12 @@ export const SITE = {
 	/** The private phase is not published; keep the site out of search engines until it is. */
 	isPublic: import.meta.env.SITE_PUBLIC === 'true',
 	usingFixtures: import.meta.env.ATLAS_FIXTURES === '1',
+	/**
+	 * Local review mode: includes records a curator has not approved yet, so
+	 * they can be read as pages before being published. Every page is marked,
+	 * and the output check refuses a build carrying that mark without this flag.
+	 */
+	showingDrafts: import.meta.env.ATLAS_DRAFTS === '1',
 	repoUrl: 'https://github.com/i-sababishraq/kidney-dataset-atlas',
 };
 

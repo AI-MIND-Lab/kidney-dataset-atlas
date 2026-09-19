@@ -1,0 +1,154 @@
+id: nhanes-2021-2023-kidney
+dataset: nhanes
+versionLabel: August 2021–August 2023 kidney laboratory files
+releaseDate: null
+counts:
+  patients:
+    value: null
+    status: not_applicable
+    evidence:
+      sources: [nhanes-alb-cr-l, nhanes-biopro-l]
+      status: verified
+      verifiedOn: 2026-09-19
+      note: >-
+        These are survey participants, not patients. ALB_CR_L covers 8,493 participants and
+        BIOPRO_L 7,199, of whom 6,750 gave blood samples.
+  records:
+    value: 8493
+    status: present
+    evidence:
+      sources: [nhanes-alb-cr-l]
+      locator: Sample size, ALB_CR_L
+      status: verified
+      verifiedOn: 2026-09-19
+      note: Participants in the urine albumin and creatinine file, the larger of the two files.
+  examinations:
+    value: null
+    status: not_applicable
+  lesions:
+    value: null
+    status: not_applicable
+  slices:
+    value: null
+    status: not_applicable
+  slides:
+    value: null
+    status: not_applicable
+modalities:
+  - clinical_table
+cohort: >-
+  Participants in the August 2021–August 2023 NHANES cycle. Urine albumin and creatinine were
+  measured in examined participants aged 3 years and over; the standard biochemistry profile
+  covers participants aged 12 years and over.
+tasks: []
+annotations: []
+features:
+  wsi:
+    status: not_applicable
+  ctPhases:
+    status: not_applicable
+  clinicalData:
+    status: present
+    note: Laboratory measures of kidney function, with survey design variables held in the demographics file of the same cycle.
+    evidence:
+      sources: [nhanes-alb-cr-l, nhanes-biopro-l]
+      status: verified
+      verifiedOn: 2026-09-19
+  followUp:
+    status: not_documented
+    note: NHANES cycles sample participants anew rather than following the same people; no follow-up within this release was documented on the pages checked.
+access:
+  mode: open_download
+  registrationVisible: false
+  instructions: >-
+    Public-use files download directly from the NHANES site in SAS transport (.xpt) format —
+    ALB_CR_L.xpt and BIOPRO_L.xpt for this record. No registration, application or approval is
+    required.
+  evidence:
+    sources: [nhanes-alb-cr-l]
+    locator: File name and format
+    status: verified
+    verifiedOn: 2026-09-19
+license:
+  name: NCHS public-use file terms
+  url: https://www.cdc.gov/nchs/policy/data-user-agreement.html
+  conditions: >-
+    Use for statistical reporting and analysis only; make no attempt to learn the identity of
+    any person or establishment; do not link these data with individually identifiable data
+    from other sources.
+deidentification:
+  statement: >-
+    NCHS releases public-use files only after review by its Disclosure Review Board, and users
+    must agree not to attempt re-identification or linkage. The pages checked did not state
+    which specific identifiers are removed.
+  status: present
+  evidence:
+    sources: [nchs-data-release-policy, nchs-data-user-agreement]
+    locator: Disclosure Review Board review; data user agreement terms
+    status: verified
+    verifiedOn: 2026-09-19
+pairing:
+  - kind: same_patient
+    modalities: [clinical_table]
+    status: present
+    note: Files join by the participant sequence number SEQN, so urine and serum measures belong to the same participant.
+    evidence:
+      sources: [nhanes-alb-cr-l, nhanes-biopro-l]
+      status: verified
+      verifiedOn: 2026-09-19
+dictionary:
+  completeness: partial
+  inspectedScope: >-
+    The published codebooks for ALB_CR_L and BIOPRO_L. Every ALB_CR_L variable is documented;
+    for BIOPRO_L only the kidney-relevant analytes are. Other files in the cycle, including
+    demographics and the survey design variables, are not documented here.
+structure: >-
+  Two SAS transport tables, one row per participant, joined to each other and to the rest of
+  the cycle by SEQN. Weighted analysis additionally needs SDMVSTRA and SDMVPSU from the
+  demographics file of the same cycle.
+citation: >-
+  National Center for Health Statistics, National Health and Nutrition Examination Survey,
+  August 2021–August 2023 public-use data files.
+limitations:
+  - Survey participants, not a clinical cohort, and not a kidney disease cohort.
+  - "Cross-sectional: the cycle gives one measurement occasion per participant."
+  - The urine albumin method changed to LC-MS/MS; results average 6.20% higher than the previous immunoassay, and the provider supplies regression equations for comparability.
+  - Estimates require the survey design variables and weights, which are in a file outside this record.
+  - Serum creatinine here is not a reference-method measurement for clinical decisions about renal function.
+eligibility:
+  publicAccess:
+    status: pass
+    note: Public-use files download directly, with no registration or application.
+    evidence:
+      sources: [nhanes-alb-cr-l]
+      status: verified
+      verifiedOn: 2026-09-19
+  deidentification:
+    status: pass
+    note: Public-use files are released after Disclosure Review Board review, and re-identification is prohibited by the user agreement.
+    evidence:
+      sources: [nchs-data-release-policy, nchs-data-user-agreement]
+      status: verified
+      verifiedOn: 2026-09-19
+  noPhiHosted:
+    status: pass
+  termsPermitUse:
+    status: pass
+    note: This record describes variables and cites the codebooks; it holds no participant data.
+    evidence:
+      sources: [nchs-data-user-agreement]
+      status: verified
+      verifiedOn: 2026-09-19
+  samplePermission:
+    status: pass
+    note: No preview images are shown for this release.
+catalogStatus: draft
+verifiedOn: 2026-09-19
+researchedBy: agent
+approvedBy: null
+approvedOn: null
+sources:
+  - nhanes-alb-cr-l
+  - nhanes-biopro-l
+  - nchs-data-user-agreement
+  - nchs-data-release-policy

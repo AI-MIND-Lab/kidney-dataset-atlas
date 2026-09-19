@@ -1,0 +1,74 @@
+[
+	{
+		"id": "use-kits23-auto3dseg",
+		"paper": "kits23-auto3dseg",
+		"release": "kits23",
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": ["kits23-winner-paper"],
+			"locator": "Abstract: the solution is described as trained for, and evaluated in, the KiTS 2023 challenge",
+			"status": "verified",
+			"verifiedOn": "2026-09-19",
+			"note": "The abstract states the work is a KiTS 2023 challenge submission and reports challenge scores, so the use is explicit rather than a mention."
+		},
+		"subset": "KiTS23 challenge data: training set for training, official test set for the reported scores",
+		"preprocessing": null,
+		"task": "segmentation",
+		"trainTestRole": "train_and_test",
+		"split": "Challenge split; the test set is the 110 cases held by the organisers and is not part of the public release",
+		"results": [
+			{
+				"model": "auto3dseg-kits23",
+				"metric": "Dice (average)",
+				"value": 0.835,
+				"units": null,
+				"confidenceInterval": null,
+				"subset": "KiTS23 official test set",
+				"split": "Challenge test split, scored by the organisers",
+				"patientLevelHandling": "Not documented in the abstract read for this record",
+				"evaluation": "external",
+				"evidence": {
+					"sources": ["kits23-winner-paper"],
+					"locator": "Abstract: \"achieves the average dice of 0.835 and surface dice of 0.723, which ranks first\"",
+					"status": "verified",
+					"verifiedOn": "2026-09-19"
+				}
+			},
+			{
+				"model": "auto3dseg-kits23",
+				"metric": "Surface Dice (average)",
+				"value": 0.723,
+				"units": null,
+				"confidenceInterval": null,
+				"subset": "KiTS23 official test set",
+				"split": "Challenge test split, scored by the organisers",
+				"patientLevelHandling": "Not documented in the abstract read for this record",
+				"evaluation": "external",
+				"evidence": {
+					"sources": ["kits23-winner-paper"],
+					"locator": "Abstract",
+					"status": "verified",
+					"verifiedOn": "2026-09-19"
+				}
+			}
+		]
+	},
+	{
+		"id": "use-tcga-kirc-nature-2013",
+		"paper": "tcga-kirc-nature-2013",
+		"release": "tcga-kirc-gdc-open",
+		"role": "original",
+		"actualUseEvidence": {
+			"sources": ["tcga-kirc-nature-2013"],
+			"locator": "Crossref record for DOI 10.1038/nature12222",
+			"status": "not_verified",
+			"note": "Identified from the DOI record as the TCGA clear cell renal cell carcinoma publication. The paper's text was not read, so the link to this release is unverified."
+		},
+		"subset": null,
+		"preprocessing": null,
+		"task": null,
+		"trainTestRole": "not_documented",
+		"split": null,
+		"results": []
+	}
+]

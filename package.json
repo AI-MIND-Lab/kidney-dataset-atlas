@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "astro dev",
     "dev:fixtures": "node scripts/with-fixtures.mjs dev",
+    "preview:drafts": "node scripts/with-drafts.mjs",
     "validate": "node scripts/validate.mjs",
     "check": "astro check",
     "build": "npm run validate && astro build && npm run search:index && node scripts/check-output.mjs",
