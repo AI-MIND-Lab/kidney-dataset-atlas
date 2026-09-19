@@ -9,6 +9,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import type { z } from 'astro/zod';
 import { overlap, qualityFinding, sample, source, studyUse, variable } from './schemas.mjs';
 import { FACET_KEYS, type ExplorerEntry, type FacetKey } from './explorer';
+import { collectSourceIds } from './records';
 import { datasetPath, SITE } from './site';
 
 export type Dataset = CollectionEntry<'datasets'>;
@@ -130,6 +131,16 @@ export const studyUsesForRelease = (releaseId: string) =>
 export const studyUsesForPaper = (paperId: string) => allStudyUses().filter((entry) => entry.paper === paperId);
 
 export const sourceById = (id: string) => allSources().find((entry) => entry.id === id);
+
+export const overlapsForRelease = (releaseId: string) =>
+	allOverlaps().filter((entry) => entry.releases.includes(releaseId));
+
+/** The source records behind a page, in citation order. */
+export function sourcesFor(...records: unknown[]): Source[] {
+	return collectSourceIds(records)
+		.map((id) => sourceById(id))
+		.filter((entry): entry is Source => Boolean(entry));
+}
 
 export async function paperById(id: string): Promise<Paper | undefined> {
 	const papers = await publishedPapers();

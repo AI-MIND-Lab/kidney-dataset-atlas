@@ -229,6 +229,24 @@ main {
 	color: var(--accent-ink);
 }
 
+.button {
+	display: inline-block;
+	padding: 0.3rem 0.8rem;
+	border: 1px solid var(--accent);
+	border-radius: var(--radius);
+	background: var(--accent-weak);
+	color: var(--accent-ink);
+	text-decoration: none;
+	font: inherit;
+	font-size: 0.9rem;
+	cursor: pointer;
+}
+
+.button:hover {
+	background: var(--surface-sunken);
+	color: var(--ink);
+}
+
 /* Filter and comparison chips are created by script, so they are styled here
    rather than in the explorer component, whose styles are scoped to markup
    rendered at build time. */

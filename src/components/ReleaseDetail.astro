@@ -1,9 +1,12 @@
 ---
 import type { Dataset, Release } from '../lib/catalog';
 import {
+	overlapsForRelease,
 	paperById,
+	publishedReleases,
 	qualityForRelease,
 	samplesForRelease,
+	sourcesFor,
 	studyUsesForRelease,
 	variablesForRelease,
 } from '../lib/catalog';
@@ -33,6 +36,12 @@ const usesWithPapers = await Promise.all(
 );
 const originalUses = usesWithPapers.filter(({ use }) => use.role === 'original');
 const downstreamUses = usesWithPapers.filter(({ use }) => use.role === 'downstream');
+const overlaps = overlapsForRelease(data.id);
+const sources = sourcesFor(dataset.data, data);
+
+// Overlap records name both sides, so label the other release rather than this one.
+const allReleases = await publishedReleases();
+const releaseLabel = (id: string) => allReleases.find((entry) => entry.data.id === id)?.data.versionLabel ?? id;
 
 const SECTIONS = [
 	['overview', 'Overview'],
@@ -67,24 +76,43 @@ const countRows = [
 			Last verified: {dateLabel(data.verifiedOn)}.
 			{data.approvedBy && <> Approved by {data.approvedBy} on {dateLabel(data.approvedOn)}.</>}
 		</p>
-		<p>
-			<a href={data.access.mode === 'restricted' ? dataset.data.officialUrl : dataset.data.officialUrl}>
-				Official source
-			</a>
-			{' · '}
+		<p class="release__actions">
+			<a class="button" href={dataset.data.officialUrl}>Official source</a>
+			<a class="button" href={`${withBase('/compare/')}?releases=${data.id}`}>Compare this release</a>
+			{
+				data.citation && (
+					<button type="button" class="button" data-copy-citation={data.citation}>
+						Copy citation
+					</button>
+				)
+			}
 			<a href={withBase(releasePath(dataset.data.slug, data.id))}>Permanent link to this release</a>
+			<span class="copy-status" data-copy-status role="status" aria-live="polite" />
 		</p>
 
+		<p><strong>Access:</strong> {data.access.instructions} <a href="#access">Full access details</a></p>
+
 		{
-			isCanonical && releases.length > 1 && (
-				<p>
-					Other releases:{' '}
-					{releases
-						.filter((entry) => entry.data.id !== data.id)
-						.map((entry) => (
-							<a href={withBase(releasePath(dataset.data.slug, entry.data.id))}>{entry.data.versionLabel}</a>
+			releases.length > 1 && (
+				<nav class="release__switcher" aria-label="Releases">
+					<span>Releases:</span>
+					<ul>
+						{releases.map((entry) => (
+							<li>
+								{entry.data.id === data.id ? (
+									<span aria-current="true">
+										{entry.data.versionLabel} <span class="badge">viewing</span>
+									</span>
+								) : (
+									<a href={withBase(releasePath(dataset.data.slug, entry.data.id))}>
+										{entry.data.versionLabel}
+									</a>
+								)}
+								<small>{dateLabel(entry.data.releaseDate)}</small>
+							</li>
 						))}
-				</p>
+					</ul>
+				</nav>
 			)
 		}
 
@@ -282,6 +310,44 @@ const countRows = [
 				</div>
 			)
 		}
+
+		<h3>Overlap with other releases</h3>
+		{
+			overlaps.length === 0 ? (
+				<p>
+					No overlap with another release in this catalog is documented. That is not evidence that the cohorts
+					are independent.
+				</p>
+			) : (
+				<div class="table-scroll">
+					<table>
+						<thead>
+							<tr>
+								<th scope="col">Other release</th>
+								<th scope="col">Overlap</th>
+								<th scope="col">Shared cases</th>
+								<th scope="col">Explanation</th>
+							</tr>
+						</thead>
+						<tbody>
+							{overlaps.map((entry) => (
+								<tr>
+									<th scope="row">
+										{entry.releases
+											.filter((id) => id !== data.id)
+											.map((id) => releaseLabel(id))
+											.join(', ')}
+									</th>
+									<td>{humanize(entry.type)}</td>
+									<td>{countLabel(entry.count)}</td>
+									<td>{entry.explanation}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+			)
+		}
 	</section>
 
 	<section id="papers" class="stack">
@@ -394,8 +460,41 @@ const countRows = [
 			)}
 		</dl>
 		<p>This site does not grant access to any dataset and cannot give permission on a provider's behalf.</p>
+
+		<h3 id="sources">Sources</h3>
+		{
+			sources.length === 0 ? (
+				<p>No sources are recorded for this release yet.</p>
+			) : (
+				<ol class="sources">
+					{sources.map((entry) => (
+						<li>
+							<a href={entry.url}>{entry.title}</a>
+							{entry.locator && <> — {entry.locator}</>}
+							<small> (read {dateLabel(entry.accessedOn)})</small>
+						</li>
+					))}
+				</ol>
+			)
+		}
 	</section>
 </article>
+
+<script>
+	// Citation copy. Without JavaScript the citation is still readable in the
+	// access section, so nothing is lost when this does not run.
+	for (const button of document.querySelectorAll<HTMLButtonElement>('[data-copy-citation]')) {
+		button.addEventListener('click', async () => {
+			const status = document.querySelector<HTMLElement>('[data-copy-status]');
+			try {
+				await navigator.clipboard.writeText(button.dataset.copyCitation ?? '');
+				if (status) status.textContent = 'Citation copied.';
+			} catch {
+				if (status) status.textContent = 'Could not copy; the citation is under Access and sources.';
+			}
+		});
+	}
+</script>
 
 <style>
 	.release__header {
@@ -406,6 +505,48 @@ const countRows = [
 
 	.release__header .badge + .badge {
 		margin-left: 0.35rem;
+	}
+
+	.release__actions {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.5rem 0.9rem;
+	}
+
+	.copy-status {
+		font-size: 0.9rem;
+		color: var(--ink-muted);
+	}
+
+	.release__switcher {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.5rem;
+		font-size: 0.95rem;
+	}
+
+	.release__switcher ul {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem 1rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.release__switcher small {
+		color: var(--ink-muted);
+		margin-left: 0.3rem;
+	}
+
+	.sources {
+		padding-left: 1.2rem;
+	}
+
+	.sources small {
+		color: var(--ink-muted);
 	}
 
 	.section-menu {
