@@ -72,7 +72,17 @@ export function facetValueLabel(facet: string, value: string): string {
 	return humanize(value);
 }
 
+/**
+ * Dates in records are calendar dates, not moments. They are parsed as UTC
+ * midnight, so they must be formatted in UTC too: formatting in the reader's
+ * local zone shifts a verification date to the day before, west of Greenwich.
+ */
 export function dateLabel(value: Date | null | undefined): string {
 	if (!value) return 'Not documented';
-	return value.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
+	return value.toLocaleDateString('en-GB', {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+		timeZone: 'UTC',
+	});
 }

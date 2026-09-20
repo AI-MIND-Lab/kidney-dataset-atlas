@@ -12,7 +12,15 @@ import {
 } from '../lib/catalog';
 import Dictionary from './Dictionary.astro';
 import Samples from './Samples.astro';
-import { accessLabel, countLabel, dateLabel, humanize, stateLabel, trainTestLabel } from '../lib/display';
+import {
+	accessLabel,
+	countLabel,
+	dateLabel,
+	facetValueLabel,
+	humanize,
+	stateLabel,
+	trainTestLabel,
+} from '../lib/display';
 import { datasetPath, paperPath, releasePath, withBase } from '../lib/site';
 
 interface Props {
@@ -39,7 +47,9 @@ const usesWithPapers = await Promise.all(
 const originalUses = usesWithPapers.filter(({ use }) => use.role === 'original');
 const downstreamUses = usesWithPapers.filter(({ use }) => use.role === 'downstream');
 const overlaps = overlapsForRelease(data.id);
-const sources = sourcesFor(dataset.data, data);
+// Everything the page shows, so a source cited only by a variable or a quality
+// finding still appears in the list a reader can check.
+const sources = sourcesFor(dataset.data, data, variables, samples, findings, uses, overlaps);
 
 // Overlap records name both sides, so label the other release rather than this one.
 const allReleases = await publishedReleases();
@@ -71,8 +81,24 @@ const countRows = [
 		<p class="lede">{dataset.data.summary}</p>
 		<p>
 			<span class="badge badge--accent">{data.versionLabel}</span>
-			{data.modalities.map((modality) => <span class="badge">{humanize(modality)}</span>)}
+			{data.modalities.map((modality) => <span class="badge">{facetValueLabel('modality', modality)}</span>)}
 			<span class="badge">{accessLabel(data.access.mode)}</span>
+		</p>
+		<p class="release__counts">
+			{
+				countRows
+					.filter(([, value]) => value?.status === 'present')
+					.map(([label, value]) => (
+						<span>
+							<strong>{countLabel(value)}</strong> {label.toLowerCase()}
+						</span>
+					))
+			}
+			{
+				countRows.every(([, value]) => value?.status !== 'present') && (
+					<span>No counts are documented for this release.</span>
+				)
+			}
 		</p>
 		<p>
 			Last verified: {dateLabel(data.verifiedOn)}.
@@ -232,7 +258,11 @@ const countRows = [
 							{data.pairing.map((entry) => (
 								<tr>
 									<th scope="row">{humanize(entry.kind)}</th>
-									<td>{entry.modalities.map(humanize).join(', ') || '—'}</td>
+									<td>
+										{entry.modalities
+											.map((modality) => facetValueLabel('modality', modality))
+											.join(', ') || '—'}
+									</td>
 									<td>{stateLabel(entry.status)}</td>
 									<td>{entry.note ?? '—'}</td>
 								</tr>
@@ -444,6 +474,13 @@ const countRows = [
 		flex-wrap: wrap;
 		align-items: center;
 		gap: 0.5rem 0.9rem;
+	}
+
+	.release__counts {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem 1.25rem;
+		color: var(--ink-muted);
 	}
 
 	.copy-status {
