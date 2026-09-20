@@ -1,0 +1,22 @@
+[
+	{
+		"id": "fixture-relation-version",
+		"from": "fixture-renal-ct-v2",
+		"to": "fixture-renal-ct-v1",
+		"toExternal": null,
+		"type": "version_of",
+		"explanation": "The v2 fixture is described as a later edition of the v1 fixture.",
+		"evidence": { "sources": ["fixture-source-1"], "status": "not_verified" },
+		"sources": ["fixture-source-1"]
+	},
+	{
+		"id": "fixture-relation-derived",
+		"from": "fixture-path-wsi-r1",
+		"to": null,
+		"toExternal": { "name": "An invented external slide archive", "url": "https://example.org/fixture-archive" },
+		"type": "derived_from",
+		"explanation": "Exercises a relationship whose other side is not in the catalog, and whose annotations were produced by a model.",
+		"evidence": { "sources": ["fixture-source-1"], "status": "not_verified" },
+		"sources": ["fixture-source-1"]
+	}
+]

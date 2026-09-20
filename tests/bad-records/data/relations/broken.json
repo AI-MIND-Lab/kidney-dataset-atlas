@@ -1,0 +1,20 @@
+[
+	{
+		"id": "relation-pointing-nowhere",
+		"from": "bad-release",
+		"to": null,
+		"toExternal": null,
+		"type": "derived_from",
+		"explanation": "Deliberately broken: names nothing on the other side, so it claims a relationship no reader can check.",
+		"sources": []
+	},
+	{
+		"id": "relation-pointing-both-ways",
+		"from": "bad-release",
+		"to": "bad-release",
+		"toExternal": { "name": "Also an external collection" },
+		"type": "subset_of",
+		"explanation": "Deliberately broken: names both a catalogued release and an external one.",
+		"sources": []
+	}
+]

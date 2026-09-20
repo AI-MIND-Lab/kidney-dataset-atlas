@@ -3,7 +3,7 @@
 		"id": "use-kits21-challenge",
 		"paper": "kits21-challenge",
 		"release": "kits23",
-		"role": "original",
+		"role": "benchmark",
 		"actualUseEvidence": {
 			"sources": [
 				"kits21-paper"

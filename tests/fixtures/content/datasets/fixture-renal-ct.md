@@ -7,6 +7,7 @@ aliases:
 summary: Synthetic fixture used to develop the interface. Not a real dataset.
 diseaseTags:
   - renal_tumor
+species: human
 officialUrl: https://example.org/fixture-renal-ct
 sources:
   - fixture-source-1

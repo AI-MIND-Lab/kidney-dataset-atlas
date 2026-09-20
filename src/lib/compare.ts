@@ -26,15 +26,19 @@ export interface CompareEntry {
 export const COMPARE_ROWS: { key: string; label: string }[] = [
 	{ key: 'release', label: 'Release' },
 	{ key: 'releaseDate', label: 'Release date' },
+	{ key: 'species', label: 'Species' },
 	{ key: 'patients', label: 'Patients' },
 	{ key: 'examinations', label: 'Examinations' },
 	{ key: 'lesions', label: 'Lesions' },
 	{ key: 'slices', label: 'Slices' },
 	{ key: 'slides', label: 'Slides' },
+	{ key: 'images', label: 'Images' },
+	{ key: 'patches', label: 'Patches' },
 	{ key: 'records', label: 'Records' },
 	{ key: 'disease', label: 'Disease' },
 	{ key: 'modalities', label: 'Modalities' },
 	{ key: 'annotations', label: 'Annotations' },
+	{ key: 'annotationProvenance', label: 'Annotations made by' },
 	{ key: 'ctPhases', label: 'CT phases' },
 	{ key: 'wsi', label: 'Whole-slide images' },
 	{ key: 'clinicalData', label: 'Clinical information' },
@@ -46,6 +50,7 @@ export const COMPARE_ROWS: { key: string; label: string }[] = [
 	{ key: 'verified', label: 'Last verified' },
 	{ key: 'limitations', label: 'Limitations' },
 	{ key: 'overlap', label: 'Known overlap' },
+	{ key: 'relations', label: 'Related collections' },
 ];
 
 export const MAX_COMPARE = 4;

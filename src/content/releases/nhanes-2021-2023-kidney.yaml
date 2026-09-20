@@ -42,6 +42,9 @@ cohort: >-
   covers participants aged 12 years and over.
 tasks: []
 annotations: []
+annotationProvenance:
+  kind: none
+  note: Tabular laboratory measurements; there is nothing to annotate.
 features:
   wsi:
     status: not_applicable

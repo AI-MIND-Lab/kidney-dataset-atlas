@@ -8,6 +8,7 @@ summary: Nationally representative US survey with laboratory measures of kidney 
 diseaseTags:
   - ckd
   - outcomes
+species: human
 officialUrl: https://wwwn.cdc.gov/nchs/nhanes/
 sources:
   - nhanes-alb-cr-l

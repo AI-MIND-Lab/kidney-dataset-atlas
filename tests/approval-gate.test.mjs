@@ -25,6 +25,15 @@ test('a reference to a missing record fails validation', () => {
 	assert.match(result.stderr, /points at missing datasets record "no-such-dataset"/);
 });
 
+test('a relationship must name exactly one collection on the other side', () => {
+	const result = runValidator('tests/bad-records/content', 'tests/bad-records/data');
+	assert.match(result.stderr, /relation "relation-pointing-nowhere" names nothing on the other side/);
+	assert.match(
+		result.stderr,
+		/relation "relation-pointing-both-ways" names both a catalogued release and an external one/,
+	);
+});
+
 test('the fixture catalog passes validation', () => {
 	const result = runValidator('tests/fixtures/content', 'tests/fixtures/data');
 	assert.equal(result.status, 0, result.stderr);

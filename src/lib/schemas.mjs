@@ -30,12 +30,19 @@ export const count = z.object({
 	evidence: evidence.optional(),
 });
 
+/**
+ * Units are counted separately and never added together. Images and patches
+ * matter for collections distributed as pictures rather than as studies: a
+ * count of images is not a count of patients.
+ */
 const countsByUnit = z.object({
 	patients: count.optional(),
 	examinations: count.optional(),
 	lesions: count.optional(),
 	slices: count.optional(),
 	slides: count.optional(),
+	images: count.optional(),
+	patches: count.optional(),
 	records: count.optional(),
 });
 
@@ -84,6 +91,20 @@ export const TASKS = [
 	'other',
 ];
 export const ACCESS_MODES = ['open_download', 'registration_required', 'restricted'];
+
+/** Whose tissue this is. Nonhuman and synthetic material is never left implied. */
+export const SPECIES = ['human', 'mouse', 'rat', 'pig', 'other_nonhuman', 'mixed', 'synthetic', 'not_documented'];
+
+/** Who or what produced the annotations, which is not the same as their quality. */
+export const ANNOTATION_PROVENANCE = [
+	'expert',
+	'trainee',
+	'crowd',
+	'model_generated',
+	'mixed',
+	'none',
+	'not_documented',
+];
 export const ANNOTATIONS = [
 	'segmentation_masks',
 	'bounding_boxes',
@@ -101,7 +122,10 @@ export const dataset = z.object({
 	aliases: z.array(z.string()).default([]),
 	summary: z.string(),
 	diseaseTags: z.array(z.enum(DISEASES)).default([]),
+	species: z.enum(SPECIES),
 	officialUrl: z.url(),
+	/** The dataset's own DOI, which is never the same field as a paper's DOI. */
+	doi: z.string().nullable().default(null),
 	sources: z.array(z.string()).default([]),
 });
 
@@ -116,6 +140,16 @@ export const release = z.object({
 	tasks: z.array(z.enum(TASKS)).default([]),
 	/** What is labelled, as documented by the provider. Empty means not documented. */
 	annotations: z.array(z.enum(ANNOTATIONS)).default([]),
+	/** Who produced those labels: an expert, a crowd, or a model. */
+	annotationProvenance: z
+		.object({
+			kind: z.enum(ANNOTATION_PROVENANCE),
+			note: z.string().optional(),
+			evidence: evidence.optional(),
+		})
+		.optional(),
+	/** A release-specific dataset DOI, such as an archived version. */
+	doi: z.string().nullable().default(null),
 	access: z.object({
 		mode: z.enum(ACCESS_MODES),
 		registrationVisible: z.boolean().default(false),
@@ -234,7 +268,15 @@ export const studyUse = z.object({
 	id: z.string(),
 	paper: z.string(),
 	release: z.string(),
-	role: z.enum(['original', 'downstream']),
+	/**
+	 * What the paper is to this release:
+	 * - original: the release's own publication
+	 * - benchmark: the dataset's own paper or challenge report, which evaluates
+	 *   methods on it — real computer-vision use, but not independent adoption
+	 * - downstream: a separate study that used the data
+	 * - descriptor: a publication that describes the dataset without experiments
+	 */
+	role: z.enum(['original', 'benchmark', 'downstream', 'descriptor']),
 	// A paper mentioning a dataset is not evidence that it used it.
 	actualUseEvidence: evidence,
 	subset: z.string().nullable().default(null),
@@ -306,6 +348,26 @@ export const source = z.object({
 	accessedOn: z.coerce.date(),
 });
 
+/**
+ * How one release relates to another: a subset, a derived annotation set, a
+ * later version, or an aggregation. The other side may be a release in this
+ * catalog or, when it is not catalogued, a named external collection — so a
+ * derived annotation set can say what it was derived from either way.
+ */
+export const relation = z.object({
+	id: z.string(),
+	from: z.string(),
+	to: z.string().nullable().default(null),
+	toExternal: z
+		.object({ name: z.string(), url: z.url().optional() })
+		.nullable()
+		.default(null),
+	type: z.enum(['subset_of', 'derived_from', 'version_of', 'aggregates', 'annotates']),
+	explanation: z.string(),
+	evidence: evidence.optional(),
+	sources: z.array(z.string()).default([]),
+});
+
 export const overlap = z.object({
 	id: z.string(),
 	releases: z.array(z.string()).min(2),
@@ -326,4 +388,5 @@ export const schemas = {
 	quality: qualityFinding,
 	sources: source,
 	overlap: overlap,
+	relations: relation,
 };

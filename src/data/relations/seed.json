@@ -1,0 +1,19 @@
+[
+	{
+		"id": "kits23-extends-kits21",
+		"from": "kits23",
+		"to": null,
+		"toExternal": {
+			"name": "KiTS21",
+			"url": "https://kits-challenge.org/kits21/"
+		},
+		"type": "version_of",
+		"explanation": "KiTS23 is a later edition of the same challenge cohort as KiTS21, so their cases overlap and their counts must never be added together. KiTS21 is not catalogued here yet, so the relationship names it as an external collection.",
+		"evidence": {
+			"sources": ["kits23-challenge-page", "kits21-paper"],
+			"status": "not_verified",
+			"note": "Both editions describe the same institutional cohort, but the exact case overlap between KiTS21 and KiTS23 was not established here."
+		},
+		"sources": ["kits23-challenge-page", "kits21-paper"]
+	}
+]

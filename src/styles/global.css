@@ -223,6 +223,14 @@ main {
 	color: var(--ink-muted);
 }
 
+/* Anything that is not human tissue is called out, never left implied. */
+.badge--attention {
+	background: var(--warning-weak);
+	border-color: var(--warning-border);
+	color: var(--ink);
+	font-weight: 650;
+}
+
 .badge--accent {
 	background: var(--accent-weak);
 	border-color: var(--accent);

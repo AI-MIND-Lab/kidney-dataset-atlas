@@ -88,6 +88,7 @@ const samples = load('samples', filesIn(join(dataRoot, 'samples'), ['.json']), r
 const quality = load('quality', filesIn(join(dataRoot, 'quality'), ['.json']), readJson);
 const sources = load('sources', filesIn(join(dataRoot, 'sources'), ['.json']), readJson);
 const overlaps = load('overlap', filesIn(join(dataRoot, 'overlap'), ['.json']), readJson);
+const relations = load('relations', filesIn(join(dataRoot, 'relations'), ['.json']), readJson);
 
 const curatorsFile = join(root, 'src/data/curators.yaml');
 const curators = existsSync(curatorsFile) ? (yaml.load(readFileSync(curatorsFile, 'utf8'))?.curators ?? []) : [];
@@ -106,6 +107,7 @@ for (const [name, records] of Object.entries({
 	quality,
 	sources,
 	overlap: overlaps,
+	relations,
 })) {
 	const seen = new Map();
 	for (const record of records) {
@@ -131,6 +133,19 @@ for (const record of samples) reference(record, 'releases', record.data.release,
 for (const record of quality) reference(record, 'releases', record.data.release, 'release');
 for (const record of overlaps) {
 	for (const id of record.data.releases) reference(record, 'releases', id, 'releases');
+}
+
+for (const record of relations) {
+	reference(record, 'releases', record.data.from, 'from');
+	// A relation names either a catalogued release or an external collection,
+	// never both and never neither: otherwise it says nothing checkable.
+	if (record.data.to && record.data.toExternal) {
+		fail(record.file, `relation "${record.data.id}" names both a catalogued release and an external one`);
+	}
+	if (!record.data.to && !record.data.toExternal) {
+		fail(record.file, `relation "${record.data.id}" names nothing on the other side`);
+	}
+	if (record.data.to) reference(record, 'releases', record.data.to, 'to');
 }
 
 const paperModels = new Map(papers.map((paper) => [paper.data.id, new Set(paper.data.models.map((m) => m.id))]));
@@ -165,7 +180,17 @@ function checkSources(record, value, path = '') {
 	}
 }
 
-for (const record of [...datasets, ...releases, ...papers, ...variables, ...studyUses, ...samples, ...quality, ...overlaps]) {
+for (const record of [
+	...datasets,
+	...releases,
+	...papers,
+	...variables,
+	...studyUses,
+	...samples,
+	...quality,
+	...overlaps,
+	...relations,
+]) {
 	checkSources(record, record.data);
 }
 

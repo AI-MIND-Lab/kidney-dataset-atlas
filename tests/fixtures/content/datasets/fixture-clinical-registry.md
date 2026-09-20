@@ -8,6 +8,7 @@ summary: Synthetic clinical-table fixture with invented laboratory variables. No
 diseaseTags:
   - ckd
   - outcomes
+species: human
 officialUrl: https://example.org/fixture-clinical-registry
 sources:
   - fixture-source-1

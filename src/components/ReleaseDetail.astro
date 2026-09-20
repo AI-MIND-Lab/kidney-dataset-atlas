@@ -3,6 +3,7 @@ import type { Dataset, Release } from '../lib/catalog';
 import {
 	overlapsForRelease,
 	paperById,
+	relationsForRelease,
 	publishedReleases,
 	qualityForRelease,
 	samplesForRelease,
@@ -45,7 +46,10 @@ const uses = studyUsesForRelease(data.id);
 const usesWithPapers = await Promise.all(
 	uses.map(async (use) => ({ use, paper: await paperById(use.paper) })),
 );
-const originalUses = usesWithPapers.filter(({ use }) => use.role === 'original');
+// A benchmark or descriptor belongs with the dataset's own publications, not
+// with independent adoption: a challenge report evaluating methods on its own
+// data is not evidence that anyone else used it.
+const ownUses = usesWithPapers.filter(({ use }) => use.role !== 'downstream');
 const downstreamUses = usesWithPapers.filter(({ use }) => use.role === 'downstream');
 const overlaps = overlapsForRelease(data.id);
 const isDraft = data.catalogStatus !== 'published';
@@ -74,8 +78,17 @@ const countRows = [
 	['Lesions', data.counts.lesions],
 	['Slices', data.counts.slices],
 	['Slides', data.counts.slides],
+	['Images', data.counts.images],
+	['Patches', data.counts.patches],
 	['Records', data.counts.records],
 ] as const;
+
+const relations = relationsForRelease(data.id);
+const relationTarget = (entry: (typeof relations)[number]) =>
+	entry.to ? (releaseLabel(entry.to) ?? entry.to) : (entry.toExternal?.name ?? 'an unnamed collection');
+// Human material is the assumption a reader brings, so anything else is stated
+// in the header rather than left to the record.
+const isHuman = dataset.data.species === 'human';
 ---
 
 <article class="release">
@@ -84,6 +97,7 @@ const countRows = [
 		<p class="lede">{dataset.data.summary}</p>
 		<p>
 			<span class="badge badge--accent">{data.versionLabel}</span>
+			<span class={isHuman ? 'badge' : 'badge badge--attention'}>{humanize(dataset.data.species)}</span>
 			{data.modalities.map((modality) => <span class="badge">{facetValueLabel('modality', modality)}</span>)}
 			<span class="badge">{accessLabel(data.access.mode)}</span>
 		</p>
@@ -231,6 +245,11 @@ const countRows = [
 				</p>
 			)
 		}
+		<p>
+			<strong>Annotations made by:</strong>{' '}
+			{data.annotationProvenance ? humanize(data.annotationProvenance.kind) : 'Not documented'}
+			{data.annotationProvenance?.note && <>. {data.annotationProvenance.note}</>}
+		</p>
 		<h3>Counts</h3>
 		<div class="table-scroll">
 			<table>
@@ -305,6 +324,36 @@ const countRows = [
 			)
 		}
 
+		<h3>Related collections</h3>
+		{
+			relations.length === 0 ? (
+				<p>No relationship to another collection is documented.</p>
+			) : (
+				<ul>
+					{relations.map((entry) => (
+						<li>
+							{entry.from === data.id ? (
+								<>
+									This release <strong>{humanize(entry.type).toLowerCase()}</strong>{' '}
+									{entry.toExternal?.url ? (
+										<a href={entry.toExternal.url}>{relationTarget(entry)}</a>
+									) : (
+										relationTarget(entry)
+									)}
+								</>
+							) : (
+								<>
+									{releaseLabel(entry.from)} <strong>{humanize(entry.type).toLowerCase()}</strong> this
+									release
+								</>
+							)}
+							. {entry.explanation}
+						</li>
+					))}
+				</ul>
+			)
+		}
+
 		<h3>Overlap with other releases</h3>
 		{
 			overlaps.length === 0 ? (
@@ -346,17 +395,18 @@ const countRows = [
 
 	<section id="papers" class="stack">
 		<h2>Papers and models</h2>
-		<h3>Original publication</h3>
+		<h3>The dataset's own publications</h3>
 		{
-			originalUses.length === 0 ? (
+			ownUses.length === 0 ? (
 				<p>No publication of this release is recorded.</p>
 			) : (
 				<ul class="stack">
-					{originalUses.map(({ use, paper }) =>
+					{ownUses.map(({ use, paper }) =>
 						paper ? (
 							<li>
 								<a href={withBase(paperPath(paper.data.slug))}>{paper.data.title}</a>
-								{paper.data.year && <> ({paper.data.year})</>}
+								{paper.data.year && <> ({paper.data.year})</>}{' '}
+								<span class="badge">{humanize(use.role)}</span>
 								<br />
 								<small>
 									<strong>
@@ -372,7 +422,7 @@ const countRows = [
 				</ul>
 			)
 		}
-		<h3>Studies using this release</h3>
+		<h3>Independent studies using this release</h3>
 		{
 			downstreamUses.length === 0 ? (
 				<div class="empty-state">
@@ -457,6 +507,18 @@ const countRows = [
 			</dd>
 			<dt>De-identification</dt>
 			<dd>{data.deidentification.statement} ({stateLabel(data.deidentification.status)})</dd>
+			<dt>Dataset DOI</dt>
+			<dd>
+				{
+					data.doi || dataset.data.doi ? (
+						<a href={`https://doi.org/${data.doi ?? dataset.data.doi}`}>{data.doi ?? dataset.data.doi}</a>
+					) : (
+						'Not documented'
+					)
+				}
+				{' '}
+				<small>(a dataset DOI, not a paper DOI)</small>
+			</dd>
 			{data.citation && (
 				<>
 					<dt>Citation</dt>

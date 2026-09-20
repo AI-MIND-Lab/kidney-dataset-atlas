@@ -42,6 +42,9 @@ cohort: >-
   carry demographics, one or more diagnoses, and follow-up records.
 tasks: []
 annotations: []
+annotationProvenance:
+  kind: none
+  note: No image annotations, such as tumour outlines on slides, are part of this open-access tier.
 features:
   wsi:
     status: present

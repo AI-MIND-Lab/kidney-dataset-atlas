@@ -8,6 +8,7 @@ summary: Synthetic pathology fixture with invented slide-level labels. Not a rea
 diseaseTags:
   - renal_tumor
   - outcomes
+species: mouse
 officialUrl: https://example.org/fixture-path-wsi
 sources:
   - fixture-source-1

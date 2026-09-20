@@ -6,11 +6,29 @@
  * that matter (unknown values never sort as zero, state survives the URL).
  */
 
-export type FacetKey = 'disease' | 'modality' | 'task' | 'annotations' | 'pairing' | 'access' | 'docs';
+export type FacetKey =
+	| 'species'
+	| 'disease'
+	| 'modality'
+	| 'task'
+	| 'annotations'
+	| 'pairing'
+	| 'access'
+	| 'docs';
 
-export const FACET_KEYS: FacetKey[] = ['disease', 'modality', 'task', 'annotations', 'pairing', 'access', 'docs'];
+export const FACET_KEYS: FacetKey[] = [
+	'species',
+	'disease',
+	'modality',
+	'task',
+	'annotations',
+	'pairing',
+	'access',
+	'docs',
+];
 
 export const FACET_LABELS: Record<FacetKey, string> = {
+	species: 'Species',
 	disease: 'Disease',
 	modality: 'Modality',
 	task: 'Research task',

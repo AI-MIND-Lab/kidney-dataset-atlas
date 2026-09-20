@@ -38,6 +38,17 @@ tasks:
   - segmentation
 annotations:
   - segmentation_masks
+annotationProvenance:
+  kind: crowd
+  note: >-
+    The KiTS21 publication describes delineation by crowd workers following bounding boxes and
+    reference pins placed by medical trainees, with three independent annotations per region of
+    interest. Whether the same procedure produced the cases added for KiTS23 was not verified.
+  evidence:
+    sources: [kits21-paper]
+    locator: Annotation procedure
+    status: verified
+    verifiedOn: 2026-09-19
 features:
   wsi:
     status: not_applicable

@@ -9,6 +9,7 @@ summary: Whole-slide pathology images and clinical records for clear cell renal 
 diseaseTags:
   - renal_tumor
   - outcomes
+species: human
 officialUrl: https://portal.gdc.cancer.gov/projects/TCGA-KIRC
 sources:
   - gdc-kirc-summary

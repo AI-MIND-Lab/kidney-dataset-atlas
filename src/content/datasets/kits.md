@@ -8,6 +8,7 @@ aliases:
 summary: Contrast-enhanced CT of nephrectomy patients with kidney, tumour and cyst segmentations, released for the Kidney Tumor Segmentation Challenge.
 diseaseTags:
   - renal_tumor
+species: human
 officialUrl: https://kits-challenge.org/kits23/
 sources:
   - kits23-challenge-page

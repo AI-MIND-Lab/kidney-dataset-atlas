@@ -7,7 +7,7 @@
  */
 import { getCollection, type CollectionEntry } from 'astro:content';
 import type { z } from 'astro/zod';
-import { count, overlap, qualityFinding, sample, source, studyUse, variable } from './schemas.mjs';
+import { count, overlap, qualityFinding, relation, sample, source, studyUse, variable } from './schemas.mjs';
 import type { CompareCell, CompareEntry } from './compare';
 import { accessLabel, completenessLabel, countLabel, dateLabel, humanize, stateLabel } from './display';
 import { FACET_KEYS, type ExplorerEntry, type FacetKey } from './explorer';
@@ -25,6 +25,7 @@ export type Sample = z.infer<typeof sample>;
 export type QualityFinding = z.infer<typeof qualityFinding>;
 export type Source = z.infer<typeof source>;
 export type Overlap = z.infer<typeof overlap>;
+export type Relation = z.infer<typeof relation>;
 
 /** A dataset with its published releases, newest first. */
 export interface DatasetWithReleases {
@@ -45,6 +46,7 @@ const realData: Record<string, JsonModules> = {
 	quality: import.meta.glob('../data/quality/*.json', { eager: true, import: 'default' }),
 	sources: import.meta.glob('../data/sources/*.json', { eager: true, import: 'default' }),
 	overlap: import.meta.glob('../data/overlap/*.json', { eager: true, import: 'default' }),
+	relations: import.meta.glob('../data/relations/*.json', { eager: true, import: 'default' }),
 };
 
 const fixtureData: Record<string, JsonModules> = {
@@ -54,6 +56,7 @@ const fixtureData: Record<string, JsonModules> = {
 	quality: import.meta.glob('../../tests/fixtures/data/quality/*.json', { eager: true, import: 'default' }),
 	sources: import.meta.glob('../../tests/fixtures/data/sources/*.json', { eager: true, import: 'default' }),
 	overlap: import.meta.glob('../../tests/fixtures/data/overlap/*.json', { eager: true, import: 'default' }),
+	relations: import.meta.glob('../../tests/fixtures/data/relations/*.json', { eager: true, import: 'default' }),
 };
 
 function loadData<T>(dir: string, schema: { parse: (input: unknown) => T }): T[] {
@@ -74,6 +77,7 @@ let cache: {
 	quality?: QualityFinding[];
 	sources?: Source[];
 	overlaps?: Overlap[];
+	relations?: Relation[];
 } = {};
 
 export const allVariables = () => (cache.variables ??= loadData('variables', variable));
@@ -82,6 +86,11 @@ export const allSamples = () => (cache.samples ??= loadData('samples', sample));
 export const allQuality = () => (cache.quality ??= loadData('quality', qualityFinding));
 export const allSources = () => (cache.sources ??= loadData('sources', source));
 export const allOverlaps = () => (cache.overlaps ??= loadData('overlap', overlap));
+export const allRelations = () => (cache.relations ??= loadData('relations', relation));
+
+/** Relations in either direction, since both sides are worth showing. */
+export const relationsForRelease = (releaseId: string) =>
+	allRelations().filter((entry) => entry.from === releaseId || entry.to === releaseId);
 
 /** Published releases only, newest first within each dataset. */
 export async function publishedReleases(): Promise<Release[]> {
@@ -167,6 +176,7 @@ function facetsFor(dataset: Dataset, release: Release): Record<FacetKey, string[
 			: 'none';
 
 	return {
+		species: [dataset.data.species],
 		disease: dataset.data.diseaseTags,
 		modality: release.data.modalities,
 		task: release.data.tasks,
@@ -229,7 +239,9 @@ export async function compareEntries(): Promise<CompareEntry[]> {
 			const data = release.data;
 			const pairings = data.pairing.filter((entry) => entry.status === 'present');
 			const overlaps = overlapsForRelease(data.id);
+			const relations = relationsForRelease(data.id);
 			const phases = data.features?.ctPhases?.phases ?? [];
+			const provenance = data.annotationProvenance;
 
 			columns.push({
 				id: data.id,
@@ -241,11 +253,14 @@ export async function compareEntries(): Promise<CompareEntry[]> {
 					releaseDate: data.releaseDate
 						? KNOWN_CELL(dateLabel(data.releaseDate))
 						: UNKNOWN_CELL('Not documented'),
+					species: KNOWN_CELL(humanize(dataset.data.species)),
 					patients: countCell(data.counts.patients),
 					examinations: countCell(data.counts.examinations),
 					lesions: countCell(data.counts.lesions),
 					slices: countCell(data.counts.slices),
 					slides: countCell(data.counts.slides),
+					images: countCell(data.counts.images),
+					patches: countCell(data.counts.patches),
 					records: countCell(data.counts.records),
 					disease: listCell(dataset.data.diseaseTags.map(humanize), 'Not documented'),
 					modalities: listCell(data.modalities.map(humanize), 'Not documented'),
@@ -253,6 +268,11 @@ export async function compareEntries(): Promise<CompareEntry[]> {
 						data.annotations.filter((value) => value !== 'not_documented').map(humanize),
 						'Not documented',
 					),
+					annotationProvenance: provenance
+						? provenance.kind === 'not_documented'
+							? UNKNOWN_CELL('Not documented')
+							: KNOWN_CELL([humanize(provenance.kind), provenance.note].filter(Boolean).join(' — '))
+						: UNKNOWN_CELL('Not documented'),
 					ctPhases: featureCell(data.features?.ctPhases, phases.join(', ') || undefined),
 					wsi: featureCell(data.features?.wsi),
 					clinicalData: featureCell(data.features?.clinicalData),
@@ -274,6 +294,14 @@ export async function compareEntries(): Promise<CompareEntry[]> {
 										.join(' · '),
 								)
 							: UNKNOWN_CELL('No documented overlap'),
+					relations:
+						relations.length > 0
+							? KNOWN_CELL(
+									relations
+										.map((entry) => `${humanize(entry.type)} ${entry.to ?? entry.toExternal?.name}`)
+										.join(' · '),
+								)
+							: UNKNOWN_CELL('None documented'),
 				},
 			});
 		}
