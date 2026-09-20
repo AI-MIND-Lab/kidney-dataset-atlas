@@ -90,7 +90,12 @@ export const TASKS = [
 	'report_generation',
 	'other',
 ];
-export const ACCESS_MODES = ['open_download', 'registration_required', 'restricted'];
+/**
+ * How the data are obtained. `not_documented` is for a collection whose
+ * download conditions could not be established: guessing between open and
+ * restricted would put a wrong badge on a dataset page.
+ */
+export const ACCESS_MODES = ['open_download', 'registration_required', 'restricted', 'not_documented'];
 
 /** Whose tissue this is. Nonhuman and synthetic material is never left implied. */
 export const SPECIES = ['human', 'mouse', 'rat', 'pig', 'other_nonhuman', 'mixed', 'synthetic', 'not_documented'];

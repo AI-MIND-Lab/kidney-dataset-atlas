@@ -1,0 +1,51 @@
+[
+	{
+		"id": "totalsegmentator-ct-zenodo",
+		"url": "https://zenodo.org/api/records/6802613",
+		"title": "Zenodo record: Dataset with segmentations of 117 important anatomical structures in 1939 CT images",
+		"locator": "Version 3.0.0 metadata, licence and description",
+		"accessedOn": "2026-09-20"
+	},
+	{
+		"id": "totalsegmentator-mri-zenodo",
+		"url": "https://zenodo.org/api/records/11367004",
+		"title": "Zenodo record: TotalSegmentator MRI dataset, 1296 MRI images with segmentations for 50 anatomical regions",
+		"locator": "Version 3.0.0 metadata, licence and description",
+		"accessedOn": "2026-09-20"
+	},
+	{
+		"id": "totalsegmentator-paper",
+		"url": "https://arxiv.org/abs/2208.05868",
+		"title": "TotalSegmentator: Robust Segmentation of 104 Anatomic Structures in CT Images",
+		"locator": "Abstract",
+		"accessedOn": "2026-09-20"
+	},
+	{
+		"id": "totalsegmentator-paper-crossref",
+		"url": "https://api.crossref.org/works/10.1148/ryai.230024",
+		"title": "Crossref record for the TotalSegmentator paper",
+		"locator": "Title, journal, year, authors",
+		"accessedOn": "2026-09-20"
+	},
+	{
+		"id": "ct-org-tcia",
+		"url": "https://www.cancerimagingarchive.net/collection/ct-org/",
+		"title": "CT-ORG collection on The Cancer Imaging Archive",
+		"locator": "Collection summary, licence and mask production",
+		"accessedOn": "2026-09-20"
+	},
+	{
+		"id": "ct-org-paper",
+		"url": "https://api.crossref.org/works/10.1038/s41597-020-00715-8",
+		"title": "Crossref record for: CT-ORG, a new dataset for multiple organ segmentation in computed tomography",
+		"locator": "Title, journal, year, authors",
+		"accessedOn": "2026-09-20"
+	},
+	{
+		"id": "hubmap-ftu-paper",
+		"url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10356924/",
+		"title": "Segmentation of human functional tissue units in support of a Human Reference Atlas",
+		"locator": "Kidney dataset description and availability",
+		"accessedOn": "2026-09-20"
+	}
+]

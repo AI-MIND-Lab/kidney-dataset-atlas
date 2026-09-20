@@ -1,0 +1,154 @@
+id: ct-org-tcia
+dataset: ct-org
+versionLabel: TCIA collection
+releaseDate: null
+doi: null
+counts:
+  patients:
+    value: 140
+    status: present
+    evidence:
+      sources: [ct-org-tcia]
+      locator: Collection summary
+      status: verified
+      verifiedOn: 2026-09-20
+      note: Subjects, one CT scan each as described by the collection.
+  examinations:
+    value: 140
+    status: present
+    evidence:
+      sources: [ct-org-tcia]
+      locator: Collection summary
+      status: verified
+      verifiedOn: 2026-09-20
+      note: 131 are dedicated CT studies and 9 come from PET-CT examinations.
+  lesions:
+    value: null
+    status: not_applicable
+  slices:
+    value: null
+    status: not_documented
+  slides:
+    value: null
+    status: not_applicable
+  images:
+    value: null
+    status: not_documented
+  patches:
+    value: null
+    status: not_applicable
+  records:
+    value: null
+    status: not_applicable
+modalities:
+  - ct
+cohort: >-
+  A mixture of abdominal and full-body scans, contrast and non-contrast, low dose and high
+  dose, with nine scans taken from PET-CT examinations. Not selected for kidney disease.
+tasks:
+  - segmentation
+annotations:
+  - segmentation_masks
+annotationProvenance:
+  kind: mixed
+  note: >-
+    Kidneys and the other organs apart from lungs and bones were segmented by hand in ITK-SNAP,
+    in both splits. Lungs and bones were segmented automatically by morphological image
+    processing in the 119-scan training set and manually in the 21-scan test set. Evaluating a
+    kidney model against these masks means evaluating against manual work; the same is not true
+    of every organ here.
+  evidence:
+    sources: [ct-org-tcia]
+    locator: Mask production description
+    status: verified
+    verifiedOn: 2026-09-20
+features:
+  wsi:
+    status: not_applicable
+  ctPhases:
+    status: not_documented
+    note: Contrast and non-contrast scans are both present; the phase is not recorded per case in what was read.
+  clinicalData:
+    status: not_documented
+  followUp:
+    status: not_applicable
+access:
+  mode: open_download
+  registrationVisible: false
+  instructions: Download from the collection page on The Cancer Imaging Archive.
+  evidence:
+    sources: [ct-org-tcia]
+    status: verified
+    verifiedOn: 2026-09-20
+license:
+  name: CC BY 3.0
+  url: https://creativecommons.org/licenses/by/3.0/
+  conditions: Attribution, with the citation the collection page requires.
+deidentification:
+  statement: >-
+    The archive describes itself as a service which de-identifies and hosts medical images of
+    cancer for public download. No procedure specific to this collection is described on the
+    page.
+  status: present
+  evidence:
+    sources: [ct-org-tcia]
+    status: verified
+    verifiedOn: 2026-09-20
+pairing:
+  - kind: same_patient
+    modalities: [ct]
+    status: present
+    note: One scan per subject, with its masks.
+    evidence:
+      sources: [ct-org-tcia]
+      status: verified
+      verifiedOn: 2026-09-20
+dictionary:
+  completeness: documentation_only
+  inspectedScope: The collection page's organ list. No label file was downloaded, so mask class numbers are not recorded.
+structure: >-
+  CT series with organ masks, organised by subject in the archive's collection browser, split
+  into 119 training and 21 test scans.
+citation: >-
+  Rister B, et al. CT-ORG, a new dataset for multiple organ segmentation in computed
+  tomography. Scientific Data, 2020. doi:10.1038/s41597-020-00715-8. See the collection page
+  for the archive's required citation.
+limitations:
+  - An anatomical dataset, not a kidney cohort; kidney masks are outlines, not diagnoses.
+  - Mask production differs by organ and by split, so mask quality is not uniform across the collection.
+  - Brain labels exist only in a subset of scans.
+  - Source cohorts are mixed, so the collection is not an independent kidney-cancer cohort.
+eligibility:
+  publicAccess:
+    status: pass
+    note: Public archive download with no application or credentialing.
+    evidence:
+      sources: [ct-org-tcia]
+      status: verified
+      verifiedOn: 2026-09-20
+  deidentification:
+    status: pass
+    note: The archive states that it de-identifies the images it hosts.
+    evidence:
+      sources: [ct-org-tcia]
+      status: verified
+      verifiedOn: 2026-09-20
+  noPhiHosted:
+    status: pass
+  termsPermitUse:
+    status: pass
+    note: CC BY 3.0 permits reuse with attribution.
+    evidence:
+      sources: [ct-org-tcia]
+      status: verified
+      verifiedOn: 2026-09-20
+  samplePermission:
+    status: pass
+    note: No preview images are shown for this release.
+catalogStatus: draft
+verifiedOn: 2026-09-20
+researchedBy: agent
+approvedBy: null
+approvedOn: null
+sources:
+  - ct-org-tcia

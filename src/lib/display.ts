@@ -31,6 +31,7 @@ const ACCESS_LABELS: Record<string, string> = {
 	open_download: 'Open download',
 	registration_required: 'Registration required',
 	restricted: 'Restricted',
+	not_documented: 'Access not documented',
 };
 
 export const accessLabel = (mode: string): string => ACCESS_LABELS[mode] ?? mode;

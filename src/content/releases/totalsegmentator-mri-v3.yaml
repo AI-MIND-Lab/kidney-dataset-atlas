@@ -1,0 +1,146 @@
+id: totalsegmentator-mri-v3
+dataset: totalsegmentator-mri
+versionLabel: v3.0.0
+releaseDate: 2026-09-10
+doi: 10.5281/zenodo.22688334
+counts:
+  patients:
+    value: null
+    status: not_documented
+    evidence:
+      sources: [totalsegmentator-mri-zenodo]
+      status: verified
+      verifiedOn: 2026-09-20
+      note: The record counts images, not subjects. One subject may contribute more than one scan, so the image count is not a patient count.
+  images:
+    value: 1296
+    status: present
+    evidence:
+      sources: [totalsegmentator-mri-zenodo]
+      locator: Record title and description, version 3.0.0
+      status: verified
+      verifiedOn: 2026-09-20
+      note: Up from 616 in the previous version, after whole-body, paediatric and previously failing cases were added.
+  examinations:
+    value: null
+    status: not_documented
+  lesions:
+    value: null
+    status: not_applicable
+  slices:
+    value: null
+    status: not_documented
+  slides:
+    value: null
+    status: not_applicable
+  patches:
+    value: null
+    status: not_applicable
+  records:
+    value: null
+    status: not_applicable
+modalities:
+  - mri
+cohort: >-
+  Clinical routine MRI from many institutions, scanners and sequences, including pathological
+  cases and samples from the Imaging Data Commons. Not selected for kidney disease.
+tasks:
+  - segmentation
+annotations:
+  - segmentation_masks
+annotationProvenance:
+  kind: not_documented
+  note: >-
+    Only the archive record was read. It does not state who produced the segmentations or
+    whether a model assisted, so the procedure is not recorded here.
+  evidence:
+    sources: [totalsegmentator-mri-zenodo]
+    status: verified
+    verifiedOn: 2026-09-20
+features:
+  wsi:
+    status: not_applicable
+  ctPhases:
+    status: not_applicable
+    note: An MRI collection; CT phases do not apply. Which MR sequences are present is not recorded per case in what was read.
+  clinicalData:
+    status: not_documented
+  followUp:
+    status: not_applicable
+access:
+  mode: open_download
+  registrationVisible: false
+  instructions: Download the dataset archive from its Zenodo record. No registration or application is required.
+  evidence:
+    sources: [totalsegmentator-mri-zenodo]
+    status: verified
+    verifiedOn: 2026-09-20
+license:
+  name: CC BY 4.0
+  url: https://creativecommons.org/licenses/by/4.0/
+  conditions: Attribution. No non-commercial or share-alike restriction, so a preview image could be shown with attribution once a curator approves it.
+deidentification:
+  statement: >-
+    No de-identification statement was found in the archive record. The paper describing this
+    collection was not read for this record.
+  status: not_documented
+  evidence:
+    sources: [totalsegmentator-mri-zenodo]
+    status: verified
+    verifiedOn: 2026-09-20
+pairing:
+  - kind: same_patient
+    modalities: [mri]
+    status: not_documented
+    note: Whether several scans belong to the same subject is not stated, which is also why the image count cannot be read as a patient count.
+dictionary:
+  completeness: documentation_only
+  inspectedScope: >-
+    The archive record's description only. The label list of 50 regions was not downloaded,
+    so individual class numbers are not recorded here.
+structure: >-
+  A single archive of about 15 GB, holding MR images with their segmentation masks. Both
+  kidneys are among the segmented structures; the full list of 50 regions travels with the archive.
+citation: >-
+  Akinci D'Antonoli T, et al. TotalSegmentator MRI: Robust Sequence-independent Segmentation
+  of Multiple Anatomic Structures in MRI. Radiology, 2025. The paper was not read for this
+  record; cite the dataset version DOI separately.
+limitations:
+  - An anatomical dataset, not a kidney disease cohort; kidney labels are outlines, not diagnoses.
+  - Sequences are deliberately mixed, so results are not attributable to one protocol.
+  - Images are counted, not subjects, so the size of the cohort is unknown.
+  - The paper describing this collection was not read for this record; only the archive record was.
+  - The archive is about 15 GB.
+eligibility:
+  publicAccess:
+    status: pass
+    note: Public archive download with no registration or application.
+    evidence:
+      sources: [totalsegmentator-mri-zenodo]
+      status: verified
+      verifiedOn: 2026-09-20
+  deidentification:
+    status: unknown
+    note: No de-identification statement was located in the record. The paper should be read before publishing.
+    evidence:
+      sources: [totalsegmentator-mri-zenodo]
+      status: not_verified
+  noPhiHosted:
+    status: pass
+  termsPermitUse:
+    status: pass
+    note: CC BY 4.0 permits reuse with attribution.
+    evidence:
+      sources: [totalsegmentator-mri-zenodo]
+      status: verified
+      verifiedOn: 2026-09-20
+  samplePermission:
+    status: pass
+    note: No preview images are shown for this release.
+catalogStatus: draft
+verifiedOn: 2026-09-20
+researchedBy: agent
+approvedBy: null
+approvedOn: null
+sources:
+  - totalsegmentator-mri-zenodo

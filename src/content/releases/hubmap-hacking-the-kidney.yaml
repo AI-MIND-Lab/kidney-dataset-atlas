@@ -1,0 +1,141 @@
+id: hubmap-hacking-the-kidney
+dataset: hubmap-kidney
+versionLabel: 2021 Kaggle competition release
+releaseDate: null
+doi: null
+counts:
+  patients:
+    value: null
+    status: not_documented
+    evidence:
+      sources: [hubmap-ftu-paper]
+      status: verified
+      verifiedOn: 2026-09-20
+      note: Described as coming from multiple donors; the donor count was not stated in what was read.
+  slides:
+    value: 30
+    status: present
+    evidence:
+      sources: [hubmap-ftu-paper]
+      locator: "\"The kidney data used in the 'HuBMAP - Hacking the Kidney' Kaggle competition comprises 30 whole slide images\""
+      status: verified
+      verifiedOn: 2026-09-20
+  lesions:
+    value: null
+    status: not_applicable
+  examinations:
+    value: null
+    status: not_applicable
+  slices:
+    value: null
+    status: not_applicable
+  images:
+    value: null
+    status: not_documented
+  patches:
+    value: null
+    status: not_documented
+  records:
+    value: null
+    status: not_applicable
+modalities:
+  - pathology
+cohort: Human kidney tissue from multiple donors, stained with periodic acid-Schiff.
+tasks:
+  - segmentation
+annotations:
+  - segmentation_masks
+annotationProvenance:
+  kind: mixed
+  note: >-
+    "Initial segmentations were generated automatically by a segmentation pipeline, then
+    manually inspected and corrected by subject matter experts (SMEs) using QuPath." 7,102
+    glomeruli are reported, with an average area of 80,498 pixels.
+  evidence:
+    sources: [hubmap-ftu-paper]
+    locator: Kidney dataset description
+    status: verified
+    verifiedOn: 2026-09-20
+features:
+  wsi:
+    status: present
+    note: 30 whole-slide images.
+    evidence:
+      sources: [hubmap-ftu-paper]
+      status: verified
+      verifiedOn: 2026-09-20
+  ctPhases:
+    status: not_applicable
+  clinicalData:
+    status: not_documented
+  followUp:
+    status: not_applicable
+access:
+  mode: not_documented
+  registrationVisible: false
+  instructions: >-
+    The paper states that after the competition all data were made available at the HuBMAP Data
+    Portal as a named collection. Whether an account, agreement or registration is needed was
+    not established: the competition page could not be retrieved and the portal page returns no
+    readable content to an automated fetch.
+  evidence:
+    sources: [hubmap-ftu-paper]
+    locator: Data availability
+    status: not_verified
+license:
+  name: Not documented for the data
+  conditions: >-
+    The paper itself is published under CC BY 4.0, which covers the article, not necessarily
+    the images. No licence for the image data was established.
+deidentification:
+  statement: No de-identification statement for these slides was located in what was read.
+  status: not_documented
+  evidence:
+    sources: [hubmap-ftu-paper]
+    status: not_verified
+pairing:
+  - kind: same_patient
+    modalities: [pathology]
+    status: not_documented
+dictionary:
+  completeness: documentation_only
+  inspectedScope: The paper's description of the kidney dataset. No file or manifest was downloaded.
+structure: >-
+  Whole-slide periodic acid-Schiff images with glomerulus masks. The competition distributed
+  patches alongside the slides; how the released collection is organised was not verified.
+citation: >-
+  Jain S, et al. Segmentation of human functional tissue units in support of a Human Reference
+  Atlas. Communications Biology, 2023. doi:10.1038/s42003-023-04848-5. The data collection has
+  its own citation on the HuBMAP Data Portal.
+limitations:
+  - Access conditions and licence are unverified; this record must not be read as evidence that the images are freely downloadable.
+  - Annotations were machine-generated and then corrected, not drawn independently.
+  - 30 slides is a small collection, and the donor count is not documented here.
+  - Competition splits and the later public release are not the same thing; which is described here was not established.
+eligibility:
+  publicAccess:
+    status: unknown
+    note: >-
+      The paper says the data were made publicly available at the HuBMAP Data Portal, but
+      neither the portal's download conditions nor the competition's terms could be checked.
+    evidence:
+      sources: [hubmap-ftu-paper]
+      status: not_verified
+  deidentification:
+    status: unknown
+    note: No de-identification statement for the slides was located.
+  noPhiHosted:
+    status: pass
+  termsPermitUse:
+    status: unknown
+    note: No licence for the image data was established; the article's CC BY 4.0 licence covers the article.
+  samplePermission:
+    status: pass
+    note: No preview images are shown for this release.
+catalogStatus: draft
+verifiedOn: 2026-09-20
+researchedBy: agent
+approvedBy: null
+approvedOn: null
+sources:
+  - hubmap-ftu-paper

@@ -1,0 +1,146 @@
+id: totalsegmentator-ct-v3
+dataset: totalsegmentator-ct
+versionLabel: v3.0.0
+releaseDate: 2026-09-10
+doi: 10.5281/zenodo.22688904
+counts:
+  patients:
+    value: null
+    status: not_documented
+    evidence:
+      sources: [totalsegmentator-ct-zenodo]
+      status: verified
+      verifiedOn: 2026-09-20
+      note: The record counts images, not subjects. One subject may contribute more than one scan, so the image count is not a patient count.
+  images:
+    value: 1939
+    status: present
+    evidence:
+      sources: [totalsegmentator-ct-zenodo]
+      locator: Record title and description, version 3.0.0
+      status: verified
+      verifiedOn: 2026-09-20
+      note: Up from 1,228 in the previous version, after 291 paediatric scans were added.
+  examinations:
+    value: null
+    status: not_documented
+  lesions:
+    value: null
+    status: not_applicable
+  slices:
+    value: null
+    status: not_documented
+  slides:
+    value: null
+    status: not_applicable
+  patches:
+    value: null
+    status: not_applicable
+  records:
+    value: null
+    status: not_applicable
+modalities:
+  - ct
+cohort: >-
+  Clinical routine CT from many institutions, scanners and protocols, including a range of
+  pathologies, and, since this version, paediatric scans. Not selected for kidney disease.
+tasks:
+  - segmentation
+annotations:
+  - segmentation_masks
+annotationProvenance:
+  kind: not_documented
+  note: >-
+    Only the paper's abstract and the archive record were read. Neither states who produced
+    the segmentations or whether a model assisted, so the procedure is not recorded here.
+  evidence:
+    sources: [totalsegmentator-paper, totalsegmentator-ct-zenodo]
+    status: verified
+    verifiedOn: 2026-09-20
+features:
+  wsi:
+    status: not_applicable
+  ctPhases:
+    status: not_documented
+    note: Contrast and non-contrast scans are described in general terms; phases are not recorded per case in what was read.
+  clinicalData:
+    status: not_documented
+  followUp:
+    status: not_applicable
+access:
+  mode: open_download
+  registrationVisible: false
+  instructions: Download the dataset archive from its Zenodo record. No registration or application is required.
+  evidence:
+    sources: [totalsegmentator-ct-zenodo]
+    status: verified
+    verifiedOn: 2026-09-20
+license:
+  name: CC BY 4.0
+  url: https://creativecommons.org/licenses/by/4.0/
+  conditions: Attribution. No non-commercial or share-alike restriction, so a preview image could be shown with attribution once a curator approves it.
+deidentification:
+  statement: >-
+    No de-identification statement was found in the archive record, and the paper's abstract
+    does not address it. The full paper was not read for this record.
+  status: not_documented
+  evidence:
+    sources: [totalsegmentator-ct-zenodo, totalsegmentator-paper]
+    status: verified
+    verifiedOn: 2026-09-20
+pairing:
+  - kind: same_patient
+    modalities: [ct]
+    status: not_documented
+    note: Whether several scans belong to the same subject is not stated, which is also why the image count cannot be read as a patient count.
+dictionary:
+  completeness: documentation_only
+  inspectedScope: >-
+    The archive record's description only. The label list of 117 structures was not downloaded,
+    so individual class numbers are not recorded here.
+structure: >-
+  A single archive of about 37 GB, holding CT images with their segmentation masks. Both
+  kidneys are among the segmented structures; the full label list travels with the archive.
+citation: >-
+  Wasserthal J, Breit H-C, Meyer MT, et al. TotalSegmentator: Robust Segmentation of 104
+  Anatomic Structures in CT Images. Radiology: Artificial Intelligence, 2023.
+  doi:10.1148/ryai.230024. Cite the dataset version DOI separately.
+limitations:
+  - An anatomical dataset, not a kidney disease cohort; kidney labels are outlines, not diagnoses.
+  - The paper describes 104 structures in 1,204 examinations; this release holds 117 structures across 1,939 images.
+  - Images are counted, not subjects, so the size of the cohort is unknown.
+  - The archive is about 37 GB, which is not a casual download.
+eligibility:
+  publicAccess:
+    status: pass
+    note: Public archive download with no registration or application.
+    evidence:
+      sources: [totalsegmentator-ct-zenodo]
+      status: verified
+      verifiedOn: 2026-09-20
+  deidentification:
+    status: unknown
+    note: No de-identification statement was located in the record or the abstract. The full paper should be read before publishing.
+    evidence:
+      sources: [totalsegmentator-ct-zenodo]
+      status: not_verified
+  noPhiHosted:
+    status: pass
+  termsPermitUse:
+    status: pass
+    note: CC BY 4.0 permits reuse with attribution.
+    evidence:
+      sources: [totalsegmentator-ct-zenodo]
+      status: verified
+      verifiedOn: 2026-09-20
+  samplePermission:
+    status: pass
+    note: No preview images are shown for this release.
+catalogStatus: draft
+verifiedOn: 2026-09-20
+researchedBy: agent
+approvedBy: null
+approvedOn: null
+sources:
+  - totalsegmentator-ct-zenodo
+  - totalsegmentator-paper

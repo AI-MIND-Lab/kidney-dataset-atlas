@@ -1,0 +1,40 @@
+[
+	{
+		"id": "use-wasserthal-totalsegmentator",
+		"paper": "wasserthal-2023",
+		"release": "totalsegmentator-ct-v3",
+		"role": "benchmark",
+		"actualUseEvidence": {
+			"sources": ["totalsegmentator-paper"],
+			"locator": "Abstract: 1,204 CT examinations used to segment 104 anatomical structures",
+			"status": "verified",
+			"verifiedOn": "2026-09-20",
+			"note": "The paper introduces and evaluates on this dataset, but describes an earlier version of it: 104 structures across 1,204 examinations, against 117 across 1,939 images in the release catalogued here. Its results are not results on this release."
+		},
+		"subset": "The version of the dataset current at publication, not this release",
+		"preprocessing": null,
+		"task": "segmentation",
+		"trainTestRole": "train_and_test",
+		"split": "Not documented in the abstract read for this record",
+		"results": []
+	},
+	{
+		"id": "use-jain-hubmap",
+		"paper": "jain-2023",
+		"release": "hubmap-hacking-the-kidney",
+		"role": "benchmark",
+		"actualUseEvidence": {
+			"sources": ["hubmap-ftu-paper"],
+			"locator": "Kidney dataset description and competition results",
+			"status": "verified",
+			"verifiedOn": "2026-09-20",
+			"note": "The paper reports the competition run on this data and describes the release itself."
+		},
+		"subset": "30 whole-slide images with 7,102 annotated glomeruli",
+		"preprocessing": null,
+		"task": "segmentation",
+		"trainTestRole": "train_and_test",
+		"split": "Competition split; the private evaluation data are not the same as the public training images",
+		"results": []
+	}
+]
