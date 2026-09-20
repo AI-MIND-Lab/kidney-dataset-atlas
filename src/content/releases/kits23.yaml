@@ -101,7 +101,13 @@ structure: >-
   Each case directory in the repository holds segmentation.nii.gz together with an instances
   directory of individual annotation instances; the imaging volume is fetched separately by the
   download command. Cases are identified by a case number such as case_00000.
-citation: KiTS23 — The 2023 Kidney Tumor Segmentation Challenge, https://kits-challenge.org/kits23/
+citation: >-
+  Heller N, Isensee F, Trofimova D, et al. The KiTS21 Challenge: Automatic segmentation of
+  kidneys, renal tumors, and renal cysts in corticomedullary-phase CT. arXiv:2307.01984, 2023.
+  doi:10.48550/arXiv.2307.01984 — cited together with the KiTS23 challenge page,
+  https://kits-challenge.org/kits23/. The KiTS21 report is the closest publication; no
+  publication specific to the KiTS23 release was located, and the challenge organisers may
+  request a different citation.
 limitations:
   - The 110-case test set is not publicly available; only the 489 training cases are.
   - The KiTS21 publication reports roughly a 2:1 male-to-female imbalance in the cohort.

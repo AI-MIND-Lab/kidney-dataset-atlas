@@ -21,6 +21,7 @@ import {
 	stateLabel,
 	trainTestLabel,
 } from '../lib/display';
+import { unresolvedChecks } from '../lib/eligibility.mjs';
 import { datasetPath, paperPath, releasePath, withBase } from '../lib/site';
 
 interface Props {
@@ -47,6 +48,8 @@ const usesWithPapers = await Promise.all(
 const originalUses = usesWithPapers.filter(({ use }) => use.role === 'original');
 const downstreamUses = usesWithPapers.filter(({ use }) => use.role === 'downstream');
 const overlaps = overlapsForRelease(data.id);
+const isDraft = data.catalogStatus !== 'published';
+const unresolved = isDraft ? unresolvedChecks(data.eligibility) : [];
 // Everything the page shows, so a source cited only by a variable or a quality
 // finding still appears in the list a reader can check.
 const sources = sourcesFor(dataset.data, data, variables, samples, findings, uses, overlaps);
@@ -101,8 +104,19 @@ const countRows = [
 			}
 		</p>
 		<p>
-			Last verified: {dateLabel(data.verifiedOn)}.
-			{data.approvedBy && <> Approved by {data.approvedBy} on {dateLabel(data.approvedOn)}.</>}
+			{
+				isDraft ? (
+					<>
+						<strong>Not published.</strong> Researched by {data.researchedBy} on{' '}
+						{dateLabel(data.verifiedOn)}, and not yet approved by a curator.
+					</>
+				) : (
+					<>
+						Last verified: {dateLabel(data.verifiedOn)}.
+						{data.approvedBy && <> Approved by {data.approvedBy} on {dateLabel(data.approvedOn)}.</>}
+					</>
+				)
+			}
 		</p>
 		<p class="release__actions">
 			<a class="button" href={dataset.data.officialUrl}>Official source</a>
@@ -145,13 +159,31 @@ const countRows = [
 		}
 
 		{
-			data.catalogStatus !== 'published' && (
+			isDraft && (
 				<div class="notice" data-atlas-draft>
 					<p>
-						<strong>Draft, not approved.</strong> This record was researched but no curator has checked its
-						eligibility and sources yet, so it is not published. Run <code>npm run validate</code> for its
-						approval checklist.
+						<strong>Draft, not approved.</strong> A curator has not checked this record's eligibility and
+						sources, so it is not published.
 					</p>
+					{unresolved.length === 0 ? (
+						<p>Every eligibility check passes; the record is waiting for a curator to approve it.</p>
+					) : (
+						<>
+							<p>
+								{unresolved.length === 1
+									? 'One eligibility check is unresolved:'
+									: `${unresolved.length} eligibility checks are unresolved:`}
+							</p>
+							<ul>
+								{unresolved.map((check) => (
+									<li>
+										<strong>{check.label}</strong> — {humanize(check.status)}
+										{check.note && <>. {check.note}</>}
+									</li>
+								))}
+							</ul>
+						</>
+					)}
 				</div>
 			)
 		}
@@ -317,14 +349,23 @@ const countRows = [
 		<h3>Original publication</h3>
 		{
 			originalUses.length === 0 ? (
-				<p>The dataset's own publication is not recorded yet.</p>
+				<p>No publication of this release is recorded.</p>
 			) : (
-				<ul>
-					{originalUses.map(({ paper }) =>
+				<ul class="stack">
+					{originalUses.map(({ use, paper }) =>
 						paper ? (
 							<li>
 								<a href={withBase(paperPath(paper.data.slug))}>{paper.data.title}</a>
 								{paper.data.year && <> ({paper.data.year})</>}
+								<br />
+								<small>
+									<strong>
+										{use.actualUseEvidence.status === 'verified'
+											? 'Link verified'
+											: 'Link not verified'}
+									</strong>
+									{use.actualUseEvidence.note && <>. {use.actualUseEvidence.note}</>}
+								</small>
 							</li>
 						) : null,
 					)}
@@ -348,6 +389,7 @@ const countRows = [
 								<th scope="col">Task</th>
 								<th scope="col">Subset</th>
 								<th scope="col">Train/test role</th>
+								<th scope="col">Use evidence</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -364,6 +406,7 @@ const countRows = [
 									<td>{use.task ? humanize(use.task) : 'Not documented'}</td>
 									<td>{use.subset ?? 'Not documented'}</td>
 									<td>{trainTestLabel(use.trainTestRole)}</td>
+									<td>{use.actualUseEvidence.status === 'verified' ? 'Verified' : 'Not verified'}</td>
 								</tr>
 							))}
 						</tbody>

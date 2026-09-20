@@ -11,6 +11,7 @@ import { join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import yaml from 'js-yaml';
 import { schemas } from '../src/lib/schemas.mjs';
+import { ELIGIBILITY_LABELS } from '../src/lib/eligibility.mjs';
 
 const root = resolve(fileURLToPath(new URL('../', import.meta.url)));
 const useFixtures = process.env.ATLAS_FIXTURES === '1';
@@ -169,14 +170,6 @@ for (const record of [...datasets, ...releases, ...papers, ...variables, ...stud
 }
 
 /* Publication gate ------------------------------------------------------- */
-
-const ELIGIBILITY_LABELS = {
-	publicAccess: 'Publicly accessible without an approval committee',
-	deidentification: 'Provider documents de-identification',
-	noPhiHosted: 'No patient records hosted by this site',
-	termsPermitUse: "Provider's terms permit this use",
-	samplePermission: 'Reuse permission checked for every displayed sample',
-};
 
 const publishedReleases = releases.filter((record) => record.data.catalogStatus === 'published');
 const draftReleases = releases.filter((record) => record.data.catalogStatus !== 'published');
