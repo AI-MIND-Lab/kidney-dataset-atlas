@@ -1,0 +1,72 @@
+[
+	{
+		"id": "kits19-repo",
+		"url": "https://github.com/neheller/kits19",
+		"title": "kits19 repository README",
+		"locator": "Case contents and download instructions",
+		"accessedOn": "2026-09-20"
+	},
+	{
+		"id": "kits19-license",
+		"url": "https://raw.githubusercontent.com/neheller/kits19/master/LICENSE",
+		"title": "kits19 repository LICENSE file",
+		"locator": "Opening lines",
+		"accessedOn": "2026-09-20"
+	},
+	{
+		"id": "kits19-data-paper",
+		"url": "https://arxiv.org/html/1904.00445v2",
+		"title": "The KiTS19 Challenge Data: 300 Kidney Tumor Cases with Clinical Context, CT Semantic Segmentations, and Surgical Outcomes",
+		"locator": "Cohort, ethics and clinical data sections",
+		"accessedOn": "2026-09-20"
+	},
+	{
+		"id": "kits19-challenge-report",
+		"url": "https://api.crossref.org/works/10.1016/j.media.2020.101821",
+		"title": "Crossref record for the KiTS19 challenge report",
+		"locator": "Title, journal, year",
+		"accessedOn": "2026-09-20"
+	},
+	{
+		"id": "c4kc-kits-tcia",
+		"url": "https://www.cancerimagingarchive.net/collection/c4kc-kits/",
+		"title": "C4KC-KiTS collection on The Cancer Imaging Archive",
+		"locator": "Collection summary and licence",
+		"accessedOn": "2026-09-20"
+	},
+	{
+		"id": "kits21-repo",
+		"url": "https://github.com/neheller/kits21",
+		"title": "kits21 repository README",
+		"locator": "Case contents, aggregation files and download instructions",
+		"accessedOn": "2026-09-20"
+	},
+	{
+		"id": "gdc-kirp-summary",
+		"url": "https://api.gdc.cancer.gov/projects/TCGA-KIRP?expand=summary,summary.data_categories",
+		"title": "GDC API project summary for TCGA-KIRP",
+		"locator": "summary.case_count and data_categories",
+		"accessedOn": "2026-09-20"
+	},
+	{
+		"id": "gdc-kich-summary",
+		"url": "https://api.gdc.cancer.gov/projects/TCGA-KICH?expand=summary,summary.data_categories",
+		"title": "GDC API project summary for TCGA-KICH",
+		"locator": "summary.case_count and data_categories",
+		"accessedOn": "2026-09-20"
+	},
+	{
+		"id": "gdc-kirp-kich-slides",
+		"url": "https://api.gdc.cancer.gov/files?filters=cases.project.project_id=TCGA-KIRP,TCGA-KICH&data_type=Slide+Image&facets=cases.project.project_id,experimental_strategy,access",
+		"title": "GDC API slide image facets for TCGA-KIRP and TCGA-KICH",
+		"locator": "Project, experimental_strategy and access facets",
+		"accessedOn": "2026-09-20"
+	},
+	{
+		"id": "tabibu-2019",
+		"url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6642160/",
+		"title": "Pan-Renal Cell Carcinoma classification and survival prediction from histopathology images using deep learning",
+		"locator": "Data and methods section; results",
+		"accessedOn": "2026-09-20"
+	}
+]

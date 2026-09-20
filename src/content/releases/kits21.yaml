@@ -1,0 +1,154 @@
+id: kits21
+dataset: kits
+versionLabel: KiTS21
+releaseDate: null
+counts:
+  patients:
+    value: 300
+    status: present
+    evidence:
+      sources: [kits21-repo, kits21-paper]
+      locator: Cases case_00000 to case_00299 in the repository; training set size in the paper
+      status: verified
+      verifiedOn: 2026-09-20
+      note: The public training cases. A separate 100-case test set from the Cleveland Clinic is not public and is not counted here.
+  examinations:
+    value: null
+    status: not_documented
+  lesions:
+    value: null
+    status: not_documented
+  slices:
+    value: null
+    status: not_documented
+  slides:
+    value: null
+    status: not_applicable
+  images:
+    value: null
+    status: not_documented
+  patches:
+    value: null
+    status: not_applicable
+  records:
+    value: null
+    status: not_documented
+modalities:
+  - ct
+cohort: >-
+  Patients treated at the University of Minnesota between January 2011 and June 2019 with
+  partial or radical nephrectomy for suspected renal malignancy. The separate test set was
+  contributed by the Cleveland Clinic.
+tasks:
+  - segmentation
+annotations:
+  - segmentation_masks
+annotationProvenance:
+  kind: crowd
+  note: >-
+    Three independent annotations per region of interest: medical trainees placed a bounding
+    box and reference pins, and crowd workers delineated each region following that guidance.
+  evidence:
+    sources: [kits21-paper]
+    locator: Annotation procedure
+    status: verified
+    verifiedOn: 2026-09-20
+features:
+  wsi:
+    status: not_applicable
+  ctPhases:
+    status: present
+    phases: [corticomedullary]
+    note: Corticomedullary phase only, unlike KiTS23.
+    evidence:
+      sources: [kits21-paper]
+      status: verified
+      verifiedOn: 2026-09-20
+  clinicalData:
+    status: not_documented
+  followUp:
+    status: not_documented
+access:
+  mode: open_download
+  registrationVisible: false
+  instructions: >-
+    Clone the kits21 repository, which carries the segmentations, then run one of the
+    get_imaging scripts to fetch the imaging volumes. No registration is required.
+  evidence:
+    sources: [kits21-repo]
+    locator: Download instructions
+    status: verified
+    verifiedOn: 2026-09-20
+license:
+  name: Not documented for the data
+  conditions: >-
+    The repository states MIT terms for its code. No licence for the imaging and segmentations
+    was found in the README, so the data terms are unestablished for this edition.
+deidentification:
+  statement: >-
+    The challenge publication documents institutional review board approval (University of
+    Minnesota study 1611M00821). No description of the de-identification procedure was found.
+  status: not_documented
+  evidence:
+    sources: [kits21-paper]
+    locator: "\"After receiving approval from the University of Minnesota institutional review board (study 1611M00821)\""
+    status: verified
+    verifiedOn: 2026-09-20
+pairing:
+  - kind: same_session_phases
+    modalities: [ct]
+    status: not_documented
+dictionary:
+  completeness: partial
+  inspectedScope: >-
+    The repository's description of each case directory. The label numbering is recorded from
+    the KiTS23 configuration file, which uses the same three classes; it was not separately
+    confirmed for this edition.
+structure: >-
+  Each case directory holds imaging.nii.gz, a raw directory, a segmentations directory with
+  every individual annotation instance named by region, instance and annotation number, and
+  three aggregated segmentations built by union, intersection and majority vote. Which
+  aggregation a study used changes what its numbers mean.
+citation: >-
+  Heller N, Isensee F, Trofimova D, et al. The KiTS21 Challenge: Automatic segmentation of
+  kidneys, renal tumors, and renal cysts in corticomedullary-phase CT. arXiv:2307.01984, 2023.
+limitations:
+  - The 100-case test set is not public.
+  - Roughly a 2:1 male-to-female imbalance is reported in the cohort.
+  - The training cohort is drawn largely from a single academic centre and is predominantly Caucasian.
+  - Three aggregated segmentations are distributed; results depend on which one is used.
+  - The data licence is not stated in the repository.
+eligibility:
+  publicAccess:
+    status: pass
+    note: The 300 training cases download without registration or application.
+    evidence:
+      sources: [kits21-repo]
+      status: verified
+      verifiedOn: 2026-09-20
+  deidentification:
+    status: unknown
+    note: Review board approval is documented; the de-identification procedure is not.
+    evidence:
+      sources: [kits21-paper]
+      status: not_verified
+  noPhiHosted:
+    status: pass
+  termsPermitUse:
+    status: unknown
+    note: No data licence was found for this edition.
+    evidence:
+      sources: [kits21-repo]
+      status: verified
+      verifiedOn: 2026-09-20
+  samplePermission:
+    status: pass
+    note: No preview images are shown for this release.
+catalogStatus: draft
+verifiedOn: 2026-09-20
+researchedBy: agent
+approvedBy: null
+approvedOn: null
+sources:
+  - kits21-repo
+  - kits21-paper

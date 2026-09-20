@@ -56,6 +56,18 @@ export const trainTestLabel = (value: string): string => TRAIN_TEST_LABELS[value
 /** Enum-ish values that read fine as plain words. */
 export const humanize = (value: string): string => value.replace(/_/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
 
+/** Relation types read as sentences, in each direction. */
+const RELATION_PHRASES: Record<string, { forward: string; reverse: string }> = {
+	version_of: { forward: 'is a version of', reverse: 'is a version of this release' },
+	subset_of: { forward: 'is a subset of', reverse: 'is a subset of this release' },
+	derived_from: { forward: 'is derived from', reverse: 'is derived from this release' },
+	aggregates: { forward: 'aggregates', reverse: 'aggregates this release' },
+	annotates: { forward: 'annotates', reverse: 'annotates this release' },
+};
+
+export const relationPhrase = (type: string, direction: 'forward' | 'reverse'): string =>
+	RELATION_PHRASES[type]?.[direction] ?? humanize(type).toLowerCase();
+
 const PAIRING_LABELS: Record<string, string> = {
 	verified: 'Verified pairing',
 	not_documented: 'Pairing not documented',

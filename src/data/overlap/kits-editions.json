@@ -1,0 +1,17 @@
+[
+	{
+		"id": "kits-editions-overlap",
+		"releases": ["kits19", "kits21", "kits23", "c4kc-kits"],
+		"type": "partial_cohort",
+		"count": {
+			"value": null,
+			"status": "not_verified"
+		},
+		"explanation": "The KiTS editions draw on the same institutional cohort, and the TCIA archive republishes the KiTS19 public cases. Patients appear in more than one of these releases, so their case counts describe overlapping groups and must not be summed. The number of shared patients was not established here.",
+		"evidence": {
+			"sources": ["kits19-data-paper", "kits21-paper", "kits23-challenge-page", "c4kc-kits-tcia"],
+			"status": "not_verified",
+			"note": "Each edition documents the same institution and overlapping years; no case-level mapping between editions was found."
+		}
+	}
+]

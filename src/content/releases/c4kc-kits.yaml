@@ -1,0 +1,159 @@
+id: c4kc-kits
+dataset: kits
+versionLabel: C4KC-KiTS (KiTS19 training set on TCIA)
+releaseDate: null
+counts:
+  patients:
+    value: 210
+    status: present
+    evidence:
+      sources: [c4kc-kits-tcia]
+      locator: Collection summary
+      status: verified
+      verifiedOn: 2026-09-20
+      note: Subjects in the archived collection — the same public training cases as KiTS19.
+  examinations:
+    value: 621
+    status: present
+    evidence:
+      sources: [c4kc-kits-tcia]
+      locator: Collection summary, series count
+      status: verified
+      verifiedOn: 2026-09-20
+      note: Series, which the archive counts rather than examinations; a subject may contribute several.
+  images:
+    value: 71423
+    status: present
+    evidence:
+      sources: [c4kc-kits-tcia]
+      locator: Collection summary, image count
+      status: verified
+      verifiedOn: 2026-09-20
+      note: DICOM images across the collection. This is not a count of patients or of scans.
+  lesions:
+    value: null
+    status: not_documented
+  slices:
+    value: null
+    status: not_documented
+  slides:
+    value: null
+    status: not_applicable
+  patches:
+    value: null
+    status: not_applicable
+  records:
+    value: null
+    status: not_documented
+modalities:
+  - ct
+  - clinical_table
+cohort: The 210 publicly released KiTS19 cases, archived by The Cancer Imaging Archive.
+tasks:
+  - segmentation
+annotations:
+  - segmentation_masks
+annotationProvenance:
+  kind: not_documented
+  note: The archive redistributes the KiTS19 segmentations; their procedure is not described on the collection page.
+features:
+  wsi:
+    status: not_applicable
+  ctPhases:
+    status: not_documented
+  clinicalData:
+    status: present
+    note: The collection lists demographic, exposure, measurement, diagnosis, treatment and follow-up data alongside the images.
+    evidence:
+      sources: [c4kc-kits-tcia]
+      status: verified
+      verifiedOn: 2026-09-20
+  followUp:
+    status: present
+    note: Follow-up data are listed among the collection's data types.
+    evidence:
+      sources: [c4kc-kits-tcia]
+      status: verified
+      verifiedOn: 2026-09-20
+access:
+  mode: open_download
+  registrationVisible: false
+  instructions: Download from the collection page on The Cancer Imaging Archive, which serves DICOM images, DICOM SEG segmentations and CSV clinical data.
+  evidence:
+    sources: [c4kc-kits-tcia]
+    status: verified
+    verifiedOn: 2026-09-20
+license:
+  name: CC BY 3.0
+  url: https://creativecommons.org/licenses/by/3.0/
+  conditions: >-
+    Attribution. Unlike the CC BY-NC-SA terms of the later KiTS releases, this licence carries
+    no non-commercial or share-alike restriction, which is why the two releases are recorded
+    separately rather than treated as one.
+deidentification:
+  statement: >-
+    The archive describes itself as "a service which de-identifies and hosts a large archive of
+    medical images of cancer accessible for public download". The collection page does not
+    describe the procedure applied to this collection specifically.
+  status: present
+  evidence:
+    sources: [c4kc-kits-tcia]
+    locator: Archive description on the collection page
+    status: verified
+    verifiedOn: 2026-09-20
+pairing:
+  - kind: same_patient
+    modalities: [ct, clinical_table]
+    status: present
+    note: Imaging, segmentations and clinical data are published for the same subjects in one collection.
+    evidence:
+      sources: [c4kc-kits-tcia]
+      status: verified
+      verifiedOn: 2026-09-20
+dictionary:
+  completeness: documentation_only
+  inspectedScope: The data types listed on the collection page. No file was downloaded, so no field names are recorded.
+structure: >-
+  DICOM images with DICOM SEG segmentations, plus clinical data in CSV, organised by subject
+  within the archive's collection browser.
+citation: >-
+  Heller N, Sathianathen N, Kalapara A, et al. C4KC-KiTS, The Cancer Imaging Archive, 2019.
+  See the collection page for the archive's required citation.
+limitations:
+  - Covers the 210 public KiTS19 cases only.
+  - Counts of series and images are not counts of patients.
+  - The de-identification statement is the archive's general description, not a procedure documented for this collection.
+eligibility:
+  publicAccess:
+    status: pass
+    note: Published for public download from the archive, with no application or credentialing.
+    evidence:
+      sources: [c4kc-kits-tcia]
+      status: verified
+      verifiedOn: 2026-09-20
+  deidentification:
+    status: pass
+    note: The archive states that it de-identifies the images it hosts.
+    evidence:
+      sources: [c4kc-kits-tcia]
+      status: verified
+      verifiedOn: 2026-09-20
+  noPhiHosted:
+    status: pass
+  termsPermitUse:
+    status: pass
+    note: CC BY 3.0 permits reuse with attribution, including the descriptions held here.
+    evidence:
+      sources: [c4kc-kits-tcia]
+      status: verified
+      verifiedOn: 2026-09-20
+  samplePermission:
+    status: pass
+    note: No preview images are shown for this release. CC BY 3.0 would permit one with attribution, if a curator approves that image.
+catalogStatus: draft
+verifiedOn: 2026-09-20
+researchedBy: agent
+approvedBy: null
+approvedOn: null
+sources:
+  - c4kc-kits-tcia

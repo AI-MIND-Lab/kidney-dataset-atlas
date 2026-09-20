@@ -1,0 +1,162 @@
+id: tcga-kirp-gdc-open
+dataset: tcga-kirp
+versionLabel: GDC open-access tier
+releaseDate: null
+counts:
+  patients:
+    value: 291
+    status: present
+    evidence:
+      sources: [gdc-kirp-summary]
+      locator: summary.case_count
+      status: verified
+      verifiedOn: 2026-09-20
+      note: Cases in the project, as reported by the GDC API.
+  slides:
+    value: 773
+    status: present
+    evidence:
+      sources: [gdc-kirp-kich-slides]
+      locator: Slide Image files, facets on experimental_strategy and access
+      status: verified
+      verifiedOn: 2026-09-20
+      note: Slide image files, not distinct physical slides — 1,654 tissue slides and 519 diagnostic slides, all open access.
+  examinations:
+    value: null
+    status: not_applicable
+  lesions:
+    value: null
+    status: not_documented
+  slices:
+    value: null
+    status: not_applicable
+  records:
+    value: null
+    status: not_documented
+modalities:
+  - pathology
+  - clinical_table
+  - molecular
+cohort: >-
+  Cases of papillary renal cell carcinoma collected by The Cancer Genome Atlas. Case records
+  carry demographics, one or more diagnoses, and follow-up records.
+tasks: []
+annotations: []
+annotationProvenance:
+  kind: none
+  note: No image annotations, such as tumour outlines on slides, are part of this open-access tier.
+features:
+  wsi:
+    status: present
+    note: 773 slide image files, all open access.
+    evidence:
+      sources: [gdc-kirp-kich-slides]
+      status: verified
+      verifiedOn: 2026-09-20
+  ctPhases:
+    status: not_applicable
+    note: The open-access tier holds no radiology. A separate Cancer Imaging Archive collection holds CT for TCGA-KIRC patients and is not covered here.
+  clinicalData:
+    status: present
+    note: Clinical files cover all 291 cases.
+    evidence:
+      sources: [gdc-kirp-summary]
+      status: verified
+      verifiedOn: 2026-09-20
+  followUp:
+    status: not_verified
+    note: Follow-up records were confirmed for the clear cell project; case records for this project were not queried individually.
+access:
+  mode: open_download
+  registrationVisible: false
+  instructions: >-
+    Open-access files — clinical, biospecimen and slide images — download from the GDC Data
+    Portal or API without authorisation. Controlled-access files such as low-level sequencing
+    and germline variants require dbGaP authorisation and are not part of this record.
+  evidence:
+    sources: [gdc-access-processes]
+    locator: Open access and controlled access definitions
+    status: verified
+    verifiedOn: 2026-09-20
+license:
+  name: NCI Genomic Data Commons open-access tier
+  url: https://gdc.cancer.gov/access-data/data-access-processes-and-tools
+  conditions: >-
+    Open-access data are downloadable without authorisation. Publication and citation
+    guidance from NCI applies. The controlled-access tier carries separate obligations and is
+    excluded here.
+deidentification:
+  statement: >-
+    The GDC describes open-access data as "high level genomic data that is not individually
+    identifiable, as well as most clinical and all biospecimen data elements", and places
+    individually identifiable data in the controlled tier.
+  status: present
+  evidence:
+    sources: [gdc-access-processes]
+    locator: Open access definition
+    status: verified
+    verifiedOn: 2026-09-20
+pairing:
+  - kind: same_patient
+    modalities: [ct, pathology]
+    status: not_verified
+    note: >-
+      The Cancer Imaging Archive hosts a TCGA-KIRC radiology collection. Whether those images
+      correspond to these cases was not checked for this record, so no pairing is claimed.
+  - kind: same_patient
+    modalities: [pathology, clinical_table]
+    status: present
+    note: Slide images and clinical records attach to the same case barcode.
+    evidence:
+      sources: [gdc-kirp-summary]
+      status: verified
+      verifiedOn: 2026-09-20
+dictionary:
+  completeness: documentation_only
+  inspectedScope: >-
+    Only the project summary was read. No case-level fields were documented for this project;
+    the field list recorded for the clear cell project comes from the same GDC dictionary but
+    was not confirmed here.
+structure: >-
+  A case is a patient, identified by a TCGA barcode such as TCGA-B0-5098. Clinical, biospecimen
+  and slide-image files attach to the case. A case may carry several diagnoses and several
+  follow-up records, so a case-level analysis must decide how to collapse them.
+citation: The Cancer Genome Atlas Research Network, TCGA-KIRP project, NCI Genomic Data Commons.
+limitations:
+  - Covers the open-access tier only; controlled-access molecular data need dbGaP authorisation.
+  - No expert image annotations, such as tumour outlines on slides, are documented in this record.
+  - Slide image counts are file counts, which are not necessarily distinct physical slides.
+  - Cases may have several diagnosis records, so counting diagnoses is not the same as counting patients.
+eligibility:
+  publicAccess:
+    status: pass
+    note: Open-access files download without authorisation; the controlled tier is excluded from this record.
+    evidence:
+      sources: [gdc-access-processes]
+      status: verified
+      verifiedOn: 2026-09-20
+  deidentification:
+    status: pass
+    note: The provider states that open-access data are not individually identifiable.
+    evidence:
+      sources: [gdc-access-processes]
+      status: verified
+      verifiedOn: 2026-09-20
+  noPhiHosted:
+    status: pass
+  termsPermitUse:
+    status: pass
+    note: Descriptions and sources only; no data files are mirrored here.
+  samplePermission:
+    status: pass
+    note: No preview images are shown for this release, so no per-image permission was needed.
+catalogStatus: draft
+verifiedOn: 2026-09-20
+researchedBy: agent
+approvedBy: null
+approvedOn: null
+sources:
+  - gdc-kirp-summary
+  - gdc-kirp-kich-slides
+  - gdc-kirp-summary
+  - gdc-access-processes

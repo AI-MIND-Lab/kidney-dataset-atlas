@@ -1,0 +1,163 @@
+id: kits19
+dataset: kits
+versionLabel: KiTS19
+releaseDate: null
+counts:
+  patients:
+    value: 210
+    status: present
+    evidence:
+      sources: [kits19-data-paper]
+      locator: 300 patients in total, of which 210 are public and 90 were held back for testing
+      status: verified
+      verifiedOn: 2026-09-20
+      note: The publicly released cases. The 90 test cases were withheld and are not counted here.
+  examinations:
+    value: null
+    status: not_documented
+  lesions:
+    value: null
+    status: not_documented
+  slices:
+    value: null
+    status: not_documented
+  slides:
+    value: null
+    status: not_applicable
+  images:
+    value: null
+    status: not_documented
+  patches:
+    value: null
+    status: not_applicable
+  records:
+    value: null
+    status: not_documented
+modalities:
+  - ct
+cohort: >-
+  Patients who underwent partial or radical nephrectomy for kidney tumours at the University
+  of Minnesota between 2010 and mid-2018, identified by retrospective chart review.
+tasks:
+  - segmentation
+annotations:
+  - segmentation_masks
+annotationProvenance:
+  kind: not_documented
+  note: The annotation procedure for this edition was not established from the pages checked. The crowd-and-trainee procedure is documented for KiTS21.
+features:
+  wsi:
+    status: not_applicable
+  ctPhases:
+    status: not_documented
+    note: The KiTS19 data paper was read for cohort and ethics; the phase was not confirmed for this edition.
+  clinicalData:
+    status: present
+    note: >-
+      The data paper describes demographics, comorbidities, surgical details, complications,
+      pathology staging and post-operative outcomes including eGFR, distributed as kits.json.
+    evidence:
+      sources: [kits19-data-paper, kits19-repo]
+      status: verified
+      verifiedOn: 2026-09-20
+  followUp:
+    status: present
+    note: The data paper describes post-operative outcomes including vital status.
+    evidence:
+      sources: [kits19-data-paper]
+      status: verified
+      verifiedOn: 2026-09-20
+access:
+  mode: open_download
+  registrationVisible: false
+  instructions: >-
+    Clone the kits19 repository, which carries the segmentations and kits.json, then run
+    get_imaging.py to fetch the imaging volumes. No registration or application is required.
+  evidence:
+    sources: [kits19-repo]
+    locator: Download instructions
+    status: verified
+    verifiedOn: 2026-09-20
+license:
+  name: Not documented for the data
+  conditions: >-
+    The repository's LICENSE file grants MIT terms to everything "EXCEPT that within the data/
+    subdirectory", and states no terms for the data itself. The TCIA archive of the same
+    training cases is published under CC BY 3.0; that is a different release, recorded
+    separately.
+deidentification:
+  statement: >-
+    The data paper documents institutional review board approval (University of Minnesota
+    study 1611M00821) and retrospective chart review. No description of the de-identification
+    procedure was found in the version read.
+  status: not_documented
+  evidence:
+    sources: [kits19-data-paper]
+    locator: "\"This work was reviewed and approved by the Institutional Review Board at the University of Minnesota as Study 1611M00821.\""
+    status: verified
+    verifiedOn: 2026-09-20
+pairing:
+  - kind: same_patient
+    modalities: [ct, clinical_table]
+    status: present
+    note: Clinical records in kits.json are keyed to the same case numbers as the imaging.
+    evidence:
+      sources: [kits19-repo, kits19-data-paper]
+      status: verified
+      verifiedOn: 2026-09-20
+dictionary:
+  completeness: documentation_only
+  inspectedScope: >-
+    The clinical fields are described in prose in the data paper; the kits.json file itself was
+    not downloaded, so no field names are recorded here.
+structure: >-
+  Each case directory holds imaging.nii.gz and segmentation.nii.gz, with labels 0 background,
+  1 kidney and 2 tumour. Voxel spacing is carried in each volume's affine matrix and varies
+  between cases, because scans came from many referring institutions. A kits.json file at the
+  root of the data directory holds the clinical records.
+citation: >-
+  Heller N, Sathianathen N, Kalapara A, et al. The KiTS19 Challenge Data: 300 Kidney Tumor
+  Cases with Clinical Context, CT Semantic Segmentations, and Surgical Outcomes.
+  arXiv:1904.00445, 2019.
+limitations:
+  - Only 210 of the 300 cases are public; 90 were withheld for challenge testing.
+  - "Two segmentation classes only: kidney and tumour, with no cyst class."
+  - Scanners and protocols vary, because many scans were acquired at referring institutions.
+  - The data licence is not stated in the repository.
+eligibility:
+  publicAccess:
+    status: pass
+    note: The 210 public cases download without registration or application.
+    evidence:
+      sources: [kits19-repo]
+      status: verified
+      verifiedOn: 2026-09-20
+  deidentification:
+    status: unknown
+    note: Review board approval is documented; the de-identification procedure is not. Same open question as KiTS23.
+    evidence:
+      sources: [kits19-data-paper]
+      status: not_verified
+  noPhiHosted:
+    status: pass
+  termsPermitUse:
+    status: unknown
+    note: >-
+      The repository states no licence for the data, so the terms under which this catalog may
+      describe or show it are not established.
+    evidence:
+      sources: [kits19-license]
+      status: verified
+      verifiedOn: 2026-09-20
+  samplePermission:
+    status: pass
+    note: No preview images are shown for this release.
+catalogStatus: draft
+verifiedOn: 2026-09-20
+researchedBy: agent
+approvedBy: null
+approvedOn: null
+sources:
+  - kits19-repo
+  - kits19-license
+  - kits19-data-paper

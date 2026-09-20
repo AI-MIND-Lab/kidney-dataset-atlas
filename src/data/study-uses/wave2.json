@@ -1,0 +1,148 @@
+[
+	{
+		"id": "use-kits19-data-paper",
+		"paper": "kits19-data-paper",
+		"release": "kits19",
+		"role": "descriptor",
+		"actualUseEvidence": {
+			"sources": ["kits19-data-paper"],
+			"locator": "Cohort, ethics and clinical data sections",
+			"status": "verified",
+			"verifiedOn": "2026-09-20",
+			"note": "The paper describes this release. It reports no computer-vision experiments, so it is not evidence of use."
+		},
+		"subset": "The full KiTS19 release, including the withheld test cases",
+		"preprocessing": null,
+		"task": null,
+		"trainTestRole": "not_documented",
+		"split": null,
+		"results": []
+	},
+	{
+		"id": "use-tabibu-kirc",
+		"paper": "tabibu-2019",
+		"release": "tcga-kirc-gdc-open",
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": ["tabibu-2019"],
+			"locator": "Data section: \"The whole slide images and clinical information were downloaded from TCGA data portal\", with 1,027 KIRC tumour slides and 379 normal slides",
+			"status": "verified",
+			"verifiedOn": "2026-09-20"
+		},
+		"subset": "1,027 tumour slides and 379 normal slides",
+		"preprocessing": "Patches extracted from whole-slide images at 40x",
+		"task": "classification",
+		"trainTestRole": "train_and_test",
+		"split": "Not documented in the sections read for this record",
+		"results": [
+			{
+				"model": "tabibu-cnn-tumour-vs-normal",
+				"metric": "Patch-wise accuracy (tumour versus normal, 40x)",
+				"value": 93.39,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "KIRC slides",
+				"split": "Not documented",
+				"patientLevelHandling": "Not documented in the sections read for this record",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": ["tabibu-2019"],
+					"locator": "Results; the abstract gives the same figure",
+					"status": "verified",
+					"verifiedOn": "2026-09-20"
+				}
+			},
+			{
+				"model": "tabibu-cnn-tumour-vs-normal",
+				"metric": "AUC (tumour versus normal)",
+				"value": 0.99,
+				"units": null,
+				"confidenceInterval": null,
+				"subset": "KIRC slides",
+				"split": "Not documented",
+				"patientLevelHandling": "Not documented in the sections read for this record",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": ["tabibu-2019"],
+					"locator": "Results",
+					"status": "verified",
+					"verifiedOn": "2026-09-20"
+				}
+			}
+		]
+	},
+	{
+		"id": "use-tabibu-kirp",
+		"paper": "tabibu-2019",
+		"release": "tcga-kirp-gdc-open",
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": ["tabibu-2019"],
+			"locator": "Data section: 303 KIRP tumour slides and 47 normal slides",
+			"status": "verified",
+			"verifiedOn": "2026-09-20"
+		},
+		"subset": "303 tumour slides and 47 normal slides",
+		"preprocessing": "Patches extracted from whole-slide images",
+		"task": "classification",
+		"trainTestRole": "train_and_test",
+		"split": "Not documented in the sections read for this record",
+		"results": [
+			{
+				"model": "tabibu-cnn-dag-svm",
+				"metric": "Patch-wise accuracy (three-subtype classification)",
+				"value": 92.62,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "Clear cell, papillary and chromophobe slides together",
+				"split": "Not documented",
+				"patientLevelHandling": "Not documented in the sections read for this record",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": ["tabibu-2019"],
+					"locator": "Results; the abstract states 94.07% without naming the aggregation level",
+					"status": "verified",
+					"verifiedOn": "2026-09-20",
+					"note": "The subtype task spans all three renal projects, so this figure belongs to the three cohorts jointly and is not a result for papillary cases alone."
+				}
+			}
+		]
+	},
+	{
+		"id": "use-tabibu-kich",
+		"paper": "tabibu-2019",
+		"release": "tcga-kich-gdc-open",
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": ["tabibu-2019"],
+			"locator": "Data section: 254 KICH tumour slides and 83 normal slides",
+			"status": "verified",
+			"verifiedOn": "2026-09-20"
+		},
+		"subset": "254 tumour slides and 83 normal slides",
+		"preprocessing": "Patches extracted from whole-slide images at 40x",
+		"task": "classification",
+		"trainTestRole": "train_and_test",
+		"split": "Not documented in the sections read for this record",
+		"results": [
+			{
+				"model": "tabibu-cnn-tumour-vs-normal",
+				"metric": "Patch-wise accuracy (tumour versus normal, 40x)",
+				"value": 80.57,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "KICH slides",
+				"split": "Not documented",
+				"patientLevelHandling": "Not documented in the sections read for this record",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": ["tabibu-2019"],
+					"locator": "Results",
+					"status": "verified",
+					"verifiedOn": "2026-09-20",
+					"note": "The abstract states 87.34% for chromophobe versus normal. The two figures were reported at different aggregation levels, which this record does not resolve."
+				}
+			}
+		]
+	}
+]

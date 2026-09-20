@@ -19,6 +19,7 @@ import {
 	dateLabel,
 	facetValueLabel,
 	humanize,
+	relationPhrase,
 	stateLabel,
 	trainTestLabel,
 } from '../lib/display';
@@ -164,7 +165,7 @@ const isHuman = dataset.data.species === 'human';
 										{entry.data.versionLabel}
 									</a>
 								)}
-								<small>{dateLabel(entry.data.releaseDate)}</small>
+								{entry.data.releaseDate && <small>{dateLabel(entry.data.releaseDate)}</small>}
 							</li>
 						))}
 					</ul>
@@ -334,7 +335,7 @@ const isHuman = dataset.data.species === 'human';
 						<li>
 							{entry.from === data.id ? (
 								<>
-									This release <strong>{humanize(entry.type).toLowerCase()}</strong>{' '}
+									This release <strong>{relationPhrase(entry.type, 'forward')}</strong>{' '}
 									{entry.toExternal?.url ? (
 										<a href={entry.toExternal.url}>{relationTarget(entry)}</a>
 									) : (
@@ -343,8 +344,7 @@ const isHuman = dataset.data.species === 'human';
 								</>
 							) : (
 								<>
-									{releaseLabel(entry.from)} <strong>{humanize(entry.type).toLowerCase()}</strong> this
-									release
+									{releaseLabel(entry.from)} <strong>{relationPhrase(entry.type, 'reverse')}</strong>
 								</>
 							)}
 							. {entry.explanation}
