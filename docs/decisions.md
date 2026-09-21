@@ -2,11 +2,16 @@
 
 Choices that a reader of the brief would not predict from the brief alone, and why they were made.
 
-## Releases are not listed on the dataset record
+## Releases are not listed on the dataset record, but the current one is declared
 
 The brief lists "release IDs" among a dataset's fields. Instead, each release names its dataset, and the
 dataset's releases are derived at build time. Keeping the list in both places would mean maintaining a second
 copy of a relationship, which the brief rules out elsewhere.
+
+Which release is **current** is the exception: it is stated, not derived. A release carries `current: true`,
+and validation requires exactly one current release among a dataset's published releases. Deriving it from
+dates looked simpler until several releases turned out to have no documented date, at which point the
+canonical page for a dataset would have depended on a sort over nulls.
 
 ## One canonical page per release
 
@@ -42,10 +47,12 @@ credentials, so git history alone cannot show who checked what. `npm run validat
 release whose `approvedBy` is empty or is not listed in `src/data/curators.yaml`, whose eligibility checks have
 not all passed, or that displays a sample without its own permission approval.
 
-## Search is not wired up yet
+## Search runs against the built site, not the development server
 
-Pagefind runs in the build and the index is generated, but the search interface lands with the explorer in
-milestone 2. `npm run dev` therefore has no search; `npm run preview:site` builds the real thing.
+`/search/` queries the Pagefind index, and the header carries a search field. Because Pagefind runs over
+`dist/` after the build, `npm run dev` has no index: the page says so rather than appearing broken. Use
+`npm run preview:site` whenever search matters. The query stays in the address bar so a result page can be
+shared, and the index is loaded from a path that respects the configured base.
 
 ## Deployment is prepared but disabled
 

@@ -221,36 +221,102 @@ const publiclyEligibleAccessModes = new Set([
 	'registration_gated',
 ]);
 
-for (const record of publishedReleases) {
-	const { approvedBy, approvedOn, eligibility, verifiedOn, id } = record.data;
+/**
+ * Everything that stops a release being published, as one list.
+ *
+ * The gate and the draft checklist run the same predicates, so a curator
+ * reading the checklist sees every reason a record would be rejected rather
+ * than discovering half of them at the moment they approve it. Each issue
+ * carries both phrasings: `fail` for a record that is already published, and
+ * `draft` for one that is not yet.
+ */
+function publishIssues(record) {
+	const { approvedBy, approvedOn, eligibility, verifiedOn, id, current, dataset: datasetId } = record.data;
+	const issues = [];
+	// `approval` is what the curator supplies by approving; `blocker` is what
+	// they must resolve before that approval can stick.
+	const add = (failMessage, draftMessage, kind = 'blocker', file = record.file) =>
+		issues.push({ file, fail: failMessage, draft: draftMessage, kind });
+
 	if (!approvedBy) {
-		fail(record.file, `release "${id}" is published but has no approvedBy`);
+		add(`release "${id}" is published but has no approvedBy`, 'no approvedBy recorded', 'approval');
 	} else if (!curators.includes(approvedBy)) {
-		fail(record.file, `release "${id}" was approved by "${approvedBy}", who is not listed in curators.yaml`);
+		add(
+			`release "${id}" was approved by "${approvedBy}", who is not listed in curators.yaml`,
+			`approvedBy "${approvedBy}" is not listed in curators.yaml`,
+		);
 	}
-	if (!approvedOn) fail(record.file, `release "${id}" is published but has no approvedOn`);
-	if (!verifiedOn) fail(record.file, `release "${id}" is published but has no verifiedOn`);
+	if (!approvedOn) add(`release "${id}" is published but has no approvedOn`, 'no approvedOn recorded', 'approval');
+	if (!verifiedOn) add(`release "${id}" is published but has no verifiedOn`, 'no verifiedOn recorded');
+
 	for (const [key, check] of Object.entries(eligibility)) {
 		if (check.status !== 'pass') {
-			fail(record.file, `release "${id}" is published but eligibility check ${key} is "${check.status}"`);
+			add(
+				`release "${id}" is published but eligibility check ${key} is "${check.status}"`,
+				`eligibility check ${key} is "${check.status}"`,
+			);
 		}
 		if (check.status === 'pass' && evidenceRequiredEligibility.includes(key) && !evidenceIsVerified(check.evidence)) {
-			fail(record.file, `release "${id}" passes ${key} without verified source evidence`);
-		}
-	}
-	if (!publiclyEligibleAccessModes.has(record.data.access.mode)) {
-		fail(record.file, `release "${id}" uses ineligible public access mode "${record.data.access.mode}"`);
-	}
-	for (const sample of samples.filter((entry) => entry.data.release === id)) {
-		if (!sample.data.permissionApprovedBy) {
-			fail(sample.file, `sample "${sample.data.id}" is shown on a published release without permission approval`);
-		} else if (!curators.includes(sample.data.permissionApprovedBy)) {
-			fail(
-				sample.file,
-				`sample "${sample.data.id}" permission was approved by "${sample.data.permissionApprovedBy}", who is not a curator`,
+			add(
+				`release "${id}" passes ${key} without verified source evidence`,
+				`${key} passes without verified source evidence`,
 			);
 		}
 	}
+
+	if (!publiclyEligibleAccessModes.has(record.data.access.mode)) {
+		add(
+			`release "${id}" uses ineligible public access mode "${record.data.access.mode}"`,
+			`access mode "${record.data.access.mode}" is not publishable`,
+		);
+	}
+
+	// One canonical release per dataset. For a draft, the obstacle is that
+	// neither it nor any sibling claims the position.
+	if (!current && !releases.some((other) => other.data.dataset === datasetId && other.data.current)) {
+		add(
+			`release "${id}" is published but no release of "${datasetId}" is marked current`,
+			`not marked current, and no sibling release is either`,
+		);
+	}
+
+	for (const sample of samples.filter((entry) => entry.data.release === id)) {
+		if (!sample.data.permissionApprovedBy) {
+			add(
+				`sample "${sample.data.id}" is shown on a published release without permission approval`,
+				`sample "${sample.data.id}" has no permission approval`,
+				'blocker',
+				sample.file,
+			);
+		} else if (!curators.includes(sample.data.permissionApprovedBy)) {
+			add(
+				`sample "${sample.data.id}" permission was approved by "${sample.data.permissionApprovedBy}", who is not a curator`,
+				`sample "${sample.data.id}" was approved by a non-curator`,
+				'blocker',
+				sample.file,
+			);
+		}
+	}
+
+	// Publishing a release whose papers are drafts would break the graph rule
+	// below, so it belongs in the checklist too.
+	const draftPapers = studyUses
+		.filter((use) => use.data.release === id)
+		.map((use) => use.data.paper)
+		.filter((paperId) => !publishedPaperIds.has(paperId));
+	if (draftPapers.length > 0) {
+		const unique = [...new Set(draftPapers)];
+		add(
+			`release "${id}" is published but cites unpublished papers: ${unique.join(', ')}`,
+			`cites ${unique.length === 1 ? 'a paper that is' : `${unique.length} papers that are`} still draft: ${unique.join(', ')}`,
+		);
+	}
+
+	return issues;
+}
+
+for (const record of publishedReleases) {
+	for (const issue of publishIssues(record)) fail(issue.file, issue.fail);
 }
 
 for (const record of releases) {
@@ -315,7 +381,10 @@ console.log(counts);
 
 if (draftReleases.length > 0) {
 	console.log('\nAwaiting curator approval:');
+	let ready = 0;
 	for (const record of draftReleases) {
+		const blockers = publishIssues(record).filter((issue) => issue.kind === 'blocker');
+		if (blockers.length === 0) ready += 1;
 		console.log(`\n  ${record.data.id} — ${record.file}`);
 		console.log(`    researched by: ${record.data.researchedBy}`);
 		for (const [key, label] of Object.entries(ELIGIBILITY_LABELS)) {
@@ -326,7 +395,17 @@ if (draftReleases.length > 0) {
 				.join(', ');
 			console.log(`    [${check.status === 'pass' ? 'x' : ' '}] ${label}${links ? ` — ${links}` : ''}`);
 		}
+		// Everything the gate would reject, not only the five checks above.
+		if (blockers.length === 0) {
+			console.log('    Ready for approval: nothing else blocks it.');
+		} else {
+			console.log(`    Resolve before approving (${blockers.length}):`);
+			for (const issue of blockers) console.log(`      - ${issue.draft}`);
+		}
 	}
+	console.log(
+		`\n${ready} of ${draftReleases.length} draft release${draftReleases.length === 1 ? '' : 's'} ready for approval.`,
+	);
 }
 
 if (errors.length > 0) {

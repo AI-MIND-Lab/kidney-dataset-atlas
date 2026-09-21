@@ -1,0 +1,123 @@
+---
+import type { Overlap, Relation, Release } from '../lib/catalog';
+import { countLabel, facetValueLabel, humanize, relationPhrase, stateLabel } from '../lib/display';
+
+interface Props {
+	release: Release;
+	relations: Relation[];
+	overlaps: Overlap[];
+	/** Resolves a release id to the label a reader recognises. */
+	releaseLabel: (id: string) => string;
+}
+
+const { release, relations, overlaps, releaseLabel } = Astro.props;
+const data = release.data;
+
+const relationTarget = (entry: Relation) =>
+	entry.to ? releaseLabel(entry.to) : (entry.toExternal?.name ?? 'an unnamed collection');
+---
+
+<section id="structure" class="stack">
+	<h2>Structure and pairing</h2>
+	{data.structure ? <p class="prose">{data.structure}</p> : <p>Not documented.</p>}
+
+	<h3>Pairing</h3>
+	{
+		data.pairing.length === 0 ? (
+			<p>Pairing between modalities is not documented for this release.</p>
+		) : (
+			<div class="table-scroll">
+				<table>
+					<thead>
+						<tr>
+							<th scope="col">Pairing</th>
+							<th scope="col">Modalities</th>
+							<th scope="col">Status</th>
+							<th scope="col">Note</th>
+						</tr>
+					</thead>
+					<tbody>
+						{data.pairing.map((entry) => (
+							<tr>
+								<th scope="row">{humanize(entry.kind)}</th>
+								<td>
+									{entry.modalities.map((modality) => facetValueLabel('modality', modality)).join(', ') ||
+										'—'}
+								</td>
+								<td>{stateLabel(entry.status)}</td>
+								<td>{entry.note ?? '—'}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
+		)
+	}
+
+	<h3>Related collections</h3>
+	{
+		relations.length === 0 ? (
+			<p>No relationship to another collection is documented.</p>
+		) : (
+			<ul>
+				{relations.map((entry) => (
+					<li>
+						{entry.from === data.id ? (
+							<>
+								This release <strong>{relationPhrase(entry.type, 'forward')}</strong>{' '}
+								{entry.toExternal?.url ? (
+									<a href={entry.toExternal.url}>{relationTarget(entry)}</a>
+								) : (
+									relationTarget(entry)
+								)}
+							</>
+						) : (
+							<>
+								{releaseLabel(entry.from)} <strong>{relationPhrase(entry.type, 'reverse')}</strong>
+							</>
+						)}
+						. {entry.explanation}
+					</li>
+				))}
+			</ul>
+		)
+	}
+
+	<h3>Overlap with other releases</h3>
+	{
+		overlaps.length === 0 ? (
+			<p>
+				No overlap with another release in this catalog is documented. That is not evidence that the cohorts are
+				independent.
+			</p>
+		) : (
+			<div class="table-scroll">
+				<table>
+					<thead>
+						<tr>
+							<th scope="col">Other release</th>
+							<th scope="col">Overlap</th>
+							<th scope="col">Shared cases</th>
+							<th scope="col">Explanation</th>
+						</tr>
+					</thead>
+					<tbody>
+						{overlaps.map((entry) => (
+							<tr>
+								<th scope="row">
+									{entry.releases
+										.filter((id) => id !== data.id)
+										.map((id) => releaseLabel(id))
+										.join(', ')}
+								</th>
+								<td>{humanize(entry.type)}</td>
+								<td>{countLabel(entry.count)}</td>
+								<td>{entry.explanation}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
+		)
+	}
+</section>

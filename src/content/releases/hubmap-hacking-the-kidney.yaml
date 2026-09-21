@@ -113,6 +113,10 @@ limitations:
   - Annotations were machine-generated and then corrected, not drawn independently.
   - 30 slides is a small collection, and the donor count is not documented here.
   - Competition splits and the later public release are not the same thing; which is described here was not established.
+  - >-
+    This is the dataset's only release and it is marked current, so the dataset has no
+    publishable release until someone with a browser settles the access conditions. Until then
+    it appears in a draft review build and nowhere else.
 eligibility:
   publicAccess:
     status: unknown

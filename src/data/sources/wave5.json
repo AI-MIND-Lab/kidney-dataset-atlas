@@ -1,0 +1,16 @@
+[
+	{
+		"id": "gdc-kirp-case-fields",
+		"url": "https://api.gdc.cancer.gov/cases?filters=project.project_id=TCGA-KIRP&fields=submitter_id,demographic,diagnoses,follow_ups",
+		"title": "GDC API case records for TCGA-KIRP",
+		"locator": "Returned case fields for a sample of cases",
+		"accessedOn": "2026-09-21"
+	},
+	{
+		"id": "gdc-kich-case-fields",
+		"url": "https://api.gdc.cancer.gov/cases?filters=project.project_id=TCGA-KICH&fields=submitter_id,demographic,diagnoses,follow_ups",
+		"title": "GDC API case records for TCGA-KICH",
+		"locator": "Returned case fields for a sample of cases",
+		"accessedOn": "2026-09-21"
+	}
+]

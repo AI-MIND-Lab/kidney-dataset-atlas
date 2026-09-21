@@ -65,8 +65,12 @@ features:
       status: verified
       verifiedOn: 2026-09-20
   followUp:
-    status: not_verified
-    note: Follow-up records were confirmed for the clear cell project; case records for this project were not queried individually.
+    status: present
+    note: Follow-up records with days_to_follow_up are returned for sampled cases of this project; the number per case varies and some entries are null.
+    evidence:
+      sources: [gdc-kirp-case-fields]
+      status: verified
+      verifiedOn: 2026-09-21
 access:
   mode: direct_open_download
   registrationVisible: false
@@ -100,24 +104,25 @@ deidentification:
 pairing:
   - kind: same_patient
     modalities: [ct, pathology]
-    status: not_verified
+    status: not_documented
     note: >-
-      The Cancer Imaging Archive hosts a TCGA-KIRC radiology collection. Whether those images
-      correspond to these cases was not checked for this record, so no pairing is claimed.
+      Whether radiology exists elsewhere for TCGA-KIRP cases, and whether it corresponds to
+      these cases, was not checked for this record. No pairing is claimed either way.
   - kind: same_patient
     modalities: [pathology, clinical_table]
     status: present
     note: Slide images and clinical records attach to the same case barcode.
     evidence:
-      sources: [gdc-kirp-summary]
+      sources: [gdc-kirp-case-fields, gdc-kirp-kich-slides]
       status: verified
       verifiedOn: 2026-09-20
 dictionary:
-  completeness: documentation_only
+  completeness: partial
   inspectedScope: >-
-    Only the project summary was read. No case-level fields were documented for this project;
-    the field list recorded for the clear cell project comes from the same GDC dictionary but
-    was not confirmed here.
+    The project summary, plus eight case-level fields checked against a sample of cases
+    returned by the GDC API for this project. Tumour grade returned null for every sampled
+    case. The full GDC clinical dictionary holds many more fields, and the biospecimen and
+    slide metadata are not documented here.
 structure: >-
   A case is a patient, identified by a TCGA barcode such as TCGA-B0-5098. Clinical, biospecimen
   and slide-image files attach to the case. A case may carry several diagnoses and several
@@ -147,7 +152,14 @@ eligibility:
     status: pass
   termsPermitUse:
     status: pass
-    note: Descriptions and sources only; no data files are mirrored here.
+    note: >-
+      The provider publishes this tier for download without authorisation, and this record
+      holds descriptions and sources only: no data file is mirrored here.
+    evidence:
+      sources: [gdc-access-processes]
+      locator: Open access definition and download conditions
+      status: verified
+      verifiedOn: 2026-09-21
   samplePermission:
     status: pass
     note: No preview images are shown for this release, so no per-image permission was needed.
@@ -159,5 +171,5 @@ approvedOn: null
 sources:
   - gdc-kirp-summary
   - gdc-kirp-kich-slides
-  - gdc-kirp-summary
   - gdc-access-processes
+  - gdc-kirp-case-fields

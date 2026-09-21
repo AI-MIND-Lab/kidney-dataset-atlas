@@ -151,7 +151,14 @@ eligibility:
     status: pass
   termsPermitUse:
     status: pass
-    note: Descriptions and sources only; no data files are mirrored here.
+    note: >-
+      The provider publishes this tier for download without authorisation, and this record
+      holds descriptions and sources only: no data file is mirrored here.
+    evidence:
+      sources: [gdc-access-processes]
+      locator: Open access definition and download conditions
+      status: verified
+      verifiedOn: 2026-09-21
   samplePermission:
     status: pass
     note: No preview images are shown for this release, so no per-image permission was needed.

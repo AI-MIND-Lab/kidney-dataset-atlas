@@ -13,18 +13,18 @@ import {
 } from '../lib/catalog';
 import Dictionary from './Dictionary.astro';
 import Samples from './Samples.astro';
+import StructureSection from './StructureSection.astro';
+import PapersSection from './PapersSection.astro';
 import {
 	accessLabel,
 	countLabel,
 	dateLabel,
 	facetValueLabel,
 	humanize,
-	relationPhrase,
 	stateLabel,
-	trainTestLabel,
 } from '../lib/display';
 import { unresolvedChecks } from '../lib/eligibility.mjs';
-import { datasetPath, paperPath, releasePath, withBase } from '../lib/site';
+import { datasetPath, releasePath, withBase } from '../lib/site';
 
 interface Props {
 	dataset: Dataset;
@@ -85,8 +85,6 @@ const countRows = [
 ] as const;
 
 const relations = relationsForRelease(data.id);
-const relationTarget = (entry: (typeof relations)[number]) =>
-	entry.to ? (releaseLabel(entry.to) ?? entry.to) : (entry.toExternal?.name ?? 'an unnamed collection');
 // Human material is the assumption a reader brings, so anything else is stated
 // in the header rather than left to the record.
 const isHuman = dataset.data.species === 'human';
@@ -288,183 +286,9 @@ const isHuman = dataset.data.species === 'human';
 		<Samples samples={samples} officialUrl={dataset.data.officialUrl} />
 	</section>
 
-	<section id="structure" class="stack">
-		<h2>Structure and pairing</h2>
-		{data.structure ? <p class="prose">{data.structure}</p> : <p>Not documented.</p>}
-		<h3>Pairing</h3>
-		{
-			data.pairing.length === 0 ? (
-				<p>Pairing between modalities is not documented for this release.</p>
-			) : (
-				<div class="table-scroll">
-					<table>
-						<thead>
-							<tr>
-								<th scope="col">Pairing</th>
-								<th scope="col">Modalities</th>
-								<th scope="col">Status</th>
-								<th scope="col">Note</th>
-							</tr>
-						</thead>
-						<tbody>
-							{data.pairing.map((entry) => (
-								<tr>
-									<th scope="row">{humanize(entry.kind)}</th>
-									<td>
-										{entry.modalities
-											.map((modality) => facetValueLabel('modality', modality))
-											.join(', ') || '—'}
-									</td>
-									<td>{stateLabel(entry.status)}</td>
-									<td>{entry.note ?? '—'}</td>
-								</tr>
-							))}
-						</tbody>
-					</table>
-				</div>
-			)
-		}
+	<StructureSection release={release} relations={relations} overlaps={overlaps} releaseLabel={releaseLabel} />
 
-		<h3>Related collections</h3>
-		{
-			relations.length === 0 ? (
-				<p>No relationship to another collection is documented.</p>
-			) : (
-				<ul>
-					{relations.map((entry) => (
-						<li>
-							{entry.from === data.id ? (
-								<>
-									This release <strong>{relationPhrase(entry.type, 'forward')}</strong>{' '}
-									{entry.toExternal?.url ? (
-										<a href={entry.toExternal.url}>{relationTarget(entry)}</a>
-									) : (
-										relationTarget(entry)
-									)}
-								</>
-							) : (
-								<>
-									{releaseLabel(entry.from)} <strong>{relationPhrase(entry.type, 'reverse')}</strong>
-								</>
-							)}
-							. {entry.explanation}
-						</li>
-					))}
-				</ul>
-			)
-		}
-
-		<h3>Overlap with other releases</h3>
-		{
-			overlaps.length === 0 ? (
-				<p>
-					No overlap with another release in this catalog is documented. That is not evidence that the cohorts
-					are independent.
-				</p>
-			) : (
-				<div class="table-scroll">
-					<table>
-						<thead>
-							<tr>
-								<th scope="col">Other release</th>
-								<th scope="col">Overlap</th>
-								<th scope="col">Shared cases</th>
-								<th scope="col">Explanation</th>
-							</tr>
-						</thead>
-						<tbody>
-							{overlaps.map((entry) => (
-								<tr>
-									<th scope="row">
-										{entry.releases
-											.filter((id) => id !== data.id)
-											.map((id) => releaseLabel(id))
-											.join(', ')}
-									</th>
-									<td>{humanize(entry.type)}</td>
-									<td>{countLabel(entry.count)}</td>
-									<td>{entry.explanation}</td>
-								</tr>
-							))}
-						</tbody>
-					</table>
-				</div>
-			)
-		}
-	</section>
-
-	<section id="papers" class="stack">
-		<h2>Papers and models</h2>
-		<h3>The dataset's own publications</h3>
-		{
-			ownUses.length === 0 ? (
-				<p>No publication of this release is recorded.</p>
-			) : (
-				<ul class="stack">
-					{ownUses.map(({ use, paper }) =>
-						paper ? (
-							<li>
-								<a href={withBase(paperPath(paper.data.slug))}>{paper.data.title}</a>
-								{paper.data.year && <> ({paper.data.year})</>}{' '}
-								<span class="badge">{humanize(use.role)}</span>
-								<br />
-								<small>
-									<strong>
-										{use.actualUseEvidence.status === 'verified'
-											? 'Link verified'
-											: 'Link not verified'}
-									</strong>
-									{use.actualUseEvidence.note && <>. {use.actualUseEvidence.note}</>}
-								</small>
-							</li>
-						) : null,
-					)}
-				</ul>
-			)
-		}
-		<h3>Independent studies using this release</h3>
-		{
-			downstreamUses.length === 0 ? (
-				<div class="empty-state">
-					<p>No verified downstream uses are recorded yet.</p>
-					<p>A paper that mentions a dataset is not listed here until its actual use is checked.</p>
-				</div>
-			) : (
-				<div class="table-scroll">
-					<table>
-						<thead>
-							<tr>
-								<th scope="col">Paper</th>
-								<th scope="col">Year</th>
-								<th scope="col">Task</th>
-								<th scope="col">Subset</th>
-								<th scope="col">Train/test role</th>
-								<th scope="col">Use evidence</th>
-							</tr>
-						</thead>
-						<tbody>
-							{downstreamUses.map(({ use, paper }) => (
-								<tr>
-									<th scope="row">
-										{paper ? (
-											<a href={withBase(paperPath(paper.data.slug))}>{paper.data.title}</a>
-										) : (
-											use.paper
-										)}
-									</th>
-									<td>{paper?.data.year ?? 'Not documented'}</td>
-									<td>{use.task ? humanize(use.task) : 'Not documented'}</td>
-									<td>{use.subset ?? 'Not documented'}</td>
-									<td>{trainTestLabel(use.trainTestRole)}</td>
-									<td>{use.actualUseEvidence.status === 'verified' ? 'Verified' : 'Not verified'}</td>
-								</tr>
-							))}
-						</tbody>
-					</table>
-				</div>
-			)
-		}
-	</section>
+	<PapersSection ownUses={ownUses} downstreamUses={downstreamUses} />
 
 	<section id="quality" class="stack">
 		<h2>Quality</h2>

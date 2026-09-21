@@ -1,0 +1,90 @@
+---
+import type { Paper, StudyUse } from '../lib/catalog';
+import { humanize, trainTestLabel } from '../lib/display';
+import { paperPath, withBase } from '../lib/site';
+
+export interface PaperUse {
+	use: StudyUse;
+	paper: Paper | undefined;
+}
+
+interface Props {
+	/** The dataset's own publications: original, benchmark or descriptor. */
+	ownUses: PaperUse[];
+	/** Separate studies that used the release. */
+	downstreamUses: PaperUse[];
+}
+
+const { ownUses, downstreamUses } = Astro.props;
+
+// Evidence status travels with the claim rather than sitting in the record,
+// so a reader never has to take a paper link on trust.
+const evidenceLabel = (use: StudyUse) =>
+	use.actualUseEvidence.status === 'verified' ? 'Verified' : 'Not verified';
+---
+
+<section id="papers" class="stack">
+	<h2>Papers and models</h2>
+
+	<h3>The dataset's own publications</h3>
+	{
+		ownUses.length === 0 ? (
+			<p>No publication of this release is recorded.</p>
+		) : (
+			<ul class="stack">
+				{ownUses.map(({ use, paper }) =>
+					paper ? (
+						<li>
+							<a href={withBase(paperPath(paper.data.slug))}>{paper.data.title}</a>
+							{paper.data.year && <> ({paper.data.year})</>} <span class="badge">{humanize(use.role)}</span>
+							<br />
+							<small>
+								<strong>{use.actualUseEvidence.status === 'verified' ? 'Link verified' : 'Link not verified'}</strong>
+								{use.actualUseEvidence.note && <>. {use.actualUseEvidence.note}</>}
+							</small>
+						</li>
+					) : null,
+				)}
+			</ul>
+		)
+	}
+
+	<h3>Independent studies using this release</h3>
+	{
+		downstreamUses.length === 0 ? (
+			<div class="empty-state">
+				<p>No verified downstream uses are recorded yet.</p>
+				<p>A paper that mentions a dataset is not listed here until its actual use is checked.</p>
+			</div>
+		) : (
+			<div class="table-scroll">
+				<table>
+					<thead>
+						<tr>
+							<th scope="col">Paper</th>
+							<th scope="col">Year</th>
+							<th scope="col">Task</th>
+							<th scope="col">Subset</th>
+							<th scope="col">Train/test role</th>
+							<th scope="col">Use evidence</th>
+						</tr>
+					</thead>
+					<tbody>
+						{downstreamUses.map(({ use, paper }) => (
+							<tr>
+								<th scope="row">
+									{paper ? <a href={withBase(paperPath(paper.data.slug))}>{paper.data.title}</a> : use.paper}
+								</th>
+								<td>{paper?.data.year ?? 'Not documented'}</td>
+								<td>{use.task ? humanize(use.task) : 'Not documented'}</td>
+								<td>{use.subset ?? 'Not documented'}</td>
+								<td>{trainTestLabel(use.trainTestRole)}</td>
+								<td>{evidenceLabel(use)}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
+		)
+	}
+</section>
