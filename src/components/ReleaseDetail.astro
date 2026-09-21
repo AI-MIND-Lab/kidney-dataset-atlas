@@ -43,7 +43,7 @@ const isCurrent = !current || current.data.id === data.id;
 const variables = variablesForRelease(data.id);
 const samples = samplesForRelease(data.id);
 const findings = qualityForRelease(data.id);
-const uses = studyUsesForRelease(data.id);
+const uses = await studyUsesForRelease(data.id);
 const usesWithPapers = await Promise.all(
 	uses.map(async (use) => ({ use, paper: await paperById(use.paper) })),
 );

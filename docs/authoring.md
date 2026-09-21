@@ -16,7 +16,8 @@ Every page on the site is generated from the files described here. Two rules sit
 | `not_verified` | Someone claims it, but it has not been checked here. |
 | `not_applicable` | The question does not apply to this release. |
 
-Counts carry both a number and a state. An unknown count is `value: null` with a state, never `value: 0`.
+Counts carry both a number and a state. `present` requires a non-negative integer. Every other state requires
+`value: null`; an unknown count is never represented by `0`.
 Patients, examinations, lesions, slices, slides and records are separate units and are never added together.
 
 ## Evidence
@@ -60,6 +61,23 @@ overwriting: the release URL is what people cite.
 
 Required blocks: `counts`, `access`, `license`, `deidentification`, `dictionary`, `eligibility`, plus
 `researchedBy`. Leave `catalogStatus: draft`, `approvedBy` and `approvedOn` alone — those belong to the curator.
+Set `current: true` only on the release intended to be the dataset's canonical page. A dataset with published
+releases must have exactly one published current release.
+
+Access describes how the provider distributes a cohort; it does not itself decide whether the release may be
+published. Use one of these values:
+
+- `direct_open_download`
+- `public_account_or_terms`
+- `registration_gated`
+- `application_or_manual_approval`
+- `controlled_data_use_agreement`
+- `partial_or_sample_release`
+- `private_institutional`
+- `access_unclear`
+
+Only the first three can pass the public dataset eligibility gate. The others can still provide sourced context
+on an approved paper page.
 
 On de-identification, write what the provider documents and cite it, for example
 `statement: "Provider documents de-identification of all DICOM headers."` Never write "HIPAA-free", and never
@@ -93,7 +111,14 @@ first, then variants, then baselines, each with its own `id` and `role`. Evaluat
 paper's use of a release and name the model they belong to.
 
 A paper mentioning a dataset is not evidence that it used it. `actualUseEvidence` in the study-use record must
-point at the place in the paper that shows the use.
+point at the place in the paper that shows the use. A study use targets exactly one of:
+
+- a published `release`, which receives a dataset route; or
+- an `externalCohort` with its own access class and verified evidence, which is shown as text and receives no
+  dataset route.
+
+Published papers require `approvedBy` and `approvedOn`, independently of release approval. A public study-use
+edge requires verified evidence, and a published endpoint may never point through that edge to a draft endpoint.
 
 ## Samples
 

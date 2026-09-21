@@ -37,6 +37,8 @@ models:
     weights:
       status: not_documented
 catalogStatus: published
+approvedBy: i-sababishraq
+approvedOn: 2026-09-19
 sources:
   - fixture-source-1
 ---

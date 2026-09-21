@@ -1,0 +1,37 @@
+[
+	{
+		"id": "ucsf-rmac-repo",
+		"url": "https://github.com/LarsonLab/UCSF-RMaC",
+		"title": "UCSF RMaC official repository",
+		"locator": "Dataset description, data access, file structure and HDF5 attributes",
+		"accessedOn": "2026-09-21"
+	},
+	{
+		"id": "ucsf-rmac-aws",
+		"url": "https://registry.opendata.aws/ucsf-rmac/",
+		"title": "UCSF Renal Mass CT Dataset on the Registry of Open Data on AWS",
+		"locator": "Description, licence and anonymous S3 access",
+		"accessedOn": "2026-09-21"
+	},
+	{
+		"id": "ucsf-rmac-preprint",
+		"url": "https://www.medrxiv.org/content/10.64898/2026.02.11.26346096v1",
+		"title": "UCSF RMaC: University of California San Francisco 3D Multi-Phase Renal Mass CT Dataset with Tumor Segmentations",
+		"locator": "Abstract, author declarations and data availability",
+		"accessedOn": "2026-09-21"
+	},
+	{
+		"id": "cptac-ccrcc-tcia",
+		"url": "https://www.cancerimagingarchive.net/collection/cptac-ccrcc/",
+		"title": "CPTAC-CCRCC collection on The Cancer Imaging Archive",
+		"locator": "Version 14 data access tables, subject identifiers, date handling, licence and citation",
+		"accessedOn": "2026-09-21"
+	},
+	{
+		"id": "cptac-ccrcc-annotations",
+		"url": "https://www.cancerimagingarchive.net/analysis-result/cptac-ccrcc-tumor-annotations/",
+		"title": "CPTAC-CCRCC Tumor Annotations on The Cancer Imaging Archive",
+		"locator": "Version 2 scope, formats, counts and relationship to CPTAC-CCRCC",
+		"accessedOn": "2026-09-21"
+	}
+]

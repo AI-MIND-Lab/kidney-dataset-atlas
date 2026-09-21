@@ -28,10 +28,14 @@ export function countLabel(value: Count | undefined): string {
 }
 
 const ACCESS_LABELS: Record<string, string> = {
-	open_download: 'Open download',
-	registration_required: 'Registration required',
-	restricted: 'Restricted',
-	not_documented: 'Access not documented',
+	direct_open_download: 'Direct open download',
+	public_account_or_terms: 'Public account or terms required',
+	registration_gated: 'Registration gated',
+	application_or_manual_approval: 'Application or manual approval',
+	controlled_data_use_agreement: 'Controlled data-use agreement',
+	partial_or_sample_release: 'Partial or sample release',
+	private_institutional: 'Private institutional cohort',
+	access_unclear: 'Access unclear',
 };
 
 export const accessLabel = (mode: string): string => ACCESS_LABELS[mode] ?? mode;

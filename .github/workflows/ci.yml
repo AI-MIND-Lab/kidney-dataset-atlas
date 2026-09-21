@@ -32,6 +32,12 @@ jobs:
       - name: Tests
         run: npm test
 
+      - name: Build at the domain root
+        run: npm run build
+        env:
+          SITE_URL: https://example.org
+          BASE_PATH: /
+
       # Built under a repository sub-path, because that is where the public
       # site will live: this catches links that ignore the base path.
       - name: Build under a project base path
@@ -39,3 +45,9 @@ jobs:
         env:
           SITE_URL: https://i-sababishraq.github.io
           BASE_PATH: /kidney-dataset-atlas
+
+      - name: Install browser for smoke test
+        run: npx playwright install --with-deps chromium
+
+      - name: Browser smoke test with synthetic fixtures
+        run: npm run test:browser

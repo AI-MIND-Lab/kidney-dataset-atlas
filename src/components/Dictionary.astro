@@ -4,6 +4,7 @@ import type { Variable } from '../lib/dictionary';
 import { indexEntry, PAGE_SIZE } from '../lib/dictionary';
 import { completenessLabel, humanize } from '../lib/display';
 import { withBase } from '../lib/site';
+import { safeJson } from '../lib/safe-json';
 
 interface Props {
 	release: Release;
@@ -24,7 +25,7 @@ const levels = unique(variables.map((entry) => entry.observationLevel));
 ---
 
 <div class="dictionary" data-dictionary data-page-size={PAGE_SIZE}>
-	<script type="application/json" data-dictionary-index set:html={JSON.stringify(index)} />
+	<script type="application/json" data-dictionary-index set:html={safeJson(index)} />
 
 	<p class="dictionary__completeness">
 		<strong>Completeness:</strong> {completenessLabel(dictionary.completeness)}.

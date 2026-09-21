@@ -1,0 +1,46 @@
+name: Suggest a paper or study use
+description: Propose a paper and document how it used a dataset release or sourced external cohort.
+title: "Paper: "
+labels: ["paper-submission", "needs-verification"]
+body:
+  - type: input
+    id: citation
+    attributes:
+      label: Paper title and citation
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: DOI, PubMed, or publisher URL
+      placeholder: https://...
+    validations:
+      required: true
+  - type: input
+    id: target
+    attributes:
+      label: Exact dataset release or external cohort
+      description: Name one release/version, or identify the sourced non-catalog cohort.
+    validations:
+      required: true
+  - type: textarea
+    id: usage
+    attributes:
+      label: Verified use details
+      description: Include the source locator, subset, split, patient-level handling, preprocessing, and internal/external evaluation.
+    validations:
+      required: true
+  - type: textarea
+    id: results
+    attributes:
+      label: Results to record
+      description: Include metric, value, confidence interval, model, cohort/release, and a source locator for every result.
+  - type: checkboxes
+    id: approval
+    attributes:
+      label: Submission checks
+      options:
+        - label: I have not included PHI, secrets, credentials, or restricted files.
+          required: true
+        - label: I understand that the paper and relationship remain unpublished until separately verified and approved.
+          required: true

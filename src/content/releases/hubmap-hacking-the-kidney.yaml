@@ -1,6 +1,7 @@
 id: hubmap-hacking-the-kidney
 dataset: hubmap-kidney
 versionLabel: 2021 Kaggle competition release
+current: true
 releaseDate: null
 doi: null
 counts:
@@ -71,7 +72,7 @@ features:
   followUp:
     status: not_applicable
 access:
-  mode: not_documented
+  mode: access_unclear
   registrationVisible: false
   instructions: >-
     The paper states that after the competition all data were made available at the HuBMAP Data

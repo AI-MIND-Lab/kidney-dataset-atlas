@@ -1,0 +1,54 @@
+name: Suggest a dataset release
+description: Propose an open kidney dataset release for curator review.
+title: "Dataset: "
+labels: ["dataset-submission", "needs-verification"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for helping improve the atlas. Do not include protected health information or private credentials.
+  - type: input
+    id: name
+    attributes:
+      label: Dataset and release name
+      placeholder: Dataset name, release or version
+    validations:
+      required: true
+  - type: input
+    id: landing
+    attributes:
+      label: Official landing page
+      placeholder: https://...
+    validations:
+      required: true
+  - type: dropdown
+    id: access
+    attributes:
+      label: Access route
+      options:
+        - Direct open download
+        - Public account or terms
+        - Registration gated
+        - Application or manual approval
+        - Controlled data use agreement
+        - Partial or sample release
+        - Private institutional
+        - Access unclear
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Give a source URL and locator for access, de-identification, terms, counts, and annotations.
+      placeholder: Claim — URL — page, heading, table, or quoted locator
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Submission checks
+      options:
+        - label: I have not included PHI, secrets, credentials, or restricted files.
+          required: true
+        - label: I understand that this suggestion remains unpublished until a curator verifies and approves it.
+          required: true

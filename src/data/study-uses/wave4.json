@@ -1,0 +1,22 @@
+[
+	{
+		"id": "ucsf-rmac-2026-describes-release",
+		"paper": "ucsf-rmac-2026",
+		"release": "ucsf-rmac-2025",
+		"externalCohort": null,
+		"role": "descriptor",
+		"actualUseEvidence": {
+			"sources": ["ucsf-rmac-preprint"],
+			"locator": "Abstract and Data Availability",
+			"status": "verified",
+			"verifiedOn": "2026-09-21",
+			"note": "The paper describes the 831-examination public release; it does not report a trained computer-vision model."
+		},
+		"subset": "All 831 examinations described for the public release",
+		"preprocessing": null,
+		"task": null,
+		"trainTestRole": "not_documented",
+		"split": null,
+		"results": []
+	}
+]

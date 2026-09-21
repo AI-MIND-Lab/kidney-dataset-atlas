@@ -7,6 +7,12 @@
  */
 import { z } from 'astro/zod';
 
+/** Stable machine identifiers and route slugs use one conservative format. */
+export const recordId = z
+	.string()
+	.regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'Use lowercase letters, numbers, and single hyphens only');
+export const routeSlug = recordId;
+
 /** Explicit state for anything that is not a plain yes. */
 export const STATE = ['present', 'absent', 'not_documented', 'not_verified', 'not_applicable'];
 export const state = z.enum(STATE);
@@ -24,11 +30,28 @@ export const evidence = z.object({
  * Counts are never guessed. An unknown count is null plus a state, never zero,
  * and each unit is counted separately.
  */
-export const count = z.object({
-	value: z.number().int().nonnegative().nullable(),
-	status: state,
-	evidence: evidence.optional(),
-});
+export const count = z
+	.object({
+		value: z.number().int().nonnegative().nullable(),
+		status: state,
+		evidence: evidence.optional(),
+	})
+	.superRefine((entry, context) => {
+		if (entry.status === 'present' && entry.value === null) {
+			context.addIssue({
+				code: 'custom',
+				path: ['value'],
+				message: 'A present count requires a numeric value',
+			});
+		}
+		if (entry.status !== 'present' && entry.value !== null) {
+			context.addIssue({
+				code: 'custom',
+				path: ['value'],
+				message: 'An absent, unknown, or not-applicable count must use null',
+			});
+		}
+	});
 
 /**
  * Units are counted separately and never added together. Images and patches
@@ -95,7 +118,16 @@ export const TASKS = [
  * download conditions could not be established: guessing between open and
  * restricted would put a wrong badge on a dataset page.
  */
-export const ACCESS_MODES = ['open_download', 'registration_required', 'restricted', 'not_documented'];
+export const ACCESS_MODES = [
+	'direct_open_download',
+	'public_account_or_terms',
+	'registration_gated',
+	'application_or_manual_approval',
+	'controlled_data_use_agreement',
+	'partial_or_sample_release',
+	'private_institutional',
+	'access_unclear',
+];
 
 /** Whose tissue this is. Nonhuman and synthetic material is never left implied. */
 export const SPECIES = ['human', 'mouse', 'rat', 'pig', 'other_nonhuman', 'mixed', 'synthetic', 'not_documented'];
@@ -121,8 +153,8 @@ export const ANNOTATIONS = [
 ];
 
 export const dataset = z.object({
-	id: z.string(),
-	slug: z.string(),
+	id: recordId,
+	slug: routeSlug,
 	name: z.string(),
 	aliases: z.array(z.string()).default([]),
 	summary: z.string(),
@@ -135,9 +167,11 @@ export const dataset = z.object({
 });
 
 export const release = z.object({
-	id: z.string(),
-	dataset: z.string(),
+	id: recordId,
+	dataset: recordId,
 	versionLabel: z.string(),
+	/** Exactly one published release per dataset is the current canonical page. */
+	current: z.boolean().default(false),
 	releaseDate: z.coerce.date().nullable().default(null),
 	counts: countsByUnit.default({}),
 	modalities: z.array(z.enum(MODALITIES)).default([]),
@@ -187,7 +221,7 @@ export const release = z.object({
 		completeness: z.enum(['complete_for_inspected_release', 'partial', 'documentation_only']),
 		inspectedScope: z.string(),
 	}),
-	/**
+		/**
 	 * Facts the comparison asks about directly. Each is stated, never inferred:
 	 * pathology labels do not prove whole-slide images exist, and a CT modality
 	 * does not prove which phases were acquired.
@@ -214,8 +248,8 @@ export const release = z.object({
 });
 
 export const variable = z.object({
-	id: z.string(),
-	release: z.string(),
+	id: recordId,
+	release: recordId,
 	originalName: z.string(),
 	file: z.string().optional(),
 	definition: z.string(),
@@ -236,7 +270,7 @@ export const variable = z.object({
 const modelField = z.object({ status: state, url: z.url().optional(), note: z.string().optional() });
 
 export const model = z.object({
-	id: z.string(),
+	id: recordId,
 	name: z.string(),
 	role: z.enum(['proposed', 'variant', 'baseline']),
 	originalPaper: z.string().nullable().default(null),
@@ -254,8 +288,8 @@ export const model = z.object({
 });
 
 export const paper = z.object({
-	id: z.string(),
-	slug: z.string(),
+	id: recordId,
+	slug: routeSlug,
 	title: z.string(),
 	authors: z.array(z.string()).default([]),
 	year: z.number().int().nullable().default(null),
@@ -266,50 +300,71 @@ export const paper = z.object({
 	methodSummary: z.string().optional(),
 	models: z.array(model).default([]),
 	catalogStatus: z.enum(['draft', 'published']).default('draft'),
+	approvedBy: z.string().nullable().default(null),
+	approvedOn: z.coerce.date().nullable().default(null),
 	sources: z.array(z.string()).default([]),
 });
 
-export const studyUse = z.object({
-	id: z.string(),
-	paper: z.string(),
-	release: z.string(),
-	/**
-	 * What the paper is to this release:
-	 * - original: the release's own publication
-	 * - benchmark: the dataset's own paper or challenge report, which evaluates
-	 *   methods on it — real computer-vision use, but not independent adoption
-	 * - downstream: a separate study that used the data
-	 * - descriptor: a publication that describes the dataset without experiments
-	 */
-	role: z.enum(['original', 'benchmark', 'downstream', 'descriptor']),
-	// A paper mentioning a dataset is not evidence that it used it.
-	actualUseEvidence: evidence,
-	subset: z.string().nullable().default(null),
-	preprocessing: z.string().nullable().default(null),
-	task: z.enum(TASKS).nullable().default(null),
-	trainTestRole: z.enum(['train', 'test', 'train_and_test', 'validation', 'not_documented']),
-	split: z.string().nullable().default(null),
-	results: z
-		.array(
-			z.object({
-				model: z.string(),
-				metric: z.string(),
-				value: z.number().nullable(),
-				units: z.string().nullable().default(null),
-				confidenceInterval: z.string().nullable().default(null),
-				subset: z.string().nullable().default(null),
-				split: z.string().nullable().default(null),
-				patientLevelHandling: z.string().nullable().default(null),
-				evaluation: z.enum(['internal', 'external', 'not_documented']),
-				evidence: evidence.optional(),
-			}),
-		)
-		.default([]),
-});
+export const studyUse = z
+	.object({
+		id: recordId,
+		paper: recordId,
+		release: recordId.nullable().default(null),
+		externalCohort: z
+			.object({
+				name: z.string(),
+				accessMode: z.enum(ACCESS_MODES),
+				note: z.string().optional(),
+				evidence,
+			})
+			.nullable()
+			.default(null),
+		/**
+		 * What the paper is to this release:
+		 * - original: the release's own publication
+		 * - benchmark: the dataset's own paper or challenge report, which evaluates
+		 *   methods on it — real computer-vision use, but not independent adoption
+		 * - downstream: a separate study that used the data
+		 * - descriptor: a publication that describes the dataset without experiments
+		 */
+		role: z.enum(['original', 'benchmark', 'downstream', 'descriptor']),
+		// A paper mentioning a dataset is not evidence that it used it.
+		actualUseEvidence: evidence,
+		subset: z.string().nullable().default(null),
+		preprocessing: z.string().nullable().default(null),
+		task: z.enum(TASKS).nullable().default(null),
+		trainTestRole: z.enum(['train', 'test', 'train_and_test', 'validation', 'not_documented']),
+		split: z.string().nullable().default(null),
+		results: z
+			.array(
+				z.object({
+					model: z.string(),
+					metric: z.string(),
+					value: z.number().nullable(),
+					units: z.string().nullable().default(null),
+					confidenceInterval: z.string().nullable().default(null),
+					subset: z.string().nullable().default(null),
+					split: z.string().nullable().default(null),
+					patientLevelHandling: z.string().nullable().default(null),
+					evaluation: z.enum(['internal', 'external', 'not_documented']),
+					evidence: evidence.optional(),
+				}),
+			)
+			.default([]),
+	})
+	.superRefine((entry, context) => {
+		if (Boolean(entry.release) === Boolean(entry.externalCohort)) {
+			context.addIssue({
+				code: 'custom',
+				path: ['release'],
+				message: 'Name exactly one target: a catalogued release or an external cohort',
+			});
+		}
+	});
 
 export const sample = z.object({
-	id: z.string(),
-	release: z.string(),
+	id: recordId,
+	release: recordId,
 	kind: z.enum(['dataset_sample', 'published_figure']),
 	assets: z
 		.array(
@@ -333,8 +388,8 @@ export const sample = z.object({
 });
 
 export const qualityFinding = z.object({
-	id: z.string(),
-	release: z.string(),
+	id: recordId,
+	release: recordId,
 	category: z.enum(['observed_issue', 'published_report', 'potential_check']),
 	description: z.string(),
 	inspectedScope: z.string(),
@@ -346,7 +401,7 @@ export const qualityFinding = z.object({
 });
 
 export const source = z.object({
-	id: z.string(),
+	id: recordId,
 	url: z.url(),
 	title: z.string(),
 	locator: z.string().optional(),
@@ -360,9 +415,9 @@ export const source = z.object({
  * derived annotation set can say what it was derived from either way.
  */
 export const relation = z.object({
-	id: z.string(),
-	from: z.string(),
-	to: z.string().nullable().default(null),
+	id: recordId,
+	from: recordId,
+	to: recordId.nullable().default(null),
 	toExternal: z
 		.object({ name: z.string(), url: z.url().optional() })
 		.nullable()
@@ -374,8 +429,8 @@ export const relation = z.object({
 });
 
 export const overlap = z.object({
-	id: z.string(),
-	releases: z.array(z.string()).min(2),
+	id: recordId,
+	releases: z.array(recordId).min(2),
 	type: z.enum(['same_cohort', 'partial_cohort', 'superset', 'unknown']),
 	count: count.optional(),
 	explanation: z.string(),

@@ -1,0 +1,66 @@
+- &publishedRelease
+  id: bad-public-current-a
+  dataset: bad-valid
+  versionLabel: public A
+  current: true
+  access:
+    mode: direct_open_download
+    instructions: Test record.
+  license:
+    name: Test licence
+  deidentification:
+    statement: Synthetic fixture.
+    status: not_applicable
+  dictionary:
+    completeness: partial
+    inspectedScope: Test record.
+  eligibility:
+    publicAccess:
+      status: pass
+      evidence: &verifiedEvidence
+        sources: [bad-source]
+        status: verified
+        verifiedOn: 2026-09-19
+    deidentification:
+      status: pass
+      evidence: *verifiedEvidence
+    noPhiHosted:
+      status: pass
+    termsPermitUse:
+      status: pass
+      evidence: *verifiedEvidence
+    samplePermission:
+      status: pass
+  catalogStatus: published
+  verifiedOn: 2026-09-19
+  researchedBy: agent
+  approvedBy: i-sababishraq
+  approvedOn: 2026-09-19
+  sources: [bad-source]
+
+- <<: *publishedRelease
+  id: bad-public-current-b
+  versionLabel: public B
+
+- <<: *publishedRelease
+  id: bad-draft-release
+  versionLabel: draft
+  current: false
+  catalogStatus: draft
+  approvedBy: null
+  approvedOn: null
+
+- <<: *publishedRelease
+  id: bad-count-release
+  versionLabel: invalid count
+  current: false
+  catalogStatus: draft
+  approvedBy: null
+  approvedOn: null
+  counts:
+    patients:
+      value: 12
+      status: not_documented
+    lesions:
+      value: null
+      status: present

@@ -41,5 +41,34 @@
 				"evidence": { "sources": ["fixture-source-1"], "status": "not_verified" }
 			}
 		]
+	},
+	{
+		"id": "fixture-use-private-cohort",
+		"paper": "fixture-paper",
+		"release": null,
+		"externalCohort": {
+			"name": "Fixture private hospital cohort",
+			"accessMode": "private_institutional",
+			"note": "Synthetic context-only cohort; no dataset page is generated.",
+			"evidence": {
+				"sources": ["fixture-source-1"],
+				"locator": "fixture methods section",
+				"status": "verified",
+				"verifiedOn": "2026-09-19"
+			}
+		},
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": ["fixture-source-1"],
+			"locator": "fixture methods section",
+			"status": "verified",
+			"verifiedOn": "2026-09-19"
+		},
+		"subset": "Invented local test cohort",
+		"preprocessing": null,
+		"task": "segmentation",
+		"trainTestRole": "test",
+		"split": "External evaluation",
+		"results": []
 	}
 ]

@@ -28,6 +28,8 @@ models:
     weights:
       status: not_documented
 catalogStatus: draft
+approvedBy: null
+approvedOn: null
 sources:
   - totalsegmentator-paper
   - totalsegmentator-paper-crossref

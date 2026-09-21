@@ -43,6 +43,8 @@ models:
     weights:
       status: not_documented
 catalogStatus: draft
+approvedBy: null
+approvedOn: null
 sources:
   - tabibu-2019
 ---

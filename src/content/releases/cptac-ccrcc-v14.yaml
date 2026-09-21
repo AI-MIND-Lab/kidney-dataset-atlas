@@ -1,0 +1,216 @@
+id: cptac-ccrcc-v14
+dataset: cptac-ccrcc
+versionLabel: TCIA Version 14
+current: true
+releaseDate: 2025-07-07
+doi: 10.7937/K9/TCIA.2018.OBLAMN27
+counts:
+  patients:
+    value: 262
+    status: present
+    evidence:
+      sources: [cptac-ccrcc-tcia]
+      locator: Collection summary
+      status: verified
+      verifiedOn: 2026-09-21
+      note: Collection-wide subjects; modality-specific rows overlap and must not be summed.
+  examinations:
+    value: 97
+    status: present
+    evidence:
+      sources: [cptac-ccrcc-tcia]
+      locator: Version 14 radiology rows
+      status: verified
+      verifiedOn: 2026-09-21
+      note: 85 studies in the CCRCC radiology row plus 12 studies in the separately identified rare-kidney-tumor radiology add-on.
+  lesions:
+    value: null
+    status: not_documented
+  slices:
+    value: null
+    status: not_documented
+  slides:
+    value: null
+    status: not_documented
+    evidence:
+      sources: [cptac-ccrcc-tcia]
+      status: verified
+      verifiedOn: 2026-09-21
+      note: The page reports 783 whole-slide images for 222 CCRCC subjects but does not give a collection-wide Version 14 slide total that includes the rare-tumor add-on.
+  images:
+    value: 113359
+    status: present
+    evidence:
+      sources: [cptac-ccrcc-tcia]
+      locator: Version 14 radiology rows
+      status: verified
+      verifiedOn: 2026-09-21
+      note: DICOM image instances across the 99,098-image CCRCC row and 14,261-image rare-kidney-tumor row; not examinations or patients.
+  patches:
+    value: null
+    status: not_applicable
+  records:
+    value: null
+    status: not_documented
+modalities:
+  - ct
+  - mri
+  - pathology
+  - clinical_table
+  - molecular
+cohort: >-
+  The CPTAC clear-cell renal cell carcinoma imaging cohort, with an additional small
+  non-CCRCC/rare-kidney-tumor imaging component in Version 14. Radiology was collected around
+  pathological diagnosis and at follow-up where available; pathology images come from the CPTAC
+  qualification workflow.
+tasks: []
+annotations: []
+annotationProvenance:
+  kind: none
+  note: >-
+    The base collection has no tumor masks. A separately versioned TCIA analysis result supplies
+    radiology annotations for a 60-subject subset and is not merged into this release record.
+  evidence:
+    sources: [cptac-ccrcc-tcia, cptac-ccrcc-annotations]
+    status: verified
+    verifiedOn: 2026-09-21
+features:
+  wsi:
+    status: present
+    note: The Version 14 clear-cell pathology row reports 783 SVS whole-slide images for 222 subjects.
+    evidence:
+      sources: [cptac-ccrcc-tcia]
+      locator: Version 14 Tissue Slide Images row
+      status: verified
+      verifiedOn: 2026-09-21
+  ctPhases:
+    status: not_documented
+    phases: []
+    note: Acquisition protocols are heterogeneous; a normalized phase inventory was not provided on the collection page.
+  clinicalData:
+    status: present
+    note: Clinical data are linked through PDC and GDC using the same deidentified project Patient ID; they are not bundled with every imaging download.
+    evidence:
+      sources: [cptac-ccrcc-tcia]
+      locator: Accessing the Proteomic and Genomic Clinical Data; Subject Identifiers
+      status: verified
+      verifiedOn: 2026-09-21
+  followUp:
+    status: present
+    note: The provider states that follow-up radiology scans are included where available, and their relative timing is preserved.
+    evidence:
+      sources: [cptac-ccrcc-tcia]
+      locator: Detailed description and Dates
+      status: verified
+      verifiedOn: 2026-09-21
+access:
+  mode: direct_open_download
+  registrationVisible: false
+  instructions: >-
+    Use the Version 14 download manifests on TCIA. Radiology downloads require the free NBIA Data
+    Retriever, while the pathology package uses the collection's current bulk-download route.
+    Linked proteomic, genomic and clinical data live in PDC and GDC and may have separate access tiers.
+  evidence:
+    sources: [cptac-ccrcc-tcia]
+    locator: Version 14 Data Access
+    status: verified
+    verifiedOn: 2026-09-21
+license:
+  name: CC BY 4.0
+  url: https://creativecommons.org/licenses/by/4.0/
+  conditions: >-
+    Attribution, the dataset DOI and TCIA's required data citation are required. CPTAC also
+    requests its program acknowledgement. External GDC or PDC files retain their own access rules.
+deidentification:
+  statement: >-
+    TCIA uses deidentified project Patient IDs. DICOM dates are shifted by a consistent,
+    site-specific random offset while intervals are preserved; Clinical Trial Time Point ID stores
+    days relative to pathological diagnosis.
+  status: present
+  evidence:
+    sources: [cptac-ccrcc-tcia]
+    locator: A Note about TCIA and CPTAC Subject Identifiers and Dates
+    status: verified
+    verifiedOn: 2026-09-21
+pairing:
+  - kind: same_patient
+    modalities: [ct, mri, pathology, clinical_table, molecular]
+    status: present
+    note: >-
+      The same deidentified project Patient ID is used across TCIA imaging and linked CPTAC clinical,
+      proteomic and genomic systems. Availability is sparse by modality and does not mean every
+      subject has every data type.
+    evidence:
+      sources: [cptac-ccrcc-tcia]
+      locator: Subject Identifiers
+      status: verified
+      verifiedOn: 2026-09-21
+  - kind: follow_up
+    modalities: [ct, mri]
+    status: present
+    note: Follow-up radiology exists where available; time intervals are preserved after date shifting.
+    evidence:
+      sources: [cptac-ccrcc-tcia]
+      locator: Detailed description and Dates
+      status: verified
+      verifiedOn: 2026-09-21
+dictionary:
+  completeness: documentation_only
+  inspectedScope: >-
+    Collection-level identifiers, relative-time handling, image formats and modality-specific
+    counts from the Version 14 page. No image manifest, DICOM object, slide or external clinical
+    table was downloaded for this record.
+structure: >-
+  Radiology is distributed as DICOM studies and series; pathology is distributed as SVS
+  whole-slide images. A shared project Patient ID links modalities and external CPTAC records.
+  DICOM Clinical Trial Time Point ID expresses days before or after pathological diagnosis.
+citation: >-
+  National Cancer Institute Clinical Proteomic Tumor Analysis Consortium (CPTAC). The Clinical
+  Proteomic Tumor Analysis Consortium Clear Cell Renal Cell Carcinoma Collection (CPTAC-CCRCC),
+  Version 14. The Cancer Imaging Archive, 2018. doi:10.7937/K9/TCIA.2018.OBLAMN27.
+limitations:
+  - The collection is ongoing, so counts and contents may change after Version 14.
+  - Radiology, pathology and linked molecular-data availability differ by subject; 65 and 222 are overlapping modality-specific subject counts, not additive cohorts.
+  - Version 14 contains a separately identified non-CCRCC/rare-kidney-tumor component; filter it for a pure clear-cell cohort.
+  - CT and MRI acquisition protocols are heterogeneous across sites and time points.
+  - Tumor annotations are a separate derived analysis result for 60 subjects, not labels covering the base collection.
+  - Linked GDC and PDC records are external to this imaging release and may include controlled-access files.
+eligibility:
+  publicAccess:
+    status: pass
+    note: TCIA exposes public Version 14 imaging download manifests without individual institutional approval.
+    evidence:
+      sources: [cptac-ccrcc-tcia]
+      locator: Version 14 Data Access
+      status: verified
+      verifiedOn: 2026-09-21
+  deidentification:
+    status: pass
+    note: The provider documents deidentified subject IDs and shifted DICOM dates.
+    evidence:
+      sources: [cptac-ccrcc-tcia]
+      locator: Subject Identifiers and Dates
+      status: verified
+      verifiedOn: 2026-09-21
+  noPhiHosted:
+    status: pass
+    note: This site stores descriptions and source links only; no CPTAC image or clinical files are mirrored.
+  termsPermitUse:
+    status: pass
+    note: Version 14 imaging rows carry CC BY 4.0 with required attribution and data citation.
+    evidence:
+      sources: [cptac-ccrcc-tcia]
+      locator: Version 14 licence and Citations and Data Usage Policy
+      status: verified
+      verifiedOn: 2026-09-21
+  samplePermission:
+    status: pass
+    note: No preview images are shown for this release.
+catalogStatus: draft
+verifiedOn: 2026-09-21
+researchedBy: agent
+approvedBy: null
+approvedOn: null
+sources:
+  - cptac-ccrcc-tcia
+  - cptac-ccrcc-annotations

@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../lib/site';
+
+const issueUrl = (template: string) => `${SITE.repoUrl}/issues/new?template=${template}`;
 ---
 
 <BaseLayout title="Contribute" description="Suggest a dataset, a paper, or a correction.">
@@ -26,9 +28,13 @@ import { SITE } from '../../lib/site';
 
 		<h2>How to send it</h2>
 		<p>
-			The repository is private while the catalog is being built, so issue forms are not open yet. Until then,
-			send corrections to the maintainer directly. Once the repository is public, this page will link to its
-			dataset, paper and correction forms at <code>{SITE.repoUrl}</code>.
+			Use the form that matches your contribution. Each form asks for claim-level sources and keeps the
+			record in review until a curator approves it.
 		</p>
+		<ul>
+			<li><a href={issueUrl('dataset.yml')}>Suggest a dataset release</a></li>
+			<li><a href={issueUrl('paper.yml')}>Suggest a paper or study use</a></li>
+			<li><a href={issueUrl('correction.yml')}>Report a correction</a></li>
+		</ul>
 	</div>
 </BaseLayout>

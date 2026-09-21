@@ -1,6 +1,7 @@
 id: totalsegmentator-mri-v3
 dataset: totalsegmentator-mri
 versionLabel: v3.0.0
+current: true
 releaseDate: 2026-09-10
 doi: 10.5281/zenodo.22688334
 counts:
@@ -68,7 +69,7 @@ features:
   followUp:
     status: not_applicable
 access:
-  mode: open_download
+  mode: direct_open_download
   registrationVisible: false
   instructions: Download the dataset archive from its Zenodo record. No registration or application is required.
   evidence:

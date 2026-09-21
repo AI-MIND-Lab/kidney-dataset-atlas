@@ -31,6 +31,8 @@ models:
     weights:
       status: not_documented
 catalogStatus: draft
+approvedBy: null
+approvedOn: null
 sources:
   - kits23-winner-paper
 ---

@@ -2,9 +2,10 @@
 import type { GetStaticPaths } from 'astro';
 import { render } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { publishedPapers, publishedReleases, studyUsesForPaper } from '../../../lib/catalog';
-import { humanize, stateLabel, trainTestLabel } from '../../../lib/display';
-import { releasePath, withBase } from '../../../lib/site';
+import { catalog, publishedPapers, studyUsesForPaper } from '../../../lib/catalog';
+import { accessLabel, humanize, stateLabel, trainTestLabel } from '../../../lib/display';
+import { withBase } from '../../../lib/site';
+import { studyUseTarget } from '../../../lib/study-use-target';
 
 export const getStaticPaths = (async () => {
 	const papers = await publishedPapers();
@@ -13,9 +14,25 @@ export const getStaticPaths = (async () => {
 
 const { paper } = Astro.props;
 const { Content } = await render(paper);
-const uses = studyUsesForPaper(paper.data.id);
-const releases = await publishedReleases();
-const releaseFor = (id: string) => releases.find((release) => release.data.id === id);
+const uses = await studyUsesForPaper(paper.data.id);
+const catalogEntries = await catalog();
+const releaseContexts = new Map(
+	catalogEntries.flatMap(({ dataset, releases }) =>
+		releases.map((release) => [
+			release.data.id,
+			{
+				datasetSlug: dataset.data.slug,
+				datasetName: dataset.data.name,
+				releaseId: release.data.id,
+				versionLabel: release.data.versionLabel,
+			},
+		] as const),
+	),
+);
+const targetLabel = (use: (typeof uses)[number]) => {
+	const context = use.release ? releaseContexts.get(use.release) : undefined;
+	return studyUseTarget(use, context).label;
+};
 
 // Proposed models first, then variants, then baselines.
 const ORDER = { proposed: 0, variant: 1, baseline: 2 } as const;
@@ -51,33 +68,35 @@ const resultsFor = (modelId: string) =>
 						<table>
 							<thead>
 								<tr>
-									<th scope="col">Release</th>
+									<th scope="col">Release or cohort</th>
 									<th scope="col">Role</th>
 									<th scope="col">Subset</th>
 									<th scope="col">Train/test role</th>
+									<th scope="col">Relationship evidence</th>
 								</tr>
 							</thead>
 							<tbody>
 								{uses.map((use) => {
-									const release = releaseFor(use.release);
+									const context = use.release ? releaseContexts.get(use.release) : undefined;
+									const target = studyUseTarget(use, context);
 									return (
 										<tr>
 											<th scope="row">
-												{release ? (
-													<a
-														href={withBase(
-															releasePath(release.data.dataset, release.data.id),
-														)}
-													>
-														{release.data.versionLabel}
-													</a>
+												{target.path ? (
+													<a href={withBase(target.path)}>{target.label}</a>
+												) : use.externalCohort ? (
+													<>
+														{target.label}{' '}
+														<span class="badge">{accessLabel(use.externalCohort.accessMode)}</span>
+													</>
 												) : (
-													use.release
+													target.label
 												)}
 											</th>
 											<td>{humanize(use.role)}</td>
 											<td>{use.subset ?? 'Not documented'}</td>
 											<td>{trainTestLabel(use.trainTestRole)}</td>
+											<td>{use.actualUseEvidence.status === 'verified' ? 'Verified' : 'Not verified'}</td>
 										</tr>
 									);
 								})}
@@ -139,25 +158,32 @@ const resultsFor = (modelId: string) =>
 									<table>
 										<thead>
 											<tr>
+												<th scope="col">Release or cohort</th>
 												<th scope="col">Metric</th>
 												<th scope="col">Value</th>
+												<th scope="col">Confidence interval</th>
 												<th scope="col">Subset</th>
 												<th scope="col">Split</th>
+												<th scope="col">Patient-level handling</th>
 												<th scope="col">Evaluation</th>
+												<th scope="col">Result evidence</th>
 											</tr>
 										</thead>
 										<tbody>
-											{resultsFor(model.id).map(({ result }) => (
+											{resultsFor(model.id).map(({ use, result }) => (
 												<tr>
+													<td>{targetLabel(use)}</td>
 													<th scope="row">{result.metric}</th>
 													<td>
 														{result.value ?? 'Not documented'}
 														{result.units && ` ${result.units}`}
-														{result.confidenceInterval && ` (${result.confidenceInterval})`}
 													</td>
+													<td>{result.confidenceInterval ?? 'Not documented'}</td>
 													<td>{result.subset ?? 'Not documented'}</td>
 													<td>{result.split ?? 'Not documented'}</td>
+													<td>{result.patientLevelHandling ?? 'Not documented'}</td>
 													<td>{humanize(result.evaluation)}</td>
+													<td>{result.evidence?.status === 'verified' ? 'Verified' : 'Not verified'}</td>
 												</tr>
 											))}
 										</tbody>

@@ -1,6 +1,7 @@
 id: fixture-path-wsi-r1
 dataset: fixture-path-wsi
 versionLabel: release 1 (synthetic)
+current: true
 releaseDate: 2026-01-15
 counts:
   patients:
@@ -27,7 +28,7 @@ features:
   followUp:
     status: not_documented
 access:
-  mode: registration_required
+  mode: public_account_or_terms
   registrationVisible: true
   instructions: Fixture record; registration is invented.
 license:
@@ -50,12 +51,18 @@ limitations:
 eligibility:
   publicAccess:
     status: pass
+    evidence: &fixtureEvidence
+      sources: [fixture-source-1]
+      status: verified
+      verifiedOn: 2026-09-19
   deidentification:
     status: pass
+    evidence: *fixtureEvidence
   noPhiHosted:
     status: pass
   termsPermitUse:
     status: pass
+    evidence: *fixtureEvidence
   samplePermission:
     status: pass
 catalogStatus: published

@@ -1,0 +1,38 @@
+name: Report a correction
+description: Correct a claim, link, relationship, count, licence, or eligibility decision.
+title: "Correction: "
+labels: ["correction", "needs-verification"]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Atlas page or record
+      placeholder: Paste the page URL or record ID
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: What is currently wrong?
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Proposed correction
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Supporting evidence
+      description: Give the authoritative URL, checked date, and precise locator.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Submission checks
+      options:
+        - label: I have not included PHI, secrets, credentials, or restricted files.
+          required: true

@@ -1,6 +1,7 @@
 id: nhanes-2021-2023-kidney
 dataset: nhanes
 versionLabel: August 2021–August 2023 kidney laboratory files
+current: true
 releaseDate: null
 counts:
   patients:
@@ -61,7 +62,7 @@ features:
     status: not_documented
     note: NHANES cycles sample participants anew rather than following the same people; no follow-up within this release was documented on the pages checked.
 access:
-  mode: open_download
+  mode: direct_open_download
   registrationVisible: false
   instructions: >-
     Public-use files download directly from the NHANES site in SAS transport (.xpt) format —

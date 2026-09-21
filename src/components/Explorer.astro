@@ -2,6 +2,7 @@
 import type { ExplorerEntry, FacetKey } from '../lib/explorer';
 import { FACET_KEYS, FACET_LABELS, SORTS } from '../lib/explorer';
 import { countLabel, facetValueLabel } from '../lib/display';
+import { safeJson } from '../lib/safe-json';
 import { withBase } from '../lib/site';
 
 interface Props {
@@ -19,7 +20,7 @@ const patients = (entry: ExplorerEntry) =>
 ---
 
 <section class="explorer" data-explorer>
-	<script type="application/json" data-entries set:html={JSON.stringify(entries)} />
+	<script type="application/json" data-entries set:html={safeJson(entries)} />
 
 	<form class="controls" data-controls hidden>
 		<div class="controls__search">
@@ -169,6 +170,7 @@ const patients = (entry: ExplorerEntry) =>
 		defaultState,
 		matches,
 		paramsToState,
+		sanitizeState,
 		sortEntries,
 		stateToParams,
 		FACET_KEYS,
@@ -204,7 +206,12 @@ const patients = (entry: ExplorerEntry) =>
 		controls.hidden = false;
 		controls.addEventListener('submit', (event) => event.preventDefault());
 
-		let state: ExplorerState = paramsToState(new URLSearchParams(location.search));
+		const validFacetValues = Object.fromEntries(
+			FACET_KEYS.map((key) => [key, new Set(entries.flatMap((entry) => entry.facets[key]))]),
+		) as Record<FacetKey, Set<string>>;
+		const stateFromLocation = (): ExplorerState =>
+			sanitizeState(paramsToState(new URLSearchParams(location.search)), validFacetValues);
+		let state: ExplorerState = stateFromLocation();
 		let selected: string[] = readSelection();
 
 		function readSelection(): string[] {
@@ -252,7 +259,13 @@ const patients = (entry: ExplorerEntry) =>
 					const button = document.createElement('button');
 					button.type = 'button';
 					button.className = 'chip';
-					button.innerHTML = `<span class="chip__facet">${FACET_LABELS[key]}:</span> ${facetValueLabel(key, value)} <span aria-hidden="true">×</span>`;
+					const facet = document.createElement('span');
+					facet.className = 'chip__facet';
+					facet.textContent = `${FACET_LABELS[key]}:`;
+					const remove = document.createElement('span');
+					remove.setAttribute('aria-hidden', 'true');
+					remove.textContent = '×';
+					button.append(facet, ` ${facetValueLabel(key, value)} `, remove);
 					button.setAttribute('aria-label', `Remove filter ${FACET_LABELS[key]}: ${facetValueLabel(key, value)}`);
 					button.addEventListener('click', () => {
 						state.filters[key] = state.filters[key].filter((entry) => entry !== value);
@@ -300,7 +313,10 @@ const patients = (entry: ExplorerEntry) =>
 				const button = document.createElement('button');
 				button.type = 'button';
 				button.className = 'chip';
-				button.innerHTML = `${entry.name} <span aria-hidden="true">×</span>`;
+				const remove = document.createElement('span');
+				remove.setAttribute('aria-hidden', 'true');
+				remove.textContent = '×';
+				button.append(entry.name, ' ', remove);
 				button.setAttribute('aria-label', `Remove ${entry.name} from the comparison`);
 				button.addEventListener('click', () => setSelected(selected.filter((entry) => entry !== id)));
 				item.append(button);
@@ -374,7 +390,7 @@ const patients = (entry: ExplorerEntry) =>
 
 		// Back and forward restore the previous search, filters, sort and view.
 		window.addEventListener('popstate', () => {
-			state = paramsToState(new URLSearchParams(location.search));
+			state = stateFromLocation();
 			applyStateToControls();
 			renderChips();
 			renderResults();

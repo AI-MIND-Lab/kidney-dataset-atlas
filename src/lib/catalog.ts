@@ -80,6 +80,8 @@ let cache: {
 	relations?: Relation[];
 } = {};
 
+let visibleStudyUseCache: Promise<StudyUse[]> | undefined;
+
 export const allVariables = () => (cache.variables ??= loadData('variables', variable));
 export const allStudyUses = () => (cache.studyUses ??= loadData('study-uses', studyUse));
 export const allSamples = () => (cache.samples ??= loadData('samples', sample));
@@ -115,7 +117,11 @@ export async function catalog(): Promise<DatasetWithReleases[]> {
 	for (const dataset of datasets) {
 		const own = releases.filter((release) => release.data.dataset === dataset.data.id);
 		if (own.length === 0) continue;
-		entries.push({ dataset, releases: own, current: own[0]! });
+		const current = own.find((release) => release.data.current);
+		if (!current) {
+			throw new Error(`Dataset "${dataset.data.id}" has visible releases but no explicit current release`);
+		}
+		entries.push({ dataset, releases: own, current });
 	}
 	return entries.sort((a, b) => a.dataset.data.name.localeCompare(b.dataset.data.name));
 }
@@ -123,7 +129,7 @@ export async function catalog(): Promise<DatasetWithReleases[]> {
 /** The newest published release of a dataset, or undefined if it has none. */
 export async function currentRelease(datasetId: string): Promise<Release | undefined> {
 	const releases = await publishedReleases();
-	return releases.find((release) => release.data.dataset === datasetId);
+	return releases.find((release) => release.data.dataset === datasetId && release.data.current);
 }
 
 export async function publishedPapers(): Promise<Paper[]> {
@@ -138,10 +144,27 @@ export const samplesForRelease = (releaseId: string) => allSamples().filter((ent
 
 export const qualityForRelease = (releaseId: string) => allQuality().filter((entry) => entry.release === releaseId);
 
-export const studyUsesForRelease = (releaseId: string) =>
-	allStudyUses().filter((entry) => entry.release === releaseId);
+/**
+ * Relationships are public only when every catalogued endpoint is public.
+ * External cohorts have no route, so an approved paper and verified validator
+ * gate are sufficient for those relationships.
+ */
+async function visibleStudyUses(): Promise<StudyUse[]> {
+	if (SITE.showingDrafts) return allStudyUses();
+	return (visibleStudyUseCache ??= Promise.all([publishedPapers(), publishedReleases()]).then(([papers, releases]) => {
+		const paperIds = new Set(papers.map((entry) => entry.data.id));
+		const releaseIds = new Set(releases.map((entry) => entry.data.id));
+		return allStudyUses().filter(
+			(entry) => paperIds.has(entry.paper) && (entry.externalCohort !== null || releaseIds.has(entry.release ?? '')),
+		);
+	}));
+}
 
-export const studyUsesForPaper = (paperId: string) => allStudyUses().filter((entry) => entry.paper === paperId);
+export const studyUsesForRelease = async (releaseId: string) =>
+	(await visibleStudyUses()).filter((entry) => entry.release === releaseId);
+
+export const studyUsesForPaper = async (paperId: string) =>
+	(await visibleStudyUses()).filter((entry) => entry.paper === paperId);
 
 export const sourceById = (id: string) => allSources().find((entry) => entry.id === id);
 

@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { compareEntries } from '../../lib/catalog';
 import { COMPARE_ROWS, MAX_COMPARE } from '../../lib/compare';
 import { withBase } from '../../lib/site';
+import { safeJson } from '../../lib/safe-json';
 
 // Every published release travels with the page, so the comparison is built in
 // the browser from records rather than fetched. The selection lives in the URL.
@@ -16,8 +17,8 @@ const entries = await compareEntries();
 		something is never shown as not having it.
 	</p>
 
-	<script type="application/json" data-compare-entries set:html={JSON.stringify(entries)} />
-	<script type="application/json" data-compare-rows set:html={JSON.stringify(COMPARE_ROWS)} />
+	<script type="application/json" data-compare-entries set:html={safeJson(entries)} />
+	<script type="application/json" data-compare-rows set:html={safeJson(COMPARE_ROWS)} />
 
 	<div class="notice" data-compare-missing hidden>
 		<p data-compare-missing-text></p>

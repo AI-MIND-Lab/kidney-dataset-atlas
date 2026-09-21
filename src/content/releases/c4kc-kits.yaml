@@ -1,6 +1,7 @@
 id: c4kc-kits
 dataset: kits
 versionLabel: C4KC-KiTS (KiTS19 training set on TCIA)
+current: false
 releaseDate: null
 counts:
   patients:
@@ -76,7 +77,7 @@ features:
       status: verified
       verifiedOn: 2026-09-20
 access:
-  mode: open_download
+  mode: direct_open_download
   registrationVisible: false
   instructions: Download from the collection page on The Cancer Imaging Archive, which serves DICOM images, DICOM SEG segmentations and CSV clinical data.
   evidence:

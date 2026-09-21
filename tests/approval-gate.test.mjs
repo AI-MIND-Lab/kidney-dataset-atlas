@@ -18,6 +18,24 @@ test('a release cannot be published without a curator approval', () => {
 	assert.equal(result.status, 1, 'validation should fail');
 	assert.match(result.stderr, /is published but has no approvedBy/);
 	assert.match(result.stderr, /eligibility check publicAccess is "unknown"/);
+	assert.match(result.stderr, /passes deidentification without verified source evidence/);
+});
+
+test('publication graph rejects draft leaks, missing paper approval, and unverified cohort evidence', () => {
+	const result = runValidator('tests/bad-records/content', 'tests/bad-records/data');
+	assert.match(result.stderr, /paper "bad-public-paper" is published but has no approvedBy/);
+	assert.match(result.stderr, /published release "bad-public-current-a" cites draft paper "bad-draft-paper"/);
+	assert.match(result.stderr, /published paper "bad-public-paper" cites draft release "bad-draft-release"/);
+	assert.match(result.stderr, /lacks verified external-cohort evidence/);
+});
+
+test('route, count, current-release, and study target invariants are enforced', () => {
+	const result = runValidator('tests/bad-records/content', 'tests/bad-records/data');
+	assert.match(result.stderr, /duplicate datasets slug "duplicate-route"/);
+	assert.match(result.stderr, /count must use null/);
+	assert.match(result.stderr, /present count requires a numeric value/);
+	assert.match(result.stderr, /has 2 current published releases; expected exactly one/);
+	assert.match(result.stderr, /Name exactly one target: a catalogued release or an external cohort/);
 });
 
 test('a reference to a missing record fails validation', () => {

@@ -16,6 +16,8 @@ url: https://arxiv.org/abs/1904.00445
 methodSummary: A data descriptor. It documents the cohort, the review board approval, the clinical fields and the segmentation procedure for the KiTS19 release; it does not report computer-vision experiments.
 models: []
 catalogStatus: draft
+approvedBy: null
+approvedOn: null
 sources:
   - kits19-data-paper
 ---

@@ -176,6 +176,25 @@ export function paramsToState(params: URLSearchParams): ExplorerState {
 	};
 }
 
+/**
+ * Drop facet values that are not present in the visible catalog. URL state is
+ * untrusted input; unknown values must never reach the rendered filter chips.
+ */
+export function sanitizeState(
+	state: ExplorerState,
+	allowedValues: Record<FacetKey, ReadonlySet<string>>,
+): ExplorerState {
+	return {
+		...state,
+		filters: Object.fromEntries(
+			FACET_KEYS.map((key) => [
+				key,
+				state.filters[key].filter((value) => allowedValues[key].has(value)),
+			]),
+		) as Record<FacetKey, string[]>,
+	};
+}
+
 export const activeFilterCount = (state: ExplorerState): number =>
 	FACET_KEYS.reduce((total, key) => total + state.filters[key].length, 0);
 

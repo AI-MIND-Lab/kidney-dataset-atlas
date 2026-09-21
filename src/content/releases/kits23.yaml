@@ -1,6 +1,7 @@
 id: kits23
 dataset: kits
 versionLabel: KiTS23
+current: true
 releaseDate: null
 counts:
   patients:
@@ -67,7 +68,7 @@ features:
   followUp:
     status: not_documented
 access:
-  mode: open_download
+  mode: direct_open_download
   registrationVisible: false
   instructions: >-
     Clone the kits23 repository, install the package with pip, then run kits23_download_data,

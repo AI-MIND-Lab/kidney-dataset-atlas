@@ -6,14 +6,16 @@
  * - no two indexed pages describe the same release (duplicate search results)
  * - the output still fits the host it is headed for
  */
-import { readdirSync, readFileSync, statSync } from 'node:fs';
-import { join, relative, resolve } from 'node:path';
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { extname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(fileURLToPath(new URL('../', import.meta.url)));
 const dist = join(root, 'dist');
 const usingFixtures = process.env.ATLAS_FIXTURES === '1';
 const showingDrafts = process.env.ATLAS_DRAFTS === '1';
+const configuredBase = `/${(process.env.BASE_PATH ?? '').replace(/^\/+|\/+$/g, '')}`;
+const basePath = configuredBase === '/' ? '' : configuredBase;
 
 /** GitHub Pages publishes at most 1 GB; warn before the site gets close. */
 const LIMIT_BYTES = 1024 ** 3;
@@ -51,6 +53,44 @@ if (!usingFixtures) {
 }
 
 const canonicals = new Map();
+const brokenTargets = new Set();
+
+function outputCandidates(targetPath) {
+	const clean = decodeURIComponent(targetPath).replace(/^\/+/, '');
+	const direct = resolve(dist, clean);
+	if (!direct.startsWith(resolve(dist))) return [];
+	if (!clean || targetPath.endsWith('/')) return [join(direct, 'index.html')];
+	if (extname(clean)) return [direct];
+	return [direct, join(direct, 'index.html')];
+}
+
+function checkTarget(value, pageName) {
+	const decoded = value.replaceAll('&amp;', '&');
+	if (!decoded || decoded.startsWith('#') || /^(?:[a-z]+:|\/\/)/i.test(decoded)) return;
+
+	const pagePath = `/${pageName.replace(/index\.html$/, '')}`;
+	let pathname;
+	try {
+		pathname = new URL(decoded, `https://atlas.invalid${basePath}${pagePath}`).pathname;
+	} catch {
+		errors.push(`${pageName}: malformed internal URL "${value}"`);
+		return;
+	}
+
+	if (basePath && pathname !== basePath && !pathname.startsWith(`${basePath}/`)) {
+		errors.push(`${pageName}: internal URL ignores configured base path: ${value}`);
+		return;
+	}
+	const outputPath = basePath ? pathname.slice(basePath.length) || '/' : pathname;
+	if (!outputCandidates(outputPath).some(existsSync)) {
+		const key = `${pageName}\0${value}`;
+		if (!brokenTargets.has(key)) {
+			brokenTargets.add(key);
+			errors.push(`${pageName}: broken internal link or asset: ${value}`);
+		}
+	}
+}
+
 for (const file of files.filter((path) => path.endsWith('.html'))) {
 	const html = readFileSync(file, 'utf8');
 	const name = relative(dist, file).replace(/\\/g, '/');
@@ -62,6 +102,9 @@ for (const file of files.filter((path) => path.endsWith('.html'))) {
 	if (!showingDrafts && /data-atlas-draft/.test(html)) {
 		errors.push(`${name}: contains an unapproved draft record, which must never reach a public build`);
 	}
+
+	for (const match of html.matchAll(/\b(?:href|src)="([^"]+)"/g)) checkTarget(match[1], name);
+	for (const match of html.matchAll(/\bdata-pagefind-url="([^"]+)"/g)) checkTarget(match[1], name);
 
 	if (!html.includes('data-pagefind-body')) continue;
 	const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];

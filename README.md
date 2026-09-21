@@ -60,6 +60,11 @@ SITE_URL=https://i-sababishraq.github.io BASE_PATH=/kidney-dataset-atlas npm run
 
 ## Adding to the catalog
 
+The broad research inventory is versioned at
+[`docs/Kidney_Open_Datasets_and_CV_Papers.md`](docs/Kidney_Open_Datasets_and_CV_Papers.md). It is a backlog, not a
+publication feed: records are imported individually only after evidence review and curator approval. Citation
+counts and unapproved preview images are not public site metadata.
+
 | What you are adding | Where it goes |
 | --- | --- |
 | Dataset | `src/content/datasets/<id>.md` — description in the body, fields in the frontmatter |

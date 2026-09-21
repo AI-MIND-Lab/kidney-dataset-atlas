@@ -2,10 +2,12 @@ import { strict as assert } from 'node:assert';
 import { test } from 'node:test';
 import {
 	MAX_COMPARE,
+	FACET_KEYS,
 	defaultState,
 	emptyFilters,
 	matches,
 	paramsToState,
+	sanitizeState,
 	sortEntries,
 	stateToParams,
 	toggleCompare,
@@ -27,7 +29,7 @@ const entry = (overrides = {}) => ({
 		task: ['segmentation'],
 		annotations: ['segmentation_masks'],
 		pairing: ['none'],
-		access: ['open_download'],
+		access: ['direct_open_download'],
 		docs: ['partial'],
 	},
 	preview: null,
@@ -45,8 +47,8 @@ test('search matches names, abbreviations and descriptions', () => {
 
 test('values within one filter are alternatives, across filters they all apply', () => {
 	assert.equal(matches(entry(), withFilters({ modality: ['ct', 'mri'] })), true);
-	assert.equal(matches(entry(), withFilters({ modality: ['ct'], access: ['registration_required'] })), false);
-	assert.equal(matches(entry(), withFilters({ modality: ['ct'], access: ['open_download'] })), true);
+	assert.equal(matches(entry(), withFilters({ modality: ['ct'], access: ['registration_gated'] })), false);
+	assert.equal(matches(entry(), withFilters({ modality: ['ct'], access: ['direct_open_download'] })), true);
 });
 
 test('unknown patient counts sort last in both directions', () => {
@@ -84,7 +86,7 @@ test('unknown verification dates also sort last', () => {
 test('state survives a round trip through the URL', () => {
 	const state = {
 		q: 'kidney ct',
-		filters: { ...emptyFilters(), modality: ['ct', 'mri'], access: ['open_download'] },
+		filters: { ...emptyFilters(), modality: ['ct', 'mri'], access: ['direct_open_download'] },
 		sort: 'patients-desc',
 		view: 'table',
 	};
@@ -100,6 +102,17 @@ test('an unknown sort in the URL falls back to the default', () => {
 	const restored = paramsToState(new URLSearchParams('sort=by-vibes&view=grid'));
 	assert.equal(restored.sort, 'name-asc');
 	assert.equal(restored.view, 'cards');
+});
+
+test('unknown and malicious URL filter values are rejected', () => {
+	const parsed = paramsToState(
+		new URLSearchParams('modality=ct&modality=%3C%2Fscript%3E%3Cscript%3Ealert(1)%3C%2Fscript%3E'),
+	);
+	const allowed = Object.fromEntries(
+		FACET_KEYS.map((key) => [key, new Set(key === 'modality' ? ['ct'] : [])]),
+	);
+	const sanitized = sanitizeState(parsed, allowed);
+	assert.deepEqual(sanitized.filters.modality, ['ct']);
 });
 
 test('the comparison tray holds at most four releases', () => {

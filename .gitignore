@@ -5,6 +5,8 @@ dist/
 
 # dependencies
 node_modules/
+test-results/
+playwright-report/
 
 # logs
 npm-debug.log*
@@ -22,3 +24,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Local working notes, kept out of the repository
+docs/implemented-plan-updates.md
+docs/Kidney_Open_Datasets_and_CV_Papers.md

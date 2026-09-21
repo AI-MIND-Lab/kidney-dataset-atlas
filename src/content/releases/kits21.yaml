@@ -1,6 +1,7 @@
 id: kits21
 dataset: kits
 versionLabel: KiTS21
+current: false
 releaseDate: null
 counts:
   patients:
@@ -69,7 +70,7 @@ features:
   followUp:
     status: not_documented
 access:
-  mode: open_download
+  mode: direct_open_download
   registrationVisible: false
   instructions: >-
     Clone the kits21 repository, which carries the segmentations, then run one of the

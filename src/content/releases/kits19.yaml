@@ -1,6 +1,7 @@
 id: kits19
 dataset: kits
 versionLabel: KiTS19
+current: false
 releaseDate: null
 counts:
   patients:
@@ -68,7 +69,7 @@ features:
       status: verified
       verifiedOn: 2026-09-20
 access:
-  mode: open_download
+  mode: direct_open_download
   registrationVisible: false
   instructions: >-
     Clone the kits19 repository, which carries the segmentations and kits.json, then run

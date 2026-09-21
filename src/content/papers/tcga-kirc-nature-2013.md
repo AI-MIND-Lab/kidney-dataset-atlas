@@ -12,6 +12,8 @@ url: null
 methodSummary: The Cancer Genome Atlas study of clear cell renal cell carcinoma, identified here as the primary publication of the TCGA-KIRC cohort.
 models: []
 catalogStatus: draft
+approvedBy: null
+approvedOn: null
 sources:
   - tcga-kirc-nature-2013
 ---

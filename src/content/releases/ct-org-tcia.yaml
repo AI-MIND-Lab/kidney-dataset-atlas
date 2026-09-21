@@ -1,6 +1,7 @@
 id: ct-org-tcia
 dataset: ct-org
 versionLabel: TCIA collection
+current: true
 releaseDate: null
 doi: null
 counts:
@@ -73,7 +74,7 @@ features:
   followUp:
     status: not_applicable
 access:
-  mode: open_download
+  mode: direct_open_download
   registrationVisible: false
   instructions: Download from the collection page on The Cancer Imaging Archive.
   evidence:

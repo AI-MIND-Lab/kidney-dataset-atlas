@@ -1,6 +1,7 @@
 id: fixture-renal-ct-v2
 dataset: fixture-renal-ct
 versionLabel: v2 (synthetic)
+current: true
 releaseDate: 2026-03-01
 counts:
   patients:
@@ -36,7 +37,7 @@ features:
   followUp:
     status: not_documented
 access:
-  mode: open_download
+  mode: direct_open_download
   registrationVisible: false
   instructions: Fixture record; there is nothing to download.
 license:
@@ -61,14 +62,20 @@ eligibility:
   publicAccess:
     status: pass
     note: Fixture record; nothing real is accessed.
+    evidence: &fixtureEvidence
+      sources: [fixture-source-1]
+      status: verified
+      verifiedOn: 2026-09-19
   deidentification:
     status: pass
     note: Fixture record; no human data exist.
+    evidence: *fixtureEvidence
   noPhiHosted:
     status: pass
   termsPermitUse:
     status: pass
     note: Fixture record; no real terms apply.
+    evidence: *fixtureEvidence
   samplePermission:
     status: pass
     note: Fixture record shows no samples.

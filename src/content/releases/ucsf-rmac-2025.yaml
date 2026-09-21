@@ -1,0 +1,200 @@
+id: ucsf-rmac-2025
+dataset: ucsf-rmac
+versionLabel: 2025 public release
+current: true
+releaseDate: null
+doi: 10.58078/C2WC74
+counts:
+  patients:
+    value: null
+    status: not_documented
+    evidence:
+      sources: [ucsf-rmac-repo, ucsf-rmac-preprint]
+      status: verified
+      verifiedOn: 2026-09-21
+      note: The sources report 831 examinations or cases but do not explicitly establish a unique-patient count.
+  examinations:
+    value: 831
+    status: present
+    evidence:
+      sources: [ucsf-rmac-repo, ucsf-rmac-preprint]
+      locator: Dataset description and abstract
+      status: verified
+      verifiedOn: 2026-09-21
+  lesions:
+    value: null
+    status: not_documented
+  slices:
+    value: null
+    status: not_documented
+  slides:
+    value: null
+    status: not_applicable
+  images:
+    value: null
+    status: not_documented
+  patches:
+    value: null
+    status: not_applicable
+  records:
+    value: null
+    status: not_documented
+modalities:
+  - ct
+  - clinical_table
+cohort: >-
+  Pre-operative renal-mass CT examinations acquired at UCSF from 2002 through 2018. Included
+  masses were surgically treated, no larger than 7 cm, and had postoperative pathology results.
+tasks:
+  - segmentation
+  - classification
+annotations:
+  - segmentation_masks
+  - bounding_boxes
+  - pathology_labels
+  - classification_labels
+annotationProvenance:
+  kind: mixed
+  note: >-
+    A radiology resident began collecting and annotating the examinations; the release contains
+    a mixture of polygon outlines and bounding boxes, while diagnostic outcomes come from
+    postoperative pathology.
+  evidence:
+    sources: [ucsf-rmac-repo, ucsf-rmac-preprint]
+    locator: Dataset description and acknowledgements
+    status: verified
+    verifiedOn: 2026-09-21
+features:
+  wsi:
+    status: absent
+    note: Pathology-derived labels are included, but the documented HDF5 contents contain no pathology slide images.
+    evidence:
+      sources: [ucsf-rmac-repo]
+      locator: HDF5 file structure and attributes
+      status: verified
+      verifiedOn: 2026-09-21
+  ctPhases:
+    status: present
+    phases:
+      - unenhanced
+      - arterial / corticomedullary
+      - portal venous / nephrogenic
+      - delayed / excretory
+    note: Every examination has an unenhanced volume and up to three post-contrast phases.
+    evidence:
+      sources: [ucsf-rmac-repo]
+      locator: Dataset description
+      status: verified
+      verifiedOn: 2026-09-21
+  clinicalData:
+    status: present
+    note: Selected metadata include age, sex, tumor type, pathology and pathology grade.
+    evidence:
+      sources: [ucsf-rmac-repo]
+      locator: HDF5 attributes
+      status: verified
+      verifiedOn: 2026-09-21
+  followUp:
+    status: not_documented
+    note: The release is described around pre-operative imaging and surgical pathology; longitudinal follow-up is not documented.
+access:
+  mode: direct_open_download
+  registrationVisible: false
+  instructions: >-
+    Download from the UCSF dataset page or copy the public AWS S3 bucket anonymously with
+    aws s3 sync --no-sign-request s3://ucsf-rmac-dataset/ <destination>.
+  evidence:
+    sources: [ucsf-rmac-repo, ucsf-rmac-aws]
+    locator: Data Access and AWS CLI Access
+    status: verified
+    verifiedOn: 2026-09-21
+license:
+  name: CC BY 4.0
+  url: https://creativecommons.org/licenses/by/4.0/
+  conditions: Attribution is required. Cite the dataset DOI and record the access date for the AWS registry citation.
+deidentification:
+  statement: >-
+    The release uses random ten-character alphanumeric patient keys, and the accompanying
+    preprint states that included identifiers are not known outside the research group and
+    cannot be used to identify individuals.
+  status: present
+  evidence:
+    sources: [ucsf-rmac-repo, ucsf-rmac-preprint]
+    locator: File structure and author declaration
+    status: verified
+    verifiedOn: 2026-09-21
+pairing:
+  - kind: same_session_phases
+    modalities: [ct]
+    status: present
+    note: Available contrast phases are registered to the unenhanced volume when registration succeeded.
+    evidence:
+      sources: [ucsf-rmac-repo]
+      status: verified
+      verifiedOn: 2026-09-21
+  - kind: same_lesion
+    modalities: [ct, clinical_table]
+    status: present
+    note: Tumor localization and postoperative pathology labels are supplied for the renal mass in each examination.
+    evidence:
+      sources: [ucsf-rmac-repo, ucsf-rmac-preprint]
+      status: verified
+      verifiedOn: 2026-09-21
+dictionary:
+  completeness: partial
+  inspectedScope: >-
+    The documented HDF5 groups and attributes plus the phase registration codes were mapped.
+    Values and distributions were not inspected from the downloaded release.
+structure: >-
+  One HDF5 file per patient-keyed examination contains noncon, optional arterial, portven and
+  delay arrays, a mask array, pixel-dimension attributes and selected labels. phase_reg_key.csv
+  records phase availability and registration status using codes 0, 1 and 2.
+citation: >-
+  Larson P, Wang ZJ, Sahin S, et al. UCSF RMaC: UCSF Renal Mass CT Dataset. UCSF Center for
+  Intelligent Imaging Datasets for Medical Imaging, 2025. doi:10.58078/C2WC74. See the dataset
+  page for the current required citation.
+limitations:
+  - The 831 figure is an examination count; a unique-patient count is not explicitly documented.
+  - Only surgically treated masses no larger than 7 cm were included, creating selection and spectrum limitations.
+  - Localization is a mixture of bounding boxes and polygon masks, so boundary precision is not uniform.
+  - Registration failed for a minority of post-contrast volumes; the number of affected examinations is not stated in the repository summary.
+  - The distributed HDF5 volumes are not the source DICOM objects, and no image-level inspection was performed for this atlas record.
+eligibility:
+  publicAccess:
+    status: pass
+    note: The AWS bucket supports anonymous access without an account or individual approval.
+    evidence:
+      sources: [ucsf-rmac-aws]
+      locator: AWS CLI Access
+      status: verified
+      verifiedOn: 2026-09-21
+  deidentification:
+    status: pass
+    note: Random patient keys and the preprint's identifier declaration document deidentification.
+    evidence:
+      sources: [ucsf-rmac-repo, ucsf-rmac-preprint]
+      status: verified
+      verifiedOn: 2026-09-21
+  noPhiHosted:
+    status: pass
+    note: This site stores descriptions and source links only; no UCSF data files are mirrored.
+  termsPermitUse:
+    status: pass
+    note: The AWS registry identifies the data licence as CC BY 4.0.
+    evidence:
+      sources: [ucsf-rmac-aws]
+      locator: Licence
+      status: verified
+      verifiedOn: 2026-09-21
+  samplePermission:
+    status: pass
+    note: No preview images are shown for this release.
+catalogStatus: draft
+verifiedOn: 2026-09-21
+researchedBy: agent
+approvedBy: null
+approvedOn: null
+sources:
+  - ucsf-rmac-repo
+  - ucsf-rmac-aws
+  - ucsf-rmac-preprint

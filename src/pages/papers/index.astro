@@ -5,7 +5,9 @@ import { humanize } from '../../lib/display';
 import { paperPath, withBase } from '../../lib/site';
 
 const papers = await publishedPapers();
-const rows = papers.map((paper) => ({ paper, uses: studyUsesForPaper(paper.data.id) }));
+const rows = await Promise.all(
+	papers.map(async (paper) => ({ paper, uses: await studyUsesForPaper(paper.data.id) })),
+);
 ---
 
 <BaseLayout title="Papers" description="Papers and model architectures built with the catalogued datasets.">

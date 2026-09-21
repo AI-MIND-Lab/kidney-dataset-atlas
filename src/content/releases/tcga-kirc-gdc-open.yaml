@@ -1,6 +1,7 @@
 id: tcga-kirc-gdc-open
 dataset: tcga-kirc
 versionLabel: GDC open-access tier
+current: true
 releaseDate: null
 counts:
   patients:
@@ -71,7 +72,7 @@ features:
       status: verified
       verifiedOn: 2026-09-19
 access:
-  mode: open_download
+  mode: direct_open_download
   registrationVisible: false
   instructions: >-
     Open-access files — clinical, biospecimen and slide images — download from the GDC Data

@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../lib/site';
+
+const pagefindUrl = withBase('/pagefind/pagefind.js');
+const baseUrl = withBase('/');
+---
+
+<BaseLayout title="Search" description="Search datasets, releases, papers, and documentation in the Kidney Dataset Atlas." indexable={false}>
+	<section class="prose">
+		<h1>Search</h1>
+		<p>Search the generated atlas index. Your query remains in the address bar so the result page can be shared.</p>
+	</section>
+
+	<form class="search-form" action={withBase('/search/')} method="get" role="search">
+		<label class="visually-hidden" for="search-query">Search the atlas</label>
+		<input id="search-query" name="q" type="search" autocomplete="off" placeholder="Dataset, modality, paper, variable…" />
+		<button type="submit">Search</button>
+	</form>
+
+	<div data-search-root data-pagefind-url={pagefindUrl} data-base-url={baseUrl}>
+		<p data-search-status>Enter a query to search the atlas.</p>
+		<ol class="search-results" data-search-results></ol>
+	</div>
+	<noscript>
+		<p class="notice">Search needs JavaScript. You can still browse the <a href={withBase('/')}>dataset catalog</a> or <a href={withBase('/papers/')}>paper index</a>.</p>
+	</noscript>
+</BaseLayout>
+
+<script is:inline type="module">
+	const root = document.querySelector('[data-search-root]');
+	const form = document.querySelector('.search-form');
+	const input = document.querySelector('#search-query');
+	const status = root?.querySelector('[data-search-status]');
+	const results = root?.querySelector('[data-search-results]');
+
+	function resultItem(data) {
+		const item = document.createElement('li');
+		const heading = document.createElement('h2');
+		const link = document.createElement('a');
+		link.href = data.url ?? '#';
+		link.textContent = data.meta?.title ?? 'Untitled result';
+		heading.append(link);
+		item.append(heading);
+
+		const summary = document.createElement('p');
+		if (data.raw_content) {
+			summary.textContent = data.raw_content.slice(0, 260);
+		} else {
+			const parsed = new DOMParser().parseFromString(data.excerpt ?? '', 'text/html');
+			summary.textContent = (parsed.body.textContent ?? '').slice(0, 260);
+		}
+		item.append(summary);
+		return item;
+	}
+
+	async function runSearch(query) {
+		if (!root || !status || !results) return;
+		results.replaceChildren();
+		if (!query) {
+			status.textContent = 'Enter a query to search the atlas.';
+			return;
+		}
+
+		status.textContent = `Searching for “${query}”…`;
+		try {
+			const pagefindUrl = root.dataset.pagefindUrl;
+			if (!pagefindUrl) throw new Error('Pagefind URL is missing');
+			const pagefind = await import(/* @vite-ignore */ pagefindUrl);
+			await pagefind.options({ baseUrl: root.dataset.baseUrl ?? '/' });
+			const response = await pagefind.search(query);
+			const loaded = await Promise.all(response.results.slice(0, 50).map((result) => result.data()));
+			for (const data of loaded) results.append(resultItem(data));
+			status.textContent = `${response.results.length} result${response.results.length === 1 ? '' : 's'} for “${query}”.`;
+		} catch {
+			status.textContent = 'Search is available after a production build. You can still browse datasets and papers using the navigation above.';
+		}
+	}
+
+	const query = new URLSearchParams(location.search).get('q')?.trim() ?? '';
+	if (input) input.value = query;
+	void runSearch(query);
+
+	form?.addEventListener('submit', (event) => {
+		event.preventDefault();
+		const nextQuery = input?.value.trim() ?? '';
+		const url = new URL(location.href);
+		if (nextQuery) url.searchParams.set('q', nextQuery);
+		else url.searchParams.delete('q');
+		history.pushState({}, '', url);
+		void runSearch(nextQuery);
+	});
+
+	window.addEventListener('popstate', () => {
+		const nextQuery = new URLSearchParams(location.search).get('q')?.trim() ?? '';
+		if (input) input.value = nextQuery;
+		void runSearch(nextQuery);
+	});
+</script>

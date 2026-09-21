@@ -4,8 +4,9 @@
 id: bad-release
 dataset: no-such-dataset
 versionLabel: v1
+current: true
 access:
-  mode: open_download
+  mode: direct_open_download
   instructions: Test record.
 license:
   name: Test licence

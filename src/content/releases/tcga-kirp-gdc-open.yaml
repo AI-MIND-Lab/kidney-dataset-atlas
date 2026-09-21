@@ -1,6 +1,7 @@
 id: tcga-kirp-gdc-open
 dataset: tcga-kirp
 versionLabel: GDC open-access tier
+current: true
 releaseDate: null
 counts:
   patients:
@@ -67,7 +68,7 @@ features:
     status: not_verified
     note: Follow-up records were confirmed for the clear cell project; case records for this project were not queried individually.
 access:
-  mode: open_download
+  mode: direct_open_download
   registrationVisible: false
   instructions: >-
     Open-access files — clinical, biospecimen and slide images — download from the GDC Data

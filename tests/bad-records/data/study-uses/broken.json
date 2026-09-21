@@ -1,0 +1,71 @@
+[
+	{
+		"id": "bad-public-release-to-draft-paper",
+		"paper": "bad-draft-paper",
+		"release": "bad-public-current-a",
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": ["bad-source"],
+			"status": "verified",
+			"verifiedOn": "2026-09-19"
+		},
+		"trainTestRole": "test",
+		"results": []
+	},
+	{
+		"id": "bad-public-paper-to-draft-release",
+		"paper": "bad-public-paper",
+		"release": "bad-draft-release",
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": ["bad-source"],
+			"status": "verified",
+			"verifiedOn": "2026-09-19"
+		},
+		"trainTestRole": "test",
+		"results": []
+	},
+	{
+		"id": "bad-unverified-external-cohort",
+		"paper": "bad-public-paper",
+		"release": null,
+		"externalCohort": {
+			"name": "Private test cohort",
+			"accessMode": "private_institutional",
+			"evidence": {
+				"sources": ["bad-source"],
+				"status": "not_verified"
+			}
+		},
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": ["bad-source"],
+			"status": "verified",
+			"verifiedOn": "2026-09-19"
+		},
+		"trainTestRole": "test",
+		"results": []
+	},
+	{
+		"id": "bad-two-targets",
+		"paper": "bad-public-paper",
+		"release": "bad-public-current-a",
+		"externalCohort": {
+			"name": "Ambiguous cohort",
+			"accessMode": "private_institutional",
+			"evidence": {
+				"sources": ["bad-source"],
+				"status": "verified",
+				"verifiedOn": "2026-09-19"
+			}
+		},
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": ["bad-source"],
+			"status": "verified",
+			"verifiedOn": "2026-09-19"
+		},
+		"trainTestRole": "test",
+		"results": []
+	}
+]

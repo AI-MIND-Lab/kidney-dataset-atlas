@@ -1,6 +1,7 @@
 id: fixture-clinical-registry-2024
 dataset: fixture-clinical-registry
 versionLabel: 2024 extract (synthetic)
+current: true
 releaseDate: 2024-11-20
 counts:
   patients:
@@ -28,7 +29,7 @@ features:
     status: present
     note: Invented annual follow-up.
 access:
-  mode: open_download
+  mode: direct_open_download
   registrationVisible: false
   instructions: Fixture record; there is nothing to download.
 license:
@@ -45,12 +46,18 @@ limitations:
 eligibility:
   publicAccess:
     status: pass
+    evidence: &fixtureEvidence
+      sources: [fixture-source-1]
+      status: verified
+      verifiedOn: 2026-09-19
   deidentification:
     status: pass
+    evidence: *fixtureEvidence
   noPhiHosted:
     status: pass
   termsPermitUse:
     status: pass
+    evidence: *fixtureEvidence
   samplePermission:
     status: pass
 catalogStatus: published

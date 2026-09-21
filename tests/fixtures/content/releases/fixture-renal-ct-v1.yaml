@@ -1,6 +1,7 @@
 id: fixture-renal-ct-v1
 dataset: fixture-renal-ct
 versionLabel: v1 (synthetic)
+current: false
 releaseDate: 2025-05-01
 counts:
   patients:
@@ -14,7 +15,7 @@ tasks:
 annotations:
   - segmentation_masks
 access:
-  mode: open_download
+  mode: direct_open_download
   registrationVisible: false
   instructions: Fixture record; there is nothing to download.
 license:
@@ -30,12 +31,18 @@ limitations:
 eligibility:
   publicAccess:
     status: pass
+    evidence: &fixtureEvidence
+      sources: [fixture-source-1]
+      status: verified
+      verifiedOn: 2026-09-19
   deidentification:
     status: pass
+    evidence: *fixtureEvidence
   noPhiHosted:
     status: pass
   termsPermitUse:
     status: pass
+    evidence: *fixtureEvidence
   samplePermission:
     status: pass
 catalogStatus: published

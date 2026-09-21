@@ -1,0 +1,97 @@
+[
+	{
+		"id": "cptac-ccrcc-patient-id",
+		"release": "cptac-ccrcc-v14",
+		"originalName": "project Patient ID",
+		"definition": "Deidentified subject identifier shared by TCIA imaging and the corresponding CPTAC clinical, proteomic and genomic records.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "identifier",
+		"group": "administrative",
+		"derivation": "derived",
+		"normalizedConcept": "deidentified subject identifier",
+		"provenance": "Documented by TCIA; no manifest value was inspected.",
+		"evidence": {
+			"sources": ["cptac-ccrcc-tcia"],
+			"locator": "Subject Identifiers",
+			"status": "verified",
+			"verifiedOn": "2026-09-21"
+		}
+	},
+	{
+		"id": "cptac-ccrcc-time-point-id",
+		"release": "cptac-ccrcc-v14",
+		"originalName": "Clinical Trial Time Point ID (0012,0050)",
+		"file": "DICOM radiology objects",
+		"definition": "Number of days from pathological diagnosis to the scan; negative values precede diagnosis and positive values follow it.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": "Relative to pathological diagnosis",
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "days from diagnosis to imaging",
+		"provenance": "Inserted by TCIA to retain temporal context after date deidentification.",
+		"evidence": {
+			"sources": ["cptac-ccrcc-tcia"],
+			"locator": "Dates",
+			"status": "verified",
+			"verifiedOn": "2026-09-21"
+		}
+	},
+	{
+		"id": "cptac-ccrcc-radiology-image",
+		"release": "cptac-ccrcc-v14",
+		"originalName": "Radiology Images",
+		"file": "DICOM studies and series",
+		"definition": "Heterogeneous standard-of-care CT or MRI acquired near pathological diagnosis or at follow-up where available.",
+		"type": "image",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": "Diagnosis-related or follow-up",
+		"role": "predictor",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": "radiology image",
+		"provenance": "Version 14 collection table and detailed description.",
+		"evidence": {
+			"sources": ["cptac-ccrcc-tcia"],
+			"locator": "Version 14 Radiology Images and Detailed Description",
+			"status": "verified",
+			"verifiedOn": "2026-09-21"
+		}
+	},
+	{
+		"id": "cptac-ccrcc-wsi",
+		"release": "cptac-ccrcc-v14",
+		"originalName": "Tissue Slide Images",
+		"file": "SVS whole-slide images",
+		"definition": "Digitized histopathology whole-slide image collected through the CPTAC pathology qualification workflow.",
+		"type": "image",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "slide",
+		"timePoint": null,
+		"role": "predictor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "whole-slide histopathology image",
+		"provenance": "Version 14 collection table and detailed description.",
+		"evidence": {
+			"sources": ["cptac-ccrcc-tcia"],
+			"locator": "Version 14 Tissue Slide Images and Detailed Description",
+			"status": "verified",
+			"verifiedOn": "2026-09-21"
+		}
+	}
+]

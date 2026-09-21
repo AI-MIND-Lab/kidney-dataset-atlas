@@ -21,6 +21,8 @@ url: https://arxiv.org/abs/2307.01984
 methodSummary: Report of the KiTS21 challenge, describing the cohort, the three-stage annotation procedure, the challenge results and the dataset's limitations.
 models: []
 catalogStatus: draft
+approvedBy: null
+approvedOn: null
 sources:
   - kits21-paper
 ---
@@ -30,8 +32,7 @@ segmentations were produced, and what the organisers consider the dataset's weak
 of what this catalog records about the KiTS cohort — the institutions, the years, the
 annotation procedure, the sex imbalance — comes from this paper.
 
-It reports the **KiTS21** edition. KiTS23 extends that cohort, and no publication specific to
-the KiTS23 release was found, so the link to that release is recorded as unverified rather
-than as the release's own publication.
+It reports the **KiTS21** edition. KiTS23 extends that cohort, but that continuity is recorded
+as a release relationship rather than treating this paper as a KiTS23 publication.
 
 The author list here is shortened; the paper has 45 authors.

@@ -2,17 +2,18 @@
 	{
 		"id": "use-kits21-challenge",
 		"paper": "kits21-challenge",
-		"release": "kits23",
+		"release": "kits21",
 		"role": "benchmark",
 		"actualUseEvidence": {
 			"sources": [
 				"kits21-paper"
 			],
 			"locator": "Cohort, annotation method and limitations sections",
-			"status": "not_verified",
-			"note": "The paper reports the KiTS21 edition, which KiTS23 extends. No publication specific to the KiTS23 release was located, so this is the closest publication rather than a confirmed publication of this release."
+			"status": "verified",
+			"verifiedOn": "2026-09-20",
+			"note": "The paper is the challenge report for the KiTS21 edition. KiTS23 is connected separately through version and overlap records."
 		},
-		"subset": "The KiTS21 cohort, which this release extends",
+		"subset": "KiTS21 challenge cohort",
 		"preprocessing": null,
 		"task": "segmentation",
 		"trainTestRole": "not_documented",

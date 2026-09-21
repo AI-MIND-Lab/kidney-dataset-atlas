@@ -25,5 +25,10 @@ const isCurrent = (href: string) => {
 				}
 			</ul>
 		</nav>
+		<form class="site-search" action={withBase('/search/')} method="get" role="search">
+			<label class="visually-hidden" for="site-search-query">Search the atlas</label>
+			<input id="site-search-query" name="q" type="search" placeholder="Search" />
+			<button type="submit">Search</button>
+		</form>
 	</div>
 </header>

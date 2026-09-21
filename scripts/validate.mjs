@@ -25,9 +25,7 @@ const dataRoot = process.env.ATLAS_DATA_ROOT
 	: join(root, useFixtures ? 'tests/fixtures/data' : 'src/data');
 
 const errors = [];
-const warnings = [];
 const fail = (file, message) => errors.push({ file, message });
-const warn = (file, message) => warnings.push({ file, message });
 const rel = (file) => relative(root, file).replace(/\\/g, '/');
 
 /** Every file in a directory tree, or nothing if the directory is absent. */
@@ -121,6 +119,19 @@ for (const [name, records] of Object.entries({
 
 const has = (collection, id) => ids[collection].has(id);
 
+/** Route slugs are independent from ids, but must still be unique per route family. */
+for (const [name, records] of [
+	['datasets', datasets],
+	['papers', papers],
+]) {
+	const seen = new Map();
+	for (const record of records) {
+		const existing = seen.get(record.data.slug);
+		if (existing) fail(record.file, `duplicate ${name} slug "${record.data.slug}" (also in ${existing})`);
+		seen.set(record.data.slug, record.file);
+	}
+}
+
 /* References ------------------------------------------------------------- */
 
 const reference = (record, collection, id, field) => {
@@ -152,7 +163,7 @@ const paperModels = new Map(papers.map((paper) => [paper.data.id, new Set(paper.
 
 for (const record of studyUses) {
 	reference(record, 'papers', record.data.paper, 'paper');
-	reference(record, 'releases', record.data.release, 'release');
+	if (record.data.release) reference(record, 'releases', record.data.release, 'release');
 	const models = paperModels.get(record.data.paper);
 	for (const result of record.data.results) {
 		if (models && !models.has(result.model)) {
@@ -198,6 +209,17 @@ for (const record of [
 
 const publishedReleases = releases.filter((record) => record.data.catalogStatus === 'published');
 const draftReleases = releases.filter((record) => record.data.catalogStatus !== 'published');
+const publishedPapers = papers.filter((record) => record.data.catalogStatus === 'published');
+const publishedReleaseIds = new Set(publishedReleases.map((record) => record.data.id));
+const publishedPaperIds = new Set(publishedPapers.map((record) => record.data.id));
+const evidenceIsVerified = (value) =>
+	value?.status === 'verified' && Array.isArray(value.sources) && value.sources.length > 0;
+const evidenceRequiredEligibility = ['publicAccess', 'deidentification', 'termsPermitUse'];
+const publiclyEligibleAccessModes = new Set([
+	'direct_open_download',
+	'public_account_or_terms',
+	'registration_gated',
+]);
 
 for (const record of publishedReleases) {
 	const { approvedBy, approvedOn, eligibility, verifiedOn, id } = record.data;
@@ -212,6 +234,12 @@ for (const record of publishedReleases) {
 		if (check.status !== 'pass') {
 			fail(record.file, `release "${id}" is published but eligibility check ${key} is "${check.status}"`);
 		}
+		if (check.status === 'pass' && evidenceRequiredEligibility.includes(key) && !evidenceIsVerified(check.evidence)) {
+			fail(record.file, `release "${id}" passes ${key} without verified source evidence`);
+		}
+	}
+	if (!publiclyEligibleAccessModes.has(record.data.access.mode)) {
+		fail(record.file, `release "${id}" uses ineligible public access mode "${record.data.access.mode}"`);
 	}
 	for (const sample of samples.filter((entry) => entry.data.release === id)) {
 		if (!sample.data.permissionApprovedBy) {
@@ -223,13 +251,6 @@ for (const record of publishedReleases) {
 			);
 		}
 	}
-	// A published release must not link out to draft papers.
-	for (const use of studyUses.filter((entry) => entry.data.release === id)) {
-		const paper = papers.find((entry) => entry.data.id === use.data.paper);
-		if (paper && paper.data.catalogStatus !== 'published') {
-			warn(use.file, `published release "${id}" cites paper "${paper.data.id}", which is still a draft`);
-		}
-	}
 }
 
 for (const record of releases) {
@@ -238,9 +259,57 @@ for (const record of releases) {
 	}
 }
 
+for (const record of publishedPapers) {
+	const { approvedBy, approvedOn, id } = record.data;
+	if (!approvedBy) {
+		fail(record.file, `paper "${id}" is published but has no approvedBy`);
+	} else if (!curators.includes(approvedBy)) {
+		fail(record.file, `paper "${id}" was approved by "${approvedBy}", who is not listed in curators.yaml`);
+	}
+	if (!approvedOn) fail(record.file, `paper "${id}" is published but has no approvedOn`);
+}
+
+for (const record of papers) {
+	if (record.data.approvedBy && !curators.includes(record.data.approvedBy)) {
+		fail(record.file, `approvedBy "${record.data.approvedBy}" is not listed in curators.yaml`);
+	}
+}
+
+// Every public dataset has one explicit canonical release; dates and labels
+// are display metadata and are never used to guess which release is current.
+for (const dataset of datasets) {
+	const ownPublished = publishedReleases.filter((record) => record.data.dataset === dataset.data.id);
+	if (ownPublished.length === 0) continue;
+	const current = ownPublished.filter((record) => record.data.current);
+	if (current.length !== 1) {
+		fail(dataset.file, `dataset "${dataset.data.id}" has ${current.length} current published releases; expected exactly one`);
+	}
+}
+
+// A public page may only expose relationships whose catalogued endpoints are
+// public. External/private cohorts can appear on approved paper pages, but
+// only with verified relationship and cohort evidence and never with a route.
+for (const record of studyUses) {
+	const paperIsPublic = publishedPaperIds.has(record.data.paper);
+	const releaseIsPublic = record.data.release ? publishedReleaseIds.has(record.data.release) : false;
+	if (releaseIsPublic && !paperIsPublic) {
+		fail(record.file, `published release "${record.data.release}" cites draft paper "${record.data.paper}"`);
+	}
+	if (paperIsPublic && record.data.release && !releaseIsPublic) {
+		fail(record.file, `published paper "${record.data.paper}" cites draft release "${record.data.release}"`);
+	}
+	if (!paperIsPublic && !releaseIsPublic) continue;
+	if (!evidenceIsVerified(record.data.actualUseEvidence)) {
+		fail(record.file, `public study use "${record.data.id}" lacks verified relationship evidence`);
+	}
+	if (record.data.externalCohort && !evidenceIsVerified(record.data.externalCohort.evidence)) {
+		fail(record.file, `public study use "${record.data.id}" lacks verified external-cohort evidence`);
+	}
+}
+
 /* Report ----------------------------------------------------------------- */
 
-const counts = `${datasets.length} datasets, ${releases.length} releases (${publishedReleases.length} published), ${papers.length} papers, ${variables.length} variables, ${samples.length} samples`;
+const counts = `${datasets.length} datasets, ${releases.length} releases (${publishedReleases.length} published), ${papers.length} papers (${publishedPapers.length} published), ${variables.length} variables, ${samples.length} samples`;
 console.log(`Kidney Dataset Atlas — record validation${useFixtures ? ' (fixtures)' : ''}`);
 console.log(counts);
 
@@ -259,8 +328,6 @@ if (draftReleases.length > 0) {
 		}
 	}
 }
-
-for (const { file, message } of warnings) console.warn(`warning  ${file}: ${message}`);
 
 if (errors.length > 0) {
 	console.error(`\n${errors.length} problem${errors.length === 1 ? '' : 's'} found:`);
