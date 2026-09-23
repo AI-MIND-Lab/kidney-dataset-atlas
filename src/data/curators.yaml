@@ -2,5 +2,10 @@
 # the reuse permission for a sample image. An agent must never add itself here,
 # set approvedBy, or switch a release to published: see docs/decisions.md and
 # the curator approval section of the project brief (docs/brief.md, section 12).
+# Usernames must match GitHub logins exactly: approvedBy is compared character for character.
 curators:
   - i-sababishraq
+  # Added at i-sababishraq's request on 2026-09-23.
+  - kkellyzhang
+  - omarftt
+  - ghazalehmirzaee
