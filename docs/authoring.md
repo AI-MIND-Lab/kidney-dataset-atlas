@@ -6,6 +6,26 @@ Every page on the site is generated from the files described here. Two rules sit
    source, and the record names that source and where in it the claim appears.
 2. **Unknown is written as unknown.** Never fill a gap with zero, "no", or a plausible guess.
 
+## Complete examples
+
+This guide explains the rules. For a complete, valid example of every record type, copy from the synthetic
+fixtures, which the tests build into a working site:
+
+| Record | Example |
+| --- | --- |
+| Dataset | `tests/fixtures/content/datasets/fixture-renal-ct.md` |
+| Release | `tests/fixtures/content/releases/fixture-renal-ct-v2.yaml` |
+| Paper and its models | `tests/fixtures/content/papers/fixture-paper.md` |
+| Variables | `tests/fixtures/data/variables/fixture-renal-ct-v2.json` |
+| Study uses | `tests/fixtures/data/study-uses/fixture-uses.json` |
+| Sources | `tests/fixtures/data/sources/fixture-sources.json` |
+| Samples | `tests/fixtures/data/samples/fixture-samples.json` |
+| Quality findings | `tests/fixtures/data/quality/fixture-quality.json` |
+| Relations and overlap | `tests/fixtures/data/relations/fixture-relations.json`, `tests/fixtures/data/overlap/fixture-overlap.json` |
+
+The real records in `src/content/` and `src/data/` are also good models; `src/content/releases/kits23.yaml` is one
+of the most complete. Fixture content is invented: copy the structure, never the values.
+
 ## Saying what you do not know
 
 | Value | Use it when |
@@ -130,9 +150,13 @@ Preview files go in `public/previews/`, compressed. They live in git history for
 
 ## Before committing
 
+Run the same checks CI runs (also listed in [CONTRIBUTING.md](../CONTRIBUTING.md)):
+
 ```bash
 npm run validate   # schemas, references, approval rules, draft checklist
+npm run check      # TypeScript and Astro checks
 npm test
+npm run build      # the full build, including search and the output checks
 ```
 
 Validation prints an approval checklist for every draft release. The curator reads the listed sources, then

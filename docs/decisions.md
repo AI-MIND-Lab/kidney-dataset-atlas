@@ -1,6 +1,6 @@
 # Decisions
 
-Choices that a reader of the brief would not predict from the brief alone, and why they were made.
+Choices that a reader of the [project brief](brief.md) would not predict from the brief alone, and why they were made.
 
 ## Releases are not listed on the dataset record, but the current one is declared
 

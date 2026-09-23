@@ -8,7 +8,8 @@ This repository contains two kinds of material under different terms.
    synthetic fixtures in tests/fixtures/), the .github/ and .devcontainer/
    directories, the build and tooling configuration files in the repository
    root, and the project documentation (README.md, CONTRIBUTING.md,
-   AGENTS.md, CLAUDE.md, docs/authoring.md and docs/decisions.md).
+   AGENTS.md, CLAUDE.md, docs/authoring.md, docs/decisions.md and
+   docs/brief.md).
 
 2. CATALOGUE DATA AND RESEARCH CONTENT: all rights reserved
 

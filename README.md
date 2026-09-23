@@ -89,7 +89,9 @@ counts and unapproved preview images are not public site metadata.
 | Source | `src/data/sources/<name>.json` — every claim cites one of these |
 | Correction | Change the record and its source; `npm run validate` before committing |
 
-Templates and the rules for unknown values are in [docs/authoring.md](docs/authoring.md).
+The rules for records and unknown values are in [docs/authoring.md](docs/authoring.md), which also points to a
+complete synthetic example of every record type in `tests/fixtures/` to copy from. The original product brief is
+[docs/brief.md](docs/brief.md).
 
 ## Approval
 
@@ -117,7 +119,7 @@ src/lib/          schemas, catalog queries, display rules, URL helpers
 src/pages/        routes
 scripts/          record validation, build output checks
 tests/            tests and synthetic fixtures
-docs/             authoring guide and recorded decisions
+docs/             authoring guide, recorded decisions, product brief, research inventory
 ```
 
 ## Contributing

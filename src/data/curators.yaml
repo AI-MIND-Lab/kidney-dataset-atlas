@@ -1,6 +1,6 @@
 # GitHub usernames allowed to approve a release for publication, and to approve
 # the reuse permission for a sample image. An agent must never add itself here,
 # set approvedBy, or switch a release to published: see docs/decisions.md and
-# the curator approval section of the project brief.
+# the curator approval section of the project brief (docs/brief.md, section 12).
 curators:
   - i-sababishraq

@@ -69,7 +69,7 @@ const countsByUnit = z.object({
 	records: count.optional(),
 });
 
-/** One of the five eligibility gates from the brief. */
+/** One of the five eligibility gates from the brief (docs/brief.md, section 2). */
 const eligibilityCheck = z.object({
 	status: z.enum(['pass', 'fail', 'unknown']),
 	note: z.string().optional(),

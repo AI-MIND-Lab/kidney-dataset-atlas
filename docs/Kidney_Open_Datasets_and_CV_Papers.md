@@ -19,6 +19,33 @@ This is a broad, source-checked starting inventory, **not a verified list of eve
 
 The intended scope is publicly released, deidentified data that do not require obtaining PHI or controlled clinical-record access. Do not label a dataset “HIPAA-free” based on its name or a public URL. Record the publisher's deidentification statement, exact data license, and access conditions for the release selected. Download permission and permission to reproduce sample images on the website are separate fields.
 
+## Import status on the site
+
+This inventory uses its own IDs (K01, M05, …); the site's records use slugs. The table below shows which entries have
+site records so far, as of 23 September 2026. **Every site record is still a draft.** Entries not listed have no site
+record yet and are open for a contributor to research and import, following [docs/authoring.md](authoring.md).
+Update this table in the same pull request as the import.
+
+| Inventory entry | Site dataset (`src/content/datasets/`) | Site releases (`src/content/releases/`) | Papers linked on the site |
+|---|---|---|---|
+| K01 KiTS19 | `kits` | `kits19`, `c4kc-kits` (TCIA copy) | `kits19-data-paper` |
+| K02 KiTS21 | `kits` | `kits21` | `kits21-challenge` |
+| K03 KiTS23 | `kits` | `kits23` | `kits23-auto3dseg` |
+| K06 TCGA-KIRC slides | `tcga-kirc` | `tcga-kirc-gdc-open` | `tabibu-2019`, `tcga-kirc-nature-2013` |
+| K07 TCGA-KIRP slides | `tcga-kirp` | `tcga-kirp-gdc-open` | `tabibu-2019` |
+| K08 TCGA-KICH slides | `tcga-kich` | `tcga-kich-gdc-open` | `tabibu-2019` |
+| K10 HuBMAP Hacking the Kidney | `hubmap-kidney` | `hubmap-hacking-the-kidney` | `jain-2023` |
+| M01 TotalSegmentator CT | `totalsegmentator-ct` | `totalsegmentator-ct-v3` | `wasserthal-2023` |
+| M02 TotalSegmentator MRI | `totalsegmentator-mri` | `totalsegmentator-mri-v3` | none yet |
+| M05 CT-ORG | `ct-org` | `ct-org-tcia` | none yet |
+| G01 UCSF RMaC | `ucsf-rmac` | `ucsf-rmac-2025` | `ucsf-rmac-2026` |
+| G02 CPTAC-CCRCC | `cptac-ccrcc` | `cptac-ccrcc-v14` | none yet |
+| N01 NHANES (section 5) | `nhanes` | `nhanes-2021-2023-kidney` | none (not an imaging dataset) |
+
+The verified downstream papers in §6.4 are not yet on the site: importing one means adding a paper record in
+`src/content/papers/` and a study use in `src/data/study-uses/`.
+
+
 ## 1. Kidney-focused human imaging and pathology
 
 | ID | Dataset name | Dataset link | Images / kidney task | Papers that used the dataset with computer vision | Paper DOI, arXiv, or full-text link | Evidence and access notes |
@@ -99,6 +126,7 @@ These should be separate from the computer-vision table. No CV paper relationshi
 
 | Dataset / resource | Link | Kidney relevance | Computer-vision paper / DOI status |
 |---|---|---|---|
+| **N01 NHANES — National Health and Nutrition Examination Survey, kidney laboratory files (August 2021–August 2023)** | [NHANES](https://wwwn.cdc.gov/nchs/nhanes/); [ALB_CR_L codebook](https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/ALB_CR_L.htm); [BIOPRO_L codebook](https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/BIOPRO_L.htm) | Nationally representative, cross-sectional US survey. Urine albumin and creatinine (ALB_CR_L, 8,493 participants aged 3 and over) and serum creatinine and urea nitrogen in the standard biochemistry profile (BIOPRO_L, 7,199 participants aged 12 and over; 6,750 gave blood). Survey participants, not a clinical cohort; analyses need the design variables and weights from the same cycle's demographics file. Public-use files under the [NCHS data user agreement](https://www.cdc.gov/nchs/policy/data-user-agreement.html). | Not applicable: tabular laboratory data with no image modality. Already has a draft site record (`nhanes`). |
 | **UCI Chronic Kidney Disease** | [Official dataset](https://archive.ics.uci.edu/dataset/336/chronic+kidney+disease) | Tabular clinical/laboratory classification dataset; no image modality. | Not applicable to a native image-based CV relationship. Any later tabular-to-image transformation should be described as such, not as medical imaging. |
 | **Kidney Precision Medicine Project public resources** | [KPMP portal](https://www.kpmp.org/) | A resource family containing kidney atlas and study data; individual products can have different access rules. | Discovery lead for a wider dictionary. Select and verify individual public records; do not mark the entire project as unrestricted or attach an unverified CV paper. |
 | **GEO kidney-study records** | [NCBI GEO](https://www.ncbi.nlm.nih.gov/geo/) | Repository containing kidney expression and other functional-genomics studies. | GEO is not one dataset. Add individual accession numbers and their actual modalities; do not infer that a gene-expression record includes usable images. |
