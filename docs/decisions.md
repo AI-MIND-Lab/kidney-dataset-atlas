@@ -42,8 +42,9 @@ if that marker appears in a normal build.
 
 ## The validator, not the platform, enforces approval
 
-GitHub cannot require reviews on a private repository on the free plan, and an agent commits with the owner's
-credentials, so git history alone cannot show who checked what. `npm run validate` refuses to build a published
+An agent commits with the owner's credentials, so git history alone cannot show who checked what; and
+repository settings such as required reviews can change. (The repository started private, where the free plan
+cannot require reviews at all.) `npm run validate` refuses to build a published
 release whose `approvedBy` is empty or is not listed in `src/data/curators.yaml`, whose eligibility checks have
 not all passed, or that displays a sample without its own permission approval.
 
@@ -56,5 +57,7 @@ shared, and the index is loaded from a path that respects the configured base.
 
 ## Deployment is prepared but disabled
 
-`deploy.yml` starts only by hand. A GitHub Pages site is public even from a private repository, and viewer
-restrictions need GitHub Enterprise Cloud, so during the private phase collaborators run the site locally.
+`deploy.yml` starts only by hand. While the repository was private it could not run: a GitHub Pages site is
+public even from a private repository, and viewer restrictions need GitHub Enterprise Cloud. The repository
+became public on 23 September 2026. Publishing the site remains a separate, deliberate step, and it publishes
+approved records only.

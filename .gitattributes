@@ -1,0 +1,9 @@
+# Store text with LF endings whatever the contributor's platform, so diffs stay clean.
+* text=auto eol=lf
+
+*.ico binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary

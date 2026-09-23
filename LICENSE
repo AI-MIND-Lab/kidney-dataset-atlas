@@ -1,0 +1,64 @@
+This repository contains two kinds of material under different terms.
+
+1. SOFTWARE: MIT License
+
+   The MIT License below applies to the software in this repository: the site
+   source (src/components/, src/layouts/, src/lib/, src/pages/, src/styles/,
+   src/content.config.ts), the scripts/ and tests/ directories (including the
+   synthetic fixtures in tests/fixtures/), the .github/ and .devcontainer/
+   directories, the build and tooling configuration files in the repository
+   root, and the project documentation (README.md, CONTRIBUTING.md,
+   AGENTS.md, CLAUDE.md, docs/authoring.md and docs/decisions.md).
+
+2. CATALOGUE DATA AND RESEARCH CONTENT: all rights reserved
+
+   The following are NOT covered by the MIT License. No licence to copy,
+   redistribute, modify or reuse them is granted:
+
+   - src/content/ (dataset, release and paper records)
+   - src/data/ (variables, study uses, samples, quality findings, sources,
+     relations, overlaps and curator lists)
+   - public/previews/
+   - docs/Kidney_Open_Datasets_and_CV_Papers.md
+   - docs/literature/
+
+   Copyright (c) 2026 i-sababishraq. All rights reserved.
+
+   You may read this material in this repository and link to it. Facts about
+   third-party datasets and publications remain the property of their
+   respective owners; this reservation covers the selection, arrangement,
+   annotations and original text of this catalogue.
+
+3. THIRD-PARTY MATERIAL
+
+   Dataset names, licences and descriptions refer to datasets owned by their
+   publishers, each under its own terms (see the linked official sources).
+   docs/literature/ quotes short citing sentences and abstract sentences from
+   published papers, retrieved through the Semantic Scholar API, OpenAlex,
+   Europe PMC and DataCite. See docs/literature/paper-candidates.md for the
+   attribution those services require. Those excerpts remain subject to their
+   authors' and publishers' rights.
+
+--------------------------------------------------------------------------------
+
+MIT License
+
+Copyright (c) 2026 i-sababishraq
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

@@ -4,6 +4,32 @@
 
 The full list is [`paper-candidates.csv`](paper-candidates.csv), one row per dataset–paper pair. It opens in Excel with filters. Fill in `review_decision` (`keep`, `reject` or `unsure`), and for kept rows `role_if_used`, `train_test_role`, `method_used` and `evidence_locator` (section, table or page). This page lists the citation pages for each dataset and its strongest candidates.
 
+## Sources, attribution and terms
+
+This sheet was compiled from the following services. Their terms apply to the data drawn from them, and they
+also apply to the `evidence_sentence` column of the CSV.
+
+- **Semantic Scholar.** Citation lists, citing sentences ("contexts"), citation intents and paper metadata come
+  from the [Semantic Scholar Academic Graph API](https://www.semanticscholar.org/product/api), used under its
+  [API License Agreement](https://www.semanticscholar.org/product/api/license). Data provided by Semantic
+  Scholar is subject to the [S2 data licences](https://www.semanticscholar.org/product/api/license)
+  (ODC-BY or CC BY-NC, as applicable). Please cite: Kinney, R., et al. *The Semantic Scholar Open Data Platform*.
+  arXiv:2301.10140 (2023). <https://arxiv.org/abs/2301.10140>
+- **OpenAlex.** Citing-work lists and abstracts come from [OpenAlex](https://openalex.org), whose data is
+  released under [CC0](https://creativecommons.org/publicdomain/zero/1.0/). Please cite: Priem, J., Piwowar, H.,
+  & Orr, R. *OpenAlex: A fully-open index of scholarly works, authors, venues, institutions, and concepts*.
+  arXiv:2205.01833 (2022). <https://arxiv.org/abs/2205.01833>
+- **Europe PMC.** Methods-section and full-text searches use the
+  [Europe PMC RESTful API](https://europepmc.org/RestfulWebService).
+- **DataCite and Crossref.** Works citing dataset DOIs come from the [DataCite REST API](https://support.datacite.org/docs/api)
+  (metadata released under CC0), with bibliographic details from the [Crossref REST API](https://www.crossref.org/documentation/retrieve-metadata/rest-api/).
+
+**Quoted text.** The `evidence_sentence` column quotes one sentence per row from the citing paper. It is either
+a citing sentence supplied by Semantic Scholar or a sentence from the paper's abstract. The excerpts are there
+only so a reviewer can judge whether the paper used the dataset. Copyright in each excerpt stays with the
+paper's authors and publisher, and each row links to the source paper. The rest of this sheet is covered by
+the repository's terms for research content (see [LICENSE](../../LICENSE)).
+
 ## How candidates were found
 
 1. **Semantic Scholar citations with citing sentences.** Every paper citing each dataset's descriptor or challenge paper was downloaded, including the sentence where the citation occurs and Semantic Scholar's citation-intent label. A sentence naming a specific edition (e.g. "KiTS23") is assigned to that edition, whichever paper it cites.

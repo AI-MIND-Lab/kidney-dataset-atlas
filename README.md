@@ -5,12 +5,13 @@ Explore open kidney research datasets, understand their variables, and discover 
 The catalog is a set of files in this repository. Pages, search and exports are generated from those files, so
 every number on the site traces back to a record with a source.
 
-**Status: private.** The site is not hosted anywhere yet. People invited to this repository run it on their own
-machine, as described below. Nothing is published until a curator has approved it.
+**Status: public repository, site not yet hosted.** Anyone can read the source and run the site on their own
+machine, as described below. Records in the repository are drafts until a curator approves them: drafts are
+visible here as files, but they never appear on the built site, in its search index or in its exports.
 
 ## Run the site
 
-You need [Node.js](https://nodejs.org) 22.12 or newer and git. Then:
+You need [Node.js](https://nodejs.org) 22.12 or newer (the project uses 24, pinned in `.nvmrc`) and git. Then:
 
 ```bash
 git clone https://github.com/i-sababishraq/kidney-dataset-atlas.git
@@ -21,6 +22,15 @@ npm run preview:site
 
 The last command validates the records, builds the site, generates the search index, and serves the result.
 Open the address it prints (usually <http://localhost:4321>).
+
+**Seeing an empty site?** That is expected while every record is still a draft: the normal build shows
+approved records only. To read the drafts as pages, run:
+
+```bash
+npm run preview:drafts
+```
+
+Every page in that build is marked as a draft, and the output check refuses to publish it.
 
 Prefer not to install anything? Open the repository in GitHub Codespaces instead (Code → Codespaces → Create),
 then run `npm run preview:site` in its terminal. Codespaces usage counts against your own free allowance.
@@ -48,8 +58,10 @@ output check fails if a fixture marker appears in `dist/`.
 | `npm run validate` | Checks every record: schema, references, curator approval |
 | `npm run check` | TypeScript and Astro checks |
 | `npm test` | Focused tests (approval gate, unknown-value semantics) |
+| `npm run test:browser` | Browser smoke test against the fixtures (first run `npx playwright install chromium`) |
 | `npm run build` | Validate → build → **generate search** → check output |
-| `npm run preview:site` | Build as above, then serve it locally |
+| `npm run preview:site` | Build as above, then serve it locally (approved records only) |
+| `npm run preview:drafts` | Build including drafts, marked as such, then serve it locally |
 | `npm run search:index` | Regenerate the Pagefind index over `dist/` |
 
 To build the site as it will be published later, under a repository sub-path:
@@ -91,12 +103,9 @@ Curators are listed in `src/data/curators.yaml`; the build fails if anyone else 
 
 ## Deployment
 
-Nothing is deployed during the private phase. A GitHub Pages site would be visible to anyone with its address
-even from a private repository, and restricting viewers needs GitHub Enterprise Cloud, so the site stays local
-for now.
-
-`.github/workflows/deploy.yml` holds the Pages deployment and starts only when triggered by hand. It works once
-the repository is public. `.github/workflows/ci.yml` validates, checks, tests and builds every push, including a
+The site is not deployed yet. `.github/workflows/deploy.yml` holds the GitHub Pages deployment and starts only
+when triggered by hand from the Actions tab; the repository is public, so it can now run, and it publishes
+approved records only. `.github/workflows/ci.yml` validates, checks, tests and builds every push, including a
 build under the project sub-path.
 
 ## Layout
@@ -110,3 +119,15 @@ scripts/          record validation, build output checks
 tests/            tests and synthetic fixtures
 docs/             authoring guide and recorded decisions
 ```
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the branch and pull-request workflow. To suggest a dataset, paper or
+correction without writing code, open an issue using one of the templates.
+
+## Licence
+
+The software (site source, scripts, tests, configuration and project documentation) is under the MIT License. The catalogue data and
+research content (`src/content/`, `src/data/`, `public/previews/`, the research inventory and `docs/literature/`)
+are **not** openly licensed: all rights reserved. See [LICENSE](LICENSE) for the exact scope and for the
+attribution required for third-party material.

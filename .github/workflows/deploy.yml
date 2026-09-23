@@ -1,10 +1,9 @@
 name: Deploy to GitHub Pages
 
-# Manual start only. While the repository is private this workflow cannot
-# publish: GitHub Pages needs a public repository on the free plan, and a Pages
-# site is visible to anyone with the address even from a private repository.
-# During the private phase, collaborators run the site locally instead
-# (see README.md). Enable this once the repository is public.
+# Manual start only: publishing the site is a deliberate step, not a side
+# effect of pushing. The build publishes approved records only; drafts and
+# fixtures fail the output check. GitHub Pages must be enabled in the
+# repository settings (Source: GitHub Actions) before the first run.
 on:
   workflow_dispatch:
 
@@ -25,7 +24,7 @@ jobs:
 
       - uses: actions/setup-node@v7
         with:
-          node-version-file: package.json
+          node-version-file: .nvmrc
           cache: npm
 
       - run: npm ci
