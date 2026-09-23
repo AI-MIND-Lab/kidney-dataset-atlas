@@ -1,6 +1,6 @@
 # Kidney Dataset Atlas
 
-Explore open kidney research datasets, understand their variables, and discover the studies built with them.
+Curated catalogue of open kidney research datasets.
 
 The catalog is a set of files in this repository. Pages, search and exports are generated from those files, so
 every number on the site traces back to a record with a source.

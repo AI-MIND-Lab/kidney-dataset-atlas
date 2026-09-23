@@ -3,7 +3,7 @@
 export const SITE = {
 	title: 'Kidney Dataset Atlas',
 	description:
-		'Explore open kidney research datasets, understand their variables, and discover the studies built with them.',
+		'Curated catalogue of open kidney research datasets.',
 	/** Only the deliberate Pages deployment sets this; other builds stay out of search engines. */
 	isPublic: import.meta.env.SITE_PUBLIC === 'true',
 	usingFixtures: import.meta.env.ATLAS_FIXTURES === '1',
