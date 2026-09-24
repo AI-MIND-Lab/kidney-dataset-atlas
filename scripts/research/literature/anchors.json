@@ -1,0 +1,609 @@
+{
+ "_about": "One entry per dataset in the research inventory. anchors are the papers whose citations are harvested (Semantic Scholar IDs: DOI:, ARXIV: or a paper ID); kw are names that mark a citing sentence as naming the dataset; epmc is a Europe PMC query for the dataset name; s2search is a keyword search for datasets without an anchor paper. Entries with mergeInto add anchors to another dataset. dataDois are the dataset archive DOIs whose citing works DataCite tracks.",
+ "datasets": [
+  {
+   "id": "K01",
+   "name": "KiTS19",
+   "anchors": [
+    "ARXIV:1904.00445",
+    "DOI:10.1016/j.media.2020.101821"
+   ],
+   "kw": [
+    "KiTS19",
+    "KiTS 2019",
+    "KiTS-19",
+    "KiTS'19",
+    "C4KC-KiTS",
+    "KiTS 19"
+   ],
+   "epmc": "\"KiTS19\" OR \"KiTS 2019\" OR \"C4KC-KiTS\" OR \"KiTS-19\"",
+   "dataDois": [
+    "10.7937/TCIA.2019.IX49E8NX"
+   ]
+  },
+  {
+   "id": "K02",
+   "name": "KiTS21",
+   "anchors": [
+    "ARXIV:2307.01984"
+   ],
+   "kw": [
+    "KiTS21",
+    "KiTS 2021",
+    "KiTS-21",
+    "KiTS 21"
+   ],
+   "epmc": "\"KiTS21\" OR \"KiTS 2021\" OR \"KiTS-21\""
+  },
+  {
+   "id": "K03",
+   "name": "KiTS23",
+   "anchors": [],
+   "kw": [
+    "KiTS23",
+    "KiTS 2023",
+    "KiTS-23"
+   ],
+   "epmc": "\"KiTS23\" OR \"KiTS 2023\" OR \"KiTS-23\"",
+   "s2search": "KiTS23 kidney tumor segmentation"
+  },
+  {
+   "id": "K04",
+   "name": "Radboudumc Kidney Abnormality",
+   "anchors": [
+    "ARXIV:2309.03383"
+   ],
+   "kw": [
+    "abnormalit",
+    "Radboud",
+    "215"
+   ],
+   "epmc": "\"zenodo.8014289\"",
+   "dataDois": [
+    "10.5281/zenodo.8014289"
+   ]
+  },
+  {
+   "id": "K05",
+   "name": "CT Kidney Normal-Cyst-Tumor-Stone",
+   "anchors": [
+    "DOI:10.1038/s41598-022-15634-4"
+   ],
+   "kw": [
+    "12,446",
+    "12446",
+    "CT KIDNEY DATASET",
+    "Normal-Cyst-Tumor",
+    "Kaggle",
+    "cyst, stone",
+    "cyst, tumor",
+    "Islam"
+   ],
+   "epmc": "\"CT KIDNEY DATASET\" OR \"Normal-Cyst-Tumor\" OR (\"12,446\" AND kidney)"
+  },
+  {
+   "id": "K06-K08",
+   "name": "TCGA renal WSI (KIRC/KIRP/KICH)",
+   "anchors": [
+    "DOI:10.1038/s41598-019-46718-3"
+   ],
+   "kw": [
+    "TCGA",
+    "KIRC",
+    "KIRP",
+    "KICH"
+   ],
+   "epmc": "(\"TCGA-KIRC\" OR \"TCGA-KIRP\" OR \"TCGA-KICH\" OR \"TCGA KIRC\") AND (\"whole slide\" OR \"whole-slide\") AND (\"deep learning\" OR \"convolutional\")"
+  },
+  {
+   "id": "K09",
+   "name": "TCGA-KIRC radiology (TCIA)",
+   "anchors": [
+    "ARXIV:2310.14897"
+   ],
+   "kw": [
+    "TCGA-KIRC",
+    "KIRC",
+    "TCIA",
+    "Cancer Imaging Archive"
+   ],
+   "epmc": "(\"TCGA-KIRC\" OR \"TCGA KIRC\") AND (\"TCIA\" OR \"Cancer Imaging Archive\") AND (CT OR \"computed tomography\")",
+   "dataDois": [
+    "10.7937/K9/TCIA.2016.V6PBVTDR",
+    "10.7937/K9/TCIA.2016.ACWOGBEF",
+    "10.7937/K9/TCIA.2016.YU3RBCZN"
+   ]
+  },
+  {
+   "id": "K10",
+   "name": "HuBMAP Hacking the Kidney",
+   "anchors": [
+    "DOI:10.1038/s42003-023-04848-5"
+   ],
+   "kw": [
+    "HuBMAP",
+    "Hacking the Kidney"
+   ],
+   "epmc": "\"Hacking the Kidney\" OR (\"HuBMAP\" AND glomerul*)"
+  },
+  {
+   "id": "K11-K12",
+   "name": "HuBMAP+HPA Hacking the Human Body",
+   "anchors": [
+    "DOI:10.1038/s41467-023-40291-0"
+   ],
+   "kw": [
+    "HuBMAP",
+    "Hacking the Human Body",
+    "HPA",
+    "Human Protein Atlas"
+   ],
+   "epmc": "\"Hacking the Human Body\" OR (\"HuBMAP\" AND \"Human Protein Atlas\" AND segmentation)"
+  },
+  {
+   "id": "K13",
+   "name": "TRUSTED",
+   "anchors": [
+    "DOI:10.1038/s41597-025-04467-1"
+   ],
+   "kw": [
+    "TRUSTED"
+   ],
+   "epmc": "\"TRUSTED\" AND kidney AND ultrasound AND CT",
+   "dataDois": [
+    "10.6084/m9.figshare.27981050"
+   ]
+  },
+  {
+   "id": "K14",
+   "name": "Axial CT kidney stone (Mendeley)",
+   "anchors": [],
+   "kw": [
+    "fwhytt5mzd",
+    "Axial CT Imaging Dataset",
+    "Sulaimani"
+   ],
+   "epmc": "\"fwhytt5mzd\" OR \"Axial CT Imaging Dataset for AI-Powered Kidney Stone\"",
+   "s2search": "Axial CT Imaging Dataset for AI-Powered Kidney Stone Detection",
+   "dataDois": [
+    "10.17632/fwhytt5mzd.2"
+   ]
+  },
+  {
+   "id": "M01",
+   "name": "TotalSegmentator CT",
+   "anchors": [
+    "DOI:10.1148/ryai.230024"
+   ],
+   "kw": [
+    "TotalSegmentator"
+   ],
+   "epmc": "\"TotalSegmentator dataset\"",
+   "dataDois": [
+    "10.5281/zenodo.6802613"
+   ]
+  },
+  {
+   "id": "M02",
+   "name": "TotalSegmentator MRI",
+   "anchors": [
+    "DOI:10.1148/radiol.241613"
+   ],
+   "kw": [
+    "TotalSegmentator"
+   ],
+   "epmc": "\"TotalSegmentator MRI\"",
+   "dataDois": [
+    "10.5281/zenodo.11367004"
+   ]
+  },
+  {
+   "id": "M03",
+   "name": "AMOS22",
+   "anchors": [
+    "ARXIV:2206.08023"
+   ],
+   "kw": [
+    "AMOS"
+   ],
+   "epmc": "\"AMOS22\" OR \"AMOS 2022\" OR (\"AMOS\" AND \"abdominal multi-organ\")",
+   "dataDois": [
+    "10.5281/zenodo.7262581"
+   ]
+  },
+  {
+   "id": "M04",
+   "name": "CHAOS",
+   "anchors": [
+    "DOI:10.1016/j.media.2020.101950"
+   ],
+   "kw": [
+    "CHAOS"
+   ],
+   "epmc": "\"CHAOS challenge\" OR \"CHAOS dataset\"",
+   "dataDois": [
+    "10.5281/zenodo.3362844"
+   ]
+  },
+  {
+   "id": "M05",
+   "name": "CT-ORG",
+   "anchors": [
+    "DOI:10.1038/s41597-020-00715-8"
+   ],
+   "kw": [
+    "CT-ORG",
+    "CTORG",
+    "CT ORG"
+   ],
+   "epmc": "\"CT-ORG\"",
+   "dataDois": [
+    "10.7937/tcia.2019.tt7f4v7o"
+   ]
+  },
+  {
+   "id": "M06",
+   "name": "WORD",
+   "anchors": [
+    "DOI:10.1016/j.media.2022.102642"
+   ],
+   "kw": [
+    "WORD"
+   ],
+   "epmc": "\"WORD dataset\" AND (abdominal OR organ)"
+  },
+  {
+   "id": "M07",
+   "name": "AbdomenAtlas",
+   "anchors": [
+    "DOI:10.1016/j.media.2024.103285",
+    "ARXIV:2407.16697"
+   ],
+   "kw": [
+    "AbdomenAtlas",
+    "Abdomen Atlas"
+   ],
+   "epmc": "\"AbdomenAtlas\""
+  },
+  {
+   "id": "M08",
+   "name": "FLARE21",
+   "anchors": [
+    "DOI:10.1016/j.media.2022.102616"
+   ],
+   "kw": [
+    "FLARE21",
+    "FLARE 2021",
+    "FLARE'21",
+    "FLARE"
+   ],
+   "epmc": "\"FLARE21\" OR \"FLARE 2021\""
+  },
+  {
+   "id": "M09",
+   "name": "FLARE22",
+   "anchors": [
+    "ARXIV:2308.05862"
+   ],
+   "kw": [
+    "FLARE22",
+    "FLARE 2022",
+    "FLARE'22",
+    "FLARE"
+   ],
+   "epmc": "\"FLARE22\" OR \"FLARE 2022\"",
+   "dataDois": [
+    "10.5281/zenodo.7860267"
+   ]
+  },
+  {
+   "id": "M10",
+   "name": "FLARE23",
+   "anchors": [],
+   "kw": [
+    "FLARE23",
+    "FLARE 2023",
+    "FLARE'23"
+   ],
+   "epmc": "\"FLARE23\" OR \"FLARE 2023\"",
+   "s2search": "FLARE 2023 abdomen CT organ pan-cancer segmentation challenge"
+  },
+  {
+   "id": "M11",
+   "name": "AbdomenAtlas 3.0 / RadGPT",
+   "anchors": [
+    "ARXIV:2501.04678"
+   ],
+   "kw": [
+    "AbdomenAtlas",
+    "RadGPT dataset",
+    "AbdomenAtlas 3"
+   ],
+   "epmc": "\"AbdomenAtlas 3.0\" OR \"RadGPT\""
+  },
+  {
+   "id": "M12",
+   "name": "AMOS-MM",
+   "anchors": [],
+   "kw": [
+    "AMOS-MM"
+   ],
+   "epmc": "\"AMOS-MM\"",
+   "s2search": "AMOS-MM abdominal multimodal analysis challenge",
+   "dataDois": [
+    "10.5281/zenodo.10992155"
+   ]
+  },
+  {
+   "id": "M13",
+   "name": "SA-Med3D-140K",
+   "anchors": [
+    "ARXIV:2310.15161"
+   ],
+   "kw": [
+    "SA-Med3D",
+    "140K",
+    "SAM-Med3D dataset",
+    "SAM-Med3D data"
+   ],
+   "epmc": "\"SA-Med3D\" OR \"SAM-Med3D\""
+  },
+  {
+   "id": "M14",
+   "name": "ULS23",
+   "anchors": [
+    "DOI:10.1016/j.media.2025.103525"
+   ],
+   "kw": [
+    "ULS23",
+    "ULS"
+   ],
+   "epmc": "\"ULS23\""
+  },
+  {
+   "id": "M15",
+   "name": "3DLAND",
+   "anchors": [
+    "ARXIV:2602.12820"
+   ],
+   "kw": [
+    "3DLAND"
+   ],
+   "epmc": "\"3DLAND\""
+  },
+  {
+   "id": "M16",
+   "name": "DeepLesion",
+   "anchors": [
+    "DOI:10.1117/1.JMI.5.3.036501"
+   ],
+   "kw": [
+    "DeepLesion"
+   ],
+   "epmc": "\"DeepLesion\" AND (kidney OR renal)"
+  },
+  {
+   "id": "M17",
+   "name": "M3D-Data",
+   "anchors": [
+    "ARXIV:2404.00578"
+   ],
+   "kw": [
+    "M3D-Cap",
+    "M3D-VQA",
+    "M3D-Seg",
+    "M3D-RefSeg",
+    "M3D-Data",
+    "M3D dataset",
+    "M3D data",
+    "M3D benchmark"
+   ],
+   "epmc": "\"M3D-Cap\" OR \"M3D-VQA\" OR \"M3D-Seg\" OR \"M3D-Data\""
+  },
+  {
+   "id": "G01",
+   "name": "UCSF RMaC",
+   "anchors": [
+    "DOI:10.64898/2026.02.11.26346096"
+   ],
+   "kw": [
+    "RMaC",
+    "UCSF"
+   ],
+   "epmc": "\"UCSF-RMaC\" OR \"RMaC\"",
+   "dataDois": [
+    "10.58078/C2WC74"
+   ]
+  },
+  {
+   "id": "G02",
+   "name": "CPTAC-CCRCC imaging",
+   "anchors": [
+    "DOI:10.1016/j.cell.2019.10.007"
+   ],
+   "kw": [
+    "CPTAC"
+   ],
+   "epmc": "(\"CPTAC-CCRCC\" OR \"CPTAC ccRCC\" OR \"CPTAC-ccRCC\") AND (\"whole slide\" OR \"whole-slide\" OR \"deep learning\" OR radiomics)",
+   "dataDois": [
+    "10.7937/K9/TCIA.2018.OBLAMN27"
+   ]
+  },
+  {
+   "id": "G03",
+   "name": "RCC-AID",
+   "anchors": [
+    "DOI:10.64898/2026.04.22.26351451",
+    "DOI:10.59275/j.melba.2026-2dg2"
+   ],
+   "kw": [
+    "RCC-AID"
+   ],
+   "epmc": "\"RCC-AID\"",
+   "dataDois": [
+    "10.5281/zenodo.20719257"
+   ]
+  },
+  {
+   "id": "H01",
+   "name": "Open Kidney Ultrasound (kidneyUS)",
+   "anchors": [
+    "ARXIV:2206.06657"
+   ],
+   "kw": [
+    "Open Kidney",
+    "kidneyUS"
+   ],
+   "epmc": "\"Open Kidney Ultrasound\" OR \"kidneyUS\""
+  },
+  {
+   "id": "H03",
+   "name": "KiPA22",
+   "anchors": [
+    "ARXIV:2208.13338"
+   ],
+   "kw": [
+    "KiPA",
+    "KiPA22"
+   ],
+   "epmc": "\"KiPA22\" OR \"KiPA 2022\" OR \"Kidney Parsing\""
+  },
+  {
+   "id": "H04",
+   "name": "KPIs 2024",
+   "anchors": [
+    "ARXIV:2502.07288"
+   ],
+   "kw": [
+    "KPIs"
+   ],
+   "epmc": "\"KPIs 2024\" OR \"KPIs challenge\" OR \"KPIs dataset\""
+  },
+  {
+   "id": "H05",
+   "name": "AbdomenCT-1K",
+   "anchors": [
+    "DOI:10.1109/TPAMI.2021.3100536"
+   ],
+   "kw": [
+    "AbdomenCT-1K",
+    "AbdomenCT1K",
+    "AbdomenCT 1K"
+   ],
+   "epmc": "\"AbdomenCT-1K\""
+  },
+  {
+   "id": "H06",
+   "name": "RAOS",
+   "anchors": [
+    "ARXIV:2406.13674"
+   ],
+   "kw": [
+    "RAOS"
+   ],
+   "epmc": "\"RAOS\" AND abdominal"
+  },
+  {
+   "id": "H07",
+   "name": "BTCV / Synapse multi-organ",
+   "anchors": [
+    "ARXIV:2103.10504"
+   ],
+   "kw": [
+    "BTCV",
+    "Synapse",
+    "Beyond the Cranial Vault",
+    "multi-organ"
+   ],
+   "epmc": "\"BTCV\" OR \"Beyond the Cranial Vault\""
+  },
+  {
+   "id": "H09",
+   "name": "NEPTUNE multistain (Jayapandian)",
+   "anchors": [
+    "DOI:10.1016/j.kint.2020.07.044"
+   ],
+   "kw": [
+    "NEPTUNE"
+   ],
+   "epmc": "\"NEPTUNE\" AND (\"deep learning\" OR segmentation) AND (\"whole slide\" OR WSI)"
+  },
+  {
+   "id": "H10",
+   "name": "Merlin Abdominal CT",
+   "anchors": [
+    "DOI:10.1038/s41586-026-10181-8",
+    "ARXIV:2406.06512"
+   ],
+   "kw": [
+    "Merlin dataset",
+    "Merlin Abdominal CT",
+    "Merlin data",
+    "Merlin Abd"
+   ],
+   "epmc": "\"Merlin\" AND (CT OR \"computed tomography\") AND (\"vision-language\" OR \"foundation model\")"
+  },
+  {
+   "id": "H11",
+   "name": "RadImageNet-VQA",
+   "anchors": [
+    "ARXIV:2512.17396"
+   ],
+   "kw": [
+    "RadImageNet-VQA"
+   ],
+   "epmc": "\"RadImageNet-VQA\""
+  },
+  {
+   "id": "H03b",
+   "name": "KiPA22 (organizer-requested citations)",
+   "anchors": [
+    "DOI:10.1016/j.media.2021.102055",
+    "DOI:10.1016/j.media.2020.101722"
+   ],
+   "kw": [
+    "KiPA"
+   ],
+   "epmc": "\"KiPA\"",
+   "mergeInto": "H03"
+  },
+  {
+   "id": "H07b",
+   "name": "BTCV via UNETR (WACV)",
+   "anchors": [
+    "DOI:10.1109/WACV51458.2022.00181"
+   ],
+   "kw": [
+    "BTCV",
+    "Synapse",
+    "Beyond the Cranial Vault"
+   ],
+   "epmc": "\"BTCV\"",
+   "mergeInto": "H07"
+  },
+  {
+   "id": "M06r",
+   "name": "WORD retry",
+   "anchors": [
+    "ARXIV:2111.02403"
+   ],
+   "kw": [
+    "WORD"
+   ],
+   "epmc": "\"WORD dataset\"",
+   "mergeInto": "M06"
+  },
+  {
+   "id": "M14r",
+   "name": "ULS23 retry",
+   "anchors": [
+    "738f25d09b24872aa4dfd5bba77836a47838517c"
+   ],
+   "kw": [
+    "ULS23"
+   ],
+   "epmc": "\"ULS23\"",
+   "mergeInto": "M14"
+  }
+ ]
+}

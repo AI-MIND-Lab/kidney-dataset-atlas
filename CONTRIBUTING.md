@@ -9,7 +9,7 @@ Thanks for helping build the Kidney Dataset Atlas. There are two ways to take pa
 ## Set up
 
 1. Install [Node.js](https://nodejs.org) 24 (the version in `.nvmrc`; 22.12 or newer works) and git.
-2. Collaborators clone the repository; everyone else forks it first.
+2. Clone the repository (you need collaborator access while it is private).
 3. `npm ci`
 4. `npm run preview:drafts` to see the current records as pages. The normal `npm run preview:site` shows
    approved records only, which may be none.
@@ -41,8 +41,12 @@ Write commit messages as a short, sentence-case summary of what the change does 
 
 - **Never set approval fields yourself.** `approvedBy`, `permissionApprovedBy` and `catalogStatus: published` are
   set by a curator in their own commit. The validator rejects an approver who is not a curator.
-- **No dataset files.** Do not commit images, scans, masks or downloads from any dataset. A sample image may be
-  added only with a recorded reuse permission, which a curator approves.
+- **Previews yes, raw data no.** Collaborators may add preview images: compressed renderings in
+  `public/previews/<release-id>/`, each with a sample record giving its caption, attribution and reuse terms under
+  the source dataset's licence (see [docs/previews.md](docs/previews.md) and the Samples section of
+  [docs/authoring.md](docs/authoring.md)). Never commit raw scans, masks, archives or other downloads from a
+  dataset. A preview shows on draft pages straight away; a curator approves its permission before a published
+  page shows it.
 - **No protected health information or credentials**, anywhere: records, issues, pull requests or commits.
 - **Drafts stay drafts.** A normal build fails if a draft or fixture reaches its output.
 

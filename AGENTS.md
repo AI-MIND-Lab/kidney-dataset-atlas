@@ -21,8 +21,10 @@ where the implementation departs from it.
    evidence that it used it.
 3. **Unknown stays unknown.** Use `not_documented`, `not_verified` or `not_applicable` with `value: null`; never
    `0`, "no" or a plausible guess. See [docs/authoring.md](docs/authoring.md).
-4. **No dataset files, no patient data, no credentials.** Do not commit images, scans, masks or downloads from
-   any dataset, and never commit protected health information or secrets.
+4. **Previews only, no raw data, no credentials.** Preview images may be added as compressed renderings in
+   `public/previews/<release-id>/` with a sample record (see [docs/previews.md](docs/previews.md)), leaving
+   `permissionApprovedBy` null. Never commit raw scans, masks, archives or other dataset downloads, protected
+   health information or secrets.
 5. **Fixtures stay fixtures.** Synthetic records live only in `tests/fixtures/` and must never be copied into
    `src/`.
 
