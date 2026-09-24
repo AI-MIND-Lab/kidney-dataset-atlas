@@ -1,0 +1,438 @@
+[
+	{
+		"id": "kits23-case-00062",
+		"release": "kits23",
+		"kind": "dataset_sample",
+		"assets": [
+			{
+				"path": "/previews/kits23/case_00062.webp",
+				"role": "image",
+				"sliceIndex": null,
+				"width": 1650,
+				"height": 462
+			}
+		],
+		"caption": "Mask: KiTS23's own reference labels, drawn by trained annotators with expert review of doubtful cases. KiTS23 case_00062 (0.98 × 0.98 × 5.0 mm): a small tumour in the left kidney. Four views of one scan: the whole axial slice where the centred label is largest, a zoomed axial crop, and coronal and sagittal cuts through the same point. Kidney is outlined in green, tumour in red and cyst in yellow. Window 50/500 HU; radiological orientation (patient left on viewer right). Description written from the Kidney-VLM processed-data figure guide (24 September 2026).",
+		"alt": "CT of the abdomen with a small tumour outlined in red in the left kidney, shown in axial, zoomed, coronal and sagittal views.",
+		"attribution": "Images and reference labels: KiTS23, Kidney and Kidney Tumor Segmentation Challenge 2023 (Heller et al.; kits-challenge.org/kits23), read from a Hugging Face copy of the release. Rendered by the Kidney-VLM project: windowed, reoriented to LPS, cropped and outlined.",
+		"reuseTerms": "CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/). This preview is an adaptation of KiTS23 data and is shared under the same licence: non-commercial use with attribution, and adaptations under the same terms.",
+		"permissionApprovedBy": null,
+		"permissionApprovedOn": null,
+		"alignment": "Outlines come from the reference segmentation on the same voxel grid as the image.",
+		"sources": [
+			"kits23-challenge-page",
+			"kits23-readme"
+		]
+	},
+	{
+		"id": "kits23-case-00236",
+		"release": "kits23",
+		"kind": "dataset_sample",
+		"assets": [
+			{
+				"path": "/previews/kits23/case_00236.webp",
+				"role": "image",
+				"sliceIndex": null,
+				"width": 1650,
+				"height": 462
+			}
+		],
+		"caption": "Mask: KiTS23's own reference labels, drawn by trained annotators with expert review of doubtful cases. KiTS23 case_00236 (0.92 × 0.92 × 5.0 mm): a large, round tumour in the left kidney; the right kidney is normal. The flat upper tumour edge in the sagittal view reflects the 5 mm slices. Four views of one scan: the whole axial slice where the centred label is largest, a zoomed axial crop, and coronal and sagittal cuts through the same point. Kidney is outlined in green, tumour in red and cyst in yellow. Window 50/500 HU; radiological orientation (patient left on viewer right). Description written from the Kidney-VLM processed-data figure guide (24 September 2026).",
+		"alt": "CT with a large round tumour outlined in red in the left kidney and a normal right kidney outlined in green.",
+		"attribution": "Images and reference labels: KiTS23, Kidney and Kidney Tumor Segmentation Challenge 2023 (Heller et al.; kits-challenge.org/kits23), read from a Hugging Face copy of the release. Rendered by the Kidney-VLM project: windowed, reoriented to LPS, cropped and outlined.",
+		"reuseTerms": "CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/). This preview is an adaptation of KiTS23 data and is shared under the same licence: non-commercial use with attribution, and adaptations under the same terms.",
+		"permissionApprovedBy": null,
+		"permissionApprovedOn": null,
+		"alignment": "Outlines come from the reference segmentation on the same voxel grid as the image.",
+		"sources": [
+			"kits23-challenge-page",
+			"kits23-readme"
+		]
+	},
+	{
+		"id": "kits23-case-00242",
+		"release": "kits23",
+		"kind": "dataset_sample",
+		"assets": [
+			{
+				"path": "/previews/kits23/case_00242.webp",
+				"role": "image",
+				"sliceIndex": null,
+				"width": 1650,
+				"height": 462
+			}
+		],
+		"caption": "Mask: KiTS23's own reference labels, drawn by trained annotators with expert review of doubtful cases. KiTS23 case_00242 (0.76 × 0.76 × 5.0 mm): a large exophytic tumour on the right kidney, with small cysts in the left kidney. Four views of one scan: the whole axial slice where the centred label is largest, a zoomed axial crop, and coronal and sagittal cuts through the same point. Kidney is outlined in green, tumour in red and cyst in yellow. Window 50/500 HU; radiological orientation (patient left on viewer right). Description written from the Kidney-VLM processed-data figure guide (24 September 2026).",
+		"alt": "CT with a large tumour outlined in red protruding from the right kidney, and small yellow-outlined cysts in the left kidney.",
+		"attribution": "Images and reference labels: KiTS23, Kidney and Kidney Tumor Segmentation Challenge 2023 (Heller et al.; kits-challenge.org/kits23), read from a Hugging Face copy of the release. Rendered by the Kidney-VLM project: windowed, reoriented to LPS, cropped and outlined.",
+		"reuseTerms": "CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/). This preview is an adaptation of KiTS23 data and is shared under the same licence: non-commercial use with attribution, and adaptations under the same terms.",
+		"permissionApprovedBy": null,
+		"permissionApprovedOn": null,
+		"alignment": "Outlines come from the reference segmentation on the same voxel grid as the image.",
+		"sources": [
+			"kits23-challenge-page",
+			"kits23-readme"
+		]
+	},
+	{
+		"id": "kits23-case-00242-cyst",
+		"release": "kits23",
+		"kind": "dataset_sample",
+		"assets": [
+			{
+				"path": "/previews/kits23/case_00242_cyst.webp",
+				"role": "image",
+				"sliceIndex": null,
+				"width": 1650,
+				"height": 462
+			}
+		],
+		"caption": "Mask: KiTS23's own reference labels, drawn by trained annotators with expert review of doubtful cases. KiTS23 case_00242, the same scan centred on a left-kidney cyst: tumour and cysts in opposite kidneys. Four views of one scan: the whole axial slice where the centred label is largest, a zoomed axial crop, and coronal and sagittal cuts through the same point. Kidney is outlined in green, tumour in red and cyst in yellow. Window 50/500 HU; radiological orientation (patient left on viewer right). Description written from the Kidney-VLM processed-data figure guide (24 September 2026).",
+		"alt": "CT centred on a small cyst outlined in yellow in the left kidney, with a tumour in the opposite kidney.",
+		"attribution": "Images and reference labels: KiTS23, Kidney and Kidney Tumor Segmentation Challenge 2023 (Heller et al.; kits-challenge.org/kits23), read from a Hugging Face copy of the release. Rendered by the Kidney-VLM project: windowed, reoriented to LPS, cropped and outlined.",
+		"reuseTerms": "CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/). This preview is an adaptation of KiTS23 data and is shared under the same licence: non-commercial use with attribution, and adaptations under the same terms.",
+		"permissionApprovedBy": null,
+		"permissionApprovedOn": null,
+		"alignment": "Outlines come from the reference segmentation on the same voxel grid as the image.",
+		"sources": [
+			"kits23-challenge-page",
+			"kits23-readme"
+		]
+	},
+	{
+		"id": "kits23-case-00203-cyst",
+		"release": "kits23",
+		"kind": "dataset_sample",
+		"assets": [
+			{
+				"path": "/previews/kits23/case_00203_cyst.webp",
+				"role": "image",
+				"sliceIndex": null,
+				"width": 1650,
+				"height": 462
+			}
+		],
+		"caption": "Mask: KiTS23's own reference labels, drawn by trained annotators with expert review of doubtful cases. KiTS23 case_00203 (0.64 × 0.64 × 1.0 mm, 620 slices from chest to pelvis): a small peripheral cyst in the left kidney and a small tumour visible in the sagittal view. The kidneys fill only a small part of this long scan. Four views of one scan: the whole axial slice where the centred label is largest, a zoomed axial crop, and coronal and sagittal cuts through the same point. Kidney is outlined in green, tumour in red and cyst in yellow. Window 50/500 HU; radiological orientation (patient left on viewer right). Description written from the Kidney-VLM processed-data figure guide (24 September 2026).",
+		"alt": "Thin-slice CT covering chest to pelvis, centred on a small yellow-outlined cyst in the left kidney.",
+		"attribution": "Images and reference labels: KiTS23, Kidney and Kidney Tumor Segmentation Challenge 2023 (Heller et al.; kits-challenge.org/kits23), read from a Hugging Face copy of the release. Rendered by the Kidney-VLM project: windowed, reoriented to LPS, cropped and outlined.",
+		"reuseTerms": "CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/). This preview is an adaptation of KiTS23 data and is shared under the same licence: non-commercial use with attribution, and adaptations under the same terms.",
+		"permissionApprovedBy": null,
+		"permissionApprovedOn": null,
+		"alignment": "Outlines come from the reference segmentation on the same voxel grid as the image.",
+		"sources": [
+			"kits23-challenge-page",
+			"kits23-readme"
+		]
+	},
+	{
+		"id": "kits23-case-00433-cyst",
+		"release": "kits23",
+		"kind": "dataset_sample",
+		"assets": [
+			{
+				"path": "/previews/kits23/case_00433_cyst.webp",
+				"role": "image",
+				"sliceIndex": null,
+				"width": 1650,
+				"height": 462
+			}
+		],
+		"caption": "Mask: KiTS23's own reference labels, drawn by trained annotators with expert review of doubtful cases. KiTS23 case_00433 (0.69 × 0.69 × 2.5 mm): a large cyst at the upper pole of the left kidney, bulging beyond the kidney outline, and a tumour at the lower pole. Labels never overlap: each voxel is kidney, tumour or cyst. Four views of one scan: the whole axial slice where the centred label is largest, a zoomed axial crop, and coronal and sagittal cuts through the same point. Kidney is outlined in green, tumour in red and cyst in yellow. Window 50/500 HU; radiological orientation (patient left on viewer right). Description written from the Kidney-VLM processed-data figure guide (24 September 2026).",
+		"alt": "CT with a large yellow-outlined cyst at the upper pole of the left kidney and a red-outlined tumour at its lower pole.",
+		"attribution": "Images and reference labels: KiTS23, Kidney and Kidney Tumor Segmentation Challenge 2023 (Heller et al.; kits-challenge.org/kits23), read from a Hugging Face copy of the release. Rendered by the Kidney-VLM project: windowed, reoriented to LPS, cropped and outlined.",
+		"reuseTerms": "CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/). This preview is an adaptation of KiTS23 data and is shared under the same licence: non-commercial use with attribution, and adaptations under the same terms.",
+		"permissionApprovedBy": null,
+		"permissionApprovedOn": null,
+		"alignment": "Outlines come from the reference segmentation on the same voxel grid as the image.",
+		"sources": [
+			"kits23-challenge-page",
+			"kits23-readme"
+		]
+	},
+	{
+		"id": "ucsf-rmac-2025-3lyufvswiy",
+		"release": "ucsf-rmac-2025",
+		"kind": "dataset_sample",
+		"assets": [
+			{
+				"path": "/previews/ucsf-rmac-2025/3LYUFVSwiY.webp",
+				"role": "image",
+				"sliceIndex": null,
+				"width": 1254,
+				"height": 462
+			}
+		],
+		"caption": "Mask: UCSF RMaC's own annotation, drawn by a radiology resident and reviewed by an attending radiologist. In these examples it is a bounding box, not an outline. RMaC exam 3LYUFVSwiY: clear cell RCC, 1.9 cm, left kidney. Non-contrast, arterial and delayed phases (no registered portal-venous volume). A small mass at the edge of the kidney, marked by a rectangle. One panel per contrast phase at the same slice and zoom. Only phases registered to the non-contrast scan are shown. The red outline is the dataset's own mass annotation, drawn on the non-contrast grid. Description written from the Kidney-VLM processed-data figure guide (24 September 2026).",
+		"alt": "Three contrast phases of CT showing a small renal mass marked by a red rectangle.",
+		"attribution": "Images and annotations: UCSF RMaC, the UCSF 3D Multi-Phase Renal Mass CT dataset (Larson 2025, doi:10.58078/C2WC74; Sahin et al. 2026). Pathology from the dataset's key table. Rendered by the Kidney-VLM project: cropped, windowed and outlined.",
+		"reuseTerms": "CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). This preview is an adaptation of UCSF RMaC data; reuse requires attribution to the dataset.",
+		"permissionApprovedBy": null,
+		"permissionApprovedOn": null,
+		"alignment": "Phases shown are those the release registers to the non-contrast scan, so they share the annotation grid.",
+		"sources": [
+			"ucsf-rmac-repo",
+			"ucsf-rmac-aws",
+			"ucsf-rmac-preprint"
+		]
+	},
+	{
+		"id": "ucsf-rmac-2025-mnx1xxzzpn",
+		"release": "ucsf-rmac-2025",
+		"kind": "dataset_sample",
+		"assets": [
+			{
+				"path": "/previews/ucsf-rmac-2025/Mnx1XxZZPN.webp",
+				"role": "image",
+				"sliceIndex": null,
+				"width": 1672,
+				"height": 462
+			}
+		],
+		"caption": "Mask: UCSF RMaC's own annotation, drawn by a radiology resident and reviewed by an attending radiologist. In these examples it is a bounding box, not an outline. RMaC exam Mnx1XxZZPN: clear cell RCC, 5.4 cm, right kidney. All four phases: the mass is faint without contrast and enhances strongly and unevenly in the arterial phase. One panel per contrast phase at the same slice and zoom. Only phases registered to the non-contrast scan are shown. The red outline is the dataset's own mass annotation, drawn on the non-contrast grid. Description written from the Kidney-VLM processed-data figure guide (24 September 2026).",
+		"alt": "Four contrast phases of CT of a large renal mass marked by a red rectangle, bright and heterogeneous in the arterial phase.",
+		"attribution": "Images and annotations: UCSF RMaC, the UCSF 3D Multi-Phase Renal Mass CT dataset (Larson 2025, doi:10.58078/C2WC74; Sahin et al. 2026). Pathology from the dataset's key table. Rendered by the Kidney-VLM project: cropped, windowed and outlined.",
+		"reuseTerms": "CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). This preview is an adaptation of UCSF RMaC data; reuse requires attribution to the dataset.",
+		"permissionApprovedBy": null,
+		"permissionApprovedOn": null,
+		"alignment": "Phases shown are those the release registers to the non-contrast scan, so they share the annotation grid.",
+		"sources": [
+			"ucsf-rmac-repo",
+			"ucsf-rmac-aws",
+			"ucsf-rmac-preprint"
+		]
+	},
+	{
+		"id": "ucsf-rmac-2025-wc3j7q0yat",
+		"release": "ucsf-rmac-2025",
+		"kind": "dataset_sample",
+		"assets": [
+			{
+				"path": "/previews/ucsf-rmac-2025/WC3J7Q0yat.webp",
+				"role": "image",
+				"sliceIndex": null,
+				"width": 1672,
+				"height": 462
+			}
+		],
+		"caption": "Mask: UCSF RMaC's own annotation, drawn by a radiology resident and reviewed by an attending radiologist. In these examples it is a bounding box, not an outline. RMaC exam WC3J7Q0yat: chromophobe RCC, 6.3 cm, left kidney. All four phases: a large, round, fairly uniform mass that enhances less than the adjacent kidney cortex in the arterial phase. One panel per contrast phase at the same slice and zoom. Only phases registered to the non-contrast scan are shown. The red outline is the dataset's own mass annotation, drawn on the non-contrast grid. Description written from the Kidney-VLM processed-data figure guide (24 September 2026).",
+		"alt": "Four contrast phases of CT of a large round renal mass marked by a red rectangle.",
+		"attribution": "Images and annotations: UCSF RMaC, the UCSF 3D Multi-Phase Renal Mass CT dataset (Larson 2025, doi:10.58078/C2WC74; Sahin et al. 2026). Pathology from the dataset's key table. Rendered by the Kidney-VLM project: cropped, windowed and outlined.",
+		"reuseTerms": "CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). This preview is an adaptation of UCSF RMaC data; reuse requires attribution to the dataset.",
+		"permissionApprovedBy": null,
+		"permissionApprovedOn": null,
+		"alignment": "Phases shown are those the release registers to the non-contrast scan, so they share the annotation grid.",
+		"sources": [
+			"ucsf-rmac-repo",
+			"ucsf-rmac-aws",
+			"ucsf-rmac-preprint"
+		]
+	},
+	{
+		"id": "ucsf-rmac-2025-yopbh7znug",
+		"release": "ucsf-rmac-2025",
+		"kind": "dataset_sample",
+		"assets": [
+			{
+				"path": "/previews/ucsf-rmac-2025/YoPBh7znuG.webp",
+				"role": "image",
+				"sliceIndex": null,
+				"width": 1254,
+				"height": 462
+			}
+		],
+		"caption": "Mask: UCSF RMaC's own annotation, drawn by a radiology resident and reviewed by an attending radiologist. In these examples it is a bounding box, not an outline. RMaC exam YoPBh7znuG: clear cell RCC, 5.3 cm, right kidney. Non-contrast, venous and delayed phases (no registered arterial volume): heterogeneous enhancement in the venous phase and excreted contrast nearby in the delayed phase. One panel per contrast phase at the same slice and zoom. Only phases registered to the non-contrast scan are shown. The red outline is the dataset's own mass annotation, drawn on the non-contrast grid. Description written from the Kidney-VLM processed-data figure guide (24 September 2026).",
+		"alt": "Three contrast phases of CT of a large renal mass marked by a red rectangle.",
+		"attribution": "Images and annotations: UCSF RMaC, the UCSF 3D Multi-Phase Renal Mass CT dataset (Larson 2025, doi:10.58078/C2WC74; Sahin et al. 2026). Pathology from the dataset's key table. Rendered by the Kidney-VLM project: cropped, windowed and outlined.",
+		"reuseTerms": "CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). This preview is an adaptation of UCSF RMaC data; reuse requires attribution to the dataset.",
+		"permissionApprovedBy": null,
+		"permissionApprovedOn": null,
+		"alignment": "Phases shown are those the release registers to the non-contrast scan, so they share the annotation grid.",
+		"sources": [
+			"ucsf-rmac-repo",
+			"ucsf-rmac-aws",
+			"ucsf-rmac-preprint"
+		]
+	},
+	{
+		"id": "cptac-ccrcc-v14-c3l-00766",
+		"release": "cptac-ccrcc-v14",
+		"kind": "dataset_sample",
+		"assets": [
+			{
+				"path": "/previews/cptac-ccrcc-v14/C3L-00766.webp",
+				"role": "image",
+				"sliceIndex": null,
+				"width": 1650,
+				"height": 462
+			}
+		],
+		"caption": "Mask: BAMF (AI-generated, AIMI Annotations), corrected by a radiologist. CPTAC-CCRCC C3L-00766 (phase not recorded; GE; 0.82 × 0.82 × 2.5 mm): a small tumour at the upper edge of the right kidney. Four views of one scan: the whole axial slice where the centred label is largest, a zoomed axial crop, and coronal and sagittal cuts through the same point. Kidney is outlined in green, tumour in red and cyst in yellow. Window 50/500 HU; radiological orientation (patient left on viewer right). Description written from the Kidney-VLM processed-data figure guide (24 September 2026).",
+		"alt": "CT with a small tumour outlined in red at the upper edge of the right kidney.",
+		"attribution": "Images: CPTAC-CCRCC collection, The Cancer Imaging Archive (National Cancer Institute CPTAC, 2018, doi:10.7937/K9/TCIA.2018.OBLAMN27). Masks: BAMF AI-generated segmentations from the AIMI Annotations initiative (Van Oss et al. 2024, doi:10.5281/zenodo.8345959; Murugesan et al. 2024). Rendered by the Kidney-VLM project from its processed volumes: windowed, cropped and outlined.",
+		"reuseTerms": "CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/) for both the TCIA images and the BAMF masks. This preview is an adaptation; reuse requires attribution to both.",
+		"permissionApprovedBy": null,
+		"permissionApprovedOn": null,
+		"alignment": "BAMF DICOM-SEG masks placed on the processed CT volumes. Masks are AI output unless marked as corrected.",
+		"sources": [
+			"cptac-ccrcc-tcia",
+			"bamf-aimi-zenodo",
+			"bamf-aimi-paper"
+		]
+	},
+	{
+		"id": "cptac-ccrcc-v14-c3n-00313",
+		"release": "cptac-ccrcc-v14",
+		"kind": "dataset_sample",
+		"assets": [
+			{
+				"path": "/previews/cptac-ccrcc-v14/C3N-00313.webp",
+				"role": "image",
+				"sliceIndex": null,
+				"width": 1650,
+				"height": 462
+			}
+		],
+		"caption": "Mask: BAMF (AI-generated, AIMI Annotations), uncorrected AI output. CPTAC-CCRCC C3N-00313 (phase not recorded; GE; 0.62 × 0.62 × 5.0 mm): a round tumour in the left kidney. The AI mask also marks a second small tumour region in the right kidney and a tiny cyst region. Four views of one scan: the whole axial slice where the centred label is largest, a zoomed axial crop, and coronal and sagittal cuts through the same point. Kidney is outlined in green, tumour in red and cyst in yellow. Window 50/500 HU; radiological orientation (patient left on viewer right). Description written from the Kidney-VLM processed-data figure guide (24 September 2026).",
+		"alt": "CT with a round tumour outlined in red in the left kidney.",
+		"attribution": "Images: CPTAC-CCRCC collection, The Cancer Imaging Archive (National Cancer Institute CPTAC, 2018, doi:10.7937/K9/TCIA.2018.OBLAMN27). Masks: BAMF AI-generated segmentations from the AIMI Annotations initiative (Van Oss et al. 2024, doi:10.5281/zenodo.8345959; Murugesan et al. 2024). Rendered by the Kidney-VLM project from its processed volumes: windowed, cropped and outlined.",
+		"reuseTerms": "CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/) for both the TCIA images and the BAMF masks. This preview is an adaptation; reuse requires attribution to both.",
+		"permissionApprovedBy": null,
+		"permissionApprovedOn": null,
+		"alignment": "BAMF DICOM-SEG masks placed on the processed CT volumes. Masks are AI output unless marked as corrected.",
+		"sources": [
+			"cptac-ccrcc-tcia",
+			"bamf-aimi-zenodo",
+			"bamf-aimi-paper"
+		]
+	},
+	{
+		"id": "cptac-ccrcc-v14-c3n-02063",
+		"release": "cptac-ccrcc-v14",
+		"kind": "dataset_sample",
+		"assets": [
+			{
+				"path": "/previews/cptac-ccrcc-v14/C3N-02063.webp",
+				"role": "image",
+				"sliceIndex": null,
+				"width": 1650,
+				"height": 462
+			}
+		],
+		"caption": "Mask: BAMF (AI-generated, AIMI Annotations), corrected by a radiologist. CPTAC-CCRCC C3N-02063 (venous phase from the series description; Siemens; 0.77 × 0.77 × 1.5 mm): an exophytic tumour on the lateral side of the right kidney. Four views of one scan: the whole axial slice where the centred label is largest, a zoomed axial crop, and coronal and sagittal cuts through the same point. Kidney is outlined in green, tumour in red and cyst in yellow. Window 50/500 HU; radiological orientation (patient left on viewer right). Description written from the Kidney-VLM processed-data figure guide (24 September 2026).",
+		"alt": "CT with a tumour outlined in red bulging from the lateral side of the right kidney.",
+		"attribution": "Images: CPTAC-CCRCC collection, The Cancer Imaging Archive (National Cancer Institute CPTAC, 2018, doi:10.7937/K9/TCIA.2018.OBLAMN27). Masks: BAMF AI-generated segmentations from the AIMI Annotations initiative (Van Oss et al. 2024, doi:10.5281/zenodo.8345959; Murugesan et al. 2024). Rendered by the Kidney-VLM project from its processed volumes: windowed, cropped and outlined.",
+		"reuseTerms": "CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/) for both the TCIA images and the BAMF masks. This preview is an adaptation; reuse requires attribution to both.",
+		"permissionApprovedBy": null,
+		"permissionApprovedOn": null,
+		"alignment": "BAMF DICOM-SEG masks placed on the processed CT volumes. Masks are AI output unless marked as corrected.",
+		"sources": [
+			"cptac-ccrcc-tcia",
+			"bamf-aimi-zenodo",
+			"bamf-aimi-paper"
+		]
+	},
+	{
+		"id": "cptac-ccrcc-v14-c3n-02723",
+		"release": "cptac-ccrcc-v14",
+		"kind": "dataset_sample",
+		"assets": [
+			{
+				"path": "/previews/cptac-ccrcc-v14/C3N-02723.webp",
+				"role": "image",
+				"sliceIndex": null,
+				"width": 1650,
+				"height": 462
+			}
+		],
+		"caption": "Mask: BAMF (AI-generated, AIMI Annotations), uncorrected AI output. CPTAC-CCRCC C3N-02723 (venous phase from the series description; Toshiba; 0.98 × 0.98 × 5.0 mm): a large, heterogeneous right-kidney tumour. Four views of one scan: the whole axial slice where the centred label is largest, a zoomed axial crop, and coronal and sagittal cuts through the same point. Kidney is outlined in green, tumour in red and cyst in yellow. Window 50/500 HU; radiological orientation (patient left on viewer right). Description written from the Kidney-VLM processed-data figure guide (24 September 2026).",
+		"alt": "CT with a large heterogeneous tumour outlined in red in the right kidney.",
+		"attribution": "Images: CPTAC-CCRCC collection, The Cancer Imaging Archive (National Cancer Institute CPTAC, 2018, doi:10.7937/K9/TCIA.2018.OBLAMN27). Masks: BAMF AI-generated segmentations from the AIMI Annotations initiative (Van Oss et al. 2024, doi:10.5281/zenodo.8345959; Murugesan et al. 2024). Rendered by the Kidney-VLM project from its processed volumes: windowed, cropped and outlined.",
+		"reuseTerms": "CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/) for both the TCIA images and the BAMF masks. This preview is an adaptation; reuse requires attribution to both.",
+		"permissionApprovedBy": null,
+		"permissionApprovedOn": null,
+		"alignment": "BAMF DICOM-SEG masks placed on the processed CT volumes. Masks are AI output unless marked as corrected.",
+		"sources": [
+			"cptac-ccrcc-tcia",
+			"bamf-aimi-zenodo",
+			"bamf-aimi-paper"
+		]
+	},
+	{
+		"id": "cptac-ccrcc-v14-c3n-02723-cyst",
+		"release": "cptac-ccrcc-v14",
+		"kind": "dataset_sample",
+		"assets": [
+			{
+				"path": "/previews/cptac-ccrcc-v14/C3N-02723_cyst.webp",
+				"role": "image",
+				"sliceIndex": null,
+				"width": 1650,
+				"height": 462
+			}
+		],
+		"caption": "Mask: BAMF (AI-generated, AIMI Annotations), uncorrected AI output. CPTAC-CCRCC C3N-02723, the same scan centred on a tiny cyst at the edge of the left kidney. The uncorrected AI mask also carries small tumour fragments. Four views of one scan: the whole axial slice where the centred label is largest, a zoomed axial crop, and coronal and sagittal cuts through the same point. Kidney is outlined in green, tumour in red and cyst in yellow. Window 50/500 HU; radiological orientation (patient left on viewer right). Description written from the Kidney-VLM processed-data figure guide (24 September 2026).",
+		"alt": "CT centred on a tiny cyst outlined in yellow at the edge of the left kidney.",
+		"attribution": "Images: CPTAC-CCRCC collection, The Cancer Imaging Archive (National Cancer Institute CPTAC, 2018, doi:10.7937/K9/TCIA.2018.OBLAMN27). Masks: BAMF AI-generated segmentations from the AIMI Annotations initiative (Van Oss et al. 2024, doi:10.5281/zenodo.8345959; Murugesan et al. 2024). Rendered by the Kidney-VLM project from its processed volumes: windowed, cropped and outlined.",
+		"reuseTerms": "CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/) for both the TCIA images and the BAMF masks. This preview is an adaptation; reuse requires attribution to both.",
+		"permissionApprovedBy": null,
+		"permissionApprovedOn": null,
+		"alignment": "BAMF DICOM-SEG masks placed on the processed CT volumes. Masks are AI output unless marked as corrected.",
+		"sources": [
+			"cptac-ccrcc-tcia",
+			"bamf-aimi-zenodo",
+			"bamf-aimi-paper"
+		]
+	},
+	{
+		"id": "cptac-ccrcc-v14-c3l-01462-cyst",
+		"release": "cptac-ccrcc-v14",
+		"kind": "dataset_sample",
+		"assets": [
+			{
+				"path": "/previews/cptac-ccrcc-v14/C3L-01462_cyst.webp",
+				"role": "image",
+				"sliceIndex": null,
+				"width": 1650,
+				"height": 462
+			}
+		],
+		"caption": "Mask: BAMF (AI-generated, AIMI Annotations), uncorrected AI output. CPTAC-CCRCC C3L-01462 (arterial phase from the series description; GE; 0.87 × 0.87 × 5.0 mm): a cyst directly beside a small tumour in the right kidney. Four views of one scan: the whole axial slice where the centred label is largest, a zoomed axial crop, and coronal and sagittal cuts through the same point. Kidney is outlined in green, tumour in red and cyst in yellow. Window 50/500 HU; radiological orientation (patient left on viewer right). Description written from the Kidney-VLM processed-data figure guide (24 September 2026).",
+		"alt": "CT with a yellow-outlined cyst directly beside a red-outlined small tumour in the right kidney.",
+		"attribution": "Images: CPTAC-CCRCC collection, The Cancer Imaging Archive (National Cancer Institute CPTAC, 2018, doi:10.7937/K9/TCIA.2018.OBLAMN27). Masks: BAMF AI-generated segmentations from the AIMI Annotations initiative (Van Oss et al. 2024, doi:10.5281/zenodo.8345959; Murugesan et al. 2024). Rendered by the Kidney-VLM project from its processed volumes: windowed, cropped and outlined.",
+		"reuseTerms": "CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/) for both the TCIA images and the BAMF masks. This preview is an adaptation; reuse requires attribution to both.",
+		"permissionApprovedBy": null,
+		"permissionApprovedOn": null,
+		"alignment": "BAMF DICOM-SEG masks placed on the processed CT volumes. Masks are AI output unless marked as corrected.",
+		"sources": [
+			"cptac-ccrcc-tcia",
+			"bamf-aimi-zenodo",
+			"bamf-aimi-paper"
+		]
+	},
+	{
+		"id": "cptac-ccrcc-v14-c3n-00435-cyst",
+		"release": "cptac-ccrcc-v14",
+		"kind": "dataset_sample",
+		"assets": [
+			{
+				"path": "/previews/cptac-ccrcc-v14/C3N-00435_cyst.webp",
+				"role": "image",
+				"sliceIndex": null,
+				"width": 1650,
+				"height": 462
+			}
+		],
+		"caption": "Mask: BAMF (AI-generated, AIMI Annotations), uncorrected AI output. CPTAC-CCRCC C3N-00435 (venous phase from the series description; Siemens; 0.67 × 0.67 × 1.2 mm): several cysts in the left kidney and tumour regions in the right kidney. Four views of one scan: the whole axial slice where the centred label is largest, a zoomed axial crop, and coronal and sagittal cuts through the same point. Kidney is outlined in green, tumour in red and cyst in yellow. Window 50/500 HU; radiological orientation (patient left on viewer right). Description written from the Kidney-VLM processed-data figure guide (24 September 2026).",
+		"alt": "CT with several yellow-outlined cysts in the left kidney and red-outlined tumour regions in the right kidney.",
+		"attribution": "Images: CPTAC-CCRCC collection, The Cancer Imaging Archive (National Cancer Institute CPTAC, 2018, doi:10.7937/K9/TCIA.2018.OBLAMN27). Masks: BAMF AI-generated segmentations from the AIMI Annotations initiative (Van Oss et al. 2024, doi:10.5281/zenodo.8345959; Murugesan et al. 2024). Rendered by the Kidney-VLM project from its processed volumes: windowed, cropped and outlined.",
+		"reuseTerms": "CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/) for both the TCIA images and the BAMF masks. This preview is an adaptation; reuse requires attribution to both.",
+		"permissionApprovedBy": null,
+		"permissionApprovedOn": null,
+		"alignment": "BAMF DICOM-SEG masks placed on the processed CT volumes. Masks are AI output unless marked as corrected.",
+		"sources": [
+			"cptac-ccrcc-tcia",
+			"bamf-aimi-zenodo",
+			"bamf-aimi-paper"
+		]
+	}
+]

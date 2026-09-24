@@ -27,3 +27,7 @@ pnpm-debug.log*
 
 # Local working notes, kept out of the repository
 docs/implemented-plan-updates.md
+
+# Raw quality-check figures from the Kidney-VLM processing pipeline. They show patients,
+# so only compressed, attributed copies with sample records go in public/previews/.
+figures/

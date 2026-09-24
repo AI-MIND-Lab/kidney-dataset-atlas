@@ -204,8 +204,13 @@ eligibility:
       status: verified
       verifiedOn: 2026-09-21
   samplePermission:
-    status: pass
-    note: No preview images are shown for this release.
+    status: unknown
+    note: >-
+      7 previews rendered from the released data await a curator's permission approval. The
+      source licence is CC BY 4.0 for the TCIA images and for the BAMF masks drawn on them, with attribution to both; each sample record states its attribution and terms.
+    evidence:
+      sources: [cptac-ccrcc-tcia]
+      status: not_verified
 catalogStatus: draft
 verifiedOn: 2026-09-21
 researchedBy: agent
