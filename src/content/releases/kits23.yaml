@@ -40,16 +40,18 @@ tasks:
 annotations:
   - segmentation_masks
 annotationProvenance:
-  kind: crowd
+  kind: trainee
   note: >-
-    The KiTS21 publication describes delineation by crowd workers following bounding boxes and
-    reference pins placed by medical trainees, with three independent annotations per region of
-    interest. Whether the same procedure produced the cases added for KiTS23 was not verified.
+    Trainees (residents, medical students and pre-medical undergraduates, trained by the experts)
+    placed 3D bounding boxes and then 2D contours around each region, consulting experts when in
+    doubt; the contours were post-processed into segmentations and reviewed by trainees. Unlike
+    KiTS21, each region was annotated once. Experts (attending radiologists, urologic oncologists
+    and fellows) reviewed cases where a baseline nnU-Net disagreed with the labels.
   evidence:
-    sources: [kits21-paper]
-    locator: Annotation procedure
+    sources: [kits23-challenge-page]
+    locator: Annotation section
     status: verified
-    verifiedOn: 2026-09-19
+    verifiedOn: 2026-09-24
 features:
   wsi:
     status: not_applicable
@@ -153,8 +155,13 @@ eligibility:
       status: verified
       verifiedOn: 2026-09-19
   samplePermission:
-    status: pass
-    note: No preview images are shown for this release, so no per-image permission was needed.
+    status: unknown
+    note: >-
+      6 previews rendered from the released data await a curator's permission approval. The
+      source licence is CC BY-NC-SA 4.0, so the previews are shared under the same licence; each sample record states its attribution and terms.
+    evidence:
+      sources: [kits23-challenge-page]
+      status: not_verified
 catalogStatus: draft
 verifiedOn: 2026-09-19
 researchedBy: agent

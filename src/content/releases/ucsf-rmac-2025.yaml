@@ -54,16 +54,18 @@ annotations:
   - pathology_labels
   - classification_labels
 annotationProvenance:
-  kind: mixed
+  kind: trainee
   note: >-
-    A radiology resident began collecting and annotating the examinations; the release contains
-    a mixture of polygon outlines and bounding boxes, while diagnostic outcomes come from
-    postoperative pathology.
+    A radiology resident with three years' experience annotated the renal lesions on axial slices
+    in the MD.ai tool, and an attending abdominal radiologist with over 15 years' experience
+    reviewed every annotation before inclusion. Three annotation types were used: bounding boxes
+    (53%), a bounding box on the centre slice with points on the end slices (41%), and polygons
+    (6%). Diagnostic outcomes come from postoperative pathology.
   evidence:
-    sources: [ucsf-rmac-repo, ucsf-rmac-preprint]
-    locator: Dataset description and acknowledgements
+    sources: [ucsf-rmac-preprint, ucsf-rmac-repo]
+    locator: Preprint, tumour annotation methods
     status: verified
-    verifiedOn: 2026-09-21
+    verifiedOn: 2026-09-24
 features:
   wsi:
     status: absent
@@ -187,8 +189,13 @@ eligibility:
       status: verified
       verifiedOn: 2026-09-21
   samplePermission:
-    status: pass
-    note: No preview images are shown for this release.
+    status: unknown
+    note: >-
+      4 previews rendered from the released data await a curator's permission approval. The
+      source licence is CC BY 4.0, with attribution to the dataset; each sample record states its attribution and terms.
+    evidence:
+      sources: [ucsf-rmac-aws]
+      status: not_verified
 catalogStatus: draft
 verifiedOn: 2026-09-21
 researchedBy: agent

@@ -1,0 +1,23 @@
+[
+	{
+		"id": "kits19-kits-json",
+		"url": "https://github.com/neheller/kits19/blob/67e495dd48dc40830df57719ef6f7f1d389c7a89/data/kits.json",
+		"title": "kits19 repository: data/kits.json clinical records (commit 67e495d, 12 July 2021)",
+		"locator": "All 210 case records; field names, value types and missing-value counts",
+		"accessedOn": "2026-09-23"
+	},
+	{
+		"id": "bamf-aimi-zenodo",
+		"url": "https://doi.org/10.5281/zenodo.8345959",
+		"title": "Van Oss J, Murugesan GK, McCrumb D, Soni R, et al. Image segmentations produced by BAMF under the AIMI Annotations initiative (Zenodo, v2.0.2)",
+		"locator": "Record licence (CC BY 4.0) and description",
+		"accessedOn": "2026-09-24"
+	},
+	{
+		"id": "bamf-aimi-paper",
+		"url": "https://doi.org/10.1038/s41597-024-03977-8",
+		"title": "Murugesan GK, et al. AI-Generated Annotations Dataset for Diverse Cancer Radiology Collections in NCI Image Data Commons. Scientific Data, 2024",
+		"locator": "Methods",
+		"accessedOn": "2026-09-24"
+	}
+]

@@ -1,0 +1,2198 @@
+[
+	{
+		"id": "kits19-case-id",
+		"release": "kits19",
+		"originalName": "case_id",
+		"file": "data/kits.json",
+		"definition": "Unique case identifier: \"case_\" followed by five digits giving the case index, zero-padded. Cases 00000 to 00209 are the public portion.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "identifier",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Joins the clinical record to the case folder holding imaging.nii.gz and segmentation.nii.gz.",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-age-at-nephrectomy",
+		"release": "kits19",
+		"originalName": "age_at_nephrectomy",
+		"file": "data/kits.json",
+		"definition": "Patient's age when they underwent nephrectomy for the renal tumor. Observed range 1 to 90.",
+		"type": "integer",
+		"unit": "years",
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "At nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "age",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-gender",
+		"release": "kits19",
+		"originalName": "gender",
+		"file": "data/kits.json",
+		"definition": "The patient's gender.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "male",
+				"meaning": "(123 of 210 cases)"
+			},
+			{
+				"code": "female",
+				"meaning": "(87 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "sex/gender",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-body-mass-index",
+		"release": "kits19",
+		"originalName": "body_mass_index",
+		"file": "data/kits.json",
+		"definition": "Body mass index at the time measured nearest to the most recent imaging in the dataset. Observed range 16.2 to 49.61.",
+		"type": "decimal",
+		"unit": "kg/m²",
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Nearest to the preoperative CT",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "body mass index",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-comorbidities-myocardial-infarction",
+		"release": "kits19",
+		"originalName": "comorbidities.myocardial_infarction",
+		"file": "data/kits.json",
+		"definition": "Whether the patient has myocardial infarction, one entry in the comorbidities bitmap.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Not present (201 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Present (9 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "comorbidity",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-comorbidities-congestive-heart-failure",
+		"release": "kits19",
+		"originalName": "comorbidities.congestive_heart_failure",
+		"file": "data/kits.json",
+		"definition": "Whether the patient has congestive heart failure, one entry in the comorbidities bitmap.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Not present (204 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Present (6 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "comorbidity",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-comorbidities-peripheral-vascular-disease",
+		"release": "kits19",
+		"originalName": "comorbidities.peripheral_vascular_disease",
+		"file": "data/kits.json",
+		"definition": "Whether the patient has peripheral vascular disease, one entry in the comorbidities bitmap.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Not present (201 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Present (9 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "comorbidity",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-comorbidities-cerebrovascular-disease",
+		"release": "kits19",
+		"originalName": "comorbidities.cerebrovascular_disease",
+		"file": "data/kits.json",
+		"definition": "Whether the patient has cerebrovascular disease, one entry in the comorbidities bitmap.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Not present (206 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Present (4 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "comorbidity",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-comorbidities-dementia",
+		"release": "kits19",
+		"originalName": "comorbidities.dementia",
+		"file": "data/kits.json",
+		"definition": "Whether the patient has dementia, one entry in the comorbidities bitmap. No case in the public portion is recorded as true.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Not present (210 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "comorbidity",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-comorbidities-copd",
+		"release": "kits19",
+		"originalName": "comorbidities.copd",
+		"file": "data/kits.json",
+		"definition": "Whether the patient has COPD, one entry in the comorbidities bitmap.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Not present (199 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Present (11 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "comorbidity",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-comorbidities-connective-tissue-disease",
+		"release": "kits19",
+		"originalName": "comorbidities.connective_tissue_disease",
+		"file": "data/kits.json",
+		"definition": "Whether the patient has connective tissue disease, one entry in the comorbidities bitmap.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Not present (209 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Present (1 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "comorbidity",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-comorbidities-peptic-ulcer-disease",
+		"release": "kits19",
+		"originalName": "comorbidities.peptic_ulcer_disease",
+		"file": "data/kits.json",
+		"definition": "Whether the patient has peptic ulcer disease, one entry in the comorbidities bitmap.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Not present (209 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Present (1 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "comorbidity",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-comorbidities-uncomplicated-diabetes-mellitus",
+		"release": "kits19",
+		"originalName": "comorbidities.uncomplicated_diabetes_mellitus",
+		"file": "data/kits.json",
+		"definition": "Whether the patient has uncomplicated diabetes mellitus, one entry in the comorbidities bitmap.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Not present (172 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Present (38 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "comorbidity",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-comorbidities-diabetes-mellitus-with-end-organ-damage",
+		"release": "kits19",
+		"originalName": "comorbidities.diabetes_mellitus_with_end_organ_damage",
+		"file": "data/kits.json",
+		"definition": "Whether the patient has diabetes mellitus with end organ damage, one entry in the comorbidities bitmap.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Not present (208 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Present (2 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "comorbidity",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-comorbidities-chronic-kidney-disease",
+		"release": "kits19",
+		"originalName": "comorbidities.chronic_kidney_disease",
+		"file": "data/kits.json",
+		"definition": "Whether the patient has chronic kidney disease, one entry in the comorbidities bitmap.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Not present (194 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Present (16 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "comorbidity",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-comorbidities-hemiplegia-from-stroke",
+		"release": "kits19",
+		"originalName": "comorbidities.hemiplegia_from_stroke",
+		"file": "data/kits.json",
+		"definition": "Whether the patient has hemiplegia from stroke, one entry in the comorbidities bitmap.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Not present (209 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Present (1 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "comorbidity",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-comorbidities-leukemia",
+		"release": "kits19",
+		"originalName": "comorbidities.leukemia",
+		"file": "data/kits.json",
+		"definition": "Whether the patient has leukemia, one entry in the comorbidities bitmap.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Not present (209 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Present (1 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "comorbidity",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-comorbidities-malignant-lymphoma",
+		"release": "kits19",
+		"originalName": "comorbidities.malignant_lymphoma",
+		"file": "data/kits.json",
+		"definition": "Whether the patient has malignant lymphoma, one entry in the comorbidities bitmap.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Not present (208 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Present (2 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "comorbidity",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-comorbidities-localized-solid-tumor",
+		"release": "kits19",
+		"originalName": "comorbidities.localized_solid_tumor",
+		"file": "data/kits.json",
+		"definition": "Whether the patient has localized solid tumor, one entry in the comorbidities bitmap.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Not present (181 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Present (29 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "comorbidity",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-comorbidities-metastatic-solid-tumor",
+		"release": "kits19",
+		"originalName": "comorbidities.metastatic_solid_tumor",
+		"file": "data/kits.json",
+		"definition": "Whether the patient has metastatic solid tumor, one entry in the comorbidities bitmap.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Not present (198 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Present (12 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "comorbidity",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-comorbidities-mild-liver-disease",
+		"release": "kits19",
+		"originalName": "comorbidities.mild_liver_disease",
+		"file": "data/kits.json",
+		"definition": "Whether the patient has mild liver disease, one entry in the comorbidities bitmap.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Not present (206 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Present (4 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "comorbidity",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-comorbidities-moderate-to-severe-liver-disease",
+		"release": "kits19",
+		"originalName": "comorbidities.moderate_to_severe_liver_disease",
+		"file": "data/kits.json",
+		"definition": "Whether the patient has moderate to severe liver disease, one entry in the comorbidities bitmap.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Not present (209 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Present (1 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "comorbidity",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-comorbidities-aids",
+		"release": "kits19",
+		"originalName": "comorbidities.aids",
+		"file": "data/kits.json",
+		"definition": "Whether the patient has AIDS, one entry in the comorbidities bitmap. No case in the public portion is recorded as true.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Not present (210 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "comorbidity",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-smoking-history",
+		"release": "kits19",
+		"originalName": "smoking_history",
+		"file": "data/kits.json",
+		"definition": "The patient's smoking history.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "never_smoked",
+				"meaning": "(100 of 210 cases)"
+			},
+			{
+				"code": "previous_smoker",
+				"meaning": "(76 of 210 cases)"
+			},
+			{
+				"code": "current_smoker",
+				"meaning": "(34 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "smoking status",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-age-when-quit-smoking",
+		"release": "kits19",
+		"originalName": "age_when_quit_smoking",
+		"file": "data/kits.json",
+		"definition": "Age at which the patient quit smoking. Stored in the file as text (for example \"43\"), although the paper specifies an integer.",
+		"type": "text",
+		"unit": "years",
+		"coding": [],
+		"missingValues": [
+			"\"not_applicable\": not applicable (134 of 210 cases)",
+			"null: not known (22 of 210 cases)"
+		],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-pack-years",
+		"release": "kits19",
+		"originalName": "pack_years",
+		"file": "data/kits.json",
+		"definition": "Estimated cigarette pack-years smoked. Stored inconsistently: 100 cases hold the number 0 and 43 hold a number written as text (for example \"30\").",
+		"type": "integer",
+		"unit": "pack-years",
+		"coding": [],
+		"missingValues": [
+			"null: unknown (67 of 210 cases)"
+		],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-chewing-tobacco-use",
+		"release": "kits19",
+		"originalName": "chewing_tobacco_use",
+		"file": "data/kits.json",
+		"definition": "The patient's chewing-tobacco use. The file's values differ from the paper's list (the paper gives \"never or not for more than 3mo\", \"quit in last 3mo\", \"currently chews\").",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "never_or_not_in_last_3mo",
+				"meaning": "(209 of 210 cases)"
+			},
+			{
+				"code": "quit_in_last_3mo",
+				"meaning": "(1 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-alcohol-use",
+		"release": "kits19",
+		"originalName": "alcohol_use",
+		"file": "data/kits.json",
+		"definition": "The patient's alcohol use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "two_or_less_daily",
+				"meaning": "(102 of 210 cases)"
+			},
+			{
+				"code": "never_or_not_in_last_3mo",
+				"meaning": "(95 of 210 cases)"
+			},
+			{
+				"code": "more_than_two_daily",
+				"meaning": "(13 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "alcohol use",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-intraoperative-complications-blood-transfusion",
+		"release": "kits19",
+		"originalName": "intraoperative_complications.blood_transfusion",
+		"file": "data/kits.json",
+		"definition": "Whether a blood transfusion occurred during the operation, one entry in the intraoperative-complications bitmap.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Did not occur (207 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Occurred (3 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "During nephrectomy",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": "intraoperative complication",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-intraoperative-complications-injury-to-surrounding-organ",
+		"release": "kits19",
+		"originalName": "intraoperative_complications.injury_to_surrounding_organ",
+		"file": "data/kits.json",
+		"definition": "Whether a injury to surrounding organ occurred during the operation, one entry in the intraoperative-complications bitmap.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Did not occur (207 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Occurred (3 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "During nephrectomy",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": "intraoperative complication",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-intraoperative-complications-cardiac-event",
+		"release": "kits19",
+		"originalName": "intraoperative_complications.cardiac_event",
+		"file": "data/kits.json",
+		"definition": "Whether a cardiac event occurred during the operation, one entry in the intraoperative-complications bitmap. No case in the public portion is recorded as true.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Did not occur (210 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "During nephrectomy",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": "intraoperative complication",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-hospitalization",
+		"release": "kits19",
+		"originalName": "hospitalization",
+		"file": "data/kits.json",
+		"definition": "Number of days the patient spent in hospital after the nephrectomy. Observed range 0 to 28.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"\"died_before_discharge\": the patient died before discharge (1 of 210 cases)"
+		],
+		"observationLevel": "patient",
+		"timePoint": "After nephrectomy",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": "length of stay",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-ischemia-time",
+		"release": "kits19",
+		"originalName": "ischemia_time",
+		"file": "data/kits.json",
+		"definition": "Minutes the kidney was deprived of blood during the nephrectomy. Observed range 0 to 54.",
+		"type": "integer",
+		"unit": "minutes",
+		"coding": [],
+		"missingValues": [
+			"\"not_applicable\": radical nephrectomy (70 of 210 cases)",
+			"null: partial nephrectomy with no value available (10 of 210 cases)"
+		],
+		"observationLevel": "patient",
+		"timePoint": "During nephrectomy",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "ischemia time",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-radiographic-size",
+		"release": "kits19",
+		"originalName": "radiographic_size",
+		"file": "data/kits.json",
+		"definition": "Tumor size reported in the radiology report. The unit is not stated by the source. Observed range 1.2 to 16.2.",
+		"type": "decimal",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Preoperative",
+		"role": "predictor",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": "tumor size",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-pathologic-size",
+		"release": "kits19",
+		"originalName": "pathologic_size",
+		"file": "data/kits.json",
+		"definition": "Tumor size reported in the surgical pathology report. The unit is not stated by the source. Observed range 0.8 to 22.5.",
+		"type": "decimal",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Postoperative pathology",
+		"role": "outcome",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "tumor size",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-malignant",
+		"release": "kits19",
+		"originalName": "malignant",
+		"file": "data/kits.json",
+		"definition": "Whether the postoperative surgical pathology report indicates the tumor was malignant.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "true",
+				"meaning": "Malignant (192 of 210 cases)"
+			},
+			{
+				"code": "false",
+				"meaning": "Not malignant (18 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Postoperative pathology",
+		"role": "outcome",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "malignancy",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-pathology-t-stage",
+		"release": "kits19",
+		"originalName": "pathology_t_stage",
+		"file": "data/kits.json",
+		"definition": "T stage reported in the postoperative surgical pathology report. The paper also allows \"X\", \"1c\" and \"2b\"; not every allowed value occurs in the public portion.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "1a",
+				"meaning": "(92 of 210 cases)"
+			},
+			{
+				"code": "3",
+				"meaning": "(44 of 210 cases)"
+			},
+			{
+				"code": "1b",
+				"meaning": "(41 of 210 cases)"
+			},
+			{
+				"code": "0",
+				"meaning": "(18 of 210 cases)"
+			},
+			{
+				"code": "2a",
+				"meaning": "(9 of 210 cases)"
+			},
+			{
+				"code": "2b",
+				"meaning": "(3 of 210 cases)"
+			},
+			{
+				"code": "4",
+				"meaning": "(3 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Postoperative pathology",
+		"role": "outcome",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "pathologic T stage",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-pathology-n-stage",
+		"release": "kits19",
+		"originalName": "pathology_n_stage",
+		"file": "data/kits.json",
+		"definition": "N stage reported in the postoperative surgical pathology report.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "X",
+				"meaning": "Not assessed (114 of 210 cases)"
+			},
+			{
+				"code": "0",
+				"meaning": "(90 of 210 cases)"
+			},
+			{
+				"code": "1",
+				"meaning": "(6 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Postoperative pathology",
+		"role": "outcome",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "pathologic N stage",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-pathology-m-stage",
+		"release": "kits19",
+		"originalName": "pathology_m_stage",
+		"file": "data/kits.json",
+		"definition": "M stage reported in the postoperative surgical pathology report.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "X",
+				"meaning": "Not assessed (100 of 210 cases)"
+			},
+			{
+				"code": "0",
+				"meaning": "(93 of 210 cases)"
+			},
+			{
+				"code": "1",
+				"meaning": "(17 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Postoperative pathology",
+		"role": "outcome",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "pathologic M stage",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-tumor-histologic-subtype",
+		"release": "kits19",
+		"originalName": "tumor_histologic_subtype",
+		"file": "data/kits.json",
+		"definition": "Histologic subtype proved by surgical pathology.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "clear_cell_rcc",
+				"meaning": "(143 of 210 cases)"
+			},
+			{
+				"code": "papillary",
+				"meaning": "(21 of 210 cases)"
+			},
+			{
+				"code": "chromophobe",
+				"meaning": "(19 of 210 cases)"
+			},
+			{
+				"code": "oncocytoma",
+				"meaning": "(10 of 210 cases)"
+			},
+			{
+				"code": "angiomyolipoma",
+				"meaning": "(5 of 210 cases)"
+			},
+			{
+				"code": "clear_cell_papillary_rcc",
+				"meaning": "(4 of 210 cases)"
+			},
+			{
+				"code": "rcc_unclassified",
+				"meaning": "(2 of 210 cases)"
+			},
+			{
+				"code": "mest",
+				"meaning": "(2 of 210 cases)"
+			},
+			{
+				"code": "spindle_cell_neoplasm",
+				"meaning": "(1 of 210 cases)"
+			},
+			{
+				"code": "wilms",
+				"meaning": "(1 of 210 cases)"
+			},
+			{
+				"code": "urothelial",
+				"meaning": "(1 of 210 cases)"
+			},
+			{
+				"code": "multilocular_cystic_rcc",
+				"meaning": "(1 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Postoperative pathology",
+		"role": "outcome",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "histologic subtype",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-tumor-necrosis",
+		"release": "kits19",
+		"originalName": "tumor_necrosis",
+		"file": "data/kits.json",
+		"definition": "Whether the surgical pathology report indicates necrotic tissue within the tumor.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Necrosis absent (144 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Necrosis present (43 of 210 cases)"
+			}
+		],
+		"missingValues": [
+			"null: the report does not mention necrosis (23 of 210 cases)"
+		],
+		"observationLevel": "patient",
+		"timePoint": "Postoperative pathology",
+		"role": "outcome",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "tumor necrosis",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-tumor-isup-grade",
+		"release": "kits19",
+		"originalName": "tumor_isup_grade",
+		"file": "data/kits.json",
+		"definition": "WHO/ISUP grade of the tumor in the postoperative surgical pathology report.",
+		"type": "integer",
+		"unit": null,
+		"coding": [
+			{
+				"code": "2",
+				"meaning": "(93 of 210 cases)"
+			},
+			{
+				"code": "3",
+				"meaning": "(39 of 210 cases)"
+			},
+			{
+				"code": "1",
+				"meaning": "(26 of 210 cases)"
+			},
+			{
+				"code": "4",
+				"meaning": "(14 of 210 cases)"
+			}
+		],
+		"missingValues": [
+			"null: ISUP grade does not apply, e.g. benign tumors or chromophobe RCC (38 of 210 cases)"
+		],
+		"observationLevel": "patient",
+		"timePoint": "Postoperative pathology",
+		"role": "outcome",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "ISUP grade",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-clavien-surgical-complications",
+		"release": "kits19",
+		"originalName": "clavien_surgical_complications",
+		"file": "data/kits.json",
+		"definition": "Grade of surgical complications on the Clavien-Dindo scale.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "0",
+				"meaning": "(149 of 210 cases)"
+			},
+			{
+				"code": "1",
+				"meaning": "(27 of 210 cases)"
+			},
+			{
+				"code": "2",
+				"meaning": "(15 of 210 cases)"
+			},
+			{
+				"code": "3b",
+				"meaning": "(7 of 210 cases)"
+			},
+			{
+				"code": "3a",
+				"meaning": "(6 of 210 cases)"
+			},
+			{
+				"code": "4",
+				"meaning": "(4 of 210 cases)"
+			},
+			{
+				"code": "5",
+				"meaning": "(1 of 210 cases)"
+			}
+		],
+		"missingValues": [
+			"null: could not be determined (1 of 210 cases)"
+		],
+		"observationLevel": "patient",
+		"timePoint": "After nephrectomy",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": "Clavien-Dindo grade",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-er-visit",
+		"release": "kits19",
+		"originalName": "er_visit",
+		"file": "data/kits.json",
+		"definition": "Whether the patient visited the emergency room less than 24 hours after discharge without being admitted.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Did not visit (191 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Visited (17 of 210 cases)"
+			}
+		],
+		"missingValues": [
+			"null: could not be determined (2 of 210 cases)"
+		],
+		"observationLevel": "patient",
+		"timePoint": "After discharge",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-readmission",
+		"release": "kits19",
+		"originalName": "readmission",
+		"file": "data/kits.json",
+		"definition": "Whether the patient was readmitted to hospital within 90 days of surgery.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Not readmitted (187 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Readmitted (21 of 210 cases)"
+			}
+		],
+		"missingValues": [
+			"null: could not be determined, e.g. censor or death date within 90 days (2 of 210 cases)"
+		],
+		"observationLevel": "patient",
+		"timePoint": "Within 90 days of surgery",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": "90-day readmission",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-estimated-blood-loss",
+		"release": "kits19",
+		"originalName": "estimated_blood_loss",
+		"file": "data/kits.json",
+		"definition": "Surgeon's estimate of blood lost during the nephrectomy. Observed range 0 to 2000.",
+		"type": "integer",
+		"unit": "ml",
+		"coding": [],
+		"missingValues": [
+			"null: not available (1 of 210 cases)"
+		],
+		"observationLevel": "patient",
+		"timePoint": "During nephrectomy",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "estimated blood loss",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-surgery-type",
+		"release": "kits19",
+		"originalName": "surgery_type",
+		"file": "data/kits.json",
+		"definition": "Surgical technique used.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "robotic",
+				"meaning": "(122 of 210 cases)"
+			},
+			{
+				"code": "open",
+				"meaning": "(60 of 210 cases)"
+			},
+			{
+				"code": "laparoscopic",
+				"meaning": "(28 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "At nephrectomy",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-surgical-procedure",
+		"release": "kits19",
+		"originalName": "surgical_procedure",
+		"file": "data/kits.json",
+		"definition": "Whether the nephrectomy was partial or radical.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "partial_nephrectomy",
+				"meaning": "(140 of 210 cases)"
+			},
+			{
+				"code": "radical_nephrectomy",
+				"meaning": "(70 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "At nephrectomy",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "nephrectomy type",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-surgical-approach",
+		"release": "kits19",
+		"originalName": "surgical_approach",
+		"file": "data/kits.json",
+		"definition": "Surgical approach. Values are capitalized in the file, unlike the lowercase values in the paper.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Transperitoneal",
+				"meaning": "(171 of 210 cases)"
+			},
+			{
+				"code": "Retroperitoneal",
+				"meaning": "(39 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "At nephrectomy",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-operative-time",
+		"release": "kits19",
+		"originalName": "operative_time",
+		"file": "data/kits.json",
+		"definition": "Duration of the nephrectomy procedure. Observed range 44 to 613.",
+		"type": "integer",
+		"unit": "minutes",
+		"coding": [],
+		"missingValues": [
+			"null: could not be retrieved (2 of 210 cases)"
+		],
+		"observationLevel": "patient",
+		"timePoint": "During nephrectomy",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "operative time",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-cytoreductive",
+		"release": "kits19",
+		"originalName": "cytoreductive",
+		"file": "data/kits.json",
+		"definition": "Whether the nephrectomy was performed for debulking (cytoreduction).",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Not cytoreductive (193 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Cytoreductive (17 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "At nephrectomy",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-positive-resection-margins",
+		"release": "kits19",
+		"originalName": "positive_resection_margins",
+		"file": "data/kits.json",
+		"definition": "Whether the surgical pathology report indicates malignant tissue remaining at the margins of the excised tissue.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "Clear margins (199 of 210 cases)"
+			},
+			{
+				"code": "true",
+				"meaning": "Positive margins (11 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Postoperative pathology",
+		"role": "outcome",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "surgical margin status",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-last-preop-egfr-value",
+		"release": "kits19",
+		"originalName": "last_preop_egfr.value",
+		"file": "data/kits.json",
+		"definition": "Value of the most recent eGFR measured before the nephrectomy.",
+		"type": "decimal",
+		"unit": "ml/min (as stated by the source)",
+		"coding": [],
+		"missingValues": [
+			"\">=90\": the value was 90 or greater (33 of 210 cases)",
+			"null: no value available (57 of 210 cases)"
+		],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "eGFR",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-last-preop-egfr-days-before-nephrectomy",
+		"release": "kits19",
+		"originalName": "last_preop_egfr.days_before_nephrectomy",
+		"file": "data/kits.json",
+		"definition": "Number of days before the nephrectomy that the preoperative eGFR was measured. Observed range 1 to 90.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"null: no value available (57 of 210 cases)"
+		],
+		"observationLevel": "patient",
+		"timePoint": "Before nephrectomy",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-first-postop-egfr-value",
+		"release": "kits19",
+		"originalName": "first_postop_egfr.value",
+		"file": "data/kits.json",
+		"definition": "Value of the first eGFR measured after the nephrectomy.",
+		"type": "decimal",
+		"unit": "ml/min (as stated by the source)",
+		"coding": [],
+		"missingValues": [
+			"\">=90\": the value was 90 or greater (20 of 210 cases)",
+			"\"age<16\": patient younger than 16, for whom GFR cannot be reliably estimated (2 of 210 cases)",
+			"null: no value available (53 of 210 cases)"
+		],
+		"observationLevel": "patient",
+		"timePoint": "After nephrectomy",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": "eGFR",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-first-postop-egfr-days-before-nephrectomy",
+		"release": "kits19",
+		"originalName": "first_postop_egfr.days_before_nephrectomy",
+		"file": "data/kits.json",
+		"definition": "Days between the nephrectomy and this eGFR measurement. The paper defines this subfield as \"days after nephrectomy\", but the released file names it days_before_nephrectomy. Observed range 76 to 2,503.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"null: no value available (53 of 210 cases)"
+		],
+		"observationLevel": "patient",
+		"timePoint": "After nephrectomy",
+		"role": "descriptor",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-last-postop-egfr-value",
+		"release": "kits19",
+		"originalName": "last_postop_egfr.value",
+		"file": "data/kits.json",
+		"definition": "Value of the most recent eGFR measured after the nephrectomy. Null when one or fewer postoperative values were available.",
+		"type": "decimal",
+		"unit": "ml/min (as stated by the source)",
+		"coding": [],
+		"missingValues": [
+			"\">=90\": the value was 90 or greater (22 of 210 cases)",
+			"\"age<16\": patient younger than 16, for whom GFR cannot be reliably estimated (2 of 210 cases)",
+			"null: no value available (53 of 210 cases)"
+		],
+		"observationLevel": "patient",
+		"timePoint": "After nephrectomy",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": "eGFR",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-last-postop-egfr-days-before-nephrectomy",
+		"release": "kits19",
+		"originalName": "last_postop_egfr.days_before_nephrectomy",
+		"file": "data/kits.json",
+		"definition": "Days between the nephrectomy and this eGFR measurement. The paper defines this subfield as \"days after nephrectomy\", but the released file names it days_before_nephrectomy. Observed range 76 to 3,070.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"null: no value available (53 of 210 cases)"
+		],
+		"observationLevel": "patient",
+		"timePoint": "After nephrectomy",
+		"role": "descriptor",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-vital-status",
+		"release": "kits19",
+		"originalName": "vital_status",
+		"file": "data/kits.json",
+		"definition": "The patient's current vital status. Values are lowercase in the file, unlike the capitalized values in the paper.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "censored",
+				"meaning": "Alive at censor date (189 of 210 cases)"
+			},
+			{
+				"code": "dead",
+				"meaning": "Died (21 of 210 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Last follow-up",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": "vital status",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-vital-days-after-surgery",
+		"release": "kits19",
+		"originalName": "vital_days_after_surgery",
+		"file": "data/kits.json",
+		"definition": "Days from nephrectomy to the censor date or the date of death. Observed range 0 to 3,070.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": "Last follow-up",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": "overall survival time",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits19-kits-json"
+			],
+			"locator": "Section 3, Data Records; data/kits.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-voxel-spacing-x-spacing",
+		"release": "kits19",
+		"originalName": "voxel_spacing.x_spacing",
+		"file": "data/kits.json",
+		"definition": "Voxel spacing along the x-axis of the CT volume (pixel width), matching the affine of imaging.nii.gz. Not listed in the data paper; the README describes it. The unit is not stated.",
+		"type": "decimal",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": "Preoperative CT",
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Added to kits.json on 12 July 2021 (\"finally added voxel spacing\").",
+		"evidence": {
+			"sources": [
+				"kits19-repo",
+				"kits19-kits-json"
+			],
+			"locator": "README, \"Usage\" and \"Voxel Spacing\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-voxel-spacing-y-spacing",
+		"release": "kits19",
+		"originalName": "voxel_spacing.y_spacing",
+		"file": "data/kits.json",
+		"definition": "Voxel spacing along the y-axis of the CT volume (pixel height), matching the affine of imaging.nii.gz. Not listed in the data paper; the README describes it. The unit is not stated.",
+		"type": "decimal",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": "Preoperative CT",
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Added to kits.json on 12 July 2021 (\"finally added voxel spacing\").",
+		"evidence": {
+			"sources": [
+				"kits19-repo",
+				"kits19-kits-json"
+			],
+			"locator": "README, \"Usage\" and \"Voxel Spacing\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-voxel-spacing-z-spacing",
+		"release": "kits19",
+		"originalName": "voxel_spacing.z_spacing",
+		"file": "data/kits.json",
+		"definition": "Voxel spacing along the z-axis of the CT volume (slice thickness), matching the affine of imaging.nii.gz. Not listed in the data paper; the README describes it. The unit is not stated.",
+		"type": "decimal",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": "Preoperative CT",
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Added to kits.json on 12 July 2021 (\"finally added voxel spacing\").",
+		"evidence": {
+			"sources": [
+				"kits19-repo",
+				"kits19-kits-json"
+			],
+			"locator": "README, \"Usage\" and \"Voxel Spacing\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	},
+	{
+		"id": "kits19-segmentation-label",
+		"release": "kits19",
+		"originalName": "segmentation label",
+		"file": "segmentation.nii.gz",
+		"definition": "Voxel label in each case's segmentation volume.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "0",
+				"meaning": "Background"
+			},
+			{
+				"code": "1",
+				"meaning": "Kidney"
+			},
+			{
+				"code": "2",
+				"meaning": "Tumor"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "slice",
+		"timePoint": "Preoperative CT",
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": "segmentation class",
+		"provenance": "Manual annotation by students under clinician supervision, as described in the data paper; label values from the README.",
+		"evidence": {
+			"sources": [
+				"kits19-repo"
+			],
+			"locator": "README, \"Usage\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-23"
+		}
+	}
+]

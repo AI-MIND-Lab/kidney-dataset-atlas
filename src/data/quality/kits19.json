@@ -1,0 +1,44 @@
+[
+	{
+		"id": "kits19-postop-egfr-days-field-name",
+		"release": "kits19",
+		"category": "observed_issue",
+		"description": "In kits.json the day count for both postoperative eGFR measurements (first_postop_egfr and last_postop_egfr) is named days_before_nephrectomy. The data paper specifies this subfield as \"days after nephrectomy\" for postoperative values. The field name contradicts its documented meaning.",
+		"inspectedScope": "All 210 case records in data/kits.json at commit 67e495d, compared field by field with section 3 of the data paper.",
+		"affected": {
+			"value": 157,
+			"status": "present",
+			"evidence": {
+				"sources": ["kits19-kits-json"],
+				"status": "verified",
+				"verifiedOn": "2026-09-23",
+				"note": "Cases with a non-null postoperative day count."
+			}
+		},
+		"detection": "Comparison of the released field names with the specification in the data paper.",
+		"impact": "Code or readers going by the field name would treat postoperative measurement times as preoperative, which reverses the timing of renal-function outcomes.",
+		"handling": "Read these two fields as days after nephrectomy, as the paper defines them. KiTS23's kits23.json names the same fields days_after_nephrectomy.",
+		"sources": ["kits19-kits-json", "kits19-data-paper"]
+	},
+	{
+		"id": "kits19-value-format-differs-from-paper",
+		"release": "kits19",
+		"category": "observed_issue",
+		"description": "Several values in kits.json are stored differently from the data paper's specification. age_when_quit_smoking is specified as an integer but stored as text (for example \"43\"); pack_years mixes integers (every integer is 0) with numbers written as text (for example \"30\"). Categorical values also differ in form: underscores replace spaces (\"clear_cell_rcc\" for \"clear cell rcc\"), surgical_approach is capitalized and vital_status is lowercase where the paper shows the opposite, and chewing_tobacco_use uses \"never_or_not_in_last_3mo\" where the paper lists \"never or not for more than 3mo\".",
+		"inspectedScope": "All 210 case records in data/kits.json at commit 67e495d, compared field by field with section 3 of the data paper.",
+		"affected": {
+			"value": 74,
+			"status": "present",
+			"evidence": {
+				"sources": ["kits19-kits-json"],
+				"status": "verified",
+				"verifiedOn": "2026-09-23",
+				"note": "Cases where age_when_quit_smoking or pack_years holds a number stored as text (54 and 43 cases). The categorical formatting differences apply to every case."
+			}
+		},
+		"detection": "Profiling value types and distinct values for every field, compared with the paper.",
+		"impact": "Numeric analyses that do not convert text values will drop or mis-sort these cases, and value matching against the paper's lists will fail.",
+		"handling": "Convert numeric text to numbers, keeping \"not_applicable\" and null distinct, and match categorical values on the forms that occur in the file (listed in this release's data dictionary).",
+		"sources": ["kits19-kits-json", "kits19-data-paper"]
+	}
+]
