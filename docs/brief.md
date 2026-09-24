@@ -5,8 +5,9 @@
 > is why it is addressed to "you" and ends with a hand-off section. It is kept unchanged as the reference for what
 > the atlas is meant to become: routes, page sections, data model, approval process and acceptance criteria.
 >
-> **What has changed since:** the repository became public on 23 September 2026, so the "private phase" in §1, §3
-> and §13 is over; the site is still not hosted, and publishing it remains a manual step. Where this brief and the
+> **What has changed since:** the "private phase" in §1, §3 and §13 is no longer tied to a fixed plan: the
+> repository's visibility is set in its GitHub settings (it is currently private). The site is still not hosted,
+> and publishing it remains a manual step. Where this brief and the
 > [README](../README.md), [CONTRIBUTING.md](../CONTRIBUTING.md) or [decisions.md](decisions.md) disagree, those
 > files describe the current state and take precedence. [decisions.md](decisions.md) also records where the
 > implementation deliberately departs from this brief.

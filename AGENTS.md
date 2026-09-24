@@ -48,7 +48,8 @@ for you to complete by editing approval fields.
   [docs/Kidney_Open_Datasets_and_CV_Papers.md](docs/Kidney_Open_Datasets_and_CV_Papers.md).
 - Unverified paper candidates for review: [docs/literature/](docs/literature/).
 - Licensing: code and project documentation are MIT; catalogue data and research content are all rights
-  reserved. Keep new data files inside the reserved paths listed in [LICENSE](LICENSE).
+  reserved; preview images in `public/previews/` carry the licence of the dataset they come from. Keep new data
+  files inside the paths listed in [LICENSE](LICENSE).
 
 ## Running the site
 

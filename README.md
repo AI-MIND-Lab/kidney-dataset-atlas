@@ -5,9 +5,9 @@ Curated catalogue of open kidney research datasets.
 The catalog is a set of files in this repository. Pages, search and exports are generated from those files, so
 every number on the site traces back to a record with a source.
 
-**Status: public repository, site not yet hosted.** Anyone can read the source and run the site on their own
-machine, as described below. Records in the repository are drafts until a curator approves them: drafts are
-visible here as files, but they never appear on the built site, in its search index or in its exports.
+**Status: private repository, site not yet hosted.** Collaborators run the site on their own machine, as
+described below. Records in the repository are drafts until a curator approves them: drafts are visible here as
+files, but they never appear on the built site, in its search index or in its exports.
 
 ## Run the site
 
@@ -106,8 +106,8 @@ Curators are listed in `src/data/curators.yaml`; the build fails if anyone else 
 ## Deployment
 
 The site is not deployed yet. `.github/workflows/deploy.yml` holds the GitHub Pages deployment and starts only
-when triggered by hand from the Actions tab; the repository is public, so it can now run, and it publishes
-approved records only. `.github/workflows/ci.yml` validates, checks, tests and builds every push, including a
+when triggered by hand from the Actions tab. It publishes approved records only, and on GitHub's free plan it can
+run only while the repository is public. `.github/workflows/ci.yml` validates, checks, tests and builds every push, including a
 build under the project sub-path.
 
 ## Layout
@@ -130,6 +130,7 @@ correction without writing code, open an issue using one of the templates.
 ## Licence
 
 The software (site source, scripts, tests, configuration and project documentation) is under the MIT License. The catalogue data and
-research content (`src/content/`, `src/data/`, `public/previews/`, the research inventory and `docs/literature/`)
-are **not** openly licensed: all rights reserved. See [LICENSE](LICENSE) for the exact scope and for the
+research content (`src/content/`, `src/data/`, the research inventory and `docs/literature/`)
+are **not** openly licensed: all rights reserved. Preview images in `public/previews/` carry the licence of the
+dataset they come from, stated in each sample record. See [LICENSE](LICENSE) for the exact scope and for the
 attribution required for third-party material.

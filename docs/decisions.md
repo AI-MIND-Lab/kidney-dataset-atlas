@@ -57,7 +57,7 @@ shared, and the index is loaded from a path that respects the configured base.
 
 ## Deployment is prepared but disabled
 
-`deploy.yml` starts only by hand. While the repository was private it could not run: a GitHub Pages site is
-public even from a private repository, and viewer restrictions need GitHub Enterprise Cloud. The repository
-became public on 23 September 2026. Publishing the site remains a separate, deliberate step, and it publishes
-approved records only.
+`deploy.yml` starts only by hand, so publishing the site is a separate, deliberate step, and it publishes
+approved records only. On GitHub's free plan it can run only while the repository is public; and a Pages site is
+visible to anyone with its address even from a private repository, because viewer restrictions need GitHub
+Enterprise Cloud. While the repository is private, collaborators run the site locally.

@@ -50,10 +50,12 @@ Write commit messages as a short, sentence-case summary of what the change does 
 
 - Code and project documentation you contribute are licensed under the MIT License, like the rest of the
   software.
-- Records and research content you contribute (anything under `src/content/`, `src/data/`, `public/previews/`
-  or `docs/literature/`, and the research inventory) become part of the catalogue, which is not openly licensed. By opening a pull request you confirm that
-  you have the right to submit the material and allow the maintainer to include, modify and publish it as part
-  of the atlas.
+- Records and research content you contribute (anything under `src/content/`, `src/data/` or
+  `docs/literature/`, and the research inventory) become part of the catalogue, which is not openly licensed. By
+  opening a pull request you confirm that you have the right to submit the material and allow the maintainer to
+  include, modify and publish it as part of the atlas.
+- Preview images in `public/previews/` keep the licence of the dataset they come from. Each needs a sample record
+  stating its attribution and terms, and a curator's permission approval before a published page shows it.
 
 See [LICENSE](LICENSE) for the full terms.
 

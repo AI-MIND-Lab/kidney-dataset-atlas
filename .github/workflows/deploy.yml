@@ -3,7 +3,8 @@ name: Deploy to GitHub Pages
 # Manual start only: publishing the site is a deliberate step, not a side
 # effect of pushing. The build publishes approved records only; drafts and
 # fixtures fail the output check. GitHub Pages must be enabled in the
-# repository settings (Source: GitHub Actions) before the first run.
+# repository settings (Source: GitHub Actions) before the first run, and on
+# GitHub's free plan it runs only while the repository is public.
 on:
   workflow_dispatch:
 

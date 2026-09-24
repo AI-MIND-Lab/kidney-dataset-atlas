@@ -124,6 +124,24 @@ treat being downloadable as evidence that data were de-identified.
 
 `dictionary.inspectedScope` says what was actually opened, for example "clinical.csv and the v2 release notes".
 
+### Building a dictionary from the released files
+
+`src/data/variables/kits19.json` is the worked example: 63 clinical fields plus the segmentation labels.
+
+1. **Pin the file.** Download the provider's own metadata file (for KiTS19, `data/kits.json`), and add a source in
+   `src/data/sources/` whose URL names the exact commit or version you read.
+2. **One entry per field,** named exactly as in the file (`originalName`), including nested keys such as
+   `comorbidities.copd`.
+3. **Meanings come from the provider's documentation** (for KiTS19, section 3 of the data paper). If a field is not
+   documented, say so in `definition`; do not infer its meaning from its name.
+4. **Observed facts come from the file:** the value type, the codes that actually occur with their counts, ranges,
+   and each missing-value marker with how many records use it (for example `null: not available (57 of 210 cases)`).
+5. **Units only where a source states them.** Leave `unit: null` rather than assume centimetres or millimetres.
+6. **Record every mismatch between documentation and file** as a quality finding in `src/data/quality/`: renamed
+   fields, numbers stored as text, value sets that differ. `src/data/quality/kits19.json` shows the form.
+7. Set `dictionary.completeness` to `complete_for_inspected_release` only when every field of the inspected file is
+   present, and say in `inspectedScope` what was and was not opened (for example, "imaging volumes not downloaded").
+
 ## Papers and their architectures
 
 `src/content/papers/<id>.md`. Document **every architecture the paper reports results for**: proposed models
@@ -147,6 +165,22 @@ under which it is shown. Say whether the image is an actual dataset sample or a 
 Never show an invented image, a mask that does not belong to its image, or unrelated stock imagery.
 
 Preview files go in `public/previews/`, compressed. They live in git history forever, so keep them small.
+
+`src/data/samples/processed-figures.json` is the worked example. For each preview:
+
+- **Folder and format.** Put the file in `public/previews/<release-id>/` as WebP (quality around 80 keeps outlines
+  sharp at a fraction of the PNG size). Raw renderings stay in the git-ignored `figures/` folder: they show
+  patients, and only compressed, attributed copies with a sample record may be committed.
+- **Caption.** Start with who drew the mask ("Mask: BAMF (AI-generated), corrected by a radiologist.",
+  "Mask: KiTS23's own reference labels…"), then describe what the image shows in neutral terms, then say where the
+  description comes from (for example the figure guide it was written from).
+- **Attribution.** Name the image source and the mask source separately when they differ (a TCIA collection with
+  BAMF or RCC-AID masks), with DOIs, and say who rendered the preview and what was changed (windowed, cropped,
+  outlined).
+- **Reuse terms.** A preview is an adaptation, so it carries the source dataset's licence, with a link to the
+  official licence page. A share-alike licence (such as KiTS23's CC BY-NC-SA 4.0) passes on to the preview.
+- **Approval.** Leave `permissionApprovedBy` and `permissionApprovedOn` null for a curator, and set the release's
+  `eligibility.samplePermission` to `unknown` until they approve every preview it shows.
 
 ## Before committing
 
