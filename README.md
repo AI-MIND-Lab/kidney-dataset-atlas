@@ -17,28 +17,26 @@ You need [Node.js](https://nodejs.org) 22.12 or newer (the project uses 24, pinn
 git clone https://github.com/i-sababishraq/kidney-dataset-atlas.git
 cd kidney-dataset-atlas
 npm ci
-npm run preview:site
-```
-
-The last command validates the records, builds the site, generates the search index, and serves the result.
-Open the address it prints (usually <http://localhost:4321>).
-
-**Seeing an empty site?** That is expected while every record is still a draft: the normal build shows
-approved records only. To read the drafts as pages, run:
-
-```bash
 npm run preview:drafts
 ```
 
-Every page in that build is marked as a draft, and the output check refuses to publish it.
+The last command validates the records, builds the site with every record in it, generates the search index,
+and serves the result. Open the address it prints (usually <http://localhost:4321>). Every collaborator who runs
+it from the same commit sees exactly the same site: the output is built only from files in the repository.
+
+The records are still drafts, so this is the view to use for now; each page is marked as a draft. The public
+view, `npm run preview:site`, shows approved records only, and stays empty until a curator approves something.
+
+To pick up everyone's latest changes, run `git pull`, then `npm ci` if `package-lock.json` changed, then
+`npm run preview:drafts` again.
 
 Prefer not to install anything? Open the repository in GitHub Codespaces instead (Code → Codespaces → Create),
-then run `npm run preview:site` in its terminal. Codespaces usage counts against your own free allowance.
+then run `npm run preview:drafts` in its terminal. Codespaces usage counts against your own free allowance.
 
 ### Working on the interface
 
 `npm run dev` starts the development server with live reload, but it has **no search index**: Pagefind runs
-against the built site, so use `npm run preview:site` whenever search matters.
+against the built site, so use `npm run preview:drafts` (or `preview:site`) whenever search matters.
 
 Because no real records are approved yet, use the synthetic fixtures to see a populated interface:
 

@@ -52,7 +52,7 @@ not all passed, or that displays a sample without its own permission approval.
 
 `/search/` queries the Pagefind index, and the header carries a search field. Because Pagefind runs over
 `dist/` after the build, `npm run dev` has no index: the page says so rather than appearing broken. Use
-`npm run preview:site` whenever search matters. The query stays in the address bar so a result page can be
+`npm run preview:drafts` or `npm run preview:site` whenever search matters. The query stays in the address bar so a result page can be
 shared, and the index is loaded from a path that respects the configured base.
 
 ## Deployment is prepared but disabled
