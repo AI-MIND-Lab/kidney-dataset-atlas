@@ -1,0 +1,35 @@
+---
+import type { Paper } from '../lib/catalog';
+import { withBase } from '../lib/site';
+
+type Figure = Paper['data']['figures'][number];
+
+interface Props {
+	figure: Figure;
+}
+
+const { figure } = Astro.props;
+const src = withBase(figure.path);
+---
+
+<figure class="paper-figure" id={figure.id}>
+	<a class="paper-figure__image" href={src} title="Open the full-size figure">
+		<img src={src} width={figure.width} height={figure.height} alt={figure.alt} loading="lazy" decoding="async" />
+	</a>
+	<figcaption>
+		<span class="paper-figure__label">{figure.label} of the paper · {figure.title}</span>
+		<blockquote class="paper-figure__caption">{figure.caption}</blockquote>
+		{
+			figure.mapsTo && (
+				<p class="paper-figure__map">
+					<strong>How it maps to the table below:</strong> {figure.mapsTo}
+				</p>
+			)
+		}
+		<p class="paper-figure__credit">
+			Figure reproduced from {figure.credit} Source: <a href={figure.source}>{figure.source.replace(/^https?:\/\//, '')}</a>.
+			Licensed under <a href={figure.license.url}>{figure.license.name}</a>. Changes: {figure.changes} Caption quoted
+			from the paper.
+		</p>
+	</figcaption>
+</figure>

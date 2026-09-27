@@ -1,0 +1,37 @@
+---
+import type { Paper } from '../lib/catalog';
+
+type Model = Paper['data']['models'][number];
+
+interface Props {
+	model: Model;
+}
+
+// The atlas's own drawing of a model, built from its pipeline steps. It is
+// always shown, so a paper whose figure may not be copied still has a picture.
+const { model } = Astro.props;
+---
+
+{
+	model.pipeline.length > 0 && (
+		<figure class="pipeline" aria-label={`${model.name} pipeline`}>
+			<ol class="pipeline__steps">
+				{model.pipeline.map((step, index) => (
+					<li
+						class:list={[
+							'pipeline__step',
+							index === 0 && 'pipeline__step--input',
+							index === model.pipeline.length - 1 && 'pipeline__step--output',
+						]}
+					>
+						<span class="pipeline__label">{step.label}</span>
+						{step.detail && <span class="pipeline__detail">{step.detail}</span>}
+					</li>
+				))}
+			</ol>
+			<figcaption class="pipeline__caption">
+				<strong>{model.name}</strong>, from input to output. Diagram drawn by the atlas from the paper's text.
+			</figcaption>
+		</figure>
+	)
+}

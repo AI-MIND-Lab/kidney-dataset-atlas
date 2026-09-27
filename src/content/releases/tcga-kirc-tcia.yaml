@@ -1,0 +1,202 @@
+id: tcga-kirc-tcia
+dataset: tcga-kirc
+versionLabel: TCIA radiology collection (Version 3)
+current: false
+releaseDate: 2020-05-29
+doi: 10.7937/K9/TCIA.2016.V6PBVTDR
+counts:
+  patients:
+    value: 267
+    status: present
+    evidence:
+      sources: [tcia-tcga-kirc, tcia-tcga-kirc-series]
+      locator: Data access table (Subjects); distinct PatientID values in the series list
+      status: verified
+      verifiedOn: 2026-09-26
+      note: 237 of the 267 patients have CT, 62 have MR and 1 has computed radiography; many have more than one.
+  examinations:
+    value: 439
+    status: present
+    evidence:
+      sources: [tcia-tcga-kirc, tcia-tcga-kirc-series]
+      locator: Data access table (Studies)
+      status: verified
+      verifiedOn: 2026-09-26
+      note: Imaging studies, holding 2,654 series (1,736 CT, 914 MR, 4 CR). A series is one acquisition or reconstruction, so series are not scans of different patients.
+  images:
+    value: 192581
+    status: present
+    evidence:
+      sources: [tcia-tcga-kirc, tcia-tcga-kirc-series]
+      locator: Data access table (Images); sum of ImageCount
+      status: verified
+      verifiedOn: 2026-09-26
+      note: DICOM images (slices) across all series. Not a count of scans or patients.
+  lesions:
+    value: null
+    status: not_documented
+  slides:
+    value: null
+    status: not_applicable
+  records:
+    value: null
+    status: not_applicable
+modalities:
+  - ct
+  - mri
+  - other
+cohort: >-
+  Patients of the TCGA clear cell renal cell carcinoma project whose clinical imaging was
+  contributed to The Cancer Imaging Archive: 267 of the project's 537 cases, from multiple
+  institutions and scanners (mostly GE and Siemens).
+tasks: []
+annotations: []
+annotationProvenance:
+  kind: none
+  note: >-
+    The collection holds images only. Two separately published annotation sets cover part of
+    it: BAMF's AI-generated kidney, tumour and cyst masks for 156 contrast-enhanced CT scans,
+    39 of them scored by a radiologist and corrected where needed (Murugesan et al. 2024, CC BY 4.0), and
+    RCC-AID's student-corrected masks for 85 CT scans, catalogued as its own dataset. Neither is
+    merged into this release.
+  evidence:
+    sources: [tcia-tcga-kirc, bamf-aimi-paper, rcc-aid-paper]
+    locator: TCIA analysis-results listing; BAMF paper, CT kidneys, tumors and cysts annotation; RCC-AID Table 2
+    status: verified
+    verifiedOn: 2026-09-26
+features:
+  wsi:
+    status: not_applicable
+    note: Slides for these patients are in the GDC open-access release of this dataset.
+  ctPhases:
+    status: not_documented
+    note: >-
+      Scans span several contrast phases, but the collection does not label them in a
+      structured way: the RCC-AID authors report that the TCGA metadata does not give clear
+      phase information, and had a radiologist label phases for the scans they annotated.
+    evidence:
+      sources: [rcc-aid-paper]
+      locator: Section 5.2.2, annotation protocol
+      status: verified
+      verifiedOn: 2026-09-26
+  clinicalData:
+    status: absent
+    note: The archive states that clinical and genomic data are held in the GDC, not in this collection. They join by TCGA barcode.
+    evidence:
+      sources: [tcia-tcga-kirc]
+      status: verified
+      verifiedOn: 2026-09-26
+  followUp:
+    status: absent
+    note: Follow-up is in the GDC clinical records, not in this collection.
+access:
+  mode: direct_open_download
+  registrationVisible: false
+  instructions: >-
+    Download from the collection page with the NBIA Data Retriever, or query the TCIA API. The
+    images are also mirrored in NCI's Imaging Data Commons.
+  evidence:
+    sources: [tcia-tcga-kirc]
+    status: verified
+    verifiedOn: 2026-09-26
+license:
+  name: CC BY 3.0
+  url: https://creativecommons.org/licenses/by/3.0/
+  conditions: >-
+    Attribution: cite the collection (Akin et al. 2016, doi:10.7937/K9/TCIA.2016.V6PBVTDR) and
+    The Cancer Imaging Archive. The series list gives the same licence for every series.
+deidentification:
+  statement: >-
+    The collection page describes the images as de-identified, with DICOM dates offset by 3 to
+    10 years so that intervals between studies are kept.
+  status: present
+  evidence:
+    sources: [tcia-tcga-kirc]
+    locator: Collection page, date-offset note
+    status: verified
+    verifiedOn: 2026-09-26
+pairing:
+  - kind: same_patient
+    modalities: [ct, pathology, clinical_table]
+    status: present
+    note: >-
+      Every one of the 267 imaging patients is a case in the GDC open-access release of
+      TCGA-KIRC: the archive's PatientID is the TCGA barcode (the GDC's submitter_id). 237
+      patients with CT also have slide images there.
+    evidence:
+      sources: [tcia-tcga-kirc-series, gdc-kirc-case-records, gdc-kirc-slide-files]
+      locator: PatientID values matched against GDC case submitter_id values
+      status: verified
+      verifiedOn: 2026-09-26
+  - kind: follow_up
+    modalities: [ct, mri]
+    status: present
+    note: 439 studies for 267 patients, so some patients have more than one imaging date; the RCC-AID authors kept only each patient's first study date to reduce post-surgery scans.
+    evidence:
+      sources: [tcia-tcga-kirc-series, rcc-aid-paper]
+      locator: StudyInstanceUID per PatientID; RCC-AID section 5.2.1
+      status: verified
+      verifiedOn: 2026-09-26
+dictionary:
+  completeness: documentation_only
+  inspectedScope: >-
+    The series-level fields returned by the TCIA API (PatientID, modality, manufacturer, series
+    description, image count, licence). No DICOM header was read, so acquisition parameters and
+    contrast phases are not recorded. The clinical dictionary is on the GDC release.
+structure: >-
+  DICOM organised as patient, study and series. The PatientID is the TCGA barcode, which joins
+  each patient to the clinical records and slides in the GDC. Series include localisers,
+  reconstructions and MR sequences as well as diagnostic CT, so a study that needs one CT
+  volume per patient must choose a series; series descriptions are free text.
+citation: >-
+  Akin O, et al. The Cancer Genome Atlas Kidney Renal Clear Cell Carcinoma
+  Collection (TCGA-KIRC) (Version 3) [Data set]. The Cancer Imaging Archive, 2016.
+  doi:10.7937/K9/TCIA.2016.V6PBVTDR
+limitations:
+  - Covers 267 of the 537 TCGA-KIRC cases; the rest have no imaging here.
+  - Mixed modalities and many series per study; contrast phase is not labelled in a structured field.
+  - No masks are part of the collection. The BAMF masks were produced by a model trained partly on TCGA-KIRC cases, so they are not independent of this collection.
+  - Scans come from many institutions with differing protocols and slice thicknesses.
+eligibility:
+  publicAccess:
+    status: pass
+    note: Downloads without registration or application.
+    evidence:
+      sources: [tcia-tcga-kirc]
+      status: verified
+      verifiedOn: 2026-09-26
+  deidentification:
+    status: pass
+    note: The archive states that the images are de-identified, with dates offset.
+    evidence:
+      sources: [tcia-tcga-kirc]
+      status: verified
+      verifiedOn: 2026-09-26
+  noPhiHosted:
+    status: pass
+    note: This record hosts descriptions and compressed preview renderings only; no DICOM file is mirrored.
+  termsPermitUse:
+    status: pass
+    note: CC BY 3.0 permits reuse with attribution.
+    evidence:
+      sources: [tcia-tcga-kirc]
+      status: verified
+      verifiedOn: 2026-09-26
+  samplePermission:
+    status: unknown
+    note: >-
+      Seven preview renderings are proposed. The images are CC BY 3.0 and the BAMF and RCC-AID
+      masks drawn on them are CC BY 4.0, so reuse with attribution is permitted; a curator
+      still has to approve each preview.
+catalogStatus: draft
+verifiedOn: 2026-09-26
+researchedBy: agent
+approvedBy: null
+approvedOn: null
+sources:
+  - tcia-tcga-kirc
+  - tcia-tcga-kirc-series
+  - gdc-kirc-case-records
+  - bamf-aimi-paper
+  - bamf-aimi-zenodo
+  - rcc-aid-paper

@@ -1,0 +1,208 @@
+id: rcc-aid-v2
+dataset: rcc-aid
+versionLabel: Version 2.0.0 (Zenodo)
+current: true
+releaseDate: 2026-06-16
+doi: 10.5281/zenodo.20719257
+counts:
+  patients:
+    value: 91
+    status: present
+    evidence:
+      sources: [rcc-aid-paper, rcc-aid-zenodo]
+      locator: Abstract; section 6.1
+      status: verified
+      verifiedOn: 2026-09-26
+      note: 65 clear cell, 16 papillary and 10 chromophobe patients (24 female, 67 male).
+  examinations:
+    value: 129
+    status: present
+    evidence:
+      sources: [rcc-aid-paper, rcc-aid-zenodo]
+      locator: Section 6.1; Table 3
+      status: verified
+      verifiedOn: 2026-09-26
+      note: CT scans (one series each), 85 clear cell, 26 papillary and 18 chromophobe. A patient can contribute more than one scan.
+  lesions:
+    value: 247
+    status: present
+    evidence:
+      sources: [rcc-aid-paper]
+      locator: Sections 5.2.2 and 6.1
+      status: verified
+      verifiedOn: 2026-09-26
+      note: >-
+        Annotated lesion instances across the 129 scans: one primary solid tumour per scan (129)
+        and 118 cysts in 38 scans. A patient with several scans contributes the same lesions more
+        than once.
+  slides:
+    value: null
+    status: not_applicable
+  records:
+    value: null
+    status: not_applicable
+modalities:
+  - ct
+  - clinical_table
+cohort: >-
+  Contrast-enhanced CT scans from the TCGA-KIRC, TCGA-KIRP and TCGA-KICH collections on The
+  Cancer Imaging Archive, each with exactly one solid primary renal tumour. All papillary and
+  chromophobe candidates were annotated, and a random 200 of 676 eligible clear cell series;
+  scans of the chest, post-operative scans, scans without contrast and scans with several solid
+  tumours were excluded.
+tasks:
+  - segmentation
+  - detection
+  - classification
+annotations:
+  - segmentation_masks
+  - classification_labels
+annotationProvenance:
+  kind: mixed
+  note: >-
+    A public nnU-Net model (de Boer et al. 2026) drew initial kidney and renal-mass masks. Two
+    students trained for the task, without full medical training, corrected obvious errors and
+    clicked the primary tumour and any cysts, and unselected masks were deleted. 31 of 283
+    series were referred to a board-certified radiologist (6 years' abdominal experience); 16
+    were resolved and 15 excluded. A second radiologist (3 years) labelled contrast phases.
+    Unidentified lesions were not searched for, and inter-observer variability was not measured.
+  evidence:
+    sources: [rcc-aid-paper]
+    locator: Sections 5.2.2 to 5.2.4
+    status: verified
+    verifiedOn: 2026-09-26
+features:
+  wsi:
+    status: not_applicable
+    note: Slides for these patients are in the GDC releases of the TCGA kidney projects, joined by barcode.
+  ctPhases:
+    status: present
+    phases: [arterial, venous, delayed]
+    note: Every scan is contrast-enhanced and phase-labelled by a radiologist; 26 arterial, 50 venous and 53 delayed.
+    evidence:
+      sources: [rcc-aid-paper]
+      locator: Section 6.1; Table 2
+      status: verified
+      verifiedOn: 2026-09-26
+  clinicalData:
+    status: present
+    note: >-
+      metadata.csv gives each scan's histologic subtype, patient sex and age, tumour size,
+      contrast phase and TCIA series identifiers. Further clinical data join from the GDC by
+      TCGA barcode.
+    evidence:
+      sources: [rcc-aid-zenodo, rcc-aid-paper]
+      locator: Zenodo record contents table; paper section 2
+      status: verified
+      verifiedOn: 2026-09-26
+  followUp:
+    status: absent
+    note: Not part of this release; follow-up is in the GDC clinical records.
+access:
+  mode: direct_open_download
+  registrationVisible: false
+  instructions: >-
+    Download images, labels and metadata.csv from the Zenodo record without registration. The
+    record also carries a manifest.tcia file for fetching the original DICOM from The Cancer
+    Imaging Archive with the NBIA Data Retriever.
+  evidence:
+    sources: [rcc-aid-paper, rcc-aid-zenodo]
+    locator: Section 4.1; Zenodo record contents table
+    status: verified
+    verifiedOn: 2026-09-26
+license:
+  name: CC BY 4.0 (masks); CC BY 3.0 (images and metadata, from TCIA)
+  url: https://creativecommons.org/licenses/by/4.0/
+  conditions: >-
+    The segmentation masks are CC BY 4.0. The NIfTI images and metadata.csv are derived from the
+    TCIA TCGA collections and remain under their CC BY 3.0 licence. Commercial use is allowed.
+    Cite the RCC-AID paper and the three TCIA collections, and include the TCGA acknowledgement.
+    The code is MIT-licensed.
+deidentification:
+  statement: >-
+    The authors state that the TCIA images were de-identified by the original providers under
+    HIPAA Safe Harbor, including removal of DICOM identifiers, that no further steps were
+    applied, and that re-identification attempts are prohibited.
+  status: present
+  evidence:
+    sources: [rcc-aid-paper]
+    locator: Section 4.4.3
+    status: verified
+    verifiedOn: 2026-09-26
+pairing:
+  - kind: same_patient
+    modalities: [ct, pathology, clinical_table]
+    status: present
+    note: >-
+      Scans link to the TCGA clinical, genomic and slide data through the shared TCGA participant
+      identifier. Patients with several scans appear more than once, so splits must be made by
+      patient.
+    evidence:
+      sources: [rcc-aid-paper]
+      locator: Sections 3 and 5.1.1
+      status: verified
+      verifiedOn: 2026-09-26
+dictionary:
+  completeness: partial
+  inspectedScope: >-
+    The label map and file layout from the Zenodo record, and the metadata.csv columns that the
+    authors' analysis code reads (PatientID, SeriesInstanceUID, PatientSex, PatientAge). The
+    record could not be downloaded (Zenodo refused automated requests), so the remaining
+    metadata columns, including tumour size and contrast phase, are not listed by name.
+structure: >-
+  images/ holds one NIfTI CT volume per scan and labels/ one matching mask (file name plus
+  _seg). File names begin with the collection code (KIRC, KIRP or KICH), which gives the
+  subtype, followed by the TCIA series UID. Masks label 0 background, 1 kidney, 2 tumour and
+  3 cyst. metadata.csv links each scan to its TCIA series and TCGA patient.
+citation: >-
+  de Boer S, Häntze H, Ziegelmayer S, Russo T, van Ginneken B, Prokop M, Bressem K, Hering A.
+  RCC-AID: Renal Cell Carcinoma AI Dataset for Medical Imaging Research. Machine Learning for
+  Biomedical Imaging, 2026:772-782. doi:10.59275/j.melba.2026-2dg2. Cite also the TCIA
+  TCGA-KIRC, TCGA-KIRP and TCGA-KICH collections.
+limitations:
+  - Masks start from a model's output and were corrected by trained students, with a radiologist only for uncertain cases; no inter-observer study.
+  - Only the primary solid tumour and cysts are labelled; scans with several solid tumours were excluded and missed lesions were not searched for.
+  - Clear cell cases are a random 200 of 676 eligible series before exclusions; papillary (26 scans) and chromophobe (18) are small.
+  - Predominantly male (67 of 91) and from North American academic centres.
+  - Not independent of the TCGA collections, and version 1.0.0 (142 scans) differs; results must name the version.
+  - Slice thickness ranges from 0.6 to 5.0 mm across scanners.
+eligibility:
+  publicAccess:
+    status: pass
+    note: Downloadable from Zenodo without registration.
+    evidence:
+      sources: [rcc-aid-paper]
+      locator: Section 4.1
+      status: verified
+      verifiedOn: 2026-09-26
+  deidentification:
+    status: pass
+    note: The authors document that the source images were de-identified by TCIA and that no identifiers were added.
+    evidence:
+      sources: [rcc-aid-paper]
+      locator: Section 4.4.3
+      status: verified
+      verifiedOn: 2026-09-26
+  noPhiHosted:
+    status: pass
+    note: This record hosts descriptions and compressed preview renderings only.
+  termsPermitUse:
+    status: pass
+    note: CC BY 4.0 masks and CC BY 3.0 images permit reuse, including commercial use, with attribution.
+    evidence:
+      sources: [rcc-aid-paper, rcc-aid-zenodo]
+      locator: Section 4.3
+      status: verified
+      verifiedOn: 2026-09-26
+  samplePermission:
+    status: unknown
+    note: Nine preview renderings are proposed; both licences permit them with attribution, and a curator still has to approve each one.
+catalogStatus: draft
+verifiedOn: 2026-09-26
+researchedBy: agent
+approvedBy: null
+approvedOn: null
+sources:
+  - rcc-aid-zenodo
+  - rcc-aid-paper
+  - rcc-aid-code

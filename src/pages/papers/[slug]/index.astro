@@ -1,9 +1,12 @@
 ---
 import type { GetStaticPaths } from 'astro';
 import { render } from 'astro:content';
+import ModelPipeline from '../../../components/ModelPipeline.astro';
+import ModelTable from '../../../components/ModelTable.astro';
+import PaperFigure from '../../../components/PaperFigure.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { catalog, publishedPapers, studyUsesForPaper } from '../../../lib/catalog';
-import { accessLabel, humanize, stateLabel, trainTestLabel } from '../../../lib/display';
+import { accessLabel, humanize, trainTestLabel } from '../../../lib/display';
 import { withBase } from '../../../lib/site';
 import { studyUseTarget } from '../../../lib/study-use-target';
 
@@ -16,6 +19,9 @@ const { paper } = Astro.props;
 const { Content } = await render(paper);
 const uses = await studyUsesForPaper(paper.data.id);
 const catalogEntries = await catalog();
+const papersById = new Map(
+	(await publishedPapers()).map((entry) => [entry.data.id, { title: entry.data.title, slug: entry.data.slug }]),
+);
 const releaseContexts = new Map(
 	catalogEntries.flatMap(({ dataset, releases }) =>
 		releases.map((release) => [
@@ -29,16 +35,54 @@ const releaseContexts = new Map(
 		] as const),
 	),
 );
-const targetLabel = (use: (typeof uses)[number]) => {
+
+/** "TCGA-KIRC (TCIA radiology collection)": short enough for a results cell. */
+const shortTarget = (use: (typeof uses)[number]) => {
 	const context = use.release ? releaseContexts.get(use.release) : undefined;
-	return studyUseTarget(use, context).label;
+	if (!context) return studyUseTarget(use, context).label;
+	return `${context.datasetName.split(' — ')[0]} (${context.versionLabel})`;
 };
 
 // Proposed models first, then variants, then baselines.
 const ORDER = { proposed: 0, variant: 1, baseline: 2 } as const;
 const models = [...paper.data.models].sort((a, b) => ORDER[a.role] - ORDER[b.role]);
-const resultsFor = (modelId: string) =>
-	uses.flatMap((use) => use.results.filter((result) => result.model === modelId).map((result) => ({ use, result })));
+const modelName = new Map(models.map((model) => [model.id, model.name]));
+
+// A result that covers several releases is recorded once per release; show it once, listing where it applies.
+type Result = (typeof uses)[number]['results'][number];
+const grouped = new Map<string, { result: Result; uses: (typeof uses)[number][] }>();
+for (const use of uses) {
+	for (const result of use.results) {
+		const key = JSON.stringify([
+			result.model,
+			result.metric,
+			result.value,
+			result.units,
+			result.confidenceInterval,
+			result.subset,
+			result.split,
+			result.evaluation,
+		]);
+		const entry = grouped.get(key) ?? { result, uses: [] as (typeof uses)[number][] };
+		entry.uses.push(use);
+		grouped.set(key, entry);
+	}
+}
+/** "TCGA-KIRC, TCGA-KIRP and TCGA-KICH (TCIA radiology collection)" rather than three long labels. */
+const targetList = (list: (typeof uses)[number][]) => {
+	const contexts = list.map((use) => (use.release ? releaseContexts.get(use.release) : undefined));
+	const versions = new Set(contexts.map((context) => context?.versionLabel.replace(/ \(.*\)$/, '')));
+	if (contexts.every(Boolean) && versions.size === 1) {
+		const names = contexts.map((context) => context!.datasetName.split(' — ')[0]);
+		const joined = names.length > 1 ? `${names.slice(0, -1).join(', ')} and ${names.at(-1)}` : names[0];
+		return `${joined} (${[...versions][0]})`;
+	}
+	return list.map(shortTarget).join('; ');
+};
+const results = [...grouped.values()].sort(
+	(a, b) => (models.findIndex((m) => m.id === a.result.model) ?? 0) - (models.findIndex((m) => m.id === b.result.model) ?? 0),
+);
+const documented = (value: string | null | undefined) => value && !/^not documented/i.test(value);
 ---
 
 <BaseLayout title={paper.data.title} description={paper.data.methodSummary ?? paper.data.title}>
@@ -54,9 +98,94 @@ const resultsFor = (modelId: string) =>
 
 		<section id="method" class="stack">
 			<h2>Method</h2>
+			{paper.data.methodSummary && <p class="lede">{paper.data.methodSummary}</p>}
 			<div class="prose"><Content /></div>
-			{paper.data.methodSummary && <p class="prose">{paper.data.methodSummary}</p>}
 		</section>
+
+		<section id="architectures" class="stack">
+			<h2>Architecture</h2>
+			{paper.data.figures.map((figure) => <PaperFigure figure={figure} />)}
+			{
+				paper.data.linkedFigures.map((figure) => (
+					<aside class="linked-figure">
+						<strong>
+							{figure.label} of the paper · {figure.title}
+						</strong>
+						<p>{figure.summary}</p>
+						<p>
+							<a href={figure.url}>View {figure.label.toLowerCase()} in the paper</a>
+						</p>
+						<p class="paper-figure__credit">{figure.reason} The atlas diagram below is drawn from the paper's text.</p>
+					</aside>
+				))
+			}
+			{models.map((model) => <ModelPipeline model={model} />)}
+			{
+				models.length === 0 ? (
+					<p>No architectures are documented for this paper yet.</p>
+				) : (
+					<ModelTable models={models} papersById={papersById} />
+				)
+			}
+		</section>
+
+		{
+			results.length > 0 && (
+				<section id="results" class="stack">
+					<h2>Reported results</h2>
+					<div class="table-scroll">
+						<table class="results-table">
+							<thead>
+								<tr>
+									<th scope="col">Model</th>
+									<th scope="col">Metric</th>
+									<th scope="col">Value</th>
+									<th scope="col">Evaluated on</th>
+									<th scope="col">Split</th>
+									<th scope="col">Evaluation</th>
+								</tr>
+							</thead>
+							<tbody>
+								{results.map(({ result, uses: resultUses }) => (
+									<tr>
+										<td>{modelName.get(result.model) ?? result.model}</td>
+										<th scope="row">{result.metric}</th>
+										<td class="value">
+											{result.value ?? 'Not documented'}
+											{result.units && ` ${result.units}`}
+											{result.confidenceInterval && <small class="model-table__note">{result.confidenceInterval}</small>}
+										</td>
+										<td>
+											{result.subset ?? 'Not documented'}
+											<small class="model-table__note">Catalogue records: {targetList(resultUses)}</small>
+										</td>
+										<td>
+											{result.split ?? 'Not documented'}
+											{documented(result.patientLevelHandling) && (
+												<small class="model-table__note">{result.patientLevelHandling}</small>
+											)}
+										</td>
+										<td>
+											{humanize(result.evaluation)}
+											{result.evidence?.status !== 'verified' && <span class="badge">Not verified</span>}
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
+					{
+						results.some(({ result }) => result.evidence?.note) && (
+							<ul class="muted">
+								{[...new Set(results.map(({ result }) => result.evidence?.note).filter(Boolean))].map((note) => (
+									<li>{note}</li>
+								))}
+							</ul>
+						)
+					}
+				</section>
+			)
+		}
 
 		<section id="datasets" class="stack">
 			<h2>Datasets used</h2>
@@ -72,6 +201,7 @@ const resultsFor = (modelId: string) =>
 									<th scope="col">Role</th>
 									<th scope="col">Subset</th>
 									<th scope="col">Train/test role</th>
+									<th scope="col">Split</th>
 									<th scope="col">Relationship evidence</th>
 								</tr>
 							</thead>
@@ -96,6 +226,7 @@ const resultsFor = (modelId: string) =>
 											<td>{humanize(use.role)}</td>
 											<td>{use.subset ?? 'Not documented'}</td>
 											<td>{trainTestLabel(use.trainTestRole)}</td>
+											<td>{use.split ?? 'Not documented'}</td>
 											<td>{use.actualUseEvidence.status === 'verified' ? 'Verified' : 'Not verified'}</td>
 										</tr>
 									);
@@ -103,95 +234,6 @@ const resultsFor = (modelId: string) =>
 							</tbody>
 						</table>
 					</div>
-				)
-			}
-		</section>
-
-		<section id="architectures" class="stack">
-			<h2>Architectures</h2>
-			{
-				models.length === 0 ? (
-					<p>No architectures are documented for this paper yet.</p>
-				) : (
-					models.map((model) => (
-						<section id={`model-${model.id}`} class="stack">
-							<h3>
-								{model.name} <span class="badge">{humanize(model.role)}</span>
-							</h3>
-							<dl>
-								<dt>Task</dt>
-								<dd>{humanize(model.task)}</dd>
-								<dt>Backbone</dt>
-								<dd>{model.backbone ?? 'Not documented'}</dd>
-								<dt>Input representation</dt>
-								<dd>{model.inputRepresentation ? model.inputRepresentation.toUpperCase() : 'Not documented'}</dd>
-								<dt>Preprocessing</dt>
-								<dd>{model.preprocessing ?? 'Not documented'}</dd>
-								<dt>Loss</dt>
-								<dd>{model.loss ?? 'Not documented'}</dd>
-								<dt>Outputs</dt>
-								<dd>{model.outputs ?? 'Not documented'}</dd>
-								<dt>Training inputs</dt>
-								<dd>{model.trainingInputs ?? 'Not documented'}</dd>
-								<dt>Inference inputs</dt>
-								<dd>{model.inferenceInputs ?? 'Not documented'}</dd>
-								<dt>Code</dt>
-								<dd>
-									{model.code?.url ? (
-										<a href={model.code.url}>{stateLabel(model.code.status)}</a>
-									) : (
-										stateLabel(model.code?.status ?? 'not_documented')
-									)}
-								</dd>
-								<dt>Weights</dt>
-								<dd>
-									{model.weights?.url ? (
-										<a href={model.weights.url}>{stateLabel(model.weights.status)}</a>
-									) : (
-										stateLabel(model.weights?.status ?? 'not_documented')
-									)}
-								</dd>
-							</dl>
-
-							{resultsFor(model.id).length > 0 && (
-								<div class="table-scroll">
-									<table>
-										<thead>
-											<tr>
-												<th scope="col">Release or cohort</th>
-												<th scope="col">Metric</th>
-												<th scope="col">Value</th>
-												<th scope="col">Confidence interval</th>
-												<th scope="col">Subset</th>
-												<th scope="col">Split</th>
-												<th scope="col">Patient-level handling</th>
-												<th scope="col">Evaluation</th>
-												<th scope="col">Result evidence</th>
-											</tr>
-										</thead>
-										<tbody>
-											{resultsFor(model.id).map(({ use, result }) => (
-												<tr>
-													<td>{targetLabel(use)}</td>
-													<th scope="row">{result.metric}</th>
-													<td>
-														{result.value ?? 'Not documented'}
-														{result.units && ` ${result.units}`}
-													</td>
-													<td>{result.confidenceInterval ?? 'Not documented'}</td>
-													<td>{result.subset ?? 'Not documented'}</td>
-													<td>{result.split ?? 'Not documented'}</td>
-													<td>{result.patientLevelHandling ?? 'Not documented'}</td>
-													<td>{humanize(result.evaluation)}</td>
-													<td>{result.evidence?.status === 'verified' ? 'Verified' : 'Not verified'}</td>
-												</tr>
-											))}
-										</tbody>
-									</table>
-								</div>
-							)}
-						</section>
-					))
 				)
 			}
 		</section>

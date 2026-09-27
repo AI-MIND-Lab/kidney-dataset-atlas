@@ -1,0 +1,193 @@
+id: tcga-kirp-tcia
+dataset: tcga-kirp
+versionLabel: TCIA radiology collection (Version 4)
+current: false
+releaseDate: 2020-05-29
+doi: 10.7937/K9/TCIA.2016.ACWOGBEF
+counts:
+  patients:
+    value: 33
+    status: present
+    evidence:
+      sources: [tcia-tcga-kirp, tcia-tcga-kirp-series]
+      locator: Data access table (Subjects); distinct PatientID values in the series list
+      status: verified
+      verifiedOn: 2026-09-26
+      note: 23 of the 33 patients have CT, 17 have MR and 2 have PET; many have more than one.
+  examinations:
+    value: 47
+    status: present
+    evidence:
+      sources: [tcia-tcga-kirp, tcia-tcga-kirp-series]
+      locator: Data access table (Studies)
+      status: verified
+      verifiedOn: 2026-09-26
+      note: Imaging studies, holding 376 series (110 CT, 260 MR, 6 PET). Series are not scans of different patients.
+  images:
+    value: 26667
+    status: present
+    evidence:
+      sources: [tcia-tcga-kirp, tcia-tcga-kirp-series]
+      locator: Data access table (Images); sum of ImageCount
+      status: verified
+      verifiedOn: 2026-09-26
+      note: DICOM images (slices) across all series. Not a count of scans or patients.
+  lesions:
+    value: null
+    status: not_documented
+  slides:
+    value: null
+    status: not_applicable
+  records:
+    value: null
+    status: not_applicable
+modalities:
+  - ct
+  - mri
+  - other
+cohort: >-
+  Patients of the TCGA papillary renal cell carcinoma project whose clinical imaging was
+  contributed to The Cancer Imaging Archive: 33 of the project's 291 cases. The archive states
+  that all baseline imaging studies are pre-surgical.
+tasks: []
+annotations: []
+annotationProvenance:
+  kind: none
+  note: >-
+    The collection holds images only. RCC-AID, catalogued as its own dataset, adds
+    student-corrected kidney, tumour and cyst masks for 26 CT scans from this collection. BAMF's
+    AIMI annotation record (version 2.x) also lists this collection among its sources; those
+    masks are AI output, a small part of it corrected by a radiologist.
+  evidence:
+    sources: [rcc-aid-paper, bamf-aimi-zenodo]
+    locator: RCC-AID Table 2; BAMF Zenodo record, related identifiers (derived from doi:10.7937/K9/TCIA.2016.ACWOGBEF)
+    status: verified
+    verifiedOn: 2026-09-26
+features:
+  wsi:
+    status: not_applicable
+    note: Slides for these patients are in the GDC open-access release of this dataset.
+  ctPhases:
+    status: not_documented
+    note: >-
+      Contrast phases are not labelled in a structured field; the RCC-AID authors had a
+      radiologist label phases for the scans they annotated.
+    evidence:
+      sources: [rcc-aid-paper]
+      locator: Section 5.2.2, annotation protocol
+      status: verified
+      verifiedOn: 2026-09-26
+  clinicalData:
+    status: absent
+    note: The archive states that clinical and genomic data are held in the GDC, not in this collection. They join by TCGA barcode.
+    evidence:
+      sources: [tcia-tcga-kirp]
+      status: verified
+      verifiedOn: 2026-09-26
+  followUp:
+    status: absent
+    note: Follow-up is in the GDC clinical records, not in this collection.
+access:
+  mode: direct_open_download
+  registrationVisible: false
+  instructions: >-
+    Download from the collection page with the NBIA Data Retriever, or query the TCIA API. The
+    images are also mirrored in NCI's Imaging Data Commons.
+  evidence:
+    sources: [tcia-tcga-kirp]
+    status: verified
+    verifiedOn: 2026-09-26
+license:
+  name: CC BY 3.0
+  url: https://creativecommons.org/licenses/by/3.0/
+  conditions: >-
+    Attribution: cite the collection (Linehan et al. 2016, doi:10.7937/K9/TCIA.2016.ACWOGBEF)
+    and The Cancer Imaging Archive. The series list gives the same licence for every series.
+deidentification:
+  statement: >-
+    The collection page states that DICOM dates are offset by 3 to 10 years for HIPAA
+    compliance, keeping the intervals between studies.
+  status: present
+  evidence:
+    sources: [tcia-tcga-kirp]
+    locator: Collection page, date-offset note
+    status: verified
+    verifiedOn: 2026-09-26
+pairing:
+  - kind: same_patient
+    modalities: [ct, pathology, clinical_table]
+    status: present
+    note: >-
+      All 33 imaging patients are cases in the GDC open-access release of TCGA-KIRP: the
+      archive's PatientID is the TCGA barcode. 23 patients with CT also have slide images there.
+    evidence:
+      sources: [tcia-tcga-kirp-series, gdc-kirp-case-records, gdc-kirp-slide-files]
+      locator: PatientID values matched against GDC case submitter_id values
+      status: verified
+      verifiedOn: 2026-09-26
+  - kind: follow_up
+    modalities: [ct, mri]
+    status: present
+    note: 47 studies for 33 patients, so some patients have more than one imaging date.
+    evidence:
+      sources: [tcia-tcga-kirp-series]
+      locator: StudyInstanceUID per PatientID
+      status: verified
+      verifiedOn: 2026-09-26
+dictionary:
+  completeness: documentation_only
+  inspectedScope: >-
+    The series-level fields returned by the TCIA API (PatientID, modality, manufacturer, series
+    description, image count, licence). No DICOM header was read. The clinical dictionary is on
+    the GDC release.
+structure: >-
+  DICOM organised as patient, study and series. The PatientID is the TCGA barcode, which joins
+  each patient to the clinical records and slides in the GDC. Most series are MR; 89 series
+  have no body part recorded. A study that needs one CT volume per patient must choose a series.
+citation: >-
+  Linehan M, Gautam R, Kirk S, et al. The Cancer Genome Atlas Cervical Kidney Renal Papillary
+  Cell Carcinoma Collection (TCGA-KIRP) (Version 4) [Data set]. The Cancer Imaging Archive,
+  2016. doi:10.7937/K9/TCIA.2016.ACWOGBEF
+limitations:
+  - Covers 33 of the 291 TCGA-KIRP cases, and only 23 of them have CT.
+  - The collection's official title includes the word "Cervical", although it is the papillary kidney cancer collection.
+  - Mixed modalities and many series per study; contrast phase is not labelled in a structured field.
+  - No masks are part of the collection.
+eligibility:
+  publicAccess:
+    status: pass
+    note: Downloads without registration or application.
+    evidence:
+      sources: [tcia-tcga-kirp]
+      status: verified
+      verifiedOn: 2026-09-26
+  deidentification:
+    status: pass
+    note: The archive states that DICOM dates are offset for HIPAA compliance.
+    evidence:
+      sources: [tcia-tcga-kirp]
+      status: verified
+      verifiedOn: 2026-09-26
+  noPhiHosted:
+    status: pass
+  termsPermitUse:
+    status: pass
+    note: CC BY 3.0 permits reuse with attribution.
+    evidence:
+      sources: [tcia-tcga-kirp]
+      status: verified
+      verifiedOn: 2026-09-26
+  samplePermission:
+    status: pass
+    note: No preview images are shown for this release. RCC-AID previews of papillary cases appear on the RCC-AID page.
+catalogStatus: draft
+verifiedOn: 2026-09-26
+researchedBy: agent
+approvedBy: null
+approvedOn: null
+sources:
+  - tcia-tcga-kirp
+  - tcia-tcga-kirp-series
+  - gdc-kirp-case-records
+  - bamf-aimi-zenodo
+  - rcc-aid-paper

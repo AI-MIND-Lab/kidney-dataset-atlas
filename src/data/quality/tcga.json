@@ -1,0 +1,322 @@
+[
+	{
+		"id": "tcga-kirc-multiple-diagnosis-records",
+		"release": "tcga-kirc-gdc-open",
+		"category": "observed_issue",
+		"description": "199 of 537 cases carry more than one diagnosis record (814 records in all, up to six per case). Exactly one record per case is flagged diagnosis_is_primary_disease; the others describe prior or additional malignancies, some of them outside the kidney.",
+		"inspectedScope": "All 537 case records returned by the GDC API, Data Release 46.0.",
+		"affected": {
+			"value": 199,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"gdc-kirc-case-records"
+				],
+				"locator": "diagnoses array per case",
+				"status": "verified",
+				"verifiedOn": "2026-09-26"
+			}
+		},
+		"detection": "Counted diagnosis records per case in the API response.",
+		"impact": "Taking the first diagnosis record, or pooling all of them, can attach the wrong stage, grade or histology to a patient and inflate counts.",
+		"handling": "Filter on diagnosis_is_primary_disease = true before building patient-level labels.",
+		"sources": [
+			"gdc-kirc-case-records",
+			"gdc-data-dictionary"
+		]
+	},
+	{
+		"id": "tcga-kirp-multiple-diagnosis-records",
+		"release": "tcga-kirp-gdc-open",
+		"category": "observed_issue",
+		"description": "100 of 291 cases carry more than one diagnosis record (431 records in all). Exactly one record per case is flagged diagnosis_is_primary_disease.",
+		"inspectedScope": "All 291 case records returned by the GDC API, Data Release 46.0.",
+		"affected": {
+			"value": 100,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"gdc-kirp-case-records"
+				],
+				"locator": "diagnoses array per case",
+				"status": "verified",
+				"verifiedOn": "2026-09-26"
+			}
+		},
+		"detection": "Counted diagnosis records per case in the API response.",
+		"impact": "Taking the first diagnosis record, or pooling all of them, can attach the wrong stage or histology to a patient.",
+		"handling": "Filter on diagnosis_is_primary_disease = true before building patient-level labels.",
+		"sources": [
+			"gdc-kirp-case-records",
+			"gdc-data-dictionary"
+		]
+	},
+	{
+		"id": "tcga-kich-multiple-diagnosis-records",
+		"release": "tcga-kich-gdc-open",
+		"category": "observed_issue",
+		"description": "26 of 113 cases carry more than one diagnosis record (159 records in all). Exactly one record per case is flagged diagnosis_is_primary_disease.",
+		"inspectedScope": "All 113 case records returned by the GDC API, Data Release 46.0.",
+		"affected": {
+			"value": 26,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"gdc-kich-case-records"
+				],
+				"locator": "diagnoses array per case",
+				"status": "verified",
+				"verifiedOn": "2026-09-26"
+			}
+		},
+		"detection": "Counted diagnosis records per case in the API response.",
+		"impact": "Taking the first diagnosis record, or pooling all of them, can attach the wrong stage or histology to a patient.",
+		"handling": "Filter on diagnosis_is_primary_disease = true before building patient-level labels.",
+		"sources": [
+			"gdc-kich-case-records",
+			"gdc-data-dictionary"
+		]
+	},
+	{
+		"id": "tcga-kirp-no-tumour-grade",
+		"release": "tcga-kirp-gdc-open",
+		"category": "observed_issue",
+		"description": "No diagnosis record in TCGA-KIRP has a tumour grade: tumor_grade is empty for all 291 cases, unlike TCGA-KIRC where 534 of 537 cases have one.",
+		"inspectedScope": "All 291 case records returned by the GDC API, Data Release 46.0.",
+		"affected": {
+			"value": 291,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"gdc-kirp-case-records"
+				],
+				"locator": "diagnoses.tumor_grade",
+				"status": "verified",
+				"verifiedOn": "2026-09-26"
+			}
+		},
+		"detection": "No real value found for the property in any record.",
+		"impact": "Grade cannot be used as a label or covariate from the GDC open tier; a pan-renal model conditioned on grade would silently drop this cohort.",
+		"handling": "Treat grade as unavailable for this project, or obtain it from another source and document where it came from.",
+		"sources": [
+			"gdc-kirp-case-records"
+		]
+	},
+	{
+		"id": "tcga-kich-no-tumour-grade",
+		"release": "tcga-kich-gdc-open",
+		"category": "observed_issue",
+		"description": "No diagnosis record in TCGA-KICH has a tumour grade: tumor_grade is empty for all 113 cases.",
+		"inspectedScope": "All 113 case records returned by the GDC API, Data Release 46.0.",
+		"affected": {
+			"value": 113,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"gdc-kich-case-records"
+				],
+				"locator": "diagnoses.tumor_grade",
+				"status": "verified",
+				"verifiedOn": "2026-09-26"
+			}
+		},
+		"detection": "No real value found for the property in any record.",
+		"impact": "Grade cannot be used as a label or covariate from the GDC open tier for this project.",
+		"handling": "Treat grade as unavailable for this project.",
+		"sources": [
+			"gdc-kich-case-records"
+		]
+	},
+	{
+		"id": "tcga-kirc-slide-types-mixed",
+		"release": "tcga-kirc-gdc-open",
+		"category": "potential_check",
+		"description": "The 2,173 slide-image files mix two kinds of slide and two kinds of tissue: 1,654 top- or bottom-section tissue slides (564 of them normal kidney tissue, from 442 cases) and 519 diagnostic FFPE slides, almost all tumour. Studies differ in which they use: CLAM, TransMIL and UNI use diagnostic slides, while Tabibu et al. include normal slides.",
+		"inspectedScope": "All 2,173 slide-image file records returned by the GDC API, with each file's sample type.",
+		"affected": {
+			"value": 564,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"gdc-kirc-slide-files"
+				],
+				"locator": "experimental_strategy and cases.samples.sample_type",
+				"status": "verified",
+				"verifiedOn": "2026-09-26",
+				"note": "Slide files of normal tissue."
+			}
+		},
+		"detection": "Tabulated experimental_strategy against sample_type.",
+		"impact": "Counting all slide files as tumour slides, or mixing frozen tissue slides with FFPE diagnostic slides, changes both the label balance and the image appearance a model learns from.",
+		"handling": "Select slides by experimental_strategy and sample_type, and report which were used.",
+		"sources": [
+			"gdc-kirc-slide-files",
+			"cooper-2018-tcga-pathology"
+		]
+	},
+	{
+		"id": "tcga-kirc-age-obfuscated",
+		"release": "tcga-kirc-gdc-open",
+		"category": "observed_issue",
+		"description": "Ages are altered for 7 cases (age_is_obfuscated is true), and age_at_diagnosis is capped at 32,872 days (90 years) by the GDC schema.",
+		"inspectedScope": "All 537 case records returned by the GDC API, and the GDC dictionary definition of age_at_diagnosis.",
+		"affected": {
+			"value": 7,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"gdc-kirc-case-records",
+					"gdc-data-dictionary"
+				],
+				"locator": "demographic.age_is_obfuscated; diagnosis.age_at_diagnosis maximum",
+				"status": "verified",
+				"verifiedOn": "2026-09-26"
+			}
+		},
+		"detection": "Counted age_is_obfuscated flags; read the schema maximum.",
+		"impact": "Age is not exact for the oldest patients; small effect on age as a covariate.",
+		"handling": "Treat 90 years as 90 or older.",
+		"sources": [
+			"gdc-kirc-case-records",
+			"gdc-data-dictionary"
+		]
+	},
+	{
+		"id": "tcga-kirc-tcia-bamf-not-independent",
+		"release": "tcga-kirc-tcia",
+		"category": "published_report",
+		"description": "The BAMF masks for this collection come from a model whose second training stage included 45 TCGA-KIRC cases, after non-experts refined predictions on 64 cases. Only 39 of the 156 masked scans were scored by a radiologist, who corrected them where needed; the rest are uncorrected AI output.",
+		"inspectedScope": "The BAMF paper's kidney section and the Zenodo record description.",
+		"affected": {
+			"value": 156,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"bamf-aimi-paper"
+				],
+				"locator": "CT kidneys, tumors and cysts annotation: data curation, model training, validation",
+				"status": "verified",
+				"verifiedOn": "2026-09-26",
+				"note": "CT scans with BAMF masks."
+			}
+		},
+		"detection": "Reported by the annotation authors.",
+		"impact": "Evaluating the BAMF model, or a model trained on its masks, on TCGA-KIRC overstates performance; uncorrected masks can hold stray fragments. De Boer et al. (2026) excluded the BAMF model from their TCGA-KIRC comparison for this reason.",
+		"handling": "Use the radiologist-reviewed subset or RCC-AID as a reference, and state which masks were used.",
+		"sources": [
+			"bamf-aimi-paper",
+			"bamf-aimi-zenodo",
+			"deboer-2026-renal-net"
+		]
+	},
+	{
+		"id": "tcga-kirc-tcia-series-selection",
+		"release": "tcga-kirc-tcia",
+		"category": "published_report",
+		"description": "The collection holds 1,736 CT series for 237 patients, including localisers, reconstructions, post-surgery and chest scans, with contrast phase recorded only in free-text descriptions. The RCC-AID authors screened 1,915 CT series across the three TCGA kidney collections and kept 759 after metadata rules, then excluded further scans as non-contrast, thoracic or post-operative on review.",
+		"inspectedScope": "The TCIA series list, and the RCC-AID paper's screening description.",
+		"affected": {
+			"value": null,
+			"status": "not_applicable",
+			"evidence": {
+				"sources": [
+					"rcc-aid-paper",
+					"tcia-tcga-kirc-series"
+				],
+				"locator": "RCC-AID section 5.2.1 and Figure 1",
+				"status": "verified",
+				"verifiedOn": "2026-09-26",
+				"note": "The issue concerns how series are chosen, not a countable set of bad records."
+			}
+		},
+		"detection": "Reported by the RCC-AID authors; visible in the series list.",
+		"impact": "Studies that pick series differently use different scans of the same patients, so their results are not comparable, and a chest series can be mistaken for an abdominal one.",
+		"handling": "Publish the list of series used, or use RCC-AID's series selection.",
+		"sources": [
+			"rcc-aid-paper",
+			"tcia-tcga-kirc-series"
+		]
+	},
+	{
+		"id": "rcc-aid-v1-conversion-failures",
+		"release": "rcc-aid-v2",
+		"category": "published_report",
+		"description": "Version 1.0.0 (142 scans, 101 patients) contained DICOM-to-NIfTI conversions that had silently failed. Version 2.0.0 fixed them, removed irreparable files and added phase labels, leaving 129 scans from 91 patients. The code repository's README still links an older Zenodo record (19630298) and the medRxiv preprint.",
+		"inspectedScope": "The Zenodo record's version log (through DataCite) and the code repository README.",
+		"affected": {
+			"value": 13,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"rcc-aid-zenodo",
+					"rcc-aid-code"
+				],
+				"locator": "Version log; README links",
+				"status": "verified",
+				"verifiedOn": "2026-09-26",
+				"note": "Scans in version 1.0.0 that are not in version 2.0.0 (142 minus 129)."
+			}
+		},
+		"detection": "Reported in the dataset's version log; README link checked by hand.",
+		"impact": "Results on version 1.0.0 may include corrupted image-mask pairs and are not comparable with results on version 2.0.0.",
+		"handling": "Use version 2.0.0 (doi:10.5281/zenodo.20719257) and state the version in any result.",
+		"sources": [
+			"rcc-aid-zenodo",
+			"rcc-aid-code"
+		]
+	},
+	{
+		"id": "rcc-aid-readme-demographics-per-scan",
+		"release": "rcc-aid-v2",
+		"category": "observed_issue",
+		"description": "The code repository's README reports 104 male and 25 female, which counts scans (129); the paper reports 67 male and 24 female patients (91).",
+		"inspectedScope": "The code repository README and section 6.1 of the paper.",
+		"affected": {
+			"value": null,
+			"status": "not_applicable",
+			"evidence": {
+				"sources": [
+					"rcc-aid-code",
+					"rcc-aid-paper"
+				],
+				"locator": "README, Patient demographics; paper section 6.1",
+				"status": "verified",
+				"verifiedOn": "2026-09-26",
+				"note": "A reporting difference, not a data error."
+			}
+		},
+		"detection": "Compared the two published summaries.",
+		"impact": "Quoting the README figures as patient counts overstates the cohort and the male share.",
+		"handling": "Use the paper's patient-level figures.",
+		"sources": [
+			"rcc-aid-code",
+			"rcc-aid-paper"
+		]
+	},
+	{
+		"id": "rcc-aid-annotation-scope",
+		"release": "rcc-aid-v2",
+		"category": "published_report",
+		"description": "Only the primary solid tumour and cysts the annotators identified are labelled. Missed lesions were not searched for, scans with several solid tumours were excluded, and inter-observer variability was not measured.",
+		"inspectedScope": "Sections 3, 5.2.2 and 5.2.4 of the paper.",
+		"affected": {
+			"value": null,
+			"status": "not_applicable",
+			"evidence": {
+				"sources": [
+					"rcc-aid-paper"
+				],
+				"locator": "Sections 5.2.2 and 5.2.4",
+				"status": "verified",
+				"verifiedOn": "2026-09-26",
+				"note": "Applies to the annotation protocol as a whole."
+			}
+		},
+		"detection": "Stated by the authors.",
+		"impact": "Detection results can count a correct finding of an unlabelled lesion as a false positive, and the masks are quality-controlled research labels rather than expert consensus.",
+		"handling": "Report detection results with this caveat, and prefer patient-level splits.",
+		"sources": [
+			"rcc-aid-paper"
+		]
+	}
+]

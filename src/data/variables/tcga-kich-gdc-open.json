@@ -1,10 +1,10 @@
 [
 	{
-		"id": "kich-submitter-id",
+		"id": "kich-case-case-id",
 		"release": "tcga-kich-gdc-open",
-		"originalName": "submitter_id",
-		"file": "GDC case record",
-		"definition": "TCGA barcode for the case. Joins clinical records, biospecimen records and slide images for the same patient.",
+		"originalName": "case_id",
+		"file": "GDC API case record (case)",
+		"definition": "Not described in the GDC data dictionary. The GDC's unique identifier (UUID) for the case. Has a value in 113 of 113 cases. 113 distinct values.",
 		"type": "text",
 		"unit": null,
 		"coding": [],
@@ -14,36 +14,455 @@
 		"role": "identifier",
 		"group": "administrative",
 		"derivation": "raw",
-		"normalizedConcept": "patient identifier",
-		"provenance": "Returned by the GDC API for this project.",
+		"normalizedConcept": "case identifier",
+		"provenance": "GDC data model entity \"case\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
 		"evidence": {
 			"sources": [
-				"gdc-kich-case-fields"
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
 			],
+			"locator": "Dictionary entity \"case\", property \"case_id\"",
 			"status": "verified",
-			"verifiedOn": "2026-09-21"
+			"verifiedOn": "2026-09-26"
 		}
 	},
 	{
-		"id": "kich-race",
+		"id": "kich-case-consent-type",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "consent_type",
+		"file": "GDC API case record (case)",
+		"definition": "The text term used to describe the type of consent obtain from the subject for participation in the study. Has a value in 113 of 113 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Informed Consent",
+				"meaning": "(101 cases)"
+			},
+			{
+				"code": "Consent Exemption",
+				"meaning": "(12 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"case\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"case\", property \"consent_type\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-case-days-to-consent",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "days_to_consent",
+		"file": "GDC API case record (case)",
+		"definition": "Number of days between the date used for index and the date the subject consent was obtained for participation in the study. Has a value in 101 of 113 cases. Observed range -966 to 131.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"null: no value (12 cases)"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"case\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"case\", property \"days_to_consent\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-case-disease-type",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "disease_type",
+		"file": "GDC API case record (case)",
+		"definition": "The text term used to describe the type of malignant disease, as categorized by the World Health Organization's (WHO) International Classification of Diseases for Oncology (ICD-O). Has a value in 113 of 113 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Adenomas and Adenocarcinomas",
+				"meaning": "(113 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"case\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"case\", property \"disease_type\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-case-index-date",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "index_date",
+		"file": "GDC API case record (case)",
+		"definition": "The text term used to describe the reference or anchor date used when for date obfuscation, where a single date is obscurred by creating one or more date ranges in relation to this date. Has a value in 113 of 113 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Diagnosis",
+				"meaning": "(113 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"case\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"case\", property \"index_date\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-case-lost-to-followup",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "lost_to_followup",
+		"file": "GDC API case record (case)",
+		"definition": "The yes/no/unknown indicator used to describe whether a patient was unable to be contacted or seen for follow-up information. Has a value in 99 of 113 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "No",
+				"meaning": "The non-affirmative response to a question. (65 cases)"
+			},
+			{
+				"code": "Yes",
+				"meaning": "The affirmative response to a question. (34 cases)"
+			}
+		],
+		"missingValues": [
+			"null: no value (14 cases)"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"case\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"case\", property \"lost_to_followup\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-case-primary-site",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "primary_site",
+		"file": "GDC API case record (case)",
+		"definition": "The text term used to describe the primary site of disease, as categorized by the World Health Organization's (WHO) International Classification of Diseases for Oncology (ICD-O). This categorization groups cases into general categories. Reference tissue_or_organ_of_origin on the diagnosis node for more specific primary sites of disease. Has a value in 113 of 113 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Kidney",
+				"meaning": "(113 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"case\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"case\", property \"primary_site\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-case-submitter-id",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "submitter_id",
+		"file": "GDC API case record (case)",
+		"definition": "A project-specific identifier for a node. This property is the calling card/nickname/alias for a unit of submission. It can be used in place of the uuid for identifying or recalling a node. The TCGA patient barcode, such as TCGA-B0-5098. The Cancer Imaging Archive uses the same barcode as PatientID for this project's radiology. Has a value in 113 of 113 cases. 113 distinct values.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "identifier",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": "case identifier",
+		"provenance": "GDC data model entity \"case\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"case\", property \"submitter_id\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-demographic-age-at-index",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "demographic.age_at_index",
+		"file": "GDC API case record (demographic)",
+		"definition": "The patient's age (in years) on the reference or anchor date used during date obfuscation. The index date for these cases is the diagnosis (see index_date). Has a value in 113 of 113 demographic records. Observed range 17 to 86.",
+		"type": "integer",
+		"unit": "years",
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "age",
+		"provenance": "GDC data model entity \"demographic\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"demographic\", property \"age_at_index\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-demographic-age-is-obfuscated",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "demographic.age_is_obfuscated",
+		"file": "GDC API case record (demographic)",
+		"definition": "The age or other properties related to the patient's age have been modified for compliance reasons. The actual age may differ from what was reported in order to comply with the Health Insurance Portability and Accountability Act (HIPAA). Has a value in 113 of 113 demographic records.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "(113 demographic records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"demographic\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"demographic\", property \"age_is_obfuscated\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-demographic-country-of-residence-at-enrollment",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "demographic.country_of_residence_at_enrollment",
+		"file": "GDC API case record (demographic)",
+		"definition": "The text term used to describe the patient's country of residence at the time they were enrolled in the study. Has a value in 113 of 113 demographic records.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "United States",
+				"meaning": "A country in North America, between Canada and Mexico, bordering both the North Atlantic Ocean and the North Pacific Ocean. (113 demographic records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"demographic\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"demographic\", property \"country_of_residence_at_enrollment\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-demographic-days-to-birth",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "demographic.days_to_birth",
+		"file": "GDC API case record (demographic)",
+		"definition": "Number of days between the date used for index and the date from a person's date of birth represented as a calculated negative number of days. Negative: counted backwards from the index date. Has a value in 113 of 113 demographic records. Observed range -31,591 to -6,556.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"demographic\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"demographic\", property \"days_to_birth\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-demographic-days-to-death",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "demographic.days_to_death",
+		"file": "GDC API case record (demographic)",
+		"definition": "Number of days between the date used for index and the date from a person's date of death represented as a calculated number of days. Has a value in 12 of 113 demographic records. Observed range 22 to 2,172.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"null: no value (101 demographic records)"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": "overall survival time",
+		"provenance": "GDC data model entity \"demographic\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"demographic\", property \"days_to_death\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-demographic-ethnicity",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "demographic.ethnicity",
+		"file": "GDC API case record (demographic)",
+		"definition": "An individual's self-described social and cultural grouping, specifically whether an individual describes themselves as Hispanic or Latino. The provided values are based on the categories defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau. Has a value in 75 of 113 demographic records.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "not hispanic or latino",
+				"meaning": "A person not of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish culture or origin, regardless of race. (67 demographic records)"
+			},
+			{
+				"code": "hispanic or latino",
+				"meaning": "A person of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish culture or origin, regardless of race. The term, \"Spanish origin,\" can ... (8 demographic records)"
+			}
+		],
+		"missingValues": [
+			"\"not reported\": 35 demographic records",
+			"\"Unknown\": 3 demographic records"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "ethnicity",
+		"provenance": "GDC data model entity \"demographic\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"demographic\", property \"ethnicity\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-demographic-race",
 		"release": "tcga-kich-gdc-open",
 		"originalName": "demographic.race",
-		"file": "GDC case record",
-		"definition": "Self-reported race of the patient, as recorded by the submitting centre.",
+		"file": "GDC API case record (demographic)",
+		"definition": "An arbitrary classification of a taxonomic group that is a division of a species. It usually arises as a consequence of geographical isolation within a species and is characterized by shared heredity, physical attributes and behavior, and in the case of humans, by common history, nationality, or geographic distribution. The provided values are based on the categories defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau. Has a value in 111 of 113 demographic records.",
 		"type": "categorical",
 		"unit": null,
 		"coding": [
 			{
 				"code": "white",
-				"meaning": "White"
+				"meaning": "A person having origins in any of the original peoples of Europe, the Middle East, or North Africa. (OMB) (95 demographic records)"
 			},
 			{
 				"code": "black or african american",
-				"meaning": "Black or African American"
+				"meaning": "A person having origins in any of the Black racial groups of Africa. Terms such as \"Haitian\" or \"Negro\" can be used in addition to \"Black or African American... (12 demographic records)"
+			},
+			{
+				"code": "asian",
+				"meaning": "A person having origins in any of the original peoples of the Far East, Southeast Asia, or the Indian subcontinent, including for example, Cambodia, China, I... (4 demographic records)"
 			}
 		],
 		"missingValues": [
-			"not reported"
+			"\"Unknown\": 1 demographic records",
+			"\"not reported\": 1 demographic records"
 		],
 		"observationLevel": "patient",
 		"timePoint": null,
@@ -51,193 +470,2673 @@
 		"group": "clinical",
 		"derivation": "raw",
 		"normalizedConcept": "race",
-		"provenance": "Values observed in returned case records; the coding list shows only the values seen, not the full permitted set.",
+		"provenance": "GDC data model entity \"demographic\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
 		"evidence": {
 			"sources": [
-				"gdc-kich-case-fields"
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
 			],
+			"locator": "Dictionary entity \"demographic\", property \"race\"",
 			"status": "verified",
-			"verifiedOn": "2026-09-21"
+			"verifiedOn": "2026-09-26"
 		}
 	},
 	{
-		"id": "kich-vital-status",
+		"id": "kich-demographic-sex-at-birth",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "demographic.sex_at_birth",
+		"file": "GDC API case record (demographic)",
+		"definition": "A textual description of a person's sex at birth. Has a value in 113 of 113 demographic records.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "male",
+				"meaning": "(62 demographic records)"
+			},
+			{
+				"code": "female",
+				"meaning": "(51 demographic records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "sex/gender",
+		"provenance": "GDC data model entity \"demographic\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"demographic\", property \"sex_at_birth\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-demographic-vital-status",
 		"release": "tcga-kich-gdc-open",
 		"originalName": "demographic.vital_status",
-		"file": "GDC case record",
-		"definition": "Whether the patient was alive or dead at last contact.",
+		"file": "GDC API case record (demographic)",
+		"definition": "The survival state of the person registered on the protocol. Has a value in 113 of 113 demographic records.",
 		"type": "categorical",
 		"unit": null,
 		"coding": [
 			{
 				"code": "Alive",
-				"meaning": "Alive at last contact"
+				"meaning": "Living; showing characteristics of life. (100 demographic records)"
 			},
 			{
 				"code": "Dead",
-				"meaning": "Deceased"
+				"meaning": "The cessation of life. (13 demographic records)"
 			}
 		],
-		"missingValues": [
-			"Not Reported"
-		],
+		"missingValues": [],
 		"observationLevel": "patient",
-		"timePoint": "Last contact",
+		"timePoint": null,
 		"role": "outcome",
 		"group": "outcome",
 		"derivation": "raw",
 		"normalizedConcept": "vital status",
-		"provenance": "Every sampled case of this project returned Alive; Dead is listed because the field permits it.",
+		"provenance": "GDC data model entity \"demographic\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
 		"evidence": {
 			"sources": [
-				"gdc-kich-case-fields"
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
 			],
+			"locator": "Dictionary entity \"demographic\", property \"vital_status\"",
 			"status": "verified",
-			"verifiedOn": "2026-09-21"
+			"verifiedOn": "2026-09-26"
 		}
 	},
 	{
-		"id": "kich-age-at-diagnosis",
+		"id": "kich-diagnosis-age-at-diagnosis",
 		"release": "tcga-kich-gdc-open",
 		"originalName": "diagnoses.age_at_diagnosis",
-		"file": "GDC case record",
-		"definition": "Age at diagnosis, recorded in days.",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Age at the time of diagnosis expressed in number of days since birth. The GDC schema caps this value at 32,872 days (90 years); age_is_obfuscated marks cases whose age was altered for compliance. Has a value in 147 of 159 diagnosis records, covering 113 of 113 cases. Observed range 0 to 31,591.",
 		"type": "integer",
 		"unit": "days",
 		"coding": [],
 		"missingValues": [
-			"null"
+			"null: no value (12 diagnosis records)"
 		],
-		"observationLevel": "patient",
+		"observationLevel": "record",
 		"timePoint": "Diagnosis",
 		"role": "descriptor",
 		"group": "clinical",
 		"derivation": "raw",
 		"normalizedConcept": "age at diagnosis",
-		"provenance": "Values observed in returned case records.",
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
 		"evidence": {
 			"sources": [
-				"gdc-kich-case-fields"
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
 			],
+			"locator": "Dictionary entity \"diagnosis\", property \"age_at_diagnosis\"",
 			"status": "verified",
-			"verifiedOn": "2026-09-21"
+			"verifiedOn": "2026-09-26"
 		}
 	},
 	{
-		"id": "kich-primary-diagnosis",
+		"id": "kich-diagnosis-ajcc-clinical-m",
 		"release": "tcga-kich-gdc-open",
-		"originalName": "diagnoses.primary_diagnosis",
-		"file": "GDC case record",
-		"definition": "Morphological diagnosis text. Every sampled case carried 'Renal cell carcinoma, chromophobe type'.",
-		"type": "text",
+		"originalName": "diagnoses.ajcc_clinical_m",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Extent of the distant metastasis for the cancer based on evidence obtained from clinical assessment parameters determined prior to treatment. Has a value in 88 of 159 diagnosis records, covering 88 of 113 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
 		"unit": null,
-		"coding": [],
-		"missingValues": [
-			"Not Reported"
+		"coding": [
+			{
+				"code": "M0",
+				"meaning": "A distant metastasis TNM finding indicating that there is no evidence of distant metastasis. (65 diagnosis records)"
+			},
+			{
+				"code": "MX",
+				"meaning": "A distant metastasis TNM finding indicating that the status of distant metastasis cannot be assessed. (22 diagnosis records)"
+			},
+			{
+				"code": "M1",
+				"meaning": "A clinical and/or pathologic distant metastasis TNM finding indicating the spread of cancer to distant anatomic sites. (1 diagnosis records)"
+			}
 		],
-		"observationLevel": "patient",
+		"missingValues": [
+			"null: no value (71 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"ajcc_clinical_m\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-diagnosis-ajcc-pathologic-m",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.ajcc_pathologic_m",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Code to represent the defined absence or presence of distant spread or metastases (M) to locations via vascular channels or lymphatics beyond the regional lymph nodes, using criteria established by the American Joint Committee on Cancer (AJCC). Has a value in 58 of 159 diagnosis records, covering 55 of 113 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "M0",
+				"meaning": "A distant metastasis TNM finding indicating that there is no evidence of distant metastasis. (34 diagnosis records)"
+			},
+			{
+				"code": "MX",
+				"meaning": "A distant metastasis TNM finding indicating that the status of distant metastasis cannot be assessed. (22 diagnosis records)"
+			},
+			{
+				"code": "M1",
+				"meaning": "A clinical and/or pathologic distant metastasis TNM finding indicating the spread of cancer to distant anatomic sites. (2 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (101 diagnosis records)"
+		],
+		"observationLevel": "record",
 		"timePoint": "Diagnosis",
 		"role": "descriptor",
 		"group": "pathology",
 		"derivation": "raw",
-		"normalizedConcept": "primary diagnosis",
-		"provenance": "Values observed in returned case records.",
+		"normalizedConcept": "pathologic M stage",
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
 		"evidence": {
 			"sources": [
-				"gdc-kich-case-fields"
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
 			],
+			"locator": "Dictionary entity \"diagnosis\", property \"ajcc_pathologic_m\"",
 			"status": "verified",
-			"verifiedOn": "2026-09-21"
+			"verifiedOn": "2026-09-26"
 		}
 	},
 	{
-		"id": "kich-ajcc-stage",
+		"id": "kich-diagnosis-ajcc-pathologic-n",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.ajcc_pathologic_n",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "The codes that represent the stage of cancer based on the nodes present (N stage) according to criteria based on multiple editions of the AJCC's Cancer Staging Manual. Has a value in 119 of 159 diagnosis records, covering 113 of 113 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "NX",
+				"meaning": "A regional lymph node TNM finding indicating that the status of regional lymph nodes cannot be assessed. (64 diagnosis records)"
+			},
+			{
+				"code": "N0",
+				"meaning": "A regional lymph node TNM finding indicating that there is no evidence of regional lymph node metastasis. (49 diagnosis records)"
+			},
+			{
+				"code": "N1",
+				"meaning": "A general term that refers to a TNM finding of cancer metastases usually in a limited number of regional lymph nodes. The definition of N1 TNM finding depend... (4 diagnosis records)"
+			},
+			{
+				"code": "N2",
+				"meaning": "A general term that refers to a TNM finding of cancer metastases in several regional lymph nodes. The definition of N2 TNM finding depends on the specific ty... (2 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (40 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "pathologic N stage",
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"ajcc_pathologic_n\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-diagnosis-ajcc-pathologic-stage",
 		"release": "tcga-kich-gdc-open",
 		"originalName": "diagnoses.ajcc_pathologic_stage",
-		"file": "GDC case record",
-		"definition": "AJCC pathologic stage recorded for the diagnosis. Which AJCC edition applies is not stated in the returned records.",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "The extent of a cancer, especially whether the disease has spread from the original site to other parts of the body based on AJCC staging criteria. Has a value in 118 of 159 diagnosis records, covering 113 of 113 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
 		"type": "categorical",
 		"unit": null,
 		"coding": [
 			{
 				"code": "Stage I",
-				"meaning": "AJCC pathologic stage I"
+				"meaning": "Invasive cancer confined to the original anatomic site of growth without lymph node involvement. (59 diagnosis records)"
 			},
 			{
 				"code": "Stage II",
-				"meaning": "AJCC pathologic stage II"
+				"meaning": "Invasive cancer more extensive than stage I, usually involving local lymph nodes without spread to distant anatomic sites. (33 diagnosis records)"
+			},
+			{
+				"code": "Stage III",
+				"meaning": "Locally advanced cancer that has spread to nearby organs but not to distant anatomic sites. (19 diagnosis records)"
+			},
+			{
+				"code": "Stage IV",
+				"meaning": "Cancer that has spread to distant anatomic sites beyond its original site of growth. (7 diagnosis records)"
 			}
 		],
 		"missingValues": [
-			"null"
+			"null: no value (41 diagnosis records)"
 		],
-		"observationLevel": "patient",
+		"observationLevel": "record",
 		"timePoint": "Diagnosis",
 		"role": "descriptor",
 		"group": "pathology",
 		"derivation": "raw",
-		"normalizedConcept": null,
-		"provenance": "Values observed in returned case records; only the values seen are listed.",
+		"normalizedConcept": "pathologic stage",
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
 		"evidence": {
 			"sources": [
-				"gdc-kich-case-fields"
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
 			],
+			"locator": "Dictionary entity \"diagnosis\", property \"ajcc_pathologic_stage\"",
 			"status": "verified",
-			"verifiedOn": "2026-09-21"
+			"verifiedOn": "2026-09-26"
 		}
 	},
 	{
-		"id": "kich-tumor-grade",
+		"id": "kich-diagnosis-ajcc-pathologic-t",
 		"release": "tcga-kich-gdc-open",
-		"originalName": "diagnoses.tumor_grade",
-		"file": "GDC case record",
-		"definition": "Tumour grade recorded for the diagnosis. It returned null for every sampled case of this project, so grade is not usable here and must not be compared with the grades recorded for the clear cell project.",
+		"originalName": "diagnoses.ajcc_pathologic_t",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Code of pathological T (primary tumor) to define the size or contiguous extension of the primary tumor (T), using staging criteria from the American Joint Committee on Cancer (AJCC). Has a value in 119 of 159 diagnosis records, covering 113 of 113 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
 		"type": "categorical",
 		"unit": null,
-		"coding": [],
-		"missingValues": [
-			"null (every sampled case)"
+		"coding": [
+			{
+				"code": "T1a",
+				"meaning": "A general term that refers to a TNM finding of a primary tumor limited to the site of growth.  The definition of T1a TNM finding depends on the specific type... (27 diagnosis records)"
+			},
+			{
+				"code": "T1b",
+				"meaning": "A general term that refers to a TNM finding of a primary tumor limited to the site of growth.  The definition of T1b TNM finding depends on the specific type... (26 diagnosis records)"
+			},
+			{
+				"code": "T2",
+				"meaning": "A general term that refers to a TNM finding of primary tumor growth beyond the level of in situ cancer, minimal subepithelial invasion, or minimal greatest d... (23 diagnosis records)"
+			},
+			{
+				"code": "T3a",
+				"meaning": "A general term that refers to a TNM finding of a primary tumor usually indicating that the cancer is locally invasive. The definition of T3a TNM finding depe... (18 diagnosis records)"
+			},
+			{
+				"code": "T1",
+				"meaning": "A clinical and/or pathologic primary tumor TNM finding indicating that the cancer is limited to the site of growth. (7 diagnosis records)"
+			},
+			{
+				"code": "T2b",
+				"meaning": "A general term that refers to a TNM finding of a primary tumor growth beyond the level of in situ cancer, minimal subepithelial invasion, or minimal greatest... (7 diagnosis records)"
+			},
+			{
+				"code": "T2a",
+				"meaning": "A general term that refers to a TNM finding of a primary tumor growth beyond the level of in situ cancer, minimal subepithelial invasion, or minimal greatest... (4 diagnosis records)"
+			},
+			{
+				"code": "T3b",
+				"meaning": "A general term that refers to a TNM finding of a primary tumor usually indicating that the cancer is locally invasive. The definition of T3b TNM finding depe... (3 diagnosis records)"
+			},
+			{
+				"code": "T3",
+				"meaning": "A clinical and/or pathologic primary tumor TNM finding usually indicating that the cancer is locally invasive, without infiltration of adjacent structures. (2 diagnosis records)"
+			},
+			{
+				"code": "T4",
+				"meaning": "A clinical and/or pathologic primary tumor TNM finding indicating direct invasion of adjacent structures by cancer. (2 diagnosis records)"
+			}
 		],
-		"observationLevel": "patient",
+		"missingValues": [
+			"null: no value (40 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "pathologic T stage",
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"ajcc_pathologic_t\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-diagnosis-ajcc-staging-system-edition",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.ajcc_staging_system_edition",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "The text term used to describe the version or edition of the American Joint Committee on Cancer Staging Handbooks, a publication by the group formed for the purpose of developing a system of staging for cancer that is acceptable to the American medical profession and is compatible with other accepted classifications. Has a value in 120 of 159 diagnosis records, covering 113 of 113 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "6th",
+				"meaning": "A cancer stage defined according to the AJCC 6th edition criteria. (57 diagnosis records)"
+			},
+			{
+				"code": "7th",
+				"meaning": "A cancer stage defined according to the AJCC 7th edition criteria. (50 diagnosis records)"
+			},
+			{
+				"code": "5th",
+				"meaning": "(11 diagnosis records)"
+			},
+			{
+				"code": "4th",
+				"meaning": "(1 diagnosis records)"
+			},
+			{
+				"code": "3rd",
+				"meaning": "(1 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (39 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"ajcc_staging_system_edition\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-diagnosis-classification-of-tumor",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.classification_of_tumor",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Text that describes the kind of disease present in the tumor specimen as related to a specific timepoint. Has a value in 138 of 159 diagnosis records, covering 113 of 113 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "primary",
+				"meaning": "A tumor at the original site of origin. (113 diagnosis records)"
+			},
+			{
+				"code": "Prior primary",
+				"meaning": "(14 diagnosis records)"
+			},
+			{
+				"code": "metastasis",
+				"meaning": "A tumor that has spread from its original (primary) site of growth to another site, close to or distant from the primary site.  Metastasis is characteristic ... (5 diagnosis records)"
+			},
+			{
+				"code": "Synchronous primary",
+				"meaning": "(4 diagnosis records)"
+			},
+			{
+				"code": "recurrence",
+				"meaning": "The reemergence of a neoplasm after a period of remission. (2 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"\"not reported\": 21 diagnosis records"
+		],
+		"observationLevel": "record",
 		"timePoint": "Diagnosis",
 		"role": "descriptor",
 		"group": "pathology",
 		"derivation": "raw",
 		"normalizedConcept": null,
-		"provenance": "The field exists in the GDC dictionary, but returned null for every case sampled from this project.",
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
 		"evidence": {
 			"sources": [
-				"gdc-kich-case-fields"
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
 			],
+			"locator": "Dictionary entity \"diagnosis\", property \"classification_of_tumor\"",
 			"status": "verified",
-			"verifiedOn": "2026-09-21"
+			"verifiedOn": "2026-09-26"
 		}
 	},
 	{
-		"id": "kich-days-to-follow-up",
+		"id": "kich-diagnosis-days-to-diagnosis",
 		"release": "tcga-kich-gdc-open",
-		"originalName": "follow_ups.days_to_follow_up",
-		"file": "GDC case record",
-		"definition": "Days from the reference date to a follow-up record. A case may hold several follow-up records, and some carry null.",
+		"originalName": "diagnoses.days_to_diagnosis",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Number of days between the date used for index and the date the patient was diagnosed with the malignant disease. Has a value in 147 of 159 diagnosis records, covering 113 of 113 cases. Observed range -18,560 to 4,622. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
 		"type": "integer",
 		"unit": "days",
 		"coding": [],
 		"missingValues": [
-			"null"
+			"null: no value (12 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"days_to_diagnosis\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-diagnosis-days-to-last-follow-up",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.days_to_last_follow_up",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Time interval from the date of last follow up to the date of initial pathologic diagnosis, represented as a calculated number of days. Has a value in 104 of 159 diagnosis records, covering 104 of 113 cases. Observed range 6.0 to 5132.0. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "decimal",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"null: no value (55 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": "follow-up time",
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"days_to_last_follow_up\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-diagnosis-diagnosis-is-primary-disease",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.diagnosis_is_primary_disease",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Indicates whether this specific diagnosis represents the disease that was the primary focus of the study. Additionally, this diagnosis is reflected at the case level, which is captured using the case.disease_type property. Cases can carry several diagnosis records; this flag separates the primary renal diagnosis from others such as prior malignancies. Has a value in 159 of 159 diagnosis records, covering 113 of 113 cases.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "true",
+				"meaning": "(113 diagnosis records)"
+			},
+			{
+				"code": "false",
+				"meaning": "(46 diagnosis records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"diagnosis_is_primary_disease\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-diagnosis-figo-stage",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.figo_stage",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "The extent of a cervical or endometrial cancer within the body, especially whether the disease has spread from the original site to other parts of the body, as described by the International Federation of Gynecology and Obstetrics (FIGO) stages. Has a value in 1 of 159 diagnosis records, covering 1 of 113 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Stage I",
+				"meaning": "A FIGO stage term that applies to gynecologic cancers.  For cervical cancer, it refers to invasive cancer that is confined to the cervix; for endometrial can... (1 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (158 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"figo_stage\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-diagnosis-figo-staging-edition-year",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.figo_staging_edition_year",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "The text term used to describe the edition year of the FIGO staging system used to stage the patient's gynecologic tumor. Has a value in 1 of 159 diagnosis records, covering 1 of 113 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": "calendar year",
+		"coding": [
+			{
+				"code": "1988",
+				"meaning": "(1 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (158 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"figo_staging_edition_year\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-diagnosis-icd-10-code",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.icd_10_code",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Alphanumeric value used to describe the disease code from the tenth version of the International Classification of Disease (ICD-10). Has a value in 113 of 159 diagnosis records, covering 113 of 113 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "text",
+		"unit": null,
+		"coding": [
+			{
+				"code": "C64.9",
+				"meaning": "(113 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (46 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"icd_10_code\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-diagnosis-laterality",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.laterality",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "For tumors in paired organs, designates the side on which the cancer originates. Has a value in 124 of 159 diagnosis records, covering 113 of 113 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Right",
+				"meaning": "Being or located on or directed toward the side of the body to the east when facing north. (63 diagnosis records)"
+			},
+			{
+				"code": "Left",
+				"meaning": "Being or located on or directed toward the side of the body to the west when facing north. (61 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (35 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "laterality",
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"laterality\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-diagnosis-morphology",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.morphology",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "The third edition of the International Classification of Diseases for Oncology, published in 2000 used principally in tumor and cancer registries for coding the site (topography) and the histology (morphology) of neoplasms. The study of the structure of the cells and their arrangement to constitute tissues and, finally, the association among these to form organs. In pathology, the microscopic process of identifying normal and abnormal morphologic characteristics in tissues, by employing various cytochemical and immunocytochemical stains. A system of numbered categories for representation of data. Has a value in 129 of 159 diagnosis records, covering 113 of 113 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "8317/3",
+				"meaning": "A type of carcinoma that comprises a minority of renal cell carcinomas.  It is characterized by loss of chromosomes 1 and Y.  Based on the cytoplasmic charac... (121 diagnosis records)"
+			},
+			{
+				"code": "8310/3",
+				"meaning": "A malignant neoplasm composed of glandular epithelial clear cells.  Various architectural patterns may be seen, including papillary, tubulocystic, and solid. (2 diagnosis records)"
+			},
+			{
+				"code": "8140/3",
+				"meaning": "A common cancer characterized by the presence of malignant glandular cells.  Morphologically, adenocarcinomas are classified according to the growth pattern ... (2 diagnosis records)"
+			},
+			{
+				"code": "8720/3",
+				"meaning": "A malignant, usually aggressive tumor composed of atypical, neoplastic melanocytes. Most often, melanomas arise in the skin (cutaneous melanomas) and include... (2 diagnosis records)"
+			},
+			{
+				"code": "8010/3",
+				"meaning": "A malignant tumor arising from epithelial cells. Carcinomas that arise from glandular epithelium are called adenocarcinomas, those that arise from squamous e... (1 diagnosis records)"
+			},
+			{
+				"code": "9650/3",
+				"meaning": "A lymphoma, previously known as Hodgkin's disease, characterized by the presence of large tumor cells in an abundant admixture of nonneoplastic cells. There ... (1 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"\"Not Reported\": 30 diagnosis records"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "histologic subtype",
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"morphology\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-diagnosis-primary-diagnosis",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.primary_diagnosis",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Text term used to describe the patient's histologic diagnosis, as described by the World Health Organization's (WHO) International Classification of Diseases for Oncology (ICD-O). Has a value in 129 of 159 diagnosis records, covering 113 of 113 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Renal cell carcinoma, chromophobe type",
+				"meaning": "A type of carcinoma that comprises a minority of renal cell carcinomas.  It is characterized by loss of chromosomes 1 and Y.  Based on the cytoplasmic charac... (121 diagnosis records)"
+			},
+			{
+				"code": "Clear cell carcinoma",
+				"meaning": "A malignant neoplasm composed of glandular epithelial clear cells.  Various architectural patterns may be seen, including papillary, tubulocystic, and solid. (2 diagnosis records)"
+			},
+			{
+				"code": "Adenocarcinoma, NOS",
+				"meaning": "A common cancer characterized by the presence of malignant glandular cells.  Morphologically, adenocarcinomas are classified according to the growth pattern ... (2 diagnosis records)"
+			},
+			{
+				"code": "Melanoma, NOS",
+				"meaning": "A malignant, usually aggressive tumor composed of atypical, neoplastic melanocytes. Most often, melanomas arise in the skin (cutaneous melanomas) and include... (2 diagnosis records)"
+			},
+			{
+				"code": "Carcinoma, NOS",
+				"meaning": "A malignant tumor arising from epithelial cells. Carcinomas that arise from glandular epithelium are called adenocarcinomas, those that arise from squamous e... (1 diagnosis records)"
+			},
+			{
+				"code": "Hodgkin lymphoma, NOS",
+				"meaning": "A lymphoma, previously known as Hodgkin's disease, characterized by the presence of large tumor cells in an abundant admixture of nonneoplastic cells. There ... (1 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"\"Not Reported\": 30 diagnosis records"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "histologic subtype",
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"primary_diagnosis\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-diagnosis-prior-malignancy",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.prior_malignancy",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "The yes/no/unknown indicator used to describe the patient's history of prior cancer diagnosis. Has a value in 113 of 159 diagnosis records, covering 113 of 113 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "no",
+				"meaning": "The non-affirmative response to a question. (101 diagnosis records)"
+			},
+			{
+				"code": "yes",
+				"meaning": "The affirmative response to a question. (12 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (46 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"prior_malignancy\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-diagnosis-prior-treatment",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.prior_treatment",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "A yes/no/unknown/not applicable indicator related to the administration of therapeutic agents received before the body specimen was collected. Has a value in 141 of 159 diagnosis records, covering 113 of 113 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "No",
+				"meaning": "The non-affirmative response to a question. (112 diagnosis records)"
+			},
+			{
+				"code": "Yes",
+				"meaning": "The affirmative response to a question. (29 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (18 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"prior_treatment\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-diagnosis-site-of-resection-or-biopsy",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.site_of_resection_or_biopsy",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "The text term used to describe the anatomic site of the resection or biopsy of the patient's malignant disease, as described by the World Health Organization's (WHO) International Classification of Diseases for Oncology (ICD-O). Has a value in 113 of 159 diagnosis records, covering 113 of 113 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Kidney, NOS",
+				"meaning": "One of the two bean-shaped organs located on each side of the spine in the retroperitoneum. The right kidney is located below the liver and the left kidney b... (113 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"\"Not Reported\": 46 diagnosis records"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"site_of_resection_or_biopsy\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-diagnosis-synchronous-malignancy",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.synchronous_malignancy",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "A yes/no/unknown indicator used to describe whether the patient had an additional malignant diagnosis at the same time the tumor used for sequencing was diagnosed. If both tumors were sequenced, both tumors would have synchronous malignancies. Has a value in 113 of 159 diagnosis records, covering 113 of 113 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "No",
+				"meaning": "The non-affirmative response to a question. (110 diagnosis records)"
+			},
+			{
+				"code": "Yes",
+				"meaning": "The affirmative response to a question. (3 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (46 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"synchronous_malignancy\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-diagnosis-tissue-or-organ-of-origin",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.tissue_or_organ_of_origin",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "The text term used to describe the anatomic site of origin, of the patient's malignant disease, as described by the World Health Organization's (WHO) International Classification of Diseases for Oncology (ICD-O). Has a value in 131 of 159 diagnosis records, covering 113 of 113 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Kidney, NOS",
+				"meaning": "One of the two bean-shaped organs located on each side of the spine in the retroperitoneum. The right kidney is located below the liver and the left kidney b... (119 diagnosis records)"
+			},
+			{
+				"code": "Prostate gland",
+				"meaning": "The walnut shaped accessory sex gland of the male reproductive system. It is located in the pelvis just below the bladder, surrounding the prostatic part of ... (2 diagnosis records)"
+			},
+			{
+				"code": "Upper limb, NOS",
+				"meaning": "The region of the body that includes the arm, the forearm, and hand. (2 diagnosis records)"
+			},
+			{
+				"code": "Breast, NOS",
+				"meaning": "One of two hemispheric projections of variable size situated in the subcutaneous layer over the pectoralis major muscle on either side of the chest. (2 diagnosis records)"
+			},
+			{
+				"code": "Head, face or neck, NOS",
+				"meaning": "(1 diagnosis records)"
+			},
+			{
+				"code": "Uterus, NOS",
+				"meaning": "A hollow, thick-walled, muscular organ located within the pelvic cavity of a woman. Within the uterus the fertilized egg implants and the fetus develops duri... (1 diagnosis records)"
+			},
+			{
+				"code": "Abdomen, NOS",
+				"meaning": "The portion of the body that lies between the thorax and the pelvis. (1 diagnosis records)"
+			},
+			{
+				"code": "Pleura, NOS",
+				"meaning": "The tissue that lines the wall of the thoracic cavity and the surface of the lungs. (1 diagnosis records)"
+			},
+			{
+				"code": "Bladder, NOS",
+				"meaning": "The distensible sac-like organ that functions as a reservoir of urine, collecting from the kidneys and eliminating via the urethra. (1 diagnosis records)"
+			},
+			{
+				"code": "Thorax, NOS",
+				"meaning": "The division of the body lying between the neck and the abdomen. (1 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"\"Not Reported\": 28 diagnosis records"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"tissue_or_organ_of_origin\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-diagnosis-tumor-of-origin",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.tumor_of_origin",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "The submitter_id string of the primary diagnosis node. Links a diagnosis record to the primary diagnosis it arose from. Has a value in 28 of 159 diagnosis records, covering 14 of 113 cases.",
+		"type": "text",
+		"unit": null,
+		"coding": [
+			{
+				"code": "TCGA-KL-8336_diagnosis",
+				"meaning": "(5 diagnosis records)"
+			},
+			{
+				"code": "TCGA-KL-8341_diagnosis",
+				"meaning": "(4 diagnosis records)"
+			},
+			{
+				"code": "TCGA-KL-8339_diagnosis",
+				"meaning": "(3 diagnosis records)"
+			},
+			{
+				"code": "TCGA-KM-8438_diagnosis",
+				"meaning": "(3 diagnosis records)"
+			},
+			{
+				"code": "TCGA-KM-A7Q8_diagnosis",
+				"meaning": "(2 diagnosis records)"
+			},
+			{
+				"code": "TCGA-KN-8429_diagnosis",
+				"meaning": "(2 diagnosis records)"
+			},
+			{
+				"code": "TCGA-KL-8323_diagnosis",
+				"meaning": "(2 diagnosis records)"
+			},
+			{
+				"code": "TCGA-KM-A7QH_diagnosis",
+				"meaning": "(1 diagnosis records)"
+			},
+			{
+				"code": "TCGA-KM-A7Q7_diagnosis",
+				"meaning": "(1 diagnosis records)"
+			},
+			{
+				"code": "TCGA-UW-A7GU_diagnosis",
+				"meaning": "(1 diagnosis records)"
+			},
+			{
+				"code": "TCGA-KM-8441_diagnosis",
+				"meaning": "(1 diagnosis records)"
+			},
+			{
+				"code": "TCGA-KO-8404_diagnosis",
+				"meaning": "(1 diagnosis records)"
+			},
+			{
+				"code": "TCGA-KN-8428_diagnosis",
+				"meaning": "(1 diagnosis records)"
+			},
+			{
+				"code": "TCGA-KO-8408_diagnosis",
+				"meaning": "(1 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (131 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"tumor_of_origin\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-diagnosis-year-of-diagnosis",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.year_of_diagnosis",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Numeric value to represent the year of an individual's initial pathologic diagnosis of cancer. Has a value in 113 of 159 diagnosis records, covering 113 of 113 cases. Observed range 1,999 to 2,013. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "integer",
+		"unit": "calendar year",
+		"coding": [],
+		"missingValues": [
+			"null: no value (46 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"year_of_diagnosis\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-pathology-detail-consistent-pathology-review",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.pathology_details.consistent_pathology_review",
+		"file": "GDC API case record (pathology detail)",
+		"definition": "Indicates whether a recent review of tissue is consistent with a prior pathology review. Has a value in 113 of 113 pathology detail records.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Yes",
+				"meaning": "The affirmative response to a question. (113 pathology detail records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"pathology_detail\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"pathology_detail\", property \"consistent_pathology_review\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-pathology-detail-lymph-nodes-positive",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.pathology_details.lymph_nodes_positive",
+		"file": "GDC API case record (pathology detail)",
+		"definition": "The number of lymph nodes involved with disease as determined by pathologic examination. Has a value in 44 of 113 pathology detail records. Observed range 0 to 4.",
+		"type": "integer",
+		"unit": "lymph nodes",
+		"coding": [],
+		"missingValues": [
+			"null: no value (69 pathology detail records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"pathology_detail\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"pathology_detail\", property \"lymph_nodes_positive\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-pathology-detail-lymph-nodes-tested",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.pathology_details.lymph_nodes_tested",
+		"file": "GDC API case record (pathology detail)",
+		"definition": "The number of lymph nodes tested to determine whether lymph nodes were involved with disease as determined by a pathologic examination. Has a value in 44 of 113 pathology detail records. Observed range 1 to 50.",
+		"type": "integer",
+		"unit": "lymph nodes",
+		"coding": [],
+		"missingValues": [
+			"null: no value (69 pathology detail records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"pathology_detail\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"pathology_detail\", property \"lymph_nodes_tested\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-pathology-detail-sarcomatoid-percent",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.pathology_details.sarcomatoid_percent",
+		"file": "GDC API case record (pathology detail)",
+		"definition": "Numeric value that represents the percentage of sarcomatoid features found in a specific tissue sample. Has a value in 2 of 113 pathology detail records. Observed range 50 to 90.",
+		"type": "decimal",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"null: no value (111 pathology detail records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"pathology_detail\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"pathology_detail\", property \"sarcomatoid_percent\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-pathology-detail-sarcomatoid-present",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.pathology_details.sarcomatoid_present",
+		"file": "GDC API case record (pathology detail)",
+		"definition": "Indicator describing whether sarcomatoid features were present. Has a value in 64 of 113 pathology detail records.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "No",
+				"meaning": "(60 pathology detail records)"
+			},
+			{
+				"code": "Yes",
+				"meaning": "(4 pathology detail records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (49 pathology detail records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"pathology_detail\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"pathology_detail\", property \"sarcomatoid_present\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-treatment-clinical-trial-indicator",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.treatments.clinical_trial_indicator",
+		"file": "GDC API case record (treatment)",
+		"definition": "Indicator used to describe whether the treatment was part of a clinical trial. Has a value in 21 of 385 treatment records, covering 10 of 113 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "No",
+				"meaning": "The non-affirmative response to a question. (15 treatment records)"
+			},
+			{
+				"code": "Yes",
+				"meaning": "The affirmative response to a question. (6 treatment records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (364 treatment records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"clinical_trial_indicator\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-treatment-days-to-treatment-end",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.treatments.days_to_treatment_end",
+		"file": "GDC API case record (treatment)",
+		"definition": "Number of days between the date used for index and the date the treatment ended. Has a value in 16 of 385 treatment records, covering 8 of 113 cases. Observed range 139 to 4,436.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"null: no value (369 treatment records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"days_to_treatment_end\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-treatment-days-to-treatment-start",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.treatments.days_to_treatment_start",
+		"file": "GDC API case record (treatment)",
+		"definition": "Number of days between the date used for index and the date the treatment started. Has a value in 31 of 385 treatment records, covering 14 of 113 cases. Observed range -421 to 3,554.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"null: no value (354 treatment records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"days_to_treatment_start\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-treatment-therapeutic-agents",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.treatments.therapeutic_agents",
+		"file": "GDC API case record (treatment)",
+		"definition": "Text identification of the individual agent(s) used as part of a treatment regimen. Has a value in 21 of 385 treatment records, covering 11 of 113 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Sunitinib",
+				"meaning": "(5 treatment records)"
+			},
+			{
+				"code": "Sorafenib",
+				"meaning": "(4 treatment records)"
+			},
+			{
+				"code": "Bevacizumab",
+				"meaning": "(4 treatment records)"
+			},
+			{
+				"code": "Temsirolimus",
+				"meaning": "(3 treatment records)"
+			},
+			{
+				"code": "Interferon",
+				"meaning": "(1 treatment records)"
+			},
+			{
+				"code": "Pemetrexed Disodium",
+				"meaning": "(1 treatment records)"
+			},
+			{
+				"code": "Thalidomide",
+				"meaning": "(1 treatment records)"
+			},
+			{
+				"code": "Sunitinib Malate",
+				"meaning": "(1 treatment records)"
+			},
+			{
+				"code": "Vatalanib",
+				"meaning": "(1 treatment records)"
+			}
+		],
+		"missingValues": [
+			"\"Not Reported\": 1 treatment records",
+			"null: no value (363 treatment records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "systemic therapy",
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"therapeutic_agents\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-treatment-treatment-intent-type",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.treatments.treatment_intent_type",
+		"file": "GDC API case record (treatment)",
+		"definition": "Text term to identify the reason for the administration of a treatment regimen. [Manually-curated] Has a value in 215 of 385 treatment records, covering 112 of 113 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Adjuvant",
+				"meaning": "(215 treatment records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (170 treatment records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"treatment_intent_type\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-treatment-treatment-or-therapy",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.treatments.treatment_or_therapy",
+		"file": "GDC API case record (treatment)",
+		"definition": "An indicator related to the administration of the treatment specified in the treatment_type field. Has a value in 374 of 385 treatment records, covering 111 of 113 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "no",
+				"meaning": "The non-affirmative response to a question. (309 treatment records)"
+			},
+			{
+				"code": "yes",
+				"meaning": "The affirmative response to a question. (65 treatment records)"
+			}
+		],
+		"missingValues": [
+			"\"unknown\": 11 treatment records"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"treatment_or_therapy\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-treatment-treatment-outcome",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.treatments.treatment_outcome",
+		"file": "GDC API case record (treatment)",
+		"definition": "Text term that describes the patient's final outcome after the treatment was administered. Has a value in 6 of 385 treatment records, covering 4 of 113 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Progressive Disease",
+				"meaning": "(4 treatment records)"
+			},
+			{
+				"code": "Partial Response",
+				"meaning": "(2 treatment records)"
+			}
+		],
+		"missingValues": [
+			"\"Unknown\": 16 treatment records",
+			"null: no value (363 treatment records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"treatment_outcome\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-treatment-treatment-type",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "diagnoses.treatments.treatment_type",
+		"file": "GDC API case record (treatment)",
+		"definition": "Text term that describes the type of treatment information available within this dataset. Note the value of this field may not be an indication that the treatment type was administered to this patient. Please reference the treatment_or_therapy property where it is indicated whether the patient received this treatment type. Has a value in 385 of 385 treatment records, covering 113 of 113 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Radiation Therapy, NOS",
+				"meaning": "(158 treatment records)"
+			},
+			{
+				"code": "Pharmaceutical Therapy, NOS",
+				"meaning": "(149 treatment records)"
+			},
+			{
+				"code": "Surgery, NOS",
+				"meaning": "(56 treatment records)"
+			},
+			{
+				"code": "Targeted Molecular Therapy",
+				"meaning": "(13 treatment records)"
+			},
+			{
+				"code": "Chemotherapy",
+				"meaning": "(6 treatment records)"
+			},
+			{
+				"code": "Immunotherapy (Including Vaccines)",
+				"meaning": "(2 treatment records)"
+			},
+			{
+				"code": "Radiation, External Beam",
+				"meaning": "(1 treatment records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"treatment_type\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-exposure-exposure-type",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "exposures.exposure_type",
+		"file": "GDC API case record (exposure)",
+		"definition": "The text term used to describe the type of environmental exposure. Has a value in 113 of 113 exposure records.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Tobacco",
+				"meaning": "The dried cured leaves of the tobacco plant, Nicotiana tabacum, used for smoking, chewing, or snuff. Tobacco contains nicotine, a stimulant, and other biolog... (113 exposure records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"exposure\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"exposure\", property \"exposure_type\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-exposure-pack-years-smoked",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "exposures.pack_years_smoked",
+		"file": "GDC API case record (exposure)",
+		"definition": "Numeric computed value to represent lifetime tobacco exposure defined as number of cigarettes smoked per day x number of years smoked divided by 20. Has a value in 20 of 113 exposure records. Observed range 1 to 75.",
+		"type": "decimal",
+		"unit": "pack-years",
+		"coding": [],
+		"missingValues": [
+			"null: no value (93 exposure records)"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "pack-years",
+		"provenance": "GDC data model entity \"exposure\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"exposure\", property \"pack_years_smoked\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-exposure-tobacco-smoking-onset-year",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "exposures.tobacco_smoking_onset_year",
+		"file": "GDC API case record (exposure)",
+		"definition": "The year in which the participant began smoking. Has a value in 17 of 113 exposure records. Observed range 1,949 to 1,997.",
+		"type": "integer",
+		"unit": "calendar year",
+		"coding": [],
+		"missingValues": [
+			"null: no value (96 exposure records)"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"exposure\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"exposure\", property \"tobacco_smoking_onset_year\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-exposure-tobacco-smoking-quit-year",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "exposures.tobacco_smoking_quit_year",
+		"file": "GDC API case record (exposure)",
+		"definition": "The year in which the participant quit smoking. Has a value in 12 of 113 exposure records. Observed range 1,955 to 2,006.",
+		"type": "integer",
+		"unit": "calendar year",
+		"coding": [],
+		"missingValues": [
+			"null: no value (101 exposure records)"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"exposure\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"exposure\", property \"tobacco_smoking_quit_year\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-exposure-tobacco-smoking-status",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "exposures.tobacco_smoking_status",
+		"file": "GDC API case record (exposure)",
+		"definition": "Category describing current smoking status and smoking history as self-reported by a patient. Has a value in 100 of 113 exposure records.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Lifelong Non-Smoker",
+				"meaning": "(74 exposure records)"
+			},
+			{
+				"code": "Current Smoker",
+				"meaning": "(12 exposure records)"
+			},
+			{
+				"code": "Current Reformed Smoker for < or = 15 yrs",
+				"meaning": "(7 exposure records)"
+			},
+			{
+				"code": "Current Reformed Smoker for > 15 yrs",
+				"meaning": "(5 exposure records)"
+			},
+			{
+				"code": "Current Reformed Smoker, Duration Not Specified",
+				"meaning": "(2 exposure records)"
+			}
+		],
+		"missingValues": [
+			"\"Unknown\": 13 exposure records"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "smoking status",
+		"provenance": "GDC data model entity \"exposure\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"exposure\", property \"tobacco_smoking_status\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-follow-up-days-to-follow-up",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "follow_ups.days_to_follow_up",
+		"file": "GDC API case record (follow up)",
+		"definition": "Number of days between the date used for index and the date of the patient's last follow-up appointment or contact. Has a value in 340 of 758 follow up records, covering 112 of 113 cases. Observed range -2 to 5,132.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"null: no value (418 follow up records)"
 		],
 		"observationLevel": "record",
 		"timePoint": "Follow-up",
 		"role": "outcome",
 		"group": "outcome",
 		"derivation": "raw",
-		"normalizedConcept": "follow-up time",
-		"provenance": "Values observed in returned case records.",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"follow_up\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
 		"evidence": {
 			"sources": [
-				"gdc-kich-case-fields"
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
 			],
+			"locator": "Dictionary entity \"follow_up\", property \"days_to_follow_up\"",
 			"status": "verified",
-			"verifiedOn": "2026-09-21"
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-follow-up-days-to-progression",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "follow_ups.days_to_progression",
+		"file": "GDC API case record (follow up)",
+		"definition": "Number of days between the date used for index and the date the patient's disease progressed. Has a value in 4 of 758 follow up records, covering 2 of 113 cases. Observed range 47 to 2,023.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"null: no value (754 follow up records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Follow-up",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"follow_up\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"follow_up\", property \"days_to_progression\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-follow-up-days-to-recurrence",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "follow_ups.days_to_recurrence",
+		"file": "GDC API case record (follow up)",
+		"definition": "Number of days between the date used for index and the date the patient's disease recurred. Has a value in 2 of 758 follow up records, covering 2 of 113 cases. Observed range 46 to 131.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"null: no value (756 follow up records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Follow-up",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"follow_up\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"follow_up\", property \"days_to_recurrence\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-follow-up-disease-response",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "follow_ups.disease_response",
+		"file": "GDC API case record (follow up)",
+		"definition": "Code assigned to describe the patient's response or outcome to the disease. Has a value in 278 of 758 follow up records, covering 112 of 113 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "TF-Tumor Free",
+				"meaning": "(239 follow up records)"
+			},
+			{
+				"code": "WT-With Tumor",
+				"meaning": "(39 follow up records)"
+			}
+		],
+		"missingValues": [
+			"\"Unknown\": 3 follow up records",
+			"null: no value (477 follow up records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Follow-up",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"follow_up\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"follow_up\", property \"disease_response\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-follow-up-ecog-performance-status",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "follow_ups.ecog_performance_status",
+		"file": "GDC API case record (follow up)",
+		"definition": "The ECOG functional performance status of the patient/participant. Has a value in 58 of 758 follow up records, covering 33 of 113 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "0",
+				"meaning": "(37 follow up records)"
+			},
+			{
+				"code": "1",
+				"meaning": "(20 follow up records)"
+			},
+			{
+				"code": "2",
+				"meaning": "(1 follow up records)"
+			}
+		],
+		"missingValues": [
+			"\"Unknown\": 10 follow up records",
+			"null: no value (690 follow up records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Follow-up",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"follow_up\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"follow_up\", property \"ecog_performance_status\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-follow-up-karnofsky-performance-status",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "follow_ups.karnofsky_performance_status",
+		"file": "GDC API case record (follow up)",
+		"definition": "Text term used to describe the classification used of the functional capabilities of a person. Has a value in 54 of 758 follow up records, covering 30 of 113 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "100",
+				"meaning": "(27 follow up records)"
+			},
+			{
+				"code": "90",
+				"meaning": "(22 follow up records)"
+			},
+			{
+				"code": "80",
+				"meaning": "(3 follow up records)"
+			},
+			{
+				"code": "70",
+				"meaning": "(2 follow up records)"
+			}
+		],
+		"missingValues": [
+			"\"Unknown\": 10 follow up records",
+			"null: no value (694 follow up records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Follow-up",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"follow_up\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"follow_up\", property \"karnofsky_performance_status\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-follow-up-progression-or-recurrence",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "follow_ups.progression_or_recurrence",
+		"file": "GDC API case record (follow up)",
+		"definition": "Indicates whether a patient has a progression or recurrence after initial treatment. This can include local, regional, or metastatic disease. Has a value in 25 of 758 follow up records, covering 14 of 113 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Yes",
+				"meaning": "The affirmative response to a question. (25 follow up records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (733 follow up records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Follow-up",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"follow_up\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"follow_up\", property \"progression_or_recurrence\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-follow-up-progression-or-recurrence-type",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "follow_ups.progression_or_recurrence_type",
+		"file": "GDC API case record (follow up)",
+		"definition": "The text term used to describe the type of progressive or recurrent disease or relapsed disease. Has a value in 6 of 758 follow up records, covering 4 of 113 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Distant",
+				"meaning": "(4 follow up records)"
+			},
+			{
+				"code": "Locoregional",
+				"meaning": "(2 follow up records)"
+			}
+		],
+		"missingValues": [
+			"\"Unknown\": 19 follow up records",
+			"null: no value (733 follow up records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Follow-up",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"follow_up\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"follow_up\", property \"progression_or_recurrence_type\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-follow-up-timepoint-category",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "follow_ups.timepoint_category",
+		"file": "GDC API case record (follow up)",
+		"definition": "Category describing a specific point in the time continuum, including those established relative to an event. Has a value in 373 of 758 follow up records, covering 113 of 113 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Follow-up",
+				"meaning": "(204 follow up records)"
+			},
+			{
+				"code": "Last Contact",
+				"meaning": "(112 follow up records)"
+			},
+			{
+				"code": "Other",
+				"meaning": "(30 follow up records)"
+			},
+			{
+				"code": "Post Initial Treatment",
+				"meaning": "(25 follow up records)"
+			},
+			{
+				"code": "Post Adjuvant Therapy",
+				"meaning": "(1 follow up records)"
+			},
+			{
+				"code": "Recurrence/Progression",
+				"meaning": "(1 follow up records)"
+			}
+		],
+		"missingValues": [
+			"\"Unknown\": 28 follow up records",
+			"\"Not Reported\": 8 follow up records",
+			"null: no value (349 follow up records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Follow-up",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"follow_up\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"follow_up\", property \"timepoint_category\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-molecular-test-biospecimen-type",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "follow_ups.molecular_tests.biospecimen_type",
+		"file": "GDC API case record (molecular test)",
+		"definition": "The text term used to describe the biological material used for testing, diagnostic, treatment or research purposes. Has a value in 81 of 349 molecular test records, covering 81 of 113 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Serum",
+				"meaning": "The clear portion of the blood that remains after the removal of the blood cells and the clotting proteins. (81 molecular test records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (268 molecular test records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Initial diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"molecular_test\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"molecular_test\", property \"biospecimen_type\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-molecular-test-laboratory-test",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "follow_ups.molecular_tests.laboratory_test",
+		"file": "GDC API case record (molecular test)",
+		"definition": "The text term used to describe the medical testing used to diagnose, treat or further understand a patient's disease. Has a value in 349 of 349 molecular test records, covering 87 of 113 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Calcium",
+				"meaning": "A quantitative measurement of the amount of calcium present in a sample. (81 molecular test records)"
+			},
+			{
+				"code": "Hemoglobin",
+				"meaning": "A quantitative measurement of the amount of hemoglobin present in a biospecimen. (77 molecular test records)"
+			},
+			{
+				"code": "Leukocytes",
+				"meaning": "A test to determine the number of leukocytes in a biospecimen. (77 molecular test records)"
+			},
+			{
+				"code": "Platelets",
+				"meaning": "The determination of the number of platelets in a biospecimen. (77 molecular test records)"
+			},
+			{
+				"code": "Lactate Dehydrogenase",
+				"meaning": "A quantitative measurement of the amount of lactate dehydrogenase present in a sample. (28 molecular test records)"
+			},
+			{
+				"code": "Erythrocyte Sedimentation Rate",
+				"meaning": "(9 molecular test records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": "Initial diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"molecular_test\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"molecular_test\", property \"laboratory_test\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-molecular-test-test-result",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "follow_ups.molecular_tests.test_result",
+		"file": "GDC API case record (molecular test)",
+		"definition": "The text term used to describe the result of the molecular test. If the test result was a numeric value see test_value. Has a value in 310 of 349 molecular test records, covering 81 of 113 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Normal",
+				"meaning": "Being approximately average or within certain limits; conforming with or constituting a norm or standard or level or type or social norm. (197 molecular test records)"
+			},
+			{
+				"code": "Low",
+				"meaning": "(75 molecular test records)"
+			},
+			{
+				"code": "Elevated",
+				"meaning": "(38 molecular test records)"
+			}
+		],
+		"missingValues": [
+			"\"Unknown\": 39 molecular test records"
+		],
+		"observationLevel": "record",
+		"timePoint": "Initial diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"molecular_test\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"molecular_test\", property \"test_result\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-molecular-test-timepoint-category",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "follow_ups.molecular_tests.timepoint_category",
+		"file": "GDC API case record (molecular test)",
+		"definition": "Category describing a specific point in the time continuum, including those established relative to an event. Has a value in 349 of 349 molecular test records, covering 87 of 113 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Initial Diagnosis",
+				"meaning": "(349 molecular test records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": "Initial diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"molecular_test\". Values observed in the KICH case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-case-records"
+			],
+			"locator": "Dictionary entity \"molecular_test\", property \"timepoint_category\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-file-data-format",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "data_format",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Format of the data files. Has a value in 326 of 326 slide-image files.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "SVS",
+				"meaning": "(326 slide-image files)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"slide\". Values observed in the KICH slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-slide-files"
+			],
+			"locator": "Dictionary entity \"slide_image\", property \"data_format\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-file-experimental-strategy",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "experimental_strategy",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Classification of the image type with respect to its experimental use. Meanings from Cooper et al. 2018. Has a value in 326 of 326 slide-image files.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Tissue Slide",
+				"meaning": "Top- or bottom-section slide cut from the tissue submitted to TCGA, reviewed to check tumour and necrosis content before genomic analysis (205 slide-image files)"
+			},
+			{
+				"code": "Diagnostic Slide",
+				"meaning": "Formalin-fixed paraffin-embedded slide submitted by the tissue source site to confirm the diagnosis; its relationship to the material sent for genomic analys... (121 slide-image files)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"slide\". Values observed in the KICH slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-slide-files",
+				"cooper-2018-tcga-pathology"
+			],
+			"locator": "Dictionary entity \"slide_image\", property \"experimental_strategy\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-file-sample-type",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "cases.samples.sample_type",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Text term to describe the source of a biospecimen used for a laboratory test. Has a value in 326 of 326 slide-image files.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Primary Tumor",
+				"meaning": "(255 slide-image files)"
+			},
+			{
+				"code": "Solid Tissue Normal",
+				"meaning": "(71 slide-image files)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "sample type",
+		"provenance": "GDC data model entity \"slide\". Values observed in the KICH slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-slide-files"
+			],
+			"locator": "Dictionary entity \"slide_image\", property \"sample_type\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-slide-percent-lymphocyte-infiltration",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "cases.samples.portions.slides.percent_lymphocyte_infiltration",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Numeric value to represent the percentage of infiltration by lymphocytes in a solid tissue sample or specimen. Has a value in 160 of 326 slide-image files. Observed range 0.0 to 10.0.",
+		"type": "decimal",
+		"unit": "%",
+		"coding": [],
+		"missingValues": [
+			"null: no value (166 slide-image files)"
+		],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"slide\". Values observed in the KICH slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-slide-files"
+			],
+			"locator": "Dictionary entity \"slide\", property \"percent_lymphocyte_infiltration\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-slide-percent-monocyte-infiltration",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "cases.samples.portions.slides.percent_monocyte_infiltration",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Numeric value to represent the percentage of monocyte infiltration in a sample or specimen. Has a value in 158 of 326 slide-image files. Observed range 0.0 to 10.0.",
+		"type": "decimal",
+		"unit": "%",
+		"coding": [],
+		"missingValues": [
+			"null: no value (168 slide-image files)"
+		],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"slide\". Values observed in the KICH slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-slide-files"
+			],
+			"locator": "Dictionary entity \"slide\", property \"percent_monocyte_infiltration\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-slide-percent-necrosis",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "cases.samples.portions.slides.percent_necrosis",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Numeric value to represent the percentage of cell death in a malignant tumor sample or specimen. Has a value in 183 of 326 slide-image files. Observed range 0.0 to 20.0.",
+		"type": "decimal",
+		"unit": "%",
+		"coding": [],
+		"missingValues": [
+			"null: no value (143 slide-image files)"
+		],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "necrosis percentage",
+		"provenance": "GDC data model entity \"slide\". Values observed in the KICH slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-slide-files"
+			],
+			"locator": "Dictionary entity \"slide\", property \"percent_necrosis\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-slide-percent-neutrophil-infiltration",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "cases.samples.portions.slides.percent_neutrophil_infiltration",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Numeric value to represent the percentage of infiltration by neutrophils in a tumor sample or specimen. Has a value in 158 of 326 slide-image files. Observed range 0.0 to 2.0.",
+		"type": "decimal",
+		"unit": "%",
+		"coding": [],
+		"missingValues": [
+			"null: no value (168 slide-image files)"
+		],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"slide\". Values observed in the KICH slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-slide-files"
+			],
+			"locator": "Dictionary entity \"slide\", property \"percent_neutrophil_infiltration\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-slide-percent-normal-cells",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "cases.samples.portions.slides.percent_normal_cells",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Numeric value to represent the percentage of normal cell content in a malignant tumor sample or specimen. Has a value in 183 of 326 slide-image files. Observed range 0.0 to 100.0.",
+		"type": "decimal",
+		"unit": "%",
+		"coding": [],
+		"missingValues": [
+			"null: no value (143 slide-image files)"
+		],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"slide\". Values observed in the KICH slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-slide-files"
+			],
+			"locator": "Dictionary entity \"slide\", property \"percent_normal_cells\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-slide-percent-stromal-cells",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "cases.samples.portions.slides.percent_stromal_cells",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Numeric value to represent the percentage of reactive cells that are present in a malignant tumor sample or specimen but are not malignant such as fibroblasts, vascular structures, etc. Has a value in 183 of 326 slide-image files. Observed range 0.0 to 55.0.",
+		"type": "decimal",
+		"unit": "%",
+		"coding": [],
+		"missingValues": [
+			"null: no value (143 slide-image files)"
+		],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"slide\". Values observed in the KICH slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-slide-files"
+			],
+			"locator": "Dictionary entity \"slide\", property \"percent_stromal_cells\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-slide-percent-tumor-cells",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "cases.samples.portions.slides.percent_tumor_cells",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Numeric value that represents the percentage of infiltration by tumor cells in a sample. Has a value in 183 of 326 slide-image files. Observed range 0.0 to 100.0.",
+		"type": "decimal",
+		"unit": "%",
+		"coding": [],
+		"missingValues": [
+			"null: no value (143 slide-image files)"
+		],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "tumour cell percentage",
+		"provenance": "GDC data model entity \"slide\". Values observed in the KICH slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-slide-files"
+			],
+			"locator": "Dictionary entity \"slide\", property \"percent_tumor_cells\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-slide-percent-tumor-nuclei",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "cases.samples.portions.slides.percent_tumor_nuclei",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Numeric value to represent the percentage of tumor nuclei in a malignant neoplasm sample or specimen. Has a value in 183 of 326 slide-image files. Observed range 0.0 to 97.0.",
+		"type": "decimal",
+		"unit": "%",
+		"coding": [],
+		"missingValues": [
+			"null: no value (143 slide-image files)"
+		],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"slide\". Values observed in the KICH slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-slide-files"
+			],
+			"locator": "Dictionary entity \"slide\", property \"percent_tumor_nuclei\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kich-slide-section-location",
+		"release": "tcga-kich-gdc-open",
+		"originalName": "cases.samples.portions.slides.section_location",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Tissue source of the slide. Has a value in 240 of 326 slide-image files.",
+		"type": "text",
+		"unit": null,
+		"coding": [
+			{
+				"code": "TOP",
+				"meaning": "(186 slide-image files)"
+			},
+			{
+				"code": "BOTTOM",
+				"meaning": "(54 slide-image files)"
+			}
+		],
+		"missingValues": [
+			"\"Not Reported\": 86 slide-image files"
+		],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"slide\". Values observed in the KICH slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kich-slide-files"
+			],
+			"locator": "Dictionary entity \"slide\", property \"section_location\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
 		}
 	}
 ]

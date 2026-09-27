@@ -1,0 +1,891 @@
+[
+	{
+		"id": "use-clam-kirc",
+		"paper": "clam-2021",
+		"release": "tcga-kirc-gdc-open",
+		"externalCohort": null,
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": [
+				"clam-2021"
+			],
+			"locator": "Methods, External RCC WSI dataset: 884 diagnostic WSIs from TCGA-KICH, TCGA-KIRC and TCGA-KIRP",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		},
+		"subset": "489 diagnostic slides from 483 cases",
+		"preprocessing": "Tissue segmentation; 256 × 256 patches at 20× magnification encoded by an ImageNet ResNet50",
+		"task": "classification",
+		"trainTestRole": "train_and_test",
+		"split": "10-fold Monte Carlo cross-validation: 80% of cases for training, 10% validation, 10% test, class proportions kept, and all slides of a case in the same set",
+		"results": [
+			{
+				"model": "clam",
+				"metric": "Macro-averaged one-vs-rest AUC, three-subtype classification (mean of 10 test folds, 20× magnification)",
+				"value": 0.991,
+				"units": null,
+				"confidenceInterval": null,
+				"subset": "Diagnostic slides from all three TCGA kidney projects together",
+				"split": "10-fold Monte Carlo cross-validation, 80/10/10 by case",
+				"patientLevelHandling": "Split by case; slide-level prediction",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"clam-2021"
+					],
+					"locator": "Results, cross-validated classification performance; Fig. 2a",
+					"status": "verified",
+					"verifiedOn": "2026-09-26",
+					"note": "The subtype task spans all three TCGA kidney projects, so this figure belongs to the three cohorts jointly and is not a result for one project alone. From the arXiv v2 preprint."
+				}
+			}
+		]
+	},
+	{
+		"id": "use-clam-kirp",
+		"paper": "clam-2021",
+		"release": "tcga-kirp-gdc-open",
+		"externalCohort": null,
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": [
+				"clam-2021"
+			],
+			"locator": "Methods, External RCC WSI dataset: 884 diagnostic WSIs from TCGA-KICH, TCGA-KIRC and TCGA-KIRP",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		},
+		"subset": "284 diagnostic slides from 264 cases",
+		"preprocessing": "Tissue segmentation; 256 × 256 patches at 20× magnification encoded by an ImageNet ResNet50",
+		"task": "classification",
+		"trainTestRole": "train_and_test",
+		"split": "10-fold Monte Carlo cross-validation: 80% of cases for training, 10% validation, 10% test, class proportions kept, and all slides of a case in the same set",
+		"results": [
+			{
+				"model": "clam",
+				"metric": "Macro-averaged one-vs-rest AUC, three-subtype classification (mean of 10 test folds, 20× magnification)",
+				"value": 0.991,
+				"units": null,
+				"confidenceInterval": null,
+				"subset": "Diagnostic slides from all three TCGA kidney projects together",
+				"split": "10-fold Monte Carlo cross-validation, 80/10/10 by case",
+				"patientLevelHandling": "Split by case; slide-level prediction",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"clam-2021"
+					],
+					"locator": "Results, cross-validated classification performance; Fig. 2a",
+					"status": "verified",
+					"verifiedOn": "2026-09-26",
+					"note": "The subtype task spans all three TCGA kidney projects, so this figure belongs to the three cohorts jointly and is not a result for one project alone. From the arXiv v2 preprint."
+				}
+			}
+		]
+	},
+	{
+		"id": "use-clam-kich",
+		"paper": "clam-2021",
+		"release": "tcga-kich-gdc-open",
+		"externalCohort": null,
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": [
+				"clam-2021"
+			],
+			"locator": "Methods, External RCC WSI dataset: 884 diagnostic WSIs from TCGA-KICH, TCGA-KIRC and TCGA-KIRP",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		},
+		"subset": "111 diagnostic slides from 99 cases",
+		"preprocessing": "Tissue segmentation; 256 × 256 patches at 20× magnification encoded by an ImageNet ResNet50",
+		"task": "classification",
+		"trainTestRole": "train_and_test",
+		"split": "10-fold Monte Carlo cross-validation: 80% of cases for training, 10% validation, 10% test, class proportions kept, and all slides of a case in the same set",
+		"results": [
+			{
+				"model": "clam",
+				"metric": "Macro-averaged one-vs-rest AUC, three-subtype classification (mean of 10 test folds, 20× magnification)",
+				"value": 0.991,
+				"units": null,
+				"confidenceInterval": null,
+				"subset": "Diagnostic slides from all three TCGA kidney projects together",
+				"split": "10-fold Monte Carlo cross-validation, 80/10/10 by case",
+				"patientLevelHandling": "Split by case; slide-level prediction",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"clam-2021"
+					],
+					"locator": "Results, cross-validated classification performance; Fig. 2a",
+					"status": "verified",
+					"verifiedOn": "2026-09-26",
+					"note": "The subtype task spans all three TCGA kidney projects, so this figure belongs to the three cohorts jointly and is not a result for one project alone. From the arXiv v2 preprint."
+				}
+			}
+		]
+	},
+	{
+		"id": "use-transmil-kirc",
+		"paper": "transmil-2021",
+		"release": "tcga-kirc-gdc-open",
+		"externalCohort": null,
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": [
+				"transmil-2021"
+			],
+			"locator": "Section 4, Dataset: TCGA-RCC, 884 diagnostic WSIs (111 KICH, 489 KIRC, 284 KIRP)",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		},
+		"subset": "489 diagnostic slides from 483 cases",
+		"preprocessing": "Patches at 20× magnification embedded by an ImageNet ResNet50 into 1,024-dimensional features",
+		"task": "classification",
+		"trainTestRole": "train_and_test",
+		"split": "4-fold cross-validation",
+		"results": [
+			{
+				"model": "transmil",
+				"metric": "Macro-averaged one-vs-rest AUC, three-subtype classification",
+				"value": 0.9882,
+				"units": null,
+				"confidenceInterval": null,
+				"subset": "TCGA-RCC (all three projects)",
+				"split": "4-fold cross-validation",
+				"patientLevelHandling": "Not documented",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"transmil-2021"
+					],
+					"locator": "Table 1",
+					"status": "verified",
+					"verifiedOn": "2026-09-26",
+					"note": "The subtype task spans all three TCGA kidney projects, so this figure belongs to the three cohorts jointly and is not a result for one project alone."
+				}
+			},
+			{
+				"model": "transmil",
+				"metric": "Accuracy, three-subtype classification",
+				"value": 0.9466,
+				"units": null,
+				"confidenceInterval": null,
+				"subset": "TCGA-RCC (all three projects)",
+				"split": "4-fold cross-validation",
+				"patientLevelHandling": "Not documented",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"transmil-2021"
+					],
+					"locator": "Table 1",
+					"status": "verified",
+					"verifiedOn": "2026-09-26",
+					"note": "The subtype task spans all three TCGA kidney projects, so this figure belongs to the three cohorts jointly and is not a result for one project alone."
+				}
+			},
+			{
+				"model": "transmil-clam-mb-baseline",
+				"metric": "Macro-averaged one-vs-rest AUC, three-subtype classification",
+				"value": 0.9799,
+				"units": null,
+				"confidenceInterval": null,
+				"subset": "TCGA-RCC (all three projects)",
+				"split": "4-fold cross-validation",
+				"patientLevelHandling": "Not documented",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"transmil-2021"
+					],
+					"locator": "Table 1, CLAM-MB row",
+					"status": "verified",
+					"verifiedOn": "2026-09-26",
+					"note": "The subtype task spans all three TCGA kidney projects, so this figure belongs to the three cohorts jointly and is not a result for one project alone. This is the TransMIL authors' run of CLAM-MB, not the CLAM paper's own figure."
+				}
+			}
+		]
+	},
+	{
+		"id": "use-transmil-kirp",
+		"paper": "transmil-2021",
+		"release": "tcga-kirp-gdc-open",
+		"externalCohort": null,
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": [
+				"transmil-2021"
+			],
+			"locator": "Section 4, Dataset: TCGA-RCC, 884 diagnostic WSIs (111 KICH, 489 KIRC, 284 KIRP)",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		},
+		"subset": "284 diagnostic slides from 264 cases",
+		"preprocessing": "Patches at 20× magnification embedded by an ImageNet ResNet50 into 1,024-dimensional features",
+		"task": "classification",
+		"trainTestRole": "train_and_test",
+		"split": "4-fold cross-validation",
+		"results": [
+			{
+				"model": "transmil",
+				"metric": "Macro-averaged one-vs-rest AUC, three-subtype classification",
+				"value": 0.9882,
+				"units": null,
+				"confidenceInterval": null,
+				"subset": "TCGA-RCC (all three projects)",
+				"split": "4-fold cross-validation",
+				"patientLevelHandling": "Not documented",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"transmil-2021"
+					],
+					"locator": "Table 1",
+					"status": "verified",
+					"verifiedOn": "2026-09-26",
+					"note": "The subtype task spans all three TCGA kidney projects, so this figure belongs to the three cohorts jointly and is not a result for one project alone."
+				}
+			},
+			{
+				"model": "transmil",
+				"metric": "Accuracy, three-subtype classification",
+				"value": 0.9466,
+				"units": null,
+				"confidenceInterval": null,
+				"subset": "TCGA-RCC (all three projects)",
+				"split": "4-fold cross-validation",
+				"patientLevelHandling": "Not documented",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"transmil-2021"
+					],
+					"locator": "Table 1",
+					"status": "verified",
+					"verifiedOn": "2026-09-26",
+					"note": "The subtype task spans all three TCGA kidney projects, so this figure belongs to the three cohorts jointly and is not a result for one project alone."
+				}
+			},
+			{
+				"model": "transmil-clam-mb-baseline",
+				"metric": "Macro-averaged one-vs-rest AUC, three-subtype classification",
+				"value": 0.9799,
+				"units": null,
+				"confidenceInterval": null,
+				"subset": "TCGA-RCC (all three projects)",
+				"split": "4-fold cross-validation",
+				"patientLevelHandling": "Not documented",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"transmil-2021"
+					],
+					"locator": "Table 1, CLAM-MB row",
+					"status": "verified",
+					"verifiedOn": "2026-09-26",
+					"note": "The subtype task spans all three TCGA kidney projects, so this figure belongs to the three cohorts jointly and is not a result for one project alone. This is the TransMIL authors' run of CLAM-MB, not the CLAM paper's own figure."
+				}
+			}
+		]
+	},
+	{
+		"id": "use-transmil-kich",
+		"paper": "transmil-2021",
+		"release": "tcga-kich-gdc-open",
+		"externalCohort": null,
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": [
+				"transmil-2021"
+			],
+			"locator": "Section 4, Dataset: TCGA-RCC, 884 diagnostic WSIs (111 KICH, 489 KIRC, 284 KIRP)",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		},
+		"subset": "111 diagnostic slides from 99 cases",
+		"preprocessing": "Patches at 20× magnification embedded by an ImageNet ResNet50 into 1,024-dimensional features",
+		"task": "classification",
+		"trainTestRole": "train_and_test",
+		"split": "4-fold cross-validation",
+		"results": [
+			{
+				"model": "transmil",
+				"metric": "Macro-averaged one-vs-rest AUC, three-subtype classification",
+				"value": 0.9882,
+				"units": null,
+				"confidenceInterval": null,
+				"subset": "TCGA-RCC (all three projects)",
+				"split": "4-fold cross-validation",
+				"patientLevelHandling": "Not documented",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"transmil-2021"
+					],
+					"locator": "Table 1",
+					"status": "verified",
+					"verifiedOn": "2026-09-26",
+					"note": "The subtype task spans all three TCGA kidney projects, so this figure belongs to the three cohorts jointly and is not a result for one project alone."
+				}
+			},
+			{
+				"model": "transmil",
+				"metric": "Accuracy, three-subtype classification",
+				"value": 0.9466,
+				"units": null,
+				"confidenceInterval": null,
+				"subset": "TCGA-RCC (all three projects)",
+				"split": "4-fold cross-validation",
+				"patientLevelHandling": "Not documented",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"transmil-2021"
+					],
+					"locator": "Table 1",
+					"status": "verified",
+					"verifiedOn": "2026-09-26",
+					"note": "The subtype task spans all three TCGA kidney projects, so this figure belongs to the three cohorts jointly and is not a result for one project alone."
+				}
+			},
+			{
+				"model": "transmil-clam-mb-baseline",
+				"metric": "Macro-averaged one-vs-rest AUC, three-subtype classification",
+				"value": 0.9799,
+				"units": null,
+				"confidenceInterval": null,
+				"subset": "TCGA-RCC (all three projects)",
+				"split": "4-fold cross-validation",
+				"patientLevelHandling": "Not documented",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"transmil-2021"
+					],
+					"locator": "Table 1, CLAM-MB row",
+					"status": "verified",
+					"verifiedOn": "2026-09-26",
+					"note": "The subtype task spans all three TCGA kidney projects, so this figure belongs to the three cohorts jointly and is not a result for one project alone. This is the TransMIL authors' run of CLAM-MB, not the CLAM paper's own figure."
+				}
+			}
+		]
+	},
+	{
+		"id": "use-uni-kirc",
+		"paper": "uni-2024",
+		"release": "tcga-kirc-gdc-open",
+		"externalCohort": null,
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": [
+				"uni-2024"
+			],
+			"locator": "Methods, RCC subtyping based on TCGA, DHMC and CPTAC: 922 TCGA slides (519 CCRCC, 294 PRCC, 109 CHRCC)",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		},
+		"subset": "519 clear cell diagnostic FFPE slides after quality control",
+		"preprocessing": "Slides with missing low-resolution downsamples excluded; UNI patch features",
+		"task": "classification",
+		"trainTestRole": "train_and_test",
+		"split": "Label-stratified 80:10:10 train-validation-test folds (736:89:97 slides), with external testing on DHMC and CPTAC slides",
+		"results": []
+	},
+	{
+		"id": "use-uni-kirp",
+		"paper": "uni-2024",
+		"release": "tcga-kirp-gdc-open",
+		"externalCohort": null,
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": [
+				"uni-2024"
+			],
+			"locator": "Methods, RCC subtyping based on TCGA, DHMC and CPTAC: 922 TCGA slides (519 CCRCC, 294 PRCC, 109 CHRCC)",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		},
+		"subset": "294 papillary diagnostic FFPE slides after quality control",
+		"preprocessing": "Slides with missing low-resolution downsamples excluded; UNI patch features",
+		"task": "classification",
+		"trainTestRole": "train_and_test",
+		"split": "Label-stratified 80:10:10 train-validation-test folds (736:89:97 slides), with external testing on DHMC and CPTAC slides",
+		"results": []
+	},
+	{
+		"id": "use-uni-kich",
+		"paper": "uni-2024",
+		"release": "tcga-kich-gdc-open",
+		"externalCohort": null,
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": [
+				"uni-2024"
+			],
+			"locator": "Methods, RCC subtyping based on TCGA, DHMC and CPTAC: 922 TCGA slides (519 CCRCC, 294 PRCC, 109 CHRCC)",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		},
+		"subset": "109 chromophobe diagnostic FFPE slides after quality control",
+		"preprocessing": "Slides with missing low-resolution downsamples excluded; UNI patch features",
+		"task": "classification",
+		"trainTestRole": "train_and_test",
+		"split": "Label-stratified 80:10:10 train-validation-test folds (736:89:97 slides), with external testing on DHMC and CPTAC slides",
+		"results": []
+	},
+	{
+		"id": "use-uni-cptac",
+		"paper": "uni-2024",
+		"release": "cptac-ccrcc-v14",
+		"externalCohort": null,
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": [
+				"uni-2024"
+			],
+			"locator": "Methods, RCC subtyping based on TCGA, DHMC and CPTAC: 404 CPTAC CCRCC slides",
+			"status": "verified",
+			"verifiedOn": "2026-09-26",
+			"note": "The paper points to the Proteomic Data Commons for CPTAC slides; that these are the same slides as the TCIA CPTAC-CCRCC collection was not checked slide by slide."
+		},
+		"subset": "404 clear cell slides, excluding frozen tissue, non-tumour tissue and slides without acceptable tumour segments",
+		"preprocessing": null,
+		"task": "classification",
+		"trainTestRole": "test",
+		"split": "External test only, combined with 468 DHMC slides",
+		"results": []
+	},
+	{
+		"id": "use-wessels-kirc",
+		"paper": "wessels-2022",
+		"release": "tcga-kirc-gdc-open",
+		"externalCohort": null,
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": [
+				"wessels-2022"
+			],
+			"locator": "Abstract and Methods: trained on slides from TCGA (n = 254 patients / WSIs)",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		},
+		"subset": "254 patients, one representative H&E slide each",
+		"preprocessing": "Pathologist-annotated tumour regions tessellated into patches in QuPath, with blur detection",
+		"task": "survival",
+		"trainTestRole": "train_and_test",
+		"split": "Ten folds stratified by outcome, metastasis, grade and tumour size; external validation on 99 in-house patients",
+		"results": [
+			{
+				"model": "wessels-resnet18-5y-os",
+				"metric": "AUROC, 5-year overall survival (mean over 10-fold cross-validation)",
+				"value": 0.75,
+				"units": null,
+				"confidenceInterval": "SD 0.07",
+				"subset": "TCGA-KIRC training set",
+				"split": "10-fold cross-validation",
+				"patientLevelHandling": "One slide per patient",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"wessels-2022"
+					],
+					"locator": "Abstract",
+					"status": "verified",
+					"verifiedOn": "2026-09-26"
+				}
+			},
+			{
+				"model": "wessels-resnet18-5y-os",
+				"metric": "Balanced accuracy, 5-year overall survival (mean over 10-fold cross-validation)",
+				"value": 72.0,
+				"units": "%",
+				"confidenceInterval": "SD 7.9%",
+				"subset": "TCGA-KIRC training set",
+				"split": "10-fold cross-validation",
+				"patientLevelHandling": "One slide per patient",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"wessels-2022"
+					],
+					"locator": "Abstract",
+					"status": "verified",
+					"verifiedOn": "2026-09-26"
+				}
+			}
+		]
+	},
+	{
+		"id": "use-jasti-kirc",
+		"paper": "jasti-2025",
+		"release": "tcga-kirc-gdc-open",
+		"externalCohort": null,
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": [
+				"jasti-2025"
+			],
+			"locator": "Methods, TCGA KIRC dataset: 519 whole slide images downloaded from the GDC Data Portal, the primary training dataset for RNA prediction",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		},
+		"subset": "519 slides, less exclusions (frozen-sample-like artefacts, non-clear-cell pathology, benign tissue only, imaging or staining artefacts)",
+		"preprocessing": "416 × 416 pixel patches from tumour regions at 20×, paired with the patient's RNA Angioscore",
+		"task": "regression",
+		"trainTestRole": "train_and_test",
+		"split": "3-fold cross-validation; the held-out third of slides (N = 154) used for internal testing",
+		"results": [
+			{
+				"model": "jasti-he-dl-angio",
+				"metric": "Spearman correlation between predicted and RNA Angioscore",
+				"value": 0.68,
+				"units": null,
+				"confidenceInterval": null,
+				"subset": "TCGA-KIRC held-out slides (N = 154)",
+				"split": "Held-out fold",
+				"patientLevelHandling": "Not documented",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"jasti-2025"
+					],
+					"locator": "Results and Fig. 2A",
+					"status": "verified",
+					"verifiedOn": "2026-09-26"
+				}
+			}
+		]
+	},
+	{
+		"id": "use-uhm-kirc-tcia",
+		"paper": "uhm-2021",
+		"release": "tcga-kirc-tcia",
+		"externalCohort": null,
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": [
+				"uhm-2021"
+			],
+			"locator": "Results, independent TCIA test set (184 scans: 163 ccRCC, 14 pRCC, 7 chRCC); references 27-29 cite the TCGA-KIRC, TCGA-KIRP and TCGA-KICH collections",
+			"status": "verified",
+			"verifiedOn": "2026-09-26",
+			"note": "The paper gives counts by subtype; assigning them to the three collections follows from each collection holding one subtype."
+		},
+		"subset": "163 multi-phase CT scans of clear cell RCC with at least three phases",
+		"preprocessing": "Kidney and tumour segmented in each phase, then phases aligned on the tumour region",
+		"task": "classification",
+		"trainTestRole": "test",
+		"split": "External test only; the model was trained on another hospital's data",
+		"results": [
+			{
+				"model": "uhm-multiphase-ct",
+				"metric": "Average AUC, renal tumour subtype (three RCC subtypes present)",
+				"value": 0.855,
+				"units": null,
+				"confidenceInterval": "95% CI 0.763–0.940",
+				"subset": "184 TCIA scans from all three TCGA kidney collections",
+				"split": "External test",
+				"patientLevelHandling": "Not documented",
+				"evaluation": "external",
+				"evidence": {
+					"sources": [
+						"uhm-2021"
+					],
+					"locator": "Results, independent TCIA test set",
+					"status": "verified",
+					"verifiedOn": "2026-09-26",
+					"note": "The figure covers the three TCIA collections together."
+				}
+			},
+			{
+				"model": "uhm-multiphase-ct",
+				"metric": "Accuracy, renal tumour subtype",
+				"value": 0.64,
+				"units": null,
+				"confidenceInterval": null,
+				"subset": "184 TCIA scans from all three TCGA kidney collections",
+				"split": "External test",
+				"patientLevelHandling": "Not documented",
+				"evaluation": "external",
+				"evidence": {
+					"sources": [
+						"uhm-2021"
+					],
+					"locator": "Results, independent TCIA test set",
+					"status": "verified",
+					"verifiedOn": "2026-09-26",
+					"note": "The figure covers the three TCIA collections together."
+				}
+			}
+		]
+	},
+	{
+		"id": "use-uhm-kirp-tcia",
+		"paper": "uhm-2021",
+		"release": "tcga-kirp-tcia",
+		"externalCohort": null,
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": [
+				"uhm-2021"
+			],
+			"locator": "Results, independent TCIA test set (184 scans: 163 ccRCC, 14 pRCC, 7 chRCC); references 27-29 cite the TCGA-KIRC, TCGA-KIRP and TCGA-KICH collections",
+			"status": "verified",
+			"verifiedOn": "2026-09-26",
+			"note": "The paper gives counts by subtype; assigning them to the three collections follows from each collection holding one subtype."
+		},
+		"subset": "14 multi-phase CT scans of papillary RCC with at least three phases",
+		"preprocessing": "Kidney and tumour segmented in each phase, then phases aligned on the tumour region",
+		"task": "classification",
+		"trainTestRole": "test",
+		"split": "External test only; the model was trained on another hospital's data",
+		"results": [
+			{
+				"model": "uhm-multiphase-ct",
+				"metric": "Average AUC, renal tumour subtype (three RCC subtypes present)",
+				"value": 0.855,
+				"units": null,
+				"confidenceInterval": "95% CI 0.763–0.940",
+				"subset": "184 TCIA scans from all three TCGA kidney collections",
+				"split": "External test",
+				"patientLevelHandling": "Not documented",
+				"evaluation": "external",
+				"evidence": {
+					"sources": [
+						"uhm-2021"
+					],
+					"locator": "Results, independent TCIA test set",
+					"status": "verified",
+					"verifiedOn": "2026-09-26",
+					"note": "The figure covers the three TCIA collections together."
+				}
+			},
+			{
+				"model": "uhm-multiphase-ct",
+				"metric": "Accuracy, renal tumour subtype",
+				"value": 0.64,
+				"units": null,
+				"confidenceInterval": null,
+				"subset": "184 TCIA scans from all three TCGA kidney collections",
+				"split": "External test",
+				"patientLevelHandling": "Not documented",
+				"evaluation": "external",
+				"evidence": {
+					"sources": [
+						"uhm-2021"
+					],
+					"locator": "Results, independent TCIA test set",
+					"status": "verified",
+					"verifiedOn": "2026-09-26",
+					"note": "The figure covers the three TCIA collections together."
+				}
+			}
+		]
+	},
+	{
+		"id": "use-uhm-kich-tcia",
+		"paper": "uhm-2021",
+		"release": "tcga-kich-tcia",
+		"externalCohort": null,
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": [
+				"uhm-2021"
+			],
+			"locator": "Results, independent TCIA test set (184 scans: 163 ccRCC, 14 pRCC, 7 chRCC); references 27-29 cite the TCGA-KIRC, TCGA-KIRP and TCGA-KICH collections",
+			"status": "verified",
+			"verifiedOn": "2026-09-26",
+			"note": "The paper gives counts by subtype; assigning them to the three collections follows from each collection holding one subtype."
+		},
+		"subset": "7 multi-phase CT scans of chromophobe RCC with at least three phases",
+		"preprocessing": "Kidney and tumour segmented in each phase, then phases aligned on the tumour region",
+		"task": "classification",
+		"trainTestRole": "test",
+		"split": "External test only; the model was trained on another hospital's data",
+		"results": [
+			{
+				"model": "uhm-multiphase-ct",
+				"metric": "Average AUC, renal tumour subtype (three RCC subtypes present)",
+				"value": 0.855,
+				"units": null,
+				"confidenceInterval": "95% CI 0.763–0.940",
+				"subset": "184 TCIA scans from all three TCGA kidney collections",
+				"split": "External test",
+				"patientLevelHandling": "Not documented",
+				"evaluation": "external",
+				"evidence": {
+					"sources": [
+						"uhm-2021"
+					],
+					"locator": "Results, independent TCIA test set",
+					"status": "verified",
+					"verifiedOn": "2026-09-26",
+					"note": "The figure covers the three TCIA collections together."
+				}
+			},
+			{
+				"model": "uhm-multiphase-ct",
+				"metric": "Accuracy, renal tumour subtype",
+				"value": 0.64,
+				"units": null,
+				"confidenceInterval": null,
+				"subset": "184 TCIA scans from all three TCGA kidney collections",
+				"split": "External test",
+				"patientLevelHandling": "Not documented",
+				"evaluation": "external",
+				"evidence": {
+					"sources": [
+						"uhm-2021"
+					],
+					"locator": "Results, independent TCIA test set",
+					"status": "verified",
+					"verifiedOn": "2026-09-26",
+					"note": "The figure covers the three TCIA collections together."
+				}
+			}
+		]
+	},
+	{
+		"id": "use-deboer-renal-net-kirc-tcia",
+		"paper": "deboer-2026-renal-net",
+		"release": "tcga-kirc-tcia",
+		"externalCohort": null,
+		"role": "downstream",
+		"actualUseEvidence": {
+			"sources": [
+				"deboer-2026-renal-net"
+			],
+			"locator": "Section 2.2.2, TCGA-KIRC: 28 valid imaging-mask pairs with AI masks corrected by a radiologist (Murugesan et al. 2024)",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		},
+		"subset": "28 CT scans with radiologist-corrected BAMF masks, all clear cell RCC",
+		"preprocessing": null,
+		"task": "segmentation",
+		"trainTestRole": "test",
+		"split": "External test only; training used KiTS23 and the Radboudumc public set",
+		"results": [
+			{
+				"model": "renal-net",
+				"metric": "Mean Dice, kidney region",
+				"value": 0.95,
+				"units": null,
+				"confidenceInterval": "SD 0.03",
+				"subset": "28 TCGA-KIRC scans",
+				"split": "External test",
+				"patientLevelHandling": "Per scan",
+				"evaluation": "external",
+				"evidence": {
+					"sources": [
+						"deboer-2026-renal-net"
+					],
+					"locator": "Section 4, kidney region",
+					"status": "verified",
+					"verifiedOn": "2026-09-26",
+					"note": "The configuration (with or without post-processing) behind these figures was not established in the sections read."
+				}
+			},
+			{
+				"model": "renal-net",
+				"metric": "Mean HD95, kidney region",
+				"value": 3.79,
+				"units": null,
+				"confidenceInterval": "SD 5.89",
+				"subset": "28 TCGA-KIRC scans",
+				"split": "External test",
+				"patientLevelHandling": "Per scan",
+				"evaluation": "external",
+				"evidence": {
+					"sources": [
+						"deboer-2026-renal-net"
+					],
+					"locator": "Section 4, kidney region",
+					"status": "verified",
+					"verifiedOn": "2026-09-26",
+					"note": "The configuration (with or without post-processing) behind these figures was not established in the sections read."
+				}
+			},
+			{
+				"model": "renal-net",
+				"metric": "Mean Dice, renal mass region",
+				"value": 0.86,
+				"units": null,
+				"confidenceInterval": "SD 0.25",
+				"subset": "28 TCGA-KIRC scans",
+				"split": "External test",
+				"patientLevelHandling": "Per scan",
+				"evaluation": "external",
+				"evidence": {
+					"sources": [
+						"deboer-2026-renal-net"
+					],
+					"locator": "Section 4, mass region",
+					"status": "verified",
+					"verifiedOn": "2026-09-26",
+					"note": "The configuration (with or without post-processing) behind these figures was not established in the sections read."
+				}
+			},
+			{
+				"model": "renal-net-totalsegmentator-baseline",
+				"metric": "Mean Dice, kidney region",
+				"value": 0.8,
+				"units": null,
+				"confidenceInterval": "SD 0.14",
+				"subset": "28 TCGA-KIRC scans",
+				"split": "External test",
+				"patientLevelHandling": "Per scan",
+				"evaluation": "external",
+				"evidence": {
+					"sources": [
+						"deboer-2026-renal-net"
+					],
+					"locator": "Section 4, kidney region",
+					"status": "verified",
+					"verifiedOn": "2026-09-26"
+				}
+			},
+			{
+				"model": "renal-net-totalsegmentator-baseline",
+				"metric": "Mean Dice, renal mass region",
+				"value": 0.05,
+				"units": null,
+				"confidenceInterval": "SD 0.13",
+				"subset": "28 TCGA-KIRC scans",
+				"split": "External test",
+				"patientLevelHandling": "Per scan",
+				"evaluation": "external",
+				"evidence": {
+					"sources": [
+						"deboer-2026-renal-net"
+					],
+					"locator": "Section 4, mass region",
+					"status": "verified",
+					"verifiedOn": "2026-09-26",
+					"note": "TotalSegmentator was trained on healthy kidneys, which the authors give as the reason for comparing by region."
+				}
+			}
+		]
+	},
+	{
+		"id": "rcc-aid-2026-describes-release",
+		"paper": "rcc-aid-2026",
+		"release": "rcc-aid-v2",
+		"externalCohort": null,
+		"role": "descriptor",
+		"actualUseEvidence": {
+			"sources": [
+				"rcc-aid-paper"
+			],
+			"locator": "Abstract and section 4.1: the paper describes Zenodo record 20719257",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		},
+		"subset": null,
+		"preprocessing": null,
+		"task": null,
+		"trainTestRole": "not_documented",
+		"split": null,
+		"results": []
+	}
+]

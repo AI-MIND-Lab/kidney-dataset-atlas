@@ -8,10 +8,15 @@ The rules for adding one are in the Samples section of [authoring.md](authoring.
 
 ## Where the current previews come from
 
-The previews in `src/data/samples/processed-figures.json` (KiTS23, UCSF RMaC and CPTAC-CCRCC) were rendered by the
-Kidney-VLM project as visual quality checks of its processed data, then compressed to WebP for the atlas. The
-rendering script belongs to that project and is not part of this repository. Captions were written from that
-project's description of each figure and checked against the images.
+The previews in `src/data/samples/processed-figures.json` (KiTS23, UCSF RMaC, CPTAC-CCRCC, TCGA-KIRC and RCC-AID)
+were rendered by the Kidney-VLM project as visual quality checks of its processed data, then compressed to WebP for
+the atlas by [scripts/research/previews/build_previews.py](../scripts/research/previews/build_previews.py), which
+also writes the sample records. The rendering itself belongs to that project and is not part of this repository.
+Captions were written from that project's description of each figure and checked against the images.
+
+The TCGA-KIRC previews show the project's own conversion of the TCIA scans with BAMF or RCC-AID masks placed on
+them; the RCC-AID previews show RCC-AID's released images and labels directly. In TCGA-KIRC captions, the phase
+comes from a reader's label, because the TCIA collection does not record phase in a structured field.
 
 What was changed from the source data, for every preview: the intensity was windowed, the view cropped and
 zoomed, and the mask drawn as outlines. Nothing was added to or removed from the anatomy.
@@ -60,5 +65,7 @@ recorded as a quality finding when it applies to the release as a whole.
 ## Licences
 
 A preview is an adaptation of its source dataset and carries that dataset's licence: KiTS23 previews are
-[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/); UCSF RMaC, CPTAC-CCRCC (with BAMF masks)
-and RCC-AID previews are [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See [LICENSE](../LICENSE).
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/); UCSF RMaC and CPTAC-CCRCC (with BAMF masks)
+previews are [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). TCGA-KIRC and RCC-AID previews combine
+[CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) images from TCIA with CC BY 4.0 masks, so they need
+attribution to both. See [LICENSE](../LICENSE).

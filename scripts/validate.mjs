@@ -139,6 +139,21 @@ const reference = (record, collection, id, field) => {
 };
 
 for (const record of releases) reference(record, 'datasets', record.data.dataset, 'dataset');
+for (const record of papers) {
+	for (const model of record.data.models ?? []) {
+		reference(record, 'papers', model.originalPaper, `model "${model.id}" originalPaper`);
+		for (const id of model.evidence?.sources ?? []) reference(record, 'sources', id, `model "${model.id}" evidence`);
+	}
+	// A reproduced figure must be in the paper's own folder and on disk, so a broken image never ships.
+	for (const figure of record.data.figures ?? []) {
+		if (!figure.path.startsWith(`/figures/${record.data.id}/`)) {
+			fail(record.file, `figure "${figure.id}" must be stored under /figures/${record.data.id}/`);
+		}
+		if (!existsSync(join(root, 'public', figure.path))) {
+			fail(record.file, `figure "${figure.id}" points at missing file public${figure.path}`);
+		}
+	}
+}
 for (const record of variables) reference(record, 'releases', record.data.release, 'release');
 for (const record of samples) reference(record, 'releases', record.data.release, 'release');
 for (const record of quality) reference(record, 'releases', record.data.release, 'release');

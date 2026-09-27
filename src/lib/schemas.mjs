@@ -269,12 +269,21 @@ export const variable = z.object({
 
 const modelField = z.object({ status: state, url: z.url().optional(), note: z.string().optional() });
 
+/** One step of a model, as drawn in the atlas's own pipeline diagram. */
+const pipelineStep = z.object({ label: z.string(), detail: z.string().optional() });
+
 export const model = z.object({
 	id: recordId,
 	name: z.string(),
 	role: z.enum(['proposed', 'variant', 'baseline']),
 	originalPaper: z.string().nullable().default(null),
 	task: z.enum(TASKS),
+	/**
+	 * The model as a left-to-right pipeline, from input to output. The atlas
+	 * draws its own diagram from these steps, so every model has a picture even
+	 * when the paper's figure may not be reproduced.
+	 */
+	pipeline: z.array(pipelineStep).default([]),
 	backbone: z.string().optional(),
 	inputRepresentation: z.enum(['2d', '2.5d', '3d', 'wsi', 'patch', 'tabular', 'multimodal', 'other']).optional(),
 	preprocessing: z.string().optional(),
@@ -285,6 +294,56 @@ export const model = z.object({
 	inferenceInputs: z.string().optional(),
 	code: modelField.optional(),
 	weights: modelField.optional(),
+	/** Where in the paper the architecture facts were read, so a reviewer can check each row. */
+	evidence: evidence.optional(),
+});
+
+/**
+ * Licences under which a paper's figure may be copied onto the site, with
+ * attribution. A figure under any other licence is linked, never reproduced.
+ */
+export const REUSABLE_FIGURE_LICENSES = [
+	'https://creativecommons.org/licenses/by/4.0/',
+	'https://creativecommons.org/licenses/by/3.0/',
+	'https://creativecommons.org/publicdomain/zero/1.0/',
+];
+
+/** A figure copied from a paper, shown with the paper's caption and a full credit line. */
+export const paperFigure = z.object({
+	id: recordId,
+	/** The paper's own figure number, e.g. "Figure 1". */
+	label: z.string(),
+	title: z.string(),
+	/** A file under public/figures/<paper id>/. */
+	path: z.string().regex(/^\/figures\/[a-z0-9-]+\/[a-z0-9-]+\.(webp|png|jpg)$/, 'Store figures in public/figures/<paper id>/'),
+	width: z.number().int().positive(),
+	height: z.number().int().positive(),
+	alt: z.string(),
+	/** Quoted from the paper, unchanged. */
+	caption: z.string(),
+	/** How the parts of the figure correspond to the model table, in the atlas's words. */
+	mapsTo: z.string().optional(),
+	/** Authors, title, venue, year, figure number and copyright holder. */
+	credit: z.string(),
+	license: z.object({
+		name: z.string(),
+		url: z.string().refine((url) => REUSABLE_FIGURE_LICENSES.includes(url), {
+			message: `A reproduced figure needs a reusable licence: ${REUSABLE_FIGURE_LICENSES.join(', ')}`,
+		}),
+	}),
+	/** What was changed, as the licence requires; "None" is a valid answer. */
+	changes: z.string(),
+	/** Where the image file was taken from. */
+	source: z.url(),
+});
+
+/** A figure the site may not copy: named, summarised in the atlas's words, and linked. */
+export const linkedFigure = z.object({
+	label: z.string(),
+	title: z.string(),
+	url: z.url(),
+	summary: z.string(),
+	reason: z.string(),
 });
 
 export const paper = z.object({
@@ -298,6 +357,8 @@ export const paper = z.object({
 	doi: z.string().nullable().default(null),
 	url: z.url().nullable().default(null),
 	methodSummary: z.string().optional(),
+	figures: z.array(paperFigure).default([]),
+	linkedFigures: z.array(linkedFigure).default([]),
 	models: z.array(model).default([]),
 	catalogStatus: z.enum(['draft', 'published']).default('draft'),
 	approvedBy: z.string().nullable().default(null),

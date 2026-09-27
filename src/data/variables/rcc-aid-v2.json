@@ -1,0 +1,155 @@
+[
+	{
+		"id": "rcc-aid-segmentation-label",
+		"release": "rcc-aid-v2",
+		"originalName": "segmentation label",
+		"file": "labels/<scan>_seg.nii.gz",
+		"definition": "Voxel label in each scan's mask. Only the primary solid tumour and cysts identified by the annotators are labelled; other lesions were not searched for.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{ "code": "0", "meaning": "Background" },
+			{ "code": "1", "meaning": "Kidney" },
+			{ "code": "2", "meaning": "Tumour (the primary solid tumour; exactly one per scan)" },
+			{ "code": "3", "meaning": "Cyst (118 cysts in 38 of 129 scans)" }
+		],
+		"missingValues": [],
+		"observationLevel": "slice",
+		"timePoint": "Pre-treatment CT (the first imaging date per patient was kept)",
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "segmentation class",
+		"provenance": "Initial masks from a public nnU-Net model, corrected by trained students, with uncertain cases decided by a board-certified radiologist.",
+		"evidence": {
+			"sources": ["rcc-aid-zenodo", "rcc-aid-paper"],
+			"locator": "Zenodo segmentation label map; paper sections 5.2.2 and 5.2.6",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "rcc-aid-file-subtype-prefix",
+		"release": "rcc-aid-v2",
+		"originalName": "file name prefix",
+		"file": "images/*.nii.gz",
+		"definition": "The collection code at the start of each image file name, which the authors' code maps to the histologic subtype. The rest of the name is the TCIA series UID.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{ "code": "KIRC", "meaning": "Clear cell RCC, from TCGA-KIRC (85 scans)" },
+			{ "code": "KIRP", "meaning": "Papillary RCC, from TCGA-KIRP (26 scans)" },
+			{ "code": "KICH", "meaning": "Chromophobe RCC, from TCGA-KICH (18 scans)" }
+		],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "predictor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "histologic subtype",
+		"provenance": "Subtype follows the TCGA project the scan came from.",
+		"evidence": {
+			"sources": ["rcc-aid-code", "rcc-aid-paper"],
+			"locator": "analyze_data.py, dataset_mapping; paper Table 3",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "rcc-aid-patient-id",
+		"release": "rcc-aid-v2",
+		"originalName": "PatientID",
+		"file": "metadata.csv",
+		"definition": "The TCGA patient barcode, as recorded by The Cancer Imaging Archive. It joins a scan to the TCGA clinical records and slides in the GDC.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "identifier",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": "case identifier",
+		"provenance": "Reproduced from the TCIA source collections.",
+		"evidence": {
+			"sources": ["rcc-aid-code", "rcc-aid-zenodo"],
+			"locator": "analyze_data.py reads metadata_df[\"PatientID\"]; Zenodo contents table",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "rcc-aid-series-instance-uid",
+		"release": "rcc-aid-v2",
+		"originalName": "SeriesInstanceUID",
+		"file": "metadata.csv",
+		"definition": "The DICOM series UID of the TCIA series each scan was converted from. It matches the series UID in the image file name, and several scans can belong to one patient.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "identifier",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": "series identifier",
+		"provenance": "Reproduced from the TCIA source collections.",
+		"evidence": {
+			"sources": ["rcc-aid-code"],
+			"locator": "analyze_data.py matches metadata_df[\"SeriesInstanceUID\"] to the file name",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "rcc-aid-patient-sex",
+		"release": "rcc-aid-v2",
+		"originalName": "PatientSex",
+		"file": "metadata.csv",
+		"definition": "Patient sex as recorded in the DICOM metadata of the source series. The paper reports 24 female and 67 male patients.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "sex/gender",
+		"provenance": "Reproduced from the TCIA source collections. The codes used in the file were not seen.",
+		"evidence": {
+			"sources": ["rcc-aid-code", "rcc-aid-paper"],
+			"locator": "analyze_data.py reads metadata_df[\"PatientSex\"]; paper section 6.1",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "rcc-aid-patient-age",
+		"release": "rcc-aid-v2",
+		"originalName": "PatientAge",
+		"file": "metadata.csv",
+		"definition": "Patient age as recorded in the DICOM metadata of the source series. The paper reports a mean of 56 years (range 26 to 82) and one patient with unknown age.",
+		"type": "text",
+		"unit": "years",
+		"coding": [],
+		"missingValues": ["Unknown for one patient; the missing-value marker was not seen"],
+		"observationLevel": "patient",
+		"timePoint": "At the scan",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "age",
+		"provenance": "Reproduced from the TCIA source collections. The authors' summary code strips a trailing \"Y\" before converting it to a number, consistent with the DICOM age format (for example 056Y); the file itself was not seen.",
+		"evidence": {
+			"sources": ["rcc-aid-code", "rcc-aid-paper"],
+			"locator": "analyze_data.py; summary_analysis.py, patient_age parsing; paper section 6.1",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	}
+]

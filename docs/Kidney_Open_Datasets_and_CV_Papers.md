@@ -22,7 +22,7 @@ The intended scope is publicly released, deidentified data that do not require o
 ## Import status on the site
 
 This inventory uses its own IDs (K01, M05, …); the site's records use slugs. The table below shows which entries have
-site records so far, as of 23 September 2026. **Every site record is still a draft.** Entries not listed have no site
+site records so far, as of 26 September 2026. **Every site record is still a draft.** Entries not listed have no site
 record yet and are open for a contributor to research and import, following [docs/authoring.md](authoring.md).
 Update this table in the same pull request as the import.
 
@@ -31,18 +31,20 @@ Update this table in the same pull request as the import.
 | K01 KiTS19 | `kits` | `kits19`, `c4kc-kits` (TCIA copy) | `kits19-data-paper` |
 | K02 KiTS21 | `kits` | `kits21` | `kits21-challenge` |
 | K03 KiTS23 | `kits` | `kits23` | `kits23-auto3dseg` |
-| K06 TCGA-KIRC slides | `tcga-kirc` | `tcga-kirc-gdc-open` | `tabibu-2019`, `tcga-kirc-nature-2013` |
-| K07 TCGA-KIRP slides | `tcga-kirp` | `tcga-kirp-gdc-open` | `tabibu-2019` |
-| K08 TCGA-KICH slides | `tcga-kich` | `tcga-kich-gdc-open` | `tabibu-2019` |
+| K06 TCGA-KIRC slides | `tcga-kirc` | `tcga-kirc-gdc-open` | `tabibu-2019`, `tcga-kirc-nature-2013`, `clam-2021`, `transmil-2021`, `uni-2024`, `wessels-2022`, `jasti-2025` |
+| K07 TCGA-KIRP slides | `tcga-kirp` | `tcga-kirp-gdc-open`, `tcga-kirp-tcia` (radiology) | `tabibu-2019`, `clam-2021`, `transmil-2021`, `uni-2024`, `uhm-2021` |
+| K08 TCGA-KICH slides | `tcga-kich` | `tcga-kich-gdc-open`, `tcga-kich-tcia` (radiology) | `tabibu-2019`, `clam-2021`, `transmil-2021`, `uni-2024`, `uhm-2021` |
+| K09 TCGA-KIRC radiology | `tcga-kirc` | `tcga-kirc-tcia` | `uhm-2021`, `deboer-2026-renal-net` |
 | K10 HuBMAP Hacking the Kidney | `hubmap-kidney` | `hubmap-hacking-the-kidney` | `jain-2023` |
 | M01 TotalSegmentator CT | `totalsegmentator-ct` | `totalsegmentator-ct-v3` | `wasserthal-2023` |
 | M02 TotalSegmentator MRI | `totalsegmentator-mri` | `totalsegmentator-mri-v3` | none yet |
 | M05 CT-ORG | `ct-org` | `ct-org-tcia` | none yet |
 | G01 UCSF RMaC | `ucsf-rmac` | `ucsf-rmac-2025` | `ucsf-rmac-2026` |
-| G02 CPTAC-CCRCC | `cptac-ccrcc` | `cptac-ccrcc-v14` | none yet |
+| G02 CPTAC-CCRCC | `cptac-ccrcc` | `cptac-ccrcc-v14` | `uni-2024` |
+| G03 RCC-AID | `rcc-aid` | `rcc-aid-v2` | `rcc-aid-2026` |
 | N01 NHANES (section 5) | `nhanes` | `nhanes-2021-2023-kidney` | none (not an imaging dataset) |
 
-The verified downstream papers in §6.4 are not yet on the site: importing one means adding a paper record in
+The verified §6.4 papers for the TCGA entries (K06–K09) are on the site; the others are not yet: importing one means adding a paper record in
 `src/content/papers/` and a study use in `src/data/study-uses/`.
 
 

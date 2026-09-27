@@ -1,0 +1,92 @@
+[
+	{
+		"id": "tcga-kirc-gdc-tcia-overlap",
+		"releases": [
+			"tcga-kirc-gdc-open",
+			"tcga-kirc-tcia"
+		],
+		"type": "superset",
+		"count": {
+			"value": 267,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"tcia-tcga-kirc-series",
+					"gdc-kirc-case-records"
+				],
+				"locator": "TCIA PatientID matched against GDC submitter_id",
+				"status": "verified",
+				"verifiedOn": "2026-09-26"
+			}
+		},
+		"explanation": "The GDC release holds all 537 TCGA-KIRC cases; the TCIA collection images 267 of them, identified by the same TCGA barcode (237 with CT). Every imaging patient is also a GDC case, so the counts must not be added.",
+		"evidence": {
+			"sources": [
+				"tcia-tcga-kirc-series",
+				"gdc-kirc-case-records"
+			],
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "tcga-kirp-gdc-tcia-overlap",
+		"releases": [
+			"tcga-kirp-gdc-open",
+			"tcga-kirp-tcia"
+		],
+		"type": "superset",
+		"count": {
+			"value": 33,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"tcia-tcga-kirp-series",
+					"gdc-kirp-case-records"
+				],
+				"locator": "TCIA PatientID matched against GDC submitter_id",
+				"status": "verified",
+				"verifiedOn": "2026-09-26"
+			}
+		},
+		"explanation": "The GDC release holds all 291 TCGA-KIRP cases; the TCIA collection images 33 of them, identified by the same TCGA barcode (23 with CT). Every imaging patient is also a GDC case, so the counts must not be added.",
+		"evidence": {
+			"sources": [
+				"tcia-tcga-kirp-series",
+				"gdc-kirp-case-records"
+			],
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "tcga-kich-gdc-tcia-overlap",
+		"releases": [
+			"tcga-kich-gdc-open",
+			"tcga-kich-tcia"
+		],
+		"type": "superset",
+		"count": {
+			"value": 15,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"tcia-tcga-kich-series",
+					"gdc-kich-case-records"
+				],
+				"locator": "TCIA PatientID matched against GDC submitter_id",
+				"status": "verified",
+				"verifiedOn": "2026-09-26"
+			}
+		},
+		"explanation": "The GDC release holds all 113 TCGA-KICH cases; the TCIA collection images 15 of them, identified by the same TCGA barcode (12 with CT). Every imaging patient is also a GDC case, so the counts must not be added.",
+		"evidence": {
+			"sources": [
+				"tcia-tcga-kich-series",
+				"gdc-kich-case-records"
+			],
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	}
+]

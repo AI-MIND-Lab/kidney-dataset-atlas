@@ -15,7 +15,14 @@ interface Props {
 	downstreamUses: PaperUse[];
 }
 
-const { ownUses, downstreamUses } = Astro.props;
+const { ownUses, downstreamUses: unsorted } = Astro.props;
+// Oldest first, so the table reads as the history of how the release has been used.
+const downstreamUses = [...unsorted].sort((a, b) => (a.paper?.data.year ?? 9999) - (b.paper?.data.year ?? 9999));
+/** The first proposed model's pipeline as one line, e.g. "Whole-slide image → Tissue patches → …". */
+const pipelineLine = (paper: Paper | undefined) =>
+	paper?.data.models.find((model) => model.role === 'proposed' && model.pipeline.length > 0)?.pipeline.map((step) => step.label).join(' → ');
+const proposedModels = (paper: Paper | undefined) =>
+	(paper?.data.models ?? []).filter((model) => model.role === 'proposed').map((model) => model.name);
 
 // Evidence status travels with the claim rather than sitting in the record,
 // so a reader never has to take a paper link on trust.
@@ -62,7 +69,7 @@ const evidenceLabel = (use: StudyUse) =>
 					<thead>
 						<tr>
 							<th scope="col">Paper</th>
-							<th scope="col">Year</th>
+							<th scope="col">Method</th>
 							<th scope="col">Task</th>
 							<th scope="col">Subset</th>
 							<th scope="col">Train/test role</th>
@@ -74,8 +81,29 @@ const evidenceLabel = (use: StudyUse) =>
 							<tr>
 								<th scope="row">
 									{paper ? <a href={withBase(paperPath(paper.data.slug))}>{paper.data.title}</a> : use.paper}
+									<small class="model-table__note">{paper?.data.year ?? 'Year not documented'}</small>
 								</th>
-								<td>{paper?.data.year ?? 'Not documented'}</td>
+								<td>
+									{proposedModels(paper).length > 0 && <strong>{proposedModels(paper).join(', ')}</strong>}
+									{paper?.data.methodSummary ? (
+										<small class="model-table__note">{paper.data.methodSummary}</small>
+									) : (
+										<span class="muted">Not documented</span>
+									)}
+									{pipelineLine(paper) && <span class="pipeline-inline">{pipelineLine(paper)}</span>}
+									{paper?.data.figures[0] && (
+										<a class="figure-thumb" href={`${withBase(paperPath(paper.data.slug))}#architectures`} title="See the architecture">
+											<img
+												src={withBase(paper.data.figures[0].path)}
+												alt={`${paper.data.figures[0].label} of the paper: ${paper.data.figures[0].title}`}
+												width={paper.data.figures[0].width}
+												height={paper.data.figures[0].height}
+												loading="lazy"
+												decoding="async"
+											/>
+										</a>
+									)}
+								</td>
 								<td>{use.task ? humanize(use.task) : 'Not documented'}</td>
 								<td>{use.subset ?? 'Not documented'}</td>
 								<td>{trainTestLabel(use.trainTestRole)}</td>

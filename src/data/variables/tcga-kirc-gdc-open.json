@@ -1,10 +1,10 @@
 [
 	{
-		"id": "kirc-submitter-id",
+		"id": "kirc-case-case-id",
 		"release": "tcga-kirc-gdc-open",
-		"originalName": "submitter_id",
-		"file": "GDC case record",
-		"definition": "TCGA barcode for the case, such as TCGA-B0-5098. Joins clinical records, biospecimen records and slide images for the same patient.",
+		"originalName": "case_id",
+		"file": "GDC API case record (case)",
+		"definition": "Not described in the GDC data dictionary. The GDC's unique identifier (UUID) for the case. Has a value in 537 of 537 cases. 537 distinct values.",
 		"type": "text",
 		"unit": null,
 		"coding": [],
@@ -14,182 +14,3797 @@
 		"role": "identifier",
 		"group": "administrative",
 		"derivation": "raw",
-		"normalizedConcept": "patient identifier",
-		"provenance": "Returned by the GDC API for this project.",
+		"normalizedConcept": "case identifier",
+		"provenance": "GDC data model entity \"case\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
 		"evidence": {
-			"sources": ["gdc-kirc-case-fields"],
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"case\", property \"case_id\"",
 			"status": "verified",
-			"verifiedOn": "2026-09-19"
+			"verifiedOn": "2026-09-26"
 		}
 	},
 	{
-		"id": "kirc-race",
+		"id": "kirc-case-consent-type",
 		"release": "tcga-kirc-gdc-open",
-		"originalName": "demographic.race",
-		"file": "GDC case record",
-		"definition": "Self-reported race of the patient, as recorded by the submitting centre.",
+		"originalName": "consent_type",
+		"file": "GDC API case record (case)",
+		"definition": "The text term used to describe the type of consent obtain from the subject for participation in the study. Has a value in 534 of 537 cases.",
 		"type": "categorical",
 		"unit": null,
 		"coding": [
-			{ "code": "white", "meaning": "White" },
-			{ "code": "black or african american", "meaning": "Black or African American" }
+			{
+				"code": "Informed Consent",
+				"meaning": "(421 cases)"
+			},
+			{
+				"code": "Consent by Death",
+				"meaning": "(113 cases)"
+			}
 		],
-		"missingValues": ["not reported"],
+		"missingValues": [
+			"null: no value (3 cases)"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"case\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"case\", property \"consent_type\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-case-days-to-consent",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "days_to_consent",
+		"file": "GDC API case record (case)",
+		"definition": "Number of days between the date used for index and the date the subject consent was obtained for participation in the study. Has a value in 428 of 537 cases. Observed range -3,371 to 3,116.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"null: no value (109 cases)"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"case\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"case\", property \"days_to_consent\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-case-disease-type",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "disease_type",
+		"file": "GDC API case record (case)",
+		"definition": "The text term used to describe the type of malignant disease, as categorized by the World Health Organization's (WHO) International Classification of Diseases for Oncology (ICD-O). Has a value in 537 of 537 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Adenomas and Adenocarcinomas",
+				"meaning": "(537 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"case\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"case\", property \"disease_type\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-case-index-date",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "index_date",
+		"file": "GDC API case record (case)",
+		"definition": "The text term used to describe the reference or anchor date used when for date obfuscation, where a single date is obscurred by creating one or more date ranges in relation to this date. Has a value in 537 of 537 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Diagnosis",
+				"meaning": "(537 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"case\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"case\", property \"index_date\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-case-lost-to-followup",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "lost_to_followup",
+		"file": "GDC API case record (case)",
+		"definition": "The yes/no/unknown indicator used to describe whether a patient was unable to be contacted or seen for follow-up information. Has a value in 320 of 537 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "No",
+				"meaning": "The non-affirmative response to a question. (297 cases)"
+			},
+			{
+				"code": "Yes",
+				"meaning": "The affirmative response to a question. (23 cases)"
+			}
+		],
+		"missingValues": [
+			"null: no value (217 cases)"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"case\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"case\", property \"lost_to_followup\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-case-primary-site",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "primary_site",
+		"file": "GDC API case record (case)",
+		"definition": "The text term used to describe the primary site of disease, as categorized by the World Health Organization's (WHO) International Classification of Diseases for Oncology (ICD-O). This categorization groups cases into general categories. Reference tissue_or_organ_of_origin on the diagnosis node for more specific primary sites of disease. Has a value in 537 of 537 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Kidney",
+				"meaning": "(537 cases)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"case\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"case\", property \"primary_site\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-case-submitter-id",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "submitter_id",
+		"file": "GDC API case record (case)",
+		"definition": "A project-specific identifier for a node. This property is the calling card/nickname/alias for a unit of submission. It can be used in place of the uuid for identifying or recalling a node. The TCGA patient barcode, such as TCGA-B0-5098. The Cancer Imaging Archive uses the same barcode as PatientID for this project's radiology. Has a value in 537 of 537 cases. 537 distinct values.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "identifier",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": "case identifier",
+		"provenance": "GDC data model entity \"case\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"case\", property \"submitter_id\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-demographic-age-at-index",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "demographic.age_at_index",
+		"file": "GDC API case record (demographic)",
+		"definition": "The patient's age (in years) on the reference or anchor date used during date obfuscation. The index date for these cases is the diagnosis (see index_date). Has a value in 537 of 537 demographic records. Observed range 26 to 89.",
+		"type": "integer",
+		"unit": "years",
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "age",
+		"provenance": "GDC data model entity \"demographic\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"demographic\", property \"age_at_index\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-demographic-age-is-obfuscated",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "demographic.age_is_obfuscated",
+		"file": "GDC API case record (demographic)",
+		"definition": "The age or other properties related to the patient's age have been modified for compliance reasons. The actual age may differ from what was reported in order to comply with the Health Insurance Portability and Accountability Act (HIPAA). Has a value in 537 of 537 demographic records.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "false",
+				"meaning": "(530 demographic records)"
+			},
+			{
+				"code": "true",
+				"meaning": "(7 demographic records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"demographic\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"demographic\", property \"age_is_obfuscated\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-demographic-country-of-residence-at-enrollment",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "demographic.country_of_residence_at_enrollment",
+		"file": "GDC API case record (demographic)",
+		"definition": "The text term used to describe the patient's country of residence at the time they were enrolled in the study. Has a value in 94 of 537 demographic records.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "United States",
+				"meaning": "A country in North America, between Canada and Mexico, bordering both the North Atlantic Ocean and the North Pacific Ocean. (94 demographic records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (443 demographic records)"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"demographic\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"demographic\", property \"country_of_residence_at_enrollment\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-demographic-days-to-birth",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "demographic.days_to_birth",
+		"file": "GDC API case record (demographic)",
+		"definition": "Number of days between the date used for index and the date from a person's date of birth represented as a calculated negative number of days. Negative: counted backwards from the index date. Has a value in 536 of 537 demographic records. Observed range -32,872 to -9,714.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"null: no value (1 demographic records)"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"demographic\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"demographic\", property \"days_to_birth\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-demographic-days-to-death",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "demographic.days_to_death",
+		"file": "GDC API case record (demographic)",
+		"definition": "Number of days between the date used for index and the date from a person's date of death represented as a calculated number of days. Has a value in 177 of 537 demographic records. Observed range 0 to 3,615.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"null: no value (360 demographic records)"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": "overall survival time",
+		"provenance": "GDC data model entity \"demographic\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"demographic\", property \"days_to_death\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-demographic-ethnicity",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "demographic.ethnicity",
+		"file": "GDC API case record (demographic)",
+		"definition": "An individual's self-described social and cultural grouping, specifically whether an individual describes themselves as Hispanic or Latino. The provided values are based on the categories defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau. Has a value in 385 of 537 demographic records.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "not hispanic or latino",
+				"meaning": "A person not of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish culture or origin, regardless of race. (359 demographic records)"
+			},
+			{
+				"code": "hispanic or latino",
+				"meaning": "A person of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish culture or origin, regardless of race. The term, \"Spanish origin,\" can ... (26 demographic records)"
+			}
+		],
+		"missingValues": [
+			"\"not reported\": 152 demographic records"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "ethnicity",
+		"provenance": "GDC data model entity \"demographic\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"demographic\", property \"ethnicity\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-demographic-race",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "demographic.race",
+		"file": "GDC API case record (demographic)",
+		"definition": "An arbitrary classification of a taxonomic group that is a division of a species. It usually arises as a consequence of geographical isolation within a species and is characterized by shared heredity, physical attributes and behavior, and in the case of humans, by common history, nationality, or geographic distribution. The provided values are based on the categories defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau. Has a value in 530 of 537 demographic records.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "white",
+				"meaning": "A person having origins in any of the original peoples of Europe, the Middle East, or North Africa. (OMB) (466 demographic records)"
+			},
+			{
+				"code": "black or african american",
+				"meaning": "A person having origins in any of the Black racial groups of Africa. Terms such as \"Haitian\" or \"Negro\" can be used in addition to \"Black or African American... (56 demographic records)"
+			},
+			{
+				"code": "asian",
+				"meaning": "A person having origins in any of the original peoples of the Far East, Southeast Asia, or the Indian subcontinent, including for example, Cambodia, China, I... (8 demographic records)"
+			}
+		],
+		"missingValues": [
+			"\"not reported\": 7 demographic records"
+		],
 		"observationLevel": "patient",
 		"timePoint": null,
 		"role": "descriptor",
 		"group": "clinical",
 		"derivation": "raw",
 		"normalizedConcept": "race",
-		"provenance": "Values observed in returned case records; the coding list here shows only the values seen, not the full permitted set.",
+		"provenance": "GDC data model entity \"demographic\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
 		"evidence": {
-			"sources": ["gdc-kirc-case-fields"],
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"demographic\", property \"race\"",
 			"status": "verified",
-			"verifiedOn": "2026-09-19"
+			"verifiedOn": "2026-09-26"
 		}
 	},
 	{
-		"id": "kirc-vital-status",
+		"id": "kirc-demographic-sex-at-birth",
 		"release": "tcga-kirc-gdc-open",
-		"originalName": "demographic.vital_status",
-		"file": "GDC case record",
-		"definition": "Whether the patient was alive or dead at last contact.",
+		"originalName": "demographic.sex_at_birth",
+		"file": "GDC API case record (demographic)",
+		"definition": "A textual description of a person's sex at birth. Has a value in 537 of 537 demographic records.",
 		"type": "categorical",
 		"unit": null,
 		"coding": [
-			{ "code": "Alive", "meaning": "Alive at last contact" },
-			{ "code": "Dead", "meaning": "Deceased" }
+			{
+				"code": "male",
+				"meaning": "(346 demographic records)"
+			},
+			{
+				"code": "female",
+				"meaning": "(191 demographic records)"
+			}
 		],
-		"missingValues": ["Not Reported"],
+		"missingValues": [],
 		"observationLevel": "patient",
-		"timePoint": "Last contact",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "sex/gender",
+		"provenance": "GDC data model entity \"demographic\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"demographic\", property \"sex_at_birth\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-demographic-vital-status",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "demographic.vital_status",
+		"file": "GDC API case record (demographic)",
+		"definition": "The survival state of the person registered on the protocol. Has a value in 537 of 537 demographic records.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Alive",
+				"meaning": "Living; showing characteristics of life. (360 demographic records)"
+			},
+			{
+				"code": "Dead",
+				"meaning": "The cessation of life. (177 demographic records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
 		"role": "outcome",
 		"group": "outcome",
 		"derivation": "raw",
 		"normalizedConcept": "vital status",
-		"provenance": "Values observed in returned case records.",
+		"provenance": "GDC data model entity \"demographic\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
 		"evidence": {
-			"sources": ["gdc-kirc-case-fields"],
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"demographic\", property \"vital_status\"",
 			"status": "verified",
-			"verifiedOn": "2026-09-19"
+			"verifiedOn": "2026-09-26"
 		}
 	},
 	{
-		"id": "kirc-age-at-diagnosis",
+		"id": "kirc-diagnosis-age-at-diagnosis",
 		"release": "tcga-kirc-gdc-open",
 		"originalName": "diagnoses.age_at_diagnosis",
-		"file": "GDC case record",
-		"definition": "Age at diagnosis, recorded in days. A returned example held 19,620 days.",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Age at the time of diagnosis expressed in number of days since birth. The GDC schema caps this value at 32,872 days (90 years); age_is_obfuscated marks cases whose age was altered for compliance. Has a value in 711 of 814 diagnosis records, covering 536 of 537 cases. Observed range 9,714 to 32,872.",
 		"type": "integer",
 		"unit": "days",
 		"coding": [],
-		"missingValues": ["null"],
-		"observationLevel": "patient",
+		"missingValues": [
+			"null: no value (103 diagnosis records)"
+		],
+		"observationLevel": "record",
 		"timePoint": "Diagnosis",
 		"role": "descriptor",
 		"group": "clinical",
 		"derivation": "raw",
 		"normalizedConcept": "age at diagnosis",
-		"provenance": "Values observed in returned case records.",
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
 		"evidence": {
-			"sources": ["gdc-kirc-case-fields"],
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"age_at_diagnosis\"",
 			"status": "verified",
-			"verifiedOn": "2026-09-19"
+			"verifiedOn": "2026-09-26"
 		}
 	},
 	{
-		"id": "kirc-primary-diagnosis",
+		"id": "kirc-diagnosis-ajcc-clinical-m",
 		"release": "tcga-kirc-gdc-open",
-		"originalName": "diagnoses.primary_diagnosis",
-		"file": "GDC case record",
-		"definition": "Morphological diagnosis text, for example 'Clear cell adenocarcinoma, NOS'. A case may carry several diagnosis records.",
-		"type": "text",
-		"unit": null,
-		"coding": [],
-		"missingValues": ["Not Reported"],
-		"observationLevel": "patient",
-		"timePoint": "Diagnosis",
-		"role": "descriptor",
-		"group": "pathology",
-		"derivation": "raw",
-		"normalizedConcept": "primary diagnosis",
-		"provenance": "Values observed in returned case records.",
-		"evidence": {
-			"sources": ["gdc-kirc-case-fields"],
-			"status": "verified",
-			"verifiedOn": "2026-09-19"
-		}
-	},
-	{
-		"id": "kirc-ajcc-stage",
-		"release": "tcga-kirc-gdc-open",
-		"originalName": "diagnoses.ajcc_pathologic_stage",
-		"file": "GDC case record",
-		"definition": "AJCC pathologic stage recorded for the diagnosis, for example 'Stage I'. Which AJCC edition applies is not stated in the returned records.",
-		"type": "categorical",
-		"unit": null,
-		"coding": [{ "code": "Stage I", "meaning": "AJCC pathologic stage I" }],
-		"missingValues": ["null"],
-		"observationLevel": "patient",
-		"timePoint": "Diagnosis",
-		"role": "descriptor",
-		"group": "pathology",
-		"derivation": "raw",
-		"normalizedConcept": null,
-		"provenance": "Values observed in returned case records; only the values seen are listed.",
-		"evidence": {
-			"sources": ["gdc-kirc-case-fields"],
-			"status": "verified",
-			"verifiedOn": "2026-09-19"
-		}
-	},
-	{
-		"id": "kirc-tumor-grade",
-		"release": "tcga-kirc-gdc-open",
-		"originalName": "diagnoses.tumor_grade",
-		"file": "GDC case record",
-		"definition": "Tumour grade recorded for the diagnosis, for example G1 or G3. The grading system behind these values is not stated in the returned records, so they should not be equated with another dataset's grades.",
+		"originalName": "diagnoses.ajcc_clinical_m",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Extent of the distant metastasis for the cancer based on evidence obtained from clinical assessment parameters determined prior to treatment. Has a value in 33 of 814 diagnosis records, covering 33 of 537 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
 		"type": "categorical",
 		"unit": null,
 		"coding": [
-			{ "code": "G1", "meaning": "Grade 1 as recorded" },
-			{ "code": "G3", "meaning": "Grade 3 as recorded" }
+			{
+				"code": "M0",
+				"meaning": "A distant metastasis TNM finding indicating that there is no evidence of distant metastasis. (22 diagnosis records)"
+			},
+			{
+				"code": "MX",
+				"meaning": "A distant metastasis TNM finding indicating that the status of distant metastasis cannot be assessed. (8 diagnosis records)"
+			},
+			{
+				"code": "M1",
+				"meaning": "A clinical and/or pathologic distant metastasis TNM finding indicating the spread of cancer to distant anatomic sites. (3 diagnosis records)"
+			}
 		],
-		"missingValues": ["not reported"],
-		"observationLevel": "patient",
+		"missingValues": [
+			"null: no value (781 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"ajcc_clinical_m\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-diagnosis-ajcc-pathologic-m",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.ajcc_pathologic_m",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Code to represent the defined absence or presence of distant spread or metastases (M) to locations via vascular channels or lymphatics beyond the regional lymph nodes, using criteria established by the American Joint Committee on Cancer (AJCC). Has a value in 558 of 814 diagnosis records, covering 535 of 537 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "M0",
+				"meaning": "A distant metastasis TNM finding indicating that there is no evidence of distant metastasis. (437 diagnosis records)"
+			},
+			{
+				"code": "M1",
+				"meaning": "A clinical and/or pathologic distant metastasis TNM finding indicating the spread of cancer to distant anatomic sites. (79 diagnosis records)"
+			},
+			{
+				"code": "MX",
+				"meaning": "A distant metastasis TNM finding indicating that the status of distant metastasis cannot be assessed. (42 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (256 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "pathologic M stage",
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"ajcc_pathologic_m\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-diagnosis-ajcc-pathologic-n",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.ajcc_pathologic_n",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "The codes that represent the stage of cancer based on the nodes present (N stage) according to criteria based on multiple editions of the AJCC's Cancer Staging Manual. Has a value in 561 of 814 diagnosis records, covering 537 of 537 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "NX",
+				"meaning": "A regional lymph node TNM finding indicating that the status of regional lymph nodes cannot be assessed. (292 diagnosis records)"
+			},
+			{
+				"code": "N0",
+				"meaning": "A regional lymph node TNM finding indicating that there is no evidence of regional lymph node metastasis. (251 diagnosis records)"
+			},
+			{
+				"code": "N1",
+				"meaning": "A general term that refers to a TNM finding of cancer metastases usually in a limited number of regional lymph nodes. The definition of N1 TNM finding depend... (17 diagnosis records)"
+			},
+			{
+				"code": "N2a",
+				"meaning": "A general term that refers to a TNM finding of cancer metastases in several regional lymph nodes.  The definition of N2a TNM finding depends on the specific ... (1 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (253 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "pathologic N stage",
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"ajcc_pathologic_n\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-diagnosis-ajcc-pathologic-stage",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.ajcc_pathologic_stage",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "The extent of a cancer, especially whether the disease has spread from the original site to other parts of the body based on AJCC staging criteria. Has a value in 556 of 814 diagnosis records, covering 534 of 537 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Stage I",
+				"meaning": "Invasive cancer confined to the original anatomic site of growth without lymph node involvement. (282 diagnosis records)"
+			},
+			{
+				"code": "Stage III",
+				"meaning": "Locally advanced cancer that has spread to nearby organs but not to distant anatomic sites. (125 diagnosis records)"
+			},
+			{
+				"code": "Stage IV",
+				"meaning": "Cancer that has spread to distant anatomic sites beyond its original site of growth. (83 diagnosis records)"
+			},
+			{
+				"code": "Stage II",
+				"meaning": "Invasive cancer more extensive than stage I, usually involving local lymph nodes without spread to distant anatomic sites. (61 diagnosis records)"
+			},
+			{
+				"code": "Stage IB",
+				"meaning": "Invasive cancer confined to the original anatomic site of growth without lymph node involvement.  The definition of stage IB depends on the particular type o... (2 diagnosis records)"
+			},
+			{
+				"code": "Stage IA",
+				"meaning": "A FIGO stage term that applies to gynecologic cancers.  For cervical cancer, it refers to invasive cancer that is diagnosed microscopically only.  The stroma... (1 diagnosis records)"
+			},
+			{
+				"code": "Stage IIIB",
+				"meaning": "Locally advanced cancer that has spread to nearby organs but not to distant anatomic sites.  The definition of stage IIIB depends on the particular type of c... (1 diagnosis records)"
+			},
+			{
+				"code": "Stage IIIA",
+				"meaning": "Locally advanced cancer that has spread to nearby organs but not to distant anatomic sites. The definition of stage IIIA depends on the particular type of ca... (1 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (258 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "pathologic stage",
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"ajcc_pathologic_stage\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-diagnosis-ajcc-pathologic-t",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.ajcc_pathologic_t",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Code of pathological T (primary tumor) to define the size or contiguous extension of the primary tumor (T), using staging criteria from the American Joint Committee on Cancer (AJCC). Has a value in 562 of 814 diagnosis records, covering 537 of 537 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "T1a",
+				"meaning": "A general term that refers to a TNM finding of a primary tumor limited to the site of growth.  The definition of T1a TNM finding depends on the specific type... (150 diagnosis records)"
+			},
+			{
+				"code": "T3a",
+				"meaning": "A general term that refers to a TNM finding of a primary tumor usually indicating that the cancer is locally invasive. The definition of T3a TNM finding depe... (123 diagnosis records)"
+			},
+			{
+				"code": "T1b",
+				"meaning": "A general term that refers to a TNM finding of a primary tumor limited to the site of growth.  The definition of T1b TNM finding depends on the specific type... (113 diagnosis records)"
+			},
+			{
+				"code": "T2",
+				"meaning": "A general term that refers to a TNM finding of primary tumor growth beyond the level of in situ cancer, minimal subepithelial invasion, or minimal greatest d... (57 diagnosis records)"
+			},
+			{
+				"code": "T3b",
+				"meaning": "A general term that refers to a TNM finding of a primary tumor usually indicating that the cancer is locally invasive. The definition of T3b TNM finding depe... (53 diagnosis records)"
+			},
+			{
+				"code": "T1",
+				"meaning": "A clinical and/or pathologic primary tumor TNM finding indicating that the cancer is limited to the site of growth. (29 diagnosis records)"
+			},
+			{
+				"code": "T2a",
+				"meaning": "A general term that refers to a TNM finding of a primary tumor growth beyond the level of in situ cancer, minimal subepithelial invasion, or minimal greatest... (11 diagnosis records)"
+			},
+			{
+				"code": "T4",
+				"meaning": "A clinical and/or pathologic primary tumor TNM finding indicating direct invasion of adjacent structures by cancer. (11 diagnosis records)"
+			},
+			{
+				"code": "T3",
+				"meaning": "A clinical and/or pathologic primary tumor TNM finding usually indicating that the cancer is locally invasive, without infiltration of adjacent structures. (5 diagnosis records)"
+			},
+			{
+				"code": "T2b",
+				"meaning": "A general term that refers to a TNM finding of a primary tumor growth beyond the level of in situ cancer, minimal subepithelial invasion, or minimal greatest... (5 diagnosis records)"
+			},
+			{
+				"code": "T1c",
+				"meaning": "A general term that refers to a TNM finding of a primary tumor limited to the site of growth.  The definition of T1c TNM finding depends on the specific type... (2 diagnosis records)"
+			},
+			{
+				"code": "T3c",
+				"meaning": "A general term that refers to a TNM finding of a primary tumor usually indicating that the cancer is locally invasive. The definition of T3c TNM finding depe... (2 diagnosis records)"
+			},
+			{
+				"code": "T2c",
+				"meaning": "A general term that refers to a TNM finding of a primary tumor growth beyond the level of in situ cancer, minimal subepithelial invasion, or minimal greatest... (1 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (252 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "pathologic T stage",
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"ajcc_pathologic_t\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-diagnosis-ajcc-staging-system-edition",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.ajcc_staging_system_edition",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "The text term used to describe the version or edition of the American Joint Committee on Cancer Staging Handbooks, a publication by the group formed for the purpose of developing a system of staging for cancer that is acceptable to the American medical profession and is compatible with other accepted classifications. Has a value in 199 of 814 diagnosis records, covering 183 of 537 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "7th",
+				"meaning": "A cancer stage defined according to the AJCC 7th edition criteria. (96 diagnosis records)"
+			},
+			{
+				"code": "6th",
+				"meaning": "A cancer stage defined according to the AJCC 6th edition criteria. (87 diagnosis records)"
+			},
+			{
+				"code": "5th",
+				"meaning": "(14 diagnosis records)"
+			},
+			{
+				"code": "4th",
+				"meaning": "(1 diagnosis records)"
+			},
+			{
+				"code": "3rd",
+				"meaning": "(1 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (615 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"ajcc_staging_system_edition\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-diagnosis-classification-of-tumor",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.classification_of_tumor",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Text that describes the kind of disease present in the tumor specimen as related to a specific timepoint. Has a value in 693 of 814 diagnosis records, covering 537 of 537 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "primary",
+				"meaning": "A tumor at the original site of origin. (537 diagnosis records)"
+			},
+			{
+				"code": "Prior primary",
+				"meaning": "(76 diagnosis records)"
+			},
+			{
+				"code": "metastasis",
+				"meaning": "A tumor that has spread from its original (primary) site of growth to another site, close to or distant from the primary site.  Metastasis is characteristic ... (37 diagnosis records)"
+			},
+			{
+				"code": "Synchronous primary",
+				"meaning": "(30 diagnosis records)"
+			},
+			{
+				"code": "recurrence",
+				"meaning": "The reemergence of a neoplasm after a period of remission. (13 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"\"not reported\": 121 diagnosis records"
+		],
+		"observationLevel": "record",
 		"timePoint": "Diagnosis",
 		"role": "descriptor",
 		"group": "pathology",
 		"derivation": "raw",
 		"normalizedConcept": null,
-		"provenance": "Values observed in returned case records; only the values seen are listed.",
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
 		"evidence": {
-			"sources": ["gdc-kirc-case-fields"],
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"classification_of_tumor\"",
 			"status": "verified",
-			"verifiedOn": "2026-09-19"
+			"verifiedOn": "2026-09-26"
 		}
 	},
 	{
-		"id": "kirc-days-to-follow-up",
+		"id": "kirc-diagnosis-days-to-diagnosis",
 		"release": "tcga-kirc-gdc-open",
-		"originalName": "follow_ups.days_to_follow_up",
-		"file": "GDC case record",
-		"definition": "Days from the reference date to a follow-up record. A case may hold several follow-up records; returned examples held two and five.",
+		"originalName": "diagnoses.days_to_diagnosis",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Number of days between the date used for index and the date the patient was diagnosed with the malignant disease. Has a value in 712 of 814 diagnosis records, covering 537 of 537 cases. Observed range -4,308 to 3,766. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
 		"type": "integer",
 		"unit": "days",
 		"coding": [],
-		"missingValues": ["null"],
+		"missingValues": [
+			"null: no value (102 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"days_to_diagnosis\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-diagnosis-days-to-last-follow-up",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.days_to_last_follow_up",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Time interval from the date of last follow up to the date of initial pathologic diagnosis, represented as a calculated number of days. Has a value in 161 of 814 diagnosis records, covering 161 of 537 cases. Observed range 13.0 to 3267.0. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "decimal",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"null: no value (653 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": "follow-up time",
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"days_to_last_follow_up\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-diagnosis-diagnosis-is-primary-disease",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.diagnosis_is_primary_disease",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Indicates whether this specific diagnosis represents the disease that was the primary focus of the study. Additionally, this diagnosis is reflected at the case level, which is captured using the case.disease_type property. Cases can carry several diagnosis records; this flag separates the primary renal diagnosis from others such as prior malignancies. Has a value in 814 of 814 diagnosis records, covering 537 of 537 cases.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "true",
+				"meaning": "(537 diagnosis records)"
+			},
+			{
+				"code": "false",
+				"meaning": "(277 diagnosis records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"diagnosis_is_primary_disease\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-diagnosis-icd-10-code",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.icd_10_code",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Alphanumeric value used to describe the disease code from the tenth version of the International Classification of Disease (ICD-10). Has a value in 537 of 814 diagnosis records, covering 537 of 537 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "text",
+		"unit": null,
+		"coding": [
+			{
+				"code": "C64.9",
+				"meaning": "(537 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (277 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"icd_10_code\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-diagnosis-laterality",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.laterality",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "For tumors in paired organs, designates the side on which the cancer originates. Has a value in 589 of 814 diagnosis records, covering 537 of 537 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Right",
+				"meaning": "Being or located on or directed toward the side of the body to the east when facing north. (304 diagnosis records)"
+			},
+			{
+				"code": "Left",
+				"meaning": "Being or located on or directed toward the side of the body to the west when facing north. (276 diagnosis records)"
+			},
+			{
+				"code": "Bilateral",
+				"meaning": "Affecting both sides of the body or a matched pair of organs. (9 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"\"Unknown\": 1 diagnosis records",
+			"null: no value (224 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "laterality",
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"laterality\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-diagnosis-morphology",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.morphology",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "The third edition of the International Classification of Diseases for Oncology, published in 2000 used principally in tumor and cancer registries for coding the site (topography) and the histology (morphology) of neoplasms. The study of the structure of the cells and their arrangement to constitute tissues and, finally, the association among these to form organs. In pathology, the microscopic process of identifying normal and abnormal morphologic characteristics in tissues, by employing various cytochemical and immunocytochemical stains. A system of numbered categories for representation of data. Has a value in 666 of 814 diagnosis records, covering 537 of 537 cases. 28 distinct values; the 25 most frequent are listed. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "8310/3",
+				"meaning": "A malignant neoplasm composed of glandular epithelial clear cells.  Various architectural patterns may be seen, including papillary, tubulocystic, and solid. (591 diagnosis records)"
+			},
+			{
+				"code": "8140/3",
+				"meaning": "A common cancer characterized by the presence of malignant glandular cells.  Morphologically, adenocarcinomas are classified according to the growth pattern ... (16 diagnosis records)"
+			},
+			{
+				"code": "8312/3",
+				"meaning": "A carcinoma arising from the renal parenchyma.  There is a strong correlation between cigarette smoking and the development of renal cell carcinoma.  The cli... (14 diagnosis records)"
+			},
+			{
+				"code": "8070/3",
+				"meaning": "A carcinoma arising from squamous epithelial cells.  Morphologically, it is characterized by the proliferation of atypical, often pleomorphic squamous cells.... (5 diagnosis records)"
+			},
+			{
+				"code": "8720/3",
+				"meaning": "A malignant, usually aggressive tumor composed of atypical, neoplastic melanocytes. Most often, melanomas arise in the skin (cutaneous melanomas) and include... (4 diagnosis records)"
+			},
+			{
+				"code": "8246/3",
+				"meaning": "A malignant neuroendocrine neoplasm composed of cells containing secretory granules that stain positive for NSE and chromogranin.  The neoplastic cells are o... (4 diagnosis records)"
+			},
+			{
+				"code": "9591/3",
+				"meaning": "Distinct from Hodgkin lymphoma both morphologically and biologically, non-Hodgkin lymphoma (NHL) is characterized by the absence of Reed-Sternberg cells, can... (3 diagnosis records)"
+			},
+			{
+				"code": "8260/3",
+				"meaning": "A morphologic variant of adenocarcinoma. It is characterized by the presence of a papillary growth pattern. Representative examples include thyroid gland pap... (3 diagnosis records)"
+			},
+			{
+				"code": "8120/3",
+				"meaning": "A malignant neoplasm arising from the transitional epithelium, usually affecting the urinary bladder, ureter, or renal pelvis. It may or may not have a papil... (3 diagnosis records)"
+			},
+			{
+				"code": "9690/3",
+				"meaning": "A neoplasm of follicle centre B cells which has at least a partial follicular pattern.  Follicular lymphomas comprise about 35% of adult non-Hodgkin lymphoma... (2 diagnosis records)"
+			},
+			{
+				"code": "8240/3",
+				"meaning": "A slow growing neuroendocrine tumor, composed of uniform, round, or polygonal cells having monotonous, centrally located nuclei and small nucleoli, infrequen... (2 diagnosis records)"
+			},
+			{
+				"code": "9823/3",
+				"meaning": "The most common type of chronic lymphoid leukemia.  It comprises 90% of chronic lymphoid leukemias in the United States.  Morphologically, the neoplastic cel... (2 diagnosis records)"
+			},
+			{
+				"code": "8500/2",
+				"meaning": "A carcinoma entirely confined to the mammary ducts.  It is also known as DCIS.  There is no evidence of invasion of the basement membrane.  Currently, it is ... (2 diagnosis records)"
+			},
+			{
+				"code": "9120/0",
+				"meaning": "A benign vascular lesion characterized by the formation of capillary-sized or cavernous vascular channels. (1 diagnosis records)"
+			},
+			{
+				"code": "9940/3",
+				"meaning": "A neoplasm of small B-lymphocytes with \"hairy\" projections in bone marrow, spleen, and peripheral blood.  Most patients present with splenomegaly and pancyto... (1 diagnosis records)"
+			},
+			{
+				"code": "8050/3",
+				"meaning": "A malignant epithelial neoplasm characterized by a papillary growth pattern. A papillary carcinoma may be composed of glandular cells (papillary adenocarcino... (1 diagnosis records)"
+			},
+			{
+				"code": "8045/3",
+				"meaning": "A morphologic variant of small cell lung carcinoma in combination with a non-small cell carcinoma. (1 diagnosis records)"
+			},
+			{
+				"code": "8560/3",
+				"meaning": "An invasive carcinoma composed of malignant glandular cells and malignant squamous cells. (1 diagnosis records)"
+			},
+			{
+				"code": "8084/3",
+				"meaning": "A squamous cell carcinoma characterized by the presence of malignant cells with clear cytoplasm. (1 diagnosis records)"
+			},
+			{
+				"code": "8340/3",
+				"meaning": "An encapsulated or nonencapsulated variant of papillary carcinoma of the thyroid gland characterized by the predominance of follicular structures. The malign... (1 diagnosis records)"
+			},
+			{
+				"code": "9590/3",
+				"meaning": "A malignant (clonal) proliferation of B- lymphocytes or T- lymphocytes which involves the lymph nodes, bone marrow and/or extranodal sites. This category inc... (1 diagnosis records)"
+			},
+			{
+				"code": "8272/0",
+				"meaning": "A non-metastasizing tumor that arises from the adenohypophysial cells of the anterior lobe of the pituitary gland. The tumor can be hormonally functioning or... (1 diagnosis records)"
+			},
+			{
+				"code": "9650/3",
+				"meaning": "A lymphoma, previously known as Hodgkin's disease, characterized by the presence of large tumor cells in an abundant admixture of nonneoplastic cells. There ... (1 diagnosis records)"
+			},
+			{
+				"code": "8480/3",
+				"meaning": "An invasive adenocarcinoma composed of malignant glandular cells which contain intracytoplasmic mucin. Often, the infiltrating glandular structures are assoc... (1 diagnosis records)"
+			},
+			{
+				"code": "8083/3",
+				"meaning": "A squamous cell carcinoma characterized by the presence of cells with hyperchromatic nuclei, scant amount of cytoplasm, and peripheral nuclear palisading. (1 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"\"Not Reported\": 148 diagnosis records"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "histologic subtype",
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"morphology\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-diagnosis-primary-diagnosis",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.primary_diagnosis",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Text term used to describe the patient's histologic diagnosis, as described by the World Health Organization's (WHO) International Classification of Diseases for Oncology (ICD-O). Has a value in 666 of 814 diagnosis records, covering 537 of 537 cases. 32 distinct values; the 25 most frequent are listed. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Clear cell adenocarcinoma, NOS",
+				"meaning": "A malignant neoplasm composed of glandular epithelial clear cells.  Various architectural patterns may be seen, including papillary, tubulocystic, and solid. (576 diagnosis records)"
+			},
+			{
+				"code": "Adenocarcinoma, NOS",
+				"meaning": "A common cancer characterized by the presence of malignant glandular cells.  Morphologically, adenocarcinomas are classified according to the growth pattern ... (16 diagnosis records)"
+			},
+			{
+				"code": "Clear cell carcinoma",
+				"meaning": "A malignant neoplasm composed of glandular epithelial clear cells.  Various architectural patterns may be seen, including papillary, tubulocystic, and solid. (15 diagnosis records)"
+			},
+			{
+				"code": "Renal cell carcinoma, NOS",
+				"meaning": "A carcinoma arising from the renal parenchyma.  There is a strong correlation between cigarette smoking and the development of renal cell carcinoma.  The cli... (14 diagnosis records)"
+			},
+			{
+				"code": "Squamous cell carcinoma, NOS",
+				"meaning": "A carcinoma arising from squamous epithelial cells.  Morphologically, it is characterized by the proliferation of atypical, often pleomorphic squamous cells.... (5 diagnosis records)"
+			},
+			{
+				"code": "Neuroendocrine carcinoma, NOS",
+				"meaning": "A malignant neuroendocrine neoplasm composed of cells containing secretory granules that stain positive for NSE and chromogranin.  The neoplastic cells are o... (4 diagnosis records)"
+			},
+			{
+				"code": "Melanoma, NOS",
+				"meaning": "A malignant, usually aggressive tumor composed of atypical, neoplastic melanocytes. Most often, melanomas arise in the skin (cutaneous melanomas) and include... (3 diagnosis records)"
+			},
+			{
+				"code": "Malignant lymphoma, non-Hodgkin, NOS",
+				"meaning": "Distinct from Hodgkin lymphoma both morphologically and biologically, non-Hodgkin lymphoma (NHL) is characterized by the absence of Reed-Sternberg cells, can... (3 diagnosis records)"
+			},
+			{
+				"code": "Transitional cell carcinoma",
+				"meaning": "A malignant neoplasm arising from the transitional epithelium, usually affecting the urinary bladder, ureter, or renal pelvis. It may or may not have a papil... (3 diagnosis records)"
+			},
+			{
+				"code": "Follicular lymphoma, NOS",
+				"meaning": "A neoplasm of follicle centre B cells which has at least a partial follicular pattern.  Follicular lymphomas comprise about 35% of adult non-Hodgkin lymphoma... (2 diagnosis records)"
+			},
+			{
+				"code": "Carcinoid tumor, NOS",
+				"meaning": "A slow growing neuroendocrine tumor, composed of uniform, round, or polygonal cells having monotonous, centrally located nuclei and small nucleoli, infrequen... (2 diagnosis records)"
+			},
+			{
+				"code": "Chronic lymphocytic leukemia",
+				"meaning": "The most common type of chronic lymphoid leukemia.  It comprises 90% of chronic lymphoid leukemias in the United States.  Morphologically, the neoplastic cel... (2 diagnosis records)"
+			},
+			{
+				"code": "Papillary renal cell carcinoma",
+				"meaning": "Also known as chromophil carcinoma, it represents a minority of renal cell carcinomas.  It can be hereditary or sporadic.  The sporadic papillary renal cell ... (2 diagnosis records)"
+			},
+			{
+				"code": "Hemangioma, NOS",
+				"meaning": "A benign vascular lesion characterized by the formation of capillary-sized or cavernous vascular channels. (1 diagnosis records)"
+			},
+			{
+				"code": "Hairy cell leukemia",
+				"meaning": "A neoplasm of small B-lymphocytes with \"hairy\" projections in bone marrow, spleen, and peripheral blood.  Most patients present with splenomegaly and pancyto... (1 diagnosis records)"
+			},
+			{
+				"code": "Papillary carcinoma, NOS",
+				"meaning": "A malignant epithelial neoplasm characterized by a papillary growth pattern. A papillary carcinoma may be composed of glandular cells (papillary adenocarcino... (1 diagnosis records)"
+			},
+			{
+				"code": "Combined small cell carcinoma",
+				"meaning": "A morphologic variant of small cell lung carcinoma in combination with a non-small cell carcinoma. (1 diagnosis records)"
+			},
+			{
+				"code": "Adenosquamous carcinoma",
+				"meaning": "An invasive carcinoma composed of malignant glandular cells and malignant squamous cells. (1 diagnosis records)"
+			},
+			{
+				"code": "Squamous cell carcinoma, clear cell type",
+				"meaning": "A squamous cell carcinoma characterized by the presence of malignant cells with clear cytoplasm. (1 diagnosis records)"
+			},
+			{
+				"code": "Papillary carcinoma, follicular variant",
+				"meaning": "(1 diagnosis records)"
+			},
+			{
+				"code": "Papillary adenocarcinoma, NOS",
+				"meaning": "A morphologic variant of adenocarcinoma. It is characterized by the presence of a papillary growth pattern. Representative examples include thyroid gland pap... (1 diagnosis records)"
+			},
+			{
+				"code": "Malignant lymphoma, NOS",
+				"meaning": "A malignant (clonal) proliferation of B- lymphocytes or T- lymphocytes which involves the lymph nodes, bone marrow and/or extranodal sites. This category inc... (1 diagnosis records)"
+			},
+			{
+				"code": "Malignant melanoma, NOS",
+				"meaning": "A malignant, usually aggressive tumor composed of atypical, neoplastic melanocytes. Most often, melanomas arise in the skin (cutaneous melanomas) and include... (1 diagnosis records)"
+			},
+			{
+				"code": "Pituitary adenoma, NOS",
+				"meaning": "A non-metastasizing tumor that arises from the adenohypophysial cells of the anterior lobe of the pituitary gland. The tumor can be hormonally functioning or... (1 diagnosis records)"
+			},
+			{
+				"code": "Hodgkin lymphoma, NOS",
+				"meaning": "A lymphoma, previously known as Hodgkin's disease, characterized by the presence of large tumor cells in an abundant admixture of nonneoplastic cells. There ... (1 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"\"Not Reported\": 148 diagnosis records"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "histologic subtype",
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"primary_diagnosis\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-diagnosis-prior-malignancy",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.prior_malignancy",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "The yes/no/unknown indicator used to describe the patient's history of prior cancer diagnosis. Has a value in 531 of 814 diagnosis records, covering 531 of 537 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "no",
+				"meaning": "The non-affirmative response to a question. (471 diagnosis records)"
+			},
+			{
+				"code": "yes",
+				"meaning": "The affirmative response to a question. (60 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"\"not reported\": 6 diagnosis records",
+			"null: no value (277 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"prior_malignancy\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-diagnosis-prior-treatment",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.prior_treatment",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "A yes/no/unknown/not applicable indicator related to the administration of therapeutic agents received before the body specimen was collected. Has a value in 707 of 814 diagnosis records, covering 537 of 537 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "No",
+				"meaning": "The non-affirmative response to a question. (519 diagnosis records)"
+			},
+			{
+				"code": "Yes",
+				"meaning": "The affirmative response to a question. (188 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (107 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"prior_treatment\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-diagnosis-site-of-resection-or-biopsy",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.site_of_resection_or_biopsy",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "The text term used to describe the anatomic site of the resection or biopsy of the patient's malignant disease, as described by the World Health Organization's (WHO) International Classification of Diseases for Oncology (ICD-O). Has a value in 537 of 814 diagnosis records, covering 537 of 537 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Kidney, NOS",
+				"meaning": "One of the two bean-shaped organs located on each side of the spine in the retroperitoneum. The right kidney is located below the liver and the left kidney b... (537 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"\"Not Reported\": 277 diagnosis records"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"site_of_resection_or_biopsy\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-diagnosis-synchronous-malignancy",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.synchronous_malignancy",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "A yes/no/unknown indicator used to describe whether the patient had an additional malignant diagnosis at the same time the tumor used for sequencing was diagnosed. If both tumors were sequenced, both tumors would have synchronous malignancies. Has a value in 531 of 814 diagnosis records, covering 531 of 537 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "No",
+				"meaning": "The non-affirmative response to a question. (525 diagnosis records)"
+			},
+			{
+				"code": "Yes",
+				"meaning": "The affirmative response to a question. (6 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"\"Not Reported\": 6 diagnosis records",
+			"null: no value (277 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"synchronous_malignancy\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-diagnosis-tissue-or-organ-of-origin",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.tissue_or_organ_of_origin",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "The text term used to describe the anatomic site of origin, of the patient's malignant disease, as described by the World Health Organization's (WHO) International Classification of Diseases for Oncology (ICD-O). Has a value in 638 of 814 diagnosis records, covering 537 of 537 cases. 30 distinct values; the 25 most frequent are listed. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Kidney, NOS",
+				"meaning": "One of the two bean-shaped organs located on each side of the spine in the retroperitoneum. The right kidney is located below the liver and the left kidney b... (564 diagnosis records)"
+			},
+			{
+				"code": "Prostate gland",
+				"meaning": "The walnut shaped accessory sex gland of the male reproductive system. It is located in the pelvis just below the bladder, surrounding the prostatic part of ... (18 diagnosis records)"
+			},
+			{
+				"code": "Pancreas, NOS",
+				"meaning": "An organ behind the lower part of the stomach that is the shape of a fish and about the size of a hand. It is a compound gland composed of both exocrine and ... (6 diagnosis records)"
+			},
+			{
+				"code": "Lung, NOS",
+				"meaning": "One of a pair of viscera occupying the pulmonary cavities of the thorax, the organs of respiration in which aeration of the blood takes place. As a rule, the... (6 diagnosis records)"
+			},
+			{
+				"code": "Head, face or neck, NOS",
+				"meaning": "(4 diagnosis records)"
+			},
+			{
+				"code": "Bladder, NOS",
+				"meaning": "The distensible sac-like organ that functions as a reservoir of urine, collecting from the kidneys and eliminating via the urethra. (4 diagnosis records)"
+			},
+			{
+				"code": "Breast, NOS",
+				"meaning": "One of two hemispheric projections of variable size situated in the subcutaneous layer over the pectoralis major muscle on either side of the chest. (4 diagnosis records)"
+			},
+			{
+				"code": "Colon, NOS",
+				"meaning": "The part of the large intestine measured from the cecum to the rectum consisting of ascending, transverse, descending and sigmoid portions. The purpose of th... (3 diagnosis records)"
+			},
+			{
+				"code": "Thyroid gland",
+				"meaning": "An endocrine gland located at the base of the neck that produces and secretes thyroxine and other hormones. Thyroxine is important for metabolic control. (3 diagnosis records)"
+			},
+			{
+				"code": "Eye, NOS",
+				"meaning": "The organ of sight or vision. (2 diagnosis records)"
+			},
+			{
+				"code": "Uterus, NOS",
+				"meaning": "A hollow, thick-walled, muscular organ located within the pelvic cavity of a woman. Within the uterus the fertilized egg implants and the fetus develops duri... (2 diagnosis records)"
+			},
+			{
+				"code": "Skin, NOS",
+				"meaning": "An organ that constitutes the external surface of the body. It consists of the epidermis, dermis, and skin appendages. (2 diagnosis records)"
+			},
+			{
+				"code": "Lymph node, NOS",
+				"meaning": "A bean-shaped organ surrounded by a connective tissue capsule. It is part of the lymphatic system and is found throughout the body. It is composed predominan... (2 diagnosis records)"
+			},
+			{
+				"code": "Pelvis, NOS",
+				"meaning": "The bony, basin-shaped structure formed by the hipbones and the base of the backbone supporting the lower limbs in humans. (2 diagnosis records)"
+			},
+			{
+				"code": "Other ill-defined sites",
+				"meaning": "An anatomic site that is not specified or defined well enough to associate with a specific site. (1 diagnosis records)"
+			},
+			{
+				"code": "Bone marrow",
+				"meaning": "The tissue occupying the spaces of bone. It consists of blood vessel sinuses and a network of hematopoietic cells which give rise to the red cells, white cel... (1 diagnosis records)"
+			},
+			{
+				"code": "Thorax, NOS",
+				"meaning": "The division of the body lying between the neck and the abdomen. (1 diagnosis records)"
+			},
+			{
+				"code": "Ureter",
+				"meaning": "The thick-walled tube that carries urine from each kidney to the bladder. (1 diagnosis records)"
+			},
+			{
+				"code": "Vertebral column",
+				"meaning": "A series of bones, muscles, tendons, and other tissues reaching from the base of the skull to the tailbone. The vertebral column forms the axis of the skelet... (1 diagnosis records)"
+			},
+			{
+				"code": "Brain, NOS",
+				"meaning": "An organ composed of grey and white matter containing billions of neurons that is the center for intelligence and reasoning. It is protected by the bony cran... (1 diagnosis records)"
+			},
+			{
+				"code": "Upper limb, NOS",
+				"meaning": "The region of the body that includes the arm, the forearm, and hand. (1 diagnosis records)"
+			},
+			{
+				"code": "External ear",
+				"meaning": "The external part of the ear. (1 diagnosis records)"
+			},
+			{
+				"code": "Blood",
+				"meaning": "A liquid tissue; its major function is to transport oxygen throughout the body. It also supplies the tissues with nutrients, removes waste products, and cont... (1 diagnosis records)"
+			},
+			{
+				"code": "Skin of other and unspecified parts of face",
+				"meaning": "The integumentary covering of the face. (1 diagnosis records)"
+			},
+			{
+				"code": "Stomach, NOS",
+				"meaning": "An organ located under the diaphragm, between the liver and the spleen as well as between the esophagus and the small intestine. The stomach is the primary o... (1 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"\"Not Reported\": 173 diagnosis records",
+			"\"Unknown\": 3 diagnosis records"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"tissue_or_organ_of_origin\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-diagnosis-tumor-grade",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.tumor_grade",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Numeric value to express the degree of abnormality of cancer cells, a measure of differentiation and aggressiveness. Has a value in 534 of 814 diagnosis records, covering 534 of 537 cases. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "G2",
+				"meaning": "A morphologic qualifier indicating that a cancerous lesion is moderately differentiated. (230 diagnosis records)"
+			},
+			{
+				"code": "G3",
+				"meaning": "A morphologic qualifier indicating that a cancerous lesion is poorly differentiated. (207 diagnosis records)"
+			},
+			{
+				"code": "G4",
+				"meaning": "A morphologic qualifier indicating that a cancerous lesion is undifferentiated. (78 diagnosis records)"
+			},
+			{
+				"code": "G1",
+				"meaning": "A morphologic qualifier indicating that a cancerous lesion is well differentiated. (14 diagnosis records)"
+			},
+			{
+				"code": "GX",
+				"meaning": "A morphologic qualifier indicating that the grade of a neoplasm cannot be assessed. (5 diagnosis records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (280 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "histologic grade",
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"tumor_grade\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-diagnosis-tumor-of-origin",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.tumor_of_origin",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "The submitter_id string of the primary diagnosis node. Links a diagnosis record to the primary diagnosis it arose from. Has a value in 170 of 814 diagnosis records, covering 129 of 537 cases. 129 distinct values.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"null: no value (644 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"tumor_of_origin\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-diagnosis-year-of-diagnosis",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.year_of_diagnosis",
+		"file": "GDC API case record (diagnosis)",
+		"definition": "Numeric value to represent the year of an individual's initial pathologic diagnosis of cancer. Has a value in 537 of 814 diagnosis records, covering 537 of 537 cases. Observed range 1,998 to 2,013. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"type": "integer",
+		"unit": "calendar year",
+		"coding": [],
+		"missingValues": [
+			"null: no value (277 diagnosis records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"diagnosis\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"diagnosis\", property \"year_of_diagnosis\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-pathology-detail-consistent-pathology-review",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.pathology_details.consistent_pathology_review",
+		"file": "GDC API case record (pathology detail)",
+		"definition": "Indicates whether a recent review of tissue is consistent with a prior pathology review. Has a value in 534 of 537 pathology detail records.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Yes",
+				"meaning": "The affirmative response to a question. (534 pathology detail records)"
+			}
+		],
+		"missingValues": [
+			"\"Not Reported\": 3 pathology detail records"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"pathology_detail\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"pathology_detail\", property \"consistent_pathology_review\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-pathology-detail-lymph-nodes-positive",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.pathology_details.lymph_nodes_positive",
+		"file": "GDC API case record (pathology detail)",
+		"definition": "The number of lymph nodes involved with disease as determined by pathologic examination. Has a value in 131 of 537 pathology detail records. Observed range 0 to 15.",
+		"type": "integer",
+		"unit": "lymph nodes",
+		"coding": [],
+		"missingValues": [
+			"null: no value (406 pathology detail records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"pathology_detail\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"pathology_detail\", property \"lymph_nodes_positive\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-pathology-detail-lymph-nodes-tested",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.pathology_details.lymph_nodes_tested",
+		"file": "GDC API case record (pathology detail)",
+		"definition": "The number of lymph nodes tested to determine whether lymph nodes were involved with disease as determined by a pathologic examination. Has a value in 134 of 537 pathology detail records. Observed range 1 to 30.",
+		"type": "integer",
+		"unit": "lymph nodes",
+		"coding": [],
+		"missingValues": [
+			"null: no value (403 pathology detail records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Diagnosis",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"pathology_detail\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"pathology_detail\", property \"lymph_nodes_tested\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-treatment-clinical-trial-indicator",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.treatments.clinical_trial_indicator",
+		"file": "GDC API case record (treatment)",
+		"definition": "Indicator used to describe whether the treatment was part of a clinical trial. Has a value in 20 of 1,327 treatment records, covering 14 of 537 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "No",
+				"meaning": "The non-affirmative response to a question. (17 treatment records)"
+			},
+			{
+				"code": "Yes",
+				"meaning": "The affirmative response to a question. (3 treatment records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (1,307 treatment records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"clinical_trial_indicator\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-treatment-course-number",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.treatments.course_number",
+		"file": "GDC API case record (treatment)",
+		"definition": "The number assigned to a course of therapeutic agent administration, indicating where a particular course of treatment falls within a sequence of treatments. Has a value in 44 of 1,327 treatment records, covering 29 of 537 cases. Observed range 1 to 6.",
+		"type": "decimal",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"null: no value (1,283 treatment records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"course_number\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-treatment-days-to-treatment-end",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.treatments.days_to_treatment_end",
+		"file": "GDC API case record (treatment)",
+		"definition": "Number of days between the date used for index and the date the treatment ended. Has a value in 205 of 1,327 treatment records, covering 89 of 537 cases. Observed range -156 to 2,572.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"null: no value (1,122 treatment records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"days_to_treatment_end\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-treatment-days-to-treatment-start",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.treatments.days_to_treatment_start",
+		"file": "GDC API case record (treatment)",
+		"definition": "Number of days between the date used for index and the date the treatment started. Has a value in 338 of 1,327 treatment records, covering 142 of 537 cases. Observed range -3,766 to 3,939.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"null: no value (989 treatment records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"days_to_treatment_start\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-treatment-initial-disease-status",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.treatments.initial_disease_status",
+		"file": "GDC API case record (treatment)",
+		"definition": "The text term used to describe the status of the patient's malignancy when the treatment began. Has a value in 158 of 1,327 treatment records, covering 71 of 537 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Progressive Disease",
+				"meaning": "(143 treatment records)"
+			},
+			{
+				"code": "Recurrent Disease",
+				"meaning": "(15 treatment records)"
+			}
+		],
+		"missingValues": [
+			"\"Not Reported\": 8 treatment records",
+			"\"Unknown\": 1 treatment records",
+			"null: no value (1,160 treatment records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"initial_disease_status\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-treatment-number-of-cycles",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.treatments.number_of_cycles",
+		"file": "GDC API case record (treatment)",
+		"definition": "The numeric value used to describe the number of cycles of a specific treatment or regimen the patient received. Has a value in 73 of 1,327 treatment records, covering 46 of 537 cases. Observed range 1 to 241.",
+		"type": "integer",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"null: no value (1,254 treatment records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"number_of_cycles\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-treatment-number-of-fractions",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.treatments.number_of_fractions",
+		"file": "GDC API case record (treatment)",
+		"definition": "The total number of divided radiation doses received. Has a value in 39 of 1,327 treatment records, covering 26 of 537 cases. Observed range 1 to 15.",
+		"type": "decimal",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"null: no value (1,288 treatment records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"number_of_fractions\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-treatment-prescribed-dose",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.treatments.prescribed_dose",
+		"file": "GDC API case record (treatment)",
+		"definition": "A quantity of an agent prescribed to the study participant. Has a value in 58 of 1,327 treatment records, covering 33 of 537 cases. Observed range 0.2 to 600,000.",
+		"type": "decimal",
+		"unit": "given in prescribed_dose_units",
+		"coding": [],
+		"missingValues": [
+			"null: no value (1,269 treatment records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"prescribed_dose\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-treatment-prescribed-dose-units",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.treatments.prescribed_dose_units",
+		"file": "GDC API case record (treatment)",
+		"definition": "The units of the amount of agent or medication formally prescribed to an individual. Has a value in 57 of 1,327 treatment records, covering 33 of 537 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "mg",
+				"meaning": "(26 treatment records)"
+			},
+			{
+				"code": "mg/day",
+				"meaning": "(12 treatment records)"
+			},
+			{
+				"code": "mg/kg",
+				"meaning": "(6 treatment records)"
+			},
+			{
+				"code": "mL",
+				"meaning": "(3 treatment records)"
+			},
+			{
+				"code": "mg/m2",
+				"meaning": "(3 treatment records)"
+			},
+			{
+				"code": "mg/m2/day",
+				"meaning": "(2 treatment records)"
+			},
+			{
+				"code": "IU/kg",
+				"meaning": "(2 treatment records)"
+			},
+			{
+				"code": "g/m2",
+				"meaning": "(1 treatment records)"
+			},
+			{
+				"code": "g/day",
+				"meaning": "(1 treatment records)"
+			},
+			{
+				"code": "mg/kg/day",
+				"meaning": "(1 treatment records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (1,270 treatment records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"prescribed_dose_units\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-treatment-regimen-or-line-of-therapy",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.treatments.regimen_or_line_of_therapy",
+		"file": "GDC API case record (treatment)",
+		"definition": "The text term used to describe the regimen or line of therapy. Has a value in 12 of 1,327 treatment records, covering 3 of 537 cases.",
+		"type": "text",
+		"unit": null,
+		"coding": [
+			{
+				"code": "R-CHOP",
+				"meaning": "(10 treatment records)"
+			},
+			{
+				"code": "AC regimen",
+				"meaning": "(2 treatment records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (1,315 treatment records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"regimen_or_line_of_therapy\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-treatment-therapeutic-agents",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.treatments.therapeutic_agents",
+		"file": "GDC API case record (treatment)",
+		"definition": "Text identification of the individual agent(s) used as part of a treatment regimen. Has a value in 207 of 1,327 treatment records, covering 102 of 537 cases. 49 distinct values; the 25 most frequent are listed.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Sunitinib",
+				"meaning": "(23 treatment records)"
+			},
+			{
+				"code": "Bevacizumab",
+				"meaning": "(15 treatment records)"
+			},
+			{
+				"code": "Sorafenib",
+				"meaning": "(15 treatment records)"
+			},
+			{
+				"code": "Interferon",
+				"meaning": "(12 treatment records)"
+			},
+			{
+				"code": "Recombinant Interleukin-2",
+				"meaning": "(12 treatment records)"
+			},
+			{
+				"code": "Sunitinib Malate",
+				"meaning": "(10 treatment records)"
+			},
+			{
+				"code": "Pazopanib",
+				"meaning": "(9 treatment records)"
+			},
+			{
+				"code": "Temsirolimus",
+				"meaning": "(8 treatment records)"
+			},
+			{
+				"code": "Gemcitabine",
+				"meaning": "(8 treatment records)"
+			},
+			{
+				"code": "Capecitabine",
+				"meaning": "(7 treatment records)"
+			},
+			{
+				"code": "Vitespen",
+				"meaning": "(7 treatment records)"
+			},
+			{
+				"code": "Recombinant Interferon Alfa",
+				"meaning": "(6 treatment records)"
+			},
+			{
+				"code": "Everolimus",
+				"meaning": "(5 treatment records)"
+			},
+			{
+				"code": "Sorafenib Tosylate",
+				"meaning": "(5 treatment records)"
+			},
+			{
+				"code": "Erlotinib Hydrochloride",
+				"meaning": "(5 treatment records)"
+			},
+			{
+				"code": "Cyclophosphamide",
+				"meaning": "(4 treatment records)"
+			},
+			{
+				"code": "Fluorouracil",
+				"meaning": "(4 treatment records)"
+			},
+			{
+				"code": "Prednisone",
+				"meaning": "(3 treatment records)"
+			},
+			{
+				"code": "Rituximab",
+				"meaning": "(3 treatment records)"
+			},
+			{
+				"code": "Vincristine",
+				"meaning": "(3 treatment records)"
+			},
+			{
+				"code": "Gefitinib",
+				"meaning": "(3 treatment records)"
+			},
+			{
+				"code": "Interferon Alfa-2B",
+				"meaning": "(3 treatment records)"
+			},
+			{
+				"code": "Axitinib",
+				"meaning": "(2 treatment records)"
+			},
+			{
+				"code": "Paclitaxel",
+				"meaning": "(2 treatment records)"
+			},
+			{
+				"code": "Doxorubicin Hydrochloride",
+				"meaning": "(2 treatment records)"
+			}
+		],
+		"missingValues": [
+			"\"Unknown\": 1 treatment records",
+			"\"Not Reported\": 1 treatment records",
+			"null: no value (1,118 treatment records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "systemic therapy",
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"therapeutic_agents\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-treatment-treatment-dose",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.treatments.treatment_dose",
+		"file": "GDC API case record (treatment)",
+		"definition": "The numeric value used to describe the total dose of an agent the patient received. Has a value in 65 of 1,327 treatment records, covering 42 of 537 cases. Observed range 2 to 20,000.",
+		"type": "integer",
+		"unit": "given in treatment_dose_units",
+		"coding": [],
+		"missingValues": [
+			"null: no value (1,262 treatment records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"treatment_dose\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-treatment-treatment-dose-units",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.treatments.treatment_dose_units",
+		"file": "GDC API case record (treatment)",
+		"definition": "The text term used to describe the dose units of an agent the patient received. Has a value in 65 of 1,327 treatment records, covering 42 of 537 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "cGy",
+				"meaning": "(53 treatment records)"
+			},
+			{
+				"code": "mg",
+				"meaning": "A metric unit of mass equal to one thousandth of a gram or 1000 micrograms. One milligram equals approximately 0.015 432 grain or 35.274 x 10E-6 ounce. (3 treatment records)"
+			},
+			{
+				"code": "IU/kg",
+				"meaning": "(3 treatment records)"
+			},
+			{
+				"code": "mL",
+				"meaning": "(2 treatment records)"
+			},
+			{
+				"code": "Gy",
+				"meaning": "(1 treatment records)"
+			},
+			{
+				"code": "g/day",
+				"meaning": "(1 treatment records)"
+			},
+			{
+				"code": "mg/wk",
+				"meaning": "(1 treatment records)"
+			},
+			{
+				"code": "mg/day",
+				"meaning": "(1 treatment records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (1,262 treatment records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"treatment_dose_units\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-treatment-treatment-intent-type",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.treatments.treatment_intent_type",
+		"file": "GDC API case record (treatment)",
+		"definition": "Text term to identify the reason for the administration of a treatment regimen. [Manually-curated] Has a value in 323 of 1,327 treatment records, covering 172 of 537 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Adjuvant",
+				"meaning": "(289 treatment records)"
+			},
+			{
+				"code": "Palliative",
+				"meaning": "(28 treatment records)"
+			},
+			{
+				"code": "Neoadjuvant",
+				"meaning": "(6 treatment records)"
+			}
+		],
+		"missingValues": [
+			"\"Not Reported\": 17 treatment records",
+			"\"Unknown\": 1 treatment records",
+			"null: no value (986 treatment records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"treatment_intent_type\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-treatment-treatment-or-therapy",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.treatments.treatment_or_therapy",
+		"file": "GDC API case record (treatment)",
+		"definition": "An indicator related to the administration of the treatment specified in the treatment_type field. Has a value in 1,314 of 1,327 treatment records, covering 305 of 537 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "no",
+				"meaning": "The non-affirmative response to a question. (811 treatment records)"
+			},
+			{
+				"code": "yes",
+				"meaning": "The affirmative response to a question. (503 treatment records)"
+			}
+		],
+		"missingValues": [
+			"\"unknown\": 13 treatment records"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"treatment_or_therapy\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-treatment-treatment-outcome",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.treatments.treatment_outcome",
+		"file": "GDC API case record (treatment)",
+		"definition": "Text term that describes the patient's final outcome after the treatment was administered. Has a value in 36 of 1,327 treatment records, covering 29 of 537 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Treatment Ongoing",
+				"meaning": "(15 treatment records)"
+			},
+			{
+				"code": "Progressive Disease",
+				"meaning": "(14 treatment records)"
+			},
+			{
+				"code": "Stable Disease",
+				"meaning": "(4 treatment records)"
+			},
+			{
+				"code": "Complete Response",
+				"meaning": "(2 treatment records)"
+			},
+			{
+				"code": "Partial Response",
+				"meaning": "(1 treatment records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (1,291 treatment records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"treatment_outcome\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-treatment-treatment-type",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.treatments.treatment_type",
+		"file": "GDC API case record (treatment)",
+		"definition": "Text term that describes the type of treatment information available within this dataset. Note the value of this field may not be an indication that the treatment type was administered to this patient. Please reference the treatment_or_therapy property where it is indicated whether the patient received this treatment type. Has a value in 1,327 of 1,327 treatment records, covering 310 of 537 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Pharmaceutical Therapy, NOS",
+				"meaning": "(416 treatment records)"
+			},
+			{
+				"code": "Radiation Therapy, NOS",
+				"meaning": "(411 treatment records)"
+			},
+			{
+				"code": "Surgery, NOS",
+				"meaning": "(277 treatment records)"
+			},
+			{
+				"code": "Targeted Molecular Therapy",
+				"meaning": "(78 treatment records)"
+			},
+			{
+				"code": "Chemotherapy",
+				"meaning": "(49 treatment records)"
+			},
+			{
+				"code": "Radiation, External Beam",
+				"meaning": "(42 treatment records)"
+			},
+			{
+				"code": "Immunotherapy (Including Vaccines)",
+				"meaning": "(35 treatment records)"
+			},
+			{
+				"code": "Radiation, Stereotactic/Gamma Knife/SRS",
+				"meaning": "(14 treatment records)"
+			},
+			{
+				"code": "Radiation, Cyberknife",
+				"meaning": "(2 treatment records)"
+			},
+			{
+				"code": "Hormone Therapy",
+				"meaning": "(2 treatment records)"
+			},
+			{
+				"code": "Radiation, Intensity-Modulated Radiotherapy",
+				"meaning": "(1 treatment records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"treatment_type\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-treatment-treatment-type-administered",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "diagnoses.treatments.treatment_type_administered",
+		"file": "GDC API case record (treatment)",
+		"definition": "Text term that describes the kind of treatment administered to a patient. Has a value in 503 of 1,327 treatment records, covering 160 of 537 cases.",
+		"type": "text",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Pharmaceutical Therapy, NOS",
+				"meaning": "(127 treatment records)"
+			},
+			{
+				"code": "Radiation Therapy, NOS",
+				"meaning": "(92 treatment records)"
+			},
+			{
+				"code": "Targeted Molecular Therapy",
+				"meaning": "(78 treatment records)"
+			},
+			{
+				"code": "Surgery, NOS",
+				"meaning": "(61 treatment records)"
+			},
+			{
+				"code": "Chemotherapy",
+				"meaning": "(49 treatment records)"
+			},
+			{
+				"code": "Radiation, External Beam",
+				"meaning": "(42 treatment records)"
+			},
+			{
+				"code": "Immunotherapy (Including Vaccines)",
+				"meaning": "(35 treatment records)"
+			},
+			{
+				"code": "Radiation, Stereotactic/Gamma Knife/SRS",
+				"meaning": "(14 treatment records)"
+			},
+			{
+				"code": "Radiation, Cyberknife",
+				"meaning": "(2 treatment records)"
+			},
+			{
+				"code": "Hormone Therapy",
+				"meaning": "(2 treatment records)"
+			},
+			{
+				"code": "Radiation, Intensity-Modulated Radiotherapy",
+				"meaning": "(1 treatment records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (824 treatment records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Treatment",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"treatment\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"treatment\", property \"treatment_type_administered\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-exposure-exposure-type",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "exposures.exposure_type",
+		"file": "GDC API case record (exposure)",
+		"definition": "The text term used to describe the type of environmental exposure. Has a value in 537 of 537 exposure records.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Tobacco",
+				"meaning": "The dried cured leaves of the tobacco plant, Nicotiana tabacum, used for smoking, chewing, or snuff. Tobacco contains nicotine, a stimulant, and other biolog... (537 exposure records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"exposure\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"exposure\", property \"exposure_type\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-exposure-pack-years-smoked",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "exposures.pack_years_smoked",
+		"file": "GDC API case record (exposure)",
+		"definition": "Numeric computed value to represent lifetime tobacco exposure defined as number of cigarettes smoked per day x number of years smoked divided by 20. Has a value in 21 of 537 exposure records. Observed range 7 to 65.",
+		"type": "decimal",
+		"unit": "pack-years",
+		"coding": [],
+		"missingValues": [
+			"null: no value (516 exposure records)"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "pack-years",
+		"provenance": "GDC data model entity \"exposure\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"exposure\", property \"pack_years_smoked\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-exposure-tobacco-smoking-onset-year",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "exposures.tobacco_smoking_onset_year",
+		"file": "GDC API case record (exposure)",
+		"definition": "The year in which the participant began smoking. Has a value in 12 of 537 exposure records. Observed range 1,946 to 2,001.",
+		"type": "integer",
+		"unit": "calendar year",
+		"coding": [],
+		"missingValues": [
+			"null: no value (525 exposure records)"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"exposure\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"exposure\", property \"tobacco_smoking_onset_year\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-exposure-tobacco-smoking-quit-year",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "exposures.tobacco_smoking_quit_year",
+		"file": "GDC API case record (exposure)",
+		"definition": "The year in which the participant quit smoking. Has a value in 13 of 537 exposure records. Observed range 1,970 to 2,012.",
+		"type": "integer",
+		"unit": "calendar year",
+		"coding": [],
+		"missingValues": [
+			"null: no value (524 exposure records)"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"exposure\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"exposure\", property \"tobacco_smoking_quit_year\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-exposure-tobacco-smoking-status",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "exposures.tobacco_smoking_status",
+		"file": "GDC API case record (exposure)",
+		"definition": "Category describing current smoking status and smoking history as self-reported by a patient. Has a value in 87 of 537 exposure records.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Lifelong Non-Smoker",
+				"meaning": "(47 exposure records)"
+			},
+			{
+				"code": "Current Smoker",
+				"meaning": "(17 exposure records)"
+			},
+			{
+				"code": "Current Reformed Smoker for < or = 15 yrs",
+				"meaning": "(10 exposure records)"
+			},
+			{
+				"code": "Current Reformed Smoker for > 15 yrs",
+				"meaning": "(10 exposure records)"
+			},
+			{
+				"code": "Current Reformed Smoker, Duration Not Specified",
+				"meaning": "(3 exposure records)"
+			}
+		],
+		"missingValues": [
+			"\"Not Reported\": 381 exposure records",
+			"\"Unknown\": 69 exposure records"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "smoking status",
+		"provenance": "GDC data model entity \"exposure\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"exposure\", property \"tobacco_smoking_status\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-follow-up-days-to-follow-up",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "follow_ups.days_to_follow_up",
+		"file": "GDC API case record (follow up)",
+		"definition": "Number of days between the date used for index and the date of the patient's last follow-up appointment or contact. Has a value in 1,514 of 3,611 follow up records, covering 537 of 537 cases. Observed range -359 to 4,537.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"null: no value (2,097 follow up records)"
+		],
 		"observationLevel": "record",
 		"timePoint": "Follow-up",
 		"role": "outcome",
 		"group": "outcome",
 		"derivation": "raw",
-		"normalizedConcept": "follow-up time",
-		"provenance": "Values observed in returned case records.",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"follow_up\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
 		"evidence": {
-			"sources": ["gdc-kirc-case-fields"],
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"follow_up\", property \"days_to_follow_up\"",
 			"status": "verified",
-			"verifiedOn": "2026-09-19"
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-follow-up-days-to-progression",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "follow_ups.days_to_progression",
+		"file": "GDC API case record (follow up)",
+		"definition": "Number of days between the date used for index and the date the patient's disease progressed. Has a value in 34 of 3,611 follow up records, covering 33 of 537 cases. Observed range -19 to 3,766.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"null: no value (3,577 follow up records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Follow-up",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"follow_up\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"follow_up\", property \"days_to_progression\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-follow-up-days-to-recurrence",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "follow_ups.days_to_recurrence",
+		"file": "GDC API case record (follow up)",
+		"definition": "Number of days between the date used for index and the date the patient's disease recurred. Has a value in 18 of 3,611 follow up records, covering 18 of 537 cases. Observed range 70 to 2,734.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"null: no value (3,593 follow up records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Follow-up",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"follow_up\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"follow_up\", property \"days_to_recurrence\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-follow-up-disease-response",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "follow_ups.disease_response",
+		"file": "GDC API case record (follow up)",
+		"definition": "Code assigned to describe the patient's response or outcome to the disease. Has a value in 1,227 of 3,611 follow up records, covering 513 of 537 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "TF-Tumor Free",
+				"meaning": "(874 follow up records)"
+			},
+			{
+				"code": "WT-With Tumor",
+				"meaning": "(353 follow up records)"
+			}
+		],
+		"missingValues": [
+			"\"Unknown\": 8 follow up records",
+			"null: no value (2,376 follow up records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Follow-up",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"follow_up\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"follow_up\", property \"disease_response\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-follow-up-ecog-performance-status",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "follow_ups.ecog_performance_status",
+		"file": "GDC API case record (follow up)",
+		"definition": "The ECOG functional performance status of the patient/participant. Has a value in 229 of 3,611 follow up records, covering 153 of 537 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "0",
+				"meaning": "(170 follow up records)"
+			},
+			{
+				"code": "1",
+				"meaning": "(49 follow up records)"
+			},
+			{
+				"code": "2",
+				"meaning": "(9 follow up records)"
+			},
+			{
+				"code": "3",
+				"meaning": "(1 follow up records)"
+			}
+		],
+		"missingValues": [
+			"\"Unknown\": 34 follow up records",
+			"null: no value (3,348 follow up records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Follow-up",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"follow_up\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"follow_up\", property \"ecog_performance_status\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-follow-up-karnofsky-performance-status",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "follow_ups.karnofsky_performance_status",
+		"file": "GDC API case record (follow up)",
+		"definition": "Text term used to describe the classification used of the functional capabilities of a person. Has a value in 81 of 3,611 follow up records, covering 54 of 537 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "100",
+				"meaning": "(37 follow up records)"
+			},
+			{
+				"code": "90",
+				"meaning": "(30 follow up records)"
+			},
+			{
+				"code": "80",
+				"meaning": "(7 follow up records)"
+			},
+			{
+				"code": "0",
+				"meaning": "(4 follow up records)"
+			},
+			{
+				"code": "60",
+				"meaning": "(2 follow up records)"
+			},
+			{
+				"code": "70",
+				"meaning": "(1 follow up records)"
+			}
+		],
+		"missingValues": [
+			"\"Unknown\": 35 follow up records",
+			"null: no value (3,495 follow up records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Follow-up",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"follow_up\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"follow_up\", property \"karnofsky_performance_status\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-follow-up-progression-or-recurrence",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "follow_ups.progression_or_recurrence",
+		"file": "GDC API case record (follow up)",
+		"definition": "Indicates whether a patient has a progression or recurrence after initial treatment. This can include local, regional, or metastatic disease. Has a value in 172 of 3,611 follow up records, covering 129 of 537 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Yes",
+				"meaning": "The affirmative response to a question. (172 follow up records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (3,439 follow up records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Follow-up",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"follow_up\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"follow_up\", property \"progression_or_recurrence\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-follow-up-progression-or-recurrence-type",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "follow_ups.progression_or_recurrence_type",
+		"file": "GDC API case record (follow up)",
+		"definition": "The text term used to describe the type of progressive or recurrent disease or relapsed disease. Has a value in 55 of 3,611 follow up records, covering 48 of 537 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Distant",
+				"meaning": "(37 follow up records)"
+			},
+			{
+				"code": "Locoregional",
+				"meaning": "(18 follow up records)"
+			}
+		],
+		"missingValues": [
+			"\"Unknown\": 117 follow up records",
+			"null: no value (3,439 follow up records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Follow-up",
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"follow_up\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"follow_up\", property \"progression_or_recurrence_type\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-follow-up-timepoint-category",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "follow_ups.timepoint_category",
+		"file": "GDC API case record (follow up)",
+		"definition": "Category describing a specific point in the time continuum, including those established relative to an event. Has a value in 1,691 of 3,611 follow up records, covering 537 of 537 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Follow-up",
+				"meaning": "(808 follow up records)"
+			},
+			{
+				"code": "Last Contact",
+				"meaning": "(537 follow up records)"
+			},
+			{
+				"code": "Post Initial Treatment",
+				"meaning": "(172 follow up records)"
+			},
+			{
+				"code": "Preoperative",
+				"meaning": "(87 follow up records)"
+			},
+			{
+				"code": "Other",
+				"meaning": "(45 follow up records)"
+			},
+			{
+				"code": "Recurrence/Progression",
+				"meaning": "(35 follow up records)"
+			},
+			{
+				"code": "Post Adjuvant Therapy",
+				"meaning": "(7 follow up records)"
+			}
+		],
+		"missingValues": [
+			"\"Not Reported\": 56 follow up records",
+			"\"Unknown\": 41 follow up records",
+			"null: no value (1,823 follow up records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Follow-up",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"follow_up\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"follow_up\", property \"timepoint_category\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-molecular-test-biospecimen-type",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "follow_ups.molecular_tests.biospecimen_type",
+		"file": "GDC API case record (molecular test)",
+		"definition": "The text term used to describe the biological material used for testing, diagnostic, treatment or research purposes. Has a value in 367 of 1,823 molecular test records, covering 367 of 537 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Serum",
+				"meaning": "The clear portion of the blood that remains after the removal of the blood cells and the clotting proteins. (367 molecular test records)"
+			}
+		],
+		"missingValues": [
+			"null: no value (1,456 molecular test records)"
+		],
+		"observationLevel": "record",
+		"timePoint": "Initial diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"molecular_test\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"molecular_test\", property \"biospecimen_type\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-molecular-test-laboratory-test",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "follow_ups.molecular_tests.laboratory_test",
+		"file": "GDC API case record (molecular test)",
+		"definition": "The text term used to describe the medical testing used to diagnose, treat or further understand a patient's disease. Has a value in 1,823 of 1,823 molecular test records, covering 462 of 537 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Hemoglobin",
+				"meaning": "A quantitative measurement of the amount of hemoglobin present in a biospecimen. (456 molecular test records)"
+			},
+			{
+				"code": "Platelets",
+				"meaning": "The determination of the number of platelets in a biospecimen. (446 molecular test records)"
+			},
+			{
+				"code": "Leukocytes",
+				"meaning": "A test to determine the number of leukocytes in a biospecimen. (443 molecular test records)"
+			},
+			{
+				"code": "Calcium",
+				"meaning": "A quantitative measurement of the amount of calcium present in a sample. (367 molecular test records)"
+			},
+			{
+				"code": "Lactate Dehydrogenase",
+				"meaning": "A quantitative measurement of the amount of lactate dehydrogenase present in a sample. (92 molecular test records)"
+			},
+			{
+				"code": "Erythrocyte Sedimentation Rate",
+				"meaning": "(19 molecular test records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": "Initial diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"molecular_test\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"molecular_test\", property \"laboratory_test\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-molecular-test-test-result",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "follow_ups.molecular_tests.test_result",
+		"file": "GDC API case record (molecular test)",
+		"definition": "The text term used to describe the result of the molecular test. If the test result was a numeric value see test_value. Has a value in 1,800 of 1,823 molecular test records, covering 460 of 537 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Normal",
+				"meaning": "Being approximately average or within certain limits; conforming with or constituting a norm or standard or level or type or social norm. (1,047 molecular test records)"
+			},
+			{
+				"code": "Low",
+				"meaning": "(522 molecular test records)"
+			},
+			{
+				"code": "Elevated",
+				"meaning": "(231 molecular test records)"
+			}
+		],
+		"missingValues": [
+			"\"Unknown\": 23 molecular test records"
+		],
+		"observationLevel": "record",
+		"timePoint": "Initial diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"molecular_test\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"molecular_test\", property \"test_result\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-molecular-test-timepoint-category",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "follow_ups.molecular_tests.timepoint_category",
+		"file": "GDC API case record (molecular test)",
+		"definition": "Category describing a specific point in the time continuum, including those established relative to an event. Has a value in 1,823 of 1,823 molecular test records, covering 462 of 537 cases.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Initial Diagnosis",
+				"meaning": "(1,823 molecular test records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": "Initial diagnosis",
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"molecular_test\". Values observed in the KIRC case records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-case-records"
+			],
+			"locator": "Dictionary entity \"molecular_test\", property \"timepoint_category\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-file-data-format",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "data_format",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Format of the data files. Has a value in 2,173 of 2,173 slide-image files.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "SVS",
+				"meaning": "(2,173 slide-image files)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"slide\". Values observed in the KIRC slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-slide-files"
+			],
+			"locator": "Dictionary entity \"slide_image\", property \"data_format\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-file-experimental-strategy",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "experimental_strategy",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Classification of the image type with respect to its experimental use. Meanings from Cooper et al. 2018. Has a value in 2,173 of 2,173 slide-image files.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Tissue Slide",
+				"meaning": "Top- or bottom-section slide cut from the tissue submitted to TCGA, reviewed to check tumour and necrosis content before genomic analysis (1,654 slide-image files)"
+			},
+			{
+				"code": "Diagnostic Slide",
+				"meaning": "Formalin-fixed paraffin-embedded slide submitted by the tissue source site to confirm the diagnosis; its relationship to the material sent for genomic analys... (519 slide-image files)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"slide\". Values observed in the KIRC slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-slide-files",
+				"cooper-2018-tcga-pathology"
+			],
+			"locator": "Dictionary entity \"slide_image\", property \"experimental_strategy\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-file-sample-type",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "cases.samples.sample_type",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Text term to describe the source of a biospecimen used for a laboratory test. Has a value in 2,173 of 2,173 slide-image files.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Primary Tumor",
+				"meaning": "(1,607 slide-image files)"
+			},
+			{
+				"code": "Solid Tissue Normal",
+				"meaning": "(564 slide-image files)"
+			},
+			{
+				"code": "Additional - New Primary",
+				"meaning": "(2 slide-image files)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "sample type",
+		"provenance": "GDC data model entity \"slide\". Values observed in the KIRC slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-slide-files"
+			],
+			"locator": "Dictionary entity \"slide_image\", property \"sample_type\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-slide-percent-lymphocyte-infiltration",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "cases.samples.portions.slides.percent_lymphocyte_infiltration",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Numeric value to represent the percentage of infiltration by lymphocytes in a solid tissue sample or specimen. Has a value in 148 of 2,173 slide-image files. Observed range 0.0 to 25.0.",
+		"type": "decimal",
+		"unit": "%",
+		"coding": [],
+		"missingValues": [
+			"null: no value (2,025 slide-image files)"
+		],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"slide\". Values observed in the KIRC slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-slide-files"
+			],
+			"locator": "Dictionary entity \"slide\", property \"percent_lymphocyte_infiltration\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-slide-percent-monocyte-infiltration",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "cases.samples.portions.slides.percent_monocyte_infiltration",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Numeric value to represent the percentage of monocyte infiltration in a sample or specimen. Has a value in 111 of 2,173 slide-image files. Observed range 0.0 to 100.0.",
+		"type": "decimal",
+		"unit": "%",
+		"coding": [],
+		"missingValues": [
+			"null: no value (2,062 slide-image files)"
+		],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"slide\". Values observed in the KIRC slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-slide-files"
+			],
+			"locator": "Dictionary entity \"slide\", property \"percent_monocyte_infiltration\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-slide-percent-necrosis",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "cases.samples.portions.slides.percent_necrosis",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Numeric value to represent the percentage of cell death in a malignant tumor sample or specimen. Has a value in 1,094 of 2,173 slide-image files. Observed range 0.0 to 30.0.",
+		"type": "decimal",
+		"unit": "%",
+		"coding": [],
+		"missingValues": [
+			"null: no value (1,079 slide-image files)"
+		],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "necrosis percentage",
+		"provenance": "GDC data model entity \"slide\". Values observed in the KIRC slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-slide-files"
+			],
+			"locator": "Dictionary entity \"slide\", property \"percent_necrosis\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-slide-percent-neutrophil-infiltration",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "cases.samples.portions.slides.percent_neutrophil_infiltration",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Numeric value to represent the percentage of infiltration by neutrophils in a tumor sample or specimen. Has a value in 111 of 2,173 slide-image files. Observed range 0.0 to 2.0.",
+		"type": "decimal",
+		"unit": "%",
+		"coding": [],
+		"missingValues": [
+			"null: no value (2,062 slide-image files)"
+		],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"slide\". Values observed in the KIRC slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-slide-files"
+			],
+			"locator": "Dictionary entity \"slide\", property \"percent_neutrophil_infiltration\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-slide-percent-normal-cells",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "cases.samples.portions.slides.percent_normal_cells",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Numeric value to represent the percentage of normal cell content in a malignant tumor sample or specimen. Has a value in 1,070 of 2,173 slide-image files. Observed range 0.0 to 100.0.",
+		"type": "decimal",
+		"unit": "%",
+		"coding": [],
+		"missingValues": [
+			"null: no value (1,103 slide-image files)"
+		],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"slide\". Values observed in the KIRC slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-slide-files"
+			],
+			"locator": "Dictionary entity \"slide\", property \"percent_normal_cells\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-slide-percent-stromal-cells",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "cases.samples.portions.slides.percent_stromal_cells",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Numeric value to represent the percentage of reactive cells that are present in a malignant tumor sample or specimen but are not malignant such as fibroblasts, vascular structures, etc. Has a value in 1,080 of 2,173 slide-image files. Observed range 0.0 to 70.0.",
+		"type": "decimal",
+		"unit": "%",
+		"coding": [],
+		"missingValues": [
+			"null: no value (1,093 slide-image files)"
+		],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"slide\". Values observed in the KIRC slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-slide-files"
+			],
+			"locator": "Dictionary entity \"slide\", property \"percent_stromal_cells\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-slide-percent-tumor-cells",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "cases.samples.portions.slides.percent_tumor_cells",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Numeric value that represents the percentage of infiltration by tumor cells in a sample. Has a value in 1,090 of 2,173 slide-image files. Observed range 0.0 to 100.0.",
+		"type": "decimal",
+		"unit": "%",
+		"coding": [],
+		"missingValues": [
+			"null: no value (1,083 slide-image files)"
+		],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "tumour cell percentage",
+		"provenance": "GDC data model entity \"slide\". Values observed in the KIRC slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-slide-files"
+			],
+			"locator": "Dictionary entity \"slide\", property \"percent_tumor_cells\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-slide-percent-tumor-nuclei",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "cases.samples.portions.slides.percent_tumor_nuclei",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Numeric value to represent the percentage of tumor nuclei in a malignant neoplasm sample or specimen. Has a value in 1,094 of 2,173 slide-image files. Observed range 0.0 to 100.0.",
+		"type": "decimal",
+		"unit": "%",
+		"coding": [],
+		"missingValues": [
+			"null: no value (1,079 slide-image files)"
+		],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"slide\". Values observed in the KIRC slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-slide-files"
+			],
+			"locator": "Dictionary entity \"slide\", property \"percent_tumor_nuclei\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		}
+	},
+	{
+		"id": "kirc-slide-section-location",
+		"release": "tcga-kirc-gdc-open",
+		"originalName": "cases.samples.portions.slides.section_location",
+		"file": "GDC API file record (Slide Image)",
+		"definition": "Tissue source of the slide. Has a value in 1,654 of 2,173 slide-image files.",
+		"type": "text",
+		"unit": null,
+		"coding": [
+			{
+				"code": "TOP",
+				"meaning": "(1,037 slide-image files)"
+			},
+			{
+				"code": "BOTTOM",
+				"meaning": "(617 slide-image files)"
+			}
+		],
+		"missingValues": [
+			"\"Not Reported\": 519 slide-image files"
+		],
+		"observationLevel": "slide",
+		"timePoint": "Tissue collection",
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "GDC data model entity \"slide\". Values observed in the KIRC slide-image file records returned by the GDC API (Data Release 46.0 - August 10, 2026).",
+		"evidence": {
+			"sources": [
+				"gdc-data-dictionary",
+				"gdc-kirc-slide-files"
+			],
+			"locator": "Dictionary entity \"slide\", property \"section_location\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
 		}
 	}
 ]

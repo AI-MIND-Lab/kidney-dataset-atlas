@@ -1,0 +1,170 @@
+[
+	{
+		"id": "gdc-data-dictionary",
+		"url": "https://api.gdc.cancer.gov/v0/submission/_dictionary/_all",
+		"title": "NCI Genomic Data Commons data dictionary (API)",
+		"locator": "Entities case, demographic, diagnosis, pathology_detail, treatment, exposure, follow_up, molecular_test, slide, sample and slide_image: property descriptions, types and enumeration definitions",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "gdc-kirc-case-records",
+		"url": "https://api.gdc.cancer.gov/cases?filters=%7B%22op%22%3A%22in%22%2C%22content%22%3A%7B%22field%22%3A%22project.project_id%22%2C%22value%22%3A%5B%22TCGA-KIRC%22%5D%7D%7D&expand=demographic,diagnoses,diagnoses.treatments,diagnoses.pathology_details,exposures,follow_ups,follow_ups.molecular_tests,family_histories&size=2000",
+		"title": "GDC API case records for TCGA-KIRC with all clinical entities (GDC Data Release 46.0)",
+		"locator": "All 537 case records",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "gdc-kirp-case-records",
+		"url": "https://api.gdc.cancer.gov/cases?filters=%7B%22op%22%3A%22in%22%2C%22content%22%3A%7B%22field%22%3A%22project.project_id%22%2C%22value%22%3A%5B%22TCGA-KIRP%22%5D%7D%7D&expand=demographic,diagnoses,diagnoses.treatments,diagnoses.pathology_details,exposures,follow_ups,follow_ups.molecular_tests,family_histories&size=2000",
+		"title": "GDC API case records for TCGA-KIRP with all clinical entities (GDC Data Release 46.0)",
+		"locator": "All 291 case records",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "gdc-kich-case-records",
+		"url": "https://api.gdc.cancer.gov/cases?filters=%7B%22op%22%3A%22in%22%2C%22content%22%3A%7B%22field%22%3A%22project.project_id%22%2C%22value%22%3A%5B%22TCGA-KICH%22%5D%7D%7D&expand=demographic,diagnoses,diagnoses.treatments,diagnoses.pathology_details,exposures,follow_ups,follow_ups.molecular_tests,family_histories&size=2000",
+		"title": "GDC API case records for TCGA-KICH with all clinical entities (GDC Data Release 46.0)",
+		"locator": "All 113 case records",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "gdc-kirc-slide-files",
+		"url": "https://api.gdc.cancer.gov/files?filters=%7B%22op%22%3A%22and%22%2C%22content%22%3A%5B%7B%22op%22%3A%22in%22%2C%22content%22%3A%7B%22field%22%3A%22cases.project.project_id%22%2C%22value%22%3A%5B%22TCGA-KIRC%22%5D%7D%7D%2C%7B%22op%22%3A%22in%22%2C%22content%22%3A%7B%22field%22%3A%22data_type%22%2C%22value%22%3A%5B%22Slide%20Image%22%5D%7D%7D%5D%7D&size=5000",
+		"title": "GDC API slide-image file records for TCGA-KIRC (GDC Data Release 46.0)",
+		"locator": "All 2,173 slide-image files, with sample and slide fields",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "gdc-kirp-slide-files",
+		"url": "https://api.gdc.cancer.gov/files?filters=%7B%22op%22%3A%22and%22%2C%22content%22%3A%5B%7B%22op%22%3A%22in%22%2C%22content%22%3A%7B%22field%22%3A%22cases.project.project_id%22%2C%22value%22%3A%5B%22TCGA-KIRP%22%5D%7D%7D%2C%7B%22op%22%3A%22in%22%2C%22content%22%3A%7B%22field%22%3A%22data_type%22%2C%22value%22%3A%5B%22Slide%20Image%22%5D%7D%7D%5D%7D&size=5000",
+		"title": "GDC API slide-image file records for TCGA-KIRP (GDC Data Release 46.0)",
+		"locator": "All 773 slide-image files, with sample and slide fields",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "gdc-kich-slide-files",
+		"url": "https://api.gdc.cancer.gov/files?filters=%7B%22op%22%3A%22and%22%2C%22content%22%3A%5B%7B%22op%22%3A%22in%22%2C%22content%22%3A%7B%22field%22%3A%22cases.project.project_id%22%2C%22value%22%3A%5B%22TCGA-KICH%22%5D%7D%7D%2C%7B%22op%22%3A%22in%22%2C%22content%22%3A%7B%22field%22%3A%22data_type%22%2C%22value%22%3A%5B%22Slide%20Image%22%5D%7D%7D%5D%7D&size=5000",
+		"title": "GDC API slide-image file records for TCGA-KICH (GDC Data Release 46.0)",
+		"locator": "All 326 slide-image files, with sample and slide fields",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "cooper-2018-tcga-pathology",
+		"url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6240356/",
+		"title": "Cooper LA, Demicco EG, Saltz JH, et al. PanCancer insights from The Cancer Genome Atlas: the pathologist's perspective. Journal of Pathology, 2018",
+		"locator": "Description of top- and bottom-section slides and diagnostic FFPE slides",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "tcia-tcga-kirc",
+		"url": "https://www.cancerimagingarchive.net/collection/tcga-kirc/",
+		"title": "TCGA-KIRC collection on The Cancer Imaging Archive (Version 3, updated 2020-05-29)",
+		"locator": "Data access table, licence, citation, date-offset note and listed analysis results",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "tcia-tcga-kirp",
+		"url": "https://www.cancerimagingarchive.net/collection/tcga-kirp/",
+		"title": "TCGA-KIRP collection on The Cancer Imaging Archive (Version 4, updated 2020-05-29)",
+		"locator": "Data access table, licence, citation, pre-surgical baseline note and date-offset note",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "tcia-tcga-kich",
+		"url": "https://www.cancerimagingarchive.net/collection/tcga-kich/",
+		"title": "TCGA-KICH collection on The Cancer Imaging Archive (Version 3, updated 2020-05-29)",
+		"locator": "Data access table, licence, citation and date-offset note",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "tcia-tcga-kirc-series",
+		"url": "https://services.cancerimagingarchive.net/nbia-api/services/v1/getSeries?Collection=TCGA-KIRC",
+		"title": "TCIA API series list for TCGA-KIRC",
+		"locator": "All 2,654 series: PatientID, Modality, Manufacturer, ImageCount, LicenseName",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "tcia-tcga-kirp-series",
+		"url": "https://services.cancerimagingarchive.net/nbia-api/services/v1/getSeries?Collection=TCGA-KIRP",
+		"title": "TCIA API series list for TCGA-KIRP",
+		"locator": "All 376 series: PatientID, Modality, Manufacturer, ImageCount, LicenseName",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "tcia-tcga-kich-series",
+		"url": "https://services.cancerimagingarchive.net/nbia-api/services/v1/getSeries?Collection=TCGA-KICH",
+		"title": "TCIA API series list for TCGA-KICH",
+		"locator": "All 109 series: PatientID, Modality, Manufacturer, ImageCount, LicenseName",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "rcc-aid-zenodo",
+		"url": "https://doi.org/10.5281/zenodo.20719257",
+		"title": "de Boer S, Häntze H, et al. RCC-AID: Renal Cell Carcinoma AI Dataset for Medical Imaging Research (Zenodo, version 2.0.0)",
+		"locator": "Record description (contents, label map, version log, licence), read through the DataCite metadata for this DOI",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "rcc-aid-paper",
+		"url": "https://doi.org/10.59275/j.melba.2026-2dg2",
+		"title": "de Boer S, Häntze H, Ziegelmayer S, et al. RCC-AID: Renal Cell Carcinoma AI Dataset for Medical Imaging Research. Machine Learning for Biomedical Imaging, 2026",
+		"locator": "Sections 4 (availability, licensing, ethics), 5 (data and annotation protocol) and 6 (validation)",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "rcc-aid-code",
+		"url": "https://github.com/DIAGNijmegen/oncology-RCC-AID-codebase",
+		"title": "RCC-AID codebase (README and analysis scripts)",
+		"locator": "README dataset summary; src/oncology_rcc_aid_codebase/analyze_data.py (file naming and metadata.csv columns)",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "deboer-2026-renal-net",
+		"url": "https://doi.org/10.59275/j.melba.2026-67g5",
+		"title": "de Boer S, Häntze H, Venkadesh KV, et al. Robust Renal Mass Segmentation on CT: A Validation Study of an AI-Based Framework. Machine Learning for Biomedical Imaging, 2026",
+		"locator": "Sections 2.2.2 (TCGA-KIRC test set), 3.1.3 and 4 (results)",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "clam-2021",
+		"url": "https://arxiv.org/abs/2004.09666",
+		"title": "Lu MY, Williamson DFK, Chen TY, et al. Data-efficient and weakly supervised computational pathology on whole-slide images. Nature Biomedical Engineering, 2021 (arXiv:2004.09666v2 read)",
+		"locator": "Results (cross-validated classification) and Methods (external RCC WSI dataset, feature extraction)",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "transmil-2021",
+		"url": "https://arxiv.org/abs/2106.00908",
+		"title": "Shao Z, Bian H, Chen Y, et al. TransMIL: Transformer based Correlated Multiple Instance Learning for Whole Slide Image Classification. NeurIPS 2021 (arXiv:2106.00908)",
+		"locator": "Section 4 (Dataset, Implementation details) and Table 1",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "uni-2024",
+		"url": "https://doi.org/10.1038/s41591-024-02857-3",
+		"title": "Chen RJ, Ding T, Lu MY, et al. Towards a general-purpose foundation model for computational pathology. Nature Medicine, 2024",
+		"locator": "Methods, task \"RCC subtyping based on TCGA, DHMC and CPTAC\"; Figs. 2 and 4",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "wessels-2022",
+		"url": "https://doi.org/10.1371/journal.pone.0272656",
+		"title": "Wessels F, Schmitt M, Krieghoff-Henning E, et al. Deep learning can predict survival directly from histology in clear cell renal cell carcinoma. PLoS ONE, 2022",
+		"locator": "Abstract; Methods (model training)",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "jasti-2025",
+		"url": "https://doi.org/10.1038/s41467-025-57717-6",
+		"title": "Jasti J, Zhong H, Panwar V, et al. Histopathology based AI model predicts anti-angiogenic therapy response in renal cancer clinical trial. Nature Communications, 2025",
+		"locator": "Methods (TCGA KIRC dataset, RNA training data); Results (Fig. 2A); Code availability",
+		"accessedOn": "2026-09-26"
+	},
+	{
+		"id": "uhm-2021",
+		"url": "https://doi.org/10.1038/s41698-021-00195-y",
+		"title": "Uhm KH, Jung SW, Choi MH, et al. Deep learning for end-to-end kidney cancer diagnosis on multi-phase abdominal computed tomography. npj Precision Oncology, 2021",
+		"locator": "Results (independent TCIA test set), references 27-29, Code availability",
+		"accessedOn": "2026-09-26"
+	}
+]

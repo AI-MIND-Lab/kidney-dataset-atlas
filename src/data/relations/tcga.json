@@ -1,0 +1,65 @@
+[
+	{
+		"id": "rcc-aid-v2-annotates-tcga-kirc-tcia",
+		"from": "rcc-aid-v2",
+		"to": "tcga-kirc-tcia",
+		"toExternal": null,
+		"type": "annotates",
+		"explanation": "RCC-AID converts 85 contrast-enhanced CT scans from 65 TCGA-KIRC patients in this collection to NIfTI and adds kidney, tumour and cyst masks. The scans are the same patients, not additional ones.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-paper",
+				"rcc-aid-code"
+			],
+			"locator": "Paper sections 5.1 and 6.1; code README dataset summary",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		},
+		"sources": [
+			"rcc-aid-paper",
+			"rcc-aid-code"
+		]
+	},
+	{
+		"id": "rcc-aid-v2-annotates-tcga-kirp-tcia",
+		"from": "rcc-aid-v2",
+		"to": "tcga-kirp-tcia",
+		"toExternal": null,
+		"type": "annotates",
+		"explanation": "RCC-AID converts 26 contrast-enhanced CT scans from 16 TCGA-KIRP patients in this collection to NIfTI and adds kidney, tumour and cyst masks. The scans are the same patients, not additional ones.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-paper",
+				"rcc-aid-code"
+			],
+			"locator": "Paper sections 5.1 and 6.1; code README dataset summary",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		},
+		"sources": [
+			"rcc-aid-paper",
+			"rcc-aid-code"
+		]
+	},
+	{
+		"id": "rcc-aid-v2-annotates-tcga-kich-tcia",
+		"from": "rcc-aid-v2",
+		"to": "tcga-kich-tcia",
+		"toExternal": null,
+		"type": "annotates",
+		"explanation": "RCC-AID converts 18 contrast-enhanced CT scans from 10 TCGA-KICH patients in this collection to NIfTI and adds kidney, tumour and cyst masks. The scans are the same patients, not additional ones.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-paper",
+				"rcc-aid-code"
+			],
+			"locator": "Paper sections 5.1 and 6.1; code README dataset summary",
+			"status": "verified",
+			"verifiedOn": "2026-09-26"
+		},
+		"sources": [
+			"rcc-aid-paper",
+			"rcc-aid-code"
+		]
+	}
+]

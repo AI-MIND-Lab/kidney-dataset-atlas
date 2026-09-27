@@ -56,7 +56,7 @@ features:
       verifiedOn: 2026-09-20
   ctPhases:
     status: not_applicable
-    note: The open-access tier holds no radiology. A separate Cancer Imaging Archive collection holds CT for TCGA-KIRC patients and is not covered here.
+    note: The GDC release holds no radiology. CT and MR for 33 of these patients are in the TCIA collection, catalogued as a separate release of this dataset.
   clinicalData:
     status: present
     note: Clinical files cover all 291 cases.
@@ -103,11 +103,17 @@ deidentification:
     verifiedOn: 2026-09-20
 pairing:
   - kind: same_patient
-    modalities: [ct, pathology]
-    status: not_documented
+    modalities: [ct, mri, pathology]
+    status: present
     note: >-
-      Whether radiology exists elsewhere for TCGA-KIRP cases, and whether it corresponds to
-      these cases, was not checked for this record. No pairing is claimed either way.
+      33 of the 291 cases also have radiology in The Cancer Imaging Archive's TCGA-KIRP
+      collection, catalogued as a separate release of this dataset. The archive's PatientID is
+      the TCGA barcode, and every imaging patient matched a case here; 23 have CT.
+    evidence:
+      sources: [tcia-tcga-kirp-series, gdc-kirp-case-records]
+      locator: TCIA PatientID matched against GDC submitter_id
+      status: verified
+      verifiedOn: 2026-09-26
   - kind: same_patient
     modalities: [pathology, clinical_table]
     status: present
@@ -117,12 +123,14 @@ pairing:
       status: verified
       verifiedOn: 2026-09-20
 dictionary:
-  completeness: partial
+  completeness: complete_for_inspected_release
   inspectedScope: >-
-    The project summary, plus eight case-level fields checked against a sample of cases
-    returned by the GDC API for this project. Tumour grade returned null for every sampled
-    case. The full GDC clinical dictionary holds many more fields, and the biospecimen and
-    slide metadata are not documented here.
+    Every clinical property the GDC API returns with a real value for at least one of the
+    291 cases (case, demographic, diagnosis, pathology detail, treatment, exposure, follow-up
+    and laboratory-test entities), plus the slide-image file, sample and slide fields: 92
+    variables, from GDC Data Release 46.0. Definitions are the GDC data dictionary's; counts and
+    codes are observed. Properties holding only "Not Reported"-style markers are left out.
+    Biospecimen records beyond the slides, and the controlled-access tier, are not covered.
 structure: >-
   A case is a patient, identified by a TCGA barcode such as TCGA-B0-5098. Clinical, biospecimen
   and slide-image files attach to the case. A case may carry several diagnoses and several
@@ -173,3 +181,7 @@ sources:
   - gdc-kirp-kich-slides
   - gdc-access-processes
   - gdc-kirp-case-fields
+  - gdc-kirp-case-records
+  - gdc-kirp-slide-files
+  - gdc-data-dictionary
+  - cooper-2018-tcga-pathology

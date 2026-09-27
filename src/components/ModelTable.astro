@@ -1,0 +1,170 @@
+---
+import type { Paper } from '../lib/catalog';
+import { humanize, stateLabel } from '../lib/display';
+import { paperPath, withBase } from '../lib/site';
+
+type Model = Paper['data']['models'][number];
+
+interface Props {
+	models: Model[];
+	/** Paper titles and slugs, for linking a baseline to the paper that introduced it. */
+	papersById: Map<string, { title: string; slug: string }>;
+}
+
+const { models, papersById } = Astro.props;
+
+const INPUT_LABELS: Record<string, string> = {
+	wsi: 'Whole-slide image',
+	patch: 'Image patches',
+	'2d': '2D image',
+	'2.5d': '2.5D (stacked slices)',
+	'3d': '3D volume',
+	tabular: 'Table',
+	multimodal: 'Several modalities',
+	other: 'Other',
+};
+
+type Getter = (model: Model) => string | undefined;
+type Row = { label: string; hint?: string; get: Getter; kind?: 'link' };
+
+// Rows are grouped the way a reader asks about a model: what it does, how it
+// works, how it was trained, and whether it can be reused.
+const groups: { title: string; rows: Row[] }[] = [
+	{
+		title: 'What it does',
+		rows: [
+			{ label: 'Task', get: (m) => humanize(m.task) },
+			{
+				label: 'Input',
+				get: (m) => {
+					const kind = m.inputRepresentation ? INPUT_LABELS[m.inputRepresentation] : undefined;
+					if (!m.inferenceInputs) return kind;
+					// Name the input type only when the description does not already say it.
+					const said = kind && m.inferenceInputs.toLowerCase().includes(kind.toLowerCase());
+					return kind && !said ? `${m.inferenceInputs} (${kind.toLowerCase()})` : m.inferenceInputs;
+				},
+			},
+			{ label: 'Output', get: (m) => m.outputs },
+		],
+	},
+	{
+		title: 'How it works',
+		rows: [
+			{ label: 'Preprocessing', get: (m) => m.preprocessing },
+			{ label: 'Backbone / encoder', get: (m) => m.backbone },
+			{ label: 'Aggregation / fusion', hint: 'How patches, phases or features are combined', get: (m) => m.fusion },
+			{ label: 'Loss', get: (m) => m.loss },
+		],
+	},
+	{
+		title: 'How it was trained',
+		rows: [{ label: 'Training data and labels', get: (m) => m.trainingInputs }],
+	},
+];
+
+const documented = (row: Row) => models.some((m) => row.get(m));
+const shownGroups = groups
+	.map((group) => ({ ...group, rows: group.rows.filter(documented) }))
+	.filter((group) => group.rows.length > 0);
+const missingEverywhere = groups.flatMap((group) => group.rows.filter((row) => !documented(row)).map((row) => row.label));
+
+const availability = (field: Model['code']) => {
+	if (!field) return { text: stateLabel('not_documented'), url: undefined, note: undefined };
+	const where = field.url ? field.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '') : undefined;
+	return { text: where ?? stateLabel(field.status), url: field.url, note: field.note };
+};
+---
+
+<div class="table-scroll">
+	<table class="model-table">
+		<thead>
+			<tr>
+				<th scope="col"><span class="visually-hidden">Property</span></th>
+				{
+					models.map((m) => {
+						const original = m.originalPaper ? papersById.get(m.originalPaper) : undefined;
+						return (
+							<th scope="col">
+								{m.name} <span class:list={['badge', m.role === 'proposed' && 'badge--accent']}>{humanize(m.role)}</span>
+								{original && (
+									<small class="model-table__origin">
+										Introduced in <a href={withBase(paperPath(original.slug))}>{original.title}</a>
+									</small>
+								)}
+							</th>
+						);
+					})
+				}
+			</tr>
+		</thead>
+		{
+			shownGroups.map((group) => (
+				<tbody>
+					<tr class="model-table__group">
+						<th scope="colgroup" colspan={models.length + 1}>
+							{group.title}
+						</th>
+					</tr>
+					{group.rows.map((row) => (
+						<tr>
+							<th scope="row" title={row.hint}>
+								{row.label}
+							</th>
+							{models.map((m) => {
+								const value = row.get(m);
+								return <td>{value ?? <span class="muted">Not documented</span>}</td>;
+							})}
+						</tr>
+					))}
+				</tbody>
+			))
+		}
+		<tbody>
+			<tr class="model-table__group">
+				<th scope="colgroup" colspan={models.length + 1}>Reuse</th>
+			</tr>
+			{
+				(['code', 'weights'] as const).map((key) => (
+					<tr>
+						<th scope="row">{key === 'code' ? 'Code' : 'Weights'}</th>
+						{models.map((m) => {
+							const entry = availability(m[key]);
+							return (
+								<td>
+									{entry.url ? <a href={entry.url}>{entry.text}</a> : <span class:list={[!m[key]?.url && 'muted']}>{entry.text}</span>}
+									{entry.note && <small class="model-table__note">{entry.note}</small>}
+								</td>
+							);
+						})}
+					</tr>
+				))
+			}
+		</tbody>
+	</table>
+</div>
+{
+	missingEverywhere.length > 0 && (
+		<p class="muted model-table__missing">Not documented for any model: {missingEverywhere.join(', ').toLowerCase()}.</p>
+	)
+}
+<div class="model-table__provenance">
+	<p>
+		<strong>Wording.</strong> This table, the diagrams and the method summary are written by the atlas from the
+		paper's full text, in the atlas's own words so that papers can be compared. Figure captions and result values are
+		quoted from the paper unchanged.
+	</p>
+	{
+		models.some((m) => m.evidence?.locator) && (
+			<ul>
+				{models
+					.filter((m) => m.evidence?.locator)
+					.map((m) => (
+						<li>
+							<strong>{m.name}</strong>: read from {m.evidence!.locator}
+							{m.evidence!.status === 'verified' ? '' : ' (not yet checked against the paper)'}.
+						</li>
+					))}
+			</ul>
+		)
+	}
+</div>
