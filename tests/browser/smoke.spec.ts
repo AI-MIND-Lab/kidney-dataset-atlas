@@ -18,8 +18,10 @@ test('explorer to dataset, paper, search, comparison, and CSV export', async ({ 
 	await page.getByRole('link', { name: 'A synthetic paper about a synthetic dataset' }).click();
 	await expect(page.getByRole('heading', { level: 1, name: 'A synthetic paper about a synthetic dataset' })).toBeVisible();
 	await expect(page.getByRole('columnheader', { name: 'Release or cohort' }).first()).toBeVisible();
-	await expect(page.getByRole('columnheader', { name: 'Patient-level handling' }).first()).toBeVisible();
-	await expect(page.getByRole('columnheader', { name: 'Confidence interval' }).first()).toBeVisible();
+	// Results: one row per value, with the split and any patient-level handling shown together.
+	await expect(page.getByRole('heading', { level: 2, name: 'Reported results' })).toBeVisible();
+	await expect(page.getByRole('columnheader', { name: 'Evaluated on' })).toBeVisible();
+	await expect(page.getByRole('columnheader', { name: 'Split', exact: true }).first()).toBeVisible();
 	await expect(page.getByText('Invented patient-level split').first()).toBeVisible();
 	await expect(page.getByText('Fixture private hospital cohort')).toBeVisible();
 	await expect(page.getByText('Fixture private hospital cohort').locator('a')).toHaveCount(0);
