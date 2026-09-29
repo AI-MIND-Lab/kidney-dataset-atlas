@@ -1,0 +1,4 @@
+# The project's collaborators, who are also the curators in src/data/curators.yaml.
+# A pull request from anyone else needs an approving review from one of them before it can merge into main
+# (enforced by the repository ruleset "Outside contributions need a collaborator's review").
+* @i-sababishraq @kkellyzhang @omarftt @ghazalehmirzaee

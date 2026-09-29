@@ -34,6 +34,15 @@ Or open the repository in GitHub Codespaces, which installs everything for you.
 5. A curator reviews and merges. Only a curator listed in `src/data/curators.yaml` may approve a record for
    publication.
 
+### Changes from outside the project team
+
+The collaborators (the curators in `src/data/curators.yaml`, also listed in
+[.github/CODEOWNERS](.github/CODEOWNERS)) can give final approval, and any one of them is enough. A change from
+anyone else must be verified by one of them before it is merged or approved: the collaborator checks each new or
+changed claim against its cited source and records that check by approving the pull request. GitHub enforces
+this on `main` with a ruleset that requires one code-owner approval for pull requests from outside the team.
+Collaborators can still push to `main` directly.
+
 Write commit messages as a short, sentence-case summary of what the change does ("Add the KiPA22 release",
 "Correct the DeepLesion DOI"), with detail in the body when it helps a reviewer.
 
