@@ -8,8 +8,8 @@ This repository contains two kinds of material under different terms.
    synthetic fixtures in tests/fixtures/), the .github/ and .devcontainer/
    directories, the build and tooling configuration files in the repository
    root, and the project documentation (README.md, CONTRIBUTING.md,
-   AGENTS.md, CLAUDE.md, docs/authoring.md, docs/decisions.md and
-   docs/brief.md).
+   AGENTS.md, CLAUDE.md, docs/authoring.md, docs/decisions.md,
+   docs/previews.md and docs/brief.md).
 
 2. CATALOGUE DATA AND RESEARCH CONTENT: all rights reserved
 
@@ -38,7 +38,16 @@ This repository contains two kinds of material under different terms.
    For example, KiTS23 previews are CC BY-NC-SA 4.0 (non-commercial, shared
    alike), and UCSF RMaC and CPTAC-CCRCC previews are CC BY 4.0.
 
-4. THIRD-PARTY MATERIAL
+4. PAPER FIGURES (public/figures/)
+
+   Each figure is reproduced from a published paper under that paper's own
+   licence, which must be CC BY or CC0 (the validator refuses any other). It
+   is not covered by the MIT License and not by the reservation in section 2.
+   The paper page shows, under each figure, its authors, source, licence and
+   any changes, as those licences require; the same details are in the paper
+   record in src/content/papers/. Copyright stays with the figure's authors.
+
+5. THIRD-PARTY MATERIAL
 
    Dataset names, licences and descriptions refer to datasets owned by their
    publishers, each under its own terms (see the linked official sources).

@@ -27,6 +27,11 @@ where the implementation departs from it.
    health information or secrets.
 5. **Fixtures stay fixtures.** Synthetic records live only in `tests/fixtures/` and must never be copied into
    `src/`.
+6. **Paper figures only under CC BY or CC0, and describe models in your own words.** Copy a paper's figure into
+   `public/figures/<paper-id>/` only when the paper's licence is CC BY or CC0, with the quoted caption and full
+   credit; otherwise add a `linkedFigures` entry. Write model fields and pipelines from the full text in your own
+   words, quote only captions and result values, and record where in the paper each model was read. See
+   [docs/authoring.md](docs/authoring.md#architecture-figures).
 
 ## Before you finish
 
@@ -37,6 +42,7 @@ npm run validate
 npm run check
 npm test
 npm run build
+npm run test:browser   # whenever a page or component changed
 ```
 
 `npm run validate` prints an approval checklist for draft releases; that output is for the curator, not a task

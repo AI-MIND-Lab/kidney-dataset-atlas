@@ -149,7 +149,10 @@ for (const record of papers) {
 		if (!figure.path.startsWith(`/figures/${record.data.id}/`)) {
 			fail(record.file, `figure "${figure.id}" must be stored under /figures/${record.data.id}/`);
 		}
-		if (!existsSync(join(root, 'public', figure.path))) {
+		// A figure is a file in public/, or (for the synthetic fixture paper only) a page route that draws it.
+		const ext = figure.path.slice(figure.path.lastIndexOf('.'));
+		const route = join(root, 'src/pages', figure.path.slice(0, figure.path.lastIndexOf('/')), `[name]${ext}.ts`);
+		if (!existsSync(join(root, 'public', figure.path)) && !existsSync(route)) {
 			fail(record.file, `figure "${figure.id}" points at missing file public${figure.path}`);
 		}
 	}

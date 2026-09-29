@@ -83,6 +83,7 @@ counts and unapproved preview images are not public site metadata.
 | Paper and its architectures | `src/content/papers/<id>.md` — every model the paper reports |
 | Paper's use of a release | `src/data/study-uses/<name>.json` — role, subset, split, results |
 | Sample image | `src/data/samples/<name>.json` plus the file in `public/previews/` |
+| Paper figure | A `figures` entry in the paper record plus the file in `public/figures/<paper-id>/` (CC BY or CC0 papers only; otherwise a `linkedFigures` entry) |
 | Quality finding | `src/data/quality/<name>.json` |
 | Source | `src/data/sources/<name>.json` — every claim cites one of these |
 | Correction | Change the record and its source; `npm run validate` before committing |
@@ -96,6 +97,10 @@ complete synthetic example of every record type in `tests/fixtures/` to copy fro
 Records start as `catalogStatus: draft` and stay out of the site, its search index and its exports until a
 curator approves them. `npm run validate` prints a checklist for every draft, listing each eligibility check
 with its sources.
+
+Preview images and paper figures are files in `public/`, so they are copied into every build; only the pages
+that show them wait for approval. The datasets and papers they come from are already public (see
+[docs/decisions.md](docs/decisions.md)).
 
 An agent may research and write records, but must never set `approvedBy`, `permissionApprovedBy` or
 `catalogStatus: published`. Approval is a person reading the sources and committing that decision themselves.
@@ -115,7 +120,8 @@ src/content/      dataset, release and paper records
 src/data/         variables, study uses, samples, quality, sources, overlap, curators
 src/lib/          schemas, catalog queries, display rules, URL helpers
 src/pages/        routes
-scripts/          record validation, build output checks
+scripts/          record validation, build output checks; scripts/research/ holds the research tools
+public/           preview images (public/previews/) and paper figures (public/figures/)
 tests/            tests and synthetic fixtures
 docs/             authoring guide, recorded decisions, product brief, research inventory
 ```
@@ -130,5 +136,6 @@ correction without writing code, open an issue using one of the templates.
 The software (site source, scripts, tests, configuration and project documentation) is under the MIT License. The catalogue data and
 research content (`src/content/`, `src/data/`, the research inventory and `docs/literature/`)
 are **not** openly licensed: all rights reserved. Preview images in `public/previews/` carry the licence of the
-dataset they come from, stated in each sample record. See [LICENSE](LICENSE) for the exact scope and for the
+dataset they come from, stated in each sample record, and paper figures in `public/figures/` carry their paper's
+CC BY or CC0 licence, credited under each figure. See [LICENSE](LICENSE) for the exact scope and for the
 attribution required for third-party material.

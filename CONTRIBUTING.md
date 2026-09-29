@@ -28,6 +28,7 @@ Or open the repository in GitHub Codespaces, which installs everything for you.
    npm run check
    npm test
    npm run build
+   npm run test:browser   # after `npx playwright install chromium` once
    ```
 
 4. Open a pull request against `main`. Say what changed and which sources you read. CI must pass before merging.

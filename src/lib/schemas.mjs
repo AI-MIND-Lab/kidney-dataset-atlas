@@ -315,7 +315,7 @@ export const paperFigure = z.object({
 	label: z.string(),
 	title: z.string(),
 	/** A file under public/figures/<paper id>/. */
-	path: z.string().regex(/^\/figures\/[a-z0-9-]+\/[a-z0-9-]+\.(webp|png|jpg)$/, 'Store figures in public/figures/<paper id>/'),
+	path: z.string().regex(/^\/figures\/[a-z0-9-]+\/[a-z0-9-]+\.(webp|png|jpg|svg)$/, 'Store figures in public/figures/<paper id>/'),
 	width: z.number().int().positive(),
 	height: z.number().int().positive(),
 	alt: z.string(),

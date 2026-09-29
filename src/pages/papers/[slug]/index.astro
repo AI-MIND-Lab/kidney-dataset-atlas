@@ -7,6 +7,7 @@ import PaperFigure from '../../../components/PaperFigure.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { catalog, publishedPapers, studyUsesForPaper } from '../../../lib/catalog';
 import { accessLabel, humanize, trainTestLabel } from '../../../lib/display';
+import { groupResults } from '../../../lib/results';
 import { withBase } from '../../../lib/site';
 import { studyUseTarget } from '../../../lib/study-use-target';
 
@@ -49,25 +50,10 @@ const models = [...paper.data.models].sort((a, b) => ORDER[a.role] - ORDER[b.rol
 const modelName = new Map(models.map((model) => [model.id, model.name]));
 
 // A result that covers several releases is recorded once per release; show it once, listing where it applies.
-type Result = (typeof uses)[number]['results'][number];
-const grouped = new Map<string, { result: Result; uses: (typeof uses)[number][] }>();
-for (const use of uses) {
-	for (const result of use.results) {
-		const key = JSON.stringify([
-			result.model,
-			result.metric,
-			result.value,
-			result.units,
-			result.confidenceInterval,
-			result.subset,
-			result.split,
-			result.evaluation,
-		]);
-		const entry = grouped.get(key) ?? { result, uses: [] as (typeof uses)[number][] };
-		entry.uses.push(use);
-		grouped.set(key, entry);
-	}
-}
+const results = groupResults(
+	uses,
+	models.map((model) => model.id),
+);
 /** "TCGA-KIRC, TCGA-KIRP and TCGA-KICH (TCIA radiology collection)" rather than three long labels. */
 const targetList = (list: (typeof uses)[number][]) => {
 	const contexts = list.map((use) => (use.release ? releaseContexts.get(use.release) : undefined));
@@ -79,9 +65,6 @@ const targetList = (list: (typeof uses)[number][]) => {
 	}
 	return list.map(shortTarget).join('; ');
 };
-const results = [...grouped.values()].sort(
-	(a, b) => (models.findIndex((m) => m.id === a.result.model) ?? 0) - (models.findIndex((m) => m.id === b.result.model) ?? 0),
-);
 const documented = (value: string | null | undefined) => value && !/^not documented/i.test(value);
 ---
 

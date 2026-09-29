@@ -42,12 +42,12 @@ try {
 const totalBytes = files.reduce((sum, file) => sum + statSync(file).size, 0);
 const mib = (bytes) => `${(bytes / 1024 ** 2).toFixed(1)} MiB`;
 
-// Synthetic preview drawings are generated only for fixture builds.
+// Synthetic preview and figure drawings are generated only for fixture builds.
 if (!usingFixtures) {
 	for (const file of files) {
 		const name = relative(dist, file).replace(/\\/g, '/');
-		if (name.startsWith('previews/fixtures/')) {
-			errors.push(`${name}: fixture preview asset in a public build`);
+		if (name.startsWith('previews/fixtures/') || name.startsWith('figures/fixture-paper/')) {
+			errors.push(`${name}: fixture asset in a public build`);
 		}
 	}
 }
@@ -95,7 +95,7 @@ for (const file of files.filter((path) => path.endsWith('.html'))) {
 	const html = readFileSync(file, 'utf8');
 	const name = relative(dist, file).replace(/\\/g, '/');
 
-	if (!usingFixtures && (/data-atlas-fixture/.test(html) || html.includes('/previews/fixtures/'))) {
+	if (!usingFixtures && (/data-atlas-fixture/.test(html) || html.includes('/previews/fixtures/') || html.includes('/figures/fixture-paper/'))) {
 		errors.push(`${name}: contains fixture data, which must never reach a public build`);
 	}
 

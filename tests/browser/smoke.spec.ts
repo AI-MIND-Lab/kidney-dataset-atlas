@@ -23,6 +23,20 @@ test('explorer to dataset, paper, search, comparison, and CSV export', async ({ 
 	await expect(page.getByRole('columnheader', { name: 'Evaluated on' })).toBeVisible();
 	await expect(page.getByRole('columnheader', { name: 'Split', exact: true }).first()).toBeVisible();
 	await expect(page.getByText('Invented patient-level split').first()).toBeVisible();
+	// A result recorded against two releases is shown once.
+	await expect(page.locator('.results-table tbody tr').filter({ hasText: '0.87' })).toHaveCount(1);
+
+	// Architecture: the reproduced figure with its credit and licence, the linked figure, the atlas diagram,
+	// the model table and the wording note.
+	const figure = page.locator('figure.paper-figure');
+	await expect(figure.getByRole('img', { name: /Synthetic diagram/ })).toBeVisible();
+	await expect(figure).toContainText('Figure 1 of the paper');
+	await expect(figure.getByRole('link', { name: 'CC BY 4.0' })).toHaveAttribute('href', 'https://creativecommons.org/licenses/by/4.0/');
+	await expect(page.getByRole('link', { name: 'View figure 2 in the paper' })).toBeVisible();
+	await expect(page.locator('.pipeline__label')).toHaveText(['Synthetic CT', 'FixtureNet', 'Invented mask']);
+	await expect(page.locator('.model-table')).toContainText('How it works');
+	await expect(page.locator('.model-table')).toContainText('Invented slice aggregation');
+	await expect(page.locator('.model-table__provenance')).toContainText('invented methods section and Figure 1');
 	await expect(page.getByText('Fixture private hospital cohort')).toBeVisible();
 	await expect(page.getByText('Fixture private hospital cohort').locator('a')).toHaveCount(0);
 

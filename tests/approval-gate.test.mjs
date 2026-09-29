@@ -52,6 +52,12 @@ test('a relationship must name exactly one collection on the other side', () => 
 	);
 });
 
+test('a reproduced paper figure needs a reusable licence and an existing file', () => {
+	const result = runValidator('tests/bad-records/content', 'tests/bad-records/data');
+	assert.match(result.stderr, /bad-figure-licence\.md: figures\.0\.license\.url: A reproduced figure needs a reusable licence/);
+	assert.match(result.stderr, /figure "bad-figure-absent" points at missing file public\/figures\/bad-figure-missing\/figure-1\.webp/);
+});
+
 test('the fixture catalog passes validation', () => {
 	const result = runValidator('tests/fixtures/content', 'tests/fixtures/data');
 	assert.equal(result.status, 0, result.stderr);

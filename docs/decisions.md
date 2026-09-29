@@ -42,11 +42,33 @@ if that marker appears in a normal build.
 
 ## The validator, not the platform, enforces approval
 
-An agent commits with the owner's credentials, so git history alone cannot show who checked what; and
-repository settings such as required reviews can change. (The repository started private, where the free plan
-cannot require reviews at all.) `npm run validate` refuses to build a published
-release whose `approvedBy` is empty or is not listed in `src/data/curators.yaml`, whose eligibility checks have
-not all passed, or that displays a sample without its own permission approval.
+An agent commits with the owner's credentials, so git history alone cannot show who checked what, and
+repository settings can change. `npm run validate` therefore refuses to build a published release whose
+`approvedBy` is empty or is not listed in `src/data/curators.yaml`, whose eligibility checks have not all passed,
+or that displays a sample without its own permission approval.
+
+GitHub adds one rule on top: a repository ruleset on the default branch requires an approving review from a code
+owner (the collaborators in `.github/CODEOWNERS`, who are also the curators) for pull requests from anyone else.
+Collaborators bypass it and can push directly, so it controls outside contributions, not the collaborators' own
+changes; the validator remains the gate for publication.
+
+## Image files ship with every build
+
+Preview images (`public/previews/`) and paper figures (`public/figures/`) are copied into every build,
+including the normal build that contains approved records only. No page links to an unapproved image, but its
+file can be opened by its address once the site is hosted. This is deliberate: the previews come from datasets
+that are already public and de-identified by their providers, and the figures from papers published under CC BY
+or CC0. Approval of a preview is a check of reuse terms and credit, which governs where the image is shown, not a
+secrecy control. Synthetic test images are the exception: they are generated only in fixture builds, and the
+output check fails if one reaches a normal build.
+
+## Dataset pages show a short method summary for each study
+
+The brief keeps architecture details on paper pages. Dataset pages now show, for each study that used the release,
+the proposed model's name, the paper's one-line method summary, the model's pipeline as one line, and a thumbnail
+of its architecture figure when one may be reproduced, so a researcher can see how the data were used without
+opening every paper. The limits hold: the architecture table, the full figures and every result stay on the paper
+page, and dataset pages show no scores, so there is no ranking across incompatible evaluations.
 
 ## Search runs against the built site, not the development server
 

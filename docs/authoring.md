@@ -158,6 +158,45 @@ point at the place in the paper that shows the use. A study use targets exactly 
 Published papers require `approvedBy` and `approvedOn`, independently of release approval. A public study-use
 edge requires verified evidence, and a published endpoint may never point through that edge to a draft endpoint.
 
+A result that covers several releases (one classifier evaluated on three TCGA projects together) is recorded in
+each release's study use, with a note in its evidence saying the figure belongs to the releases jointly. The paper
+page shows it once and lists the releases.
+
+### Describing a model
+
+Write the model fields in your own words from the full text, so papers can be compared; quote only figure
+captions and result values. The paper page says so under the architecture table.
+
+- **`pipeline`**: the model from input to output as three to six short steps, each with a `label` and an
+  optional `detail` ("ResNet50 (ImageNet)", "Frozen; 1,024-d feature per patch"). The page draws it as a diagram,
+  so every model has a picture even when the paper's figure may not be copied.
+- **`backbone`, `preprocessing`, `fusion`, `loss`, `outputs`, `trainingInputs`, `inferenceInputs`**: leave a field
+  out rather than guess. `fusion` is how patches, phases or features are combined (attention pooling, averaging
+  patch scores, an ensemble).
+- **`code` and `weights`**: `status`, the `url`, and a `note` for any restriction ("academic research use only").
+- **`originalPaper`** on a baseline: the id of the paper that introduced it, when that paper is in the catalogue.
+- **`evidence`**: the sources and the sections and figures the model was read from, for example
+  "section 3 (TransMIL, the TPT module and PPEG), section 4 and Figure 3". Read the full text; an abstract is not
+  enough to describe an architecture.
+
+`tests/fixtures/content/papers/fixture-paper.md` shows every field.
+
+### Architecture figures
+
+A paper's figure may be copied onto the site **only if the paper is CC BY or CC0**. Check the licence at the
+source: the Crossref `license` field or the publisher's page for a journal article, and the licence link on the
+arXiv abstract page for a preprint (arXiv's default "non-exclusive distribution" licence does not permit reuse).
+The validator refuses a `figures` entry under any other licence.
+
+- **Reproduced (`figures`)**: fetch the image with `scripts/research/figures/fetch_paper_figures.py`, which
+  checks the Crossref licence first and saves WebP to `public/figures/<paper-id>/`. The entry quotes the caption
+  unchanged, adds `alt` text, a `mapsTo` note tying the figure to the model table, the `credit` (authors, title,
+  venue, year, figure number and copyright holder), the `license`, what was changed (`changes`; "None" is an
+  answer) and the `source`. The page prints all of this under the figure, as CC BY requires.
+- **Not reproducible (`linkedFigures`)**: name the figure, summarise it in your own words, link to it, and give the
+  reason it is not shown.
+- Figures from a paper can contain patient images; a curator looks at them when approving the paper.
+
 ## Samples
 
 Each sample needs its own permission check, separate from the dataset licence, plus attribution and the terms
@@ -172,8 +211,8 @@ Preview files go in `public/previews/`, compressed. They live in git history for
   sharp at a fraction of the PNG size). Raw renderings stay in the git-ignored `figures/` folder: they show
   patients, and only compressed, attributed copies with a sample record may be committed.
 - **Caption.** Start with who drew the mask ("Mask: BAMF (AI-generated), corrected by a radiologist.",
-  "Mask: KiTS23's own reference labels…"), then describe what the image shows in neutral terms, then say where the
-  description comes from (for example the figure guide it was written from).
+  "Mask: KiTS23's own reference labels…"), then describe what the image shows in neutral terms, then point to
+  [previews.md](previews.md), which explains how the previews were made and who drew each mask.
 - **Attribution.** Name the image source and the mask source separately when they differ (a TCIA collection with
   BAMF or RCC-AID masks), with DOIs, and say who rendered the preview and what was changed (windowed, cropped,
   outlined).
@@ -191,7 +230,11 @@ npm run validate   # schemas, references, approval rules, draft checklist
 npm run check      # TypeScript and Astro checks
 npm test
 npm run build      # the full build, including search and the output checks
+npm run test:browser  # clicks through the pages; run `npx playwright install chromium` once first
 ```
+
+Run the browser test whenever you change a page or component: it is the only check that looks at the rendered
+pages.
 
 Validation prints an approval checklist for every draft release. The curator reads the listed sources, then
 sets `approvedBy`, `approvedOn` and `catalogStatus: published` in their own commit.
