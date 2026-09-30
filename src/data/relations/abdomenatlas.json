@@ -1,0 +1,250 @@
+[
+	{
+		"id": "abdomenatlas-3-0-mini-derived-from-kits23",
+		"from": "abdomenatlas-3-0-mini",
+		"to": "kits23",
+		"toExternal": null,
+		"type": "derived_from",
+		"explanation": "AbdomenAtlas 3.0 includes 489 CT scans from KiTS'23, the same number as the public KiTS23 training cases in this catalogue, with its own new masks and generated reports. They are the same scans, not additional patients. The release has no column naming the source dataset, so which BDMAP IDs are KiTS cases cannot be looked up.",
+		"evidence": {
+			"sources": [
+				"radgpt-paper"
+			],
+			"locator": "Table 1 (CT scans per source dataset)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		},
+		"sources": [
+			"radgpt-paper"
+		]
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-derived-from-ct-org-tcia",
+		"from": "abdomenatlas-3-0-mini",
+		"to": "ct-org-tcia",
+		"toExternal": null,
+		"type": "derived_from",
+		"explanation": "AbdomenAtlas 3.0 includes 140 CT scans from CT-ORG, the same number as the CT-ORG release in this catalogue, with its own new masks and generated reports. They are the same scans, not additional patients. The release has no column naming the source dataset.",
+		"evidence": {
+			"sources": [
+				"radgpt-paper"
+			],
+			"locator": "Table 1 (CT scans per source dataset)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		},
+		"sources": [
+			"radgpt-paper"
+		]
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-derived-from-flare23",
+		"from": "abdomenatlas-3-0-mini",
+		"to": null,
+		"toExternal": {
+			"name": "FLARE'23"
+		},
+		"type": "derived_from",
+		"explanation": "AbdomenAtlas 3.0 includes 4,100 CT scans from FLARE'23, according to the paper's Table 1.",
+		"evidence": {
+			"sources": [
+				"radgpt-paper"
+			],
+			"locator": "Table 1 (CT scans per source dataset)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		},
+		"sources": [
+			"radgpt-paper"
+		]
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-derived-from-lits",
+		"from": "abdomenatlas-3-0-mini",
+		"to": null,
+		"toExternal": {
+			"name": "LiTS"
+		},
+		"type": "derived_from",
+		"explanation": "AbdomenAtlas 3.0 includes 131 CT scans from LiTS, according to the paper's Table 1.",
+		"evidence": {
+			"sources": [
+				"radgpt-paper"
+			],
+			"locator": "Table 1 (CT scans per source dataset)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		},
+		"sources": [
+			"radgpt-paper"
+		]
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-derived-from-tcia-pancreas-ct",
+		"from": "abdomenatlas-3-0-mini",
+		"to": null,
+		"toExternal": {
+			"name": "TCIA-Pancreas-CT"
+		},
+		"type": "derived_from",
+		"explanation": "AbdomenAtlas 3.0 includes 42 CT scans from TCIA-Pancreas-CT, according to the paper's Table 1.",
+		"evidence": {
+			"sources": [
+				"radgpt-paper"
+			],
+			"locator": "Table 1 (CT scans per source dataset)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		},
+		"sources": [
+			"radgpt-paper"
+		]
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-derived-from-rsna-trauma",
+		"from": "abdomenatlas-3-0-mini",
+		"to": null,
+		"toExternal": {
+			"name": "RSNA 2023 Abdominal Trauma Detection"
+		},
+		"type": "derived_from",
+		"explanation": "AbdomenAtlas 3.0 includes 4,714 CT scans from RSNA 2023 Abdominal Trauma Detection, according to the paper's Table 1.",
+		"evidence": {
+			"sources": [
+				"radgpt-paper"
+			],
+			"locator": "Table 1 (CT scans per source dataset)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		},
+		"sources": [
+			"radgpt-paper"
+		]
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-derived-from-btcv",
+		"from": "abdomenatlas-3-0-mini",
+		"to": null,
+		"toExternal": {
+			"name": "BTCV"
+		},
+		"type": "derived_from",
+		"explanation": "AbdomenAtlas 3.0 includes 47 CT scans from BTCV, according to the paper's Table 1.",
+		"evidence": {
+			"sources": [
+				"radgpt-paper"
+			],
+			"locator": "Table 1 (CT scans per source dataset)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		},
+		"sources": [
+			"radgpt-paper"
+		]
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-derived-from-chaos",
+		"from": "abdomenatlas-3-0-mini",
+		"to": null,
+		"toExternal": {
+			"name": "CHAOS"
+		},
+		"type": "derived_from",
+		"explanation": "AbdomenAtlas 3.0 includes 20 CT scans from CHAOS, according to the paper's Table 1.",
+		"evidence": {
+			"sources": [
+				"radgpt-paper"
+			],
+			"locator": "Table 1 (CT scans per source dataset)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		},
+		"sources": [
+			"radgpt-paper"
+		]
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-derived-from-abdomenct-1k",
+		"from": "abdomenatlas-3-0-mini",
+		"to": null,
+		"toExternal": {
+			"name": "AbdomenCT-1K"
+		},
+		"type": "derived_from",
+		"explanation": "AbdomenAtlas 3.0 includes 1,050 CT scans from AbdomenCT-1K, according to the paper's Table 1.",
+		"evidence": {
+			"sources": [
+				"radgpt-paper"
+			],
+			"locator": "Table 1 (CT scans per source dataset)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		},
+		"sources": [
+			"radgpt-paper"
+		]
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-derived-from-msd-ct",
+		"from": "abdomenatlas-3-0-mini",
+		"to": null,
+		"toExternal": {
+			"name": "Medical Segmentation Decathlon, six CT tasks"
+		},
+		"type": "derived_from",
+		"explanation": "AbdomenAtlas 3.0 includes 945 CT scans from Medical Segmentation Decathlon, six CT tasks, according to the paper's Table 1.",
+		"evidence": {
+			"sources": [
+				"radgpt-paper"
+			],
+			"locator": "Table 1 (CT scans per source dataset)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		},
+		"sources": [
+			"radgpt-paper"
+		]
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-derived-from-word",
+		"from": "abdomenatlas-3-0-mini",
+		"to": null,
+		"toExternal": {
+			"name": "WORD"
+		},
+		"type": "derived_from",
+		"explanation": "AbdomenAtlas 3.0 includes 120 CT scans from WORD, according to the paper's Table 1.",
+		"evidence": {
+			"sources": [
+				"radgpt-paper"
+			],
+			"locator": "Table 1 (CT scans per source dataset)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		},
+		"sources": [
+			"radgpt-paper"
+		]
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-derived-from-amos",
+		"from": "abdomenatlas-3-0-mini",
+		"to": null,
+		"toExternal": {
+			"name": "AMOS"
+		},
+		"type": "derived_from",
+		"explanation": "AbdomenAtlas 3.0 includes 200 CT scans from AMOS, according to the paper's Table 1.",
+		"evidence": {
+			"sources": [
+				"radgpt-paper"
+			],
+			"locator": "Table 1 (CT scans per source dataset)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		},
+		"sources": [
+			"radgpt-paper"
+		]
+	}
+]

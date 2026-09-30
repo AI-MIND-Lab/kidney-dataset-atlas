@@ -22,7 +22,7 @@ The intended scope is publicly released, deidentified data that do not require o
 ## Import status on the site
 
 This inventory uses its own IDs (K01, M05, …); the site's records use slugs. The table below shows which entries have
-site records so far, as of 26 September 2026. **Every site record is still a draft.** Entries not listed have no site
+site records so far, as of 30 September 2026. **Every site record is still a draft.** Entries not listed have no site
 record yet and are open for a contributor to research and import, following [docs/authoring.md](authoring.md).
 Update this table in the same pull request as the import.
 
@@ -41,6 +41,7 @@ Update this table in the same pull request as the import.
 | M05 CT-ORG | `ct-org` | `ct-org-tcia` | none yet |
 | G01 UCSF RMaC | `ucsf-rmac` | `ucsf-rmac-2025` | `ucsf-rmac-2026` |
 | G02 CPTAC-CCRCC | `cptac-ccrcc` | `cptac-ccrcc-v14` | `uni-2024` |
+| M11 AbdomenAtlas 3.0 / RadGPT | `abdomenatlas` | `abdomenatlas-3-0-mini` | `radgpt-2025` |
 | G03 RCC-AID | `rcc-aid` | `rcc-aid-v2` | `rcc-aid-2026` |
 | N01 NHANES (section 5) | `nhanes` | `nhanes-2021-2023-kidney` | none (not an imaging dataset) |
 

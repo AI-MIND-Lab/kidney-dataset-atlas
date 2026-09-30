@@ -1,0 +1,62 @@
+[
+	{
+		"id": "abdomenatlas-kits23-overlap",
+		"releases": [
+			"abdomenatlas-3-0-mini",
+			"kits23"
+		],
+		"type": "partial_cohort",
+		"count": {
+			"value": 489,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"radgpt-paper"
+				],
+				"locator": "Table 1 (CT scans per source dataset)",
+				"status": "verified",
+				"verifiedOn": "2026-09-30",
+				"note": "The paper's count of KiTS'23 scans inside AbdomenAtlas 3.0; no case-level mapping is published."
+			}
+		},
+		"explanation": "AbdomenAtlas 3.0 reuses 489 KiTS'23 CT scans. Their patients are counted in both releases, so the counts must not be added. KiTS23 labels tumour and cyst separately; AbdomenAtlas 3.0 has one kidney lesion mask for both.",
+		"evidence": {
+			"sources": [
+				"radgpt-paper"
+			],
+			"locator": "Table 1 (CT scans per source dataset)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-ct-org-overlap",
+		"releases": [
+			"abdomenatlas-3-0-mini",
+			"ct-org-tcia"
+		],
+		"type": "partial_cohort",
+		"count": {
+			"value": 140,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"radgpt-paper"
+				],
+				"locator": "Table 1 (CT scans per source dataset)",
+				"status": "verified",
+				"verifiedOn": "2026-09-30",
+				"note": "The paper's count of CT-ORG scans inside AbdomenAtlas 3.0; no case-level mapping is published."
+			}
+		},
+		"explanation": "AbdomenAtlas 3.0 reuses 140 CT-ORG CT scans. Their patients are counted in both releases, so the counts must not be added.",
+		"evidence": {
+			"sources": [
+				"radgpt-paper"
+			],
+			"locator": "Table 1 (CT scans per source dataset)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	}
+]

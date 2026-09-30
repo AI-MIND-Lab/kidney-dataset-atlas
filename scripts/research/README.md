@@ -29,6 +29,7 @@ folder in it to force a fresh download, for example after a provider publishes a
 |---|---|---|
 | `build_kits19.py` | Builds the KiTS19 dictionary from `kits.json` at a pinned commit, with meanings from the KiTS19 data paper | `src/data/variables/kits19.json` |
 | `build_tcga_gdc.py` | Builds the TCGA-KIRC, -KIRP and -KICH dictionaries from the GDC API and the GDC data dictionary: every clinical field with a real value, plus slide-file fields. Run `python scripts/research/dictionary/build_tcga_gdc.py KIRC` for one project | `src/data/variables/tcga-*-gdc-open.json` |
+| `build_abdomenatlas3.py` | Builds the AbdomenAtlas 3.0 dictionary from the metadata table at a pinned Hugging Face revision (every column, recounted on all rows) and the mask file list, with meanings from the RadGPT paper and metadata script. Set `ABDOMENATLAS_CSV` to a local copy of the table to skip the 16 MB download | `src/data/variables/abdomenatlas-3-0-mini.json` |
 | `kits_files.py` | Helper: the KiTS clinical files pinned to the commits the dictionaries were built from | (used by the builders) |
 
 A new dictionary builder belongs here too, so the dictionary can be regenerated; see "Building a dictionary from

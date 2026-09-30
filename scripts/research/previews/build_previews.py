@@ -22,6 +22,10 @@ FOUR_PANEL = ('Four views of one scan: the whole axial slice where the centred l
               'cyst in yellow. Window 50/500 HU; radiological orientation (patient left on viewer right).')
 RMAC_PANELS = ('One panel per contrast phase at the same slice and zoom. Only phases registered to the non-contrast '
                'scan are shown. The red outline is the dataset\'s own mass annotation, drawn on the non-contrast grid.')
+ATLAS_PANELS = ('Four views of one scan: the whole axial slice where the centred label is largest, a zoomed axial crop, '
+                'and coronal and sagittal cuts through the same point. Kidney is outlined in green and the kidney lesion '
+                'in orange; the release does not separate tumour from cyst. Window 50/500 HU; radiological orientation '
+                '(patient left on viewer right).')
 
 KITS = {
     'release': 'kits23', 'folder': 'kits23',
@@ -129,6 +133,26 @@ RCCAID = {
     ],
 }
 
+# Rendered by the Kidney-VLM project with RadGPT/tools/render_preview.py (kept outside this repository), which follows
+# the four-panel conventions in docs/previews.md; the lesion has its own colour because the release does not type it.
+ATLAS = {
+    'release': 'abdomenatlas-3-0-mini', 'folder': 'abdomenatlas',
+    'attribution': ('Images and masks: AbdomenAtlas 3.0 (Bassi et al., ICCV 2025, doi:10.1109/ICCV51701.2025.02202), '
+                    'Hugging Face AbdomenAtlas/AbdomenAtlas3.0Mini, revision 122e04f. The release does not record which of '
+                    'its 17 source datasets this scan came from. Rendered by the Kidney-VLM project: reoriented for '
+                    'display, windowed, cropped and outlined.'),
+    'reuseTerms': ('CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/), the licence on the dataset card. '
+                   'This preview is an adaptation and is shared under the same licence. The RadGPT repository\'s LICENSE '
+                   'states CC BY-NC-ND 4.0, which does not allow adaptations; a curator has to settle which applies before '
+                   'approving this preview.'),
+    'sources': ['abdomenatlas3-hf-card', 'radgpt-paper', 'radgpt-repo-license'],
+    'alignment': ("The release's own CT and mask files; in this case they share one voxel grid and header (checked). "
+                  'Nothing was re-registered.'),
+    'items': [
+        ('BDMAP_00000061', "AbdomenAtlas 3.0 BDMAP_00000061 (venous phase and Siemens scanner from the release metadata; 1.5 × 1.5 × 1.5 mm): the release's report lists a 9.5 × 8.6 cm hypoattenuating lesion in the right kidney and five in the left kidney, the largest 7.8 × 5.4 cm. The kidney masks overlap the lesion mask, so the green kidney outline also runs around most of the lesion.", 'CT with a large round lesion outlined in orange in the right kidney and a lesion in the left kidney, shown in axial, zoomed, coronal and sagittal views.'),
+    ],
+}
+
 
 def cptac_mask(name, caption):
     if 'radiologist-corrected BAMF' in caption:
@@ -150,13 +174,16 @@ MASK_LINE = {
     'tcga-kirc-tcia': tcga_mask,
     'rcc-aid-v2': lambda n, c: ("Mask: RCC-AID's own label, started by a model and corrected by trained students, with a "
                                 "radiologist deciding uncertain cases. Phase is RCC-AID's radiologist label."),
+    'abdomenatlas-3-0-mini': lambda n, c: ("Mask: AbdomenAtlas 3.0's own masks. The kidney masks come from AbdomenAtlas 1.1 "
+                                           "(AI with radiologists in the loop); the kidney lesion mask was drawn by AI and "
+                                           "corrected by radiologists."),
 }
 
 samples, total_in, total_out = [], 0, 0
-for spec in (KITS, RMAC, CPTAC, TCGA, RCCAID):
+for spec in (KITS, RMAC, CPTAC, TCGA, RCCAID, ATLAS):
     out_dir = os.path.join(REPO, 'public', 'previews', spec['release'])
     os.makedirs(out_dir, exist_ok=True)
-    intro = RMAC_PANELS if spec is RMAC else FOUR_PANEL
+    intro = RMAC_PANELS if spec is RMAC else ATLAS_PANELS if spec is ATLAS else FOUR_PANEL
     for name, caption, alt in spec['items']:
         src = os.path.join(FIG, spec['folder'], name + '.png')
         dst = os.path.join(out_dir, name + '.webp')

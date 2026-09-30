@@ -1,0 +1,233 @@
+id: abdomenatlas-3-0-mini
+dataset: abdomenatlas
+versionLabel: "AbdomenAtlas 3.0 (Hugging Face AbdomenAtlas3.0Mini)"
+current: true
+releaseDate: null
+counts:
+  patients:
+    value: null
+    status: not_documented
+    evidence:
+      sources: [radgpt-paper, abdomenatlas3-metadata-csv]
+      status: verified
+      verifiedOn: 2026-09-30
+      note: The paper and the metadata table count CT scans, not patients, and the release has no patient identifier.
+  examinations:
+    value: 9262
+    status: present
+    evidence:
+      sources: [radgpt-paper, abdomenatlas3-metadata-csv]
+      locator: "Paper abstract and Table 1 (\"9,262 triplets of CT, mask and report\"); metadata table, 9,262 rows with unique IDs BDMAP_00000001 to BDMAP_00009262"
+      status: verified
+      verifiedOn: 2026-09-30
+  lesions:
+    value: null
+    status: not_verified
+    evidence:
+      sources: [radgpt-paper, abdomenatlas3-metadata-csv]
+      locator: Paper Figure 1 caption; metadata table lesion-instance columns
+      status: not_verified
+      verifiedOn: 2026-09-30
+      note: >-
+        The paper reports 5,582 liver, 368 pancreatic and 4,424 kidney tumours. Summed over all 9,262 rows, the
+        metadata table's instance counts give 5,586 liver, 1,417 pancreatic, 5,378 kidney and 187 colon lesions. The
+        two sources disagree, so no single count is given.
+  slices:
+    value: 2789975
+    status: present
+    evidence:
+      sources: [radgpt-paper]
+      locator: "Section 1: \"9,262 3D CTs in NIfTI format (2,789,975 CT slices)\""
+      status: verified
+      verifiedOn: 2026-09-30
+      note: Taken from the paper; the CT volumes were not all opened. The metadata table's shape column cannot be used to recount it (see the quality findings).
+  slides:
+    value: null
+    status: not_applicable
+  images:
+    value: null
+    status: not_applicable
+  patches:
+    value: null
+    status: not_applicable
+  records:
+    value: null
+    status: not_applicable
+modalities:
+  - ct
+  - other
+cohort: >-
+  CT scans taken from 17 public datasets (FLARE'23, KiTS'23, LiTS, TCIA-Pancreas-CT, CT-ORG, RSNA 2023 Abdominal
+  Trauma Detection, BTCV, CHAOS, AbdomenCT-1K, six Medical Segmentation Decathlon CT tasks, WORD and AMOS), from 138
+  institutions in 19 countries according to the paper's Table 1. The same CT scans form AbdomenAtlas 1.1. No
+  inclusion criteria beyond membership of those datasets are stated. The "other" modality is the report text:
+  structured and narrative reports for 9,261 scans, and enhanced reports that merge in human notes for 117.
+tasks:
+  - segmentation
+  - report_generation
+annotations:
+  - segmentation_masks
+annotationProvenance:
+  kind: mixed
+  note: >-
+    Organ masks come from AbdomenAtlas 1.1, made by AI with radiologists in the loop. Lesion masks for the liver,
+    kidney and pancreas were first drawn by AI (DiffTumor and nnU-Net) and then checked and corrected by radiologists,
+    one by one. They added missed lesions and removed false ones, and used the source datasets' own ground truth where
+    it existed; 12 board-certified radiologists took part. Blood-vessel masks came from an nnU-Net trained on private
+    data and were revised by radiologists. Liver sub-regions came from an nnU-Net fine-tuned on 131 LiTS scans, and no
+    revision is described. Pancreas head, body and tail were split by a fixed rule from a segmentation of the superior
+    mesenteric artery, and radiologists judged them only qualitatively. The reports are written from these masks by rules and a
+    language model, not by the source hospitals.
+  evidence:
+    sources: [radgpt-paper]
+    locator: Abstract; Figure 2 caption; section 3.1.1 and footnote 1; section 4.2; Appendix C
+    status: verified
+    verifiedOn: 2026-09-30
+doi: null
+access:
+  mode: direct_open_download
+  registrationVisible: false
+  instructions: >-
+    Download from the Hugging Face repository AbdomenAtlas/AbdomenAtlas3.0Mini with any Hugging Face download method,
+    or run download_atlas_3.sh from the RadGPT GitHub repository. The Hugging Face repository is public and not gated,
+    so no account or request is needed. The release is about 586 GB: CT volumes in 40 tarballs (570.7 GB), masks in 40
+    tarballs (12.8 GB), the metadata table, the train/test ID lists, and a 2.0 GB zip of PDF reports.
+  evidence:
+    sources: [abdomenatlas3-hf-card, abdomenatlas3-hf-files, radgpt-repo-readme]
+    locator: 'Card and README, "Download the AbdomenAtlas 3.0 Dataset"; Hub API entry for the dataset ("gated": false); file listing sizes'
+    status: verified
+    verifiedOn: 2026-09-30
+license:
+  name: CC BY-NC-SA 4.0 (Hugging Face dataset card)
+  url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+  conditions: >-
+    The dataset card states CC BY-NC-SA 4.0: non-commercial use with attribution, and anything derived must carry the
+    same licence. The LICENSE file in the RadGPT GitHub repository states CC BY-NC-ND 4.0 for "this work", which does
+    not allow adaptations. The provider does not say which of the two covers the images, masks and reports. The 17
+    source datasets carry their own licences, which were not checked for this record.
+deidentification:
+  statement: >-
+    No statement about de-identification was found in the paper, the dataset card or the repository README. The CT
+    scans come from 17 public datasets, whose own documentation was not checked for this record.
+  status: not_documented
+  evidence:
+    sources: [radgpt-paper, abdomenatlas3-hf-card, radgpt-repo-readme]
+    status: verified
+    verifiedOn: 2026-09-30
+    note: The full paper text was searched for de-identification, anonymisation, ethics approval and consent; none is mentioned.
+pairing:
+  - kind: same_patient
+    modalities: [ct]
+    status: not_documented
+    note: Each BDMAP ID is one CT scan and the release has no patient identifier, so whether a patient appears more than once is not documented.
+dictionary:
+  completeness: complete_for_inspected_release
+  inspectedScope: >-
+    All 37 columns and 9,262 rows of AbdomenAtlas3.0MiniWithMeta.csv at Hugging Face revision 122e04f, the four
+    train/test ID lists, and the 44 mask file names. The Kidney-VLM project listed the mask file names for every case
+    on 2026-09-23, and re-checked them on the first 232 cases. The CT volumes and mask contents were opened only for
+    those 232 cases (BDMAP_00000001 to BDMAP_00000232). pdf_reports.zip was not opened.
+features:
+  wsi:
+    status: not_applicable
+    note: A CT release; there are no slide images.
+  ctPhases:
+    status: present
+    phases: [non-contrast, arterial, venous, delayed]
+    note: >-
+      The metadata table's contrast column names a phase for 1,216 of 9,262 scans (Venous 580, Arterial 403, Plain
+      191, Delay 42) and is blank for the rest. The first line of the structured report names a phase for 2,602
+      scans (CT Venous Phase 1,577, CT Arterial Phase 652, Non-contrast CT 322, CT Delay Phase 51). The paper does
+      not say how the phase was determined.
+    evidence:
+      sources: [abdomenatlas3-metadata-csv]
+      locator: contrast and structured report columns, all rows
+      status: verified
+      verifiedOn: 2026-09-30
+  clinicalData:
+    status: present
+    note: >-
+      Sex is given for 1,374 scans and age for 1,379, and scanner vendor for 485; nothing else clinical. The
+      metadata script takes sex and age from two provider tables that are not in the release (one of them a
+      TotalSegmentator table), and the scanner vendor only from the TotalSegmentator table.
+    evidence:
+      sources: [abdomenatlas3-metadata-csv, radgpt-metadata-script]
+      locator: sex, age and scanner columns, all rows; create_big_table in the script
+      status: verified
+      verifiedOn: 2026-09-30
+  followUp:
+    status: not_documented
+structure: >-
+  Each case is a folder named by its BDMAP ID. It holds ct.nii.gz and a segmentations folder with one NIfTI mask per
+  structure: 43 files in most cases, 44 when a colon lesion mask is present. The files are packed in 40 image tarballs
+  and 40 mask tarballs, each covering a range of IDs. The masks are separate files and can overlap: among the first 232 cases,
+  55 of the 78 with a kidney lesion have at least 95% of the lesion inside the kidney masks. The metadata table
+  AbdomenAtlas3.0MiniWithMeta.csv has one row per scan, keyed by BDMAP ID. It holds voxel spacing, demographics where
+  known, organ volumes, lesion counts, sizes, locations and attenuation, and the report texts. The folder TrainTestIDS
+  holds two splits that each cover all 9,262 scans with no overlap: IID (8,336 train, 926 test; the random split the
+  paper used) and OOD (4,696 train, 4,566 test, which keeps hospitals apart; not used in the paper). The array axis
+  order is not the same in every file: in 450 rows the largest spacing value comes first, so read orientation from
+  each file's header.
+citation: >-
+  Bassi PRAS, Yavuz MC, Hamamci IE, Er S, Chen X, Li W, Menze B, Decherchi S, Cavalli A, Wang K, Yang Y, Yuille A,
+  Zhou Z. RadGPT: Constructing 3D Image-Text Tumor Datasets. Proceedings of the IEEE/CVF International Conference on
+  Computer Vision (ICCV), 2025, pp. 23720–23730. doi:10.1109/ICCV51701.2025.02202. Preprint: arXiv:2501.04678.
+limitations:
+  - The kidney lesion mask does not separate tumours from cysts, although KiTS'23, one of the source datasets, labels them separately.
+  - The reports were generated from the masks by rules and a language model, then checked by radiologists; they are not the source hospitals' own reports.
+  - The numbers in the metadata table were read back out of the report text, not measured from the masks, and a missing value was written as 0.
+  - Sex and age are known for about 15% of scans, scanner vendor for about 5%, and contrast phase for 13% in the metadata table.
+  - The scans are reused from public datasets, including KiTS23 and CT-ORG in this catalogue; counts must never be added to theirs.
+  - The two licence statements (dataset card CC BY-NC-SA 4.0, repository CC BY-NC-ND 4.0) disagree.
+eligibility:
+  publicAccess:
+    status: pass
+    note: The Hugging Face repository is public and not gated; the dataset card and README describe a direct download.
+    evidence:
+      sources: [abdomenatlas3-hf-files, abdomenatlas3-hf-card]
+      status: verified
+      verifiedOn: 2026-09-30
+  deidentification:
+    status: unknown
+    note: No de-identification statement was found in the paper, card or README, and the 17 source datasets' own statements were not checked. This is one of the things blocking publication.
+    evidence:
+      sources: [radgpt-paper, abdomenatlas3-hf-card]
+      status: not_verified
+  noPhiHosted:
+    status: pass
+    note: This catalog stores descriptions, sources and one compressed preview image.
+  termsPermitUse:
+    status: unknown
+    note: >-
+      The dataset card's CC BY-NC-SA 4.0 permits non-commercial reuse with attribution. The repository's CC BY-NC-ND
+      4.0 does not permit adaptations such as a preview image. The provider has to say which applies, and the source
+      datasets' licences were not checked.
+    evidence:
+      sources: [abdomenatlas3-hf-card, radgpt-repo-license]
+      status: verified
+      verifiedOn: 2026-09-30
+  samplePermission:
+    status: unknown
+    note: >-
+      1 preview rendered from the released data awaits a curator's permission approval. It is shared under the
+      dataset card's CC BY-NC-SA 4.0, which the repository's no-derivatives licence contradicts.
+    evidence:
+      sources: [abdomenatlas3-hf-card, radgpt-repo-license]
+      status: not_verified
+catalogStatus: draft
+verifiedOn: 2026-09-30
+researchedBy: agent
+approvedBy: null
+approvedOn: null
+sources:
+  - radgpt-paper
+  - radgpt-iccv
+  - abdomenatlas3-hf-card
+  - abdomenatlas3-hf-files
+  - abdomenatlas3-metadata-csv
+  - abdomenatlas3-split-files
+  - abdomenatlas3-mask-files
+  - radgpt-repo-readme
+  - radgpt-repo-license
+  - radgpt-generate-readme
+  - radgpt-metadata-script

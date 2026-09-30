@@ -1,0 +1,86 @@
+[
+	{
+		"id": "radgpt-paper",
+		"url": "https://arxiv.org/abs/2501.04678v2",
+		"title": "Bassi et al., RadGPT: Constructing 3D Image-Text Tumor Datasets (arXiv v2, 19 August 2025)",
+		"locator": "Full text: abstract; section 1 and Table 1 (source datasets, counts); sections 3.1-3.4 (RadGPT); section 4 and Table 2 (evaluation); section 5 (splits); Appendices B.1, B.2 and C",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "radgpt-iccv",
+		"url": "https://doi.org/10.1109/ICCV51701.2025.02202",
+		"title": "RadGPT: Constructing 3D Image-Text Tumor Datasets, ICCV 2025 (IEEE), Crossref record",
+		"locator": "Crossref metadata: authors, venue (2025 IEEE/CVF International Conference on Computer Vision), pages 23720-23730, licence",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "abdomenatlas3-hf-card",
+		"url": "https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas3.0Mini/blob/122e04fc188949ed60a74f3bc6b4fa74e06a6152/README.md",
+		"title": "AbdomenAtlas3.0Mini dataset card on Hugging Face, revision 122e04f",
+		"locator": "Card header (licence: cc-by-nc-sa-4.0); \"Download the AbdomenAtlas 3.0 Dataset\"; \"Train/Test Splits\"",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "abdomenatlas3-hf-files",
+		"url": "https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas3.0Mini/tree/122e04fc188949ed60a74f3bc6b4fa74e06a6152",
+		"title": "AbdomenAtlas3.0Mini file listing on Hugging Face, revision 122e04f",
+		"locator": "Repository tree and the Hub API entry for the dataset (\"gated\": false): AbdomenAtlas3.0MiniWithMeta.csv, TrainTestIDS/, image_only/ (40 tarballs, 570.7 GB), mask_only/ (40 tarballs, 12.8 GB), pdf_reports.zip",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "abdomenatlas3-metadata-csv",
+		"url": "https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas3.0Mini/blob/122e04fc188949ed60a74f3bc6b4fa74e06a6152/AbdomenAtlas3.0MiniWithMeta.csv",
+		"title": "AbdomenAtlas3.0MiniWithMeta.csv, revision 122e04f (sha256 6d180309...922b)",
+		"locator": "All 9,262 rows and 37 columns, counted by scripts/research/dictionary/build_abdomenatlas3.py",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "abdomenatlas3-split-files",
+		"url": "https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas3.0Mini/tree/122e04fc188949ed60a74f3bc6b4fa74e06a6152/TrainTestIDS",
+		"title": "AbdomenAtlas3.0Mini train/test ID lists (IID_train, IID_test, OOD_train, OOD_test), revision 122e04f",
+		"locator": "All four CSV files, one BDMAP ID per row",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "abdomenatlas3-mask-files",
+		"url": "https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas3.0Mini/tree/122e04fc188949ed60a74f3bc6b4fa74e06a6152/mask_only",
+		"title": "AbdomenAtlas3.0Mini mask tarballs (mask_only/), revision 122e04f",
+		"locator": "All 40 tarballs were listed by the Kidney-VLM project on 2026-09-23 (file names per case, stored values); the first tarball (BDMAP_00000001-BDMAP_00000232) was re-checked on 2026-09-30",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "radgpt-repo-readme",
+		"url": "https://github.com/MrGiovanni/RadGPT/blob/d064db1a27e751e1eee3763250ab48c5dcf6f4a4/README.md",
+		"title": "MrGiovanni/RadGPT README, commit d064db1",
+		"locator": "\"Download the AbdomenAtlas 3.0 Dataset\" and \"Train/Test Splits\"",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "radgpt-repo-license",
+		"url": "https://github.com/MrGiovanni/RadGPT/blob/d064db1a27e751e1eee3763250ab48c5dcf6f4a4/LICENSE",
+		"title": "MrGiovanni/RadGPT LICENSE, commit d064db1",
+		"locator": "First line: \"© The Johns Hopkins University. This work is openly licensed via CC BY-NC-ND.\"",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "radgpt-generate-readme",
+		"url": "https://github.com/MrGiovanni/RadGPT/blob/d064db1a27e751e1eee3763250ab48c5dcf6f4a4/generate_reports/README.md",
+		"title": "MrGiovanni/RadGPT generate_reports README, commit d064db1",
+		"locator": "\"Dataset Format\" (BDMAP_xxxxxxxx/ct.nii.gz and segmentations/) and \"(Optional) Extract metadata from reports\"",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "radgpt-metadata-script",
+		"url": "https://github.com/MrGiovanni/RadGPT/blob/d064db1a27e751e1eee3763250ab48c5dcf6f4a4/generate_reports/ExtractComprehensiveMedatadaReports.py",
+		"title": "MrGiovanni/RadGPT ExtractComprehensiveMedatadaReports.py, commit d064db1",
+		"locator": "parse_radiology_report and parse_lesions (numbers read from report text), create_big_table (sources of sex, age, scanner and report columns), fill_nan_in_specific_columns (missing lesion values set to 0)",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "radgpt-staging-script",
+		"url": "https://github.com/MrGiovanni/RadGPT/blob/d064db1a27e751e1eee3763250ab48c5dcf6f4a4/generate_reports/staging.py",
+		"title": "MrGiovanni/RadGPT staging.py, commit d064db1",
+		"locator": "type2name: vessel types mapped to mask file names",
+		"accessedOn": "2026-09-30"
+	}
+]
