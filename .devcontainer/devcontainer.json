@@ -1,7 +1,10 @@
 {
 	"name": "Kidney Dataset Atlas",
 	"image": "mcr.microsoft.com/devcontainers/javascript-node:1-24-bookworm",
-	"postCreateCommand": "npm ci",
+	"features": {
+		"ghcr.io/devcontainers/features/python:1": { "version": "3.11" }
+	},
+	"postCreateCommand": "npm ci && npx playwright install --with-deps chromium && pip install -r scripts/research/requirements.txt",
 	"forwardPorts": [4321],
 	"portsAttributes": {
 		"4321": {
@@ -11,7 +14,7 @@
 	},
 	"customizations": {
 		"vscode": {
-			"extensions": ["astro-build.astro-vscode"]
+			"extensions": ["astro-build.astro-vscode", "ms-python.python"]
 		}
 	}
 }

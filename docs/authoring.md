@@ -208,8 +208,9 @@ Preview files go in `public/previews/`, compressed. They live in git history for
 `src/data/samples/processed-figures.json` is the worked example. For each preview:
 
 - **Folder and format.** Put the file in `public/previews/<release-id>/` as WebP (quality around 80 keeps outlines
-  sharp at a fraction of the PNG size). Raw renderings stay in the git-ignored `figures/` folder: they show
-  patients, and only compressed, attributed copies with a sample record may be committed.
+  sharp at a fraction of the PNG size). Keep the full-size PNG rendering in `figures/<folder>/`, which is committed
+  so anyone can rebuild the previews with `scripts/research/previews/build_previews.py`; add a rendering there only
+  when a preview uses it. Raw scans, masks and other dataset files never go in the repository.
 - **Caption.** Start with who drew the mask ("Mask: BAMF (AI-generated), corrected by a radiologist.",
   "Mask: KiTS23's own reference labels…"), then describe what the image shows in neutral terms, then point to
   [previews.md](previews.md), which explains how the previews were made and who drew each mask.
@@ -236,5 +237,5 @@ npm run test:browser  # clicks through the pages; run `npx playwright install ch
 Run the browser test whenever you change a page or component: it is the only check that looks at the rendered
 pages.
 
-Validation prints an approval checklist for every draft release. The curator reads the listed sources, then
+`npm run checklist` prints an approval checklist for every draft release. The curator reads the listed sources, then
 sets `approvedBy`, `approvedOn` and `catalogStatus: published` in their own commit.

@@ -14,13 +14,24 @@ Thanks for helping build the Kidney Dataset Atlas. There are two ways to take pa
 4. `npm run preview:drafts` to see the current records as pages. The normal `npm run preview:site` shows
    approved records only, which may be none.
 
-Or open the repository in GitHub Codespaces, which installs everything for you.
+Or open the repository in GitHub Codespaces, which installs everything for you, including the browser for the
+browser test and the Python packages for the research tools. If that set-up fails, the README section
+[If the Codespace set-up fails](README.md#if-the-codespace-set-up-fails) says how to find out why and finish it by
+hand.
+
+## Finding something to work on
+
+Open tasks are [GitHub issues](https://github.com/i-sababishraq/kidney-dataset-atlas/issues). Issues labelled
+`good first issue` are small and self-contained. A map of every document is in [docs/README.md](docs/README.md),
+and the research tools (dictionary builders, preview and figure tools, literature pipeline) are described in
+[scripts/research/README.md](scripts/research/README.md).
 
 ## Workflow
 
 1. Create a branch from `main` named for the change: `dataset/<id>`, `paper/<id>`, `fix/<topic>`, `docs/<topic>`.
 2. Make the change. Records follow [docs/authoring.md](docs/authoring.md): every claim names a source and where
-   in it the claim appears, and unknown values are written as unknown, never as zero or a guess.
+   in it the claim appears, and unknown values are written as unknown, never as zero or a guess. To start a new
+   record, `npm run new -- dataset|release|paper <id> ...` creates a draft skeleton with every field present.
 3. Before pushing, run the same checks CI runs:
 
    ```bash
@@ -31,9 +42,15 @@ Or open the repository in GitHub Codespaces, which installs everything for you.
    npm run test:browser   # after `npx playwright install chromium` once
    ```
 
-4. Open a pull request against `main`. Say what changed and which sources you read. CI must pass before merging.
-5. A curator reviews and merges. Only a curator listed in `src/data/curators.yaml` may approve a record for
-   publication.
+4. Open a pull request against `main` and fill in its checklist: what changed and which sources you read. CI must
+   pass before merging.
+5. Another collaborator reviews it, checking the new or changed claims against their sources, and merges it.
+   Approving a record for publication is a separate step that only a curator listed in `src/data/curators.yaml`
+   takes, in their own commit.
+
+**When to use a pull request.** Every change to records (`src/content/`, `src/data/`), previews, figures or site
+code goes through a pull request, so a second collaborator checks it. Small fixes that change no facts (a typo, a
+broken link, wording in the docs) may be pushed straight to `main`.
 
 ### Changes from outside the project team
 
@@ -42,7 +59,7 @@ The collaborators (the curators in `src/data/curators.yaml`, also listed in
 anyone else must be verified by one of them before it is merged or approved: the collaborator checks each new or
 changed claim against its cited source and records that check by approving the pull request. GitHub enforces
 this on `main` with a ruleset that requires one code-owner approval for pull requests from outside the team.
-Collaborators can still push to `main` directly.
+The ruleset lets collaborators push directly, so the pull-request rule above is one the team keeps by agreement.
 
 Write commit messages as a short, sentence-case summary of what the change does ("Add the KiPA22 release",
 "Correct the DeepLesion DOI"), with detail in the body when it helps a reviewer.

@@ -1,7 +1,9 @@
 """Compress the Kidney-VLM quality-check figures into public/previews/ and write src/data/samples/processed-figures.json.
 
-Input: the raw PNG figures in figures/<folder>/ (git-ignored, because they show patients; ask the project owner for
-a copy). Captions were written from the Kidney-VLM figure guide, checked against each image, and are kept below;
+Input: the full-size PNG renderings in figures/<folder>/, committed so anyone can rebuild the previews. Only
+renderings that a preview uses belong there. They were rendered by the Kidney-VLM project, whose rendering code is
+not in this repository; a new preview needs a four-view (or one-panel-per-phase) PNG made the same way, added here
+with an entry below. Captions were written from the Kidney-VLM figure guide, checked against each image, and are kept below;
 docs/previews.md explains how the previews were made and who drew each mask. Every sample stays unapproved:
 permissionApprovedBy is a curator's decision.
 

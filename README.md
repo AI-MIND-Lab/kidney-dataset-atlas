@@ -33,6 +33,25 @@ To pick up everyone's latest changes, run `git pull`, then `npm ci` if `package-
 Prefer not to install anything? Open the repository in GitHub Codespaces instead (Code → Codespaces → Create),
 then run `npm run preview:drafts` in its terminal. Codespaces usage counts against your own free allowance.
 
+### If the Codespace set-up fails
+
+When a Codespace is created it runs one set-up command that installs the site's packages, the browser used by
+`npm run test:browser`, and the Python packages for the research tools (`.devcontainer/devcontainer.json`). If any
+part of it fails, the Codespace still opens, but whatever came after the failure is missing: typically
+`npm run test:browser` complains that the browser is not installed, or a research script cannot import `pypdf` or
+`PIL`. To see what went wrong, open the Command Palette (Ctrl+Shift+P, or Cmd+Shift+P on a Mac) and run
+**Codespaces: View Creation Log**. Then install the missing parts yourself in the Codespace terminal, in this order:
+
+```bash
+npm ci                                              # the site's packages
+npx playwright install --with-deps chromium         # the browser for the browser test
+pip install -r scripts/research/requirements.txt    # the research tools' Python packages
+```
+
+Or run **Codespaces: Rebuild Container** from the Command Palette to repeat the whole set-up. If it keeps failing,
+open an issue with the error from the creation log, so the set-up can be fixed for everyone. Only the browser test
+and the research tools need the last two steps; `npm run preview:drafts` needs only `npm ci`.
+
 ### Working on the interface
 
 `npm run dev` starts the development server with live reload, but it has **no search index**: Pagefind runs
@@ -53,7 +72,9 @@ output check fails if a fixture marker appears in `dist/`.
 | --- | --- |
 | `npm run dev` | Development server, live reload, no search index |
 | `npm run dev:fixtures` | Development server against the synthetic fixtures |
-| `npm run validate` | Checks every record: schema, references, curator approval |
+| `npm run validate` | Checks every record: schema, references, curator approval; one line per draft release |
+| `npm run checklist` | The full curator checklist for every draft: each eligibility check with its sources, and what blocks approval |
+| `npm run new -- <kind> <id> ...` | Creates a draft skeleton dataset, release or paper record with every field present; run it without arguments for usage |
 | `npm run check` | TypeScript and Astro checks |
 | `npm test` | Focused tests (approval gate, unknown-value semantics) |
 | `npm run test:browser` | Browser smoke test against the fixtures (first run `npx playwright install chromium`) |
@@ -88,6 +109,10 @@ counts and unapproved preview images are not public site metadata.
 | Source | `src/data/sources/<name>.json` — every claim cites one of these |
 | Correction | Change the record and its source; `npm run validate` before committing |
 
+The research tools behind the records (dictionary builders, preview and figure tools, literature search) are
+described in [scripts/research/README.md](scripts/research/README.md), and [docs/README.md](docs/README.md) maps
+every document.
+
 The rules for records and unknown values are in [docs/authoring.md](docs/authoring.md), which also points to a
 complete synthetic example of every record type in `tests/fixtures/` to copy from. The original product brief is
 [docs/brief.md](docs/brief.md).
@@ -95,8 +120,8 @@ complete synthetic example of every record type in `tests/fixtures/` to copy fro
 ## Approval
 
 Records start as `catalogStatus: draft` and stay out of the site, its search index and its exports until a
-curator approves them. `npm run validate` prints a checklist for every draft, listing each eligibility check
-with its sources.
+curator approves them. `npm run checklist` prints the checklist for every draft, listing each eligibility check
+with its sources and anything else that blocks approval; `npm run validate` gives the one-line summary.
 
 Preview images and paper figures are files in `public/`, so they are copied into every build; only the pages
 that show them wait for approval. The datasets and papers they come from are already public (see
@@ -122,6 +147,7 @@ src/lib/          schemas, catalog queries, display rules, URL helpers
 src/pages/        routes
 scripts/          record validation, build output checks; scripts/research/ holds the research tools
 public/           preview images (public/previews/) and paper figures (public/figures/)
+figures/          full-size renderings the previews are built from
 tests/            tests and synthetic fixtures
 docs/             authoring guide, recorded decisions, product brief, research inventory
 ```

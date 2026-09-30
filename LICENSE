@@ -8,8 +8,8 @@ This repository contains two kinds of material under different terms.
    synthetic fixtures in tests/fixtures/), the .github/ and .devcontainer/
    directories, the build and tooling configuration files in the repository
    root, and the project documentation (README.md, CONTRIBUTING.md,
-   AGENTS.md, CLAUDE.md, docs/authoring.md, docs/decisions.md,
-   docs/previews.md and docs/brief.md).
+   AGENTS.md, CLAUDE.md, docs/README.md, docs/authoring.md,
+   docs/decisions.md, docs/previews.md and docs/brief.md).
 
 2. CATALOGUE DATA AND RESEARCH CONTENT: all rights reserved
 
@@ -29,12 +29,13 @@ This repository contains two kinds of material under different terms.
    respective owners; this reservation covers the selection, arrangement,
    annotations and original text of this catalogue.
 
-3. PREVIEW IMAGES (public/previews/)
+3. PREVIEW IMAGES (public/previews/) AND THEIR RENDERINGS (figures/)
 
-   Each preview is an adaptation of a third-party dataset (windowed, cropped
-   and outlined) and is licensed under that dataset's terms, not under the
-   MIT License and not as all rights reserved. The licence, attribution and
-   source of every preview are stated in its sample record in src/data/samples/.
+   Each preview, and the full-size rendering in figures/ it is made from, is
+   an adaptation of a third-party dataset (windowed, cropped and outlined) and
+   is licensed under that dataset's terms, not under the MIT License and not as
+   all rights reserved. The licence, attribution and source of every preview
+   are stated in its sample record in src/data/samples/.
    For example, KiTS23 previews are CC BY-NC-SA 4.0 (non-commercial, shared
    alike), and UCSF RMaC and CPTAC-CCRCC previews are CC BY 4.0.
 

@@ -45,8 +45,8 @@ npm run build
 npm run test:browser   # whenever a page or component changed
 ```
 
-`npm run validate` prints an approval checklist for draft releases; that output is for the curator, not a task
-for you to complete by editing approval fields.
+`npm run validate` summarises the draft releases and `npm run checklist` prints the curator's approval checklist;
+that output is for the curator, not a task for you to complete by editing approval fields.
 
 ## Where things are
 

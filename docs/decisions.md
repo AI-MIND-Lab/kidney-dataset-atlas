@@ -62,6 +62,9 @@ or CC0. Approval of a preview is a check of reuse terms and credit, which govern
 secrecy control. Synthetic test images are the exception: they are generated only in fixture builds, and the
 output check fails if one reaches a normal build.
 
+The full-size PNG renderings the previews are made from are committed too, in `figures/`, so any collaborator can
+rebuild the previews from the repository. Only renderings a preview uses go there.
+
 ## Dataset pages show a short method summary for each study
 
 The brief keeps architecture details on paper pages. Dataset pages now show, for each study that used the release,

@@ -397,7 +397,22 @@ const counts = `${datasets.length} datasets, ${releases.length} releases (${publ
 console.log(`Kidney Dataset Atlas — record validation${useFixtures ? ' (fixtures)' : ''}`);
 console.log(counts);
 
-if (draftReleases.length > 0) {
+// The full per-release checklist is for curators; everyone else gets one line per draft, so errors stay visible.
+const showChecklist = process.argv.includes('--checklist');
+
+if (draftReleases.length > 0 && !showChecklist) {
+	console.log('\nDraft releases (run `npm run checklist` for the full curator checklist):');
+	let ready = 0;
+	for (const record of draftReleases) {
+		const blockers = publishIssues(record).filter((issue) => issue.kind === 'blocker');
+		if (blockers.length === 0) ready += 1;
+		const state = blockers.length === 0 ? 'ready for approval' : `${blockers.length} to resolve before approval`;
+		console.log(`  ${record.data.id}: ${state}`);
+	}
+	console.log(`${ready} of ${draftReleases.length} draft release${draftReleases.length === 1 ? '' : 's'} ready for approval.`);
+}
+
+if (draftReleases.length > 0 && showChecklist) {
 	console.log('\nAwaiting curator approval:');
 	let ready = 0;
 	for (const record of draftReleases) {

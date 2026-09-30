@@ -31,10 +31,6 @@ docs/implemented-plan-updates.md
 # Figure guide from the Kidney-VLM processing project; it links to files outside this repository
 docs/PROCESSED_DATA_FIGURES.md
 
-# Raw quality-check figures from the Kidney-VLM processing pipeline. They show patients,
-# so only compressed, attributed copies with sample records go in public/previews/.
-/figures/
-
 # Downloaded research data (API responses, full texts, provider files): regenerate with scripts/research/
 .research-cache/
 

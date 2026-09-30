@@ -11,7 +11,9 @@ The rules for adding one are in the Samples section of [authoring.md](authoring.
 The previews in `src/data/samples/processed-figures.json` (KiTS23, UCSF RMaC, CPTAC-CCRCC, TCGA-KIRC and RCC-AID)
 were rendered by the Kidney-VLM project as visual quality checks of its processed data, then compressed to WebP for
 the atlas by [scripts/research/previews/build_previews.py](../scripts/research/previews/build_previews.py), which
-also writes the sample records. The rendering itself belongs to that project and is not part of this repository.
+also writes the sample records. The full-size renderings it reads are committed in `figures/<folder>/`, so the
+previews can be rebuilt from the repository; the rendering code itself belongs to the Kidney-VLM project and is
+not part of this repository.
 Captions were written from that project's description of each figure and checked against the images.
 
 The TCGA-KIRC previews show the project's own conversion of the TCIA scans with BAMF or RCC-AID masks placed on
