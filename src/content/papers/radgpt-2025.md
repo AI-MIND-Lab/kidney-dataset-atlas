@@ -80,8 +80,9 @@ models:
     weights:
       status: not_verified
       note: >-
-        The repository links a DiffTumor tumour model and an organ model on Hugging Face for segmenting new data, and a
-        separate AbdomenAtlasNet model; whether these are the exact weights behind Table 2 is not stated.
+        generate_reports/README.md ("Perform tumor and organ segmentation") links a DiffTumor tumour model and an organ
+        model (RSuperMaskPretrained) on Hugging Face for segmenting new data, and the top-level README links a separate
+        AbdomenAtlasNet model; whether these are the exact weights behind Table 2 is not stated.
   - id: radgpt-2025-ct-chat
     name: CT-CHAT (baseline)
     role: baseline
@@ -192,6 +193,7 @@ sources:
   - radgpt-paper
   - radgpt-iccv
   - radgpt-repo-readme
+  - radgpt-generate-readme
 ---
 
 The paper is the dataset's own publication. It builds AbdomenAtlas 3.0 from the 9,262 CT scans of AbdomenAtlas 1.1.

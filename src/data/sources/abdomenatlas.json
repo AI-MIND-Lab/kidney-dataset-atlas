@@ -42,6 +42,13 @@
 		"accessedOn": "2026-09-30"
 	},
 	{
+		"id": "abdomenatlas3-image-files",
+		"url": "https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas3.0Mini/tree/122e04fc188949ed60a74f3bc6b4fa74e06a6152/image_only",
+		"title": "AbdomenAtlas3.0Mini CT tarballs (image_only/), revision 122e04f",
+		"locator": "Only the first tarball (BDMAP_00000001 to BDMAP_00000232) was opened, on 2026-09-30: NIfTI headers, data types and voxel values of ct.nii.gz",
+		"accessedOn": "2026-09-30"
+	},
+	{
 		"id": "abdomenatlas3-mask-files",
 		"url": "https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas3.0Mini/tree/122e04fc188949ed60a74f3bc6b4fa74e06a6152/mask_only",
 		"title": "AbdomenAtlas3.0Mini mask tarballs (mask_only/), revision 122e04f",
@@ -52,7 +59,7 @@
 		"id": "radgpt-repo-readme",
 		"url": "https://github.com/MrGiovanni/RadGPT/blob/d064db1a27e751e1eee3763250ab48c5dcf6f4a4/README.md",
 		"title": "MrGiovanni/RadGPT README, commit d064db1",
-		"locator": "\"Download the AbdomenAtlas 3.0 Dataset\" and \"Train/Test Splits\"",
+		"locator": "\"Download the AbdomenAtlas 3.0 Dataset\", \"Train/Test Splits\" and \"AbdomenAtlasNet: Trained Organ and Tumor Segmentation Models\"",
 		"accessedOn": "2026-09-30"
 	},
 	{
@@ -66,7 +73,7 @@
 		"id": "radgpt-generate-readme",
 		"url": "https://github.com/MrGiovanni/RadGPT/blob/d064db1a27e751e1eee3763250ab48c5dcf6f4a4/generate_reports/README.md",
 		"title": "MrGiovanni/RadGPT generate_reports README, commit d064db1",
-		"locator": "\"Dataset Format\" (BDMAP_xxxxxxxx/ct.nii.gz and segmentations/) and \"(Optional) Extract metadata from reports\"",
+		"locator": "\"Perform tumor and organ segmentation\" (links to the DiffTumor tumour model and the RSuperMaskPretrained organ model on Hugging Face), \"Dataset Format\" (BDMAP_xxxxxxxx/ct.nii.gz and segmentations/) and \"(Optional) Extarct metadata from reports\" (sic)",
 		"accessedOn": "2026-09-30"
 	},
 	{

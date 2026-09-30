@@ -14,7 +14,8 @@
 		"handling": "Decide which source defines a lesion for your use, and select cases from the masks when the mask is what is being learned. The provider does not explain the difference.",
 		"sources": [
 			"radgpt-paper",
-			"abdomenatlas3-metadata-csv"
+			"abdomenatlas3-metadata-csv",
+			"abdomenatlas3-mask-files"
 		]
 	},
 	{
@@ -55,9 +56,10 @@
 			"status": "present",
 			"evidence": {
 				"sources": [
-					"abdomenatlas3-metadata-csv"
+					"abdomenatlas3-metadata-csv",
+					"abdomenatlas3-image-files"
 				],
-				"locator": "shape column compared with ct.nii.gz headers",
+				"locator": "shape and spacing columns of the metadata table compared with the headers of the 232 ct.nii.gz files in the first image tarball",
 				"status": "verified",
 				"verifiedOn": "2026-09-30",
 				"note": "All 232 of the 232 cases checked; the other 9,030 were not opened."
@@ -68,7 +70,7 @@
 		"handling": "Read shapes from the NIfTI headers.",
 		"sources": [
 			"abdomenatlas3-metadata-csv",
-			"abdomenatlas3-mask-files"
+			"abdomenatlas3-image-files"
 		]
 	},
 	{
@@ -89,29 +91,57 @@
 		]
 	},
 	{
-		"id": "abdomenatlas3-kidney-mask-header-mismatch",
+		"id": "abdomenatlas3-mask-header-mismatch",
 		"release": "abdomenatlas-3-0-mini",
 		"category": "observed_issue",
-		"description": "In 3 of the 232 cases checked (BDMAP_00000152, BDMAP_00000181, BDMAP_00000197), kidney_left and kidney_right carry a different header orientation from the CT: negative in-plane spacing and a zero origin. The voxel arrays still line up with the CT index by index: the median CT value inside these masks is 35–194 HU, as in kidney tissue. The kidney lesion masks of the same cases match the CT header.",
+		"description": "In 56 of the 232 cases checked, at least one mask file carries a different header orientation from its CT: a zero origin and, in most of them, flipped axis directions. 132 files are affected. The aorta mask accounts for 51 of the cases; in 8 cases 8 to 13 files are affected, among them kidney_left and kidney_right in BDMAP_00000152, BDMAP_00000181 and BDMAP_00000197. The arrays still have the CT's shape, and by array index they sit on the right tissue: the median CT value inside is 25 to 468 HU for these aorta masks and 35 to 194 HU for these kidney masks.",
 		"inspectedScope": "The first image and mask tarballs, 232 cases (BDMAP_00000001 to BDMAP_00000232), opened on 2026-09-30.",
 		"affected": {
-			"value": 3,
+			"value": 56,
 			"status": "present",
 			"evidence": {
 				"sources": [
-					"abdomenatlas3-mask-files"
+					"abdomenatlas3-mask-files",
+					"abdomenatlas3-image-files"
 				],
-				"locator": "affine of kidney_left/right.nii.gz compared with ct.nii.gz",
+				"locator": "affine of every mask file compared with its ct.nii.gz",
 				"status": "verified",
 				"verifiedOn": "2026-09-30",
-				"note": "3 of the 232 cases checked; the rest of the release was not opened."
+				"note": "56 of the 232 cases checked; the rest of the release was not opened."
 			}
 		},
-		"detection": "NIfTI affines of each kidney mask compared with the CT; CT values sampled inside the mask by array index and after mirroring.",
-		"impact": "Tools that place masks by world coordinates (resampling, most viewers) show these kidney masks mirrored and shifted away from the kidneys.",
+		"detection": "NIfTI affines of every mask compared with the CT; CT values sampled inside the aorta and kidney masks by array index (other mismatched files were not checked this way).",
+		"impact": "Tools that place masks by world coordinates (resampling, most viewers) show these masks mirrored or shifted away from the anatomy.",
 		"handling": "Pair masks with the CT by array index, or copy the CT header onto the masks, after checking that shapes match.",
 		"sources": [
-			"abdomenatlas3-mask-files"
+			"abdomenatlas3-mask-files",
+			"abdomenatlas3-image-files"
+		]
+	},
+	{
+		"id": "abdomenatlas3-ct-header-dates",
+		"release": "abdomenatlas-3-0-mini",
+		"category": "observed_issue",
+		"description": "The CT file headers checked hold no patient names or ID numbers, but some keep acquisition times. In 8 of the 232 CTs checked, the header's description field holds a scan time (\"Time=...\"). One of them, BDMAP_00000186, also keeps the full acquisition date, both there and in a header extension written by the dicm2nii converter, which also copies the series number, scanner manufacturer and software version.",
+		"inspectedScope": "The first image and mask tarballs, 232 cases (BDMAP_00000001 to BDMAP_00000232), opened on 2026-09-30. Only the NIfTI header text fields (descrip, aux_file, intent_name, db_name) and header extensions were read; image content was not examined.",
+		"affected": {
+			"value": 8,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"abdomenatlas3-image-files"
+				],
+				"locator": "NIfTI header text fields and extensions of the 232 ct.nii.gz files in the first image tarball",
+				"status": "verified",
+				"verifiedOn": "2026-09-30",
+				"note": "8 of the 232 CTs checked, one of them with a full date; the rest of the release was not opened."
+			}
+		},
+		"detection": "nibabel: every non-empty header text field and header extension printed and read.",
+		"impact": "Exact dates are usually removed when data are de-identified. Their presence in a released file means de-identification cannot be assumed complete without a statement from the provider.",
+		"handling": "Strip header text fields and extensions before redistributing CTs, and ask the provider how the scans were de-identified.",
+		"sources": [
+			"abdomenatlas3-image-files"
 		]
 	},
 	{

@@ -24,8 +24,8 @@ RMAC_PANELS = ('One panel per contrast phase at the same slice and zoom. Only ph
                'scan are shown. The red outline is the dataset\'s own mass annotation, drawn on the non-contrast grid.')
 ATLAS_PANELS = ('Four views of one scan: the whole axial slice where the centred label is largest, a zoomed axial crop, '
                 'and coronal and sagittal cuts through the same point. Kidney is outlined in green and the kidney lesion '
-                'in orange; the release does not separate tumour from cyst. Window 50/500 HU; radiological orientation '
-                '(patient left on viewer right).')
+                'in orange; the release does not say whether a lesion is a tumour or a cyst. Window 50/500 HU; '
+                'radiological orientation (patient left on viewer right).')
 
 KITS = {
     'release': 'kits23', 'folder': 'kits23',
@@ -145,11 +145,12 @@ ATLAS = {
                    'This preview is an adaptation and is shared under the same licence. The RadGPT repository\'s LICENSE '
                    'states CC BY-NC-ND 4.0, which does not allow adaptations; a curator has to settle which applies before '
                    'approving this preview.'),
-    'sources': ['abdomenatlas3-hf-card', 'radgpt-paper', 'radgpt-repo-license'],
+    'sources': ['abdomenatlas3-metadata-csv', 'abdomenatlas3-image-files', 'abdomenatlas3-hf-card', 'radgpt-paper',
+                'radgpt-repo-license'],
     'alignment': ("The release's own CT and mask files; in this case they share one voxel grid and header (checked). "
                   'Nothing was re-registered.'),
     'items': [
-        ('BDMAP_00000061', "AbdomenAtlas 3.0 BDMAP_00000061 (venous phase and Siemens scanner from the release metadata; 1.5 × 1.5 × 1.5 mm): the release's report lists a 9.5 × 8.6 cm hypoattenuating lesion in the right kidney and five in the left kidney, the largest 7.8 × 5.4 cm. The kidney masks overlap the lesion mask, so the green kidney outline also runs around most of the lesion.", 'CT with a large round lesion outlined in orange in the right kidney and a lesion in the left kidney, shown in axial, zoomed, coronal and sagittal views.'),
+        ('BDMAP_00000061', "AbdomenAtlas 3.0 BDMAP_00000061 (venous phase, Siemens scanner and voxel spacing 1.5 × 1.5 × 1.5 from the release's metadata table; no unit is stated in the table or this file's header): the release's report lists a 9.5 × 8.6 cm hypoattenuating lesion in the right kidney and five in the left kidney, the largest 7.8 × 5.4 cm. The kidney masks overlap the lesion mask, so the green kidney outline also runs around most of the lesion.", 'CT with a large round lesion outlined in orange in the right kidney and a lesion in the left kidney, shown in axial, zoomed, coronal and sagittal views.'),
     ],
 }
 

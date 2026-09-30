@@ -19,12 +19,14 @@
 				"note": "The paper's count of KiTS'23 scans inside AbdomenAtlas 3.0; no case-level mapping is published."
 			}
 		},
-		"explanation": "AbdomenAtlas 3.0 reuses 489 KiTS'23 CT scans. Their patients are counted in both releases, so the counts must not be added. KiTS23 labels tumour and cyst separately; AbdomenAtlas 3.0 has one kidney lesion mask for both.",
+		"explanation": "AbdomenAtlas 3.0 reuses 489 KiTS'23 CT scans. Their patients are counted in both releases, so the counts must not be added. KiTS23 labels tumour and cyst separately. AbdomenAtlas 3.0 has a single kidney lesion mask per scan that does not say whether a lesion is a tumour or a cyst; whether KiTS23 cysts were kept in it is not documented.",
 		"evidence": {
 			"sources": [
-				"radgpt-paper"
+				"radgpt-paper",
+				"kits23-labels",
+				"abdomenatlas3-mask-files"
 			],
-			"locator": "Table 1 (CT scans per source dataset)",
+			"locator": "Table 1 (489 KiTS'23 scans); KiTS23 labels.py (separate tumor and cyst classes); mask_only listing (one kidney_lesion.nii.gz per case, no typed kidney files)",
 			"status": "verified",
 			"verifiedOn": "2026-09-30"
 		}

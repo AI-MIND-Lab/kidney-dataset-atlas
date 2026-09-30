@@ -5,17 +5,19 @@
 		"to": "kits23",
 		"toExternal": null,
 		"type": "derived_from",
-		"explanation": "AbdomenAtlas 3.0 includes 489 CT scans from KiTS'23, the same number as the public KiTS23 training cases in this catalogue, with its own new masks and generated reports. They are the same scans, not additional patients. The release has no column naming the source dataset, so which BDMAP IDs are KiTS cases cannot be looked up.",
+		"explanation": "AbdomenAtlas 3.0 includes 489 CT scans from KiTS'23, the same number as the public KiTS23 training cases in this catalogue. They are the same scans, not additional patients. AbdomenAtlas adds organ masks (from AbdomenAtlas 1.1), organ sub-region and blood-vessel masks, and generated reports. Table 1 counts 452 of these scans with kidney tumour annotations both in KiTS'23 and in AbdomenAtlas 3.0, and the paper says source datasets' ground truth was used where available. Whether the kidney lesion masks of these scans are KiTS'23's own labels, and whether KiTS'23 cysts are in them, is not stated. The release has no column naming the source dataset, so which BDMAP IDs are KiTS cases cannot be looked up.",
 		"evidence": {
 			"sources": [
-				"radgpt-paper"
+				"radgpt-paper",
+				"abdomenatlas3-metadata-csv"
 			],
-			"locator": "Table 1 (CT scans per source dataset)",
+			"locator": "Table 1 (CT scans and tumour-annotated scans per source dataset) and its caption; Figure 2 caption (\"ground-truths from public datasets were used when available\"); metadata table header row (no source-dataset column)",
 			"status": "verified",
 			"verifiedOn": "2026-09-30"
 		},
 		"sources": [
-			"radgpt-paper"
+			"radgpt-paper",
+			"abdomenatlas3-metadata-csv"
 		]
 	},
 	{
@@ -24,17 +26,19 @@
 		"to": "ct-org-tcia",
 		"toExternal": null,
 		"type": "derived_from",
-		"explanation": "AbdomenAtlas 3.0 includes 140 CT scans from CT-ORG, the same number as the CT-ORG release in this catalogue, with its own new masks and generated reports. They are the same scans, not additional patients. The release has no column naming the source dataset.",
+		"explanation": "AbdomenAtlas 3.0 includes 140 CT scans from CT-ORG, the same number as the CT-ORG release in this catalogue. They are the same scans, not additional patients. AbdomenAtlas adds lesion masks (Table 1: scans with liver tumour annotations 0 → 44, with kidney tumour annotations 0 → 21), organ sub-region and blood-vessel masks, and generated reports; its organ masks come from AbdomenAtlas 1.1. The release has no column naming the source dataset.",
 		"evidence": {
 			"sources": [
-				"radgpt-paper"
+				"radgpt-paper",
+				"abdomenatlas3-metadata-csv"
 			],
-			"locator": "Table 1 (CT scans per source dataset)",
+			"locator": "Table 1 (CT scans and tumour-annotated scans per source dataset) and its caption; Figure 2 caption (\"ground-truths from public datasets were used when available\"); metadata table header row (no source-dataset column)",
 			"status": "verified",
 			"verifiedOn": "2026-09-30"
 		},
 		"sources": [
-			"radgpt-paper"
+			"radgpt-paper",
+			"abdomenatlas3-metadata-csv"
 		]
 	},
 	{

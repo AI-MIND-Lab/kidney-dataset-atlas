@@ -30,9 +30,9 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "spacing",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Voxel size of the CT, three numbers written like a NumPy array (for example \"[0.8222656 0.8222656 2.5]\"), in the file's own axis order. In 450 rows the largest value comes first, so the slice axis is not always the last axis.",
+		"definition": "Voxel size of the CT, three numbers written like a NumPy array (for example \"[0.8222656 0.8222656 2.5]\"), in the file's own axis order. In 450 rows the largest value comes first, so the slice axis is not always the last axis. No source states the unit; in the 232 CT headers checked, 170 give millimetres and 62 give no unit.",
 		"type": "other",
-		"unit": "mm",
+		"unit": null,
 		"coding": [],
 		"missingValues": [],
 		"observationLevel": "examination",
@@ -239,7 +239,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "liver volume (cm^3)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Volume of liver, read from the \"(volume: ... cm^3)\" text of the report's Liver section. The report computes it from the mask. Observed range 0 to 8562.3; 13 rows are 0.",
+		"definition": "Volume of liver, read from the \"(volume: ... cc)\" text in the Liver section of the structured report. The report computes it from the mask. Observed range 0 to 8562.3; 13 rows are 0.",
 		"type": "decimal",
 		"unit": "cm³",
 		"coding": [],
@@ -252,13 +252,14 @@
 		"group": "imaging",
 		"derivation": "derived",
 		"normalizedConcept": "organ volume",
+		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\"; its main() then rewrote them as \"cc\" in the released report text.",
 		"evidence": {
 			"sources": [
 				"abdomenatlas3-metadata-csv",
 				"radgpt-metadata-script",
 				"radgpt-paper"
 			],
-			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns); paper section 3.1.2",
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns) and main() (cm^3 rewritten as cc); paper section 3.1.2",
 			"status": "verified",
 			"verifiedOn": "2026-09-30"
 		}
@@ -268,7 +269,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "pancreas volume (cm^3)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Volume of pancreas, read from the \"(volume: ... cm^3)\" text of the report's Pancreas section. The report computes it from the mask. Observed range 0 to 428.7; 46 rows are 0.",
+		"definition": "Volume of pancreas, read from the \"(volume: ... cc)\" text in the Pancreas section of the structured report. The report computes it from the mask. Observed range 0 to 428.7; 46 rows are 0.",
 		"type": "decimal",
 		"unit": "cm³",
 		"coding": [],
@@ -281,13 +282,14 @@
 		"group": "imaging",
 		"derivation": "derived",
 		"normalizedConcept": "organ volume",
+		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\"; its main() then rewrote them as \"cc\" in the released report text.",
 		"evidence": {
 			"sources": [
 				"abdomenatlas3-metadata-csv",
 				"radgpt-metadata-script",
 				"radgpt-paper"
 			],
-			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns); paper section 3.1.2",
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns) and main() (cm^3 rewritten as cc); paper section 3.1.2",
 			"status": "verified",
 			"verifiedOn": "2026-09-30"
 		}
@@ -297,7 +299,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "spleen volume (cm^3)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Volume of spleen, read from the \"(volume: ... cm^3)\" text of the report's Spleen section. The report computes it from the mask. Observed range 0 to 3087.9; 38 rows are 0.",
+		"definition": "Volume of spleen, read from the \"(volume: ... cc)\" text in the Spleen section of the structured report. The report computes it from the mask. Observed range 0 to 3087.9; 38 rows are 0.",
 		"type": "decimal",
 		"unit": "cm³",
 		"coding": [],
@@ -310,13 +312,14 @@
 		"group": "imaging",
 		"derivation": "derived",
 		"normalizedConcept": "organ volume",
+		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\"; its main() then rewrote them as \"cc\" in the released report text.",
 		"evidence": {
 			"sources": [
 				"abdomenatlas3-metadata-csv",
 				"radgpt-metadata-script",
 				"radgpt-paper"
 			],
-			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns); paper section 3.1.2",
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns) and main() (cm^3 rewritten as cc); paper section 3.1.2",
 			"status": "verified",
 			"verifiedOn": "2026-09-30"
 		}
@@ -326,7 +329,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "left kidney volume (cm^3)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Volume of left kidney, read from the \"left Kidney volume:\" text of the report's Kidney section. The report computes it from the mask. Observed range 0 to 1986; 136 rows are 0.",
+		"definition": "Volume of left kidney, read from the \"left kidney volume:\" text in the Kidney section of the structured report. The report computes it from the mask. Observed range 0 to 1986; 136 rows are 0.",
 		"type": "decimal",
 		"unit": "cm³",
 		"coding": [],
@@ -339,13 +342,14 @@
 		"group": "imaging",
 		"derivation": "derived",
 		"normalizedConcept": "organ volume",
+		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\"; its main() then rewrote them as \"cc\" in the released report text.",
 		"evidence": {
 			"sources": [
 				"abdomenatlas3-metadata-csv",
 				"radgpt-metadata-script",
 				"radgpt-paper"
 			],
-			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns); paper section 3.1.2",
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns) and main() (cm^3 rewritten as cc); paper section 3.1.2",
 			"status": "verified",
 			"verifiedOn": "2026-09-30"
 		}
@@ -355,7 +359,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "right kidney volume (cm^3)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Volume of right kidney, read from the \"right Kidney volume:\" text of the report's Kidney section. The report computes it from the mask. Observed range 0 to 1927.1; 96 rows are 0.",
+		"definition": "Volume of right kidney, read from the \"right kidney volume:\" text in the Kidney section of the structured report. The report computes it from the mask. Observed range 0 to 1927.1; 96 rows are 0.",
 		"type": "decimal",
 		"unit": "cm³",
 		"coding": [],
@@ -368,13 +372,14 @@
 		"group": "imaging",
 		"derivation": "derived",
 		"normalizedConcept": "organ volume",
+		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\"; its main() then rewrote them as \"cc\" in the released report text.",
 		"evidence": {
 			"sources": [
 				"abdomenatlas3-metadata-csv",
 				"radgpt-metadata-script",
 				"radgpt-paper"
 			],
-			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns); paper section 3.1.2",
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns) and main() (cm^3 rewritten as cc); paper section 3.1.2",
 			"status": "verified",
 			"verifiedOn": "2026-09-30"
 		}
@@ -384,7 +389,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "kidney volume (cm^3)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Volume of both kidneys together, read from the \"total Kidney volume:\" text of the report's Kidney section. The report computes it from the mask. Observed range 0 to 2211.8; 58 rows are 0.",
+		"definition": "Volume of both kidneys together, read from the \"total kidney volume:\" text in the Kidney section of the structured report. The report computes it from the mask. Observed range 0 to 2211.8; 58 rows are 0.",
 		"type": "decimal",
 		"unit": "cm³",
 		"coding": [],
@@ -397,13 +402,14 @@
 		"group": "imaging",
 		"derivation": "derived",
 		"normalizedConcept": "organ volume",
+		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\"; its main() then rewrote them as \"cc\" in the released report text.",
 		"evidence": {
 			"sources": [
 				"abdomenatlas3-metadata-csv",
 				"radgpt-metadata-script",
 				"radgpt-paper"
 			],
-			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns); paper section 3.1.2",
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns) and main() (cm^3 rewritten as cc); paper section 3.1.2",
 			"status": "verified",
 			"verifiedOn": "2026-09-30"
 		}
@@ -418,7 +424,7 @@
 		"unit": null,
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Liver section, or no report at all (the script writes 0 for any missing value)"
+			"0: no numbered lesion in the report's Liver section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
 		],
 		"observationLevel": "examination",
 		"timePoint": null,
@@ -446,7 +452,7 @@
 		"unit": "cm³",
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Liver section, or no report at all (the script writes 0 for any missing value)"
+			"0: no numbered lesion in the report's Liver section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
 		],
 		"observationLevel": "examination",
 		"timePoint": null,
@@ -474,7 +480,7 @@
 		"unit": "cm",
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Liver section, or no report at all (the script writes 0 for any missing value)"
+			"0: no numbered lesion in the report's Liver section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
 		],
 		"observationLevel": "lesion",
 		"timePoint": null,
@@ -743,7 +749,7 @@
 			}
 		],
 		"missingValues": [
-			"blank: no lesion (7,792 of 9,262 rows)",
+			"blank: no lesion in the report, or no report at all (BDMAP_00005266) (7,792 of 9,262 rows)",
 			"\"nan\" (text): lesion 1 has no readable location (19 of 9,262 rows)"
 		],
 		"observationLevel": "lesion",
@@ -785,7 +791,7 @@
 			}
 		],
 		"missingValues": [
-			"blank: no lesion (7,792 of 9,262 rows)"
+			"blank: no lesion in the report, or no report at all (BDMAP_00005266) (7,792 of 9,262 rows)"
 		],
 		"observationLevel": "lesion",
 		"timePoint": null,
@@ -813,7 +819,7 @@
 		"unit": null,
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Pancreas section, or no report at all (the script writes 0 for any missing value)"
+			"0: no numbered lesion in the report's Pancreas section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
 		],
 		"observationLevel": "examination",
 		"timePoint": null,
@@ -841,7 +847,7 @@
 		"unit": "cm³",
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Pancreas section, or no report at all (the script writes 0 for any missing value)"
+			"0: no numbered lesion in the report's Pancreas section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
 		],
 		"observationLevel": "examination",
 		"timePoint": null,
@@ -869,7 +875,7 @@
 		"unit": "cm",
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Pancreas section, or no report at all (the script writes 0 for any missing value)"
+			"0: no numbered lesion in the report's Pancreas section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
 		],
 		"observationLevel": "lesion",
 		"timePoint": null,
@@ -922,7 +928,7 @@
 			}
 		],
 		"missingValues": [
-			"blank: no lesion (8,151 of 9,262 rows)",
+			"blank: no lesion in the report, or no report at all (BDMAP_00005266) (8,151 of 9,262 rows)",
 			"\"nan\" (text): lesion 1 has no readable location (54 of 9,262 rows)"
 		],
 		"observationLevel": "lesion",
@@ -964,7 +970,7 @@
 			}
 		],
 		"missingValues": [
-			"blank: no lesion (8,151 of 9,262 rows)"
+			"blank: no lesion in the report, or no report at all (BDMAP_00005266) (8,151 of 9,262 rows)"
 		],
 		"observationLevel": "lesion",
 		"timePoint": null,
@@ -992,7 +998,7 @@
 		"unit": null,
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Kidney section, or no report at all (the script writes 0 for any missing value)"
+			"0: no numbered lesion in the report's Kidney section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
 		],
 		"observationLevel": "examination",
 		"timePoint": null,
@@ -1020,7 +1026,7 @@
 		"unit": "cm³",
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Kidney section, or no report at all (the script writes 0 for any missing value)"
+			"0: no numbered lesion in the report's Kidney section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
 		],
 		"observationLevel": "examination",
 		"timePoint": null,
@@ -1048,7 +1054,7 @@
 		"unit": "cm",
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Kidney section, or no report at all (the script writes 0 for any missing value)"
+			"0: no numbered lesion in the report's Kidney section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
 		],
 		"observationLevel": "lesion",
 		"timePoint": null,
@@ -1085,7 +1091,7 @@
 			}
 		],
 		"missingValues": [
-			"blank: no lesion (7,118 of 9,262 rows)",
+			"blank: no lesion in the report, or no report at all (BDMAP_00005266) (7,118 of 9,262 rows)",
 			"\"nan\" (text): lesion 1 has no readable location (95 of 9,262 rows)"
 		],
 		"observationLevel": "lesion",
@@ -1127,7 +1133,7 @@
 			}
 		],
 		"missingValues": [
-			"blank: no lesion (7,118 of 9,262 rows)"
+			"blank: no lesion in the report, or no report at all (BDMAP_00005266) (7,118 of 9,262 rows)"
 		],
 		"observationLevel": "lesion",
 		"timePoint": null,
@@ -1155,7 +1161,7 @@
 		"unit": null,
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Colon section, or no report at all (the script writes 0 for any missing value)"
+			"0: no numbered lesion in the report's Colon section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
 		],
 		"observationLevel": "examination",
 		"timePoint": null,
@@ -1183,7 +1189,7 @@
 		"unit": "cm³",
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Colon section, or no report at all (the script writes 0 for any missing value)"
+			"0: no numbered lesion in the report's Colon section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
 		],
 		"observationLevel": "examination",
 		"timePoint": null,
@@ -1211,7 +1217,7 @@
 		"unit": "cm",
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Colon section, or no report at all (the script writes 0 for any missing value)"
+			"0: no numbered lesion in the report's Colon section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
 		],
 		"observationLevel": "lesion",
 		"timePoint": null,
@@ -1252,7 +1258,7 @@
 			}
 		],
 		"missingValues": [
-			"blank: no lesion (9,080 of 9,262 rows)"
+			"blank: no lesion in the report, or no report at all (BDMAP_00005266) (9,080 of 9,262 rows)"
 		],
 		"observationLevel": "lesion",
 		"timePoint": null,
@@ -1415,13 +1421,13 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "segmentations/<structure>.nii.gz (lesion masks)",
 		"file": "mask_only tarballs, BDMAP_xxxxxxxx/segmentations/",
-		"definition": "One mask file per structure in each case folder. Each file is one binary mask with the same array shape as the CT (see the quality findings for header mismatches); masks of different files can overlap. Stored as 0/1, 0/255, or signed bytes -128/127 with a NIfTI scale that maps them to 0/1; read with a loader that applies the scale and threshold at 0.5.",
+		"definition": "One mask file per structure in each case folder. Each file is one binary mask, and masks of different files can overlap. In the 232 cases checked, every mask has the same array shape as its CT, but in 56 of them some mask headers differ from the CT header (see the quality findings). Stored as 0/1, 0/255, or signed bytes -128/127 with a NIfTI scale that maps them to 0/1; read with a loader that applies the scale and threshold at 0.5.",
 		"type": "image",
 		"unit": null,
 		"coding": [
 			{
 				"code": "kidney_lesion.nii.gz",
-				"meaning": "Kidney lesions, tumour and cyst not separated"
+				"meaning": "Kidney lesions; the file does not say whether a lesion is a tumour or a cyst"
 			},
 			{
 				"code": "liver_lesion.nii.gz",
@@ -1447,6 +1453,7 @@
 		"evidence": {
 			"sources": [
 				"abdomenatlas3-mask-files",
+				"abdomenatlas3-image-files",
 				"radgpt-paper",
 				"radgpt-staging-script"
 			],
@@ -1461,7 +1468,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "segmentations/<structure>.nii.gz (organ masks)",
 		"file": "mask_only tarballs, BDMAP_xxxxxxxx/segmentations/",
-		"definition": "One mask file per structure in each case folder. Each file is one binary mask with the same array shape as the CT (see the quality findings for header mismatches); masks of different files can overlap. Stored as 0/1, 0/255, or signed bytes -128/127 with a NIfTI scale that maps them to 0/1; read with a loader that applies the scale and threshold at 0.5.",
+		"definition": "One mask file per structure in each case folder. Each file is one binary mask, and masks of different files can overlap. In the 232 cases checked, every mask has the same array shape as its CT, but in 56 of them some mask headers differ from the CT header (see the quality findings). Stored as 0/1, 0/255, or signed bytes -128/127 with a NIfTI scale that maps them to 0/1; read with a loader that applies the scale and threshold at 0.5.",
 		"type": "image",
 		"unit": null,
 		"coding": [
@@ -1561,6 +1568,7 @@
 		"evidence": {
 			"sources": [
 				"abdomenatlas3-mask-files",
+				"abdomenatlas3-image-files",
 				"radgpt-paper",
 				"radgpt-staging-script"
 			],
@@ -1575,7 +1583,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "segmentations/<structure>.nii.gz (sub-region masks)",
 		"file": "mask_only tarballs, BDMAP_xxxxxxxx/segmentations/",
-		"definition": "One mask file per structure in each case folder. Each file is one binary mask with the same array shape as the CT (see the quality findings for header mismatches); masks of different files can overlap. Stored as 0/1, 0/255, or signed bytes -128/127 with a NIfTI scale that maps them to 0/1; read with a loader that applies the scale and threshold at 0.5.",
+		"definition": "One mask file per structure in each case folder. Each file is one binary mask, and masks of different files can overlap. In the 232 cases checked, every mask has the same array shape as its CT, but in 56 of them some mask headers differ from the CT header (see the quality findings). Stored as 0/1, 0/255, or signed bytes -128/127 with a NIfTI scale that maps them to 0/1; read with a loader that applies the scale and threshold at 0.5.",
 		"type": "image",
 		"unit": null,
 		"coding": [
@@ -1635,6 +1643,7 @@
 		"evidence": {
 			"sources": [
 				"abdomenatlas3-mask-files",
+				"abdomenatlas3-image-files",
 				"radgpt-paper",
 				"radgpt-staging-script"
 			],
@@ -1649,7 +1658,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "segmentations/<structure>.nii.gz (vessel masks)",
 		"file": "mask_only tarballs, BDMAP_xxxxxxxx/segmentations/",
-		"definition": "One mask file per structure in each case folder. Each file is one binary mask with the same array shape as the CT (see the quality findings for header mismatches); masks of different files can overlap. Stored as 0/1, 0/255, or signed bytes -128/127 with a NIfTI scale that maps them to 0/1; read with a loader that applies the scale and threshold at 0.5.",
+		"definition": "One mask file per structure in each case folder. Each file is one binary mask, and masks of different files can overlap. In the 232 cases checked, every mask has the same array shape as its CT, but in 56 of them some mask headers differ from the CT header (see the quality findings). Stored as 0/1, 0/255, or signed bytes -128/127 with a NIfTI scale that maps them to 0/1; read with a loader that applies the scale and threshold at 0.5.",
 		"type": "image",
 		"unit": null,
 		"coding": [
@@ -1697,6 +1706,7 @@
 		"evidence": {
 			"sources": [
 				"abdomenatlas3-mask-files",
+				"abdomenatlas3-image-files",
 				"radgpt-paper",
 				"radgpt-staging-script"
 			],
@@ -1725,9 +1735,10 @@
 		"evidence": {
 			"sources": [
 				"abdomenatlas3-hf-files",
+				"abdomenatlas3-image-files",
 				"radgpt-generate-readme"
 			],
-			"locator": "image_only listing; generate_reports README, \"Dataset Format\"",
+			"locator": "image_only listing; the 232 ct.nii.gz headers in the first image tarball; generate_reports README, \"Dataset Format\"",
 			"status": "verified",
 			"verifiedOn": "2026-09-30",
 			"note": "Headers opened for the first 232 cases only."
