@@ -1,0 +1,190 @@
+[
+	{
+		"id": "amos-mm-counts-differ",
+		"release": "amos-mm-2024",
+		"category": "observed_issue",
+		"description": "The size of the dataset is given differently in each source. The data page says \"2000+\" CT scans and \"19,562\" questions; Codabench says 2,088 cases (1,288 training, 400 validation, 400 test); the design document says 2,300 cases (1,500, 300 and 500) with about 4 questions per case. The released files hold 1,687 cases (1,287 training, 400 validation) and 16,538 questions, a median of 10 per case, on 1,590 cases; 97 cases have none. The design document also describes 8 question skills, where the files have 6 types, and promises gender and age, which the files do not have. Codabench lists data changes and deletions on 9 June 2024.",
+		"inspectedScope": "Both JSON files, all rows; the data page; Codabench \"Home\" and \"Dataset\" pages; design document pp. 2, 11, 12 and 26.",
+		"affected": {
+			"value": null,
+			"status": "not_applicable"
+		},
+		"detection": "Counting cases and questions in the files and comparing them with each source.",
+		"impact": "Readers who take the published numbers at face value expect more cases, more questions and demographic fields than the release holds.",
+		"handling": "Use the counts of the released files, and cite the release version when reporting them.",
+		"sources": [
+			"amos-mm-report-json",
+			"amos-mm-vqa-json",
+			"amos-mm-data-page",
+			"amos-mm-codabench",
+			"amos-mm-design-doc"
+		]
+	},
+	{
+		"id": "amos-mm-test-set-not-released",
+		"release": "amos-mm-2024",
+		"category": "observed_issue",
+		"description": "Both JSON headers announce 400 test cases (\"numTest\": 400), but the \"testing\" list is empty and the Drive folder has no test images. Only training and validation cases are public.",
+		"inspectedScope": "Both JSON headers and their \"testing\" lists; the Drive folder file list.",
+		"affected": {
+			"value": 400,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"amos-mm-report-json",
+					"amos-mm-vqa-json"
+				],
+				"locator": "\"numTest\" in both headers; empty \"testing\" lists",
+				"status": "verified",
+				"verifiedOn": "2026-09-30"
+			}
+		},
+		"detection": "Reading the header and the split lists; listing the folder.",
+		"impact": "Results on the challenge test set cannot be reproduced, so published challenge scores cannot be compared with new models.",
+		"handling": "Report results on the validation set and say that the test set is not public.",
+		"sources": [
+			"amos-mm-report-json",
+			"amos-mm-vqa-json",
+			"amos-mm-drive-folder"
+		]
+	},
+	{
+		"id": "amos-mm-validation-cts-in-training-zip",
+		"release": "amos-mm-2024",
+		"category": "observed_issue",
+		"description": "amos_7008, amos_7312 and amos_7333 are in both imagesTr.zip and imagesVa.zip, with the same size and CRC32. The JSON files list all three as validation cases only.",
+		"inspectedScope": "All 1,690 members of the two zips (from the file list; files not opened) and both JSON files.",
+		"affected": {
+			"value": 3,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"amos-mm-zip-listings",
+					"amos-mm-report-json",
+					"amos-mm-vqa-json"
+				],
+				"locator": "file names in both zips; split of each case in the JSON",
+				"status": "verified",
+				"verifiedOn": "2026-09-30"
+			}
+		},
+		"detection": "Matching member names, sizes and CRC32 between the zips and with the JSON splits.",
+		"impact": "Treating every file of imagesTr.zip as training data puts these 3 validation CTs into training.",
+		"handling": "Take the split from the JSON files, not from the zip a file came from.",
+		"sources": [
+			"amos-mm-zip-listings",
+			"amos-mm-report-json",
+			"amos-mm-vqa-json"
+		]
+	},
+	{
+		"id": "amos-mm-mri-scanner-names",
+		"release": "amos-mm-2024",
+		"category": "observed_issue",
+		"description": "4 cases name an MRI scanner model in their metadata: amos_6633 (SIGNA HDe) and amos_6665, amos_6927 and amos_6951 (Prisma). The design document lists only 5 CT scanner models. The 2 of these files in the local sample, amos_6633 and amos_6927, hold CT values (minimum −1,024), so their scanner field looks wrong.",
+		"inspectedScope": "The scanner field of all 1,687 cases; voxel values of 2 local files (sample); design document p. 11.",
+		"affected": {
+			"value": 4,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"amos-mm-report-json",
+					"amos-mm-vqa-json"
+				],
+				"locator": "meta.scanner of all cases",
+				"status": "verified",
+				"verifiedOn": "2026-09-30"
+			}
+		},
+		"detection": "Counting scanner values; reading the voxel range of the local files.",
+		"impact": "Grouping or filtering by scanner treats these CT scans as MRI.",
+		"handling": "Do not rely on the scanner field for these 4 cases; check the image values.",
+		"sources": [
+			"amos-mm-report-json",
+			"amos-mm-vqa-json",
+			"amos-mm-image-files",
+			"amos-mm-design-doc"
+		]
+	},
+	{
+		"id": "amos-mm-non-axial-volumes",
+		"release": "amos-mm-2024",
+		"category": "observed_issue",
+		"description": "2 CTs are stored as stacks of non-axial slices: amos_5693 as coronal slices (orientation LSP) and amos_5553 as sagittal slices (PSR). They are the only 2 cases with a 768 × 998 matrix in the metadata.",
+		"inspectedScope": "The shape field of all 1,687 cases; orientation of both files, which are in the local sample.",
+		"affected": {
+			"value": 2,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"amos-mm-report-json",
+					"amos-mm-vqa-json",
+					"amos-mm-image-files"
+				],
+				"locator": "meta.shape of all cases; NIfTI affine of both files",
+				"status": "verified",
+				"verifiedOn": "2026-09-30"
+			}
+		},
+		"detection": "Listing in-plane matrix sizes; reading the orientation codes from the NIfTI affine.",
+		"impact": "Code that takes the third array axis as axial cuts these scans in the wrong direction.",
+		"handling": "Reorient every scan by its NIfTI affine before use.",
+		"sources": [
+			"amos-mm-report-json",
+			"amos-mm-vqa-json",
+			"amos-mm-image-files"
+		]
+	},
+	{
+		"id": "amos-mm-licence-statements-differ",
+		"release": "amos-mm-2024",
+		"category": "observed_issue",
+		"description": "The licence statements disagree. Both JSON headers say CC BY-ND 4.0; the design document says the data follow \"the CC BY-SA (Attribution-ShareAlike) adopted by AMOS22\"; the data page gives none. For the 228 CTs that are AMOS22 files, AMOS22's Zenodo record says CC BY 4.0, its dataset.json \"CC-BY-SA 4.0\" and the AMOS paper CC BY-NC-SA. During the challenge, the application form also made applicants promise to \"obey the rules, NOT share the dataset\", although the data are now in a public folder.",
+		"inspectedScope": "Both JSON headers; design document pp. 8 and 22; the data page; Codabench \"Rules\" and \"Instructions\" pages and the application form; AMOS22 Zenodo record and dataset.json; AMOS paper Appendix B.3.",
+		"affected": {
+			"value": null,
+			"status": "not_applicable"
+		},
+		"detection": "Reading the licence statement of each source.",
+		"impact": "It is unclear whether modified copies (ND) and commercial use (NC) are allowed, which matters for derived datasets and for this catalog's preview.",
+		"handling": "Ask the provider which licence applies; until then, follow the most restrictive statement.",
+		"sources": [
+			"amos-mm-report-json",
+			"amos-mm-vqa-json",
+			"amos-mm-design-doc",
+			"amos-mm-data-page",
+			"amos-mm-codabench",
+			"amos-mm-request-form",
+			"amos22-zenodo",
+			"amos-paper"
+		]
+	},
+	{
+		"id": "amos-mm-amos22-name-reuse",
+		"release": "amos-mm-2024",
+		"category": "potential_check",
+		"description": "Only 228 of the 1,687 CT files are AMOS22's own files (the amos_0xxx names). Another 1,377 files reuse AMOS22 file names but are different files: 1,091 have the names of AMOS22 unlabelled CTs (amos_5000 to amos_6899) and 286 the names of AMOS22 unlabelled MRI scans (amos_7xxx), although they hold CT (the 2 such files in the local sample have CT values). The remaining 82 names are not in AMOS22.",
+		"inspectedScope": "All members of the two AMOS-MM zips compared with the AMOS22 zip listings by name, size and CRC32 (from the file lists; files not opened).",
+		"affected": {
+			"value": 1377,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"amos-mm-zip-listings",
+					"amos22-unlabeled-zenodo"
+				],
+				"locator": "same name, different size or CRC32",
+				"status": "verified",
+				"verifiedOn": "2026-09-30"
+			}
+		},
+		"detection": "Comparing name, size and CRC32 of every file with the AMOS22 listings.",
+		"impact": "Joining AMOS-MM with AMOS22 by file name pairs different scans, and attaches AMOS22 MRI scans to AMOS-MM CT reports.",
+		"handling": "Match the two datasets by file content (size and CRC32, or a hash), not by name; only the amos_0xxx files are shared.",
+		"sources": [
+			"amos-mm-zip-listings",
+			"amos22-zenodo",
+			"amos22-unlabeled-zenodo"
+		]
+	}
+]

@@ -135,6 +135,9 @@ RCCAID = {
     ],
 }
 
+AMOS_PANELS = ('Four views of one scan: the whole axial slice where the right kidney is largest, a zoomed axial crop, '
+               'and coronal and sagittal cuts through the centre of the right kidney. Both kidneys are outlined in green; '
+               'there is no stone or cyst mask. Window 50/500 HU; radiological orientation (patient left on viewer right).')
 # Rendered by the Kidney-VLM project with RadGPT/tools/render_preview.py (kept outside this repository), which follows
 # the four-panel conventions in docs/previews.md; the lesion has its own colour because the release does not type it.
 ATLAS = {
@@ -176,6 +179,27 @@ DTV = {
 }
 
 
+# Rendered by the Kidney-VLM project with AMOS-MM/tools/render_preview.py (kept outside this repository), adapted from the
+# AbdomenAtlas renderer. AMOS-MM releases no masks; this CT is an AMOS22 file, so AMOS22's label map fits it.
+AMOS = {
+    'release': 'amos-mm-2024', 'folder': 'amos-mm',
+    'attribution': ('CT: AMOS-MM (MICCAI 2024 AMOS-MM challenge; Ji, Ge, Li and Luo), imagesTr/amos_0088.nii.gz from the public '
+                    'Google Drive release, which matches amos_0088 of AMOS22 in size and CRC32 (Ji et al., NeurIPS 2022; '
+                    'doi:10.5281/zenodo.7262581). Kidney mask: AMOS22 labelsTr/amos_0088.nii.gz. Rendered by the Kidney-VLM '
+                    'project: reoriented for display, windowed, cropped and outlined.'),
+    'reuseTerms': ('Unresolved. The CT matches an AMOS22 file in size and CRC32, and AMOS22\'s own statements differ: its Zenodo '
+                   'record says CC BY 4.0, its dataset.json "CC-BY-SA 4.0" and the AMOS paper CC BY-NC-SA. AMOS-MM\'s JSON '
+                   'files state CC BY-ND 4.0, which does not allow adaptations, and its design document CC BY-SA. A curator '
+                   'has to settle which applies before approving this preview.'),
+    'sources': ['amos-mm-image-files', 'amos-mm-report-json', 'amos-mm-vqa-json', 'amos-mm-zip-listings', 'amos22-zenodo',
+                'amos-paper', 'amos-mm-design-doc', 'deeptumorvqa-id-mapping', 'abdomenatlas3-metadata-csv'],
+    'alignment': 'The AMOS22 mask and the AMOS-MM CT share one voxel grid and affine (checked). Nothing was re-registered.',
+    'items': [
+        ('amos_0088', "AMOS-MM amos_0088, a training case from site A (Aquilion ONE scanner in the release's metadata; voxel size 0.75 × 0.75 × 5.0 mm from the file header). Its report finds \"a small dot-like high-density focus\" and \"an unenhanced low-density focus\" of about 6 mm in the right kidney, and the impression reads \"Small kidney stone in the right kidney and a small cyst.\" Six of its questions are about the right kidney. AMOS22 outlines organs only, so neither finding is outlined here; the same scan is AbdomenAtlas 3.0 BDMAP_00001989, whose metadata lists one 0.6 cm hypoattenuating lesion in the right kidney.", 'CT with both kidneys outlined in green, shown in axial, zoomed, coronal and sagittal views.'),
+    ],
+}
+
+
 def cptac_mask(name, caption):
     if 'radiologist-corrected BAMF' in caption:
         return 'Mask: BAMF (AI-generated, AIMI Annotations), corrected by a radiologist.'
@@ -200,13 +224,15 @@ MASK_LINE = {
                                            "(AI with radiologists in the loop); the kidney lesion mask was drawn by AI and "
                                            "corrected by radiologists."),
     'deeptumorvqa-2-0': lambda n, c: "No mask: DeepTumorVQA's own image, as released for its questions.",
+    'amos-mm-2024': lambda n, c: ("Mask: AMOS22's organ mask, not part of AMOS-MM. AMOS22's masks were pre-labelled by models "
+                                  "and checked by junior and then senior radiologists; a few scans were drawn by hand."),
 }
 
 samples, total_in, total_out = [], 0, 0
-for spec in (KITS, RMAC, CPTAC, TCGA, RCCAID, ATLAS, DTV):
+for spec in (KITS, RMAC, CPTAC, TCGA, RCCAID, ATLAS, DTV, AMOS):
     out_dir = os.path.join(REPO, 'public', 'previews', spec['release'])
     os.makedirs(out_dir, exist_ok=True)
-    intro = {id(RMAC): RMAC_PANELS, id(ATLAS): ATLAS_PANELS, id(DTV): DTV_PANELS}.get(id(spec), FOUR_PANEL)
+    intro = {id(RMAC): RMAC_PANELS, id(ATLAS): ATLAS_PANELS, id(DTV): DTV_PANELS, id(AMOS): AMOS_PANELS}.get(id(spec), FOUR_PANEL)
     for name, caption, alt in spec['items']:
         src = os.path.join(FIG, spec['folder'], name + '.png')
         dst = os.path.join(out_dir, name + '.webp')

@@ -1,0 +1,586 @@
+[
+	{
+		"id": "amos-mm-2024-header",
+		"release": "amos-mm-2024",
+		"originalName": "header",
+		"file": "report_generation_train_val.json, vqa_train_val.json",
+		"definition": "File-level fields at the top of both JSON files: name (\"AMOS-MM\"), description, author, reference (\"HKU\"), licence (\"CC BY-ND 4.0\"), release (\"1.0 01/06/2024\"), contact (an e-mail address), tensorImageSize (\"3D\"), modality ({\"0\": \"CT\"}) and the number of cases per split (numTraining 1,287, numValidation 400, numTest 400). The \"testing\" list is empty, so the test cases announced here are not in the release. The values are the same in both files.",
+		"type": "other",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"amos-mm-report-json",
+				"amos-mm-vqa-json"
+			],
+			"locator": "Header fields of both JSON files",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "amos-mm-2024-image",
+		"release": "amos-mm-2024",
+		"originalName": "image",
+		"file": "report_generation_train_val.json, vqa_train_val.json",
+		"definition": "Relative path of the case's CT in the image archives (./imagesTr/amos_xxxx.nii.gz for the 1,287 training cases, ./imagesVa/... for the 400 validation cases). It is the case key; the file name, without folder, matches the name inside the zip. Three validation files (amos_7008, amos_7312, amos_7333) are also in imagesTr.zip.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "identifier",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"amos-mm-report-json",
+				"amos-mm-vqa-json",
+				"amos-mm-zip-listings"
+			],
+			"locator": "Both JSON files, all 1,687 case records; member names of both zips",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "amos-mm-2024-meta-site",
+		"release": "amos-mm-2024",
+		"originalName": "meta.site",
+		"file": "report_generation_train_val.json, vqa_train_val.json",
+		"definition": "Hospital the scan comes from, as a one-letter code. The site names are from the Codabench \"Dataset\" page.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "B",
+				"meaning": "Longgang District People's Hospital, Shenzhen (1,083 of 1,687)"
+			},
+			{
+				"code": "A",
+				"meaning": "Longgang District Central Hospital, Shenzhen (604 of 1,687)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"amos-mm-report-json",
+				"amos-mm-vqa-json",
+				"amos-mm-codabench"
+			],
+			"locator": "Both JSON files, all 1,687 case records; Codabench \"Dataset\" page",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "amos-mm-2024-meta-scanner",
+		"release": "amos-mm-2024",
+		"originalName": "meta.scanner",
+		"file": "report_generation_train_val.json, vqa_train_val.json",
+		"definition": "CT scanner model. Seven values; two of them, Prisma and SIGNA HDe, are MRI scanner models although these 4 cases are listed as CT and the 2 checked hold CT values (see the quality findings).",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "SOMATOM Force",
+				"meaning": "(834 of 1,687)"
+			},
+			{
+				"code": "Brilliance16",
+				"meaning": "(345 of 1,687)"
+			},
+			{
+				"code": "Aquilion ONE",
+				"meaning": "(259 of 1,687)"
+			},
+			{
+				"code": "Optima CT660",
+				"meaning": "(129 of 1,687)"
+			},
+			{
+				"code": "Optima CT540",
+				"meaning": "(116 of 1,687)"
+			},
+			{
+				"code": "Prisma",
+				"meaning": "(3 of 1,687)"
+			},
+			{
+				"code": "SIGNA HDe",
+				"meaning": "(1 of 1,687)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"amos-mm-report-json",
+				"amos-mm-vqa-json"
+			],
+			"locator": "Both JSON files, all 1,687 case records",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "amos-mm-2024-meta-shape",
+		"release": "amos-mm-2024",
+		"originalName": "meta.shape",
+		"file": "report_generation_train_val.json, vqa_train_val.json",
+		"definition": "Size of the CT voxel grid, three integers in the file's axis order. In-plane: 512 × 512 in 1,343, 768 × 768 in 342, 768 × 998 in 2. Third value 30 to 915 (median 120); it is the number of axial slices except in amos_5553 and amos_5693, which are stored as sagittal and coronal slices. In the 16 files checked, it equals the NIfTI header.",
+		"type": "other",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"amos-mm-report-json",
+				"amos-mm-vqa-json",
+				"amos-mm-image-files"
+			],
+			"locator": "Both JSON files, all 1,687 case records; NIfTI headers of the 16 sample files",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "amos-mm-2024-meta-spacing",
+		"release": "amos-mm-2024",
+		"originalName": "meta.spacing",
+		"file": "report_generation_train_val.json, vqa_train_val.json",
+		"definition": "Voxel size, three numbers in the file's axis order; the first two are equal in every case. In-plane 0.361 to 1.068 (median 0.666); third value 5 in 950, 2 in 547, 1.25 in 108, 2.5 in 64, other values in 18. The JSON states no unit; the 16 NIfTI headers checked give millimetres and the same values.",
+		"type": "decimal",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"amos-mm-report-json",
+				"amos-mm-vqa-json",
+				"amos-mm-image-files"
+			],
+			"locator": "Both JSON files, all 1,687 case records; NIfTI headers of the 16 sample files",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "amos-mm-2024-findings-chest",
+		"release": "amos-mm-2024",
+		"originalName": "labels.report.findings.chest",
+		"file": "report_generation_train_val.json",
+		"definition": "Findings for the chest: one English text describing what the radiologist saw. Filled in 512 of 1,687 cases; empty when the region was not reported.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"\"\": region not reported (1,175 of 1,687)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "The hospitals' Chinese reports, translated into English by three junior radiologists and corrected by two senior radiologists (design document p. 13). In vqa_train_val.json, \"labels.report\" is an empty object in every case, so this field is absent there.",
+		"evidence": {
+			"sources": [
+				"amos-mm-report-json",
+				"amos-mm-codabench",
+				"amos-mm-design-doc"
+			],
+			"locator": "report_generation_train_val.json, all 1,687 case records; Codabench \"Dataset\" page (\"MRG Annotations\"); design document p. 13",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "amos-mm-2024-findings-abdomen",
+		"release": "amos-mm-2024",
+		"originalName": "labels.report.findings.abdomen",
+		"file": "report_generation_train_val.json",
+		"definition": "Findings for the abdomen: one English text describing what the radiologist saw. Filled in 1,684 of 1,687 cases; empty when the region was not reported.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"\"\": region not reported (3 of 1,687)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "The hospitals' Chinese reports, translated into English by three junior radiologists and corrected by two senior radiologists (design document p. 13). In vqa_train_val.json, \"labels.report\" is an empty object in every case, so this field is absent there.",
+		"evidence": {
+			"sources": [
+				"amos-mm-report-json",
+				"amos-mm-codabench",
+				"amos-mm-design-doc"
+			],
+			"locator": "report_generation_train_val.json, all 1,687 case records; Codabench \"Dataset\" page (\"MRG Annotations\"); design document p. 13",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "amos-mm-2024-findings-pelvis",
+		"release": "amos-mm-2024",
+		"originalName": "labels.report.findings.pelvis",
+		"file": "report_generation_train_val.json",
+		"definition": "Findings for the pelvis: one English text describing what the radiologist saw. Filled in 1,467 of 1,687 cases; empty when the region was not reported.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"\"\": region not reported (220 of 1,687)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "The hospitals' Chinese reports, translated into English by three junior radiologists and corrected by two senior radiologists (design document p. 13). In vqa_train_val.json, \"labels.report\" is an empty object in every case, so this field is absent there.",
+		"evidence": {
+			"sources": [
+				"amos-mm-report-json",
+				"amos-mm-codabench",
+				"amos-mm-design-doc"
+			],
+			"locator": "report_generation_train_val.json, all 1,687 case records; Codabench \"Dataset\" page (\"MRG Annotations\"); design document p. 13",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "amos-mm-2024-impression-chest",
+		"release": "amos-mm-2024",
+		"originalName": "labels.report.impression.chest",
+		"file": "report_generation_train_val.json",
+		"definition": "Impression for the chest: a list of English sentences with the radiologist's conclusions. Non-empty in 487 of 1,687 cases.",
+		"type": "other",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"[]: region not reported (1,133 of 1,687)",
+			"key absent (67 of 1,687)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "The hospitals' Chinese reports, translated into English by three junior radiologists and corrected by two senior radiologists (design document p. 13). In vqa_train_val.json, \"labels.report\" is an empty object in every case, so this field is absent there.",
+		"evidence": {
+			"sources": [
+				"amos-mm-report-json",
+				"amos-mm-codabench",
+				"amos-mm-design-doc"
+			],
+			"locator": "report_generation_train_val.json, all 1,687 case records; Codabench \"Dataset\" page (\"MRG Annotations\"); design document p. 13",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "amos-mm-2024-impression-abdomen",
+		"release": "amos-mm-2024",
+		"originalName": "labels.report.impression.abdomen",
+		"file": "report_generation_train_val.json",
+		"definition": "Impression for the abdomen: a list of English sentences with the radiologist's conclusions. Non-empty in 1,623 of 1,687 cases.",
+		"type": "other",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"[]: region not reported (64 of 1,687)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "The hospitals' Chinese reports, translated into English by three junior radiologists and corrected by two senior radiologists (design document p. 13). In vqa_train_val.json, \"labels.report\" is an empty object in every case, so this field is absent there.",
+		"evidence": {
+			"sources": [
+				"amos-mm-report-json",
+				"amos-mm-codabench",
+				"amos-mm-design-doc"
+			],
+			"locator": "report_generation_train_val.json, all 1,687 case records; Codabench \"Dataset\" page (\"MRG Annotations\"); design document p. 13",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "amos-mm-2024-impression-pelvis",
+		"release": "amos-mm-2024",
+		"originalName": "labels.report.impression.pelvis",
+		"file": "report_generation_train_val.json",
+		"definition": "Impression for the pelvis: a list of English sentences with the radiologist's conclusions. Non-empty in 859 of 1,687 cases.",
+		"type": "other",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"[]: region not reported (828 of 1,687)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "The hospitals' Chinese reports, translated into English by three junior radiologists and corrected by two senior radiologists (design document p. 13). In vqa_train_val.json, \"labels.report\" is an empty object in every case, so this field is absent there.",
+		"evidence": {
+			"sources": [
+				"amos-mm-report-json",
+				"amos-mm-codabench",
+				"amos-mm-design-doc"
+			],
+			"locator": "report_generation_train_val.json, all 1,687 case records; Codabench \"Dataset\" page (\"MRG Annotations\"); design document p. 13",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "amos-mm-2024-labels-qa",
+		"release": "amos-mm-2024",
+		"originalName": "labels.qa",
+		"file": "vqa_train_val.json",
+		"definition": "List of multiple-choice questions about the case: 16,538 questions on 1,590 of 1,687 cases, 3 to 17 per case (median 10); 97 cases have none. Each question has the five fields below.",
+		"type": "other",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "clinical",
+		"derivation": "derived",
+		"normalizedConcept": null,
+		"provenance": "Generated by GPT-4 from the reports and reviewed by a senior radiologist and a clinical physician (design document p. 26).",
+		"evidence": {
+			"sources": [
+				"amos-mm-vqa-json",
+				"amos-mm-codabench",
+				"amos-mm-design-doc"
+			],
+			"locator": "vqa_train_val.json, all 16,538 questions; Codabench \"Dataset\" page (\"VQA Annotations\"); design document p. 26",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "amos-mm-2024-qa-question",
+		"release": "amos-mm-2024",
+		"originalName": "question",
+		"file": "vqa_train_val.json",
+		"definition": "Question text in English. 16,407 distinct texts among 16,538 questions.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "clinical",
+		"derivation": "derived",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"amos-mm-vqa-json",
+				"amos-mm-codabench",
+				"amos-mm-design-doc"
+			],
+			"locator": "vqa_train_val.json, all 16,538 questions; Codabench \"Dataset\" page (\"VQA Annotations\"); design document p. 26",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "amos-mm-2024-qa-options",
+		"release": "amos-mm-2024",
+		"originalName": "options",
+		"file": "vqa_train_val.json",
+		"definition": "The four answer choices, keyed A to D (four in every question).",
+		"type": "other",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "clinical",
+		"derivation": "derived",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"amos-mm-vqa-json",
+				"amos-mm-codabench",
+				"amos-mm-design-doc"
+			],
+			"locator": "vqa_train_val.json, all 16,538 questions; Codabench \"Dataset\" page (\"VQA Annotations\"); design document p. 26",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "amos-mm-2024-qa-answer",
+		"release": "amos-mm-2024",
+		"originalName": "answer",
+		"file": "vqa_train_val.json",
+		"definition": "Letter of the correct option.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "B",
+				"meaning": "(5,926 of 16,538)"
+			},
+			{
+				"code": "C",
+				"meaning": "(5,425 of 16,538)"
+			},
+			{
+				"code": "D",
+				"meaning": "(3,242 of 16,538)"
+			},
+			{
+				"code": "A",
+				"meaning": "(1,945 of 16,538)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "derived",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"amos-mm-vqa-json",
+				"amos-mm-codabench",
+				"amos-mm-design-doc"
+			],
+			"locator": "vqa_train_val.json, all 16,538 questions; Codabench \"Dataset\" page (\"VQA Annotations\"); design document p. 26",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "amos-mm-2024-qa-reasoning",
+		"release": "amos-mm-2024",
+		"originalName": "reasoning",
+		"file": "vqa_train_val.json",
+		"definition": "Short English justification of the answer, written with the question (median 272 characters; none empty). The design document calls it the rationale.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "clinical",
+		"derivation": "derived",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"amos-mm-vqa-json",
+				"amos-mm-codabench",
+				"amos-mm-design-doc"
+			],
+			"locator": "vqa_train_val.json, all 16,538 questions; Codabench \"Dataset\" page (\"VQA Annotations\"); design document p. 26",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "amos-mm-2024-qa-type",
+		"release": "amos-mm-2024",
+		"originalName": "type",
+		"file": "vqa_train_val.json",
+		"definition": "Question category; 6 values, matching the 6 skills on the Codabench page. One is spelled \"anaotomical_identification\" in the file. The design document describes 8 skills.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "quantitative_assessment",
+				"meaning": "(3,335 of 16,538)"
+			},
+			{
+				"code": "anaotomical_identification",
+				"meaning": "(3,053 of 16,538)"
+			},
+			{
+				"code": "attribute_recognition",
+				"meaning": "(2,922 of 16,538)"
+			},
+			{
+				"code": "risk_evaluation",
+				"meaning": "(2,599 of 16,538)"
+			},
+			{
+				"code": "disease_analysis",
+				"meaning": "(2,593 of 16,538)"
+			},
+			{
+				"code": "therapeutic_suggestion",
+				"meaning": "(2,036 of 16,538)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "derived",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"amos-mm-vqa-json",
+				"amos-mm-codabench",
+				"amos-mm-design-doc"
+			],
+			"locator": "vqa_train_val.json, all 16,538 questions; Codabench \"Dataset\" page (\"VQA Annotations\"); design document p. 26",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	}
+]

@@ -25,6 +25,11 @@ The DeepTumorVQA 2.0 preview is different again: it is not a rendering by the Ki
 DeepTumorVQA's own released images (an organ PNG of five axial slices), downloaded from the release and only
 compressed to WebP. It carries no outlines, and its caption comes from that scan's DeepTumorVQA metadata and questions.
 
+The AMOS-MM preview was rendered by the Kidney-VLM project with `AMOS-MM/tools/render_preview.py` (in the project's
+dataset folder, not in this repository), adapted from the AbdomenAtlas script. AMOS-MM releases no masks: the scan
+shown, amos_0088, is one of its 228 CTs that are AMOS22 files, so it is drawn with AMOS22's kidney labels. It was
+picked because its report describes a kidney finding, and its caption comes from that report and its questions.
+
 The TCGA-KIRC previews show the project's own conversion of the TCIA scans with BAMF or RCC-AID masks placed on
 them; the RCC-AID previews show RCC-AID's released images and labels directly. In TCGA-KIRC captions, the phase
 comes from a reader's label, because the TCIA collection does not record phase in a structured field.
@@ -32,7 +37,7 @@ comes from a reader's label, because the TCIA collection does not record phase i
 What was changed from the source data, for every preview: the intensity was windowed, the view cropped and
 zoomed, and the mask drawn as outlines. Nothing was added to or removed from the anatomy.
 
-## How to read a four-panel preview (KiTS23, CPTAC-CCRCC, TCGA, RCC-AID, AbdomenAtlas 3.0)
+## How to read a four-panel preview (KiTS23, CPTAC-CCRCC, TCGA, RCC-AID, AbdomenAtlas 3.0, AMOS-MM)
 
 | Panel | What it shows |
 |---|---|
@@ -71,6 +76,7 @@ Every caption starts by naming the mask source. They differ a great deal in how 
 | **UCSF RMaC annotations** | A radiology resident with three years' experience annotated each lesion in MD.ai, mostly as bounding boxes (53%) or a centre-slice box with end-slice points (41%), with polygons for 6%; an attending abdominal radiologist with over 15 years' experience reviewed every annotation | [Sahin et al. 2026, preprint](https://doi.org/10.64898/2026.02.11.26346096) |
 | **BAMF (AIMI Annotations)** | AI-generated segmentations released for NCI Imaging Data Commons collections, including CPTAC-CCRCC and the TCGA kidney collections. A portion was reviewed and corrected by a radiologist; captions say whether a mask was corrected or is uncorrected AI output, which can contain small stray regions | [Murugesan et al. 2024](https://doi.org/10.1038/s41597-024-03977-8); [Zenodo release, CC BY 4.0](https://doi.org/10.5281/zenodo.8345959) |
 | **AbdomenAtlas 3.0** | Kidney masks from AbdomenAtlas 1.1, made by AI with radiologists in the loop. The kidney lesion mask was drawn by AI (DiffTumor and nnU-Net) and then checked and corrected by radiologists one by one, using the source datasets' ground truth where it existed. It does not say whether a lesion is a tumour or a cyst | [Bassi et al. 2025, ICCV](https://doi.org/10.1109/ICCV51701.2025.02202); [Hugging Face release, CC BY-NC-SA 4.0 on the dataset card](https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas3.0Mini) |
+| **AMOS22 (shown on AMOS-MM)** | AMOS22's organ masks, which are not part of AMOS-MM. 50 CT and 20 MRI scans were annotated by hand; the rest were pre-labelled by models (3D-UNet, VNet), checked case by case by five junior radiologists and then reviewed by three senior radiologists. The kidneys are labelled as right and left kidney; there are no lesion labels | [Ji et al. 2022, AMOS paper](https://arxiv.org/abs/2206.08023); [Zenodo release](https://doi.org/10.5281/zenodo.7262581) |
 | **RCC-AID** | An automated segmentation model produced initial kidney and lesion masks on TCGA-KIRC, -KIRP and -KICH CT; two trained students checked and corrected them and added tumours and cysts, and a board-certified radiologist reviewed uncertain cases | [de Boer et al. 2026](https://doi.org/10.59275/j.melba.2026-2dg2); [Zenodo release, CC BY 4.0](https://doi.org/10.5281/zenodo.20719257) |
 
 None of these is a mask drawn from scratch by a radiologist for every case. Where a preview shows a quality
@@ -87,4 +93,8 @@ attribution to both. The AbdomenAtlas 3.0 preview carries CC BY-NC-SA 4.0, the l
 RadGPT repository's own LICENSE says CC BY-NC-ND 4.0, and a curator has to settle which applies before approving it.
 The DeepTumorVQA 2.0 preview falls under the same source CT licence, according to the DeepTumorVQA card; by
 DeepTumorVQA's ID mapping its scan is a KiTS case, so KiTS23's CC BY-NC-SA 4.0 applies as well.
+The AMOS-MM preview's licence is unresolved: its CT is an AMOS22 file (AMOS22's Zenodo record says CC BY 4.0, its
+dataset.json CC-BY-SA 4.0 and the AMOS paper CC BY-NC-SA), AMOS-MM's own files say CC BY-ND 4.0, which does not
+allow adaptations, and the challenge's application form asked applicants not to share the dataset. A curator has to
+settle it before approving the preview.
 See [LICENSE](../LICENSE).

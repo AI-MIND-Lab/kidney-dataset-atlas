@@ -1,0 +1,86 @@
+[
+	{
+		"id": "amos-mm-data-page",
+		"url": "https://era-ai-biomed.github.io/amos/dataset.html",
+		"title": "AMOS dataset page (AMOS22 and AMOS-MM)",
+		"locator": "\"Dataset Overview\" (\"The AMOS-MM dataset includes 2000+ CT scans ... and 19,562 vision questions\"); \"Download\" (Google Drive link for AMOS-MM); citation request for the AMOS paper",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "amos-mm-drive-folder",
+		"url": "https://drive.google.com/drive/folders/1R4DaN0dT8ef_0l48bHEuswG1p-MsYclX",
+		"title": "AMOS-MM Google Drive folder",
+		"locator": "Public folder, opens without sign-in. 4 files: imagesTr.zip (59,642,919,535 bytes), imagesVa.zip (19,138,381,316 bytes), report_generation_train_val.json (4,070,405 bytes), vqa_train_val.json (16,597,409 bytes); sizes from the download headers; last modified 27 January 2025 (imagesVa.zip), 29 January 2025 (both JSON files) and 1 April 2025 (imagesTr.zip). The folder holds no readme or terms of use",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "amos-mm-report-json",
+		"url": "https://drive.google.com/file/d/14ZIhEM1IDvrj6JkIjjCju-YAjLaJ22As/view",
+		"title": "AMOS-MM report_generation_train_val.json (sha256 13f029d3...a837)",
+		"locator": "Header fields and all 1,687 case records; the local copy is identical to the Drive file (sha256)",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "amos-mm-vqa-json",
+		"url": "https://drive.google.com/file/d/1VPvuMvbXo2puVj-rcN-vZy4oksKJhA_W/view",
+		"title": "AMOS-MM vqa_train_val.json (sha256 ddc7c082...13ae)",
+		"locator": "Header fields, all 1,687 case records and their 16,538 questions; the local copy is identical to the Drive file (sha256)",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "amos-mm-zip-listings",
+		"url": "https://drive.google.com/drive/folders/1R4DaN0dT8ef_0l48bHEuswG1p-MsYclX",
+		"title": "Member listings of AMOS-MM imagesTr.zip and imagesVa.zip",
+		"locator": "All 1,690 members (name, size, CRC32), read from the zip directories with HTTP range requests on 2026-09-24 and compared with the amos22.zip listing; the CT files themselves were not opened, except the 16-file sample",
+		"accessedOn": "2026-09-24"
+	},
+	{
+		"id": "amos-mm-image-files",
+		"url": "https://drive.google.com/drive/folders/1R4DaN0dT8ef_0l48bHEuswG1p-MsYclX",
+		"title": "16 AMOS-MM CT files (local sample)",
+		"locator": "12 files from imagesTr.zip and 4 from imagesVa.zip (amos_0061, 0088, 5303, 5351, 5424, 5511, 5553, 5693, 6224, 6236, 6633, 6740, 6879, 6927, 7187, 7394); NIfTI headers and voxel values",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "amos-mm-design-doc",
+		"url": "https://doi.org/10.5281/zenodo.10992155",
+		"title": "Ji Y, Ge C, Li R, Luo P. AMOS-MM: Abdominal Multimodal Analysis Challenge: Structured description of the challenge design. Zenodo, 2024 (document licensed CC BY 4.0)",
+		"locator": "pp. 2 (overview), 5 (organizers), 8 and 22 (data usage agreement), 10-14 (Task 1 cohort, data and annotation), 25 (Task 2 cases) and 26-27 (Task 2 annotation and sources of error)",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "amos-mm-codabench",
+		"url": "https://www.codabench.org/competitions/3137/",
+		"title": "MICCAI24 AMOS-MM challenge on Codabench (competition 3137)",
+		"locator": "\"Home\" page news (2024-06-01 to 2025-02-20); \"Dataset\" page (2,088 cases, sites A and B, download by request); \"Instructions\" page (application form and review); \"Rules\" page, \"Publication Policy\"",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "amos-mm-request-form",
+		"url": "https://forms.gle/M8o9rRxZkx6PHm9y8",
+		"title": "AMOS-MM data application form (Google Form linked from the Codabench \"Instructions\" page)",
+		"locator": "Required item \"I promise to obey the rules, NOT share the dataset.\"",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "amos22-zenodo",
+		"url": "https://doi.org/10.5281/zenodo.7262581",
+		"title": "AMOS22 on Zenodo (record 7262581): amos22.zip and its dataset.json",
+		"locator": "Record licence field (cc-by-4.0); amos22.zip member listing (labelled images, labelsTr and labelsVa); dataset.json (\"licence\": \"CC-BY-SA 4.0\"; labels 2 = right kidney, 3 = left kidney)",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "amos22-unlabeled-zenodo",
+		"url": "https://doi.org/10.5281/zenodo.7262757",
+		"title": "AMOS22 unlabelled data on Zenodo, Parts I-III (records 7262757, 7295661 and 7295816)",
+		"locator": "Member listings (name, size, CRC32) of amos22_unlabeled_ct_5000_5399, _5400_5899, _5900_6199 and _6200_6899.zip and amos22_unlabeled_mri_7000_8199.zip, compared with the AMOS-MM zips",
+		"accessedOn": "2026-09-24"
+	},
+	{
+		"id": "amos-paper",
+		"url": "https://arxiv.org/abs/2206.08023v3",
+		"title": "Ji Y et al. AMOS: A Large-Scale Abdominal Multi-Organ Benchmark for Versatile Medical Image Segmentation (arXiv v3)",
+		"locator": "Section 3, \"Data Annotation\", and Figure 2 (how the masks were made); Appendix B.3 (licence)",
+		"accessedOn": "2026-09-30"
+	}
+]
