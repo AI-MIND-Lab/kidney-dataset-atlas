@@ -1,0 +1,29 @@
+[
+	{
+		"id": "amos-mm-2024-derived-from-amos22",
+		"from": "amos-mm-2024",
+		"to": null,
+		"toExternal": {
+			"name": "AMOS22"
+		},
+		"type": "derived_from",
+		"explanation": "The design document calls AMOS-MM an extension of AMOS22 (p. 2). 228 of its CT files (152 training and 76 validation, all named amos_0xxx) are AMOS22 labelled CT images: their size and CRC32 match amos22.zip. AMOS22 has organ masks for these scans; AMOS-MM itself releases none. The other CT files are not AMOS22 images, although most reuse AMOS22 file names (see the quality findings).",
+		"evidence": {
+			"sources": [
+				"amos-mm-design-doc",
+				"amos-mm-zip-listings",
+				"amos22-zenodo",
+				"amos22-unlabeled-zenodo"
+			],
+			"locator": "Design document p. 2; size and CRC32 of every member of imagesTr.zip and imagesVa.zip compared with the amos22.zip and unlabelled-data listings",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		},
+		"sources": [
+			"amos-mm-design-doc",
+			"amos-mm-zip-listings",
+			"amos22-zenodo",
+			"amos22-unlabeled-zenodo"
+		]
+	}
+]

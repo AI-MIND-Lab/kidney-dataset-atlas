@@ -1,0 +1,1052 @@
+[
+	{
+		"id": "use-radgpt-2025-abdomenatlas",
+		"paper": "radgpt-2025",
+		"release": "abdomenatlas-3-0-mini",
+		"externalCohort": null,
+		"role": "original",
+		"actualUseEvidence": {
+			"sources": [
+				"radgpt-paper",
+				"radgpt-repo-readme"
+			],
+			"locator": "Section 4 (\"We randomly selected 10% of AbdomenAtlas 3.0 as a test set\"), Appendix B.1 (training on AbdomenAtlas 3.0), Table 2; README \"Train/Test Splits\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-30",
+			"note": "The paper introduces the release and evaluates six report generation models on its test set; three of them were trained on the rest."
+		},
+		"subset": "All 9,262 scans; IID split, 926 test scans (IID_test.csv), the partition the README says the paper used",
+		"preprocessing": "CT2Rep, CT-CHAT and Merlin were trained on the CT scans and structured reports only, without the masks; CT2Rep and CT-CHAT used CT resampled to 1.5 mm isotropic voxels (Appendix B.1).",
+		"task": "report_generation",
+		"trainTestRole": "train_and_test",
+		"split": "IID: random 90% train (8,336) / 10% test (926). The paper also tests on a private UCSF set, not part of this release.",
+		"results": [
+			{
+				"model": "radgpt-2025-radgpt",
+				"metric": "Pancreatic tumour detection sensitivity, tumours ≤2 cm",
+				"value": 66.7,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-radgpt",
+				"metric": "Pancreatic tumour detection sensitivity, tumours >2 cm",
+				"value": 81.5,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-radgpt",
+				"metric": "Pancreatic tumour detection specificity",
+				"value": 93.2,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-radgpt",
+				"metric": "Kidney tumour detection sensitivity, tumours ≤2 cm",
+				"value": 54.8,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-radgpt",
+				"metric": "Kidney tumour detection sensitivity, tumours >2 cm",
+				"value": 93.3,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-radgpt",
+				"metric": "Kidney tumour detection specificity",
+				"value": 51.8,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-radgpt",
+				"metric": "Liver tumour detection sensitivity, tumours ≤2 cm",
+				"value": 39.6,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-radgpt",
+				"metric": "Liver tumour detection sensitivity, tumours >2 cm",
+				"value": 96.8,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-radgpt",
+				"metric": "Liver tumour detection specificity",
+				"value": 64.4,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-ct-chat",
+				"metric": "Pancreatic tumour detection sensitivity, tumours ≤2 cm",
+				"value": 66.7,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-ct-chat",
+				"metric": "Pancreatic tumour detection sensitivity, tumours >2 cm",
+				"value": 51.9,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-ct-chat",
+				"metric": "Pancreatic tumour detection specificity",
+				"value": 61.2,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-ct-chat",
+				"metric": "Kidney tumour detection sensitivity, tumours ≤2 cm",
+				"value": 31.1,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-ct-chat",
+				"metric": "Kidney tumour detection sensitivity, tumours >2 cm",
+				"value": 32.8,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-ct-chat",
+				"metric": "Kidney tumour detection specificity",
+				"value": 74.2,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-ct-chat",
+				"metric": "Liver tumour detection sensitivity, tumours ≤2 cm",
+				"value": 5.7,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-ct-chat",
+				"metric": "Liver tumour detection sensitivity, tumours >2 cm",
+				"value": 3.2,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-ct-chat",
+				"metric": "Liver tumour detection specificity",
+				"value": 94.7,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-ct2rep",
+				"metric": "Pancreatic tumour detection sensitivity, tumours ≤2 cm",
+				"value": 0.0,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-ct2rep",
+				"metric": "Pancreatic tumour detection sensitivity, tumours >2 cm",
+				"value": 0.0,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-ct2rep",
+				"metric": "Pancreatic tumour detection specificity",
+				"value": 92.5,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-ct2rep",
+				"metric": "Kidney tumour detection sensitivity, tumours ≤2 cm",
+				"value": 36.5,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-ct2rep",
+				"metric": "Kidney tumour detection sensitivity, tumours >2 cm",
+				"value": 39.3,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-ct2rep",
+				"metric": "Kidney tumour detection specificity",
+				"value": 70.4,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-ct2rep",
+				"metric": "Liver tumour detection sensitivity, tumours ≤2 cm",
+				"value": 35.8,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-ct2rep",
+				"metric": "Liver tumour detection sensitivity, tumours >2 cm",
+				"value": 49.2,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-ct2rep",
+				"metric": "Liver tumour detection specificity",
+				"value": 70.4,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-m3d",
+				"metric": "Pancreatic tumour detection sensitivity, tumours ≤2 cm",
+				"value": 0.0,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-m3d",
+				"metric": "Pancreatic tumour detection sensitivity, tumours >2 cm",
+				"value": 7.4,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-m3d",
+				"metric": "Pancreatic tumour detection specificity",
+				"value": 97.2,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-m3d",
+				"metric": "Kidney tumour detection sensitivity, tumours ≤2 cm",
+				"value": 8.1,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-m3d",
+				"metric": "Kidney tumour detection sensitivity, tumours >2 cm",
+				"value": 16.4,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-m3d",
+				"metric": "Kidney tumour detection specificity",
+				"value": 84.1,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-m3d",
+				"metric": "Liver tumour detection sensitivity, tumours ≤2 cm",
+				"value": 9.4,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-m3d",
+				"metric": "Liver tumour detection sensitivity, tumours >2 cm",
+				"value": 12.7,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-m3d",
+				"metric": "Liver tumour detection specificity",
+				"value": 86.0,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-merlin",
+				"metric": "Pancreatic tumour detection sensitivity, tumours ≤2 cm",
+				"value": 33.3,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-merlin",
+				"metric": "Pancreatic tumour detection sensitivity, tumours >2 cm",
+				"value": 51.9,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-merlin",
+				"metric": "Pancreatic tumour detection specificity",
+				"value": 71.8,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-merlin",
+				"metric": "Kidney tumour detection sensitivity, tumours ≤2 cm",
+				"value": 28.4,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-merlin",
+				"metric": "Kidney tumour detection sensitivity, tumours >2 cm",
+				"value": 45.9,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-merlin",
+				"metric": "Kidney tumour detection specificity",
+				"value": 86.6,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-merlin",
+				"metric": "Liver tumour detection sensitivity, tumours ≤2 cm",
+				"value": 30.2,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-merlin",
+				"metric": "Liver tumour detection sensitivity, tumours >2 cm",
+				"value": 41.3,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-merlin",
+				"metric": "Liver tumour detection specificity",
+				"value": 95.9,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-radfm",
+				"metric": "Pancreatic tumour detection sensitivity, tumours ≤2 cm",
+				"value": 0.0,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-radfm",
+				"metric": "Pancreatic tumour detection sensitivity, tumours >2 cm",
+				"value": 0.0,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-radfm",
+				"metric": "Pancreatic tumour detection specificity",
+				"value": 99.9,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-radfm",
+				"metric": "Kidney tumour detection sensitivity, tumours ≤2 cm",
+				"value": 3.7,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-radfm",
+				"metric": "Kidney tumour detection sensitivity, tumours >2 cm",
+				"value": 6.3,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-radfm",
+				"metric": "Kidney tumour detection specificity",
+				"value": 95.6,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-radfm",
+				"metric": "Liver tumour detection sensitivity, tumours ≤2 cm",
+				"value": 3.3,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-radfm",
+				"metric": "Liver tumour detection sensitivity, tumours >2 cm",
+				"value": 5.7,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			},
+			{
+				"model": "radgpt-2025-radfm",
+				"metric": "Liver tumour detection specificity",
+				"value": 93.9,
+				"units": "%",
+				"confidenceInterval": null,
+				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"split": "IID: random 10% test set",
+				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": [
+						"radgpt-paper"
+					],
+					"locator": "Table 2, \"Internal validation on the test set of AbdomenAtlas 3.0 (IID)\", and its caption",
+					"status": "verified",
+					"verifiedOn": "2026-09-30"
+				}
+			}
+		]
+	}
+]

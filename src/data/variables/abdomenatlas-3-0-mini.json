@@ -1,0 +1,1790 @@
+[
+	{
+		"id": "abdomenatlas-3-0-mini-bdmap-id",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "BDMAP ID",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Scan identifier: \"BDMAP_\" followed by eight digits, unique per row (BDMAP_00000001 to BDMAP_00009262). It names the case folder in the image and mask tarballs and the rows of the train/test lists.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "identifier",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Joins the table to ct.nii.gz, the mask files and TrainTestIDS/.",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-spacing",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "spacing",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Voxel size of the CT, three numbers written like a NumPy array (for example \"[0.8222656 0.8222656 2.5]\"), in the file's own axis order. In 450 rows the largest value comes first, so the slice axis is not always the last axis. No source states the unit; in the 232 CT headers checked, 170 give millimetres and 62 give no unit.",
+		"type": "other",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": null,
+		"provenance": "Copied by the metadata script from an input table that is not part of the release. Matched the NIfTI header in all 232 cases checked (BDMAP_00000001 to BDMAP_00000232).",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (create_big_table)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-shape",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "shape",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Voxel grid size, three numbers (for example \"(512, 512, 339)\"). It does not describe the released CT files: in all 232 cases checked the released volume is smaller along at least one axis (see the quality findings).",
+		"type": "other",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": null,
+		"provenance": "Copied by the metadata script from an input table that is not part of the release; which processing step it describes is not documented.",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (create_big_table)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-sex",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "sex",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Patient sex.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "M",
+				"meaning": "Male (809 of 9,262 rows)"
+			},
+			{
+				"code": "F",
+				"meaning": "Female (565 of 9,262 rows)"
+			}
+		],
+		"missingValues": [
+			"blank: not available (7,888 of 9,262 rows)"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "sex",
+		"provenance": "Taken by the metadata script from two input tables that are not part of the release (a \"dap atlas\" table and a TotalSegmentator table).",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (create_big_table)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-age",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "age",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Patient age. The unit is not stated; the metadata script removes a leading zero and a trailing \"Y\" from the source value. Observed range 11 to 95.",
+		"type": "decimal",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"blank: not available (7,883 of 9,262 rows)"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "age",
+		"provenance": "Taken by the metadata script from the same two input tables as sex.",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (create_big_table)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-scanner",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "scanner",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "CT scanner manufacturer.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "siemens",
+				"meaning": "(419 of 9,262 rows)"
+			},
+			{
+				"code": "philips",
+				"meaning": "(41 of 9,262 rows)"
+			},
+			{
+				"code": "ge",
+				"meaning": "(25 of 9,262 rows)"
+			}
+		],
+		"missingValues": [
+			"blank: not available (8,777 of 9,262 rows)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": "scanner manufacturer",
+		"provenance": "Taken by the metadata script only from a TotalSegmentator input table that is not part of the release.",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (create_big_table)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-contrast",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "contrast",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Contrast phase of the scan. The structured report's first line names a phase for more scans (2,602) than this column does.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Venous",
+				"meaning": "(580 of 9,262 rows)"
+			},
+			{
+				"code": "Arterial",
+				"meaning": "(403 of 9,262 rows)"
+			},
+			{
+				"code": "Plain",
+				"meaning": "(191 of 9,262 rows)"
+			},
+			{
+				"code": "Delay",
+				"meaning": "(42 of 9,262 rows)"
+			}
+		],
+		"missingValues": [
+			"blank: not recorded (8,046 of 9,262 rows)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": "contrast phase",
+		"provenance": "Copied by the metadata script from an input table that is not part of the release; how the phase was determined is not documented.",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (create_big_table)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-liver-volume-cm-3",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "liver volume (cm^3)",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Volume of liver, read from the \"(volume: ... cc)\" text in the Liver section of the structured report. The report computes it from the mask. Observed range 0 to 8562.3; 13 rows are 0.",
+		"type": "decimal",
+		"unit": "cm³",
+		"coding": [],
+		"missingValues": [
+			"blank: no value in the report (1,079 of 9,262 rows)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "organ volume",
+		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\"; its main() then rewrote them as \"cc\" in the released report text.",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script",
+				"radgpt-paper"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns) and main() (cm^3 rewritten as cc); paper section 3.1.2",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-pancreas-volume-cm-3",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "pancreas volume (cm^3)",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Volume of pancreas, read from the \"(volume: ... cc)\" text in the Pancreas section of the structured report. The report computes it from the mask. Observed range 0 to 428.7; 46 rows are 0.",
+		"type": "decimal",
+		"unit": "cm³",
+		"coding": [],
+		"missingValues": [
+			"blank: no value in the report (270 of 9,262 rows)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "organ volume",
+		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\"; its main() then rewrote them as \"cc\" in the released report text.",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script",
+				"radgpt-paper"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns) and main() (cm^3 rewritten as cc); paper section 3.1.2",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-spleen-volume-cm-3",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "spleen volume (cm^3)",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Volume of spleen, read from the \"(volume: ... cc)\" text in the Spleen section of the structured report. The report computes it from the mask. Observed range 0 to 3087.9; 38 rows are 0.",
+		"type": "decimal",
+		"unit": "cm³",
+		"coding": [],
+		"missingValues": [
+			"blank: no value in the report (380 of 9,262 rows)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "organ volume",
+		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\"; its main() then rewrote them as \"cc\" in the released report text.",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script",
+				"radgpt-paper"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns) and main() (cm^3 rewritten as cc); paper section 3.1.2",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-left-kidney-volume-cm-3",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "left kidney volume (cm^3)",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Volume of left kidney, read from the \"left kidney volume:\" text in the Kidney section of the structured report. The report computes it from the mask. Observed range 0 to 1986; 136 rows are 0.",
+		"type": "decimal",
+		"unit": "cm³",
+		"coding": [],
+		"missingValues": [
+			"blank: no value in the report (618 of 9,262 rows)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "organ volume",
+		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\"; its main() then rewrote them as \"cc\" in the released report text.",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script",
+				"radgpt-paper"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns) and main() (cm^3 rewritten as cc); paper section 3.1.2",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-right-kidney-volume-cm-3",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "right kidney volume (cm^3)",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Volume of right kidney, read from the \"right kidney volume:\" text in the Kidney section of the structured report. The report computes it from the mask. Observed range 0 to 1927.1; 96 rows are 0.",
+		"type": "decimal",
+		"unit": "cm³",
+		"coding": [],
+		"missingValues": [
+			"blank: no value in the report (618 of 9,262 rows)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "organ volume",
+		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\"; its main() then rewrote them as \"cc\" in the released report text.",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script",
+				"radgpt-paper"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns) and main() (cm^3 rewritten as cc); paper section 3.1.2",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-kidney-volume-cm-3",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "kidney volume (cm^3)",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Volume of both kidneys together, read from the \"total kidney volume:\" text in the Kidney section of the structured report. The report computes it from the mask. Observed range 0 to 2211.8; 58 rows are 0.",
+		"type": "decimal",
+		"unit": "cm³",
+		"coding": [],
+		"missingValues": [
+			"blank: no value in the report (618 of 9,262 rows)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "organ volume",
+		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\"; its main() then rewrote them as \"cc\" in the released report text.",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script",
+				"radgpt-paper"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns) and main() (cm^3 rewritten as cc); paper section 3.1.2",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-number-of-liver-lesion-instances",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "number of liver lesion instances",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Number of numbered lesion entries (\"Liver lesion N:\" or \"Liver tumor N:\") in the report's Liver section. Above 0 in 1,470 rows; maximum 176.",
+		"type": "integer",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"0: no numbered lesion in the report's Liver section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "lesion count",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-total-liver-lesion-volume-cm-3",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "total liver lesion volume (cm^3)",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Sum of the \"Volume:\" values of all numbered lesions in the report's Liver section. Above 0 in 1,469 rows; maximum 2964.",
+		"type": "decimal",
+		"unit": "cm³",
+		"coding": [],
+		"missingValues": [
+			"0: no numbered lesion in the report's Liver section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "lesion volume",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-largest-liver-lesion-diameter-cm",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "largest liver lesion diameter (cm)",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Longest diameter of lesion 1, the first lesion the report lists (the column name calls it the largest): the first number of its first \"A x B cm\" measurement. Maximum 24.",
+		"type": "decimal",
+		"unit": "cm",
+		"coding": [],
+		"missingValues": [
+			"0: no numbered lesion in the report's Liver section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+		],
+		"observationLevel": "lesion",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "lesion diameter",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-largest-liver-lesion-location-1-8",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "largest liver lesion location (1-8)",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Where lesion 1 lies (liver segment numbers 1 to 8, joined by commas when the lesion spans several), taken from its \"Location:\" line in the report.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "8",
+				"meaning": "(136 of 9,262 rows)"
+			},
+			{
+				"code": "2",
+				"meaning": "(134 of 9,262 rows)"
+			},
+			{
+				"code": "7",
+				"meaning": "(133 of 9,262 rows)"
+			},
+			{
+				"code": "5",
+				"meaning": "(132 of 9,262 rows)"
+			},
+			{
+				"code": "1",
+				"meaning": "(114 of 9,262 rows)"
+			},
+			{
+				"code": "4",
+				"meaning": "(109 of 9,262 rows)"
+			},
+			{
+				"code": "6",
+				"meaning": "(65 of 9,262 rows)"
+			},
+			{
+				"code": "6,7",
+				"meaning": "(54 of 9,262 rows)"
+			},
+			{
+				"code": "3",
+				"meaning": "(54 of 9,262 rows)"
+			},
+			{
+				"code": "2,3",
+				"meaning": "(51 of 9,262 rows)"
+			},
+			{
+				"code": "7,8",
+				"meaning": "(50 of 9,262 rows)"
+			},
+			{
+				"code": "4,8",
+				"meaning": "(44 of 9,262 rows)"
+			},
+			{
+				"code": "5,6",
+				"meaning": "(33 of 9,262 rows)"
+			},
+			{
+				"code": "4,5",
+				"meaning": "(30 of 9,262 rows)"
+			},
+			{
+				"code": "1,8",
+				"meaning": "(29 of 9,262 rows)"
+			},
+			{
+				"code": "2,4",
+				"meaning": "(25 of 9,262 rows)"
+			},
+			{
+				"code": "5,8",
+				"meaning": "(22 of 9,262 rows)"
+			},
+			{
+				"code": "1,4",
+				"meaning": "(21 of 9,262 rows)"
+			},
+			{
+				"code": "1,7",
+				"meaning": "(19 of 9,262 rows)"
+			},
+			{
+				"code": "4,5,8",
+				"meaning": "(16 of 9,262 rows)"
+			},
+			{
+				"code": "5,6,7,8",
+				"meaning": "(14 of 9,262 rows)"
+			},
+			{
+				"code": "1,6",
+				"meaning": "(14 of 9,262 rows)"
+			},
+			{
+				"code": "1,2",
+				"meaning": "(13 of 9,262 rows)"
+			},
+			{
+				"code": "3,4",
+				"meaning": "(13 of 9,262 rows)"
+			},
+			{
+				"code": "1,3",
+				"meaning": "(12 of 9,262 rows)"
+			},
+			{
+				"code": "1,5",
+				"meaning": "(12 of 9,262 rows)"
+			},
+			{
+				"code": "1,4,8",
+				"meaning": "(10 of 9,262 rows)"
+			},
+			{
+				"code": "5,7,8",
+				"meaning": "(9 of 9,262 rows)"
+			},
+			{
+				"code": "1,7,8",
+				"meaning": "(7 of 9,262 rows)"
+			},
+			{
+				"code": "1,6,7,8",
+				"meaning": "(6 of 9,262 rows)"
+			},
+			{
+				"code": "1,2,4",
+				"meaning": "(6 of 9,262 rows)"
+			},
+			{
+				"code": "6,7,8",
+				"meaning": "(6 of 9,262 rows)"
+			},
+			{
+				"code": "2,3,4",
+				"meaning": "(5 of 9,262 rows)"
+			},
+			{
+				"code": "4,7,8",
+				"meaning": "(5 of 9,262 rows)"
+			},
+			{
+				"code": "1,2,3",
+				"meaning": "(4 of 9,262 rows)"
+			},
+			{
+				"code": "1,5,6,8",
+				"meaning": "(4 of 9,262 rows)"
+			},
+			{
+				"code": "1,6,7",
+				"meaning": "(3 of 9,262 rows)"
+			},
+			{
+				"code": "1,5,8",
+				"meaning": "(3 of 9,262 rows)"
+			},
+			{
+				"code": "1,5,6",
+				"meaning": "(3 of 9,262 rows)"
+			},
+			{
+				"code": "5,6,7",
+				"meaning": "(3 of 9,262 rows)"
+			},
+			{
+				"code": "1,5,7",
+				"meaning": "(3 of 9,262 rows)"
+			},
+			{
+				"code": "1,4,5",
+				"meaning": "(2 of 9,262 rows)"
+			},
+			{
+				"code": "5,6,8",
+				"meaning": "(2 of 9,262 rows)"
+			},
+			{
+				"code": "1,3,4",
+				"meaning": "(2 of 9,262 rows)"
+			},
+			{
+				"code": "4,5,6,8",
+				"meaning": "(2 of 9,262 rows)"
+			},
+			{
+				"code": "4,5,7,8",
+				"meaning": "(2 of 9,262 rows)"
+			},
+			{
+				"code": "1,5,6,7",
+				"meaning": "(2 of 9,262 rows)"
+			},
+			{
+				"code": "4,5,6",
+				"meaning": "(1 of 9,262 rows)"
+			},
+			{
+				"code": "1,5,7,8",
+				"meaning": "(1 of 9,262 rows)"
+			},
+			{
+				"code": "2,8",
+				"meaning": "(1 of 9,262 rows)"
+			},
+			{
+				"code": "1,2,3,4,5",
+				"meaning": "(1 of 9,262 rows)"
+			},
+			{
+				"code": "1,6,8",
+				"meaning": "(1 of 9,262 rows)"
+			},
+			{
+				"code": "2,4,8",
+				"meaning": "(1 of 9,262 rows)"
+			},
+			{
+				"code": "1,2,3,5,8",
+				"meaning": "(1 of 9,262 rows)"
+			},
+			{
+				"code": "1,2,8",
+				"meaning": "(1 of 9,262 rows)"
+			},
+			{
+				"code": "4,5,6,7,8",
+				"meaning": "(1 of 9,262 rows)"
+			},
+			{
+				"code": "1,4,7,8",
+				"meaning": "(1 of 9,262 rows)"
+			},
+			{
+				"code": "2,4,5,6",
+				"meaning": "(1 of 9,262 rows)"
+			},
+			{
+				"code": "1,4,5,6,7",
+				"meaning": "(1 of 9,262 rows)"
+			},
+			{
+				"code": "3,4,8",
+				"meaning": "(1 of 9,262 rows)"
+			}
+		],
+		"missingValues": [
+			"blank: no lesion in the report, or no report at all (BDMAP_00005266) (7,792 of 9,262 rows)",
+			"\"nan\" (text): lesion 1 has no readable location (19 of 9,262 rows)"
+		],
+		"observationLevel": "lesion",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "lesion location",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-largest-liver-lesion-attenuation-hyperattenuating-isoattenuating-hypoattenuating",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "largest liver lesion attenuation (hyperattenuating, isoattenuating, hypoattenuating)",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Attenuation of lesion 1 relative to its organ: the first of \"hyperattenuating\", \"hypoattenuating\" or \"isoattenuating\" found in its report text.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "hypoattenuating",
+				"meaning": "(1,329 of 9,262 rows)"
+			},
+			{
+				"code": "hyperattenuating",
+				"meaning": "(118 of 9,262 rows)"
+			},
+			{
+				"code": "isoattenuating",
+				"meaning": "(23 of 9,262 rows)"
+			}
+		],
+		"missingValues": [
+			"blank: no lesion in the report, or no report at all (BDMAP_00005266) (7,792 of 9,262 rows)"
+		],
+		"observationLevel": "lesion",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "lesion attenuation",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-number-of-pancreatic-lesion-instances",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "number of pancreatic lesion instances",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Number of numbered lesion entries (\"Pancreas lesion N:\" or \"Pancreas tumor N:\") in the report's Pancreas section. Above 0 in 1,111 rows; maximum 7.",
+		"type": "integer",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"0: no numbered lesion in the report's Pancreas section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "lesion count",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-total-pancreatic-lesion-volume-cm-3",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "total pancreatic lesion volume (cm^3)",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Sum of the \"Volume:\" values of all numbered lesions in the report's Pancreas section. Above 0 in 1,110 rows; maximum 741.9.",
+		"type": "decimal",
+		"unit": "cm³",
+		"coding": [],
+		"missingValues": [
+			"0: no numbered lesion in the report's Pancreas section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "lesion volume",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-largest-pancreatic-lesion-diameter-cm",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "largest pancreatic lesion diameter (cm)",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Longest diameter of lesion 1, the first lesion the report lists (the column name calls it the largest): the first number of its first \"A x B cm\" measurement. Maximum 13.4.",
+		"type": "decimal",
+		"unit": "cm",
+		"coding": [],
+		"missingValues": [
+			"0: no numbered lesion in the report's Pancreas section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+		],
+		"observationLevel": "lesion",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "lesion diameter",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-largest-pancreatic-lesion-location-head-body-tail",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "largest pancreatic lesion location (head, body, tail)",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Where lesion 1 lies (pancreas part: head, body or tail, joined by commas), taken from its \"Location:\" line in the report.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "head",
+				"meaning": "(630 of 9,262 rows)"
+			},
+			{
+				"code": "tail",
+				"meaning": "(147 of 9,262 rows)"
+			},
+			{
+				"code": "head,body",
+				"meaning": "(101 of 9,262 rows)"
+			},
+			{
+				"code": "body",
+				"meaning": "(101 of 9,262 rows)"
+			},
+			{
+				"code": "body,tail",
+				"meaning": "(74 of 9,262 rows)"
+			},
+			{
+				"code": "head,body,tail",
+				"meaning": "(4 of 9,262 rows)"
+			}
+		],
+		"missingValues": [
+			"blank: no lesion in the report, or no report at all (BDMAP_00005266) (8,151 of 9,262 rows)",
+			"\"nan\" (text): lesion 1 has no readable location (54 of 9,262 rows)"
+		],
+		"observationLevel": "lesion",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "lesion location",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-largest-pancreatic-lesion-attenuation-hyperattenuating-isoattenuating-hypoattenuating",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "largest pancreatic lesion attenuation (hyperattenuating, isoattenuating, hypoattenuating)",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Attenuation of lesion 1 relative to its organ: the first of \"hyperattenuating\", \"hypoattenuating\" or \"isoattenuating\" found in its report text.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "hypoattenuating",
+				"meaning": "(584 of 9,262 rows)"
+			},
+			{
+				"code": "hyperattenuating",
+				"meaning": "(397 of 9,262 rows)"
+			},
+			{
+				"code": "isoattenuating",
+				"meaning": "(130 of 9,262 rows)"
+			}
+		],
+		"missingValues": [
+			"blank: no lesion in the report, or no report at all (BDMAP_00005266) (8,151 of 9,262 rows)"
+		],
+		"observationLevel": "lesion",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "lesion attenuation",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-number-of-kidney-lesion-instances",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "number of kidney lesion instances",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Number of numbered lesion entries (\"Kidney lesion N:\" or \"Kidney tumor N:\") in the report's Kidney section. Above 0 in 2,144 rows; maximum 51.",
+		"type": "integer",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"0: no numbered lesion in the report's Kidney section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "lesion count",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-total-kidney-lesion-volume-cm-3",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "total kidney lesion volume (cm^3)",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Sum of the \"Volume:\" values of all numbered lesions in the report's Kidney section. Above 0 in 2,125 rows; maximum 2618.4.",
+		"type": "decimal",
+		"unit": "cm³",
+		"coding": [],
+		"missingValues": [
+			"0: no numbered lesion in the report's Kidney section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "lesion volume",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-largest-kidney-lesion-diameter-cm",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "largest kidney lesion diameter (cm)",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Longest diameter of lesion 1, the first lesion the report lists (the column name calls it the largest): the first number of its first \"A x B cm\" measurement. Maximum 18.2.",
+		"type": "decimal",
+		"unit": "cm",
+		"coding": [],
+		"missingValues": [
+			"0: no numbered lesion in the report's Kidney section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+		],
+		"observationLevel": "lesion",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "lesion diameter",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-largest-kidney-lesion-location-left-right",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "largest kidney lesion location (left, right)",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Where lesion 1 lies (kidney side), taken from its \"Location:\" line in the report.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "left",
+				"meaning": "(1,078 of 9,262 rows)"
+			},
+			{
+				"code": "right",
+				"meaning": "(971 of 9,262 rows)"
+			}
+		],
+		"missingValues": [
+			"blank: no lesion in the report, or no report at all (BDMAP_00005266) (7,118 of 9,262 rows)",
+			"\"nan\" (text): lesion 1 has no readable location (95 of 9,262 rows)"
+		],
+		"observationLevel": "lesion",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "lesion location",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-largest-kidney-lesion-attenuation-hyperattenuating-isoattenuating-hypoattenuating",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "largest kidney lesion attenuation (hyperattenuating, isoattenuating, hypoattenuating)",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Attenuation of lesion 1 relative to its organ: the first of \"hyperattenuating\", \"hypoattenuating\" or \"isoattenuating\" found in its report text.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "hypoattenuating",
+				"meaning": "(1,891 of 9,262 rows)"
+			},
+			{
+				"code": "hyperattenuating",
+				"meaning": "(188 of 9,262 rows)"
+			},
+			{
+				"code": "isoattenuating",
+				"meaning": "(65 of 9,262 rows)"
+			}
+		],
+		"missingValues": [
+			"blank: no lesion in the report, or no report at all (BDMAP_00005266) (7,118 of 9,262 rows)"
+		],
+		"observationLevel": "lesion",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "lesion attenuation",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-number-of-colon-lesion-instances",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "number of colon lesion instances",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Number of numbered lesion entries (\"Colon lesion N:\" or \"Colon tumor N:\") in the report's Colon section. Above 0 in 182 rows; maximum 2.",
+		"type": "integer",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"0: no numbered lesion in the report's Colon section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "lesion count",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-total-colon-lesion-volume-cm-3",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "total colon lesion volume (cm^3)",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Sum of the \"Volume:\" values of all numbered lesions in the report's Colon section. Above 0 in 182 rows; maximum 471.7.",
+		"type": "decimal",
+		"unit": "cm³",
+		"coding": [],
+		"missingValues": [
+			"0: no numbered lesion in the report's Colon section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "lesion volume",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-largest-colon-lesion-diameter-cm",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "largest colon lesion diameter (cm)",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Longest diameter of lesion 1, the first lesion the report lists (the column name calls it the largest): the first number of its first \"A x B cm\" measurement. Maximum 11.6.",
+		"type": "decimal",
+		"unit": "cm",
+		"coding": [],
+		"missingValues": [
+			"0: no numbered lesion in the report's Colon section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+		],
+		"observationLevel": "lesion",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "lesion diameter",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-largest-colon-lesion-attenuation-hyperattenuating-isoattenuating-hypoattenuating",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "largest colon lesion attenuation (hyperattenuating, isoattenuating, hypoattenuating)",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Attenuation of lesion 1 relative to its organ: the first of \"hyperattenuating\", \"hypoattenuating\" or \"isoattenuating\" found in its report text.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "hyperattenuating",
+				"meaning": "(155 of 9,262 rows)"
+			},
+			{
+				"code": "isoattenuating",
+				"meaning": "(14 of 9,262 rows)"
+			},
+			{
+				"code": "hypoattenuating",
+				"meaning": "(13 of 9,262 rows)"
+			}
+		],
+		"missingValues": [
+			"blank: no lesion in the report, or no report at all (BDMAP_00005266) (9,080 of 9,262 rows)"
+		],
+		"observationLevel": "lesion",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "lesion attenuation",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-metadata-script"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-structured-report",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "structured report",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Report built by RadGPT's rules from the masks, filling a radiologist-designed template (paper, section 3.1). The first line names the contrast phase when known.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"blank: no text (1 of 9,262 rows)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "radiology report",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-paper"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-narrative-report",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "narrative report",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "The structured report rewritten by Llama 3.1 70B (AWQ) in the style of a US hospital's reports, told not to change findings (paper, section 3.2).",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"blank: no text (1 of 9,262 rows)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "radiology report",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-paper"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-radiologist-note",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "radiologist note",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "The human note merged into this scan's enhanced reports. The paper describes clinical notes for TotalSegmentator scans and notes from the authors' radiologists (section 3.3).",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"blank: no text (9,145 of 9,262 rows)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "radiology report",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-paper"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-fusion-structured-report",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "fusion structured report",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Enhanced report: the structured report with the human note merged in by the language model (paper, section 3.3).",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"blank: no text (9,145 of 9,262 rows)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "radiology report",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-paper"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-fusion-narrative-report",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "fusion narrative report",
+		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
+		"definition": "Enhanced report: the narrative report with the human note merged in by the language model (paper, section 3.3).",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"blank: no text (9,145 of 9,262 rows)"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "radiology report",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-metadata-csv",
+				"radgpt-paper"
+			],
+			"locator": "AbdomenAtlas3.0MiniWithMeta.csv, all 9,262 rows; ExtractComprehensiveMedatadaReports.py (parse_radiology_report, parse_lesions, fill_nan_in_specific_columns)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-mask-lesion",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "segmentations/<structure>.nii.gz (lesion masks)",
+		"file": "mask_only tarballs, BDMAP_xxxxxxxx/segmentations/",
+		"definition": "One mask file per structure in each case folder. Each file is one binary mask, and masks of different files can overlap. In the 232 cases checked, every mask has the same array shape as its CT, but in 56 of them some mask headers differ from the CT header (see the quality findings). Stored as 0/1, 0/255, or signed bytes -128/127 with a NIfTI scale that maps them to 0/1; read with a loader that applies the scale and threshold at 0.5.",
+		"type": "image",
+		"unit": null,
+		"coding": [
+			{
+				"code": "kidney_lesion.nii.gz",
+				"meaning": "Kidney lesions; the file does not say whether a lesion is a tumour or a cyst"
+			},
+			{
+				"code": "liver_lesion.nii.gz",
+				"meaning": "Liver lesions"
+			},
+			{
+				"code": "pancreatic_lesion.nii.gz",
+				"meaning": "Pancreatic lesions"
+			},
+			{
+				"code": "colon_lesion.nii.gz",
+				"meaning": "Colon lesions; present only in the cases that have one"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "segmentation mask",
+		"provenance": "Drawn by AI (DiffTumor and nnU-Net), then checked and corrected one by one by radiologists, using source-dataset ground truth where it existed. The paper does not say how colon lesions were annotated.",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-mask-files",
+				"abdomenatlas3-image-files",
+				"radgpt-paper",
+				"radgpt-staging-script"
+			],
+			"locator": "mask_only tarballs (file names); paper Figure 2 caption, sections 3.1.1 and 3.1.3, footnote 1 and Appendix C (how each group was made); staging.py type2name (vessel names)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30",
+			"note": "File names and stored values were checked for every case by the Kidney-VLM project on 2026-09-23 (43 files per case, 44 where colon_lesion is present; the log was not kept) and re-checked on the first 232 cases on 2026-09-30."
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-mask-organ",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "segmentations/<structure>.nii.gz (organ masks)",
+		"file": "mask_only tarballs, BDMAP_xxxxxxxx/segmentations/",
+		"definition": "One mask file per structure in each case folder. Each file is one binary mask, and masks of different files can overlap. In the 232 cases checked, every mask has the same array shape as its CT, but in 56 of them some mask headers differ from the CT header (see the quality findings). Stored as 0/1, 0/255, or signed bytes -128/127 with a NIfTI scale that maps them to 0/1; read with a loader that applies the scale and threshold at 0.5.",
+		"type": "image",
+		"unit": null,
+		"coding": [
+			{
+				"code": "liver.nii.gz",
+				"meaning": "liver"
+			},
+			{
+				"code": "kidney_left.nii.gz",
+				"meaning": "kidney left"
+			},
+			{
+				"code": "kidney_right.nii.gz",
+				"meaning": "kidney right"
+			},
+			{
+				"code": "pancreas.nii.gz",
+				"meaning": "pancreas"
+			},
+			{
+				"code": "spleen.nii.gz",
+				"meaning": "spleen"
+			},
+			{
+				"code": "stomach.nii.gz",
+				"meaning": "stomach"
+			},
+			{
+				"code": "gall_bladder.nii.gz",
+				"meaning": "gall bladder"
+			},
+			{
+				"code": "adrenal_gland_left.nii.gz",
+				"meaning": "adrenal gland left"
+			},
+			{
+				"code": "adrenal_gland_right.nii.gz",
+				"meaning": "adrenal gland right"
+			},
+			{
+				"code": "bladder.nii.gz",
+				"meaning": "bladder"
+			},
+			{
+				"code": "colon.nii.gz",
+				"meaning": "colon"
+			},
+			{
+				"code": "duodenum.nii.gz",
+				"meaning": "duodenum"
+			},
+			{
+				"code": "esophagus.nii.gz",
+				"meaning": "esophagus"
+			},
+			{
+				"code": "femur_left.nii.gz",
+				"meaning": "femur left"
+			},
+			{
+				"code": "femur_right.nii.gz",
+				"meaning": "femur right"
+			},
+			{
+				"code": "intestine.nii.gz",
+				"meaning": "intestine"
+			},
+			{
+				"code": "lung_left.nii.gz",
+				"meaning": "lung left"
+			},
+			{
+				"code": "lung_right.nii.gz",
+				"meaning": "lung right"
+			},
+			{
+				"code": "prostate.nii.gz",
+				"meaning": "prostate"
+			},
+			{
+				"code": "rectum.nii.gz",
+				"meaning": "rectum"
+			},
+			{
+				"code": "common_bile_duct.nii.gz",
+				"meaning": "common bile duct"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "segmentation mask",
+		"provenance": "From AbdomenAtlas 1.1, made by AI with radiologists in the loop (paper, Appendix C).",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-mask-files",
+				"abdomenatlas3-image-files",
+				"radgpt-paper",
+				"radgpt-staging-script"
+			],
+			"locator": "mask_only tarballs (file names); paper Figure 2 caption, sections 3.1.1 and 3.1.3, footnote 1 and Appendix C (how each group was made); staging.py type2name (vessel names)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30",
+			"note": "File names and stored values were checked for every case by the Kidney-VLM project on 2026-09-23 (43 files per case, 44 where colon_lesion is present; the log was not kept) and re-checked on the first 232 cases on 2026-09-30."
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-mask-subregion",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "segmentations/<structure>.nii.gz (sub-region masks)",
+		"file": "mask_only tarballs, BDMAP_xxxxxxxx/segmentations/",
+		"definition": "One mask file per structure in each case folder. Each file is one binary mask, and masks of different files can overlap. In the 232 cases checked, every mask has the same array shape as its CT, but in 56 of them some mask headers differ from the CT header (see the quality findings). Stored as 0/1, 0/255, or signed bytes -128/127 with a NIfTI scale that maps them to 0/1; read with a loader that applies the scale and threshold at 0.5.",
+		"type": "image",
+		"unit": null,
+		"coding": [
+			{
+				"code": "liver_segment_1.nii.gz",
+				"meaning": "Liver segment 1"
+			},
+			{
+				"code": "liver_segment_2.nii.gz",
+				"meaning": "Liver segment 2"
+			},
+			{
+				"code": "liver_segment_3.nii.gz",
+				"meaning": "Liver segment 3"
+			},
+			{
+				"code": "liver_segment_4.nii.gz",
+				"meaning": "Liver segment 4"
+			},
+			{
+				"code": "liver_segment_5.nii.gz",
+				"meaning": "Liver segment 5"
+			},
+			{
+				"code": "liver_segment_6.nii.gz",
+				"meaning": "Liver segment 6"
+			},
+			{
+				"code": "liver_segment_7.nii.gz",
+				"meaning": "Liver segment 7"
+			},
+			{
+				"code": "liver_segment_8.nii.gz",
+				"meaning": "Liver segment 8"
+			},
+			{
+				"code": "pancreas_head.nii.gz",
+				"meaning": "Pancreas head"
+			},
+			{
+				"code": "pancreas_body.nii.gz",
+				"meaning": "Pancreas body"
+			},
+			{
+				"code": "pancreas_tail.nii.gz",
+				"meaning": "Pancreas tail"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "segmentation mask",
+		"provenance": "Liver segments from an nnU-Net fine-tuned on 131 LiTS scans; pancreas parts split by a fixed rule from a superior mesenteric artery segmentation, judged only qualitatively by radiologists (paper, sections 3.1.1 and 4.2).",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-mask-files",
+				"abdomenatlas3-image-files",
+				"radgpt-paper",
+				"radgpt-staging-script"
+			],
+			"locator": "mask_only tarballs (file names); paper Figure 2 caption, sections 3.1.1 and 3.1.3, footnote 1 and Appendix C (how each group was made); staging.py type2name (vessel names)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30",
+			"note": "File names and stored values were checked for every case by the Kidney-VLM project on 2026-09-23 (43 files per case, 44 where colon_lesion is present; the log was not kept) and re-checked on the first 232 cases on 2026-09-30."
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-mask-vessel",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "segmentations/<structure>.nii.gz (vessel masks)",
+		"file": "mask_only tarballs, BDMAP_xxxxxxxx/segmentations/",
+		"definition": "One mask file per structure in each case folder. Each file is one binary mask, and masks of different files can overlap. In the 232 cases checked, every mask has the same array shape as its CT, but in 56 of them some mask headers differ from the CT header (see the quality findings). Stored as 0/1, 0/255, or signed bytes -128/127 with a NIfTI scale that maps them to 0/1; read with a loader that applies the scale and threshold at 0.5.",
+		"type": "image",
+		"unit": null,
+		"coding": [
+			{
+				"code": "aorta.nii.gz",
+				"meaning": "Aorta"
+			},
+			{
+				"code": "postcava.nii.gz",
+				"meaning": "Inferior vena cava (IVC in the RadGPT code)"
+			},
+			{
+				"code": "superior_mesenteric_artery.nii.gz",
+				"meaning": "Superior mesenteric artery"
+			},
+			{
+				"code": "celiac_aa.nii.gz",
+				"meaning": "Celiac artery and common hepatic artery (\"CA and CHA\" in the RadGPT code)"
+			},
+			{
+				"code": "veins.nii.gz",
+				"meaning": "Portal vein and superior mesenteric vein (\"portal vein and SMV\" in the RadGPT code)"
+			},
+			{
+				"code": "celiac_trunk.nii.gz",
+				"meaning": "Celiac trunk"
+			},
+			{
+				"code": "portal_vein_and_splenic_vein.nii.gz",
+				"meaning": "Portal vein and splenic vein"
+			},
+			{
+				"code": "hepatic_vessel.nii.gz",
+				"meaning": "Hepatic vessels"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "segmentation mask",
+		"provenance": "The vessels used for pancreatic tumour staging came from an nnU-Net trained on private data and were revised by radiologists (paper, footnote 1); the origin of each other vessel file is not stated.",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-mask-files",
+				"abdomenatlas3-image-files",
+				"radgpt-paper",
+				"radgpt-staging-script"
+			],
+			"locator": "mask_only tarballs (file names); paper Figure 2 caption, sections 3.1.1 and 3.1.3, footnote 1 and Appendix C (how each group was made); staging.py type2name (vessel names)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30",
+			"note": "File names and stored values were checked for every case by the Kidney-VLM project on 2026-09-23 (43 files per case, 44 where colon_lesion is present; the log was not kept) and re-checked on the first 232 cases on 2026-09-30."
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-ct",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "ct.nii.gz",
+		"file": "image_only tarballs, BDMAP_xxxxxxxx/ct.nii.gz",
+		"definition": "The CT volume of the case, one NIfTI file per BDMAP ID, stored as 16-bit integers in the 232 cases checked.",
+		"type": "image",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "predictor",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": "CT image",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-hf-files",
+				"abdomenatlas3-image-files",
+				"radgpt-generate-readme"
+			],
+			"locator": "image_only listing; the 232 ct.nii.gz headers in the first image tarball; generate_reports README, \"Dataset Format\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-30",
+			"note": "Headers opened for the first 232 cases only."
+		}
+	},
+	{
+		"id": "abdomenatlas-3-0-mini-split",
+		"release": "abdomenatlas-3-0-mini",
+		"originalName": "TrainTestIDS split membership",
+		"file": "TrainTestIDS/IID_train.csv, IID_test.csv, OOD_train.csv, OOD_test.csv",
+		"definition": "Which part of each split a scan belongs to, from four ID lists. IID is a random 90/10 split and the one the paper used; OOD keeps hospitals apart and was not used in the paper. Each split covers all 9,262 scans with no overlap.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "IID_train",
+				"meaning": "(8,336 scans)"
+			},
+			{
+				"code": "IID_test",
+				"meaning": "(926 scans)"
+			},
+			{
+				"code": "OOD_train",
+				"meaning": "(4,696 scans)"
+			},
+			{
+				"code": "OOD_test",
+				"meaning": "(4,566 scans)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "other",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": "data split",
+		"evidence": {
+			"sources": [
+				"abdomenatlas3-split-files",
+				"radgpt-repo-readme"
+			],
+			"locator": "All four lists; README \"Train/Test Splits\"",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	}
+]

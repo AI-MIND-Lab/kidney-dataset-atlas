@@ -1,0 +1,78 @@
+[
+	{
+		"id": "amos-mm-abdomenatlas-overlap",
+		"releases": [
+			"amos-mm-2024",
+			"abdomenatlas-3-0-mini"
+		],
+		"type": "partial_cohort",
+		"count": {
+			"value": 152,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"deeptumorvqa-id-mapping",
+					"amos-mm-zip-listings",
+					"amos-mm-report-json",
+					"abdomenatlas3-image-files"
+				],
+				"locator": "DeepTumorVQA ID mapping rows \"AMOS_amos_xxxx\" (200) matched to the AMOS-MM amos_0xxx file names; those AMOS-MM files are AMOS22 files (zip listings); slice count and spacing of the 5 AMOS-MM scans in the local AbdomenAtlas sample (BDMAP_00000050, BDMAP_00000071, BDMAP_00000076, BDMAP_00000089, BDMAP_00000195) compared with the AMOS-MM JSON meta",
+				"status": "verified",
+				"verifiedOn": "2026-09-30",
+				"note": "Matching by AMOS22 name is safe here only because these AMOS-MM files are AMOS22's own. All 5 comparable scans have the same slice count and spacing in both releases; AbdomenAtlas crops them in-plane."
+			}
+		},
+		"explanation": "152 AMOS-MM training CTs are AbdomenAtlas 3.0 scans: both releases include these AMOS22 CTs. None of AMOS-MM's 76 AMOS22 validation CTs is in AbdomenAtlas. AbdomenAtlas adds masks and generated reports, AMOS-MM the hospital reports and questions. The patients are the same, so counts must not be added.",
+		"evidence": {
+			"sources": [
+				"deeptumorvqa-id-mapping",
+				"amos-mm-zip-listings",
+				"amos-mm-report-json",
+				"abdomenatlas3-image-files"
+			],
+			"locator": "DeepTumorVQA ID mapping rows \"AMOS_amos_xxxx\" (200) matched to the AMOS-MM amos_0xxx file names; those AMOS-MM files are AMOS22 files (zip listings); slice count and spacing of the 5 AMOS-MM scans in the local AbdomenAtlas sample (BDMAP_00000050, BDMAP_00000071, BDMAP_00000076, BDMAP_00000089, BDMAP_00000195) compared with the AMOS-MM JSON meta",
+			"status": "verified",
+			"verifiedOn": "2026-09-30",
+			"note": "Matching by AMOS22 name is safe here only because these AMOS-MM files are AMOS22's own. All 5 comparable scans have the same slice count and spacing in both releases; AbdomenAtlas crops them in-plane."
+		}
+	},
+	{
+		"id": "amos-mm-deeptumorvqa-overlap",
+		"releases": [
+			"amos-mm-2024",
+			"deeptumorvqa-2-0"
+		],
+		"type": "partial_cohort",
+		"count": {
+			"value": 152,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"deeptumorvqa-id-mapping",
+					"amos-mm-zip-listings",
+					"amos-mm-report-json",
+					"abdomenatlas3-image-files",
+					"deeptumorvqa-question-files"
+				],
+				"locator": "DeepTumorVQA ID mapping rows \"AMOS_amos_xxxx\" (200) matched to the AMOS-MM amos_0xxx file names; those AMOS-MM files are AMOS22 files (zip listings); slice count and spacing of the 5 AMOS-MM scans in the local AbdomenAtlas sample (BDMAP_00000050, BDMAP_00000071, BDMAP_00000076, BDMAP_00000089, BDMAP_00000195) compared with the AMOS-MM JSON meta",
+				"status": "verified",
+				"verifiedOn": "2026-09-30",
+				"note": "Matching by AMOS22 name is safe here only because these AMOS-MM files are AMOS22's own. All 5 comparable scans have the same slice count and spacing in both releases; AbdomenAtlas crops them in-plane."
+			}
+		},
+		"explanation": "DeepTumorVQA's scans are AbdomenAtlas 3.0's, so the same 152 AMOS-MM training CTs have DeepTumorVQA questions: 129 only in its training file, 21 in its validation pool and benchmark, and 2 in both its training file and validation pool. So 22 are DeepTumorVQA benchmark scans, and a model trained on AMOS-MM has seen them. Counts must not be added.",
+		"evidence": {
+			"sources": [
+				"deeptumorvqa-id-mapping",
+				"amos-mm-zip-listings",
+				"amos-mm-report-json",
+				"abdomenatlas3-image-files",
+				"deeptumorvqa-question-files"
+			],
+			"locator": "DeepTumorVQA ID mapping rows \"AMOS_amos_xxxx\" (200) matched to the AMOS-MM amos_0xxx file names; those AMOS-MM files are AMOS22 files (zip listings); slice count and spacing of the 5 AMOS-MM scans in the local AbdomenAtlas sample (BDMAP_00000050, BDMAP_00000071, BDMAP_00000076, BDMAP_00000089, BDMAP_00000195) compared with the AMOS-MM JSON meta",
+			"status": "verified",
+			"verifiedOn": "2026-09-30",
+			"note": "Matching by AMOS22 name is safe here only because these AMOS-MM files are AMOS22's own. All 5 comparable scans have the same slice count and spacing in both releases; AbdomenAtlas crops them in-plane."
+		}
+	}
+]

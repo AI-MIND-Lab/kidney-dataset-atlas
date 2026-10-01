@@ -1,0 +1,28 @@
+[
+	{
+		"id": "deeptumorvqa-2-0-derived-from-abdomenatlas-3-0-mini",
+		"from": "deeptumorvqa-2-0",
+		"to": "abdomenatlas-3-0-mini",
+		"toExternal": null,
+		"type": "derived_from",
+		"explanation": "DeepTumorVQA's questions are about the 9,262 AbdomenAtlas 3.0 CT scans, under the same BDMAP IDs. train/ct_link.md says the training CTs are not re-hosted and are \"identical to the cases in AbdomenAtlas3.0Mini\"; the card says the CT volumes are from AbdomenAtlas3.0Mini and the questions are generated from the AbdomenAtlas reports and masks. The paper instead says all masks and metadata were redrawn in-house, and does not name AbdomenAtlas. The 26 re-hosted benchmark CTs that could be compared differ in file size from AbdomenAtlas3.0Mini at revision 122e04f (see the quality findings). They are the same scans, not additional patients.",
+		"evidence": {
+			"sources": [
+				"deeptumorvqa-ct-link",
+				"deeptumorvqa-hf-card",
+				"deeptumorvqa-paper",
+				"deeptumorvqa-question-files",
+				"abdomenatlas3-metadata-csv"
+			],
+			"locator": "ct_link.md; card, \"Source data\"; paper Appendix a; BDMAP IDs of the question files matched with the AbdomenAtlas table",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		},
+		"sources": [
+			"deeptumorvqa-ct-link",
+			"deeptumorvqa-hf-card",
+			"deeptumorvqa-paper",
+			"deeptumorvqa-question-files"
+		]
+	}
+]

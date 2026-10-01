@@ -22,6 +22,12 @@ FOUR_PANEL = ('Four views of one scan: the whole axial slice where the centred l
               'cyst in yellow. Window 50/500 HU; radiological orientation (patient left on viewer right).')
 RMAC_PANELS = ('One panel per contrast phase at the same slice and zoom. Only phases registered to the non-contrast '
                'scan are shown. The red outline is the dataset\'s own mass annotation, drawn on the non-contrast grid.')
+ATLAS_PANELS = ('Four views of one scan: the whole axial slice where the centred label is largest, a zoomed axial crop, '
+                'and coronal and sagittal cuts through the same point. Kidney is outlined in green and the kidney lesion '
+                'in orange; the release does not say whether a lesion is a tumour or a cyst. Window 50/500 HU; '
+                'radiological orientation (patient left on viewer right).')
+DTV_PANELS = ('Five axial slices spread across the kidneys, side by side, exactly as DeepTumorVQA releases the image for its '
+              'questions; per the paper they use a window of -150 to 250 HU. No outline is drawn.')
 
 KITS = {
     'release': 'kits23', 'folder': 'kits23',
@@ -129,6 +135,70 @@ RCCAID = {
     ],
 }
 
+AMOS_PANELS = ('Four views of one scan: the whole axial slice where the right kidney is largest, a zoomed axial crop, '
+               'and coronal and sagittal cuts through the centre of the right kidney. Both kidneys are outlined in green; '
+               'there is no stone or cyst mask. Window 50/500 HU; radiological orientation (patient left on viewer right).')
+# Rendered by the Kidney-VLM project with RadGPT/tools/render_preview.py (kept outside this repository), which follows
+# the four-panel conventions in docs/previews.md; the lesion has its own colour because the release does not type it.
+ATLAS = {
+    'release': 'abdomenatlas-3-0-mini', 'folder': 'abdomenatlas',
+    'attribution': ('Images and masks: AbdomenAtlas 3.0 (Bassi et al., ICCV 2025, doi:10.1109/ICCV51701.2025.02202), '
+                    'Hugging Face AbdomenAtlas/AbdomenAtlas3.0Mini, revision 122e04f. The release does not record which of '
+                    'its 17 source datasets this scan came from. Rendered by the Kidney-VLM project: reoriented for '
+                    'display, windowed, cropped and outlined.'),
+    'reuseTerms': ('CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/), the licence on the dataset card. '
+                   'This preview is an adaptation and is shared under the same licence. The RadGPT repository\'s LICENSE '
+                   'states CC BY-NC-ND 4.0, which does not allow adaptations; a curator has to settle which applies before '
+                   'approving this preview.'),
+    'sources': ['abdomenatlas3-metadata-csv', 'abdomenatlas3-image-files', 'abdomenatlas3-hf-card', 'radgpt-paper',
+                'radgpt-repo-license'],
+    'alignment': ("The release's own CT and mask files; in this case they share one voxel grid and header (checked). "
+                  'Nothing was re-registered.'),
+    'items': [
+        ('BDMAP_00000061', "AbdomenAtlas 3.0 BDMAP_00000061 (venous phase, Siemens scanner and voxel spacing 1.5 × 1.5 × 1.5 from the release's metadata table; no unit is stated in the table or this file's header): the release's report lists a 9.5 × 8.6 cm hypoattenuating lesion in the right kidney and five in the left kidney, the largest 7.8 × 5.4 cm. The kidney masks overlap the lesion mask, so the green kidney outline also runs around most of the lesion.", 'CT with a large round lesion outlined in orange in the right kidney and a lesion in the left kidney, shown in axial, zoomed, coronal and sagittal views.'),
+    ],
+}
+
+# Not a Kidney-VLM rendering: DeepTumorVQA's own organ PNG, downloaded from the release and only compressed here.
+DTV = {
+    'release': 'deeptumorvqa-2-0', 'folder': 'deeptumorvqa',
+    'attribution': ('Image: DeepTumorVQA 2.0 (Chen et al. 2026, arXiv:2605.09679), Hugging Face tumor-vqa/DeepTumorVQA_2.0, '
+                    'revision a8b9db5, benchmark/images_2d/organ/BDMAP_00000162_kidney.png, rendered by DeepTumorVQA from the '
+                    'AbdomenAtlas 3.0 scan BDMAP_00000162, which DeepTumorVQA\'s ID mapping gives as KiTS21_img0205 (KiTS, Heller et al.). '
+                    'Compressed to WebP for the atlas; nothing else was changed.'),
+    'reuseTerms': ('Governed by the source CT licence, according to the DeepTumorVQA card, which points to AbdomenAtlas3.0Mini. '
+                   'That dataset\'s card states CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/) and its '
+                   'repository CC BY-NC-ND 4.0. By DeepTumorVQA\'s ID mapping the scan is a KiTS case, and KiTS23 is CC BY-NC-SA 4.0. '
+                   'A curator has to settle which applies before approving this preview.'),
+    'sources': ['deeptumorvqa-image-files', 'deeptumorvqa-hf-card', 'deeptumorvqa-paper', 'deeptumorvqa-question-files',
+                'deeptumorvqa-metadata-files', 'deeptumorvqa-id-mapping'],
+    'alignment': 'No mask is drawn; the image is shown as released.',
+    'items': [
+        ('BDMAP_00000162_kidney', "DeepTumorVQA benchmark scan BDMAP_00000162 (KiTS21_img0205 by DeepTumorVQA's ID mapping). Its benchmark questions ask whether the kidney has tumours (answer: Yes) and where the largest one is (answer: left). The metadata lists three kidney tumours with a total volume of 15.3 cm³; its recorded largest-tumour diameter, 16.1 cm, is one of the values affected by the diameter defect described in the quality findings.", 'Five axial CT slices of the abdomen side by side, at levels through the kidneys, without outlines.'),
+    ],
+}
+
+
+# Rendered by the Kidney-VLM project with AMOS-MM/tools/render_preview.py (kept outside this repository), adapted from the
+# AbdomenAtlas renderer. AMOS-MM releases no masks; this CT is an AMOS22 file, so AMOS22's label map fits it.
+AMOS = {
+    'release': 'amos-mm-2024', 'folder': 'amos-mm',
+    'attribution': ('CT: AMOS-MM (MICCAI 2024 AMOS-MM challenge; Ji, Ge, Li and Luo), imagesTr/amos_0088.nii.gz from the public '
+                    'Google Drive release, which matches amos_0088 of AMOS22 in size and CRC32 (Ji et al., NeurIPS 2022; '
+                    'doi:10.5281/zenodo.7262581). Kidney mask: AMOS22 labelsTr/amos_0088.nii.gz. Rendered by the Kidney-VLM '
+                    'project: reoriented for display, windowed, cropped and outlined.'),
+    'reuseTerms': ('Unresolved. The CT matches an AMOS22 file in size and CRC32, and AMOS22\'s own statements differ: its Zenodo '
+                   'record says CC BY 4.0, its dataset.json "CC-BY-SA 4.0" and the AMOS paper CC BY-NC-SA. AMOS-MM\'s JSON '
+                   'files state CC BY-ND 4.0, which does not allow adaptations, and its design document CC BY-SA. A curator '
+                   'has to settle which applies before approving this preview.'),
+    'sources': ['amos-mm-image-files', 'amos-mm-report-json', 'amos-mm-vqa-json', 'amos-mm-zip-listings', 'amos22-zenodo',
+                'amos-paper', 'amos-mm-design-doc', 'deeptumorvqa-id-mapping', 'abdomenatlas3-metadata-csv'],
+    'alignment': 'The AMOS22 mask and the AMOS-MM CT share one voxel grid and affine (checked). Nothing was re-registered.',
+    'items': [
+        ('amos_0088', "AMOS-MM amos_0088, a training case from site A (Aquilion ONE scanner in the release's metadata; voxel size 0.75 × 0.75 × 5.0 mm from the file header). Its report finds \"a small dot-like high-density focus\" and \"an unenhanced low-density focus\" of about 6 mm in the right kidney, and the impression reads \"Small kidney stone in the right kidney and a small cyst.\" Six of its questions are about the right kidney. AMOS22 outlines organs only, so neither finding is outlined here; the same scan is AbdomenAtlas 3.0 BDMAP_00001989, whose metadata lists one 0.6 cm hypoattenuating lesion in the right kidney.", 'CT with both kidneys outlined in green, shown in axial, zoomed, coronal and sagittal views.'),
+    ],
+}
+
 
 def cptac_mask(name, caption):
     if 'radiologist-corrected BAMF' in caption:
@@ -150,13 +220,19 @@ MASK_LINE = {
     'tcga-kirc-tcia': tcga_mask,
     'rcc-aid-v2': lambda n, c: ("Mask: RCC-AID's own label, started by a model and corrected by trained students, with a "
                                 "radiologist deciding uncertain cases. Phase is RCC-AID's radiologist label."),
+    'abdomenatlas-3-0-mini': lambda n, c: ("Mask: AbdomenAtlas 3.0's own masks. The kidney masks come from AbdomenAtlas 1.1 "
+                                           "(AI with radiologists in the loop); the kidney lesion mask was drawn by AI and "
+                                           "corrected by radiologists."),
+    'deeptumorvqa-2-0': lambda n, c: "No mask: DeepTumorVQA's own image, as released for its questions.",
+    'amos-mm-2024': lambda n, c: ("Mask: AMOS22's organ mask, not part of AMOS-MM. AMOS22's masks were pre-labelled by models "
+                                  "and checked by junior and then senior radiologists; a few scans were drawn by hand."),
 }
 
 samples, total_in, total_out = [], 0, 0
-for spec in (KITS, RMAC, CPTAC, TCGA, RCCAID):
+for spec in (KITS, RMAC, CPTAC, TCGA, RCCAID, ATLAS, DTV, AMOS):
     out_dir = os.path.join(REPO, 'public', 'previews', spec['release'])
     os.makedirs(out_dir, exist_ok=True)
-    intro = RMAC_PANELS if spec is RMAC else FOUR_PANEL
+    intro = {id(RMAC): RMAC_PANELS, id(ATLAS): ATLAS_PANELS, id(DTV): DTV_PANELS, id(AMOS): AMOS_PANELS}.get(id(spec), FOUR_PANEL)
     for name, caption, alt in spec['items']:
         src = os.path.join(FIG, spec['folder'], name + '.png')
         dst = os.path.join(out_dir, name + '.webp')
