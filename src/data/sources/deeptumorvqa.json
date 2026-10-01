@@ -1,0 +1,79 @@
+[
+	{
+		"id": "deeptumorvqa-paper",
+		"url": "https://arxiv.org/abs/2605.09679v1",
+		"title": "Chen et al., DeepTumorVQA: A Hierarchical 3D CT Benchmark for Stage-Wise Evaluation of Medical VLMs and Tool-Augmented Agents (arXiv v1, 10 May 2026)",
+		"locator": "Full text: abstract; sections 3.1-3.3 (questions, data, agent tools and modes) and 4.1-4.2 (Tables 3-4); Appendix a (Table 6, data collection, lesion counts); b (metadata); e (2D, video and 3D inputs, LoRA and agent SFT); q (Tables 15-16); s (annotators); v (ethics, reproducibility); ab (Table 23)",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "deeptumorvqa-hf-card",
+		"url": "https://huggingface.co/datasets/tumor-vqa/DeepTumorVQA_2.0/blob/a8b9db5133fda02567476dcb49498ec51f6aed37/README.md",
+		"title": "DeepTumorVQA v2 dataset card on Hugging Face, revision a8b9db5",
+		"locator": "Header (license: cc-by-4.0); \"Configurations\"; \"Folder layout\"; \"Source data\"; \"Considerations for using\"; \"License\"; \"Citation\"",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "deeptumorvqa-hf-files",
+		"url": "https://huggingface.co/datasets/tumor-vqa/DeepTumorVQA_2.0/tree/a8b9db5133fda02567476dcb49498ec51f6aed37",
+		"title": "DeepTumorVQA_2.0 file listing on Hugging Face, revision a8b9db5",
+		"locator": "Full file list with sizes (26,828 files, 106.8 GB), as cached by the download tool; Hub API entry for the dataset (\"gated\": false). File counts only; the files were not opened",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "deeptumorvqa-question-files",
+		"url": "https://huggingface.co/datasets/tumor-vqa/DeepTumorVQA_2.0/tree/a8b9db5133fda02567476dcb49498ec51f6aed37/train",
+		"title": "DeepTumorVQA_2.0 question files (train/train_qa.csv, train/val_qa_pool.csv, benchmark/test_qa.json and .jsonl), revision a8b9db5",
+		"locator": "All rows of the four files; local copies match the Hugging Face hashes",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "deeptumorvqa-metadata-files",
+		"url": "https://huggingface.co/datasets/tumor-vqa/DeepTumorVQA_2.0/tree/a8b9db5133fda02567476dcb49498ec51f6aed37/metadata",
+		"title": "DeepTumorVQA_2.0 metadata folder (reports_and_metadata.csv, subtype_schema.csv, leaderboard.csv), revision a8b9db5",
+		"locator": "All rows of the three files; local copies match the Hugging Face hashes",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "deeptumorvqa-agent-files",
+		"url": "https://huggingface.co/datasets/tumor-vqa/DeepTumorVQA_2.0/tree/a8b9db5133fda02567476dcb49498ec51f6aed37/agent_sft",
+		"title": "DeepTumorVQA_2.0 agent trajectories (agent_sft/) and tool caches (tool_cache/), revision a8b9db5",
+		"locator": "All 40,000 trajectories, coverage_note.md, and the three tool-cache files; local copies match the Hugging Face hashes",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "deeptumorvqa-ct-link",
+		"url": "https://huggingface.co/datasets/tumor-vqa/DeepTumorVQA_2.0/blob/a8b9db5133fda02567476dcb49498ec51f6aed37/train/ct_link.md",
+		"title": "DeepTumorVQA_2.0 train/ct_link.md, revision a8b9db5",
+		"locator": "\"We do not re-host the raw CT NIfTI files for the training split. They are identical to the cases in AbdomenAtlas/AbdomenAtlas3.0Mini\"",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "deeptumorvqa-image-files",
+		"url": "https://huggingface.co/datasets/tumor-vqa/DeepTumorVQA_2.0/tree/a8b9db5133fda02567476dcb49498ec51f6aed37/benchmark/images_2d",
+		"title": "DeepTumorVQA_2.0 benchmark PNGs and MP4s (benchmark/images_2d/, benchmark/videos/), revision a8b9db5",
+		"locator": "A temporary sample of 10 benchmark scans (BDMAP_00000003, 010, 056, 095, 118, 126, 127, 134, 155, 162): kidney PNG, whole-scan PNG and whole-scan MP4 each, opened on 2026-09-30 and then deleted",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "deeptumorvqa-github",
+		"url": "https://github.com/Schuture/DeepTumorVQA/blob/1df7460db6b95a4fc550bf34d75571057e1d4c4b/README.md",
+		"title": "Schuture/DeepTumorVQA GitHub repository, branch v2 at commit 1df7460 (and branch v1 at bb28a89)",
+		"locator": "LICENSE (Apache-2.0); RELEASE_INVENTORY.md; metadata/leaderboard_freeform.csv; src/deeptumorvqa/scripts/extract_train_videos.py and scripts/slurm/extract_train_videos.sh; file trees of both branches",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "deeptumorvqa-id-mapping",
+		"url": "https://github.com/Schuture/DeepTumorVQA/blob/bb28a8979c2903f4a8e834fcdb13f0ac21712a82/Data/AbdomenAtlas_ID_mapping.csv",
+		"title": "DeepTumorVQA GitHub branch v1 (commit bb28a89), Data/AbdomenAtlas_ID_mapping.csv",
+		"locator": "All 9,262 rows (columns \"original id\" and \"AbdomenAtlas_id\"); the v1 README says it \"links each image ID in our dataset to its corresponding source identifier from the original Abdomen Atlas dataset\". The v1 branch is licensed CC BY-NC-ND 4.0 (its LICENSE file); only counts derived from the file are used, nothing is copied",
+		"accessedOn": "2026-09-30"
+	},
+	{
+		"id": "kits23-repo-dataset",
+		"url": "https://github.com/neheller/kits23/tree/c1088353084c17b8882a11db71429e7c022b7785/dataset",
+		"title": "KiTS23 GitHub repository (commit c108835), dataset/ folder and dataset/kits23.json",
+		"locator": "489 case folders, case_00000 to case_00299 and case_00400 to case_00588; radiographic_size field of kits23.json",
+		"accessedOn": "2026-09-30"
+	}
+]

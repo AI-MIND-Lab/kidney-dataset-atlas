@@ -33,6 +33,6 @@ Appendix C).
 
 Three things are easy to misread. The kidney lesion mask does not say whether a lesion is a tumour or a cyst, although
 KiTS'23, one of the sources, labels the two separately. Counts must never be added to those of
-the source datasets, because the same scans appear in both; this catalogue records that overlap for KiTS23 and
-CT-ORG. And the numbers in the metadata table were read back out of the report text, not measured from the masks
-(see the quality findings on the release page).
+the source datasets, because the same scans appear in both; this catalogue records that overlap for KiTS23,
+CT-ORG, TotalSegmentator and CPTAC-CCRCC. And the numbers in the metadata table were read back out of the report
+text, not measured from the masks (see the quality findings on the release page).

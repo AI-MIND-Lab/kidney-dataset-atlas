@@ -1,0 +1,161 @@
+[
+	{
+		"id": "deeptumorvqa-abdomenatlas-overlap",
+		"releases": [
+			"deeptumorvqa-2-0",
+			"abdomenatlas-3-0-mini"
+		],
+		"type": "same_cohort",
+		"count": {
+			"value": 9262,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"deeptumorvqa-question-files",
+					"abdomenatlas3-metadata-csv"
+				],
+				"locator": "BDMAP IDs of train_qa.csv and val_qa_pool.csv (9,262 distinct) compared with AbdomenAtlas3.0MiniWithMeta.csv (9,262): identical sets",
+				"status": "verified",
+				"verifiedOn": "2026-09-30"
+			}
+		},
+		"explanation": "Both releases describe the same 9,262 CT scans under the same BDMAP IDs. DeepTumorVQA adds questions, renderings and agent files; the patients are the same, so counts must not be added.",
+		"evidence": {
+			"sources": [
+				"deeptumorvqa-question-files",
+				"abdomenatlas3-metadata-csv"
+			],
+			"locator": "BDMAP IDs of train_qa.csv and val_qa_pool.csv (9,262 distinct) compared with AbdomenAtlas3.0MiniWithMeta.csv (9,262): identical sets",
+			"status": "verified",
+			"verifiedOn": "2026-09-30"
+		}
+	},
+	{
+		"id": "deeptumorvqa-kits23-overlap",
+		"releases": [
+			"deeptumorvqa-2-0",
+			"kits23"
+		],
+		"type": "partial_cohort",
+		"count": {
+			"value": 489,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"deeptumorvqa-id-mapping",
+					"kits23-repo-dataset",
+					"abdomenatlas3-metadata-csv"
+				],
+				"locator": "original id values KiTS21_img0000 to KiTS21_img0299 (300) and KiTS23_case_00400 to KiTS23_case_00588 (189); KiTS23 dataset/ case folders and kits23.json",
+				"status": "verified",
+				"verifiedOn": "2026-09-30",
+				"note": "The mapping file is on DeepTumorVQA's v1 branch; its 9,262 BDMAP IDs are exactly AbdomenAtlas 3.0's. For the mapped KiTS cases, AbdomenAtlas 3.0's largest kidney lesion diameter agrees with KiTS23's radiographic_size (correlation 0.97 for the KiTS21 rows and 0.84 for the KiTS23 rows; 0.16 or less when each scan is paired with the neighbouring case), which supports reading KiTS21_imgNNNN as KiTS case_NNNNN."
+			}
+		},
+		"explanation": "The ID mapping published with DeepTumorVQA (GitHub, branch v1) gives the source scan of each BDMAP ID. It names 300 KiTS21 scans and 189 KiTS23 scans, which together are the 489 KiTS23 training cases. Another 176 BDMAP IDs map to KiTS19-21 names with case numbers from the same range; the metadata tables give them the same shape, spacing (up to axis order) and kidney lesion size as the KiTS21 row with that number, so they look like second copies of the same scans. So 665 BDMAP IDs hold 489 KiTS cases. These patients are counted in both releases, so the counts must not be added.",
+		"evidence": {
+			"sources": [
+				"deeptumorvqa-id-mapping",
+				"kits23-repo-dataset",
+				"abdomenatlas3-metadata-csv"
+			],
+			"locator": "original id values KiTS21_img0000 to KiTS21_img0299 (300) and KiTS23_case_00400 to KiTS23_case_00588 (189); KiTS23 dataset/ case folders and kits23.json",
+			"status": "verified",
+			"verifiedOn": "2026-09-30",
+			"note": "The mapping file is on DeepTumorVQA's v1 branch; its 9,262 BDMAP IDs are exactly AbdomenAtlas 3.0's. For the mapped KiTS cases, AbdomenAtlas 3.0's largest kidney lesion diameter agrees with KiTS23's radiographic_size (correlation 0.97 for the KiTS21 rows and 0.84 for the KiTS23 rows; 0.16 or less when each scan is paired with the neighbouring case), which supports reading KiTS21_imgNNNN as KiTS case_NNNNN."
+		}
+	},
+	{
+		"id": "deeptumorvqa-ct-org-overlap",
+		"releases": [
+			"deeptumorvqa-2-0",
+			"ct-org-tcia"
+		],
+		"type": "partial_cohort",
+		"count": {
+			"value": 64,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"deeptumorvqa-id-mapping"
+				],
+				"locator": "original id values starting CT-ORG_ (64 distinct)",
+				"status": "verified",
+				"verifiedOn": "2026-09-30",
+				"note": "DeepTumorVQA's Table 6 and RadGPT's Table 1 list 140. The mapping file is on DeepTumorVQA's v1 branch; its 9,262 BDMAP IDs are exactly AbdomenAtlas 3.0's, and its KiTS rows agree with KiTS23's own tumour sizes (see the KiTS23 overlap)."
+			}
+		},
+		"explanation": "The ID mapping names 64 distinct CT-ORG scans among the 9,262, although DeepTumorVQA's Table 6 and RadGPT's Table 1 list 140. These patients are counted in both releases, so the counts must not be added.",
+		"evidence": {
+			"sources": [
+				"deeptumorvqa-id-mapping"
+			],
+			"locator": "original id values starting CT-ORG_ (64 distinct)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30",
+			"note": "The mapping file is on DeepTumorVQA's v1 branch; its 9,262 BDMAP IDs are exactly AbdomenAtlas 3.0's, and its KiTS rows agree with KiTS23's own tumour sizes (see the KiTS23 overlap)."
+		}
+	},
+	{
+		"id": "deeptumorvqa-totalsegmentator-overlap",
+		"releases": [
+			"deeptumorvqa-2-0",
+			"totalsegmentator-ct-v3"
+		],
+		"type": "partial_cohort",
+		"count": {
+			"value": 485,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"deeptumorvqa-id-mapping"
+				],
+				"locator": "original id values starting TotalSegmentator_ (485 distinct)",
+				"status": "verified",
+				"verifiedOn": "2026-09-30",
+				"note": "The mapping file is on DeepTumorVQA's v1 branch; its 9,262 BDMAP IDs are exactly AbdomenAtlas 3.0's, and its KiTS rows agree with KiTS23's own tumour sizes (see the KiTS23 overlap)."
+			}
+		},
+		"explanation": "The ID mapping names 485 distinct TotalSegmentator scans (s0004 to s1405), a source that neither paper's table lists. The count is of scans; how many patients they come from is not stated. These scans are counted in both releases, so the counts must not be added.",
+		"evidence": {
+			"sources": [
+				"deeptumorvqa-id-mapping"
+			],
+			"locator": "original id values starting TotalSegmentator_ (485 distinct)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30",
+			"note": "The mapping file is on DeepTumorVQA's v1 branch; its 9,262 BDMAP IDs are exactly AbdomenAtlas 3.0's, and its KiTS rows agree with KiTS23's own tumour sizes (see the KiTS23 overlap)."
+		}
+	},
+	{
+		"id": "deeptumorvqa-cptac-ccrcc-overlap",
+		"releases": [
+			"deeptumorvqa-2-0",
+			"cptac-ccrcc-v14"
+		],
+		"type": "partial_cohort",
+		"count": {
+			"value": 62,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"deeptumorvqa-id-mapping"
+				],
+				"locator": "original id values starting TCIA-CPTAC-CCRCC_ (62 distinct)",
+				"status": "verified",
+				"verifiedOn": "2026-09-30",
+				"note": "The 62 scans come from 24 patient IDs (C3L-… and C3N-…). The mapping file is on DeepTumorVQA's v1 branch; its 9,262 BDMAP IDs are exactly AbdomenAtlas 3.0's, and its KiTS rows agree with KiTS23's own tumour sizes (see the KiTS23 overlap)."
+			}
+		},
+		"explanation": "The ID mapping names 62 CPTAC-CCRCC CT scans from 24 patients, a source that neither paper's table lists. These patients are counted in both releases, so the counts must not be added.",
+		"evidence": {
+			"sources": [
+				"deeptumorvqa-id-mapping"
+			],
+			"locator": "original id values starting TCIA-CPTAC-CCRCC_ (62 distinct)",
+			"status": "verified",
+			"verifiedOn": "2026-09-30",
+			"note": "The mapping file is on DeepTumorVQA's v1 branch; its 9,262 BDMAP IDs are exactly AbdomenAtlas 3.0's, and its KiTS rows agree with KiTS23's own tumour sizes (see the KiTS23 overlap)."
+		}
+	}
+]

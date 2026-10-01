@@ -5,13 +5,15 @@ DOI, the Crossref licence is checked before anything is saved; an arXiv figure m
 abstract page. The paper record then quotes the caption and carries the credit line; the validator refuses a
 reproduced figure under any other licence.
 
-Requires: pip install -r scripts/research/requirements.txt
+Pass paper ids to fetch only those papers' figures (python fetch_paper_figures.py deeptumorvqa-2026); with no
+arguments every figure is fetched.
+
+Requires: pip install -r scripts/research/requirements.txt (pypdf only for figures taken from a PDF)
 """
 import io
 import sys
 from pathlib import Path
 
-import pypdf
 from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -33,6 +35,9 @@ FIGURES = [
     ('transmil-2021', 'figure-3', None, ('pdf', 'https://arxiv.org/pdf/2106.00908', 5, 'Im3.png')),
     # arXiv:2310.04110 is CC BY 4.0 on its abstract page; Fig. 2 is the raster image on page 4.
     ('kits23-auto3dseg', 'figure-2', None, ('pdf', 'https://arxiv.org/pdf/2310.04110', 4, 'Im2.png')),
+    # arXiv:2605.09679 is CC BY 4.0 on its abstract page; Figure 1 is a vector drawing in the PDF, so the PNG from
+    # arXiv's HTML version of the paper is used.
+    ('deeptumorvqa-2026', 'figure-1', None, ('url', 'https://arxiv.org/html/2605.09679v1/task_demonstration.png')),
 ]
 
 
@@ -42,7 +47,10 @@ def licence_ok(doi):
     return any(any(cc in url for cc in CC_BY) for url in urls)
 
 
+ONLY = set(sys.argv[1:])
 for paper, name, doi, (kind, url, *rest) in FIGURES:
+    if ONLY and paper not in ONLY:
+        continue
     if doi and not licence_ok(doi):
         print(f'SKIP {paper}: Crossref does not list a CC BY licence for {doi}')
         continue
@@ -51,6 +59,7 @@ for paper, name, doi, (kind, url, *rest) in FIGURES:
         print(f'FAIL {paper}: could not download {url}')
         continue
     if kind == 'pdf':
+        import pypdf
         page, image_name = rest
         image = next(im.image for im in pypdf.PdfReader(io.BytesIO(data)).pages[page - 1].images if im.name == image_name)
     else:

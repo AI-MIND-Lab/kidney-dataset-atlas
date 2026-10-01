@@ -110,10 +110,12 @@ deidentification:
   statement: >-
     No statement about de-identification was found in the paper, the dataset card or the repository README. The CT
     scans come from 17 public datasets, whose own documentation was not checked for this record. In the 232 CT headers
-    checked, one keeps its full acquisition date (see the quality findings).
+    checked, one keeps its full acquisition date (see the quality findings). DeepTumorVQA, a question set built on
+    these scans whose authors include several of RadGPT's, states on its dataset card that the CTs were "deidentified
+    by the AbdomenAtlas project"; AbdomenAtlas's own documentation does not say so.
   status: not_documented
   evidence:
-    sources: [radgpt-paper, abdomenatlas3-hf-card, radgpt-repo-readme, abdomenatlas3-image-files]
+    sources: [radgpt-paper, abdomenatlas3-hf-card, radgpt-repo-readme, abdomenatlas3-image-files, deeptumorvqa-hf-card]
     status: verified
     verifiedOn: 2026-09-30
     note: The full paper text was searched for de-identification, anonymisation, ethics approval and consent; none is mentioned.
@@ -179,7 +181,7 @@ limitations:
   - The reports were generated from the masks by rules and a language model, then checked by radiologists; they are not the source hospitals' own reports.
   - The organ volumes and lesion values in the metadata table were read back out of the report text, not measured from the masks. A missing lesion count, size or volume was written as 0, so 0 also covers "not in the report" and "no report"; other missing values are left blank.
   - Sex and age are known for about 15% of scans, scanner vendor for about 5%, and contrast phase for 13% in the metadata table.
-  - The scans are reused from public datasets, including KiTS23 and CT-ORG in this catalogue; counts must never be added to theirs.
+  - The scans are reused from public datasets, including KiTS23, CT-ORG, TotalSegmentator and CPTAC-CCRCC in this catalogue (per DeepTumorVQA's ID mapping); counts must never be added to theirs.
   - The two licence statements (dataset card CC BY-NC-SA 4.0, repository CC BY-NC-ND 4.0) disagree.
 eligibility:
   publicAccess:
@@ -194,9 +196,12 @@ eligibility:
     status: unknown
     note: No de-identification statement was found in the paper, card or README, and the 17 source datasets' own statements were not checked. This is one of the things blocking publication.
     evidence:
-      sources: [radgpt-paper, abdomenatlas3-hf-card, abdomenatlas3-image-files]
+      sources: [radgpt-paper, abdomenatlas3-hf-card, abdomenatlas3-image-files, deeptumorvqa-hf-card]
       status: not_verified
-      note: One of the 232 CT headers checked keeps its full acquisition date, so de-identification cannot be assumed without the provider's statement.
+      note: >-
+        One of the 232 CT headers checked keeps its full acquisition date, so de-identification cannot be assumed without
+        the provider's statement. The DeepTumorVQA card's second-hand statement ("deidentified by the AbdomenAtlas
+        project") is supporting evidence only.
   noPhiHosted:
     status: pass
     note: This catalog stores descriptions, sources and one compressed preview image.

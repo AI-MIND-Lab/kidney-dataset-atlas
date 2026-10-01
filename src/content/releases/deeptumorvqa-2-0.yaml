@@ -1,0 +1,251 @@
+id: deeptumorvqa-2-0
+dataset: deeptumorvqa
+versionLabel: "DeepTumorVQA 2.0 (Hugging Face, revision a8b9db5)"
+current: true
+releaseDate: null
+counts:
+  patients:
+    value: null
+    status: not_documented
+    evidence:
+      sources: [deeptumorvqa-paper, deeptumorvqa-question-files]
+      locator: 'Paper section 3.2 ("patient-level with zero overlap") and Appendix v ("patient-level split by dataset"); BDMAP IDs of the question files'
+      status: verified
+      verifiedOn: 2026-09-30
+      note: The paper calls the split "patient-level", but the files identify scans only (BDMAP IDs); no patient count or patient identifier is given.
+  examinations:
+    value: 9262
+    status: present
+    evidence:
+      sources: [deeptumorvqa-paper, deeptumorvqa-question-files]
+      locator: 'Paper abstract ("9,262 3D CT volumes"); the training and validation question files together name 9,262 distinct BDMAP IDs, the same set as AbdomenAtlas 3.0'
+      status: verified
+      verifiedOn: 2026-09-30
+  lesions:
+    value: null
+    status: not_verified
+    evidence:
+      sources: [deeptumorvqa-paper, deeptumorvqa-metadata-files]
+      locator: 'Paper Appendix a ("11,319 individual lesions"); lesion-instance columns of reports_and_metadata.csv'
+      status: not_verified
+      verifiedOn: 2026-09-30
+      note: >-
+        The paper's 11,319 (6,357 liver, 4,114 kidney, 665 pancreatic, 183 colon) equals the untyped lesion columns of
+        the metadata table only. The typed columns hold another 1,909 kidney and 1,481 pancreatic tumour or cyst
+        instances, almost always in other scans (1 kidney and 80 of 1,120 pancreatic scans have both), so the total
+        number of lesions is not established (see the quality findings).
+  slices:
+    value: null
+    status: not_documented
+  slides:
+    value: null
+    status: not_applicable
+  images:
+    value: 16490
+    status: present
+    evidence:
+      sources: [deeptumorvqa-hf-files]
+      locator: "File list: 7,160 organ PNGs and 996 whole-scan PNGs under benchmark/images_2d/, 8,334 PNGs under train/images_2d/"
+      status: verified
+      verifiedOn: 2026-09-30
+      note: Counted from the file list; the files were not opened except a 10-scan sample of benchmark PNGs, which hold 5 (organ) or 9 (whole-scan) CT slices side by side. The training PNGs were not opened. There are also 9,330 MP4 videos (996 benchmark, 8,334 training).
+  patches:
+    value: null
+    status: not_applicable
+  records:
+    value: 475983
+    status: present
+    evidence:
+      sources: [deeptumorvqa-question-files, deeptumorvqa-paper]
+      locator: "train_qa.csv 428,050 rows and val_qa_pool.csv 47,933 rows, question IDs 0 to 475,982 with no gap; paper abstract \"476K questions\""
+      status: verified
+      verifiedOn: 2026-09-30
+      note: Questions. The 10,000 benchmark questions are copies of validation-pool questions and are not counted again.
+modalities:
+  - ct
+  - other
+cohort: >-
+  The 9,262 AbdomenAtlas 3.0 CT scans. The paper says they come from 17 public abdominal CT datasets, collected as
+  11,995 scans with 2,733 excluded in quality control (Appendix a); the ID mapping on GitHub names more sources than
+  that (see the quality findings). The "other" modality is the
+  question-and-answer text. There are 428,050 training questions on 8,334 scans, a validation pool of 47,933 on
+  1,158 scans (230 scans are in both), and a 10,000-question benchmark on 991 scans drawn from that pool.
+tasks:
+  - other
+annotations:
+  - classification_labels
+annotationProvenance:
+  kind: mixed
+  note: >-
+    The answers are computed by programs, not written by people: one program per question type reads the per-scan
+    metadata table and fills one of its sentence templates (paper, section 3.1, says 10; in the files 12 of the 42
+    subtypes have only 3 to 5 wordings). The paper says the masks behind that table were
+    drawn by 23 radiologists in 3D Slicer, with peer review and specialist adjudication, and that the only
+    human-assigned attributes are the lesion types (cyst or tumour; PDAC or PNET) (Appendices b and s). The dataset
+    card instead says the questions are generated from the AbdomenAtlas reports and masks. A 200-question subset was
+    answered by two radiologists (card; paper, section 4.1). The masks themselves are not released.
+  evidence:
+    sources: [deeptumorvqa-paper, deeptumorvqa-hf-card]
+    locator: Paper sections 3.1-3.2 and Appendices b and s; card, "Source data"
+    status: verified
+    verifiedOn: 2026-09-30
+doi: null
+access:
+  mode: direct_open_download
+  registrationVisible: false
+  instructions: >-
+    Download from the Hugging Face repository tumor-vqa/DeepTumorVQA_2.0 with huggingface_hub or the datasets library;
+    the card shows how to download only the parts a given evaluation needs. The repository is public and not gated.
+    From its file list, the release is about 107 GB: 991 benchmark CT volumes (74.6 GB), 7,160 organ PNGs, 996
+    whole-scan PNGs and 996 MP4s for the benchmark, 8,334 PNGs and 8,334 MP4s for training, and the question,
+    metadata, tool-cache and trajectory files. The training CT volumes are not re-hosted; train/ct_link.md points to
+    AbdomenAtlas3.0Mini for them.
+  evidence:
+    sources: [deeptumorvqa-hf-card, deeptumorvqa-hf-files, deeptumorvqa-ct-link]
+    locator: 'Card, "Quick start", "Folder layout" and "Per-modality lazy download"; file list sizes; Hub API entry ("gated": false)'
+    status: verified
+    verifiedOn: 2026-09-30
+license:
+  name: CC BY 4.0 (questions, metadata, tool caches, trajectories); source CT licences (images, videos, CT)
+  url: https://creativecommons.org/licenses/by/4.0/
+  conditions: >-
+    The paper releases the annotations, structured metadata and benchmark questions under CC BY 4.0, and the card adds
+    the tool caches and agent trajectories to that licence. The
+    PNG slices, videos and CT volumes are governed by the licences of the source CT datasets, and the card points to
+    AbdomenAtlas3.0Mini for those terms, which are themselves unclear (its dataset card and repository licence
+    disagree). The evaluation code on GitHub is Apache-2.0.
+deidentification:
+  statement: >-
+    The dataset card states: "All CT data was collected with appropriate IRB approval and was deidentified by the
+    AbdomenAtlas project." The paper states that the CT volumes are "sourced from publicly available, de-identified
+    datasets" (Appendix v). Both are second-hand: they describe work done by AbdomenAtlas and the source datasets, and
+    AbdomenAtlas itself documents no de-identification.
+  status: present
+  evidence:
+    sources: [deeptumorvqa-hf-card, deeptumorvqa-paper]
+    locator: 'Card, "Considerations for using"; paper Appendix v.1, "Data privacy considerations"'
+    status: verified
+    verifiedOn: 2026-09-30
+pairing:
+  - kind: same_patient
+    modalities: [ct]
+    status: not_documented
+    note: >-
+      Each BDMAP ID is one CT scan and the release has no patient identifier. The source IDs in the ID mapping on
+      GitHub show that many patients appear more than once: 1,327 RSNA Trauma patients have two series each, TCIA Colon
+      has 615 scans of 301 patients, CPTAC 182 scans of 62 patients, autoPET 916 scans of 894 patients, and 176 KiTS
+      scans look like second copies under another BDMAP ID. The other sources' IDs do not identify patients.
+    evidence:
+      sources: [deeptumorvqa-id-mapping, deeptumorvqa-metadata-files, abdomenatlas3-metadata-csv]
+      locator: patient numbers in the original id values (RSNA Trauma, TCIA Colon, CPTAC, autoPET) and KiTS case numbers; shape and spacing columns of both metadata tables
+      status: verified
+      verifiedOn: 2026-09-30
+dictionary:
+  completeness: complete_for_inspected_release
+  inspectedScope: >-
+    Every text file of revision a8b9db5, all rows: the four question files, reports_and_metadata.csv,
+    subtype_schema.csv, leaderboard.csv, the agent trajectories and the tool caches. Their local copies match the
+    Hugging Face hashes. The CT volumes were not opened. PNGs and videos were opened only for a temporary 10-scan
+    sample.
+features:
+  wsi:
+    status: not_applicable
+    note: A CT release; there are no slide images.
+  ctPhases:
+    status: present
+    phases: [arterial, venous, delayed]
+    note: >-
+      The contrast column is empty in every row of the question files and the metadata table. The phase is given only in
+      the report text: the first line of the structured report names it for 2,273 of 9,257 scans (CT Venous Phase 1,572,
+      CT Arterial Phase 650, CT Delay Phase 51). The paper says contrast phase was read from DICOM headers (Appendix b).
+    evidence:
+      sources: [deeptumorvqa-question-files, deeptumorvqa-metadata-files, deeptumorvqa-paper]
+      locator: contrast column of the four question files and of reports_and_metadata.csv, and the first line of its structured report column, all rows; paper Appendix b
+      status: verified
+      verifiedOn: 2026-09-30
+  clinicalData:
+    status: present
+    note: Sex is given for 1,374 scans, age for 1,379 and scanner vendor for 485, repeated in every question row; these values are identical to the AbdomenAtlas 3.0 metadata table.
+    evidence:
+      sources: [deeptumorvqa-metadata-files, abdomenatlas3-metadata-csv]
+      locator: sex, age and scanner columns of reports_and_metadata.csv compared with AbdomenAtlas3.0MiniWithMeta.csv, all rows
+      status: verified
+      verifiedOn: 2026-09-30
+  followUp:
+    status: not_documented
+structure: >-
+  Questions are in train/train_qa.csv, train/val_qa_pool.csv and benchmark/test_qa.json; test_qa.jsonl holds the same
+  10,000 benchmark records. Compared with the CSV files, the two benchmark files add 5 fields (the tools an agent needs,
+  and paths to images and videos) and have no split field.
+  Each question row names its scan by BDMAP ID and repeats the scan's spacing, shape, sex, age and scanner; it holds
+  the question, the answer, the multiple-choice version and the correct letter, the organ and lesion type asked
+  about, and the question type (4) and subtype (42). metadata/reports_and_metadata.csv has one row per scan (9,257
+  rows, 84 columns) with the measured values and the report texts. metadata/subtype_schema.csv describes the 42
+  subtypes and metadata/leaderboard.csv the 38 paper results. For agents, tool_cache/ holds per-scan tool outputs
+  (ground-truth and TotalSegmentator values for the 991 benchmark scans, ground-truth values for 283 training scans),
+  and agent_sft/ holds 20,000 training and 20,000 held-out conversations on those 283 scans. Benchmark images and
+  videos are in benchmark/images_2d/ and benchmark/videos/; the paths written in the question files use other folder
+  names (see the quality findings).
+citation: >-
+  Chen Y, Xiao W, Bassi PRAS, Wang B, He L, Zhou X, Er S, Hamamci IE, Zhou Z, Yuille A. DeepTumorVQA: A Hierarchical
+  3D CT Benchmark for Stage-Wise Evaluation of Medical VLMs and Tool-Augmented Agents. arXiv:2605.09679, 2026.
+limitations:
+  - All answers are generated by programs from a metadata table. They inherit its errors, including implausible typed-lesion diameters on 424 KiTS scans and "no kidney lesion" answers for kidneys with tumours or cysts (see the quality findings).
+  - The benchmark is a subset of the validation pool, 230 scans are in both the training set and the validation pool, and at least 437 of the 991 benchmark scans have the same scan or patient in training, although the paper describes the split as having zero overlap.
+  - The paper and the dataset card disagree on whether the masks behind the metadata are AbdomenAtlas's or were redrawn in-house.
+  - The contrast column is empty everywhere (the phase is only in the report text, for 2,273 scans), and sex and age are known for about 15% of scans.
+  - The questions are about the AbdomenAtlas 3.0 scans, which include, by the ID mapping on GitHub, 489 KiTS23, 64 CT-ORG, 485 TotalSegmentator and 62 CPTAC-CCRCC scans in this catalogue; counts must never be added to theirs.
+eligibility:
+  publicAccess:
+    status: pass
+    note: The Hugging Face repository is public and not gated; the card describes direct download.
+    evidence:
+      sources: [deeptumorvqa-hf-files, deeptumorvqa-hf-card]
+      locator: 'Hub API entry ("gated": false); card, "Quick start"'
+      status: verified
+      verifiedOn: 2026-09-30
+  deidentification:
+    status: unknown
+    note: >-
+      The card and the paper say the CTs were de-identified, but only second-hand, pointing to AbdomenAtlas and the
+      source datasets. AbdomenAtlas itself documents no de-identification, and one of the 232 AbdomenAtlas CT headers
+      checked (a local sample) keeps a full scan date. A curator has to decide whether this statement is enough.
+    evidence:
+      sources: [deeptumorvqa-hf-card, deeptumorvqa-paper, abdomenatlas3-image-files]
+      status: not_verified
+  noPhiHosted:
+    status: pass
+    note: This catalog stores descriptions, sources, one compressed preview image and one paper figure.
+  termsPermitUse:
+    status: unknown
+    note: >-
+      CC BY 4.0 permits this site's use of the text files. The preview image falls under the source CT licences,
+      which are unresolved for AbdomenAtlas 3.0 (its card and repository licence disagree). By the ID mapping, the
+      preview scan is KiTS21_img0205, a KiTS case, and KiTS23 is CC BY-NC-SA 4.0 in this catalogue.
+    evidence:
+      sources: [deeptumorvqa-hf-card, abdomenatlas3-hf-card, radgpt-repo-license, deeptumorvqa-id-mapping]
+      locator: 'DeepTumorVQA card, "License"; AbdomenAtlas card header; RadGPT LICENSE, first line; ID mapping row BDMAP_00000162'
+      status: verified
+      verifiedOn: 2026-09-30
+  samplePermission:
+    status: unknown
+    note: 1 preview (one of DeepTumorVQA's own PNGs) awaits a curator's permission approval; its reuse terms depend on the unresolved AbdomenAtlas licence and on KiTS's CC BY-NC-SA 4.0, since its scan is a KiTS case.
+    evidence:
+      sources: [deeptumorvqa-hf-card]
+      status: not_verified
+catalogStatus: draft
+verifiedOn: 2026-09-30
+researchedBy: agent
+approvedBy: null
+approvedOn: null
+sources:
+  - deeptumorvqa-paper
+  - deeptumorvqa-hf-card
+  - deeptumorvqa-hf-files
+  - deeptumorvqa-question-files
+  - deeptumorvqa-metadata-files
+  - deeptumorvqa-agent-files
+  - deeptumorvqa-ct-link
+  - deeptumorvqa-image-files
+  - deeptumorvqa-github
+  - deeptumorvqa-id-mapping

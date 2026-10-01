@@ -21,6 +21,10 @@ The AbdomenAtlas 3.0 preview was made later and differently. The Kidney-VLM proj
 four-panel conventions below. It reads the release's own CT and mask files directly, and its caption was written
 from the release's report for that scan.
 
+The DeepTumorVQA 2.0 preview is different again: it is not a rendering by the Kidney-VLM project but one of
+DeepTumorVQA's own released images (an organ PNG of five axial slices), downloaded from the release and only
+compressed to WebP. It carries no outlines, and its caption comes from that scan's DeepTumorVQA metadata and questions.
+
 The TCGA-KIRC previews show the project's own conversion of the TCIA scans with BAMF or RCC-AID masks placed on
 them; the RCC-AID previews show RCC-AID's released images and labels directly. In TCGA-KIRC captions, the phase
 comes from a reader's label, because the TCIA collection does not record phase in a structured field.
@@ -81,4 +85,6 @@ previews are [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). TCGA-KIR
 [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) images from TCIA with CC BY 4.0 masks, so they need
 attribution to both. The AbdomenAtlas 3.0 preview carries CC BY-NC-SA 4.0, the licence on its dataset card; the
 RadGPT repository's own LICENSE says CC BY-NC-ND 4.0, and a curator has to settle which applies before approving it.
+The DeepTumorVQA 2.0 preview falls under the same source CT licence, according to the DeepTumorVQA card; by
+DeepTumorVQA's ID mapping its scan is a KiTS case, so KiTS23's CC BY-NC-SA 4.0 applies as well.
 See [LICENSE](../LICENSE).

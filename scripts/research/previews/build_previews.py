@@ -26,6 +26,8 @@ ATLAS_PANELS = ('Four views of one scan: the whole axial slice where the centred
                 'and coronal and sagittal cuts through the same point. Kidney is outlined in green and the kidney lesion '
                 'in orange; the release does not say whether a lesion is a tumour or a cyst. Window 50/500 HU; '
                 'radiological orientation (patient left on viewer right).')
+DTV_PANELS = ('Five axial slices spread across the kidneys, side by side, exactly as DeepTumorVQA releases the image for its '
+              'questions; per the paper they use a window of -150 to 250 HU. No outline is drawn.')
 
 KITS = {
     'release': 'kits23', 'folder': 'kits23',
@@ -154,6 +156,25 @@ ATLAS = {
     ],
 }
 
+# Not a Kidney-VLM rendering: DeepTumorVQA's own organ PNG, downloaded from the release and only compressed here.
+DTV = {
+    'release': 'deeptumorvqa-2-0', 'folder': 'deeptumorvqa',
+    'attribution': ('Image: DeepTumorVQA 2.0 (Chen et al. 2026, arXiv:2605.09679), Hugging Face tumor-vqa/DeepTumorVQA_2.0, '
+                    'revision a8b9db5, benchmark/images_2d/organ/BDMAP_00000162_kidney.png, rendered by DeepTumorVQA from the '
+                    'AbdomenAtlas 3.0 scan BDMAP_00000162, which DeepTumorVQA\'s ID mapping gives as KiTS21_img0205 (KiTS, Heller et al.). '
+                    'Compressed to WebP for the atlas; nothing else was changed.'),
+    'reuseTerms': ('Governed by the source CT licence, according to the DeepTumorVQA card, which points to AbdomenAtlas3.0Mini. '
+                   'That dataset\'s card states CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/) and its '
+                   'repository CC BY-NC-ND 4.0. By DeepTumorVQA\'s ID mapping the scan is a KiTS case, and KiTS23 is CC BY-NC-SA 4.0. '
+                   'A curator has to settle which applies before approving this preview.'),
+    'sources': ['deeptumorvqa-image-files', 'deeptumorvqa-hf-card', 'deeptumorvqa-paper', 'deeptumorvqa-question-files',
+                'deeptumorvqa-metadata-files', 'deeptumorvqa-id-mapping'],
+    'alignment': 'No mask is drawn; the image is shown as released.',
+    'items': [
+        ('BDMAP_00000162_kidney', "DeepTumorVQA benchmark scan BDMAP_00000162 (KiTS21_img0205 by DeepTumorVQA's ID mapping). Its benchmark questions ask whether the kidney has tumours (answer: Yes) and where the largest one is (answer: left). The metadata lists three kidney tumours with a total volume of 15.3 cm³; its recorded largest-tumour diameter, 16.1 cm, is one of the values affected by the diameter defect described in the quality findings.", 'Five axial CT slices of the abdomen side by side, at levels through the kidneys, without outlines.'),
+    ],
+}
+
 
 def cptac_mask(name, caption):
     if 'radiologist-corrected BAMF' in caption:
@@ -178,13 +199,14 @@ MASK_LINE = {
     'abdomenatlas-3-0-mini': lambda n, c: ("Mask: AbdomenAtlas 3.0's own masks. The kidney masks come from AbdomenAtlas 1.1 "
                                            "(AI with radiologists in the loop); the kidney lesion mask was drawn by AI and "
                                            "corrected by radiologists."),
+    'deeptumorvqa-2-0': lambda n, c: "No mask: DeepTumorVQA's own image, as released for its questions.",
 }
 
 samples, total_in, total_out = [], 0, 0
-for spec in (KITS, RMAC, CPTAC, TCGA, RCCAID, ATLAS):
+for spec in (KITS, RMAC, CPTAC, TCGA, RCCAID, ATLAS, DTV):
     out_dir = os.path.join(REPO, 'public', 'previews', spec['release'])
     os.makedirs(out_dir, exist_ok=True)
-    intro = RMAC_PANELS if spec is RMAC else ATLAS_PANELS if spec is ATLAS else FOUR_PANEL
+    intro = {id(RMAC): RMAC_PANELS, id(ATLAS): ATLAS_PANELS, id(DTV): DTV_PANELS}.get(id(spec), FOUR_PANEL)
     for name, caption, alt in spec['items']:
         src = os.path.join(FIG, spec['folder'], name + '.png')
         dst = os.path.join(out_dir, name + '.webp')

@@ -1,0 +1,282 @@
+[
+	{
+		"id": "deeptumorvqa-typed-lesion-diameters",
+		"release": "deeptumorvqa-2-0",
+		"category": "observed_issue",
+		"description": "The typed-lesion diameters in the metadata table are implausibly large on the 444 scans whose spacing lists the thick slice axis first (for example [5, 0.78, 0.78]); 424 of them have typed diameters. By the ID mapping, all 444 are KiTS scans. On those scans the largest kidney tumour has a median diameter of 17.9 cm and a maximum of 99.6 cm, against 4.3 cm and 16.0 cm on all other scans; kidney cysts, PDAC, PNET and pancreatic cysts show the same pattern. Against KiTS23's own radiographic tumour size, the kidney tumour diameter is more than 1.5 times too large on 369 of the 418 of these scans that can be compared (median ratio 4.6), against 5 of 214 other KiTS scans (median 1.05). The same scan stored with the slice axis last gives normal values: for the 139 of these scans that also have a second copy with a kidney tumour diameter, the median is 4.9 cm on the copy and 18.6 cm on the slice-axis-first entry. The 45 further scans whose spacing has the form [a, b, b] with a thin first value (0.5 mm) look normal. The training answers copy the metadata values: 726 of the 995 kidney tumour diameter answers come from the 444 scans, including all 186 over 30 cm, and 349 of the 447 kidney cyst diameter answers, including all 68 over 20 cm. For example, BDMAP_00000162 lists a 16.1 cm largest kidney tumour with a total kidney tumour volume of 15.3 cm³, while AbdomenAtlas 3.0 lists its largest kidney lesion as 2.7 cm.",
+		"inspectedScope": "All 9,257 rows of metadata/reports_and_metadata.csv and all 428,050 rows of train/train_qa.csv.",
+		"affected": {
+			"value": 444,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"deeptumorvqa-metadata-files"
+				],
+				"locator": "spacing column of reports_and_metadata.csv: rows of the form [a, b, b] with a > b, compared to within 1e-6",
+				"status": "verified",
+				"verifiedOn": "2026-09-30"
+			}
+		},
+		"detection": "Diameter distributions compared between scans with and without that spacing order; training answers matched to the metadata values.",
+		"impact": "Questions and answers about typed-lesion diameters are wrong for many of these scans, and a model trained on them learns the wrong sizes.",
+		"handling": "Do not use typed-lesion diameters, or the questions built on them, for scans whose spacing lists the thick slice axis first. The release does not state the cause; the copies point to the axis order.",
+		"sources": [
+			"deeptumorvqa-metadata-files",
+			"deeptumorvqa-question-files",
+			"abdomenatlas3-metadata-csv",
+			"deeptumorvqa-id-mapping",
+			"kits23-repo-dataset"
+		]
+	},
+	{
+		"id": "deeptumorvqa-split-overlap",
+		"release": "deeptumorvqa-2-0",
+		"category": "observed_issue",
+		"description": "230 scans have questions in both the training file and the validation pool, and 68 of them are also benchmark scans. The ID mapping shows more: its source IDs carry patient numbers for RSNA Trauma (Trauma_Detection_<patient>_<series>), TCIA Colon, CPTAC, autoPET, LDCT and TCGA, and 176 KiTS scans appear twice. Beyond the 68, 254 benchmark scans share an RSNA Trauma patient with a training scan, 50 a TCIA Colon patient, 34 a KiTS case, 22 a CPTAC patient, 4 an autoPET patient, 3 an LDCT patient and 2 a TCGA patient. In all, at least 437 of the 991 benchmark scans have the same scan or patient in training; the other sources' IDs do not identify patients. The paper says the train/test splits are \"patient-level with zero overlap\".",
+		"inspectedScope": "All rows of train_qa.csv, val_qa_pool.csv and test_qa.json, compared by BDMAP ID and through all 9,262 rows of the ID mapping.",
+		"affected": {
+			"value": 230,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"deeptumorvqa-question-files"
+				],
+				"locator": "BDMAP IDs present in both train_qa.csv and val_qa_pool.csv",
+				"status": "verified",
+				"verifiedOn": "2026-09-30"
+			}
+		},
+		"detection": "Set intersection of the scan IDs in the question files, then of the patient numbers read from the source IDs in the ID mapping.",
+		"impact": "Models trained on the training file have seen the same scan, or another scan of the same patient, for at least 437 of the 991 benchmark scans, so benchmark scores are not held out.",
+		"handling": "Group scans by the patient numbers in the ID mapping before splitting, or report benchmark scores without those 437 benchmark scans.",
+		"sources": [
+			"deeptumorvqa-question-files",
+			"deeptumorvqa-paper",
+			"deeptumorvqa-id-mapping"
+		]
+	},
+	{
+		"id": "deeptumorvqa-benchmark-in-validation-pool",
+		"release": "deeptumorvqa-2-0",
+		"category": "observed_issue",
+		"description": "All 10,000 benchmark questions also appear, with the same scan, question text and answer, in train/val_qa_pool.csv; none appear in train_qa.csv. The validation pool therefore contains the whole benchmark.",
+		"inspectedScope": "All rows of val_qa_pool.csv, train_qa.csv and test_qa.json.",
+		"affected": {
+			"value": 10000,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"deeptumorvqa-question-files"
+				],
+				"locator": "benchmark questions matched to validation-pool rows by BDMAP ID, question text and answer",
+				"status": "verified",
+				"verifiedOn": "2026-09-30"
+			}
+		},
+		"detection": "Exact matching of (scan, question, answer) between the files.",
+		"impact": "Tuning or model selection on the validation pool is tuning on the benchmark.",
+		"handling": "Use the validation pool only after removing the benchmark questions, or not at all when reporting benchmark scores.",
+		"sources": [
+			"deeptumorvqa-question-files",
+			"deeptumorvqa-hf-card"
+		]
+	},
+	{
+		"id": "deeptumorvqa-benchmark-paths",
+		"release": "deeptumorvqa-2-0",
+		"category": "observed_issue",
+		"description": "The path fields in the benchmark files point to folders that are not in the release (benchmark/slices/, benchmark/slices_whole/, benchmark/videos_whole/) or, for video_path, to files directly under benchmark/videos/, which holds only a whole/ subfolder. The organ PNGs, whole-scan PNGs and whole-scan videos can be found by file name under benchmark/images_2d/ and benchmark/videos/whole/, but the 5,093 organ-level videos named in video_path are not in the release at all.",
+		"inspectedScope": "All 10,000 records of test_qa.json compared with the full file list of revision a8b9db5.",
+		"affected": {
+			"value": 5093,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"deeptumorvqa-question-files",
+					"deeptumorvqa-hf-files"
+				],
+				"locator": "distinct video_path values, none present in the file list",
+				"status": "verified",
+				"verifiedOn": "2026-09-30"
+			}
+		},
+		"detection": "Every path value looked up in the release file list, as written and by file name.",
+		"impact": "Code that follows the paths fails; video-input evaluation at organ level cannot be reproduced from the release.",
+		"handling": "Map paths to benchmark/images_2d/organ/, benchmark/images_2d/whole/ and benchmark/videos/whole/ by file name. Organ-level videos are not available.",
+		"sources": [
+			"deeptumorvqa-question-files",
+			"deeptumorvqa-hf-files"
+		]
+	},
+	{
+		"id": "deeptumorvqa-counts-and-files-differ",
+		"release": "deeptumorvqa-2-0",
+		"category": "observed_issue",
+		"description": "Several numbers and file lists disagree between the card, the paper and the files. The card gives \"438K total QA pairs\", the paper \"476K questions\", and the files hold 475,983. The card lists metadata/leaderboard_freeform.csv, which is not on Hugging Face (it is in the GitHub repository), and that file says the free-form models were fine-tuned \"on 50K open-ended\" questions where the paper's Table 23 says the same 428K. The paper reports 5,093 organ images for the benchmark; the release has 7,160 organ PNGs, of which the benchmark files name 5,093. The benchmark's image and video folders hold 996 whole-scan files for 991 benchmark scans: the 5 extra scans are also the 5 missing from the metadata table (9,257 rows for 9,262 scans). In subtype_schema.csv, the n_full_dataset column sums to 47,933, the size of the validation pool, not of the full dataset. The paper says wrong options for volume and HU questions lie within 0.7 to 1.3 times the true value; in the files this holds for organ volume and organ aggregation questions, while 58 of the 106,476 wrong options of organ HU questions and 6,401 of the 19,674 of lesion volume questions fall outside it. The paper describes a 27-entry knowledge base for the agents; the tool caches' knowledge section has 16 entries. The ID mapping on GitHub names sources that neither the paper's Table 6 nor RadGPT's Table 1 lists, such as autoPET (916 scans), TCIA Colon (615) and TotalSegmentator (485), and fewer scans for some that they do (CT-ORG 64 against 140, LiTS 58 against 131).",
+		"inspectedScope": "The card, the paper, the full file list, and all rows of the question, metadata and schema files; the GitHub free-form leaderboard at commit 1df7460; the ID mapping at commit bb28a89.",
+		"affected": {
+			"value": null,
+			"status": "not_verified"
+		},
+		"detection": "Counting rows and files and comparing them with the stated numbers.",
+		"impact": "Readers who take the card or paper numbers at face value will expect files, videos or counts that are not in the release.",
+		"handling": "Rely on the counts of the released files; treat n_full_dataset as validation-pool counts.",
+		"sources": [
+			"deeptumorvqa-hf-card",
+			"deeptumorvqa-paper",
+			"deeptumorvqa-hf-files",
+			"deeptumorvqa-question-files",
+			"deeptumorvqa-metadata-files",
+			"deeptumorvqa-github",
+			"deeptumorvqa-id-mapping",
+			"radgpt-paper"
+		]
+	},
+	{
+		"id": "deeptumorvqa-mask-origin-disagrees",
+		"release": "deeptumorvqa-2-0",
+		"category": "potential_check",
+		"description": "The card and the paper describe the source of the metadata differently. The card says the questions are generated from the AbdomenAtlas structured reports and 43-class masks, and that the training CTs are the AbdomenAtlas3.0Mini files. The paper says all masks and metadata \"were re-annotated and re-computed in-house by our 23 radiologists (Appendix s); we did not adopt the original dataset-provided annotations\", computes the values \"deterministically from the masks\", counts 88 medical centres (AbdomenAtlas 3.0 reports 138), and does not name AbdomenAtlas. The metadata table's columns are the 79 of the RadGPT metadata script, which reads values out of report text, plus 5 PNET columns; of the 37 columns it shares with the AbdomenAtlas table, only 6 hold identical values (ID, spacing, shape, sex, age, scanner).",
+		"inspectedScope": "The card, the paper (section 3.2, Appendices a and b), the RadGPT metadata script at commit d064db1, and all rows of both metadata tables.",
+		"detection": "Reading the two sources side by side; comparing the tables column by column.",
+		"impact": "It is unclear whether DeepTumorVQA's labels are independent of AbdomenAtlas's masks, which matters when the two are used together or compared.",
+		"handling": "Ask the provider which masks the metadata was computed from. Until then, do not treat the two releases as independent annotations.",
+		"sources": [
+			"deeptumorvqa-hf-card",
+			"deeptumorvqa-paper",
+			"deeptumorvqa-metadata-files",
+			"radgpt-metadata-script",
+			"abdomenatlas3-metadata-csv"
+		]
+	},
+	{
+		"id": "deeptumorvqa-images-from-uncropped-scans",
+		"release": "deeptumorvqa-2-0",
+		"category": "observed_issue",
+		"description": "In all 10 sampled benchmark scans, every PNG panel has the in-plane size given by the metadata shape column, and the video frames match it to within one pixel; that size differs from the AbdomenAtlas3.0Mini CT file (revision 122e04f) of the same scan in all 10. Separately, all 26 re-hosted benchmark CTs that are also in the local AbdomenAtlas sample differ in file size from those files. DeepTumorVQA's job for the training videos on GitHub (scripts/slurm/extract_train_videos.sh) reads its CTs from a folder named AbdomenAtlas1.1, although the script's own usage example names AbdomenAtlas3.0Mini/extracted; so the images may come from an earlier, uncropped version of the scans, but the release does not say.",
+		"inspectedScope": "A temporary sample of 10 benchmark scans that are also in the local AbdomenAtlas sample (BDMAP_00000003, 010, 056, 095, 118, 126, 127, 134, 155, 162): kidney PNG, whole-scan PNG and whole-scan MP4 each, opened on 2026-09-30 and deleted afterwards. File sizes of the 26 overlapping benchmark CTs from the file list. src/deeptumorvqa/scripts/extract_train_videos.py and scripts/slurm/extract_train_videos.sh at commit 1df7460.",
+		"affected": {
+			"value": 10,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"deeptumorvqa-image-files",
+					"abdomenatlas3-image-files",
+					"abdomenatlas3-metadata-csv"
+				],
+				"locator": "image sizes compared with the shape column and with the local AbdomenAtlas CT headers",
+				"status": "verified",
+				"verifiedOn": "2026-09-30",
+				"note": "All 10 of the 10 scans sampled; the rest of the release was not opened."
+			}
+		},
+		"detection": "PNG and MP4 dimensions compared with the metadata shape column and with the local AbdomenAtlas CT headers.",
+		"impact": "Pixel positions in these DeepTumorVQA images do not correspond to voxel positions in the Hugging Face AbdomenAtlas3.0Mini CTs, although train/ct_link.md calls the training CTs identical to them.",
+		"handling": "Do not overlay AbdomenAtlas masks on DeepTumorVQA images without registering them first.",
+		"sources": [
+			"deeptumorvqa-image-files",
+			"deeptumorvqa-hf-files",
+			"deeptumorvqa-ct-link",
+			"deeptumorvqa-github",
+			"abdomenatlas3-image-files",
+			"abdomenatlas3-metadata-csv"
+		]
+	},
+	{
+		"id": "deeptumorvqa-images-differ-from-paper",
+		"release": "deeptumorvqa-2-0",
+		"category": "observed_issue",
+		"description": "The released images and videos differ from the paper's description (Appendix e). The paper describes 5 slices per image with 2-pixel white separators, whole-scan images with \"the same 5-slice tiling\", and organ videos in H.264 at 5 frames per second. In the sample, organ PNGs hold 5 slices with no separator, whole-scan PNGs hold 9 slices, and the only videos are whole-scan MPEG-4 files at 8 frames per second, with one frame per slice for scans of up to 150 slices and 150 frames for longer scans.",
+		"inspectedScope": "A temporary sample of 10 benchmark scans that are also in the local AbdomenAtlas sample (BDMAP_00000003, 010, 056, 095, 118, 126, 127, 134, 155, 162): kidney PNG, whole-scan PNG and whole-scan MP4 each, opened on 2026-09-30 and deleted afterwards.",
+		"affected": {
+			"value": 10,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"deeptumorvqa-image-files"
+				],
+				"locator": "PNG panel counts and separators; MP4 codec, frame rate and frame count (ffprobe)",
+				"status": "verified",
+				"verifiedOn": "2026-09-30",
+				"note": "All 10 of the 10 scans sampled."
+			}
+		},
+		"detection": "Counting panels in each PNG and reading the video stream properties.",
+		"impact": "Results from the paper that depend on the input format may not be reproducible with the released files.",
+		"handling": "Describe the input format from the files, not from the paper, when reporting results.",
+		"sources": [
+			"deeptumorvqa-image-files",
+			"deeptumorvqa-paper"
+		]
+	},
+	{
+		"id": "deeptumorvqa-contrast-empty",
+		"release": "deeptumorvqa-2-0",
+		"category": "observed_issue",
+		"description": "The contrast column is empty in every row: blank in the two CSV question files and the metadata table, NaN in the benchmark files. The phase is only in the report text: the first line of the structured report names it for 2,273 scans (CT Venous Phase 1,572, CT Arterial Phase 650, CT Delay Phase 51). The paper says contrast phase was read from DICOM headers.",
+		"inspectedScope": "All rows of the four question files and the metadata table.",
+		"affected": {
+			"value": 9262,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"deeptumorvqa-question-files",
+					"deeptumorvqa-metadata-files"
+				],
+				"locator": "contrast column, all rows; first line of the structured report column",
+				"status": "verified",
+				"verifiedOn": "2026-09-30"
+			}
+		},
+		"detection": "Counting non-empty values; reading the first line of each structured report.",
+		"impact": "Anyone filtering on the contrast column finds no phase for any scan, although 2,273 reports state one.",
+		"handling": "Take the phase from the first line of the structured report; where AbdomenAtlas 3.0's contrast column is also filled, the two agree. AbdomenAtlas's column also names a phase for 196 scans that have none in DeepTumorVQA's reports (191 plain, 4 venous, 1 arterial; 4 of them are missing from the metadata table).",
+		"sources": [
+			"deeptumorvqa-question-files",
+			"deeptumorvqa-metadata-files",
+			"deeptumorvqa-paper",
+			"abdomenatlas3-metadata-csv"
+		]
+	},
+	{
+		"id": "deeptumorvqa-generic-and-typed-lesions-disjoint",
+		"release": "deeptumorvqa-2-0",
+		"category": "observed_issue",
+		"description": "The metadata table records each lesion either in the untyped 'lesion' columns or in the typed tumour, cyst, PDAC and PNET columns, almost never both: of the 639 scans with typed kidney tumours or cysts, only one also has an untyped kidney lesion; for the pancreas, 80 of the 1,120 scans with typed lesions also have untyped ones. The paper's 11,319 lesions equal the untyped columns only; the typed columns hold another 1,909 kidney and 1,481 pancreatic instances. The questions inherit this: 638 scans have a 'kidney lesion existence' answer of No and a kidney tumour or cyst existence answer of Yes (571 if the reversed template below is left out), and in the benchmark itself 11 scans get both answers (10 without it). For example, BDMAP_00000540 (one kidney tumour and two kidney cysts in the table) is answered No to \"Are lesions found in the kidney based on the scans?\" and Yes to its cyst questions. One of the 10 templates is worded the other way round: \"Is the kidney free of lesions or does it contain some?\" is answered Yes for 1,257 scans with untyped lesions and No for 793 without (and for 6 with one small untyped lesion), so its Yes means \"contains lesions\".",
+		"inspectedScope": "All 9,257 rows of the metadata table and all questions of the four question files.",
+		"affected": {
+			"value": 638,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"deeptumorvqa-question-files"
+				],
+				"locator": "scans whose kidney lesion existence answer is No while a kidney tumour or cyst existence answer is Yes, training file and validation pool",
+				"status": "verified",
+				"verifiedOn": "2026-09-30"
+			}
+		},
+		"detection": "Comparing untyped and typed instance counts per scan; comparing the answers of the three kidney existence subtypes per scan.",
+		"impact": "'Kidney lesion existence' questions answer No for kidneys that have tumours or cysts, and lesion totals built from the untyped columns leave out every typed lesion.",
+		"handling": "Add the typed columns to the untyped ones before counting lesions, and treat \"kidney lesion existence\" as \"untyped lesion present\" rather than \"any lesion present\".",
+		"sources": [
+			"deeptumorvqa-metadata-files",
+			"deeptumorvqa-question-files",
+			"deeptumorvqa-paper"
+		]
+	},
+	{
+		"id": "deeptumorvqa-construction-code-missing",
+		"release": "deeptumorvqa-2-0",
+		"category": "potential_check",
+		"description": "The paper says the repository includes dataset-construction scripts, benchmark/benchmark_v4.json, benchmark/precompute_tool_results.py and benchmark/prepare_agent_sft_data.py. Neither branch of the GitHub repository (v1 at bb28a89, v2 at 1df7460) contains them. v2 holds the evaluation package and release scripts (video extraction, staging, upload); its video script imports an extract_2d_slices module that is not in the repository either.",
+		"inspectedScope": "Full file trees of both GitHub branches, compared with the paper's reproducibility section (Appendix v).",
+		"detection": "Listing both repository trees through the GitHub API.",
+		"impact": "The metadata and questions cannot be regenerated or checked against the masks from the released code.",
+		"handling": "Treat the released files as the only definition of the questions; ask the provider for the construction code.",
+		"sources": [
+			"deeptumorvqa-github",
+			"deeptumorvqa-paper"
+		]
+	}
+]
