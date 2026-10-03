@@ -1,8 +1,8 @@
 id: tcga-kirp-gdc-open
 dataset: tcga-kirp
-versionLabel: GDC open-access tier
+versionLabel: GDC open-access tier (Data Release 46.0)
 current: true
-releaseDate: null
+releaseDate: 2026-08-10
 counts:
   patients:
     value: 291
@@ -41,11 +41,18 @@ modalities:
 cohort: >-
   Cases of papillary renal cell carcinoma collected by The Cancer Genome Atlas. Case records
   carry demographics, one or more diagnoses, and follow-up records.
-tasks: []
-annotations: []
+tasks:
+  - classification
+  - survival
+annotations:
+  - pathology_labels
+  - outcome_labels
 annotationProvenance:
-  kind: none
-  note: No image annotations, such as tumour outlines on slides, are part of this open-access tier.
+  kind: not_documented
+  note: >-
+    The labels are clinical record fields submitted for each case: the pathological diagnosis and stage
+    (no tumour grade is recorded; see the quality findings), and vital status with follow-up (see the data dictionary). The sources read do not say who
+    assigned them. No image annotations, such as tumour outlines on slides, are part of this open-access tier.
 features:
   wsi:
     status: present

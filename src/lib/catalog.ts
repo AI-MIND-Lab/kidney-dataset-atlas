@@ -10,7 +10,7 @@ import type { z } from 'astro/zod';
 import { count, overlap, qualityFinding, relation, sample, source, studyUse, variable } from './schemas.mjs';
 import type { CompareCell, CompareEntry } from './compare';
 import { accessLabel, completenessLabel, countLabel, dateLabel, humanize, stateLabel } from './display';
-import { FACET_KEYS, type ExplorerEntry, type FacetKey } from './explorer';
+import { combineFacets, FACET_KEYS, type ExplorerEntry, type FacetKey } from './explorer';
 import { collectSourceIds } from './records';
 import { datasetPath, releasePath, SITE } from './site';
 
@@ -213,8 +213,9 @@ function facetsFor(dataset: Dataset, release: Release): Record<FacetKey, string[
 /** One row per dataset, describing its current release. */
 export async function explorerEntries(): Promise<ExplorerEntry[]> {
 	const entries = await catalog();
-	return entries.map(({ dataset, current }) => {
+	return entries.map(({ dataset, releases, current }) => {
 		const preview = samplesForRelease(current.data.id)[0];
+		const parts = releases.filter((release) => release.data.role === 'part');
 		return {
 		id: current.data.id,
 		slug: dataset.data.slug,
@@ -225,7 +226,10 @@ export async function explorerEntries(): Promise<ExplorerEntry[]> {
 		href: datasetPath(dataset.data.slug),
 			patients: patientCount(current),
 			verified: current.data.verifiedOn?.getTime() ?? null,
-			facets: facetsFor(dataset, current),
+			facets: combineFacets(
+				facetsFor(dataset, current),
+				parts.map((part) => facetsFor(dataset, part)),
+			),
 			preview: preview ? { src: preview.assets[0]!.path, alt: preview.alt } : null,
 		};
 	});

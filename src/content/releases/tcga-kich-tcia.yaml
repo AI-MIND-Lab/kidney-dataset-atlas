@@ -2,6 +2,7 @@ id: tcga-kich-tcia
 dataset: tcga-kich
 versionLabel: TCIA radiology collection (Version 3)
 current: false
+role: part
 releaseDate: 2020-05-29
 doi: 10.7937/K9/TCIA.2016.YU3RBCZN
 counts:

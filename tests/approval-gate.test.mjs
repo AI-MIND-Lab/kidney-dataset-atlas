@@ -36,6 +36,7 @@ test('route, count, current-release, and study target invariants are enforced', 
 	assert.match(result.stderr, /present count requires a numeric value/);
 	assert.match(result.stderr, /has 2 current published releases; expected exactly one/);
 	assert.match(result.stderr, /Name exactly one target: a catalogued release or an external cohort/);
+	assert.match(result.stderr, /release "bad-part-current" is a part of its dataset and cannot also be current/);
 });
 
 test('a reference to a missing record fails validation', () => {

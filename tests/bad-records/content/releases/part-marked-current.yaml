@@ -1,0 +1,32 @@
+# Deliberately broken record used by tests/approval-gate.test.mjs: a part of a
+# dataset (such as a radiology collection beside the slides) that also claims to
+# be the current release.
+id: bad-part-current
+dataset: bad-valid
+versionLabel: Radiology part
+current: true
+role: part
+access:
+  mode: direct_open_download
+  instructions: Test record.
+license:
+  name: Test licence
+deidentification:
+  statement: Test record.
+  status: not_documented
+dictionary:
+  completeness: partial
+  inspectedScope: Test record.
+eligibility:
+  publicAccess:
+    status: unknown
+  deidentification:
+    status: unknown
+  noPhiHosted:
+    status: pass
+  termsPermitUse:
+    status: unknown
+  samplePermission:
+    status: pass
+researchedBy: agent
+catalogStatus: draft

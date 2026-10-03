@@ -359,6 +359,13 @@ for (const record of papers) {
 	}
 }
 
+// A part sits beside the current release; it cannot be the canonical page itself.
+for (const record of releases) {
+	if (record.data.role === 'part' && record.data.current) {
+		fail(record.file, `release "${record.data.id}" is a part of its dataset and cannot also be current`);
+	}
+}
+
 // Every public dataset has one explicit canonical release; dates and labels
 // are display metadata and are never used to guess which release is current.
 for (const dataset of datasets) {

@@ -172,6 +172,12 @@ export const release = z.object({
 	versionLabel: z.string(),
 	/** Exactly one published release per dataset is the current canonical page. */
 	current: z.boolean().default(false),
+	/**
+	 * `version`: an edition of the dataset; a non-current one is older or newer than the current release.
+	 * `part`: a parallel component distributed separately, such as a collection's radiology beside its slides.
+	 * A part is never current; the explorer and filters describe a dataset by its current release and its parts.
+	 */
+	role: z.enum(['version', 'part']).default('version'),
 	releaseDate: z.coerce.date().nullable().default(null),
 	counts: countsByUnit.default({}),
 	modalities: z.array(z.enum(MODALITIES)).default([]),

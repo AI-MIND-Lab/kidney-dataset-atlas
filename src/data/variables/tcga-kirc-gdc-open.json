@@ -969,7 +969,7 @@
 		"release": "tcga-kirc-gdc-open",
 		"originalName": "diagnoses.days_to_diagnosis",
 		"file": "GDC API case record (diagnosis)",
-		"definition": "Number of days between the date used for index and the date the patient was diagnosed with the malignant disease. Has a value in 712 of 814 diagnosis records, covering 537 of 537 cases. Observed range -4,308 to 3,766. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
+		"definition": "Number of days between the date used for index and the date the patient was diagnosed with the malignant disease. Has a value in 712 of 814 diagnosis records, covering 537 of 537 cases. Observed range -4,308 to 3,766. On primary-disease records (diagnosis_is_primary_disease is true) the value is always 0; other values come from records of other diagnoses, such as prior malignancies. A case can have several diagnosis records (see diagnosis_is_primary_disease), so a patient-level analysis must choose which record to use.",
 		"type": "integer",
 		"unit": "days",
 		"coding": [],

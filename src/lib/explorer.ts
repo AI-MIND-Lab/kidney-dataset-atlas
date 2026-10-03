@@ -98,6 +98,29 @@ export const defaultState = (): ExplorerState => ({
 	view: DEFAULT_VIEW,
 });
 
+/** Facets where a dataset offers whatever any of its parts offers. */
+const COMBINED_FACETS: FacetKey[] = ['modality', 'task', 'annotations', 'access'];
+
+/**
+ * A dataset's facets from its current release plus its parts (for example TCGA's
+ * radiology collection beside the slides), so a filter for CT finds it. Species,
+ * disease, pairing and documentation describe the current release and stay as
+ * they are. "not_documented" is dropped from a combined facet once a part
+ * documents a real value.
+ */
+export function combineFacets(
+	current: Record<FacetKey, string[]>,
+	parts: Record<FacetKey, string[]>[],
+): Record<FacetKey, string[]> {
+	const combined = { ...current };
+	for (const key of COMBINED_FACETS) {
+		const values = [...new Set([current, ...parts].flatMap((facets) => facets[key]))];
+		const documented = values.filter((value) => value !== 'not_documented');
+		combined[key] = documented.length > 0 ? documented : values;
+	}
+	return combined;
+}
+
 const searchText = (entry: ExplorerEntry) =>
 	[entry.name, ...entry.aliases, entry.summary, entry.release].join(' ').toLowerCase();
 

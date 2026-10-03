@@ -84,6 +84,18 @@ Required blocks: `counts`, `access`, `license`, `deidentification`, `dictionary`
 Set `current: true` only on the release intended to be the dataset's canonical page. A dataset with published
 releases must have exactly one published current release.
 
+`role` says how a non-current release relates to the current one. Leave it out (`version`) for an edition: an
+older or newer release of the same data. Set `role: part` for a component that the provider distributes
+separately, alongside the current release rather than instead of it, such as TCGA-KIRC's radiology collection in
+The Cancer Imaging Archive beside its slides and clinical records in the GDC. A part is never current. Its page says it is
+a part rather than an older release, and the dataset explorer filters on the modalities, tasks, annotations and
+access of the current release and its parts together.
+
+`tasks` lists the research tasks the release's own data supports, and `annotations` the labels that make them
+possible: masks for segmentation, diagnosis labels for classification, outcome labels such as vital status and
+follow-up for survival. Clinical record fields count as labels. Leave both empty when the release carries no
+labels of its own; a task that other studies performed with labels they made themselves does not belong here.
+
 Access describes how the provider distributes a cohort; it does not itself decide whether the release may be
 published. Use one of these values:
 
