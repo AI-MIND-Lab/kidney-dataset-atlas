@@ -13,11 +13,19 @@ interface Props {
 	ownUses: PaperUse[];
 	/** Separate studies that used the release. */
 	downstreamUses: PaperUse[];
+	/** Studies that used the dataset's parts, shown on the current release's page as their own tables. */
+	partGroups?: { label: string; href: string; downstreamUses: PaperUse[] }[];
 }
 
-const { ownUses, downstreamUses: unsorted } = Astro.props;
+const { ownUses, downstreamUses: unsorted, partGroups = [] } = Astro.props;
 // Oldest first, so the table reads as the history of how the release has been used.
-const downstreamUses = [...unsorted].sort((a, b) => (a.paper?.data.year ?? 9999) - (b.paper?.data.year ?? 9999));
+const byYear = (uses: PaperUse[]) => [...uses].sort((a, b) => (a.paper?.data.year ?? 9999) - (b.paper?.data.year ?? 9999));
+const tables = [
+	{ heading: 'Independent studies using this release', href: null as string | null, uses: byYear(unsorted) },
+	...partGroups
+		.filter((group) => group.downstreamUses.length > 0)
+		.map((group) => ({ heading: `Independent studies using the ${group.label}`, href: group.href, uses: byYear(group.downstreamUses) })),
+];
 /** The first proposed model's pipeline as one line, e.g. "Whole-slide image → Tissue patches → …". */
 const pipelineLine = (paper: Paper | undefined) =>
 	paper?.data.models.find((model) => model.role === 'proposed' && model.pipeline.length > 0)?.pipeline.map((step) => step.label).join(' → ');
@@ -56,7 +64,14 @@ const evidenceLabel = (use: StudyUse) =>
 		)
 	}
 
-	<h3>Independent studies using this release</h3>
+	{tables.map(({ heading, href, uses: downstreamUses }) => (
+	<>
+	<h3>{heading}</h3>
+	{href && (
+		<p>
+			A separate part of this dataset; <a href={href}>see its page</a>.
+		</p>
+	)}
 	{
 		downstreamUses.length === 0 ? (
 			<div class="empty-state">
@@ -115,4 +130,6 @@ const evidenceLabel = (use: StudyUse) =>
 			</div>
 		)
 	}
+	</>
+	))}
 </section>

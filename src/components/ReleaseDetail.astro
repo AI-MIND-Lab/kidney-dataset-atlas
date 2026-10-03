@@ -52,12 +52,41 @@ const usesWithPapers = await Promise.all(
 // data is not evidence that anyone else used it.
 const ownUses = usesWithPapers.filter(({ use }) => use.role !== 'downstream');
 const downstreamUses = usesWithPapers.filter(({ use }) => use.role === 'downstream');
+
+// The current release's page is the dataset page, so it also shows what the dataset's parts hold (TCGA's
+// radiology previews and the studies that used them). `releases` holds visible releases only, so a draft part
+// never reaches a published page.
+const parts = isCurrent ? releases.filter((entry) => entry.data.role === 'part' && entry.data.id !== data.id) : [];
+const partGroups = await Promise.all(
+	parts.map(async (part) => {
+		const partUses = await Promise.all(
+			(await studyUsesForRelease(part.data.id)).map(async (use) => ({ use, paper: await paperById(use.paper) })),
+		);
+		return {
+			label: part.data.versionLabel,
+			href: withBase(releasePath(dataset.data.slug, part.data.id)),
+			samples: samplesForRelease(part.data.id),
+			ownUses: partUses.filter(({ use }) => use.role !== 'downstream'),
+			downstreamUses: partUses.filter(({ use }) => use.role === 'downstream'),
+		};
+	}),
+);
+
 const overlaps = overlapsForRelease(data.id);
 const isDraft = data.catalogStatus !== 'published';
 const unresolved = isDraft ? unresolvedChecks(data.eligibility) : [];
 // Everything the page shows, so a source cited only by a variable or a quality
 // finding still appears in the list a reader can check.
-const sources = sourcesFor(dataset.data, data, variables, samples, findings, uses, overlaps);
+const sources = sourcesFor(
+	dataset.data,
+	data,
+	variables,
+	samples,
+	findings,
+	uses,
+	overlaps,
+	partGroups.map((group) => [group.samples, group.ownUses.map(({ use }) => use), group.downstreamUses.map(({ use }) => use)]),
+);
 
 // Overlap records name both sides, so label the other release rather than this one.
 const allReleases = await publishedReleases();
@@ -291,12 +320,20 @@ const isHuman = dataset.data.species === 'human';
 
 	<section id="samples" class="stack">
 		<h2>Samples</h2>
-		<Samples samples={samples} officialUrl={dataset.data.officialUrl} />
+		<Samples
+			samples={samples}
+			officialUrl={dataset.data.officialUrl}
+			partGroups={partGroups.map(({ label, href, samples }) => ({ label, href, samples }))}
+		/>
 	</section>
 
 	<StructureSection release={release} relations={relations} overlaps={overlaps} releaseLabel={releaseLabel} />
 
-	<PapersSection ownUses={ownUses} downstreamUses={downstreamUses} />
+	<PapersSection
+		ownUses={[...ownUses, ...partGroups.flatMap((group) => group.ownUses)]}
+		downstreamUses={downstreamUses}
+		partGroups={partGroups.map(({ label, href, downstreamUses }) => ({ label, href, downstreamUses }))}
+	/>
 
 	<section id="quality" class="stack">
 		<h2>Quality</h2>

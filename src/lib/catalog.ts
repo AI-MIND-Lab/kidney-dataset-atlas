@@ -214,8 +214,9 @@ function facetsFor(dataset: Dataset, release: Release): Record<FacetKey, string[
 export async function explorerEntries(): Promise<ExplorerEntry[]> {
 	const entries = await catalog();
 	return entries.map(({ dataset, releases, current }) => {
-		const preview = samplesForRelease(current.data.id)[0];
 		const parts = releases.filter((release) => release.data.role === 'part');
+		// A part's preview stands in when the current release has none, as for TCGA's radiology.
+		const preview = [current, ...parts].map((release) => samplesForRelease(release.data.id)[0]).find(Boolean);
 		return {
 		id: current.data.id,
 		slug: dataset.data.slug,

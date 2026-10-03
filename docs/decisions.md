@@ -32,7 +32,9 @@ a filter for CT did not find TCGA-KIRC's 267 imaged patients.
 
 A release now carries `role: version` (the default) or `role: part`. One release is still current and canonical;
 a part sits beside it, is labelled as a part on its page, and contributes its modalities, tasks, annotations and
-access to the dataset's explorer facets (`combineFacets` in `src/lib/explorer.ts`). Species, disease, pairing and
+access to the dataset's explorer facets (`combineFacets` in `src/lib/explorer.ts`). The dataset page also shows
+each part's previews and the studies that used it, under the part's name, and the explorer card uses a part's
+preview when the current release has none; otherwise TCGA-KIRC's page would show none of its radiology previews. Species, disease, pairing and
 documentation stay those of the current release. Splitting the radiology into its own dataset was the
 alternative; it would have changed public URLs and separated records that share one patient population, which
 the overlap records already describe.

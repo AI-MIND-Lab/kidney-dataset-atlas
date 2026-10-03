@@ -5,9 +5,11 @@ import { withBase } from '../lib/site';
 interface Props {
 	samples: Sample[];
 	officialUrl: string;
+	/** Previews of the dataset's parts, shown on the current release's page under their own heading. */
+	partGroups?: { label: string; href: string; samples: Sample[] }[];
 }
 
-const { samples, officialUrl } = Astro.props;
+const { samples, officialUrl, partGroups = [] } = Astro.props;
 
 /**
  * A sample only gets a slider when it really has several slices, and a mask
@@ -30,11 +32,14 @@ function viewerFor(sample: Sample) {
 	};
 }
 
-const viewers = samples.map((sample) => ({ sample, ...viewerFor(sample) }));
+// The release's own previews first, then each part's under its own heading; empty groups are left out.
+const groups = [{ label: null as string | null, href: null as string | null, samples }, ...partGroups]
+	.filter((group) => group.samples.length > 0)
+	.map((group) => ({ ...group, viewers: group.samples.map((sample) => ({ sample, ...viewerFor(sample) })) }));
 ---
 
 {
-	samples.length === 0 ? (
+	groups.length === 0 ? (
 		<div class="empty-state">
 			<p>No previews are published for this release.</p>
 			<p>
@@ -43,6 +48,17 @@ const viewers = samples.map((sample) => ({ sample, ...viewerFor(sample) }));
 			</p>
 		</div>
 	) : (
+		groups.map(({ label, href, viewers }) => (
+		<>
+		{label && href && (
+			<>
+				<h3>From the {label}</h3>
+				<p>
+					These previews belong to a separate part of this dataset. <a href={href}>See its page</a> for how it
+					is distributed and documented.
+				</p>
+			</>
+		)}
 		<ul class="samples">
 			{viewers.map(({ sample, images, hasSlider, hasMask, maskFor }) => (
 				<li class="sample" data-sample>
@@ -114,6 +130,8 @@ const viewers = samples.map((sample) => ({ sample, ...viewerFor(sample) }));
 				</li>
 			))}
 		</ul>
+		</>
+		))
 	)
 }
 
