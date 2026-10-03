@@ -130,8 +130,25 @@ def fmt(v):
     return f'{v:,}' if isinstance(v, int) and not isinstance(v, bool) else str(v)
 
 
-def describe(project, entity, field, values, n_records, n_cases, n_total, prop, observed_on):
-    """One variable record. values holds every value of the field, None included, one per entity record."""
+def primary_note(field, real, primary_values, numeric):
+    """For a diagnosis field, what changes when only primary-disease records are kept, or None if nothing does."""
+    if field in ('diagnosis_is_primary_disease', 'tumor_of_origin'):  # their notes already say this
+        return None
+    kept = [v for v in primary_values if v is not None and not (isinstance(v, str) and v in MARKERS)]
+    if not kept:
+        return ('Every value comes from a diagnosis record that is not the primary renal diagnosis '
+                '(diagnosis_is_primary_disease is false), such as a prior malignancy.')
+    if numeric and (min(kept), max(kept)) != (min(real), max(real)):
+        on_primary = (f'the value is always {fmt(kept[0])}' if min(kept) == max(kept)
+                      else f'the range is {fmt(min(kept))} to {fmt(max(kept))}')
+        return (f'On primary-disease records (diagnosis_is_primary_disease is true) {on_primary}; other values come '
+                'from records of other diagnoses, such as prior malignancies.')
+    return None
+
+
+def describe(project, entity, field, values, n_records, n_cases, n_total, prop, observed_on, primary_values=None):
+    """One variable record. values holds every value of the field, None included, one per entity record.
+    primary_values, for diagnosis fields, holds the values on primary-disease records only."""
     present = [v for v in values if v is not None]
     real = [v for v in present if not (isinstance(v, str) and v in MARKERS)]
     counts = collections.Counter(real)
@@ -160,6 +177,10 @@ def describe(project, entity, field, values, n_records, n_cases, n_total, prop, 
             coding.append({'code': code, 'meaning': (meaning + ' ' if meaning else '') + f'({n:,} {per})'})
     else:
         parts.append(f'{len(counts):,} distinct values.')
+    if primary_values is not None:
+        note = primary_note(field, real, primary_values, numeric)
+        if note:
+            parts.append(note)
     missing = [f'"{m}": {n:,} {per}' for m, n in collections.Counter(v for v in present if isinstance(v, str) and v in MARKERS).most_common()]
     if len(present) < n_records:
         missing.append(f'null: no value ({n_records - len(present):,} {per})')
@@ -203,6 +224,7 @@ def build(project, observed_on):
     n_total = len(cases)
     fields = collections.defaultdict(list)       # (entity, field) -> values, one per entity record
     covered = collections.defaultdict(set)       # (entity, field) -> case ids with a real value
+    primary = collections.defaultdict(list)      # diagnosis field -> values on primary-disease records only
     records = collections.Counter()
 
     def walk(obj, entity, cid):
@@ -216,6 +238,8 @@ def build(project, observed_on):
                 continue
             else:
                 fields[(entity, k)].append(v)
+                if entity == 'diagnosis' and obj.get('diagnosis_is_primary_disease') is True:
+                    primary[k].append(v)
                 if v is not None and not (isinstance(v, str) and v in MARKERS):
                     covered[(entity, k)].add(cid)
 
@@ -248,7 +272,8 @@ def build(project, observed_on):
             dropped.append(f'{entity}.{k}')
             continue
         out.append(describe(project, entity, k, vals, records[entity], len(covered[(entity, k)]), n_total,
-                            dicts[entity].get(k), observed_on))
+                            dicts[entity].get(k), observed_on,
+                            primary_values=primary[k] if entity == 'diagnosis' else None))
     ids = [v['id'] for v in out]
     assert len(ids) == len(set(ids)), 'duplicate ids'
     target = REPO_ROOT / 'src' / 'data' / 'variables' / f'tcga-{project.lower()}-gdc-open.json'

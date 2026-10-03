@@ -182,6 +182,89 @@
 		]
 	},
 	{
+		"id": "tcga-kirp-slide-types-mixed",
+		"release": "tcga-kirp-gdc-open",
+		"category": "potential_check",
+		"description": "The 773 slide-image files mix two kinds of slide and two kinds of tissue: 474 top- or bottom-section tissue slides (93 of them normal kidney tissue, from 88 cases) and 299 diagnostic FFPE slides, all tumour. Studies differ in which they use: CLAM, TransMIL and UNI use diagnostic slides, while Tabibu et al. left KIRP out of their normal-versus-tumour classifier because it has few normal slides.",
+		"inspectedScope": "All 773 slide-image file records in the GDC API responses saved on 26 September 2026 (Data Release 46.0), with each file's sample type.",
+		"affected": {
+			"value": 93,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"gdc-kirp-slide-files"
+				],
+				"locator": "experimental_strategy and cases.samples.sample_type",
+				"status": "verified",
+				"verifiedOn": "2026-10-02",
+				"note": "Slide files of normal tissue."
+			}
+		},
+		"detection": "Tabulated experimental_strategy against sample_type.",
+		"impact": "Counting all slide files as tumour slides, or mixing frozen tissue slides with FFPE diagnostic slides, changes both the label balance and the image appearance a model learns from.",
+		"handling": "Select slides by experimental_strategy and sample_type, and report which were used.",
+		"sources": [
+			"gdc-kirp-slide-files",
+			"cooper-2018-tcga-pathology",
+			"tabibu-2019"
+		]
+	},
+	{
+		"id": "tcga-kich-slide-types-mixed",
+		"release": "tcga-kich-gdc-open",
+		"category": "potential_check",
+		"description": "The 326 slide-image files mix two kinds of slide and two kinds of tissue: 205 top- or bottom-section tissue slides (59 of them normal kidney tissue) and 121 diagnostic FFPE slides, of which 12 are normal kidney tissue, one each from 12 cases. Unlike KIRC and KIRP, choosing diagnostic slides alone does not remove normal tissue here. Studies differ in which slides they use: CLAM, TransMIL and UNI use diagnostic slides, while Tabibu et al. include normal slides.",
+		"inspectedScope": "All 326 slide-image file records in the GDC API responses saved on 26 September 2026 (Data Release 46.0), with each file's sample type.",
+		"affected": {
+			"value": 71,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"gdc-kich-slide-files"
+				],
+				"locator": "experimental_strategy and cases.samples.sample_type",
+				"status": "verified",
+				"verifiedOn": "2026-10-02",
+				"note": "Slide files of normal tissue: 59 tissue slides and 12 diagnostic slides, from 71 cases."
+			}
+		},
+		"detection": "Tabulated experimental_strategy against sample_type.",
+		"impact": "A chromophobe-versus-other classifier trained on diagnostic slides without checking sample_type learns 12 normal-tissue slides as chromophobe tumour, about 10% of KICH's 121 diagnostic slides.",
+		"handling": "Filter on sample_type = Primary Tumor as well as experimental_strategy, and report which slides were used.",
+		"sources": [
+			"gdc-kich-slide-files",
+			"cooper-2018-tcga-pathology",
+			"tabibu-2019"
+		]
+	},
+	{
+		"id": "tcga-kirp-age-obfuscated",
+		"release": "tcga-kirp-gdc-open",
+		"category": "observed_issue",
+		"description": "Ages are altered for 3 cases (age_is_obfuscated is true), and age_at_diagnosis is capped at 32,872 days (90 years) by the GDC schema.",
+		"inspectedScope": "All 291 case records in the GDC API responses saved on 26 September 2026 (Data Release 46.0), and the GDC dictionary definition of age_at_diagnosis.",
+		"affected": {
+			"value": 3,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"gdc-kirp-case-records",
+					"gdc-data-dictionary"
+				],
+				"locator": "demographic.age_is_obfuscated; diagnosis.age_at_diagnosis maximum",
+				"status": "verified",
+				"verifiedOn": "2026-10-02"
+			}
+		},
+		"detection": "Counted age_is_obfuscated flags; read the schema maximum.",
+		"impact": "Age is not exact for the oldest patients; small effect on age as a covariate.",
+		"handling": "Treat 90 years as 90 or older.",
+		"sources": [
+			"gdc-kirp-case-records",
+			"gdc-data-dictionary"
+		]
+	},
+	{
 		"id": "tcga-kirc-tcia-bamf-not-independent",
 		"release": "tcga-kirc-tcia",
 		"category": "published_report",

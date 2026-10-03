@@ -215,13 +215,21 @@ const isHuman = dataset.data.species === 'human';
 		{
 			!isCanonical && !isCurrent && current && (
 				<div class="notice">
-					<p>
-						This is an older release. The current release is{' '}
-						<a href={withBase(releasePath(dataset.data.slug, current.data.id))}>
-							{current.data.versionLabel}
-						</a>
-						.
-					</p>
+					{data.role === 'part' ? (
+						<p>
+							This is one part of {dataset.data.name}, distributed separately from the main release,{' '}
+							<a href={withBase(datasetPath(dataset.data.slug))}>{current.data.versionLabel}</a>. It is
+							not an older version: both are current, and they cover different data.
+						</p>
+					) : (
+						<p>
+							This is an older release. The current release is{' '}
+							<a href={withBase(releasePath(dataset.data.slug, current.data.id))}>
+								{current.data.versionLabel}
+							</a>
+							.
+						</p>
+					)}
 				</div>
 			)
 		}

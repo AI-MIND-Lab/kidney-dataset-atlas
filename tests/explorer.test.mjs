@@ -3,6 +3,7 @@ import { test } from 'node:test';
 import {
 	MAX_COMPARE,
 	FACET_KEYS,
+	combineFacets,
 	defaultState,
 	emptyFilters,
 	matches,
@@ -49,6 +50,25 @@ test('values within one filter are alternatives, across filters they all apply',
 	assert.equal(matches(entry(), withFilters({ modality: ['ct', 'mri'] })), true);
 	assert.equal(matches(entry(), withFilters({ modality: ['ct'], access: ['registration_gated'] })), false);
 	assert.equal(matches(entry(), withFilters({ modality: ['ct'], access: ['direct_open_download'] })), true);
+});
+
+test('a dataset is found by the modalities and tasks of its parts, not only its current release', () => {
+	const slides = { ...entry().facets, species: ['human'], modality: ['pathology'], task: ['classification'], annotations: ['pathology_labels'] };
+	const radiology = { ...slides, modality: ['ct', 'mri'], task: [], annotations: ['not_documented'], docs: ['documentation_only'] };
+	const combined = combineFacets(slides, [radiology]);
+	assert.deepEqual(combined.modality, ['pathology', 'ct', 'mri']);
+	assert.deepEqual(combined.task, ['classification']);
+	assert.equal(matches(entry({ facets: combined }), withFilters({ modality: ['ct'] })), true);
+	assert.equal(matches(entry({ facets: slides }), withFilters({ modality: ['ct'] })), false);
+	// Documentation and pairing describe the current release, so a part does not change them.
+	assert.deepEqual(combined.docs, slides.docs);
+});
+
+test('"not documented" annotations give way to a documented value from any part', () => {
+	const none = { ...entry().facets, annotations: ['not_documented'] };
+	assert.deepEqual(combineFacets(none, [{ ...none, annotations: ['segmentation_masks'] }]).annotations, ['segmentation_masks']);
+	assert.deepEqual(combineFacets(none, [none]).annotations, ['not_documented']);
+	assert.deepEqual(combineFacets(none, []), none);
 });
 
 test('unknown patient counts sort last in both directions', () => {

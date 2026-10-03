@@ -22,6 +22,21 @@ are indexed and labelled. `scripts/check-output.mjs` fails the build if two inde
 Pagefind skips every page without `data-pagefind-body` as soon as one page has it, so the marker is set in the
 base layout for all pages, and only the duplicate opts out.
 
+## A release can be a part of its dataset, not only a version
+
+The release model assumed that a dataset's releases are editions, so every non-current release was "older".
+TCGA broke that: each TCGA kidney project is distributed as slides and clinical records in the GDC and as
+radiology in The Cancer Imaging Archive, two current components joined by the patient barcode. Marked as an
+older release, the radiology was hidden from the explorer, which describes a dataset by its current release, so
+a filter for CT did not find TCGA-KIRC's 267 imaged patients.
+
+A release now carries `role: version` (the default) or `role: part`. One release is still current and canonical;
+a part sits beside it, is labelled as a part on its page, and contributes its modalities, tasks, annotations and
+access to the dataset's explorer facets (`combineFacets` in `src/lib/explorer.ts`). Species, disease, pairing and
+documentation stay those of the current release. Splitting the radiology into its own dataset was the
+alternative; it would have changed public URLs and separated records that share one patient population, which
+the overlap records already describe.
+
 ## Data records are read through Vite, not content collections
 
 Datasets, releases and papers are content collections, because they have prose or benefit from per-file
