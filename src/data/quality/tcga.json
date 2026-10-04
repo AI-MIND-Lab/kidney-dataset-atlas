@@ -401,5 +401,60 @@
 		"sources": [
 			"rcc-aid-paper"
 		]
+	},
+	{
+		"id": "tcga-kirc-tcia-chest-series-cut-kidneys",
+		"release": "tcga-kirc-tcia",
+		"category": "potential_check",
+		"description": "Some series in the collection are mainly chest scans that reach the kidneys only at their edge. The series shown for TCGA-CJ-4918 covers the chest: its coronal view shows the lungs, the kidneys appear only at the lower edge of the volume, and the cyst the preview is centred on lies on slice 5 of 133. The BAMF reviewer who rated this series noted: \"Images do not include entire kidney region.\"",
+		"inspectedScope": "The atlas preview of TCGA-CJ-4918 (axial, zoomed axial, coronal and sagittal views). Other series were not inspected for coverage.",
+		"affected": {
+			"value": 1,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"tcia-tcga-kirc",
+					"bamf-aimi-zenodo"
+				],
+				"locator": "TCGA-CJ-4918, series 1.3.6.1.4.1.14519.5.2.1.1706.4004.252007142387318994840525680708; BAMF kidney-ct.zip, qa-results.csv, CommentsAboutAISegmentation for this series",
+				"status": "verified",
+				"verifiedOn": "2026-10-04",
+				"note": "One series seen in a preview; this is not a count across the collection."
+			}
+		},
+		"detection": "Seen in the preview rendering of the series.",
+		"impact": "Kidneys that are cut off at the edge of a volume give incomplete masks and volumes.",
+		"handling": "Choose series that cover the kidneys, for example by checking that the kidney mask does not touch the first or last slice.",
+		"sources": [
+			"tcia-tcga-kirc",
+			"bamf-aimi-zenodo"
+		]
+	},
+	{
+		"id": "rcc-aid-kn-8419-mask-holes",
+		"release": "rcc-aid-v2",
+		"category": "observed_issue",
+		"description": "RCC-AID's tumour label for TCGA-KN-8419 (series ending 166781) has small unlabelled holes near the centre of the tumour and a ragged outline along part of its anterior edge.",
+		"inspectedScope": "The atlas preview of RCC-AID's image and label for this series (axial, zoomed axial, coronal and sagittal views through the tumour). Other labels were not inspected.",
+		"affected": {
+			"value": 1,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"rcc-aid-zenodo"
+				],
+				"locator": "labels.zip, TCGA-KICH series 1.3.6.1.4.1.14519.5.2.1.3671.4011.214911382968244656730175166781",
+				"status": "verified",
+				"verifiedOn": "2026-10-04",
+				"note": "One label seen in a preview; this is not a count across the release."
+			}
+		},
+		"detection": "Seen in the preview rendering of the label on its image.",
+		"impact": "A small underestimate of tumour volume, and rougher edges for shape or boundary features.",
+		"handling": "Fill interior holes, or inspect the label, when exact tumour volume or shape matters.",
+		"sources": [
+			"rcc-aid-zenodo",
+			"rcc-aid-paper"
+		]
 	}
 ]

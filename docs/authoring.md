@@ -223,9 +223,16 @@ Preview files go in `public/previews/`, compressed. They live in git history for
   sharp at a fraction of the PNG size). Keep the full-size PNG rendering in `figures/<folder>/`, which is committed
   so anyone can rebuild the previews with `scripts/research/previews/build_previews.py`; add a rendering there only
   when a preview uses it. Raw scans, masks and other dataset files never go in the repository.
-- **Caption.** Start with who drew the mask ("Mask: BAMF (AI-generated), corrected by a radiologist.",
-  "Mask: KiTS23's own reference labels…"), then describe what the image shows in neutral terms, then point to
-  [previews.md](previews.md), which explains how the previews were made and who drew each mask.
+- **No caption of our own.** Nothing the atlas writes describes the image. A preview record gives the case
+  (`caseId`), who drew the mask in a few words (`mask`: "BAMF, AI-generated, not corrected"), and the provider's own
+  text about that case in `providerText`: each entry names the provider's field, copies its value exactly, cites a
+  source the record lists, with a locator, and sets `generatedBy` to the program when a program wrote it (such as a
+  report pipeline or a question generator). Leave out numeric codes whose meaning the provider does not document.
+  How to read the kind of preview goes in `viewGuide`, which the page shows once per group, and a mask problem seen
+  in the image goes in the release's quality findings. See [previews.md](previews.md).
+- **Large copy.** A rendering wider than the page (for example one drawn at 2×) is halved for the page and also
+  shipped whole as the asset's `large` copy, which opens when the reader clicks the image; `build_previews.py`
+  does both.
 - **Attribution.** Name the image source and the mask source separately when they differ (a TCIA collection with
   BAMF or RCC-AID masks), with DOIs, and say who rendered the preview and what was changed (windowed, cropped,
   outlined).

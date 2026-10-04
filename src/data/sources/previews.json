@@ -1,0 +1,16 @@
+[
+	{
+		"id": "gdc-cptac-ccrcc-preview-cases",
+		"url": "https://api.gdc.cancer.gov/cases?filters=%7B%22op%22%3A%22in%22%2C%22content%22%3A%7B%22field%22%3A%22submitter_id%22%2C%22value%22%3A%5B%22C3L-00766%22%2C%22C3N-00313%22%2C%22C3N-02063%22%2C%22C3N-02723%22%2C%22C3L-01462%22%2C%22C3N-00435%22%5D%7D%7D&fields=submitter_id,project.project_id,diagnoses.primary_diagnosis,diagnoses.diagnosis_is_primary_disease",
+		"title": "GDC API case records (project CPTAC-3) for the six CPTAC-CCRCC patients shown in previews (GDC Data Release 46.0)",
+		"locator": "diagnoses.primary_diagnosis of the record with diagnosis_is_primary_disease = true",
+		"accessedOn": "2026-10-04"
+	},
+	{
+		"id": "ucsf-rmac-exam-attributes",
+		"url": "https://registry.opendata.aws/ucsf-rmac/",
+		"title": "UCSF RMaC exam files (ucsf-rmac-dataset/<exam>.hdf5 in the v2 release archive), root attributes",
+		"locator": "attribute pathology of each exam file; read on the project's UCF copy of the release on 2026-10-04",
+		"accessedOn": "2026-10-04"
+	}
+]

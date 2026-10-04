@@ -175,5 +175,31 @@
 			"abdomenatlas3-hf-card",
 			"radgpt-repo-license"
 		]
+	},
+	{
+		"id": "abdomenatlas3-kidney-and-lesion-masks-overlap",
+		"release": "abdomenatlas-3-0-mini",
+		"category": "potential_check",
+		"description": "The kidney masks and the kidney lesion mask are separate files and can overlap. In BDMAP_00000061 the right-kidney mask covers most of the 9.5 cm lesion, so the kidney outline runs around the lesion in every view.",
+		"inspectedScope": "The atlas preview of BDMAP_00000061 (axial, zoomed axial, coronal and sagittal views through the lesion). Other cases were not inspected for overlap.",
+		"affected": {
+			"value": 1,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"abdomenatlas3-image-files"
+				],
+				"locator": "BDMAP_00000061, kidney and kidney lesion masks",
+				"status": "verified",
+				"verifiedOn": "2026-10-04",
+				"note": "One case seen in a preview; this is not a count across the release."
+			}
+		},
+		"detection": "Seen in the preview rendering of both masks on the CT.",
+		"impact": "A kidney volume taken from the kidney mask can include the lesion, and adding kidney and lesion volumes counts the overlap twice.",
+		"handling": "Subtract the lesion mask from the kidney mask when a lesion-free kidney volume is needed.",
+		"sources": [
+			"abdomenatlas3-image-files"
+		]
 	}
 ]

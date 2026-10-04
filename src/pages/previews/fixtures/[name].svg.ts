@@ -19,6 +19,8 @@ export const getStaticPaths = (async () => {
 		paths.push({ params: { name: `ct-mask-${slice}` }, props: { slice, kind: 'mask' as const } });
 	}
 	paths.push({ params: { name: 'figure' }, props: { slice: 5, kind: 'figure' as const } });
+	// The enlarged copy of the figure, so the viewer's "open large" path is exercised.
+	paths.push({ params: { name: 'figure-large' }, props: { slice: 5, kind: 'figure' as const } });
 	return paths;
 }) satisfies GetStaticPaths;
 

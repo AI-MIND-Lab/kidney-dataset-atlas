@@ -69,8 +69,8 @@ Write commit messages as a short, sentence-case summary of what the change does 
 - **Never set approval fields yourself.** `approvedBy`, `permissionApprovedBy` and `catalogStatus: published` are
   set by a curator in their own commit. The validator rejects an approver who is not a curator.
 - **Previews yes, raw data no.** Collaborators may add preview images: compressed renderings in
-  `public/previews/<release-id>/`, each with a sample record giving its caption, attribution and reuse terms under
-  the source dataset's licence (see [docs/previews.md](docs/previews.md) and the Samples section of
+  `public/previews/<release-id>/`, each with a sample record giving its case, who drew the mask, the provider's own
+  text about the case (never a caption we write), attribution and reuse terms under the source dataset's licence (see [docs/previews.md](docs/previews.md) and the Samples section of
   [docs/authoring.md](docs/authoring.md)). Never commit raw scans, masks, archives or other downloads from a
   dataset. A preview shows on draft pages straight away; a curator approves its permission before a published
   page shows it.

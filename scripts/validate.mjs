@@ -158,7 +158,25 @@ for (const record of papers) {
 	}
 }
 for (const record of variables) reference(record, 'releases', record.data.release, 'release');
-for (const record of samples) reference(record, 'releases', record.data.release, 'release');
+for (const record of samples) {
+	reference(record, 'releases', record.data.release, 'release');
+	// A provider quotation is only checkable if its source is one the record lists (and so one that exists).
+	for (const quote of record.data.providerText) {
+		if (!record.data.sources.includes(quote.source)) {
+			fail(record.file, `sample "${record.data.id}" quotes ${quote.field} from source "${quote.source}", which its sources do not list`);
+		}
+	}
+	// Each image is a file in public/, or (for the synthetic fixtures only) a page route that draws it.
+	for (const asset of record.data.assets) {
+		for (const { path } of [asset, asset.large].filter(Boolean)) {
+			const ext = path.slice(path.lastIndexOf('.'));
+			const route = join(root, 'src/pages', path.slice(0, path.lastIndexOf('/')), `[name]${ext}.ts`);
+			if (!existsSync(join(root, 'public', path)) && !existsSync(route)) {
+				fail(record.file, `sample "${record.data.id}" points at missing file public${path}`);
+			}
+		}
+	}
+}
 for (const record of quality) reference(record, 'releases', record.data.release, 'release');
 for (const record of overlaps) {
 	for (const id of record.data.releases) reference(record, 'releases', id, 'releases');

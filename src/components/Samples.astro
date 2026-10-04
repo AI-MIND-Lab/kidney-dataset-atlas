@@ -1,5 +1,6 @@
 ---
 import type { Sample } from '../lib/catalog';
+import { sourceById } from '../lib/catalog';
 import { withBase } from '../lib/site';
 
 interface Props {
@@ -32,10 +33,34 @@ function viewerFor(sample: Sample) {
 	};
 }
 
-// The release's own previews first, then each part's under its own heading; empty groups are left out.
+/**
+ * Under each image only facts and the provider's own words appear: the case, who drew the mask, and quotations
+ * grouped by who wrote them (people, or a named program).
+ */
+function quoteGroups(sample: Sample) {
+	const groups = new Map<string, { generatedBy: string | null; quotes: Sample['providerText'] }>();
+	for (const quote of sample.providerText) {
+		const key = quote.generatedBy ?? '';
+		if (!groups.has(key)) groups.set(key, { generatedBy: quote.generatedBy, quotes: [] });
+		groups.get(key)!.quotes.push(quote);
+	}
+	return [...groups.values()];
+}
+
+const unique = <T,>(values: T[]) => [...new Set(values)];
+
+// The release's own previews first, then each part's under its own heading; empty groups are left out. How to read
+// the previews and their credit are the same for a whole group, so they are shown once, not under every image.
 const groups = [{ label: null as string | null, href: null as string | null, samples }, ...partGroups]
 	.filter((group) => group.samples.length > 0)
-	.map((group) => ({ ...group, viewers: group.samples.map((sample) => ({ sample, ...viewerFor(sample) })) }));
+	.map((group) => ({
+		...group,
+		viewers: group.samples.map((sample) => ({ sample, quotes: quoteGroups(sample), ...viewerFor(sample) })),
+		guides: unique(group.samples.map((sample) => sample.viewGuide).filter((guide): guide is string => Boolean(guide))),
+		credits: unique(group.samples.map((sample) => JSON.stringify([sample.attribution, sample.reuseTerms, sample.alignment ?? '']))).map(
+			(entry) => JSON.parse(entry) as [string, string, string],
+		),
+	}));
 ---
 
 {
@@ -48,110 +73,172 @@ const groups = [{ label: null as string | null, href: null as string | null, sam
 			</p>
 		</div>
 	) : (
-		groups.map(({ label, href, viewers }) => (
-		<>
-		{label && href && (
+		groups.map(({ label, href, viewers, guides, credits }) => (
 			<>
-				<h3>From the {label}</h3>
-				<p>
-					These previews belong to a separate part of this dataset. <a href={href}>See its page</a> for how it
-					is distributed and documented.
-				</p>
-			</>
-		)}
-		<ul class="samples">
-			{viewers.map(({ sample, images, hasSlider, hasMask, maskFor }) => (
-				<li class="sample" data-sample>
-					<figure>
-						<div class="sample__frame">
-							{images.map((image, index) => {
-								const mask = maskFor(image.sliceIndex);
-								return (
-									<div class="sample__slice" data-slice={index} hidden={index !== 0}>
-										<img
-											src={withBase(image.path)}
-											alt={index === 0 ? sample.alt : ''}
-											width={image.width}
-											height={image.height}
-											loading="lazy"
-										/>
-										{mask && (
-											<img
-												class="sample__mask"
-												data-mask
-												src={withBase(mask.path)}
-												alt=""
-												width={mask.width}
-												height={mask.height}
-												loading="lazy"
-											/>
+				{label && href && (
+					<>
+						<h3>From the {label}</h3>
+						<p>
+							These previews belong to a separate part of this dataset. <a href={href}>See its page</a> for how
+							it is distributed and documented.
+						</p>
+					</>
+				)}
+
+				<div class="samples__about">
+					{guides.length > 0 && (
+						<details>
+							<summary>How to read these previews</summary>
+							{guides.map((guide) => (
+								<p>{guide}</p>
+							))}
+						</details>
+					)}
+					<details>
+						<summary>Credit and licence</summary>
+						{credits.map(([attribution, reuseTerms, alignment]) => (
+							<>
+								<p>{attribution}</p>
+								<p>
+									<strong>Reuse:</strong> {reuseTerms}
+								</p>
+								{alignment && <p>{alignment}</p>}
+							</>
+						))}
+					</details>
+				</div>
+
+				<ul class="samples">
+					{viewers.map(({ sample, quotes, images, hasSlider, hasMask, maskFor }) => (
+						<li class="sample" data-sample data-case={sample.caseId}>
+							<figure>
+								<div class="sample__frame" style={`max-width: ${Math.max(...images.map((image) => image.width))}px`}>
+									{images.map((image, index) => {
+										const mask = maskFor(image.sliceIndex);
+										return (
+											<div class="sample__slice" data-slice={index} hidden={index !== 0}>
+												<button
+													type="button"
+													class="sample__open"
+													data-open
+													data-large={withBase(image.large?.path ?? image.path)}
+													aria-label={`Enlarge the preview of ${sample.caseId}`}
+												>
+													<img
+														src={withBase(image.path)}
+														alt={index === 0 ? sample.alt : ''}
+														width={image.width}
+														height={image.height}
+														loading="lazy"
+														decoding="async"
+													/>
+													{mask && (
+														<img
+															class="sample__mask"
+															data-mask
+															src={withBase(mask.path)}
+															alt=""
+															width={mask.width}
+															height={mask.height}
+															loading="lazy"
+														/>
+													)}
+												</button>
+											</div>
+										);
+									})}
+								</div>
+
+								{(hasSlider || hasMask) && (
+									<div class="sample__controls" data-sample-controls hidden>
+										{hasSlider && (
+											<label>
+												Slice <span data-slice-label>1</span> of {images.length}
+												<input type="range" min="0" max={images.length - 1} value="0" step="1" data-slice-input />
+											</label>
+										)}
+										{hasMask && (
+											<>
+												<label class="sample__checkbox">
+													<input type="checkbox" checked data-mask-toggle />
+													Show mask
+												</label>
+												<label>
+													Mask opacity
+													<input type="range" min="0" max="100" value="60" step="5" data-mask-opacity />
+												</label>
+											</>
 										)}
 									</div>
-								);
-							})}
-							<button type="button" class="sample__zoom" data-zoom hidden>
-								Zoom
-							</button>
-						</div>
-
-						{(hasSlider || hasMask) && (
-							<div class="sample__controls" data-sample-controls hidden>
-								{hasSlider && (
-									<label>
-										Slice <span data-slice-label>1</span> of {images.length}
-										<input type="range" min="0" max={images.length - 1} value="0" step="1" data-slice-input />
-									</label>
 								)}
-								{hasMask && (
-									<>
-										<label class="sample__checkbox">
-											<input type="checkbox" checked data-mask-toggle />
-											Show mask
-										</label>
-										<label>
-											Mask opacity
-											<input type="range" min="0" max="100" value="60" step="5" data-mask-opacity />
-										</label>
-									</>
-								)}
-							</div>
-						)}
 
-						<figcaption>
-							<strong>{sample.kind === 'dataset_sample' ? 'Actual dataset sample' : 'Published figure'}.</strong>{' '}
-							{sample.caption}
-							<br />
-							<small>
-								{sample.attribution} · Reuse: {sample.reuseTerms}
-								{sample.alignment && <> · {sample.alignment}</>}
-							</small>
-						</figcaption>
-					</figure>
-				</li>
-			))}
-		</ul>
-		</>
+								<figcaption data-caption>
+									<p class="sample__label">
+										<strong>{sample.caseId}</strong>
+										{sample.kind === 'published_figure' && <> · Published figure</>}
+										{sample.mask && <> · Mask: {sample.mask}</>}
+									</p>
+									{quotes.map(({ generatedBy, quotes: group }) => (
+										<div class="sample__quotes">
+											<p class="sample__source">
+												{generatedBy ? (
+													<>
+														<strong>Machine-generated by the provider</strong> ({generatedBy}):
+													</>
+												) : (
+													<strong>From the provider:</strong>
+												)}
+											</p>
+											<dl>
+												{group.map((quote) => (
+													<div>
+														<dt>{quote.field}</dt>
+														<dd>“{quote.value}”</dd>
+													</div>
+												))}
+											</dl>
+											{unique(group.map((quote) => JSON.stringify([quote.source, quote.locator]))).map((key) => {
+												const [id, locator] = JSON.parse(key) as [string, string];
+												const source = sourceById(id);
+												return (
+													<p class="sample__locator">
+														Source: {source ? <a href={source.url}>{source.title}</a> : id}; {locator}
+													</p>
+												);
+											})}
+										</div>
+									))}
+								</figcaption>
+							</figure>
+						</li>
+					))}
+				</ul>
+			</>
 		))
 	)
 }
 
-<dialog class="zoom-dialog" data-zoom-dialog>
-	<form method="dialog">
-		<button class="button" value="close">Close</button>
-	</form>
-	<img data-zoom-image alt="" />
-	<p data-zoom-caption></p>
+<dialog class="lightbox" data-lightbox aria-label="Enlarged preview">
+	<div class="lightbox__bar">
+		<strong data-lightbox-title></strong>
+		<span class="lightbox__buttons">
+			<button type="button" class="button" data-lightbox-size aria-pressed="false">Actual size</button>
+			<button type="button" class="button" data-lightbox-prev>Previous</button>
+			<button type="button" class="button" data-lightbox-next>Next</button>
+			<button type="button" class="button" data-lightbox-close>Close</button>
+		</span>
+	</div>
+	<div class="lightbox__stage" data-lightbox-stage>
+		<img data-lightbox-image alt="" />
+	</div>
+	<div class="lightbox__caption" data-lightbox-caption></div>
 </dialog>
 
 <script>
-	const dialog = document.querySelector<HTMLDialogElement>('[data-zoom-dialog]');
-
 	for (const root of document.querySelectorAll<HTMLElement>('[data-sample]')) {
 		const slices = [...root.querySelectorAll<HTMLElement>('[data-slice]')];
 		const controls = root.querySelector<HTMLElement>('[data-sample-controls]');
-		const zoomButton = root.querySelector<HTMLButtonElement>('[data-zoom]');
 		if (controls) controls.hidden = false;
-		if (zoomButton && dialog) zoomButton.hidden = false;
 
 		const sliceInput = root.querySelector<HTMLInputElement>('[data-slice-input]');
 		const sliceLabel = root.querySelector<HTMLElement>('[data-slice-label]');
@@ -177,41 +264,122 @@ const groups = [{ label: null as string | null, href: null as string | null, sam
 		maskToggle?.addEventListener('change', applyMask);
 		maskOpacity?.addEventListener('input', applyMask);
 		applyMask();
+	}
 
-		zoomButton?.addEventListener('click', () => {
-			const current = slices.find((slice) => !slice.hidden) ?? slices[0];
-			const image = current?.querySelector('img');
-			const zoomImage = dialog!.querySelector<HTMLImageElement>('[data-zoom-image]')!;
-			const caption = dialog!.querySelector<HTMLElement>('[data-zoom-caption]')!;
-			if (!image) return;
-			zoomImage.src = image.src;
-			zoomImage.alt = image.alt || 'Enlarged preview';
-			caption.textContent = root.querySelector('figcaption')?.textContent?.trim() ?? '';
-			dialog!.showModal();
+	// Clicking a preview opens it large: the higher-resolution copy where one exists, fitted to the window, with
+	// "Actual size" to see every pixel, and Previous/Next (or the arrow keys) to step through the page's previews.
+	const lightbox = document.querySelector<HTMLDialogElement>('[data-lightbox]');
+	if (lightbox) {
+		const samples = [...document.querySelectorAll<HTMLElement>('[data-sample]')];
+		const image = lightbox.querySelector<HTMLImageElement>('[data-lightbox-image]')!;
+		const title = lightbox.querySelector<HTMLElement>('[data-lightbox-title]')!;
+		const caption = lightbox.querySelector<HTMLElement>('[data-lightbox-caption]')!;
+		const stage = lightbox.querySelector<HTMLElement>('[data-lightbox-stage]')!;
+		const sizeButton = lightbox.querySelector<HTMLButtonElement>('[data-lightbox-size]')!;
+		const prev = lightbox.querySelector<HTMLButtonElement>('[data-lightbox-prev]')!;
+		const next = lightbox.querySelector<HTMLButtonElement>('[data-lightbox-next]')!;
+		let current = 0;
+
+		const setActualSize = (on: boolean) => {
+			stage.classList.toggle('is-actual', on);
+			sizeButton.setAttribute('aria-pressed', String(on));
+			sizeButton.textContent = on ? 'Fit to window' : 'Actual size';
+		};
+
+		const show = (index: number) => {
+			current = (index + samples.length) % samples.length;
+			const sample = samples[current]!;
+			const visible = [...sample.querySelectorAll<HTMLElement>('[data-slice]')].find((slice) => !slice.hidden);
+			const opener = (visible ?? sample).querySelector<HTMLElement>('[data-open]');
+			const thumb = opener?.querySelector('img');
+			if (!opener || !thumb) return;
+			image.src = opener.dataset.large ?? thumb.src;
+			image.alt = thumb.alt || 'Enlarged preview';
+			title.textContent = sample.dataset.case ?? '';
+			caption.innerHTML = sample.querySelector('[data-caption]')?.innerHTML ?? '';
+			prev.hidden = next.hidden = samples.length < 2;
+			setActualSize(false);
+		};
+
+		samples.forEach((sample, index) => {
+			for (const opener of sample.querySelectorAll<HTMLElement>('[data-open]')) {
+				opener.addEventListener('click', () => {
+					show(index);
+					lightbox.showModal();
+				});
+			}
+		});
+		prev.addEventListener('click', () => show(current - 1));
+		next.addEventListener('click', () => show(current + 1));
+		sizeButton.addEventListener('click', () => setActualSize(!stage.classList.contains('is-actual')));
+		lightbox.querySelector('[data-lightbox-close]')?.addEventListener('click', () => lightbox.close());
+		// A click on the backdrop (the dialog itself, outside its content) closes it; Escape closes it natively.
+		lightbox.addEventListener('click', (event) => {
+			if (event.target === lightbox) lightbox.close();
+		});
+		lightbox.addEventListener('keydown', (event) => {
+			if (event.key === 'ArrowLeft') show(current - 1);
+			if (event.key === 'ArrowRight') show(current + 1);
 		});
 	}
 </script>
 
 <style>
+	.samples__about {
+		display: grid;
+		gap: 0.25rem;
+		margin-bottom: 1rem;
+		font-size: 0.92rem;
+	}
+
+	.samples__about summary {
+		cursor: pointer;
+		font-weight: 600;
+	}
+
+	.samples__about p {
+		margin: 0.35rem 0;
+		color: var(--ink-muted);
+	}
+
+	/* One preview per row: the renderings are wide strips that need the full width to be read. */
 	.samples {
 		list-style: none;
 		padding: 0;
 		margin: 0;
 		display: grid;
-		gap: 1.5rem;
-		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+		gap: 2rem;
+		grid-template-columns: 1fr;
 	}
 
 	figure {
 		margin: 0;
 	}
 
+	/* Full width, capped at the image's own width (set inline), so the space is reserved before a lazy image loads. */
 	.sample__frame {
 		position: relative;
+		width: 100%;
 		border: 1px solid var(--border);
 		border-radius: var(--radius);
 		overflow: hidden;
 		background: #12161a;
+	}
+
+	/* A button shrinks to its content even as a block, and its image is 100% of the button, so it needs a width. */
+	.sample__open {
+		position: relative;
+		display: block;
+		width: 100%;
+		padding: 0;
+		border: 0;
+		background: none;
+		cursor: zoom-in;
+	}
+
+	.sample__open:focus-visible {
+		outline: 3px solid var(--accent, #1f6f5c);
+		outline-offset: -3px;
 	}
 
 	.sample__slice img {
@@ -225,19 +393,6 @@ const groups = [{ label: null as string | null, href: null as string | null, sam
 		inset: 0;
 		mix-blend-mode: screen;
 		pointer-events: none;
-	}
-
-	.sample__zoom {
-		position: absolute;
-		right: 0.5rem;
-		top: 0.5rem;
-		font: inherit;
-		font-size: 0.85rem;
-		padding: 0.15rem 0.6rem;
-		border: 1px solid var(--border-strong);
-		border-radius: var(--radius);
-		background: var(--surface);
-		cursor: pointer;
 	}
 
 	.sample__controls {
@@ -263,31 +418,109 @@ const groups = [{ label: null as string | null, href: null as string | null, sam
 		font-size: 0.92rem;
 	}
 
-	figcaption small {
-		color: var(--ink-muted);
+	figcaption p {
+		margin: 0.2rem 0;
 	}
 
-	.zoom-dialog {
+	.sample__quotes {
+		margin-top: 0.35rem;
+	}
+
+	/* One quoted field per line, so a question and its answer read as a pair. */
+	.sample__quotes dl {
+		display: grid;
+		gap: 0.15rem;
+		margin: 0.15rem 0;
+	}
+
+	.sample__quotes dl div {
+		display: flex;
+		gap: 0.4rem;
+	}
+
+	.sample__quotes dt {
+		color: var(--ink-muted);
+		font-family: var(--font-mono, monospace);
+		font-size: 0.85rem;
+	}
+
+	.sample__quotes dd {
+		margin: 0;
+	}
+
+	.sample__locator {
+		color: var(--ink-muted);
+		font-size: 0.82rem;
+	}
+
+	.lightbox {
+		width: 96vw;
+		max-width: 96vw;
+		height: 94vh;
+		max-height: 94vh;
+		padding: 0.75rem;
 		border: 1px solid var(--border-strong);
 		border-radius: var(--radius);
-		padding: 1rem;
-		max-width: min(90vw, 40rem);
+		background: var(--surface);
 	}
 
-	.zoom-dialog img {
-		width: 100%;
-		height: auto;
+	.lightbox[open] {
+		display: grid;
+		grid-template-rows: auto 1fr auto;
+		gap: 0.5rem;
+	}
+
+	.lightbox::backdrop {
+		background: rgb(10 14 18 / 0.85);
+	}
+
+	.lightbox__bar {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.5rem;
+	}
+
+	.lightbox__buttons {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
+	}
+
+	.lightbox__stage {
+		min-height: 0;
+		overflow: auto;
+		display: grid;
+		place-items: center;
 		background: #12161a;
 		border-radius: var(--radius);
 	}
 
-	.zoom-dialog::backdrop {
-		background: rgb(15 42 68 / 0.6);
+	/* Fitted to the window by default; "Actual size" shows every pixel and scrolls. */
+	.lightbox__stage img {
+		max-width: 100%;
+		max-height: 100%;
+		object-fit: contain;
 	}
 
-	.zoom-dialog form {
-		display: flex;
-		justify-content: flex-end;
-		margin-bottom: 0.5rem;
+	.lightbox__stage.is-actual {
+		place-items: start;
+	}
+
+	.lightbox__stage.is-actual img {
+		max-width: none;
+		max-height: none;
+	}
+
+	.lightbox__caption {
+		font-size: 0.9rem;
+		max-height: 25vh;
+		overflow: auto;
+	}
+
+	.lightbox__caption p,
+	.lightbox__caption dl {
+		margin: 0.2rem 0;
 	}
 </style>

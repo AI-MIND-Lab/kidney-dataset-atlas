@@ -39,10 +39,17 @@ the released files" in [docs/authoring.md](../../docs/authoring.md).
 
 ### Preview images (`previews/`)
 
+`render_previews.py` draws the KiTS23, UCSF RMaC and TCGA-KIRC renderings from the datasets' volumes and masks, at
+2× (`--scale 1` reproduces the originals pixel for pixel). Its packages are pinned in `requirements-render.txt`,
+because other matplotlib or FreeType builds change text anti-aliasing. For RMaC and TCGA-KIRC it reads the
+Kidney-VLM project's processed NIfTI files, whose conversion script is not in this repository.
+
 `build_previews.py` compresses the full-size renderings in `figures/<folder>/` to WebP in
-`public/previews/<release>/` and writes `src/data/samples/processed-figures.json`, with each preview's caption,
-attribution and reuse terms. Rebuilding from the committed renderings gives byte-identical files. To add a preview,
-put its PNG rendering in `figures/<folder>/` and add an entry with its caption and alt text in the script. See
+`public/previews/<release>/`: a copy for the page, and the whole rendering as the enlarged copy when it is wider than
+the page (the 2× ones). It writes `src/data/samples/processed-figures.json` with each preview's case, mask source,
+the provider's own text about the case (copied exactly, with its source and locator, and marked when a program
+generated it), attribution and reuse terms. Rebuilding from the committed renderings gives byte-identical files. To
+add a preview, put its PNG rendering in `figures/<folder>/` and add an entry in the script. See
 [docs/previews.md](../../docs/previews.md) for how the renderings were made and how to read them.
 
 ### Paper figures (`figures/`)
