@@ -84,10 +84,6 @@ Required blocks: `counts`, `access`, `license`, `deidentification`, `dictionary`
 Set `current: true` only on the release intended to be the dataset's canonical page. A dataset with published
 releases must have exactly one published current release.
 
-Optional `notes` entries add release-specific context under Overview. Each entry has `title`, `text` and
-`evidence`; entries with `status: not_verified` display an explicit research-note label. Keep edition-specific
-claims here rather than adding them to the shared dataset-family description.
-
 Access describes how the provider distributes a cohort; it does not itself decide whether the release may be
 published. Use one of these values:
 

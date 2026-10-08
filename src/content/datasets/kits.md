@@ -25,6 +25,5 @@ Cleveland Clinic. Annotation was done in three stages: medical trainees placed a
 box, then reference pins, and delineation was carried out by crowd workers following that
 guidance, with three independent annotations collected for each region of interest.
 
-KiTS23 also provides case-level clinical metadata in `dataset/kits23.json`, linked to the
-images by case identifier. Release-specific cohort details and dictionary limitations are
-described below; definitions from earlier editions should not be assumed unchanged.
+What this collection does not contain, as far as the pages checked show: it is an imaging
+and segmentation release, and no clinical table accompanying the KiTS23 release was located.

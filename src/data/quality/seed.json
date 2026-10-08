@@ -9,9 +9,7 @@
 			"value": null,
 			"status": "not_applicable",
 			"evidence": {
-				"sources": [
-					"nhanes-alb-cr-l"
-				],
+				"sources": ["nhanes-alb-cr-l"],
 				"status": "verified",
 				"verifiedOn": "2026-09-19",
 				"note": "The change affects the measurement scale rather than a countable set of records."
@@ -20,9 +18,7 @@
 		"detection": "Documented by the provider in the file's analytic notes.",
 		"impact": "Comparing albumin or albumin-to-creatinine values across cycles without the provider's adjustment will overstate the change over time.",
 		"handling": "Apply the regression equations the provider supplies before comparing cycles.",
-		"sources": [
-			"nhanes-alb-cr-l"
-		]
+		"sources": ["nhanes-alb-cr-l"]
 	},
 	{
 		"id": "nhanes-2021-missing-lab-results",
@@ -34,9 +30,7 @@
 			"value": 873,
 			"status": "present",
 			"evidence": {
-				"sources": [
-					"nhanes-biopro-l"
-				],
+				"sources": ["nhanes-biopro-l"],
 				"locator": "Codebook, LBXSCR missing count",
 				"status": "verified",
 				"verifiedOn": "2026-09-19",
@@ -46,28 +40,21 @@
 		"detection": "Stated in the published codebooks.",
 		"impact": "Analyses restricted to complete cases lose participants, and the loss may not be random.",
 		"handling": "Account for missingness, and use the survey design variables and weights.",
-		"sources": [
-			"nhanes-alb-cr-l",
-			"nhanes-biopro-l"
-		]
+		"sources": ["nhanes-alb-cr-l", "nhanes-biopro-l"]
 	},
 	{
 		"id": "kits23-annotation-method",
 		"release": "kits23",
 		"category": "potential_check",
-		"description": "Annotation procedures differ between editions: KiTS21 used three crowd delineations based on expert-reviewed guidance; the newer KiTS23 process uses direct trainee contours and expert review of low agreement with baseline nnU-Net predictions. Boundary quality and the number of expert-reviewed cases require case-level inspection.",
-		"inspectedScope": "Official KiTS21 and KiTS23 annotation descriptions and organizer guidance; no imaging or mask file was inspected.",
+		"description": "Segmentations were produced by crowd workers following bounding boxes and reference pins placed by medical trainees, with three independent annotations per region of interest, rather than directly by radiologists. Anyone relying on boundary precision should check how the three annotations were combined.",
+		"inspectedScope": "The annotation method described in the KiTS21 publication. No segmentation file was examined, and this description may not hold for cases added after KiTS21.",
 		"affected": {
 			"value": null,
 			"status": "not_verified"
 		},
-		"detection": "Comparison of official annotation procedures; not a measured labeling-error audit.",
+		"detection": "Described by the dataset's own publication.",
 		"impact": "Unclear without inspection; it is a property of the annotation process, not a known error.",
-		"handling": "Keep edition-specific annotation provenance explicit; use the actual released mask files and inspect aggregation before assuming all cases have identical annotation history.",
-		"sources": [
-			"kits21-annotation-page",
-			"kits23-challenge-page",
-			"kits-majority-vote-guidance"
-		]
+		"handling": "Inspect the per-case annotation instances in the repository before treating boundaries as a gold standard.",
+		"sources": ["kits21-paper", "kits23-case-listing"]
 	}
 ]
