@@ -1,0 +1,30 @@
+[
+	{
+		"id": "kits23-clinical-metadata",
+		"url": "https://raw.githubusercontent.com/neheller/kits23/main/dataset/kits23.json",
+		"title": "KiTS23 case-level clinical metadata (dataset/kits23.json)",
+		"locator": "489 records and 40 top-level fields; field names, types and category encodings inspected in memory. Clinical definitions and KiTS21 missing-count equivalence are not verified.",
+		"accessedOn": "2026-10-07"
+	},
+	{
+		"id": "kits21-reannotation-update",
+		"url": "https://discourse.kits-challenge.org/t/kits21-challenge-update/354",
+		"title": "KiTS21 Challenge Update ? organizer announcement",
+		"locator": "Tentative Dataset Characteristics: reannotation of the 300 KiTS19 cases",
+		"accessedOn": "2026-10-07"
+	},
+	{
+		"id": "kits21-annotation-page",
+		"url": "https://kits-challenge.org/kits21/",
+		"title": "KiTS21 official annotation process",
+		"locator": "Data Annotation Process: annotator roles, guidance and independent delineations",
+		"accessedOn": "2026-10-07"
+	},
+	{
+		"id": "kits-majority-vote-guidance",
+		"url": "https://discourse.kits-challenge.org/t/which-is-gt-among-the-annotation-1-annotation-2-annotation-3/500",
+		"title": "Organizer explanation of majority-vote aggregation and KiTS21 mask location",
+		"locator": "Nicholas Heller replies, 20 and 24 January 2024",
+		"accessedOn": "2026-10-07"
+	}
+]

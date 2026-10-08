@@ -3,22 +3,22 @@
 		"id": "kits23-challenge-page",
 		"url": "https://kits-challenge.org/kits23/",
 		"title": "KiTS23: The 2023 Kidney Tumor Segmentation Challenge",
-		"locator": "Dataset and licence sections",
-		"accessedOn": "2026-09-19"
+		"locator": "Introduction, timeline, The Data, annotation process and evaluation; release-specific claims reviewed 7 October 2026",
+		"accessedOn": "2026-10-07"
 	},
 	{
 		"id": "kits23-readme",
 		"url": "https://github.com/neheller/kits23",
 		"title": "kits23 repository README",
-		"locator": "Data download and licence sections",
-		"accessedOn": "2026-09-19"
+		"locator": "Dataset version, installation, imaging download, metrics, licence and citation instructions",
+		"accessedOn": "2026-10-07"
 	},
 	{
 		"id": "kits23-labels",
 		"url": "https://raw.githubusercontent.com/neheller/kits23/main/kits23/configuration/labels.py",
 		"title": "kits23 label configuration (labels.py)",
 		"locator": "KITS_LABEL_NAMES",
-		"accessedOn": "2026-09-19"
+		"accessedOn": "2026-10-07"
 	},
 	{
 		"id": "kits23-case-listing",

@@ -2,7 +2,7 @@ id: kits23
 dataset: kits
 versionLabel: KiTS23
 current: true
-releaseDate: null
+releaseDate: 2023-04-14
 counts:
   patients:
     value: 489
@@ -31,10 +31,9 @@ counts:
 modalities:
   - ct
 cohort: >-
-  Patients who underwent partial or radical nephrectomy for suspected renal malignancy, with
-  pre-operative CT available. The KiTS21 publication describes the training cohort as
-  University of Minnesota patients treated between January 2011 and June 2019, with the test
-  set contributed by the Cleveland Clinic.
+  Patients treated for suspected renal malignancy by cryoablation, partial nephrectomy or
+  radical nephrectomy at M Health Fairview medical centers between 2010 and 2022. The
+  selected scan is the most recent contrast-enhanced preoperative CT covering all kidneys.
 tasks:
   - segmentation
 annotations:
@@ -45,7 +44,9 @@ annotationProvenance:
     Trainees (residents, medical students and pre-medical undergraduates, trained by the experts)
     placed 3D bounding boxes and then 2D contours around each region, consulting experts when in
     doubt; the contours were post-processed into segmentations and reviewed by trainees. Unlike
-    KiTS21, each region was annotated once. Experts (attending radiologists, urologic oncologists
+    KiTS21, the KiTS23 process delineates each region once. This describes the newer annotation
+    procedure, not a claim that all inherited cases have only one annotation.
+    Experts (attending radiologists, urologic oncologists
     and fellows) reviewed cases where a baseline nnU-Net disagreed with the labels.
   evidence:
     sources: [kits23-challenge-page]
@@ -65,10 +66,21 @@ features:
       status: verified
       verifiedOn: 2026-09-19
   clinicalData:
-    status: not_documented
-    note: No clinical table for the KiTS23 release was located in the repository or on the challenge page. Earlier KiTS editions released clinical context; that was not verified for this release.
+    status: present
+    note: Case-level metadata are provided in dataset/kits23.json. The file has 40 top-level fields including demographics, surgery, pathology, renal function and outcomes; descriptions adapted from the supplied KiTS21 dictionary remain subject to semantic review.
+    evidence:
+      sources: [kits23-clinical-metadata]
+      locator: Top-level field names in dataset/kits23.json
+      status: verified
+      verifiedOn: 2026-10-07
   followUp:
-    status: not_documented
+    status: present
+    note: Metadata include vital_status, vital_days_after_surgery and postoperative eGFR measurements. This does not imply complete follow-up or released free-text reports.
+    evidence:
+      sources: [kits23-clinical-metadata]
+      locator: Vital-status and postoperative eGFR field names
+      status: verified
+      verifiedOn: 2026-10-07
 access:
   mode: direct_open_download
   registrationVisible: false
@@ -88,7 +100,8 @@ license:
   conditions: >-
     Attribution, non-commercial use, and share-alike: anything derived from the images,
     including preview pictures on a site like this one, must carry the same licence. The
-    repository code is separately licensed under MIT.
+    repository code is separately licensed under MIT. The README directs commercial-use
+    enquiries to Nicholas Heller; this catalogue does not grant commercial permission.
 deidentification:
   statement: >-
     The KiTS21 publication documents institutional review board approval (University of
@@ -110,11 +123,108 @@ dictionary:
   completeness: partial
   inspectedScope: >-
     The label configuration file in the dataset repository (kits23/configuration/labels.py) and
-    the challenge page. The imaging itself was not downloaded, and no clinical table was located.
+    the challenge page. Added clinical metadata descriptions are adapted from the user-supplied
+    KiTS21 data dictionary. Their definitions, coding and missing-value semantics have not been
+    fully cross-referenced against KiTS23 metadata. Field names and observed encodings were
+    checked in dataset/kits23.json, which contains 40 top-level fields across 489 records.
+    Missing-instance counts from KiTS21 were not
+    adopted as KiTS23 counts and are omitted. The imaging was not downloaded for this review.
 structure: >-
   Each case directory in the repository holds segmentation.nii.gz together with an instances
   directory of individual annotation instances; the imaging volume is fetched separately by the
-  download command. Cases are identified by a case number such as case_00000.
+  download command. Files are NIfTI (.nii.gz). The clinical file dataset/kits23.json joins
+  records to case directories through case_id. Public case identifiers span case_00000 to
+  case_00299 and case_00400 to case_00588; the absent 00300–00399 range is not evidence of an
+  incomplete public download. Background is label 0, kidney 1, tumor 2 and cyst 3.
+notes:
+  - title: Release and intended use
+    text: >-
+      KiTS23 is the MICCAI 2023 segmentation challenge release. The official repository lists
+      dataset version 0.1.4; its update from 0.1.3 changed a dependency only. That package
+      version is distinct from the KiTS23 challenge edition. The challenge is organized by
+      the University of Minnesota, DKFZ and Cleveland Clinic. The main task is 3D kidney,
+      tumor and cyst segmentation; radiomics and classification are possible research uses,
+      not additional segmentation labels or verified benchmarks in this record.
+    evidence:
+      sources: [kits23-readme, kits23-challenge-page]
+      locator: README version and timeline; challenge introduction and organizers
+      status: verified
+      verifiedOn: 2026-10-07
+  - title: Challenge splits and reused cases
+    text: >-
+      The challenge has 599 cases: 489 public training cases and 110 held-out test cases,
+      described as previously unused for a challenge. Only the public 489 are counted in
+      this catalogue. KiTS19 used case_00000–case_00209 for training and case_00210–case_00299
+      for testing. KiTS21 used case_00000–case_00299 for training. KNIGHT used those same 300
+      cases for training and case_00400–case_00499 for testing: 400 cases reused from the
+      KiTS23 public cohort, not 400 additional patients. Five-fold internal validation of
+      489 cases gives folds of 97 or 98 cases; this is a derived example, not an official
+      KiTS23 validation split, and it does not replace the held-out challenge test set.
+    evidence:
+      sources: [kits23-challenge-page]
+      locator: The Data; fold sizes calculated from 489 divided by five
+      status: verified
+      verifiedOn: 2026-10-07
+  - title: Annotation history and reference masks
+    text: >-
+      KiTS19 cases were re-annotated for KiTS21. KiTS21 used trainee localization and
+      expert-reviewed guidance, followed by three independent crowd delineations per ROI.
+      KiTS23's newer process omits guidance pins and crowd delineation: trainees contour
+      directly, with expert consultation and later review of cases where nnU-Net predictions
+      disagree with the labels. The number of cases receiving this additional review was
+      not established. The baseline model is used for quality control, not described as
+      generating the initial reference contours. Majority-vote aggregated_MAJ_seg.nii.gz is
+      documented in the KiTS21 repository; do not assume that filename exists in KiTS23,
+      whose aggregated mask is segmentation.nii.gz.
+    evidence:
+      sources: [kits21-reannotation-update, kits21-annotation-page, kits23-challenge-page, kits21-repo, kits-majority-vote-guidance]
+      locator: KiTS21 reannotation announcement; annotation processes; README layout; organizer forum replies
+      status: verified
+      verifiedOn: 2026-10-07
+  - title: Annotation coverage claimed in the research document
+    text: >-
+      The supplied document reports 599 manually annotated cases, with 300 using the
+      KiTS21-style three-delineation procedure and 299 using the KiTS23-style single
+      delineation per ROI, and reports no AI-generated initial masks. It also says the
+      first 300 KiTS23 cases retain KiTS21 annotations unchanged. These exact counts and
+      the unchanged-mask claim were not independently audited, so they are not entered
+      as verified annotation counts. The document describes expert revision, but the
+      published KiTS23 process specifies consultation on doubtful cases and additional
+      review where nnU-Net agreement is low, rather than proof of expert review of every mask.
+    evidence:
+      sources: [kits23-challenge-page, kits21-reannotation-update]
+      locator: User-supplied research document compared with official process descriptions
+      status: not_verified
+      verifiedOn: null
+  - title: Evaluation and historical benchmark
+    text: >-
+      The repository supplies official Dice and surface-Dice evaluation and ranking code,
+      including kits23_compute_metrics. Scores are evaluated over hierarchical combinations
+      of kidney, tumor and cyst labels. The Auto3DSeg paper reports first place in the 2023
+      challenge with average Dice 0.835 and surface Dice 0.723; these results are already
+      recorded under Papers and models. This is a historical challenge result, not a claim
+      of the best performance as of today.
+    evidence:
+      sources: [kits23-readme, kits23-winner-paper]
+      locator: README Using the Metrics; winner paper abstract
+      status: verified
+      verifiedOn: 2026-10-07
+  - title: Download and missingness research notes
+    text: >-
+      The research document notes that imaging.nii.gz can be missing after an interrupted
+      or incomplete download. Check each expected case for imaging and segmentation before
+      preprocessing; retry affected downloads or use the official Hugging Face imaging
+      source linked from the README. This review did not reproduce a downloader failure.
+      The document refers to KiTS23_MD_Null.csv for a null-value audit, but that file was not
+      supplied or checked. Complete metadata records do not mean every field has a value.
+      The document's approximate 95,221 slices and 30–40 GB download size have not been
+      verified against a named source or downloaded images. Its statement that no free-text
+      reports are released has not been independently established.
+    evidence:
+      sources: [kits23-readme, kits23-clinical-metadata]
+      locator: User-supplied research document; official download instructions and metadata structure
+      status: not_verified
+      verifiedOn: null
 citation: >-
   Heller N, Isensee F, Trofimova D, et al. The KiTS21 Challenge: Automatic segmentation of
   kidneys, renal tumors, and renal cysts in corticomedullary-phase CT. arXiv:2307.01984, 2023.
@@ -128,6 +238,7 @@ limitations:
   - The KiTS21 publication describes the training cohort as drawn largely from a single academic centre and predominantly Caucasian.
   - Scanners and protocols vary, because many scans came from referring institutions.
   - Six segmentation classes were originally planned; three were released after quality assurance.
+  - Tumor label 2 denotes a mass suspected of malignancy before treatment, not necessarily malignant renal cell carcinoma. Benign and malignant cases must be distinguished using appropriate clinical evidence.
 eligibility:
   publicAccess:
     status: pass
@@ -172,3 +283,9 @@ sources:
   - kits23-readme
   - kits21-paper
   - kits23-case-listing
+  - kits23-clinical-metadata
+  - kits23-winner-paper
+  - kits21-reannotation-update
+  - kits21-annotation-page
+  - kits21-repo
+  - kits-majority-vote-guidance

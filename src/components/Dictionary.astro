@@ -29,7 +29,7 @@ const levels = unique(variables.map((entry) => entry.observationLevel));
 
 	<p class="dictionary__completeness">
 		<strong>Completeness:</strong> {completenessLabel(dictionary.completeness)}.
-		<strong>Inspected:</strong> {dictionary.inspectedScope}
+		{' '}<strong>Inspected:</strong> {dictionary.inspectedScope}
 		{
 			dictionary.completeness !== 'complete_for_inspected_release' && (
 				<>

@@ -8,9 +8,18 @@
 		"type": "categorical",
 		"unit": null,
 		"coding": [
-			{ "code": "1", "meaning": "Kidney — parenchyma and non-adipose tissue within the hilum" },
-			{ "code": "2", "meaning": "Tumor — mass pre-operatively suspected of being malignant" },
-			{ "code": "3", "meaning": "Cyst — mass determined radiologically, or pathologically where available, to be a cyst" }
+			{
+				"code": "1",
+				"meaning": "Kidney — parenchyma and non-adipose tissue within the hilum"
+			},
+			{
+				"code": "2",
+				"meaning": "Tumor — mass pre-operatively suspected of being malignant"
+			},
+			{
+				"code": "3",
+				"meaning": "Cyst — mass determined radiologically, or pathologically where available, to be a cyst"
+			}
 		],
 		"missingValues": [],
 		"observationLevel": "slice",
@@ -21,7 +30,10 @@
 		"normalizedConcept": "segmentation class",
 		"provenance": "Class numbering from the repository's label configuration; class meanings from the challenge page.",
 		"evidence": {
-			"sources": ["kits23-labels", "kits23-challenge-page"],
+			"sources": [
+				"kits23-labels",
+				"kits23-challenge-page"
+			],
 			"locator": "KITS_LABEL_NAMES; dataset description",
 			"status": "verified",
 			"verifiedOn": "2026-09-19"
@@ -45,10 +57,1493 @@
 		"normalizedConcept": "case identifier",
 		"provenance": "Repository directory listing.",
 		"evidence": {
-			"sources": ["kits23-case-listing"],
+			"sources": [
+				"kits23-case-listing"
+			],
 			"locator": "dataset/case_00000",
 			"status": "verified",
 			"verifiedOn": "2026-09-19"
+		}
+	},
+	{
+		"id": "kits23-gender",
+		"release": "kits23",
+		"originalName": "gender",
+		"file": "dataset/kits23.json",
+		"definition": "Patient gender. Observed category encodings are listed below; the KiTS21-derived male/female list is not exhaustive for KiTS23.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "male",
+				"meaning": "male"
+			},
+			{
+				"code": "female",
+				"meaning": "female"
+			},
+			{
+				"code": "transgender_male_to_female",
+				"meaning": "transgender male to female"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: gender; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-vital-status",
+		"release": "kits23",
+		"originalName": "vital_status",
+		"file": "dataset/kits23.json",
+		"definition": "Vital status at the follow-up endpoint, described as Censored or Dead. Censoring does not establish current vital status.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "censored",
+				"meaning": "censored"
+			},
+			{
+				"code": "dead",
+				"meaning": "dead"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: vital_status; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-vital-days-after-surgery",
+		"release": "kits23",
+		"originalName": "vital_days_after_surgery",
+		"file": "dataset/kits23.json",
+		"definition": "Days after nephrectomy to the censoring date or death.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: vital_days_after_surgery; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-bmi",
+		"release": "kits23",
+		"originalName": "bmi",
+		"file": "dataset/kits23.json",
+		"definition": "Body mass index measured closest to the most recent imaging. Unit requires verification.",
+		"type": "decimal",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: bmi; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-comorbidities",
+		"release": "kits23",
+		"originalName": "comorbidities",
+		"file": "dataset/kits23.json",
+		"definition": "Object containing condition flags: myocardial_infarction, congestive_heart_failure, peripheral_vascular_disease, cerebrovascular_disease, dementia, copd, connective_tissue_disease, peptic_ulcer_disease, uncomplicated_diabetes_mellitus, diabetes_mellitus_with_end_organ_damage, chronic_kidney_disease, hemiplegia_from_stroke, leukemia, malignant_lymphoma, localized_solid_tumor, metastatic_solid_tumor, mild_liver_disease, moderate_to_severe_liver_disease, aids. KiTS23 separates leukemia and malignant_lymphoma; clinical definitions require review.",
+		"type": "other",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: comorbidities; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-age-at-nephrectomy",
+		"release": "kits23",
+		"originalName": "age_at_nephrectomy",
+		"file": "dataset/kits23.json",
+		"definition": "Patient age at nephrectomy for the renal tumor. Unit requires verification.",
+		"type": "integer",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: age_at_nephrectomy; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-hospitalization",
+		"release": "kits23",
+		"originalName": "hospitalization",
+		"file": "dataset/kits23.json",
+		"definition": "Days hospitalized after treatment, as described in the supplied earlier dictionary. Inspected KiTS23 values are numeric; died_before_discharge was not observed.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: hospitalization; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-er-visit",
+		"release": "kits23",
+		"originalName": "er_visit",
+		"file": "dataset/kits23.json",
+		"definition": "Whether the patient visited the ER within 24 hours after discharge without admission; null if undetermined.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: er_visit; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-readmission",
+		"release": "kits23",
+		"originalName": "readmission",
+		"file": "dataset/kits23.json",
+		"definition": "Whether the patient was readmitted within 90 days after nephrectomy; null if undetermined, including insufficient follow-up.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: readmission; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-surgery-type",
+		"release": "kits23",
+		"originalName": "surgery_type",
+		"file": "dataset/kits23.json",
+		"definition": "Recorded surgical technique. Categories observed in KiTS23 include percutaneous as well as robotic, open and laparoscopic.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "robotic",
+				"meaning": "robotic"
+			},
+			{
+				"code": "open",
+				"meaning": "open"
+			},
+			{
+				"code": "laparoscopic",
+				"meaning": "laparoscopic"
+			},
+			{
+				"code": "percutaneous",
+				"meaning": "percutaneous"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: surgery_type; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-surgical-approach",
+		"release": "kits23",
+		"originalName": "surgical_approach",
+		"file": "dataset/kits23.json",
+		"definition": "Recorded surgical approach. The meaning of trans_to_retro has not been verified from clinical documentation.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "transperitoneal",
+				"meaning": "transperitoneal"
+			},
+			{
+				"code": "retroperitoneal",
+				"meaning": "retroperitoneal"
+			},
+			{
+				"code": "trans_to_retro",
+				"meaning": "trans to retro"
+			}
+		],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: surgical_approach; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-surgical-procedure",
+		"release": "kits23",
+		"originalName": "surgical_procedure",
+		"file": "dataset/kits23.json",
+		"definition": "Recorded procedure. KiTS23 includes cryoablation and nephroureterectomy in addition to partial and radical nephrectomy.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "partial_nephrectomy",
+				"meaning": "partial nephrectomy"
+			},
+			{
+				"code": "radical_nephrectomy",
+				"meaning": "radical nephrectomy"
+			},
+			{
+				"code": "cryoablation",
+				"meaning": "cryoablation"
+			},
+			{
+				"code": "nephroureterectomy",
+				"meaning": "nephroureterectomy"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: surgical_procedure; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-estimated-blood-loss",
+		"release": "kits23",
+		"originalName": "estimated_blood_loss",
+		"file": "dataset/kits23.json",
+		"definition": "Estimated blood loss during surgery; null if undetermined.",
+		"type": "integer",
+		"unit": "mL",
+		"coding": [],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: estimated_blood_loss; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-clavien-surgical-complications",
+		"release": "kits23",
+		"originalName": "clavien_surgical_complications",
+		"file": "dataset/kits23.json",
+		"definition": "Recorded Clavien-Dindo grade; supplied values are 0, 1, 2, 3a, 3b, 4, 5. Coding and grading reference require verification.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "0",
+				"meaning": "0"
+			},
+			{
+				"code": "1",
+				"meaning": "1"
+			},
+			{
+				"code": "2",
+				"meaning": "2"
+			},
+			{
+				"code": "3a",
+				"meaning": "3a"
+			},
+			{
+				"code": "3b",
+				"meaning": "3b"
+			},
+			{
+				"code": "4",
+				"meaning": "4"
+			},
+			{
+				"code": "5",
+				"meaning": "5"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: clavien_surgical_complications; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-intraoperative-complications",
+		"release": "kits23",
+		"originalName": "intraoperative_complications",
+		"file": "dataset/kits23.json",
+		"definition": "Object containing Boolean flags for blood_transfusion, injury_to_surrounding_organ, cardiac_event.",
+		"type": "other",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: intraoperative_complications; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-ischemia-time",
+		"release": "kits23",
+		"originalName": "ischemia_time",
+		"file": "dataset/kits23.json",
+		"definition": "Duration of renal ischemia during treatment, described in minutes by the supplied dictionary. KiTS23 stores numbers or null, not the earlier not_applicable string. Null does not by itself distinguish inapplicable from unknown.",
+		"type": "integer",
+		"unit": "minutes",
+		"coding": [],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: ischemia_time; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-operative-time",
+		"release": "kits23",
+		"originalName": "operative_time",
+		"file": "dataset/kits23.json",
+		"definition": "Duration of nephrectomy; null if undetermined.",
+		"type": "integer",
+		"unit": "minutes",
+		"coding": [],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: operative_time; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-smoking-history",
+		"release": "kits23",
+		"originalName": "smoking_history",
+		"file": "dataset/kits23.json",
+		"definition": "Smoking history: never_smoked, previous_smoker, current_smoker.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "never_smoked",
+				"meaning": "never smoked"
+			},
+			{
+				"code": "previous_smoker",
+				"meaning": "previous smoker"
+			},
+			{
+				"code": "current_smoker",
+				"meaning": "current smoker"
+			},
+			{
+				"code": "not_found_in_emr",
+				"meaning": "not found in emr"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: smoking_history; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-age-when-quit-smoking",
+		"release": "kits23",
+		"originalName": "age_when_quit_smoking",
+		"file": "dataset/kits23.json",
+		"definition": "Age when smoking ceased, as described in the supplied earlier dictionary. KiTS23 stores numbers or null; no not_applicable string was observed. Age unit and null semantics require verification.",
+		"type": "integer",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: age_when_quit_smoking; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-pack-years",
+		"release": "kits23",
+		"originalName": "pack_years",
+		"file": "dataset/kits23.json",
+		"definition": "Estimated cigarette exposure in pack-years; null if unknown. Numeric type requires verification.",
+		"type": "decimal",
+		"unit": "pack-years",
+		"coding": [],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: pack_years; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-chewing-tobacco-use",
+		"release": "kits23",
+		"originalName": "chewing_tobacco_use",
+		"file": "dataset/kits23.json",
+		"definition": "Chewing-tobacco use: never_or_not_for_more_than3mo, quit_in_last_3mo, currently_chews.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "never_or_not_in_the_last_3_months",
+				"meaning": "never or not in the last 3 months"
+			},
+			{
+				"code": "quit_in_last_3_months",
+				"meaning": "quit in last 3 months"
+			},
+			{
+				"code": "current_chewing_tobacco_user",
+				"meaning": "current chewing tobacco user"
+			},
+			{
+				"code": "not_found_in_emr",
+				"meaning": "not found in emr"
+			}
+		],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: chewing_tobacco_use; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-alcohol-use",
+		"release": "kits23",
+		"originalName": "alcohol_use",
+		"file": "dataset/kits23.json",
+		"definition": "Alcohol use: never_or_not_in_last_3mo, two_or_less_daily, more_than_two_daily, quit_in_last_3mo. Quantity definition and reference time require verification.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "two_or_less_daily",
+				"meaning": "two or less daily"
+			},
+			{
+				"code": "never_or_not_in_the_last_3_months",
+				"meaning": "never or not in the last 3 months"
+			},
+			{
+				"code": "more_than_two_daily",
+				"meaning": "more than two daily"
+			},
+			{
+				"code": "quit_in_last_3_months",
+				"meaning": "quit in last 3 months"
+			},
+			{
+				"code": "not_found_in_emr",
+				"meaning": "not found in emr"
+			}
+		],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: alcohol_use; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-radiographic-size",
+		"release": "kits23",
+		"originalName": "radiographic_size",
+		"file": "dataset/kits23.json",
+		"definition": "Tumor size from the radiology report. Unit and measurement convention require verification.",
+		"type": "decimal",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: radiographic_size; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-cytoreductive",
+		"release": "kits23",
+		"originalName": "cytoreductive",
+		"file": "dataset/kits23.json",
+		"definition": "Whether nephrectomy was performed for debulking purposes.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: cytoreductive; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-pathologic-size",
+		"release": "kits23",
+		"originalName": "pathologic_size",
+		"file": "dataset/kits23.json",
+		"definition": "Tumor size from the surgical pathology report. Unit and measurement convention require verification.",
+		"type": "decimal",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: pathologic_size; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-malignant",
+		"release": "kits23",
+		"originalName": "malignant",
+		"file": "dataset/kits23.json",
+		"definition": "Whether surgical pathology classified the tumor as malignant.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: malignant; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-pathology-t-stage",
+		"release": "kits23",
+		"originalName": "pathology_t_stage",
+		"file": "dataset/kits23.json",
+		"definition": "Recorded pathologic T-stage code. Observed codes are listed below; clinical staging edition and interpretation require verification.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "1a",
+				"meaning": "1a"
+			},
+			{
+				"code": "1b",
+				"meaning": "1b"
+			},
+			{
+				"code": "2a",
+				"meaning": "2a"
+			},
+			{
+				"code": "2b",
+				"meaning": "2b"
+			},
+			{
+				"code": "3",
+				"meaning": "3"
+			},
+			{
+				"code": "4",
+				"meaning": "4"
+			},
+			{
+				"code": "na",
+				"meaning": "Observed code; interpretation not yet verified"
+			}
+		],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: pathology_t_stage; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-pathology-n-stage",
+		"release": "kits23",
+		"originalName": "pathology_n_stage",
+		"file": "dataset/kits23.json",
+		"definition": "Recorded pathologic N-stage code. Observed codes include x and na; their missingness or applicability meanings require verification.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "0",
+				"meaning": "0"
+			},
+			{
+				"code": "1",
+				"meaning": "1"
+			},
+			{
+				"code": "x",
+				"meaning": "Observed code; interpretation not yet verified"
+			},
+			{
+				"code": "na",
+				"meaning": "Observed code; interpretation not yet verified"
+			}
+		],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: pathology_n_stage; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-pathology-m-stage",
+		"release": "kits23",
+		"originalName": "pathology_m_stage",
+		"file": "dataset/kits23.json",
+		"definition": "Recorded pathologic M-stage code. Observed values are 0, 1, x and na; the T-stage categories copied into the supplied document do not describe this field.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "0",
+				"meaning": "0"
+			},
+			{
+				"code": "1",
+				"meaning": "1"
+			},
+			{
+				"code": "x",
+				"meaning": "Observed code; interpretation not yet verified"
+			},
+			{
+				"code": "na",
+				"meaning": "Observed code; interpretation not yet verified"
+			}
+		],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: pathology_m_stage; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-tumor-histologic-subtype",
+		"release": "kits23",
+		"originalName": "tumor_histologic_subtype",
+		"file": "dataset/kits23.json",
+		"definition": "Tumor histologic subtype recorded in case metadata. Observed encodings are listed below; meanings and handling of multiple tumors require clinical documentation.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "clear_cell_rcc",
+				"meaning": "clear cell rcc"
+			},
+			{
+				"code": "papillary_rcc",
+				"meaning": "papillary rcc"
+			},
+			{
+				"code": "chromophobe_rcc",
+				"meaning": "chromophobe rcc"
+			},
+			{
+				"code": "angiomyolipoma",
+				"meaning": "angiomyolipoma"
+			},
+			{
+				"code": "rcc_unclassified",
+				"meaning": "rcc unclassified"
+			},
+			{
+				"code": "oncocytoma",
+				"meaning": "oncocytoma"
+			},
+			{
+				"code": "spindle_cell_neoplasm",
+				"meaning": "spindle cell neoplasm"
+			},
+			{
+				"code": "mest",
+				"meaning": "mest"
+			},
+			{
+				"code": "clear_cell_papillary",
+				"meaning": "clear cell papillary"
+			},
+			{
+				"code": "wilms_tumor",
+				"meaning": "wilms tumor"
+			},
+			{
+				"code": "transitional_cell_carcinoma",
+				"meaning": "transitional cell carcinoma"
+			},
+			{
+				"code": "multilocular_cystic_rcc",
+				"meaning": "multilocular cystic rcc"
+			},
+			{
+				"code": "other",
+				"meaning": "other"
+			},
+			{
+				"code": "cyst",
+				"meaning": "cyst"
+			}
+		],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: tumor_histologic_subtype; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-tumor-necrosis",
+		"release": "kits23",
+		"originalName": "tumor_necrosis",
+		"file": "dataset/kits23.json",
+		"definition": "Whether necrotic tissue is present within the tumor; null if undetermined.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: tumor_necrosis; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-tumor-isup-grade",
+		"release": "kits23",
+		"originalName": "tumor_isup_grade",
+		"file": "dataset/kits23.json",
+		"definition": "Recorded WHO/ISUP tumor grade. KiTS23 encodes grades as strings and also uses na and null; these must not be treated as numeric zero.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "1",
+				"meaning": "1"
+			},
+			{
+				"code": "2",
+				"meaning": "2"
+			},
+			{
+				"code": "3",
+				"meaning": "3"
+			},
+			{
+				"code": "4",
+				"meaning": "4"
+			},
+			{
+				"code": "na",
+				"meaning": "Observed code; interpretation not yet verified"
+			}
+		],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: tumor_isup_grade; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-positive-resection-margins",
+		"release": "kits23",
+		"originalName": "positive_resection_margins",
+		"file": "dataset/kits23.json",
+		"definition": "Whether malignant tissue is present at the resection margin; true for positive and false for clear margins.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: positive_resection_margins; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-sarcomatoid-features",
+		"release": "kits23",
+		"originalName": "sarcomatoid_features",
+		"file": "dataset/kits23.json",
+		"definition": "Sarcomatoid-features flag, with true, false, or null. Null semantics require verification.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata"
+			],
+			"locator": "dataset/kits23.json: sarcomatoid_features; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-rhabdoid-features",
+		"release": "kits23",
+		"originalName": "rhabdoid_features",
+		"file": "dataset/kits23.json",
+		"definition": "Rhabdoid-features flag, with true, false, or null. Null semantics require verification.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata"
+			],
+			"locator": "dataset/kits23.json: rhabdoid_features; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-last-preop-egfr",
+		"release": "kits23",
+		"originalName": "last_preop_egfr",
+		"file": "dataset/kits23.json",
+		"definition": "Object for the most recent preoperative eGFR, with value and days_before_nephrectomy subfields. Missing measurements can be represented by null subfields within an object. Units and special-value interpretations require verification.",
+		"type": "other",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: last_preop_egfr; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-first-postop-egfr",
+		"release": "kits23",
+		"originalName": "first_postop_egfr",
+		"file": "dataset/kits23.json",
+		"definition": "Object for the first postoperative eGFR, with value and days_after_nephrectomy subfields. This corrects first_post_egfr and preoperative wording in the supplied document. Units and special-value interpretations require verification.",
+		"type": "other",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: first_postop_egfr; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-last-postop-egfr",
+		"release": "kits23",
+		"originalName": "last_postop_egfr",
+		"file": "dataset/kits23.json",
+		"definition": "Object for the most recent postoperative eGFR, with value and days_after_nephrectomy subfields. Null subfields may occur; the earlier days_before_nephrectomy wording does not match KiTS23. Units and special-value interpretations require verification.",
+		"type": "other",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits21-paper"
+			],
+			"locator": "dataset/kits23.json: last_postop_egfr; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-aua-risk-score",
+		"release": "kits23",
+		"originalName": "aua_risk_score",
+		"file": "dataset/kits23.json",
+		"definition": "AUA risk category: benign, low_risk, intermediate_risk, high_risk, very_high_risk, or null. Classification version and null semantics require verification.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "benign",
+				"meaning": "benign"
+			},
+			{
+				"code": "low_risk",
+				"meaning": "low risk"
+			},
+			{
+				"code": "intermediate_risk",
+				"meaning": "intermediate risk"
+			},
+			{
+				"code": "high_risk",
+				"meaning": "high risk"
+			},
+			{
+				"code": "very_high_risk",
+				"meaning": "very high risk"
+			}
+		],
+		"missingValues": [
+			"null"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"provenance": "Field name and storage encodings inspected in KiTS23 dataset/kits23.json. Semantic descriptions are adapted from the user-supplied KiTS21 dictionary, except the newer fields identified directly in metadata; equivalence of clinical definitions has not been verified. KiTS21 missing-instance counts are omitted.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata"
+			],
+			"locator": "dataset/kits23.json: aua_risk_score; user-supplied dictionary attributed to KiTS21 (exact definition reference pending)",
+			"status": "not_verified",
+			"verifiedOn": null,
+			"note": "Field presence and storage encodings checked; full semantic interpretation is not approved or independently verified."
+		}
+	},
+	{
+		"id": "kits23-metadata-case-id",
+		"release": "kits23",
+		"originalName": "case_id",
+		"file": "dataset/kits23.json",
+		"definition": "Case identifier linking clinical metadata to the corresponding case directory.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "identifier",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": "case identifier",
+		"provenance": "Observed metadata join key; the existing case_XXXXX directory-name entry remains unchanged.",
+		"evidence": {
+			"sources": [
+				"kits23-clinical-metadata",
+				"kits23-case-listing"
+			],
+			"locator": "case_id field and corresponding case directory name",
+			"status": "verified",
+			"verifiedOn": "2026-10-07"
 		}
 	}
 ]
