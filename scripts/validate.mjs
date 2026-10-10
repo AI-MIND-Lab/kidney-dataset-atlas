@@ -190,6 +190,19 @@ for (const record of studyUses) {
 	}
 }
 
+// A provider's term is quoted from one of the release's own sources, so a reader can find it there.
+for (const record of releases) {
+	for (const term of record.data.annotationTerms ?? []) {
+		reference(record, 'sources', term.source, `annotation term "${term.value}" source`);
+		if (!(record.data.sources ?? []).includes(term.source)) {
+			fail(
+				record.file,
+				`release "${record.data.id}" quotes annotation term "${term.value}" from source "${term.source}", which its sources do not list`,
+			);
+		}
+	}
+}
+
 /** Source ids can appear on a record or inside any evidence object. */
 function checkSources(record, value, path = '') {
 	if (!value || typeof value !== 'object') return;

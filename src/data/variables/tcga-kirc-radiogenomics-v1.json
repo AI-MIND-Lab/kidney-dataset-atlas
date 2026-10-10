@@ -1,0 +1,812 @@
+[
+	{
+		"id": "tcga-kirc-radiogenomics-v1-patient-barcode",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "(unnamed first column)",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "TCGA patient barcode, such as TCGA-B0-4698; the column has an empty header. One row per patient, 103 rows, all distinct.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "identifier",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": "patient identifier",
+		"provenance": "Joins each row to the TCGA-KIRC scans in The Cancer Imaging Archive and to the GDC case records.",
+		"evidence": {
+			"sources": [
+				"tcia-tcga-kirc-radiogenomics-csv",
+				"tcia-tcga-kirc-series"
+			],
+			"locator": "First column; every value matches a PatientID in the TCIA series list for TCGA-KIRC",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-bap1",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "BAP1",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "Whether the tumour carries a mutation in BAP1. The paper took mutation status for the six most commonly mutated genes of the TCGA KIRC cohort from cBioPortal; the counts match its Table 2.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "TRUE",
+				"meaning": "Mutated (5 of 103)"
+			},
+			{
+				"code": "FALSE",
+				"meaning": "Not mutated (98 of 103)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "other",
+		"derivation": "derived",
+		"normalizedConcept": "somatic mutation status",
+		"evidence": {
+			"sources": [
+				"shinagare-2015",
+				"tcia-tcga-kirc-radiogenomics-csv"
+			],
+			"locator": "Methods, Mutational status; Table 2",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-pbrm1",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "PBRM1",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "Whether the tumour carries a mutation in PBRM1. The paper took mutation status for the six most commonly mutated genes of the TCGA KIRC cohort from cBioPortal; the counts match its Table 2.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "TRUE",
+				"meaning": "Mutated (24 of 103)"
+			},
+			{
+				"code": "FALSE",
+				"meaning": "Not mutated (79 of 103)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "other",
+		"derivation": "derived",
+		"normalizedConcept": "somatic mutation status",
+		"evidence": {
+			"sources": [
+				"shinagare-2015",
+				"tcia-tcga-kirc-radiogenomics-csv"
+			],
+			"locator": "Methods, Mutational status; Table 2",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-vhl",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "VHL",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "Whether the tumour carries a mutation in VHL. The paper took mutation status for the six most commonly mutated genes of the TCGA KIRC cohort from cBioPortal; the counts match its Table 2.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "TRUE",
+				"meaning": "Mutated (52 of 103)"
+			},
+			{
+				"code": "FALSE",
+				"meaning": "Not mutated (51 of 103)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "other",
+		"derivation": "derived",
+		"normalizedConcept": "somatic mutation status",
+		"evidence": {
+			"sources": [
+				"shinagare-2015",
+				"tcia-tcga-kirc-radiogenomics-csv"
+			],
+			"locator": "Methods, Mutational status; Table 2",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-setd2",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "SETD2",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "Whether the tumour carries a mutation in SETD2. The paper took mutation status for the six most commonly mutated genes of the TCGA KIRC cohort from cBioPortal; the counts match its Table 2.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "TRUE",
+				"meaning": "Mutated (9 of 103)"
+			},
+			{
+				"code": "FALSE",
+				"meaning": "Not mutated (94 of 103)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "other",
+		"derivation": "derived",
+		"normalizedConcept": "somatic mutation status",
+		"evidence": {
+			"sources": [
+				"shinagare-2015",
+				"tcia-tcga-kirc-radiogenomics-csv"
+			],
+			"locator": "Methods, Mutational status; Table 2",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-kdm5c",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "KDM5C",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "Whether the tumour carries a mutation in KDM5C. The paper took mutation status for the six most commonly mutated genes of the TCGA KIRC cohort from cBioPortal; the counts match its Table 2.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "TRUE",
+				"meaning": "Mutated (6 of 103)"
+			},
+			{
+				"code": "FALSE",
+				"meaning": "Not mutated (97 of 103)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "other",
+		"derivation": "derived",
+		"normalizedConcept": "somatic mutation status",
+		"evidence": {
+			"sources": [
+				"shinagare-2015",
+				"tcia-tcga-kirc-radiogenomics-csv"
+			],
+			"locator": "Methods, Mutational status; Table 2",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-muc4",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "MUC4",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "Whether the tumour carries a mutation in MUC4. The paper took mutation status for the six most commonly mutated genes of the TCGA KIRC cohort from cBioPortal; the counts match its Table 2.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "TRUE",
+				"meaning": "Mutated (9 of 103)"
+			},
+			{
+				"code": "FALSE",
+				"meaning": "Not mutated (94 of 103)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "other",
+		"derivation": "derived",
+		"normalizedConcept": "somatic mutation status",
+		"evidence": {
+			"sources": [
+				"shinagare-2015",
+				"tcia-tcga-kirc-radiogenomics-csv"
+			],
+			"locator": "Methods, Mutational status; Table 2",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-daystolastfollowup",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "DaystoLastFollowup",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "Days to last follow-up, as the column name says. Not defined on the analysis-result page or in the paper. Neither gives the reference date, and the paper does not use it. Observed range 5 to 448, a value for all 103.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "other",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-tcga-kirc-radiogenomics-csv"
+			],
+			"locator": "DaystoLastFollowup column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-status",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "Status",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "Not defined on the analysis-result page or in the paper. TRUE or FALSE.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "TRUE",
+				"meaning": "(29 of 103)"
+			},
+			{
+				"code": "FALSE",
+				"meaning": "(74 of 103)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "other",
+		"group": "other",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-tcga-kirc-radiogenomics-csv"
+			],
+			"locator": "Status column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-age",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "Age",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "Patient age. Observed range 34 to 79, matching the paper's \"median age 59 years, range 34–79\"; the paper does not say at which date age was taken.",
+		"type": "integer",
+		"unit": "years",
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "age",
+		"evidence": {
+			"sources": [
+				"shinagare-2015",
+				"tcia-tcga-kirc-radiogenomics-csv"
+			],
+			"locator": "Abstract and Patient cohort",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-gender",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "Gender",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "Patient sex as coded in the file; the paper reports 77 men.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "MALE",
+				"meaning": "(77 of 103)"
+			},
+			{
+				"code": "FEMALE",
+				"meaning": "(26 of 103)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "sex",
+		"evidence": {
+			"sources": [
+				"shinagare-2015",
+				"tcia-tcga-kirc-radiogenomics-csv"
+			],
+			"locator": "Patient cohort",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-histgrade",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "HistGrade",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "Tumour grade code. The provider does not describe the grading system.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "G2",
+				"meaning": "(48 of 103)"
+			},
+			{
+				"code": "G3",
+				"meaning": "(39 of 103)"
+			},
+			{
+				"code": "G4",
+				"meaning": "(16 of 103)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "predictor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "tumour grade",
+		"evidence": {
+			"sources": [
+				"tcia-tcga-kirc-radiogenomics-csv"
+			],
+			"locator": "HistGrade column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-stage",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "Stage",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "Tumour stage. The provider does not say which staging system.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Stage I",
+				"meaning": "(60 of 103)"
+			},
+			{
+				"code": "Stage II",
+				"meaning": "(7 of 103)"
+			},
+			{
+				"code": "Stage III",
+				"meaning": "(26 of 103)"
+			},
+			{
+				"code": "Stage IV",
+				"meaning": "(10 of 103)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "tumour stage",
+		"evidence": {
+			"sources": [
+				"tcia-tcga-kirc-radiogenomics-csv"
+			],
+			"locator": "Stage column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-axislength",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "AxisLength",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "Tumour size. The paper records size as the maximum tumour dimension in the axial plane on nephrographic or excretory phase images and summarises the three readers by their median. Observed range 14.5 to 162.0, matching the paper's \"Median tumor size was 49 mm (range 14–162 mm)\".",
+		"type": "decimal",
+		"unit": "mm",
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "lesion",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "tumour size",
+		"evidence": {
+			"sources": [
+				"shinagare-2015",
+				"tcia-tcga-kirc-radiogenomics-csv"
+			],
+			"locator": "Image feature set development; Statistical analysis; Results",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-multipletumors",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "MultipleTumors",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "Not defined on the analysis-result page or in the paper.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "TRUE",
+				"meaning": "(4 of 103)"
+			},
+			{
+				"code": "FALSE",
+				"meaning": "(99 of 103)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "other",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-tcga-kirc-radiogenomics-csv"
+			],
+			"locator": "MultipleTumors column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-side",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "Side",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "Not defined on the analysis-result page or in the paper.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Right",
+				"meaning": "(57 of 103)"
+			},
+			{
+				"code": "Left",
+				"meaning": "(46 of 103)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "other",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-tcga-kirc-radiogenomics-csv"
+			],
+			"locator": "Side column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-numberlefttumors",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "NumberLeftTumors",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "Not defined on the analysis-result page or in the paper.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "1",
+				"meaning": "(6 of 10)"
+			},
+			{
+				"code": "2",
+				"meaning": "(2 of 10)"
+			},
+			{
+				"code": "3",
+				"meaning": "(1 of 10)"
+			},
+			{
+				"code": "> 3",
+				"meaning": "(1 of 10)"
+			}
+		],
+		"missingValues": [
+			"NA: no value (93 of 103)"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "other",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-tcga-kirc-radiogenomics-csv"
+			],
+			"locator": "NumberLeftTumors column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-numberrighttumors",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "NumberRightTumors",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "Not defined on the analysis-result page or in the paper.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "1",
+				"meaning": "(6 of 12)"
+			},
+			{
+				"code": "2",
+				"meaning": "(3 of 12)"
+			},
+			{
+				"code": "3",
+				"meaning": "(1 of 12)"
+			},
+			{
+				"code": "> 3",
+				"meaning": "(2 of 12)"
+			}
+		],
+		"missingValues": [
+			"NA: no value (91 of 103)"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "other",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-tcga-kirc-radiogenomics-csv"
+			],
+			"locator": "NumberRightTumors column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-welldefinedmargin",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "WellDefinedMargin",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "Tumour margin, well-defined if more than 90% of the tumour circumference was \"pencil-thin\" sharp on nephrographic or excretory phase images; the most common answer of the three readers. Counts match Table 1.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "TRUE",
+				"meaning": "Well-defined (73 of 103)"
+			},
+			{
+				"code": "FALSE",
+				"meaning": "Ill-defined (30 of 103)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "lesion",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "tumour margin",
+		"evidence": {
+			"sources": [
+				"shinagare-2015",
+				"tcia-tcga-kirc-radiogenomics-csv"
+			],
+			"locator": "Image feature set development; Statistical analysis; Table 1",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-solidcomposition",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "SolidComposition",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "Tumour composition: cystic when at least 50% of the tumour volume was cystic (fluid attenuation, 20 HU or less), otherwise solid; the most common answer of the three readers. Counts match Table 1.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "TRUE",
+				"meaning": "Solid (98 of 103)"
+			},
+			{
+				"code": "FALSE",
+				"meaning": "Cystic (5 of 103)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "lesion",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "tumour composition",
+		"evidence": {
+			"sources": [
+				"shinagare-2015",
+				"tcia-tcga-kirc-radiogenomics-csv"
+			],
+			"locator": "Image feature set development; Statistical analysis; Table 1",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-necrosis",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "Necrosis",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "Proportion of necrosis (hypodense, non-enhancing areas without sharp borders or walls), assessed in solid tumours on nephrographic or excretory phase images; the median of the three readers. Counts match Table 1.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "0% (no necrosis)",
+				"meaning": "(6 of 94)"
+			},
+			{
+				"code": "1-33% present",
+				"meaning": "(57 of 94)"
+			},
+			{
+				"code": "34-66% present",
+				"meaning": "(24 of 94)"
+			},
+			{
+				"code": "67-100% present",
+				"meaning": "(7 of 94)"
+			}
+		],
+		"missingValues": [
+			"NA: not assessed (9 of 103; Table 1 \"Missing\")"
+		],
+		"observationLevel": "lesion",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "tumour necrosis",
+		"evidence": {
+			"sources": [
+				"shinagare-2015",
+				"tcia-tcga-kirc-radiogenomics-csv"
+			],
+			"locator": "Image feature set development; Statistical analysis; Table 1",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-calcification",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "Calcification",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "Calcification in the tumour, scored as absent, present or indeterminate; the most common answer of the three readers. Counts match Table 1.",
+		"type": "boolean",
+		"unit": null,
+		"coding": [
+			{
+				"code": "TRUE",
+				"meaning": "Present (18 of 91)"
+			},
+			{
+				"code": "FALSE",
+				"meaning": "Absent (73 of 91)"
+			}
+		],
+		"missingValues": [
+			"NA: not evaluable (12 of 103; the paper says calcification \"was not considered evaluable in 12 cases\")"
+		],
+		"observationLevel": "lesion",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "tumour calcification",
+		"evidence": {
+			"sources": [
+				"shinagare-2015",
+				"tcia-tcga-kirc-radiogenomics-csv"
+			],
+			"locator": "Image feature set development; Results; Table 1",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-growthpattern",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"originalName": "GrowthPattern",
+		"file": "FullDataforAnalysis071714.csv",
+		"definition": "Growth pattern: entirely endophytic, less than 50% exophytic, or 50% or more exophytic; the median of the three readers. Counts match Table 1.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Entirely Endophytic",
+				"meaning": "(9 of 103)"
+			},
+			{
+				"code": "<50% exophytic",
+				"meaning": "(49 of 103)"
+			},
+			{
+				"code": ">= 50% exophytic",
+				"meaning": "(45 of 103)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "lesion",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "derived",
+		"normalizedConcept": "tumour growth pattern",
+		"evidence": {
+			"sources": [
+				"shinagare-2015",
+				"tcia-tcga-kirc-radiogenomics-csv"
+			],
+			"locator": "Image feature set development; Statistical analysis; Table 1",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	}
+]

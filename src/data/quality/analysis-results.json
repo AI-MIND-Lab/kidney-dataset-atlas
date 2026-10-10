@@ -1,0 +1,143 @@
+[
+	{
+		"id": "tcga-kirc-radiogenomics-text-and-table-1-differ",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"category": "observed_issue",
+		"description": "The paper's text and its Table 1 disagree on two features. The text says 95 tumours showed necrosis, 59 with 1–33%, 27 with 34–66% and nine with more than 66%, and that 46 had a more than 50% exophytic component; Table 1 gives 57, 24 and 7 (88 in all, with 6 without necrosis and 9 missing) and 45. The text also gives necrosis agreement as alpha 0.429, Table 1 as 0.651. The released table matches Table 1.",
+		"inspectedScope": "Paper Results and Table 1; the Necrosis and GrowthPattern columns of FullDataforAnalysis071714.csv.",
+		"affected": {
+			"value": null,
+			"status": "not_applicable",
+			"evidence": {
+				"sources": [
+					"shinagare-2015",
+					"tcia-tcga-kirc-radiogenomics-csv"
+				],
+				"locator": "Results, Imaging features and Inter-observer agreement; Table 1",
+				"status": "verified",
+				"verifiedOn": "2026-10-09",
+				"note": "Concerns how the paper reports two features, not individual patients."
+			}
+		},
+		"detection": "Counts from the released table compared with the paper's text and Table 1.",
+		"impact": "Figures quoted from the text do not match the data for necrosis and growth pattern.",
+		"handling": "Take counts from the released table or Table 1, and say so when citing the text.",
+		"sources": [
+			"shinagare-2015",
+			"tcia-tcga-kirc-radiogenomics-csv"
+		]
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-scored-scan-not-identified",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"category": "observed_issue",
+		"description": "The table does not say which study or series the readers scored. TCIA's image list for this result holds 738 series in 118 studies; 79 patients have only CT series in it, 14 only MR and 10 both, while the paper reports CT for 81 patients, MRI for 19 and both for 3.",
+		"inspectedScope": "The image manifest matched against the TCIA series list for TCGA-KIRC; paper, Patient cohort.",
+		"affected": {
+			"value": 10,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"tcia-tcga-kirc-radiogenomics-manifest",
+					"tcia-tcga-kirc-series",
+					"shinagare-2015"
+				],
+				"locator": "Modality of each listed series, per patient",
+				"status": "verified",
+				"verifiedOn": "2026-10-09",
+				"note": "Patients with both CT and MR series in the image list; 11 patients also have more than one study in it (one has six)."
+			}
+		},
+		"detection": "Series in the manifest looked up in the TCIA series list and grouped by patient and modality.",
+		"impact": "A model trained on image–feature pairs may pair a feature with a scan the readers did not score.",
+		"handling": "Choose one pre-surgical study per patient, state the rule used, and treat the pairing as approximate.",
+		"sources": [
+			"tcia-tcga-kirc-radiogenomics-manifest",
+			"tcia-tcga-kirc-series",
+			"shinagare-2015"
+		]
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-undefined-columns",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"category": "observed_issue",
+		"description": "Neither the page nor the paper defines Status, Side, MultipleTumors, NumberLeftTumors or NumberRightTumors, or gives the reference date of DaystoLastFollowup. The tumour columns do not agree with each other: MultipleTumors is TRUE for 4 patients, but the two count columns give two or more tumours for 8 patients marked FALSE.",
+		"inspectedScope": "All 23 columns of FullDataforAnalysis071714.csv; the analysis-result page and the paper.",
+		"affected": {
+			"value": 8,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"tcia-tcga-kirc-radiogenomics-csv"
+				],
+				"locator": "MultipleTumors, NumberLeftTumors and NumberRightTumors",
+				"status": "verified",
+				"verifiedOn": "2026-10-09",
+				"note": "Patients marked MultipleTumors FALSE whose left and right counts add to two or more (\"> 3\" counted as more than three)."
+			}
+		},
+		"detection": "Profiled the columns and compared them with the paper's feature set.",
+		"impact": "These columns cannot be used as labels without guessing their meaning.",
+		"handling": "Use only the features the paper defines; ask the provider before using the others.",
+		"sources": [
+			"tcia-tcga-kirc-radiogenomics-csv",
+			"shinagare-2015"
+		]
+	},
+	{
+		"id": "crowds-cure-2017-no-lesion-location",
+		"release": "crowds-cure-2017-v1",
+		"category": "published_report",
+		"description": "The 2017 application had no options for image quality, lesion location or lesion characteristics, \"requiring additional post-collection image review\". The anatomy column marks the source collection (Renal for every TCGA-KIRC row), not the measured lesion, so a measurement on a kidney-collection scan need not be of the kidney tumour. No result of the later review is part of this release.",
+		"inspectedScope": "Crowds-Cure-2018 summary; the anatomy column against the TCGA-KIRC patient list.",
+		"affected": {
+			"value": 1282,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"tcia-crowds-cure-2018",
+					"tcia-crowds-cure-2017-csv"
+				],
+				"locator": "Summary; rows with anatomy Renal",
+				"status": "verified",
+				"verifiedOn": "2026-10-09",
+				"note": "Every kidney measurement lacks a lesion location."
+			}
+		},
+		"detection": "Stated by the provider on the Crowds-Cure-2018 page; the anatomy values were checked against the collections.",
+		"impact": "Using the lines as kidney-tumour labels can include other lesions.",
+		"handling": "Check the measured slice before using a measurement as a kidney-tumour label.",
+		"sources": [
+			"tcia-crowds-cure-2018",
+			"tcia-crowds-cure-2017-csv"
+		]
+	},
+	{
+		"id": "crowds-cure-2017-report-count-differs",
+		"release": "crowds-cure-2017-v1",
+		"category": "observed_issue",
+		"description": "The structured-report ZIP holds 2,334 files for the 2,345 measurements in the CSV. 1,270 of the files name a TCGA-KIRC patient, against 1,282 kidney rows, so the two formats do not hold the same measurements.",
+		"inspectedScope": "File list of CrowdsCureCancer-dicomsrfiles_20180830.zip and the TCGA barcodes in each file; the CSV.",
+		"affected": {
+			"value": 12,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"tcia-crowds-cure-2017-sr",
+					"tcia-crowds-cure-2017-csv"
+				],
+				"locator": "File count and barcodes",
+				"status": "verified",
+				"verifiedOn": "2026-10-09",
+				"note": "Difference between kidney rows and report files that name a TCGA-KIRC patient."
+			}
+		},
+		"detection": "Counted the .dcm files and searched each for TCGA barcodes.",
+		"impact": "A pipeline that reads only the structured reports misses some measurements.",
+		"handling": "Use the CSV as the complete list of measurements.",
+		"sources": [
+			"tcia-crowds-cure-2017-sr",
+			"tcia-crowds-cure-2017-csv"
+		]
+	}
+]

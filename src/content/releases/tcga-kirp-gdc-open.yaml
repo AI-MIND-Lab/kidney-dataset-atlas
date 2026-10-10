@@ -21,7 +21,7 @@ counts:
       locator: Slide Image files, facets on experimental_strategy and access
       status: verified
       verifiedOn: 2026-09-20
-      note: Slide image files, not distinct physical slides — 1,654 tissue slides and 519 diagnostic slides, all open access.
+      note: Slide image files, not distinct physical slides — 474 tissue slides and 299 diagnostic slides, all open access.
   examinations:
     value: null
     status: not_applicable
@@ -47,6 +47,25 @@ tasks:
 annotations:
   - pathology_labels
   - outcome_labels
+annotationTerms:
+  - value: Clinical
+    source: gdc-kirp-summary
+    locator: Project summary, data_category in data_categories
+  - value: Diagnosis
+    source: gdc-data-dictionary
+    locator: diagnosis entity, title
+  - value: primary_diagnosis
+    source: gdc-data-dictionary
+    locator: diagnosis entity, property name
+  - value: ajcc_pathologic_stage
+    source: gdc-data-dictionary
+    locator: diagnosis entity, property name
+  - value: vital_status
+    source: gdc-data-dictionary
+    locator: demographic entity, property name
+  - value: Follow-Up
+    source: gdc-data-dictionary
+    locator: follow_up entity, title
 annotationProvenance:
   kind: not_documented
   note: >-
@@ -73,11 +92,11 @@ features:
       verifiedOn: 2026-09-20
   followUp:
     status: present
-    note: Follow-up records with days_to_follow_up are returned for sampled cases of this project; the number per case varies and some entries are null.
+    note: Follow-up records with a days_to_follow_up value are returned for 290 of the 291 cases; the number of follow-ups varies per case.
     evidence:
-      sources: [gdc-kirp-case-fields]
+      sources: [gdc-kirp-case-records]
       status: verified
-      verifiedOn: 2026-09-21
+      verifiedOn: 2026-10-09
 access:
   mode: direct_open_download
   registrationVisible: false

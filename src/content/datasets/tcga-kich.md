@@ -27,5 +27,5 @@ property of the cohorts rather than of any method applied to them.
 
 **Radiology is a second release.** The Cancer Imaging Archive holds imaging for 15 of the 113
 cases (12 with CT), identified by the same TCGA barcodes, so it joins to the slides and
-clinical records here. The archive distributes images only; RCC-AID, catalogued as its own
-dataset, adds kidney, tumour and cyst masks for 18 of these CT scans.
+clinical records here. The archive distributes images, with a copy of the TCGA clinical spreadsheets, but no
+masks; RCC-AID, catalogued as its own dataset, adds kidney, tumour and cyst masks for 18 of these CT scans.

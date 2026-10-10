@@ -25,6 +25,10 @@ tasks:
   - segmentation
 annotations:
   - segmentation_masks
+annotationTerms:
+  - value: Synthetic lesion outlines
+    source: fixture-source-1
+    locator: Fixture section 2
 features:
   wsi:
     status: absent

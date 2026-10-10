@@ -88,5 +88,155 @@
 			"status": "verified",
 			"verifiedOn": "2026-09-26"
 		}
+	},
+	{
+		"id": "tcga-kirc-tcia-radiogenomics-overlap",
+		"releases": [
+			"tcga-kirc-tcia",
+			"tcga-kirc-radiogenomics-v1"
+		],
+		"type": "superset",
+		"count": {
+			"value": 103,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"tcia-tcga-kirc-radiogenomics-csv",
+					"tcia-tcga-kirc-series"
+				],
+				"locator": "CSV barcodes matched against TCIA PatientID",
+				"status": "verified",
+				"verifiedOn": "2026-10-09"
+			}
+		},
+		"explanation": "All 103 patients of TCGA-KIRC-Radiogenomics are TCGA-KIRC imaging patients; the table describes their scans and adds no patients.",
+		"evidence": {
+			"sources": [
+				"tcia-tcga-kirc-radiogenomics-csv",
+				"tcia-tcga-kirc-series"
+			],
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "tcga-kirc-tcia-crowds-cure-2017-overlap",
+		"releases": [
+			"tcga-kirc-tcia",
+			"crowds-cure-2017-v1"
+		],
+		"type": "superset",
+		"count": {
+			"value": 159,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"tcia-crowds-cure-2017-csv",
+					"tcia-tcga-kirc-series"
+				],
+				"locator": "patientID of kidney rows matched against TCIA PatientID",
+				"status": "verified",
+				"verifiedOn": "2026-10-09"
+			}
+		},
+		"explanation": "All 159 patients of the kidney part of Crowds-Cure-2017 are TCGA-KIRC imaging patients, measured on 237 of the collection's series.",
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-csv",
+				"tcia-tcga-kirc-series"
+			],
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "radiogenomics-crowds-cure-2017-overlap",
+		"releases": [
+			"tcga-kirc-radiogenomics-v1",
+			"crowds-cure-2017-v1"
+		],
+		"type": "partial_cohort",
+		"count": {
+			"value": 84,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"tcia-tcga-kirc-radiogenomics-csv",
+					"tcia-crowds-cure-2017-csv"
+				],
+				"locator": "Barcodes common to both files",
+				"status": "verified",
+				"verifiedOn": "2026-10-09"
+			}
+		},
+		"explanation": "84 patients have both radiologist-scored features and crowd measurements; together the two sets cover 178 distinct TCGA-KIRC patients, not 262.",
+		"evidence": {
+			"sources": [
+				"tcia-tcga-kirc-radiogenomics-csv",
+				"tcia-crowds-cure-2017-csv"
+			],
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "radiogenomics-rcc-aid-overlap",
+		"releases": [
+			"tcga-kirc-radiogenomics-v1",
+			"rcc-aid-v2"
+		],
+		"type": "partial_cohort",
+		"count": {
+			"value": 27,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"tcia-tcga-kirc-radiogenomics-csv",
+					"rcc-aid-zenodo"
+				],
+				"locator": "Barcodes common to the CSV and RCC-AID metadata.csv (Collection TCGA-KIRC)",
+				"status": "verified",
+				"verifiedOn": "2026-10-09"
+			}
+		},
+		"explanation": "27 of the 65 TCGA-KIRC patients in RCC-AID also have radiologist-scored features in TCGA-KIRC-Radiogenomics.",
+		"evidence": {
+			"sources": [
+				"tcia-tcga-kirc-radiogenomics-csv",
+				"rcc-aid-zenodo"
+			],
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-rcc-aid-overlap",
+		"releases": [
+			"crowds-cure-2017-v1",
+			"rcc-aid-v2"
+		],
+		"type": "partial_cohort",
+		"count": {
+			"value": 51,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"tcia-crowds-cure-2017-csv",
+					"rcc-aid-zenodo"
+				],
+				"locator": "Barcodes common to the kidney rows and RCC-AID metadata.csv (Collection TCGA-KIRC)",
+				"status": "verified",
+				"verifiedOn": "2026-10-09"
+			}
+		},
+		"explanation": "51 of the 65 TCGA-KIRC patients in RCC-AID also have Crowds-Cure-2017 measurements.",
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-csv",
+				"rcc-aid-zenodo"
+			],
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
 	}
 ]

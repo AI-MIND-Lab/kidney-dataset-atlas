@@ -57,11 +57,11 @@ annotationProvenance:
   note: >-
     The collection holds images only. RCC-AID, catalogued as its own dataset, adds
     student-corrected kidney, tumour and cyst masks for 26 CT scans from this collection. BAMF's
-    AIMI annotation record (version 2.x) also lists this collection among its sources; those
-    masks are AI output, a small part of it corrected by a radiologist.
+    AIMI annotation record (version 2.x) adds AI masks for 18 scans of 11 patients from this
+    collection; a radiologist scored 1 of them, and the rest are uncorrected AI output.
   evidence:
     sources: [rcc-aid-paper, bamf-aimi-zenodo]
-    locator: RCC-AID Table 2; BAMF Zenodo record, related identifiers (derived from doi:10.7937/K9/TCIA.2016.ACWOGBEF)
+    locator: RCC-AID Table 2; BAMF Zenodo record v2.0.2, kidney-ct.zip, qa-results.csv (Collection tcga_kirp)
     status: verified
     verifiedOn: 2026-09-26
 features:
@@ -79,20 +79,31 @@ features:
       status: verified
       verifiedOn: 2026-09-26
   clinicalData:
-    status: absent
-    note: The archive states that clinical and genomic data are held in the GDC, not in this collection. They join by TCGA barcode.
+    status: present
+    note: >-
+      The collection page offers TCGA clinical spreadsheets taken from the GDC (TCGA-KIRP-Clinical-Data.zip);
+      its patient file covers 31 of the 33 imaging patients. The full, current clinical records are the GDC's, joined by
+      TCGA barcode.
     evidence:
       sources: [tcia-tcga-kirp]
+      locator: Collection page, Detailed Description ("Below is a snapshot of clinical data…") and Version note; TCGA-KIRP-Clinical-Data.zip, clinical_patient file
       status: verified
-      verifiedOn: 2026-09-26
+      verifiedOn: 2026-10-09
   followUp:
-    status: absent
-    note: Follow-up is in the GDC clinical records, not in this collection.
+    status: present
+    note: >-
+      The clinical spreadsheets on the collection page include a follow-up file covering 25 of the 33 imaging patients;
+      the GDC's follow-up records are more complete.
+    evidence:
+      sources: [tcia-tcga-kirp]
+      locator: TCGA-KIRP-Clinical-Data.zip, clinical_follow_up file
+      status: verified
+      verifiedOn: 2026-10-09
 access:
   mode: direct_open_download
   registrationVisible: false
   instructions: >-
-    Download from the collection page with the NBIA Data Retriever, or query the TCIA API. The
+    Download from the collection page with the TCIA Data Retriever, or query the TCIA API. The
     images are also mirrored in NCI's Imaging Data Commons.
   evidence:
     sources: [tcia-tcga-kirp]

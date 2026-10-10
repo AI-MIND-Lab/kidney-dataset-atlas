@@ -31,7 +31,13 @@ the 537 cases (237 with CT). Its patient identifiers are the same TCGA barcodes,
 imaging patient matches a case in the GDC release, so imaging joins to slides and clinical
 records by barcode. The imaging patients are a subset of the GDC cases, not extra ones.
 
-The archive distributes images only. Masks for some of the CT scans come from two separate
-sources: BAMF's AI-generated kidney, tumour and cyst masks under the AIMI Annotations
+The archive distributes images, with a copy of the TCGA clinical spreadsheets; it holds no masks.
+Masks for some of the CT scans come from two separate sources: BAMF's AI-generated kidney, tumour and cyst masks under the AIMI Annotations
 initiative (156 scans, 39 of them scored by a radiologist), and RCC-AID, catalogued as its own
 dataset, whose student-corrected masks cover 85 scans.
+
+Two analysis results listed on the archive's collection page are also catalogued as their own
+datasets: TCGA-KIRC-Radiogenomics, with imaging features scored by three radiologists and
+mutation status for 103 patients, and Crowds-Cure-2017, with single-line lesion measurements
+drawn at RSNA 2017 on scans of 159 patients. Both describe these patients' scans and add no
+new patients.

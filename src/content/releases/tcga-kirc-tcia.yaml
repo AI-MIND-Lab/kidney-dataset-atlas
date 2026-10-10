@@ -55,16 +55,19 @@ annotations: []
 annotationProvenance:
   kind: none
   note: >-
-    The collection holds images only. Two separately published annotation sets cover part of
-    it: BAMF's AI-generated kidney, tumour and cyst masks for 156 contrast-enhanced CT scans,
+    The collection holds images only. Its page lists two analysis results built on it, each
+    catalogued as its own dataset: TCGA-KIRC-Radiogenomics (imaging features scored by three
+    radiologists, with mutation status, for 103 patients) and Crowds-Cure-2017 (1,282
+    single-line lesion measurements by RSNA 2017 attendees on scans of 159 patients). Two
+    separately published mask sets cover part of it: BAMF's AI-generated kidney, tumour and cyst masks for 156 contrast-enhanced CT scans,
     39 of them scored by a radiologist and corrected where needed (Murugesan et al. 2024, CC BY 4.0), and
     RCC-AID's student-corrected masks for 85 CT scans, catalogued as its own dataset. Neither is
     merged into this release.
   evidence:
-    sources: [tcia-tcga-kirc, bamf-aimi-paper, rcc-aid-paper]
-    locator: TCIA analysis-results listing; BAMF paper, CT kidneys, tumors and cysts annotation; RCC-AID Table 2
+    sources: [tcia-tcga-kirc, tcia-tcga-kirc-radiogenomics, tcia-crowds-cure-2017-csv, bamf-aimi-paper, rcc-aid-paper]
+    locator: Collection page, Analysis Results and External Resources; the two analysis-result pages and the Crowds-Cure-2017 measurements file; BAMF paper, CT kidneys, tumors and cysts annotation; RCC-AID Table 2
     status: verified
-    verifiedOn: 2026-09-26
+    verifiedOn: 2026-10-09
 features:
   wsi:
     status: not_applicable
@@ -81,20 +84,31 @@ features:
       status: verified
       verifiedOn: 2026-09-26
   clinicalData:
-    status: absent
-    note: The archive states that clinical and genomic data are held in the GDC, not in this collection. They join by TCGA barcode.
+    status: present
+    note: >-
+      The collection page offers TCGA clinical spreadsheets taken from the GDC (TCGA-KIRC-Clinical-Data.zip);
+      its patient file covers 264 of the 267 imaging patients. The full, current clinical records are the GDC's, joined by
+      TCGA barcode.
     evidence:
       sources: [tcia-tcga-kirc]
+      locator: Collection page, Detailed Description ("Below is a snapshot of clinical data…") and Version note; TCGA-KIRC-Clinical-Data.zip, clinical_patient file
       status: verified
-      verifiedOn: 2026-09-26
+      verifiedOn: 2026-10-09
   followUp:
-    status: absent
-    note: Follow-up is in the GDC clinical records, not in this collection.
+    status: present
+    note: >-
+      The clinical spreadsheets on the collection page include a follow-up file covering 261 of the 267 imaging patients;
+      the GDC's follow-up records are more complete.
+    evidence:
+      sources: [tcia-tcga-kirc]
+      locator: TCGA-KIRC-Clinical-Data.zip, clinical_follow_up file
+      status: verified
+      verifiedOn: 2026-10-09
 access:
   mode: direct_open_download
   registrationVisible: false
   instructions: >-
-    Download from the collection page with the NBIA Data Retriever, or query the TCIA API. The
+    Download from the collection page with the TCIA Data Retriever, or query the TCIA API. The
     images are also mirrored in NCI's Imaging Data Commons.
   evidence:
     sources: [tcia-tcga-kirc]
@@ -108,8 +122,9 @@ license:
     The Cancer Imaging Archive. The series list gives the same licence for every series.
 deidentification:
   statement: >-
-    The collection page describes the images as de-identified, with DICOM dates offset by 3 to
-    10 years so that intervals between studies are kept.
+    The Cancer Imaging Archive describes itself as "a service which de-identifies and hosts" cancer
+    images, and the collection page states that DICOM dates are offset by 3 to 10 years so that
+    intervals between studies are kept, "while still meeting HIPAA requirements".
   status: present
   evidence:
     sources: [tcia-tcga-kirc]

@@ -145,6 +145,8 @@ export const ANNOTATION_PROVENANCE = [
 export const ANNOTATIONS = [
 	'segmentation_masks',
 	'bounding_boxes',
+	// Lines drawn across a lesion to record its length.
+	'lesion_measurements',
 	'classification_labels',
 	'pathology_labels',
 	'outcome_labels',
@@ -185,6 +187,14 @@ export const release = z.object({
 	tasks: z.array(z.enum(TASKS)).default([]),
 	/** What is labelled, as documented by the provider. Empty means not documented. */
 	annotations: z.array(z.enum(ANNOTATIONS)).default([]),
+	/**
+	 * The provider's own words for those labels, copied exactly, each with the source and the place in it. The
+	 * categories above group the same kind of label across providers for filtering and comparison; these terms show
+	 * what the provider actually wrote. Empty means not yet recorded.
+	 */
+	annotationTerms: z
+		.array(z.object({ value: z.string().min(1), source: z.string(), locator: z.string() }))
+		.default([]),
 	/** Who produced those labels: an expert, a crowd, or a model. */
 	annotationProvenance: z
 		.object({

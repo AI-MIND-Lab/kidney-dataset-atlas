@@ -1,0 +1,241 @@
+id: crowds-cure-2017-v1
+dataset: crowds-cure-2017
+versionLabel: Version 1 (TCIA, updated 2018-05-17)
+current: true
+releaseDate: 2018-05-17
+doi: 10.7937/K9/TCIA.2018.OW73VLO2
+counts:
+  patients:
+    value: 159
+    status: present
+    evidence:
+      sources: [tcia-crowds-cure-2017-csv, tcia-crowds-cure-2017-clinical, tcia-crowds-cure-2017]
+      locator: Distinct patientID among rows with anatomy Renal; project_id TCGA-KIRC in the clinical snapshot; page snapshot ("Subjects 352")
+      status: verified
+      verifiedOn: 2026-10-09
+      note: >-
+        TCGA-KIRC patients only. The whole release has 352 subjects in four collections: TCGA-KIRC
+        159, TCGA-OV 93, TCGA-LUAD 56 and TCGA-LIHC 44.
+  examinations:
+    value: 159
+    status: present
+    evidence:
+      sources: [tcia-crowds-cure-2017-csv]
+      locator: Distinct StudyInstanceUID among rows with anatomy Renal
+      status: verified
+      verifiedOn: 2026-10-09
+      note: One CT study per patient, with measurements on 237 series of those studies.
+  slices:
+    value: 762
+    status: present
+    evidence:
+      sources: [tcia-crowds-cure-2017-csv]
+      locator: Distinct instanceUID among rows with anatomy Renal
+      status: verified
+      verifiedOn: 2026-10-09
+      note: CT images (slices) carrying at least one measurement.
+  lesions:
+    value: null
+    status: not_documented
+    evidence:
+      sources: [tcia-crowds-cure-2018]
+      locator: Summary, on the 2017 application
+      status: verified
+      verifiedOn: 2026-10-09
+      note: The file does not identify lesions, and several people measured each patient, so the number of distinct lesions is unknown.
+  records:
+    value: 1282
+    status: present
+    evidence:
+      sources: [tcia-crowds-cure-2017-csv, tcia-crowds-cure-2018]
+      locator: Rows with anatomy Renal; Crowds-Cure-2018 summary ("2345 uni-dimensional measurements in 2017")
+      status: verified
+      verifiedOn: 2026-10-09
+      note: Measurements on TCGA-KIRC scans, of the 2,345 in the release.
+  slides:
+    value: null
+    status: not_applicable
+modalities:
+  - ct
+  - clinical_table
+cohort: >-
+  CT scans of 159 TCGA-KIRC patients from The Cancer Imaging Archive, one study each, shown to
+  attendees of the RSNA 2017 annual meeting together with scans from TCGA-LUAD, TCGA-LIHC and
+  TCGA-OV. How the scans were chosen is not documented.
+tasks:
+  - detection
+annotations:
+  - lesion_measurements
+annotationTerms:
+  - value: Lesion measurements
+    source: tcia-crowds-cure-2017
+    locator: Analysis Result Snapshot table, in the column headed External Resources
+  - value: Image Annotations
+    source: tcia-crowds-cure-2017
+    locator: Data Access table, title of the CSV file
+  - value: Measurement
+    source: tcia-crowds-cure-2017
+    locator: Data Access table, data type of the CSV file
+  - value: a uni-dimensional measurement of the largest lesion
+    source: tcia-crowds-cure-2018
+    locator: Summary, describing the 2017 application
+annotationProvenance:
+  kind: crowd
+  note: >-
+    Attendees of the RSNA 2017 meeting, asked to make "a uni-dimensional measurement of the
+    largest lesion". Each row records whether its author was a radiologist: of the 1,282 kidney
+    measurements, 770 are by 41 people marked radiologist and 512 by 27 marked not radiologist.
+    The application had no option for image quality, lesion location or lesion
+    characteristics, which the provider says required "additional post-collection image
+    review"; no such review is part of this release.
+  evidence:
+    sources: [tcia-crowds-cure-2018, tcia-crowds-cure-2017-csv]
+    locator: Crowds-Cure-2018 summary; radiologist_status and annotator columns
+    status: verified
+    verifiedOn: 2026-10-09
+features:
+  wsi:
+    status: not_applicable
+    note: Slides for these patients are in the GDC open-access release of TCGA-KIRC, joined by barcode.
+  ctPhases:
+    status: not_documented
+    note: The files do not record a contrast phase, and the application recorded nothing about image quality or contrast.
+    evidence:
+      sources: [tcia-crowds-cure-2018]
+      locator: Summary, on the 2017 application
+      status: verified
+      verifiedOn: 2026-10-09
+  clinicalData:
+    status: present
+    note: >-
+      ccc2017clinical.csv, "a CSV dump" of the GDC clinical data, has one row for each of the 159
+      patients: sex, race, ethnicity, year of birth, diagnosis, morphology code, tumour stage and
+      age at diagnosis.
+    evidence:
+      sources: [tcia-crowds-cure-2017, tcia-crowds-cure-2017-clinical]
+      locator: Detailed description, clinical data note; clinical snapshot columns
+      status: verified
+      verifiedOn: 2026-10-09
+  followUp:
+    status: present
+    note: >-
+      The clinical snapshot gives vital status for all 159 patients (43 dead), days to death for
+      those 43 and days to last follow-up for 119. The GDC's current records are the fuller source.
+    evidence:
+      sources: [tcia-crowds-cure-2017-clinical]
+      locator: vital_status, days_to_death and days_to_last_follow_up columns
+      status: verified
+      verifiedOn: 2026-10-09
+access:
+  mode: direct_open_download
+  registrationVisible: false
+  instructions: >-
+    Download the measurements (CSV, 925 KB), the DICOM structured reports (ZIP, 3.7 MB) and the
+    clinical snapshot (CSV, 53 KB) from the analysis-result page without registration. The images
+    are TCGA-KIRC's: the page links a manifest of the 443 measured series, 237 of them TCGA-KIRC,
+    for the TCIA Data Retriever.
+  evidence:
+    sources: [tcia-crowds-cure-2017, tcia-crowds-cure-2017-manifest]
+    locator: Data access table and Collections used in this analysis result
+    status: verified
+    verifiedOn: 2026-10-09
+license:
+  name: CC BY 3.0
+  url: https://creativecommons.org/licenses/by/3.0/
+  conditions: >-
+    Users must follow the TCIA Data Usage Policy and Restrictions, and attribution must include
+    the data citation with its DOI.
+deidentification:
+  statement: >-
+    The Cancer Imaging Archive describes itself as "a service which de-identifies and hosts" cancer
+    images. Patients appear by TCGA barcode and annotators by nicknames such as misty_mandrill. The
+    measurement file repeats each study's DICOM StudyDate and StudyTime, which for TCGA-KIRC are
+    the collection's offset dates, and the clinical snapshot gives years of birth and death from
+    the GDC.
+  status: present
+  evidence:
+    sources: [tcia-crowds-cure-2017, tcia-crowds-cure-2017-csv, tcia-crowds-cure-2017-clinical, tcia-tcga-kirc]
+    locator: Page footer, About the Cancer Imaging Archive; CSV columns; TCGA-KIRC collection page, date-offset note
+    status: verified
+    verifiedOn: 2026-10-09
+pairing:
+  - kind: same_patient
+    modalities: [ct, pathology, clinical_table]
+    status: present
+    note: >-
+      Every kidney measurement names a TCGA-KIRC patient, study, series and image: all 159
+      patients and all 237 series appear in the TCIA series list for TCGA-KIRC. The barcode joins
+      the measurements to the GDC slides and clinical records.
+    evidence:
+      sources: [tcia-crowds-cure-2017-csv, tcia-tcga-kirc-series]
+      locator: patientID and seriesUID matched against the TCIA series list
+      status: verified
+      verifiedOn: 2026-10-09
+dictionary:
+  completeness: complete_for_inspected_release
+  inspectedScope: >-
+    CrowdsCureCancer2017Annotations.csv (all 20 columns; the 1,282 kidney rows profiled) and
+    ccc2017clinical.csv (all 17 columns; the 159 TCGA-KIRC rows profiled). The DICOM structured
+    reports were counted, not parsed, and no image was downloaded.
+structure: >-
+  CrowdsCureCancer2017Annotations.csv has one row per measurement: the patient (patientID, a TCGA
+  barcode); the study, series and image measured (StudyInstanceUID, seriesUID, instanceUID,
+  sliceIndex); the line's end points (start_x, start_y, end_x, end_y) and its length; the
+  annotator's nickname and radiologist_status; and when it was drawn (date, date_unix). anatomy
+  is Renal for exactly the TCGA-KIRC patients. The structured-report ZIP holds 2,334 files for
+  the 2,345 measurements. ccc2017clinical.csv has one GDC clinical row per patient, keyed by
+  Patient ID, with "--" for a missing value.
+citation: >-
+  Kalpathy-Cramer J, Beers A, Mamonov A, Ziegler E, Lewis R, Almeida AB, Harris G, Pieper S,
+  Sharma A, Tarbox L, Tobler J, Prior F, Flanders A, Dulkowski J, Fevrier-Sullivan B, Jaffe C,
+  Freymann J, Kirby J. (2019). Crowds Cure Cancer: Crowdsourced data collected at the RSNA 2017
+  annual meeting [Data set]. The Cancer Imaging Archive. doi:10.7937/K9/TCIA.2018.OW73VLO2
+limitations:
+  - Single lines on one slice, not masks or volumes; the units of the length and end-point columns are not stated.
+  - No lesion location was recorded, so a measurement need not be of the kidney tumour, and the provider's later image review is not released.
+  - Drawn by meeting attendees; 512 of the 1,282 kidney measurements are by people marked not radiologists, and the only documented instruction is to measure the largest lesion.
+  - Repeated measurements of the same patients (a median of 6, up to 18), and 74 patients have measurements on more than one series; splits must be made by patient.
+  - How the 159 patients were chosen is not documented, and the page lists no publication by the dataset's authors.
+  - Not independent of TCGA-KIRC; its counts must not be added to the collection's.
+eligibility:
+  publicAccess:
+    status: pass
+    note: The measurement, report and clinical files download from the analysis-result page without registration.
+    evidence:
+      sources: [tcia-crowds-cure-2017]
+      status: verified
+      verifiedOn: 2026-10-09
+  deidentification:
+    status: pass
+    note: The archive states that it de-identifies what it hosts; patients appear by TCGA barcode and the study dates are the collection's offset dates.
+    evidence:
+      sources: [tcia-crowds-cure-2017, tcia-tcga-kirc]
+      status: verified
+      verifiedOn: 2026-10-09
+  noPhiHosted:
+    status: pass
+    note: This record hosts descriptions only; no file is mirrored.
+  termsPermitUse:
+    status: pass
+    note: CC BY 3.0 permits reuse with attribution.
+    evidence:
+      sources: [tcia-crowds-cure-2017]
+      status: verified
+      verifiedOn: 2026-10-09
+  samplePermission:
+    status: pass
+    note: No preview images are shown for this release, so no per-image permission was needed.
+catalogStatus: draft
+verifiedOn: 2026-10-09
+researchedBy: agent
+approvedBy: null
+approvedOn: null
+sources:
+  - tcia-crowds-cure-2017
+  - tcia-crowds-cure-2017-csv
+  - tcia-crowds-cure-2017-clinical
+  - tcia-crowds-cure-2017-sr
+  - tcia-crowds-cure-2017-manifest
+  - tcia-crowds-cure-2018
+  - tcia-tcga-kirc-series
+  - tcia-tcga-kirc

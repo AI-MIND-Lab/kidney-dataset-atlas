@@ -61,5 +61,53 @@
 			"rcc-aid-paper",
 			"rcc-aid-code"
 		]
+	},
+	{
+		"id": "tcga-kirc-radiogenomics-v1-annotates-tcga-kirc-tcia",
+		"from": "tcga-kirc-radiogenomics-v1",
+		"to": "tcga-kirc-tcia",
+		"toExternal": null,
+		"type": "annotates",
+		"explanation": "TCGA-KIRC-Radiogenomics adds radiologist-scored imaging features and mutation status for 103 patients of this collection, read on their CT or MRI. It holds no images of its own; the patients are the same, not additional ones.",
+		"evidence": {
+			"sources": [
+				"tcia-tcga-kirc-radiogenomics",
+				"tcia-tcga-kirc-radiogenomics-csv",
+				"tcia-tcga-kirc-series",
+				"shinagare-2015"
+			],
+			"locator": "Analysis-result page, related collections; CSV barcodes matched to the TCIA series list; paper, Patient cohort",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		},
+		"sources": [
+			"tcia-tcga-kirc-radiogenomics",
+			"tcia-tcga-kirc-radiogenomics-csv",
+			"tcia-tcga-kirc-series",
+			"shinagare-2015"
+		]
+	},
+	{
+		"id": "crowds-cure-2017-v1-annotates-tcga-kirc-tcia",
+		"from": "crowds-cure-2017-v1",
+		"to": "tcga-kirc-tcia",
+		"toExternal": null,
+		"type": "annotates",
+		"explanation": "Crowds-Cure-2017 adds 1,282 single-line lesion measurements, drawn by RSNA 2017 attendees, on 237 CT series of 159 patients of this collection. It holds no images of its own; the patients are the same, not additional ones.",
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017",
+				"tcia-crowds-cure-2017-csv",
+				"tcia-tcga-kirc-series"
+			],
+			"locator": "Analysis-result page, related collections; patientID and seriesUID matched to the TCIA series list",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		},
+		"sources": [
+			"tcia-crowds-cure-2017",
+			"tcia-crowds-cure-2017-csv",
+			"tcia-tcga-kirc-series"
+		]
 	}
 ]
