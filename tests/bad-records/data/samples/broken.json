@@ -1,0 +1,17 @@
+[
+	{
+		"id": "bad-sample-unlisted-quote",
+		"release": "bad-release",
+		"kind": "dataset_sample",
+		"assets": [{ "path": "/previews/no-such-release/no-such-image.webp", "role": "image", "width": 100, "height": 100 }],
+		"caseId": "BAD-0001",
+		"mask": null,
+		"providerText": [
+			{ "field": "diagnosis", "value": "Invented", "source": "bad-source", "locator": "row 1", "generatedBy": null }
+		],
+		"alt": "Deliberately broken sample for tests/approval-gate.test.mjs: it quotes a source it does not list, and its image does not exist.",
+		"attribution": "Test record.",
+		"reuseTerms": "Test record.",
+		"sources": []
+	}
+]

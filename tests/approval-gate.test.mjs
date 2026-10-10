@@ -39,6 +39,12 @@ test('route, count, current-release, and study target invariants are enforced', 
 	assert.match(result.stderr, /release "bad-part-current" is a part of its dataset and cannot also be current/);
 });
 
+test('a preview quotes the provider only from a source it lists, and its image must exist', () => {
+	const result = runValidator('tests/bad-records/content', 'tests/bad-records/data');
+	assert.match(result.stderr, /sample "bad-sample-unlisted-quote" quotes diagnosis from source "bad-source", which its sources do not list/);
+	assert.match(result.stderr, /sample "bad-sample-unlisted-quote" points at missing file public\/previews\/no-such-release\/no-such-image\.webp/);
+});
+
 test('a reference to a missing record fails validation', () => {
 	const result = runValidator('tests/bad-records/content', 'tests/bad-records/data');
 	assert.match(result.stderr, /points at missing datasets record "no-such-dataset"/);

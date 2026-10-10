@@ -131,7 +131,18 @@
 				"height": 256
 			}
 		],
-		"caption": "Synthetic slice stack with an invented lesion mask, drawn to exercise the viewer.",
+		"caseId": "FX-0001",
+		"mask": "Invented lesion mask, drawn for this fixture",
+		"providerText": [
+			{
+				"field": "finding",
+				"value": "Invented lesion, synthetic.",
+				"source": "fixture-source-1",
+				"locator": "case FX-0001",
+				"generatedBy": "a fixture generator"
+			}
+		],
+		"viewGuide": "Synthetic slices of one invented scan; the mask is drawn on the same grid.",
 		"alt": "A drawing of a cross-section with a pale oval marked as a lesion.",
 		"attribution": "Drawn for this fixture; no dataset involved.",
 		"reuseTerms": "Synthetic drawing; no reuse terms apply.",
@@ -152,10 +163,26 @@
 				"role": "image",
 				"sliceIndex": null,
 				"width": 256,
-				"height": 256
+				"height": 256,
+				"large": {
+					"path": "/previews/fixtures/figure-large.svg",
+					"width": 512,
+					"height": 512
+				}
 			}
 		],
-		"caption": "A single synthetic figure, with no slice stack and no mask, so the viewer shows no controls.",
+		"caseId": "Figure 1",
+		"mask": null,
+		"providerText": [
+			{
+				"field": "caption",
+				"value": "A single synthetic figure, with no slice stack and no mask, so the viewer shows no controls.",
+				"source": "fixture-source-1",
+				"locator": "Figure 1",
+				"generatedBy": null
+			}
+		],
+		"viewGuide": "One synthetic figure.",
 		"alt": "A drawing of a cross-section, labelled as a figure.",
 		"attribution": "Drawn for this fixture.",
 		"reuseTerms": "Synthetic drawing; no reuse terms apply.",

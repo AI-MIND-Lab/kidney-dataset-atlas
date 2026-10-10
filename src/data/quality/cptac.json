@@ -1,0 +1,24 @@
+[
+	{
+		"id": "cptac-ccrcc-bamf-stray-regions",
+		"release": "cptac-ccrcc-v14",
+		"category": "potential_check",
+		"description": "Uncorrected BAMF masks can label small regions apart from the main tumour. In C3N-00313 the mask marks a small tumour region in the right kidney and a tiny cyst region inside the left-kidney tumour, besides that tumour. In C3N-02723 it marks small tumour fragments in the left kidney, away from the large right-kidney tumour. Whether these regions are real lesions is not documented.",
+		"inspectedScope": "The atlas previews of C3N-00313 and C3N-02723 (axial, zoomed axial, coronal and sagittal views through the centred label). Other cases were not inspected.",
+		"affected": {
+			"value": 2,
+			"status": "present",
+			"evidence": {
+				"sources": ["bamf-aimi-zenodo", "cptac-ccrcc-tcia"],
+				"locator": "BAMF segmentations of cases C3N-00313 and C3N-02723, drawn on their CT",
+				"status": "verified",
+				"verifiedOn": "2026-10-04",
+				"note": "Cases seen in previews; this is not a count across the release."
+			}
+		},
+		"detection": "Seen in the preview renderings of the BAMF mask on each case's CT.",
+		"impact": "A per-case lesion count or tumour volume taken from an uncorrected mask includes these regions.",
+		"handling": "Check small separate regions in uncorrected BAMF masks before counting lesions or measuring volumes; use the radiologist-corrected masks where they exist.",
+		"sources": ["bamf-aimi-zenodo", "bamf-aimi-paper", "cptac-ccrcc-tcia"]
+	}
+]

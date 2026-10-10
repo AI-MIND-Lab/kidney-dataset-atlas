@@ -429,22 +429,50 @@ export const studyUse = z
 		}
 	});
 
+/**
+ * Text the provider published about the case shown, copied exactly. Only the provider's own words appear under a
+ * preview; nothing written by the atlas describes the image.
+ */
+export const providerQuote = z.object({
+	/** The provider's own field or section name, e.g. "tumor_histologic_subtype" or "impression (abdomen)". */
+	field: z.string(),
+	/** Copied exactly as published: same spelling, case and punctuation. */
+	value: z.string().min(1),
+	/** A source id; the sample's `sources` must list it. */
+	source: z.string(),
+	/** Where in the source: the file, the case or row, the field. */
+	locator: z.string(),
+	/** null when people wrote it; otherwise the program that generated it, shown as "machine-generated". */
+	generatedBy: z.string().nullable().default(null),
+});
+
+const imageFile = z.object({
+	path: z.string(),
+	width: z.number().int().positive(),
+	height: z.number().int().positive(),
+});
+
 export const sample = z.object({
 	id: recordId,
 	release: recordId,
 	kind: z.enum(['dataset_sample', 'published_figure']),
 	assets: z
 		.array(
-			z.object({
-				path: z.string(),
+			imageFile.extend({
 				role: z.enum(['image', 'mask', 'overlay']),
 				sliceIndex: z.number().int().nullable().default(null),
-				width: z.number().int().positive(),
-				height: z.number().int().positive(),
+				/** A higher-resolution copy, opened when the reader enlarges the image. */
+				large: imageFile.nullable().default(null),
 			}),
 		)
 		.min(1),
-	caption: z.string(),
+	/** The provider's case identifier, shown under the image. */
+	caseId: z.string(),
+	/** Who drew the outlines, in a few words ("BAMF, AI-generated, not corrected"); null when none are drawn. */
+	mask: z.string().nullable().default(null),
+	providerText: z.array(providerQuote).default([]),
+	/** How to read this kind of preview (panels, window, colours); shown once for a group of previews. */
+	viewGuide: z.string().optional(),
 	alt: z.string(),
 	attribution: z.string(),
 	reuseTerms: z.string(),

@@ -3,8 +3,23 @@
 Preview images on dataset pages are compressed renderings of each dataset's own images and masks. They are there
 so a reader can see what the data look like; they are not results, and each shows one randomly chosen scan.
 
-Every preview has a sample record in `src/data/samples/` giving its caption, attribution, licence and sources.
-The rules for adding one are in the Samples section of [authoring.md](authoring.md).
+Every preview has a sample record in `src/data/samples/` giving its case, who drew the mask, the provider's own text
+about that case, its attribution, licence and sources. The rules for adding one are in the Samples section of
+[authoring.md](authoring.md).
+
+## What appears under each image
+
+Only facts and the provider's own words. Under each image the site shows the case identifier and who drew the mask
+("Mask: BAMF, AI-generated, not corrected"), then text the provider published about that case, copied exactly and
+cited: for example KiTS23's `tumor_histologic_subtype`, the GDC's `primary_diagnosis` for TCGA and CPTAC, RCC-AID's
+`Collection` and radiologist `phase_name`, UCSF RMaC's `pathology`, and the AMOS-MM report's impression. Text that a
+program generated is marked as machine-generated and names the program: AbdomenAtlas 3.0's report (the RadGPT
+pipeline) and DeepTumorVQA's questions and answers. Numeric codes whose meaning the provider does not document, such
+as UCSF RMaC's `pathology_grade` and `tumor_type`, are left out. Nothing written by the atlas describes the image.
+
+How to read each kind of preview (the text in the sections below) and the credit and licence are shown once above a
+group of previews. Clicking a preview opens it large; KiTS23, UCSF RMaC and TCGA-KIRC previews, and DeepTumorVQA's
+own image, open at twice the page resolution.
 
 ## Where the current previews come from
 
@@ -12,27 +27,35 @@ The previews in `src/data/samples/processed-figures.json` (KiTS23, UCSF RMaC, CP
 were rendered by the Kidney-VLM project as visual quality checks of its processed data, then compressed to WebP for
 the atlas by [scripts/research/previews/build_previews.py](../scripts/research/previews/build_previews.py), which
 also writes the sample records. The full-size renderings it reads are committed in `figures/<folder>/`, so the
-previews can be rebuilt from the repository; the rendering code itself belongs to the Kidney-VLM project and is
-not part of this repository.
-Captions were written from that project's description of each figure and checked against the images.
+previews can be rebuilt from the repository.
+
+The KiTS23, UCSF RMaC and TCGA-KIRC renderings are drawn by
+[scripts/research/previews/render_previews.py](../scripts/research/previews/render_previews.py), at twice the
+original resolution (220 DPI); `--scale 1` reproduces the originals pixel for pixel. It reads KiTS23's released
+files directly; for UCSF RMaC and TCGA-KIRC it reads the Kidney-VLM project's processed NIfTI volumes and masks,
+whose conversion script is not in this repository. Its pinned packages are in
+[requirements-render.txt](../scripts/research/previews/requirements-render.txt), because a different matplotlib or
+FreeType build changes text anti-aliasing. The CPTAC-CCRCC and RCC-AID rendering code belongs to the Kidney-VLM
+project and is not part of this repository.
 
 The AbdomenAtlas 3.0 preview was made later and differently. The Kidney-VLM project rendered it with a separate script
 (`RadGPT/tools/render_preview.py` in the project's dataset folder, also not in this repository), written to follow the
-four-panel conventions below. It reads the release's own CT and mask files directly, and its caption was written
-from the release's report for that scan.
+four-panel conventions below. It reads the release's own CT and mask files directly.
 
 The DeepTumorVQA 2.0 preview is different again: it is not a rendering by the Kidney-VLM project but one of
 DeepTumorVQA's own released images (an organ PNG of five axial slices), downloaded from the release and only
-compressed to WebP. It carries no outlines, and its caption comes from that scan's DeepTumorVQA metadata and questions.
+compressed to WebP. It carries no outlines.
 
 The AMOS-MM preview was rendered by the Kidney-VLM project with `AMOS-MM/tools/render_preview.py` (in the project's
 dataset folder, not in this repository), adapted from the AbdomenAtlas script. AMOS-MM releases no masks: the scan
 shown, amos_0088, is one of its 228 CTs that are AMOS22 files, so it is drawn with AMOS22's kidney labels. It was
-picked because its report describes a kidney finding, and its caption comes from that report and its questions.
+picked because its report describes a kidney finding.
 
 The TCGA-KIRC previews show the project's own conversion of the TCIA scans with BAMF or RCC-AID masks placed on
-them; the RCC-AID previews show RCC-AID's released images and labels directly. In TCGA-KIRC captions, the phase
-comes from a reader's label, because the TCIA collection does not record phase in a structured field.
+them; the RCC-AID previews show RCC-AID's released images and labels directly. In TCGA-KIRC title lines, the phase
+comes from a reader's label, because the TCIA collection does not record phase in a structured field: the BAMF
+reviewers' contrast phase (qa-results.csv) for the BAMF-masked series, and RCC-AID's radiologist `phase_name` for the
+RCC-AID-masked ones.
 
 What was changed from the source data, for every preview: the intensity was windowed, the view cropped and
 zoomed, and the mask drawn as outlines. Nothing was added to or removed from the anatomy.
@@ -68,20 +91,20 @@ own annotation of the mass. In these previews it is a bounding box, not an outli
 
 ## Who drew the masks
 
-Every caption starts by naming the mask source. They differ a great deal in how the masks were made:
+The line under every image names the mask source ("Mask: …"). The sources differ a great deal in how the masks were made:
 
 | Mask source | How the masks were made | Source |
 |---|---|---|
 | **KiTS23 reference labels** | Trained annotators (residents, medical students and pre-medical undergraduates) placed 3D boxes and then 2D contours, consulting experts when in doubt; each region was annotated once, and experts reviewed cases where a baseline nnU-Net disagreed with the labels | [KiTS23 challenge page](https://kits-challenge.org/kits23/) |
 | **UCSF RMaC annotations** | A radiology resident with three years' experience annotated each lesion in MD.ai, mostly as bounding boxes (53%) or a centre-slice box with end-slice points (41%), with polygons for 6%; an attending abdominal radiologist with over 15 years' experience reviewed every annotation | [Sahin et al. 2026, preprint](https://doi.org/10.64898/2026.02.11.26346096) |
-| **BAMF (AIMI Annotations)** | AI-generated segmentations released for NCI Imaging Data Commons collections, including CPTAC-CCRCC and the TCGA kidney collections. A portion was reviewed and corrected by a radiologist; captions say whether a mask was corrected or is uncorrected AI output, which can contain small stray regions | [Murugesan et al. 2024](https://doi.org/10.1038/s41597-024-03977-8); [Zenodo release, CC BY 4.0](https://doi.org/10.5281/zenodo.8345959) |
+| **BAMF (AIMI Annotations)** | AI-generated segmentations released for NCI Imaging Data Commons collections, including CPTAC-CCRCC and the TCGA kidney collections. A portion was reviewed and corrected by a radiologist; the line under each image says whether a mask was corrected by a radiologist, reviewed by a radiologist and rated acceptable, or is uncorrected AI output, which can contain small stray regions (BAMF's review file, qa-results.csv, records each rating) | [Murugesan et al. 2024](https://doi.org/10.1038/s41597-024-03977-8); [Zenodo release, CC BY 4.0](https://doi.org/10.5281/zenodo.8345959) |
 | **AbdomenAtlas 3.0** | Kidney masks from AbdomenAtlas 1.1, made by AI with radiologists in the loop. The kidney lesion mask was drawn by AI (DiffTumor and nnU-Net) and then checked and corrected by radiologists one by one, using the source datasets' ground truth where it existed. It does not say whether a lesion is a tumour or a cyst | [Bassi et al. 2025, ICCV](https://doi.org/10.1109/ICCV51701.2025.02202); [Hugging Face release, CC BY-NC-SA 4.0 on the dataset card](https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas3.0Mini) |
 | **AMOS22 (shown on AMOS-MM)** | AMOS22's organ masks, which are not part of AMOS-MM. 50 CT and 20 MRI scans were annotated by hand; the rest were pre-labelled by models (3D-UNet, VNet), checked case by case by five junior radiologists and then reviewed by three senior radiologists. The kidneys are labelled as right and left kidney; there are no lesion labels | [Ji et al. 2022, AMOS paper](https://arxiv.org/abs/2206.08023); [Zenodo release](https://doi.org/10.5281/zenodo.7262581) |
 | **RCC-AID** | An automated segmentation model produced initial kidney and lesion masks on TCGA-KIRC, -KIRP and -KICH CT; two trained students checked and corrected them and added tumours and cysts, and a board-certified radiologist reviewed uncertain cases | [de Boer et al. 2026](https://doi.org/10.59275/j.melba.2026-2dg2); [Zenodo release, CC BY 4.0](https://doi.org/10.5281/zenodo.20719257) |
 
-None of these is a mask drawn from scratch by a radiologist for every case. Where a preview shows a quality
-problem in a mask (for example stray fragments in an uncorrected AI mask), the caption says so, and the problem is
-recorded as a quality finding when it applies to the release as a whole.
+None of these is a mask drawn from scratch by a radiologist for every case. A problem visible in a preview's mask
+(for example stray fragments in an uncorrected AI mask) belongs in the release's quality findings, with the case
+named, not under the image.
 
 ## Licences
 
