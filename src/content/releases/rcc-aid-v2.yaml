@@ -57,6 +57,31 @@ tasks:
 annotations:
   - segmentation_masks
   - classification_labels
+annotationTerms:
+  - value: voxel-level annotations
+    source: rcc-aid-paper
+    locator: Abstract
+  - value: multi-label segmentation mask
+    source: rcc-aid-paper
+    locator: Section 5.2.6, Data format
+  - value: background (0), kidney (1), solid tumor (2), and cyst (3)
+    source: rcc-aid-paper
+    locator: Section 5.2.6, Data format, the label values
+  - value: Histologic subtype labels
+    source: rcc-aid-paper
+    locator: Section 4.2, Potential Use Cases
+  - value: contrast phase of the CT
+    source: rcc-aid-paper
+    locator: Section 2, Summary, on the metadata
+  - value: voxel-level segmentation annotations
+    source: rcc-aid-zenodo
+    locator: Record description, Background
+  - value: RCC subtype
+    source: rcc-aid-zenodo
+    locator: Record description, Dataset Contents, the metadata.csv row
+  - value: phase_name
+    source: rcc-aid-zenodo
+    locator: metadata.csv, column name
 annotationProvenance:
   kind: mixed
   note: >-

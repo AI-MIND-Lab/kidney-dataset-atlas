@@ -37,7 +37,7 @@
 		"results": [
 			{
 				"model": "tabibu-cnn-tumour-vs-normal",
-				"metric": "Patch-wise accuracy (tumour versus normal, 40x)",
+				"metric": "Patch-wise accuracy (tumour versus normal)",
 				"value": 93.39,
 				"units": "%",
 				"confidenceInterval": null,
@@ -47,15 +47,16 @@
 				"evaluation": "internal",
 				"evidence": {
 					"sources": ["tabibu-2019"],
-					"locator": "Results; the abstract gives the same figure",
+					"locator": "Results: “We obtained 93.39% and 87.34% (Tables 1 and 2) patch-wise accuracy on the test set for KIRC and KICH, respectively”; the abstract gives the same figure",
 					"status": "verified",
-					"verifiedOn": "2026-09-20"
+					"verifiedOn": "2026-10-09",
+					"note": "The authors’ reported figure: ResNet-18 at 40× in Table 2."
 				}
 			},
 			{
 				"model": "tabibu-cnn-tumour-vs-normal",
-				"metric": "AUC (tumour versus normal)",
-				"value": 0.99,
+				"metric": "Slide-wise AUC (tumour versus normal)",
+				"value": 0.98,
 				"units": null,
 				"confidenceInterval": null,
 				"subset": "KIRC slides",
@@ -64,9 +65,10 @@
 				"evaluation": "internal",
 				"evidence": {
 					"sources": ["tabibu-2019"],
-					"locator": "Results",
+					"locator": "Results: “We achieved a best Area Under Curve (AUC) of 0.98 for KIRC and 0.95 for KICH using Resnet 34 (Table 2)”",
 					"status": "verified",
-					"verifiedOn": "2026-09-20"
+					"verifiedOn": "2026-10-09",
+					"note": "As the authors report it. Their Table 2 lists 0.99 for KIRC with both ResNets at 40×, and Table 1 lists 0.98 for ResNet-34 at 20×."
 				}
 			}
 		]
@@ -90,8 +92,8 @@
 		"results": [
 			{
 				"model": "tabibu-cnn-dag-svm",
-				"metric": "Patch-wise accuracy (three-subtype classification)",
-				"value": 92.62,
+				"metric": "Accuracy (three-subtype classification)",
+				"value": 94.07,
 				"units": "%",
 				"confidenceInterval": null,
 				"subset": "Clear cell, papillary and chromophobe slides together",
@@ -100,10 +102,10 @@
 				"evaluation": "internal",
 				"evidence": {
 					"sources": ["tabibu-2019"],
-					"locator": "Results; the abstract states 94.07% without naming the aggregation level",
+					"locator": "Abstract: “a CNN trained to distinguish clear cell, chromophobe and papillary RCC achieves a classification accuracy of 94.07%”",
 					"status": "verified",
-					"verifiedOn": "2026-09-20",
-					"note": "The subtype task spans all three renal projects, so this figure belongs to the three cohorts jointly and is not a result for papillary cases alone."
+					"verifiedOn": "2026-10-09",
+					"note": "The authors’ reported figure. The abstract does not say how it was aggregated; the best patch-wise figure in Table 3 is 92.62% (ResNet-18 + DAG-SVM). The subtype task spans all three renal projects, so this figure belongs to the three cohorts jointly and is not a result for papillary cases alone."
 				}
 			}
 		]
@@ -120,15 +122,15 @@
 			"verifiedOn": "2026-09-20"
 		},
 		"subset": "254 tumour slides and 83 normal slides",
-		"preprocessing": "Patches extracted from whole-slide images at 40x",
+		"preprocessing": "Patches extracted from whole-slide images at 20x and 40x",
 		"task": "classification",
 		"trainTestRole": "train_and_test",
 		"split": "Not documented in the sections read for this record",
 		"results": [
 			{
 				"model": "tabibu-cnn-tumour-vs-normal",
-				"metric": "Patch-wise accuracy (tumour versus normal, 40x)",
-				"value": 80.57,
+				"metric": "Patch-wise accuracy (tumour versus normal)",
+				"value": 87.34,
 				"units": "%",
 				"confidenceInterval": null,
 				"subset": "KICH slides",
@@ -137,10 +139,28 @@
 				"evaluation": "internal",
 				"evidence": {
 					"sources": ["tabibu-2019"],
-					"locator": "Results",
+					"locator": "Results: “We obtained 93.39% and 87.34% (Tables 1 and 2) patch-wise accuracy on the test set for KIRC and KICH, respectively”; the abstract gives the same figure",
 					"status": "verified",
-					"verifiedOn": "2026-09-20",
-					"note": "The abstract states 87.34% for chromophobe versus normal. The two figures were reported at different aggregation levels, which this record does not resolve."
+					"verifiedOn": "2026-10-09",
+					"note": "The authors’ reported figure: ResNet-34 at 20× in Table 1. Table 2 gives 80.57% for the same model at 40×."
+				}
+			},
+			{
+				"model": "tabibu-cnn-tumour-vs-normal",
+				"metric": "Slide-wise AUC (tumour versus normal)",
+				"value": 0.95,
+				"units": null,
+				"confidenceInterval": null,
+				"subset": "KICH slides",
+				"split": "Not documented",
+				"patientLevelHandling": "Not documented in the sections read for this record",
+				"evaluation": "internal",
+				"evidence": {
+					"sources": ["tabibu-2019"],
+					"locator": "Results: “We achieved a best Area Under Curve (AUC) of 0.98 for KIRC and 0.95 for KICH using Resnet 34 (Table 2)”",
+					"status": "verified",
+					"verifiedOn": "2026-10-09",
+					"note": "As the authors report it, for ResNet-34."
 				}
 			}
 		]

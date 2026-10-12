@@ -38,6 +38,7 @@ export const COMPARE_ROWS: { key: string; label: string }[] = [
 	{ key: 'disease', label: 'Disease' },
 	{ key: 'modalities', label: 'Modalities' },
 	{ key: 'annotations', label: 'Annotations' },
+	{ key: 'annotationTerms', label: "In the provider's words" },
 	{ key: 'annotationProvenance', label: 'Annotations made by' },
 	{ key: 'ctPhases', label: 'CT phases' },
 	{ key: 'wsi', label: 'Whole-slide images' },

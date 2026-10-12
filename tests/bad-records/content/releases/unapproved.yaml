@@ -1,10 +1,14 @@
 # Deliberately broken record used by tests/approval-gate.test.mjs: it claims to
-# be published without an approval, with an unresolved eligibility check, and
-# points at a dataset that does not exist.
+# be published without an approval, with an unresolved eligibility check, points
+# at a dataset that does not exist, and quotes a term from a source it does not list.
 id: bad-release
 dataset: no-such-dataset
 versionLabel: v1
 current: true
+annotationTerms:
+  - value: Unlisted wording
+    source: bad-source
+    locator: Test record.
 access:
   mode: direct_open_download
   instructions: Test record.

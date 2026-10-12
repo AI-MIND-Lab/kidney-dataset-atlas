@@ -96,6 +96,19 @@ possible: masks for segmentation, diagnosis labels for classification, outcome l
 follow-up for survival. Clinical record fields count as labels. Leave both empty when the release carries no
 labels of its own; a task that other studies performed with labels they made themselves does not belong here.
 
+The `annotations` values are the atlas's own categories, so that the same kind of label can be filtered and compared
+across providers who describe it differently. `annotationTerms` records what the provider itself calls those labels:
+each `value` is copied exactly, with the `source` (one the release lists) and the `locator` where it appears. The release
+page and the comparison show them beside the categories. Leave the list empty until someone has read the provider's
+wording; the page then says "not yet recorded".
+
+```yaml
+annotationTerms:
+  - value: Image Annotations
+    source: tcia-crowds-cure-2017
+    locator: Data Access table, title of the CSV file
+```
+
 Access describes how the provider distributes a cohort; it does not itself decide whether the release may be
 published. Use one of these values:
 

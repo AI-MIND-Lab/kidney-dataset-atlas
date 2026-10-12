@@ -1,12 +1,14 @@
 ---
 import type { Dataset, Release } from '../lib/catalog';
 import {
+	catalog,
 	overlapsForRelease,
 	paperById,
 	relationsForRelease,
 	publishedReleases,
 	qualityForRelease,
 	samplesForRelease,
+	sourceById,
 	sourcesFor,
 	studyUsesForRelease,
 	variablesForRelease,
@@ -88,9 +90,21 @@ const sources = sourcesFor(
 	partGroups.map((group) => [group.samples, group.ownUses.map(({ use }) => use), group.downstreamUses.map(({ use }) => use)]),
 );
 
-// Overlap records name both sides, so label the other release rather than this one.
-const allReleases = await publishedReleases();
-const releaseLabel = (id: string) => allReleases.find((entry) => entry.data.id === id)?.data.versionLabel ?? id;
+// Overlap records name both sides, so label the other release rather than this one. A release of another dataset
+// also carries that dataset's short name, because version labels such as "Version 1 (TCIA, …)" repeat across
+// datasets, unless the label already contains it ("KiTS23", "AMOS-MM 1.0").
+const [allReleases, catalogEntries] = await Promise.all([publishedReleases(), catalog()]);
+const datasetShortName = (id: string) =>
+	catalogEntries.find((entry) => entry.dataset.data.id === id)?.dataset.data.name.split(' — ')[0] ?? id;
+const releaseLabel = (id: string) => {
+	const other = allReleases.find((entry) => entry.data.id === id);
+	if (!other) return id;
+	const label = other.data.versionLabel;
+	const name = datasetShortName(other.data.dataset);
+	return other.data.dataset === data.dataset || label.toLowerCase().includes(name.toLowerCase())
+		? label
+		: `${name}: ${label}`;
+};
 
 const SECTIONS = [
 	['overview', 'Overview'],
@@ -145,21 +159,15 @@ const isHuman = dataset.data.species === 'human';
 				)
 			}
 		</p>
-		<p>
-			{
-				isDraft ? (
-					<>
-						<strong>Not published.</strong> Researched by {data.researchedBy} on{' '}
-						{dateLabel(data.verifiedOn)}, and not yet approved by a curator.
-					</>
-				) : (
-					<>
-						Last verified: {dateLabel(data.verifiedOn)}.
-						{data.approvedBy && <> Approved by {data.approvedBy} on {dateLabel(data.approvedOn)}.</>}
-					</>
-				)
-			}
-		</p>
+		{
+			// A draft's status is shown by the draft notice below; who researched it is for curators, not readers.
+			!isDraft && (
+				<p>
+					Last verified: {dateLabel(data.verifiedOn)}.
+					{data.approvedBy && <> Approved by {data.approvedBy} on {dateLabel(data.approvedOn)}.</>}
+				</p>
+			)
+		}
 		<p class="release__actions">
 			<a class="button" href={dataset.data.officialUrl}>Official source</a>
 			<a class="button" href={`${withBase('/compare/')}?releases=${data.id}`}>Compare this release</a>
@@ -280,6 +288,45 @@ const isHuman = dataset.data.species === 'human';
 					<strong>Supported tasks:</strong> {data.tasks.map(humanize).join(', ')}
 				</p>
 			)
+		}
+		<p>
+			<strong>Annotations:</strong>{' '}
+			{data.annotations.length > 0
+				? data.annotations.map((value) => facetValueLabel('annotations', value)).join(', ')
+				: data.annotationProvenance?.kind === 'none'
+					? 'None'
+					: 'Not documented'}
+		</p>
+		{
+			// The categories group labels across providers; the provider's own words are quoted beside them.
+			(data.annotations.length > 0 || data.annotationTerms.length > 0) &&
+				(data.annotationTerms.length > 0 ? (
+					<div class="annotation-terms">
+						<p>
+							<strong>In the provider's words:</strong>
+						</p>
+						<ul>
+							{[...new Set(data.annotationTerms.map((term) => term.source))].map((id) => {
+								const source = sourceById(id);
+								const terms = data.annotationTerms.filter((term) => term.source === id);
+								return (
+									<li>
+										{source ? <a href={source.url}>{source.title}</a> : id}:{' '}
+										{terms.map((term, index) => (
+											<>
+												{index > 0 && '; '}“{term.value}” ({term.locator})
+											</>
+										))}
+									</li>
+								);
+							})}
+						</ul>
+					</div>
+				) : (
+					<p>
+						<strong>In the provider's words:</strong> not yet recorded.
+					</p>
+				))
 		}
 		<p>
 			<strong>Annotations made by:</strong>{' '}

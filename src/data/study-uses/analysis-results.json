@@ -1,0 +1,21 @@
+[
+	{
+		"id": "use-shinagare-2015-radiogenomics",
+		"paper": "shinagare-2015",
+		"release": "tcga-kirc-radiogenomics-v1",
+		"role": "original",
+		"actualUseEvidence": {
+			"sources": ["shinagare-2015", "tcia-tcga-kirc-radiogenomics"],
+			"locator": "Paper, Patient cohort and Results (\"All the imaging studies evaluated in this research project are available online\", with this release's DOI); analysis-result page, Related publications",
+			"status": "verified",
+			"verifiedOn": "2026-10-09",
+			"note": "The study that produced the released table; the analysis-result page recommends it as the best source of additional information."
+		},
+		"subset": "All 103 patients",
+		"preprocessing": null,
+		"task": null,
+		"trainTestRole": "not_documented",
+		"split": null,
+		"results": []
+	}
+]

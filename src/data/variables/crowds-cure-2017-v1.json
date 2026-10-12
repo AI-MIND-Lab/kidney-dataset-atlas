@@ -1,0 +1,1102 @@
+[
+	{
+		"id": "crowds-cure-2017-v1-order",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "order",
+		"file": "CrowdsCureCancer2017Annotations.csv",
+		"definition": "Not defined by the provider. Integers 1 to 2345 across the whole file, one per row.",
+		"type": "integer",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": null,
+		"role": "identifier",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-csv"
+			],
+			"locator": "order column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-anatomy",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "anatomy",
+		"file": "CrowdsCureCancer2017Annotations.csv",
+		"definition": "Not defined by the provider. Renal for exactly the rows of the 159 TCGA-KIRC patients, and Lung, Liver or Ovarian for the other collections, so it marks the source collection. The 2017 application recorded no lesion location, so it does not say where the measured lesion is.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Renal",
+				"meaning": "(1282 of 2345)"
+			},
+			{
+				"code": "Ovarian",
+				"meaning": "(437 of 2345)"
+			},
+			{
+				"code": "Lung",
+				"meaning": "(368 of 2345)"
+			},
+			{
+				"code": "Liver",
+				"meaning": "(258 of 2345)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-csv",
+				"tcia-crowds-cure-2018",
+				"tcia-tcga-kirc-series"
+			],
+			"locator": "anatomy column against TCGA-KIRC PatientID values; Crowds-Cure-2018 summary",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-patientid",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "patientID",
+		"file": "CrowdsCureCancer2017Annotations.csv",
+		"definition": "TCGA patient barcode. Observed in the 1282 kidney rows: 159 patients, all in the TCIA series list for TCGA-KIRC.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "identifier",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": "patient identifier",
+		"provenance": "Joins each measurement to the TCGA-KIRC scans and to the GDC case records.",
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-csv",
+				"tcia-tcga-kirc-series"
+			],
+			"locator": "patientID column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-studyinstanceuid",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "StudyInstanceUID",
+		"file": "CrowdsCureCancer2017Annotations.csv",
+		"definition": "DICOM study identifier of the measured scan. Observed in the 1282 kidney rows: 159 studies, one per patient.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "identifier",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-csv"
+			],
+			"locator": "StudyInstanceUID column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-seriesuid",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "seriesUID",
+		"file": "CrowdsCureCancer2017Annotations.csv",
+		"definition": "DICOM series identifier of the measured scan. Observed in the 1282 kidney rows: 237 series, all in the TCIA series list for TCGA-KIRC.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "identifier",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-csv",
+				"tcia-tcga-kirc-series"
+			],
+			"locator": "seriesUID column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-instanceuid",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "instanceUID",
+		"file": "CrowdsCureCancer2017Annotations.csv",
+		"definition": "DICOM identifier of the measured image (slice). Observed in the 1282 kidney rows: 762 images.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "slice",
+		"timePoint": null,
+		"role": "identifier",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-csv"
+			],
+			"locator": "instanceUID column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-sliceindex",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "sliceIndex",
+		"file": "CrowdsCureCancer2017Annotations.csv",
+		"definition": "Not defined by the provider. Observed in the 1282 kidney rows: integers 0 to 408.",
+		"type": "integer",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "slice",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-csv"
+			],
+			"locator": "sliceIndex column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-length",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "length",
+		"file": "CrowdsCureCancer2017Annotations.csv",
+		"definition": "Length of the drawn line; the units are not stated. Observed in the 1282 kidney rows: 7.24 to 311.43, median 48.45.",
+		"type": "decimal",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": "lesion length",
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-csv",
+				"tcia-crowds-cure-2018"
+			],
+			"locator": "length column; Crowds-Cure-2018 summary (\"uni-dimensional measurement\")",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-start-x",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "start_x",
+		"file": "CrowdsCureCancer2017Annotations.csv",
+		"definition": "Not defined by the provider. One end-point coordinate of the drawn line; the units and origin are not stated. Observed in the 1282 kidney rows: 41.1 to 446.7.",
+		"type": "decimal",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-csv"
+			],
+			"locator": "start_x column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-start-y",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "start_y",
+		"file": "CrowdsCureCancer2017Annotations.csv",
+		"definition": "Not defined by the provider. One end-point coordinate of the drawn line; the units and origin are not stated. Observed in the 1282 kidney rows: 139.0 to 394.5.",
+		"type": "decimal",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-csv"
+			],
+			"locator": "start_y column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-end-x",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "end_x",
+		"file": "CrowdsCureCancer2017Annotations.csv",
+		"definition": "Not defined by the provider. One end-point coordinate of the drawn line; the units and origin are not stated. Observed in the 1282 kidney rows: 59.1 to 463.6.",
+		"type": "decimal",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-csv"
+			],
+			"locator": "end_x column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-end-y",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "end_y",
+		"file": "CrowdsCureCancer2017Annotations.csv",
+		"definition": "Not defined by the provider. One end-point coordinate of the drawn line; the units and origin are not stated. Observed in the 1282 kidney rows: 78.3 to 420.0.",
+		"type": "decimal",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-csv"
+			],
+			"locator": "end_y column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-annotator",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "annotator",
+		"file": "CrowdsCureCancer2017Annotations.csv",
+		"definition": "Nickname of the person who drew the measurement, such as misty_mandrill. Observed in the 1282 kidney rows: 68 names, 236 measurements for the most active.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "other",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-csv"
+			],
+			"locator": "annotator column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-radiologist-status",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "radiologist_status",
+		"file": "CrowdsCureCancer2017Annotations.csv",
+		"definition": "Whether the person who drew the measurement was a radiologist.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "radiologist",
+				"meaning": "Radiologist (770 of 1282)"
+			},
+			{
+				"code": "not_radiologist",
+				"meaning": "Not a radiologist (512 of 1282)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "other",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-csv"
+			],
+			"locator": "radiologist_status column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-id",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "_id",
+		"file": "CrowdsCureCancer2017Annotations.csv",
+		"definition": "Not defined by the provider. A 32-character hexadecimal string, distinct for every row.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": null,
+		"role": "identifier",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-csv"
+			],
+			"locator": "_id column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-date-unix",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "date_unix",
+		"file": "CrowdsCureCancer2017Annotations.csv",
+		"definition": "Not defined by the provider. Matches the date column as Unix time in seconds. Observed in the 1282 kidney rows: 1511716365 to 1514992431 (26 November 2017 to 3 January 2018, UTC).",
+		"type": "integer",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-csv"
+			],
+			"locator": "date_unix column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-date",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "date",
+		"file": "CrowdsCureCancer2017Annotations.csv",
+		"definition": "Not defined by the provider. A spreadsheet serial day number, matching date_unix to within a day. Observed in the 1282 kidney rows: 43065 to 43103 (26 November 2017 to 3 January 2018).",
+		"type": "integer",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "record",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-csv"
+			],
+			"locator": "date column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-studydate",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "StudyDate",
+		"file": "CrowdsCureCancer2017Annotations.csv",
+		"definition": "DICOM study date of the measured scan, in YYYYMMDD form; TCGA-KIRC study dates are offset by the archive.",
+		"type": "date",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-csv",
+				"tcia-tcga-kirc"
+			],
+			"locator": "StudyDate column; TCGA-KIRC collection page, date-offset note",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-studytime",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "StudyTime",
+		"file": "CrowdsCureCancer2017Annotations.csv",
+		"definition": "DICOM study time of the measured scan, as HHMMSS with optional fractions.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-csv"
+			],
+			"locator": "StudyTime column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-sopclassuid",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "SOPClassUID",
+		"file": "CrowdsCureCancer2017Annotations.csv",
+		"definition": "DICOM SOP class of the measured image; 1.2.840.10008.5.1.4.1.1.2 in every row.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "slice",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-csv"
+			],
+			"locator": "SOPClassUID column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-clinical-patient-id",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "Patient ID",
+		"file": "ccc2017clinical.csv",
+		"definition": "TCGA patient barcode; one row per patient. Observed in the 159 TCGA-KIRC rows: all 159 kidney patients of the measurement file.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "identifier",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": "patient identifier",
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-clinical",
+				"tcia-crowds-cure-2017"
+			],
+			"locator": "Patient ID column matched against patientID in the measurement file",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-clinical-project-id",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "project_id",
+		"file": "ccc2017clinical.csv",
+		"definition": "GDC project of the patient. The file holds TCGA-KIRC, TCGA-OV, TCGA-LUAD and TCGA-LIHC rows.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "TCGA-KIRC",
+				"meaning": "(159 of 352)"
+			},
+			{
+				"code": "TCGA-OV",
+				"meaning": "(93 of 352)"
+			},
+			{
+				"code": "TCGA-LUAD",
+				"meaning": "(56 of 352)"
+			},
+			{
+				"code": "TCGA-LIHC",
+				"meaning": "(44 of 352)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-clinical",
+				"tcia-crowds-cure-2017"
+			],
+			"locator": "project_id column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-clinical-gender",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "gender",
+		"file": "ccc2017clinical.csv",
+		"definition": "The current GDC data dictionary has no gender field (its demographic entity has sex_at_birth), and the page does not define it. The page calls this file \"a CSV dump\" of the GDC clinical data.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "male",
+				"meaning": "(108 of 159)"
+			},
+			{
+				"code": "female",
+				"meaning": "(51 of 159)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "sex",
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-clinical",
+				"tcia-crowds-cure-2017"
+			],
+			"locator": "gender column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-clinical-year-of-birth",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "year_of_birth",
+		"file": "ccc2017clinical.csv",
+		"definition": "Numeric value to represent the calendar year in which an individual was born. (GDC data dictionary, demographic.) The page calls this file \"a CSV dump\" of the GDC clinical data. Observed in the 159 TCGA-KIRC rows: 1914 to 1983.",
+		"type": "integer",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-clinical",
+				"tcia-crowds-cure-2017",
+				"gdc-data-dictionary"
+			],
+			"locator": "year_of_birth column; GDC data dictionary, demographic.year_of_birth",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-clinical-race",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "race",
+		"file": "ccc2017clinical.csv",
+		"definition": "An arbitrary classification of a taxonomic group that is a division of a species. It usually arises as a consequence of geographical isolation within a species and is characterized by shared heredity, physical attributes and behavior, and in the case of humans, by common history, nationality, or geographic distribution. The provided values are based on the categories defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau. (GDC data dictionary, demographic.) The page calls this file \"a CSV dump\" of the GDC clinical data.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "white",
+				"meaning": "(147 of 159)"
+			},
+			{
+				"code": "black or african american",
+				"meaning": "(10 of 159)"
+			},
+			{
+				"code": "asian",
+				"meaning": "(2 of 159)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-clinical",
+				"tcia-crowds-cure-2017",
+				"gdc-data-dictionary"
+			],
+			"locator": "race column; GDC data dictionary, demographic.race",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-clinical-ethnicity",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "ethnicity",
+		"file": "ccc2017clinical.csv",
+		"definition": "An individual's self-described social and cultural grouping, specifically whether an individual describes themselves as Hispanic or Latino. The provided values are based on the categories defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau. (GDC data dictionary, demographic.) The page calls this file \"a CSV dump\" of the GDC clinical data.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "not hispanic or latino",
+				"meaning": "(89 of 159)"
+			},
+			{
+				"code": "not reported",
+				"meaning": "(64 of 159)"
+			},
+			{
+				"code": "hispanic or latino",
+				"meaning": "(6 of 159)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-clinical",
+				"tcia-crowds-cure-2017",
+				"gdc-data-dictionary"
+			],
+			"locator": "ethnicity column; GDC data dictionary, demographic.ethnicity",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-clinical-year-of-death",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "year_of_death",
+		"file": "ccc2017clinical.csv",
+		"definition": "Numeric value to represent the year of the death of an individual. (GDC data dictionary, demographic.) The page calls this file \"a CSV dump\" of the GDC clinical data. Observed in the 159 TCGA-KIRC rows: 2003 to 2010.",
+		"type": "integer",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"\"--\": no value (118 of 159)"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-clinical",
+				"tcia-crowds-cure-2017",
+				"gdc-data-dictionary"
+			],
+			"locator": "year_of_death column; GDC data dictionary, demographic.year_of_death",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-clinical-primary-diagnosis",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "primary_diagnosis",
+		"file": "ccc2017clinical.csv",
+		"definition": "Text term used to describe the patient's histologic diagnosis, as described by the World Health Organization's (WHO) International Classification of Diseases for Oncology (ICD-O). (GDC data dictionary, diagnosis.) The page calls this file \"a CSV dump\" of the GDC clinical data.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Clear cell adenocarcinoma, NOS",
+				"meaning": "(155 of 159)"
+			},
+			{
+				"code": "Renal cell carcinoma, NOS",
+				"meaning": "(4 of 159)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": "primary diagnosis",
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-clinical",
+				"tcia-crowds-cure-2017",
+				"gdc-data-dictionary"
+			],
+			"locator": "primary_diagnosis column; GDC data dictionary, diagnosis.primary_diagnosis",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-clinical-tumor-stage",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "tumor_stage",
+		"file": "ccc2017clinical.csv",
+		"definition": "The current GDC data dictionary has no tumor_stage field, and the page does not define it or say which staging system. The page calls this file \"a CSV dump\" of the GDC clinical data.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "stage i",
+				"meaning": "(91 of 159)"
+			},
+			{
+				"code": "stage iii",
+				"meaning": "(40 of 159)"
+			},
+			{
+				"code": "stage iv",
+				"meaning": "(15 of 159)"
+			},
+			{
+				"code": "stage ii",
+				"meaning": "(13 of 159)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "tumour stage",
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-clinical",
+				"tcia-crowds-cure-2017"
+			],
+			"locator": "tumor_stage column",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-clinical-age-at-diagnosis",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "age_at_diagnosis",
+		"file": "ccc2017clinical.csv",
+		"definition": "Age at the time of diagnosis expressed in number of days since birth. (GDC data dictionary, diagnosis.) The page calls this file \"a CSV dump\" of the GDC clinical data. Observed in the 159 TCGA-KIRC rows: 9714 to 32364.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "predictor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": "age",
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-clinical",
+				"tcia-crowds-cure-2017",
+				"gdc-data-dictionary"
+			],
+			"locator": "age_at_diagnosis column; GDC data dictionary, diagnosis.age_at_diagnosis",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-clinical-vital-status",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "vital_status",
+		"file": "ccc2017clinical.csv",
+		"definition": "The survival state of the person registered on the protocol. (GDC data dictionary, demographic.) The page calls this file \"a CSV dump\" of the GDC clinical data.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "alive",
+				"meaning": "(116 of 159)"
+			},
+			{
+				"code": "dead",
+				"meaning": "(43 of 159)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": "vital status",
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-clinical",
+				"tcia-crowds-cure-2017",
+				"gdc-data-dictionary"
+			],
+			"locator": "vital_status column; GDC data dictionary, demographic.vital_status",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-clinical-morphology",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "morphology",
+		"file": "ccc2017clinical.csv",
+		"definition": "The third edition of the International Classification of Diseases for Oncology, published in 2000 used principally in tumor and cancer registries for coding the site (topography) and the histology (morphology) of neoplasms. The study of the structure of the cells and their arrangement to constitute tissues and, finally, the association among these to form organs. In pathology, the microscopic process of identifying normal and abnormal morphologic characteristics in tissues, by employing various cytochemical and immunocytochemical stains. A system of numbered categories for representation of data. (GDC data dictionary, diagnosis.) The page calls this file \"a CSV dump\" of the GDC clinical data.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "8310/3",
+				"meaning": "(155 of 159)"
+			},
+			{
+				"code": "8312/3",
+				"meaning": "(4 of 159)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-clinical",
+				"tcia-crowds-cure-2017",
+				"gdc-data-dictionary"
+			],
+			"locator": "morphology column; GDC data dictionary, diagnosis.morphology",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-clinical-days-to-death",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "days_to_death",
+		"file": "ccc2017clinical.csv",
+		"definition": "Number of days between the date used for index and the date from a person's date of death represented as a calculated number of days. (GDC data dictionary, demographic.) The page calls this file \"a CSV dump\" of the GDC clinical data. Observed in the 159 TCGA-KIRC rows: 41 to 2386.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"\"--\": no value (116 of 159)"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-clinical",
+				"tcia-crowds-cure-2017",
+				"gdc-data-dictionary"
+			],
+			"locator": "days_to_death column; GDC data dictionary, demographic.days_to_death",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-clinical-tissue-or-organ-of-origin",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "tissue_or_organ_of_origin",
+		"file": "ccc2017clinical.csv",
+		"definition": "The text term used to describe the anatomic site of origin, of the patient's malignant disease, as described by the World Health Organization's (WHO) International Classification of Diseases for Oncology (ICD-O). (GDC data dictionary, diagnosis.) The page calls this file \"a CSV dump\" of the GDC clinical data.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Kidney, NOS",
+				"meaning": "(159 of 159)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-clinical",
+				"tcia-crowds-cure-2017",
+				"gdc-data-dictionary"
+			],
+			"locator": "tissue_or_organ_of_origin column; GDC data dictionary, diagnosis.tissue_or_organ_of_origin",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-clinical-days-to-birth",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "days_to_birth",
+		"file": "ccc2017clinical.csv",
+		"definition": "Number of days between the date used for index and the date from a person's date of birth represented as a calculated negative number of days. (GDC data dictionary, demographic.) The page calls this file \"a CSV dump\" of the GDC clinical data. Observed in the 159 TCGA-KIRC rows: -32364 to -9714.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-clinical",
+				"tcia-crowds-cure-2017",
+				"gdc-data-dictionary"
+			],
+			"locator": "days_to_birth column; GDC data dictionary, demographic.days_to_birth",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-clinical-site-of-resection-or-biopsy",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "site_of_resection_or_biopsy",
+		"file": "ccc2017clinical.csv",
+		"definition": "The text term used to describe the anatomic site of the resection or biopsy of the patient's malignant disease, as described by the World Health Organization's (WHO) International Classification of Diseases for Oncology (ICD-O). (GDC data dictionary, diagnosis.) The page calls this file \"a CSV dump\" of the GDC clinical data.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Kidney, NOS",
+				"meaning": "(159 of 159)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "pathology",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-clinical",
+				"tcia-crowds-cure-2017",
+				"gdc-data-dictionary"
+			],
+			"locator": "site_of_resection_or_biopsy column; GDC data dictionary, diagnosis.site_of_resection_or_biopsy",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	},
+	{
+		"id": "crowds-cure-2017-v1-clinical-days-to-last-follow-up",
+		"release": "crowds-cure-2017-v1",
+		"originalName": "days_to_last_follow_up",
+		"file": "ccc2017clinical.csv",
+		"definition": "Time interval from the date of last follow up to the date of initial pathologic diagnosis, represented as a calculated number of days. (GDC data dictionary, diagnosis.) The page calls this file \"a CSV dump\" of the GDC clinical data. Observed in the 159 TCGA-KIRC rows: 13 to 3989.",
+		"type": "integer",
+		"unit": "days",
+		"coding": [],
+		"missingValues": [
+			"\"--\": no value (40 of 159)"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "outcome",
+		"group": "outcome",
+		"derivation": "raw",
+		"normalizedConcept": null,
+		"evidence": {
+			"sources": [
+				"tcia-crowds-cure-2017-clinical",
+				"tcia-crowds-cure-2017",
+				"gdc-data-dictionary"
+			],
+			"locator": "days_to_last_follow_up column; GDC data dictionary, diagnosis.days_to_last_follow_up",
+			"status": "verified",
+			"verifiedOn": "2026-10-09"
+		}
+	}
+]

@@ -47,6 +47,28 @@ tasks:
 annotations:
   - pathology_labels
   - outcome_labels
+annotationTerms:
+  - value: Clinical
+    source: gdc-kirc-summary
+    locator: Project summary, data_category in data_categories
+  - value: Diagnosis
+    source: gdc-data-dictionary
+    locator: diagnosis entity, title
+  - value: primary_diagnosis
+    source: gdc-data-dictionary
+    locator: diagnosis entity, property name
+  - value: tumor_grade
+    source: gdc-data-dictionary
+    locator: diagnosis entity, property name
+  - value: ajcc_pathologic_stage
+    source: gdc-data-dictionary
+    locator: diagnosis entity, property name
+  - value: vital_status
+    source: gdc-data-dictionary
+    locator: demographic entity, property name
+  - value: Follow-Up
+    source: gdc-data-dictionary
+    locator: follow_up entity, title
 annotationProvenance:
   kind: not_documented
   note: >-
@@ -73,11 +95,11 @@ features:
       verifiedOn: 2026-09-19
   followUp:
     status: present
-    note: Follow-up records with days_to_follow_up are returned for cases; the number of follow-ups varies per case.
+    note: Follow-up records with a days_to_follow_up value are returned for all 537 cases; the number of follow-ups varies per case.
     evidence:
-      sources: [gdc-kirc-case-fields]
+      sources: [gdc-kirc-case-records]
       status: verified
-      verifiedOn: 2026-09-19
+      verifiedOn: 2026-10-09
 access:
   mode: direct_open_download
   registrationVisible: false

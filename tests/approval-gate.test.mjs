@@ -59,6 +59,14 @@ test('a relationship must name exactly one collection on the other side', () => 
 	);
 });
 
+test("a provider's annotation term is quoted only from a source the release lists", () => {
+	const result = runValidator('tests/bad-records/content', 'tests/bad-records/data');
+	assert.match(
+		result.stderr,
+		/release "bad-release" quotes annotation term "Unlisted wording" from source "bad-source", which its sources do not list/,
+	);
+});
+
 test('a reproduced paper figure needs a reusable licence and an existing file', () => {
 	const result = runValidator('tests/bad-records/content', 'tests/bad-records/data');
 	assert.match(result.stderr, /bad-figure-licence\.md: figures\.0\.license\.url: A reproduced figure needs a reusable licence/);

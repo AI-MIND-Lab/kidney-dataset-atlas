@@ -113,8 +113,9 @@ The paper trains convolutional networks on whole-slide images from three TCGA re
 separating tumour from normal tissue and classifying the subtype, then relates shape and
 nuclei features from predicted tumour regions to survival in the clear cell cohort.
 
-Two sets of figures appear for the same models: the abstract reports 93.39% and 87.34% for
-tumour versus normal, and 94.07% for subtype classification, while the results section reports
-patch-wise figures of 93.39%, 80.57% and 92.62%. The level at which each figure was aggregated
-was not established here, so the catalog records the patch-wise figures with their locator and
-notes the difference rather than choosing between them.
+The catalog records the figures the authors themselves report: 93.39% (KIRC) and 87.34% (KICH)
+patch-wise accuracy for tumour versus normal, best slide-wise AUCs of 0.98 and 0.95, and 94.07%
+for subtype classification. The paper's tables hold further rows for other networks and
+magnifications (for example 80.57% for KICH with ResNet-34 at 40×, and 92.62% patch-wise for the
+subtypes with ResNet-18 and DAG-SVM); each result's note names the table row behind it, and where
+the authors' summary differs from their tables (KIRC's AUC is 0.99 in Table 2), the note says so.

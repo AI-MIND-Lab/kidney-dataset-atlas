@@ -89,9 +89,10 @@
 			"sources": [
 				"tcga-kirc-nature-2013"
 			],
-			"locator": "Crossref record for DOI 10.1038/nature12222",
-			"status": "not_verified",
-			"note": "Identified from the DOI record as the TCGA clear cell renal cell carcinoma publication. The paper's text was not read, so the link to this release is unverified."
+			"locator": "Full text (PMC3771322), Methods summary: samples from patients with histologically confirmed ccRCC meeting the TCGA requirements; data freeze of 446 samples",
+			"status": "verified",
+			"verifiedOn": "2026-10-09",
+			"note": "The Cancer Genome Atlas Research Network's marker paper for the clear cell renal cell carcinoma project, read in full: \"A data freeze representing 446 samples was generated\"."
 		},
 		"subset": null,
 		"preprocessing": null,

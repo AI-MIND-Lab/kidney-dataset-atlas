@@ -1,0 +1,222 @@
+id: tcga-kirc-radiogenomics-v1
+dataset: tcga-kirc-radiogenomics
+versionLabel: Version 1 (TCIA, updated 2015-05-28)
+current: true
+releaseDate: 2015-05-28
+doi: 10.7937/K9/TCIA.2014.K6M61GDW
+counts:
+  patients:
+    value: 103
+    status: present
+    evidence:
+      sources: [tcia-tcga-kirc-radiogenomics, shinagare-2015, tcia-tcga-kirc-radiogenomics-csv]
+      locator: Page snapshot ("Subjects 103"); paper, Patient cohort; one CSV row per patient
+      status: verified
+      verifiedOn: 2026-10-09
+      note: 77 men and 26 women, aged 34 to 79. The paper reports CT for 81 patients, MRI for 19 and both for 3.
+  examinations:
+    value: 118
+    status: present
+    evidence:
+      sources: [tcia-tcga-kirc-radiogenomics, tcia-tcga-kirc-radiogenomics-manifest, tcia-tcga-kirc-series]
+      locator: Collections used in this analysis result ("103 118 738 49,815"); manifest series matched to the TCIA series list
+      status: verified
+      verifiedOn: 2026-10-09
+      note: >-
+        Studies in TCIA's image list for this result (738 series, 49,815 images, 441 CT and 297 MR series).
+        These are TCGA-KIRC studies, not new ones, and the table does not say which study each reader scored.
+  lesions:
+    value: 103
+    status: present
+    evidence:
+      sources: [shinagare-2015, tcia-tcga-kirc-radiogenomics-csv]
+      locator: Table 1 ("103 clear cell renal cell carcinomas"); one feature row per patient
+      status: verified
+      verifiedOn: 2026-10-09
+      note: One tumour per patient is described. The table marks 4 patients as having more than one tumour (MultipleTumors), and only one of their tumours is scored.
+  slides:
+    value: null
+    status: not_applicable
+modalities:
+  - ct
+  - mri
+  - clinical_table
+  - molecular
+cohort: >-
+  The first 103 patients of the TCGA clear cell renal cell carcinoma project whose pre-surgical
+  CT or MRI was available in The Cancer Imaging Archive, with images from multiple institutions
+  and scanners. All 103 are TCGA-KIRC patients.
+tasks:
+  - classification
+annotations:
+  - classification_labels
+annotationTerms:
+  - value: Radiologist assessments of image features
+    source: tcia-tcga-kirc-radiogenomics
+    locator: Analysis Result Snapshot table, in the column headed External Resources
+  - value: Radiologist annotations, mutation status, and clinical variables
+    source: tcia-tcga-kirc-radiogenomics
+    locator: Data Access table, title of the CSV file
+  - value: Demographic, Measurement, Molecular Test, Classification
+    source: tcia-tcga-kirc-radiogenomics
+    locator: Data Access table, data types of the CSV file
+  - value: Imaging features
+    source: shinagare-2015
+    locator: Abstract, Materials and methods
+annotationProvenance:
+  kind: expert
+  note: >-
+    Each tumour was scored by three radiologists, randomly assigned from 13 fellowship-trained
+    abdominal radiologists at seven institutions (7 to 16 years' experience), blinded to the
+    clinical and mutational data, on a feature set the research group defined in consensus and
+    practised on 11 training cases. The released table holds one value per feature; its counts
+    match the paper's Table 1, which reports the summary values: the readers' median for size,
+    necrosis and growth pattern, and the most common answer for margin, composition and
+    calcification. The individual readers' scores are not released. Agreement between readers
+    was very high for size (ICC 0.983), low for margin (Krippendorff's alpha 0.300) and
+    inconclusive for the other features. Mutation status for the six genes came from cBioPortal.
+  evidence:
+    sources: [shinagare-2015, tcia-tcga-kirc-radiogenomics-csv]
+    locator: Methods (image feature set development, image review, mutational status, statistical analysis); Results, inter-observer agreement; Table 1
+    status: verified
+    verifiedOn: 2026-10-09
+features:
+  wsi:
+    status: not_applicable
+    note: Slides for these patients are in the GDC open-access release of TCGA-KIRC, joined by barcode.
+  ctPhases:
+    status: not_documented
+    note: >-
+      The table does not record a phase. The paper says size, margin and necrosis were assessed on
+      nephrographic or excretory phase images.
+    evidence:
+      sources: [shinagare-2015]
+      locator: Methods, image feature set development
+      status: verified
+      verifiedOn: 2026-10-09
+  clinicalData:
+    status: present
+    note: Age, Gender, HistGrade (G2 to G4) and Stage (I to IV) for every patient. Further clinical records join from the GDC by TCGA barcode.
+    evidence:
+      sources: [tcia-tcga-kirc-radiogenomics, tcia-tcga-kirc-radiogenomics-csv]
+      locator: Data access table ("Radiologist annotations, mutation status, and clinical variables"); CSV columns
+      status: verified
+      verifiedOn: 2026-10-09
+  followUp:
+    status: present
+    note: >-
+      DaystoLastFollowup has a value for all 103 patients (5 to 448 days). Neither the page nor
+      the paper defines it or the Status column beside it, and the paper does not use them.
+    evidence:
+      sources: [tcia-tcga-kirc-radiogenomics-csv]
+      locator: DaystoLastFollowup and Status columns
+      status: verified
+      verifiedOn: 2026-10-09
+access:
+  mode: direct_open_download
+  registrationVisible: false
+  instructions: >-
+    Download the 17 KB table (FullDataforAnalysis071714.csv) from the analysis-result page; no
+    registration is needed. The images are the TCGA-KIRC collection's: the same page links a
+    manifest of the 738 series for the TCIA Data Retriever.
+  evidence:
+    sources: [tcia-tcga-kirc-radiogenomics]
+    locator: Data access table and Collections used in this analysis result
+    status: verified
+    verifiedOn: 2026-10-09
+license:
+  name: CC BY 3.0
+  url: https://creativecommons.org/licenses/by/3.0/
+  conditions: >-
+    Users must follow the TCIA Data Usage Policy and Restrictions, and attribution must include
+    the data citation with its DOI. The authors recommend the 2015 Abdominal Imaging paper as the
+    best source of further information.
+deidentification:
+  statement: >-
+    The Cancer Imaging Archive describes itself as "a service which de-identifies and hosts" cancer
+    images. The table identifies patients only by TCGA barcode and holds no dates; age is in years
+    and follow-up in days.
+  status: present
+  evidence:
+    sources: [tcia-tcga-kirc-radiogenomics, tcia-tcga-kirc-radiogenomics-csv]
+    locator: Page footer, About the Cancer Imaging Archive; CSV columns
+    status: verified
+    verifiedOn: 2026-10-09
+pairing:
+  - kind: same_patient
+    modalities: [ct, mri, pathology, clinical_table, molecular]
+    status: present
+    note: >-
+      Every row's barcode is a TCGA-KIRC patient in The Cancer Imaging Archive (all 103 appear in
+      its series list), so the features join to the scans and, through the GDC, to the slides and
+      clinical records.
+    evidence:
+      sources: [tcia-tcga-kirc-radiogenomics-csv, tcia-tcga-kirc-series]
+      locator: First CSV column matched against PatientID in the TCIA series list
+      status: verified
+      verifiedOn: 2026-10-09
+dictionary:
+  completeness: complete_for_inspected_release
+  inspectedScope: >-
+    FullDataforAnalysis071714.csv, all 23 columns and 103 rows; meanings from the paper's methods
+    and Table 1. The image manifest was matched against the TCIA series list; no image was
+    downloaded.
+structure: >-
+  One CSV, one row per patient. An unnamed first column holds the TCGA barcode. Then come six
+  mutation flags (BAP1, PBRM1, VHL, SETD2, KDM5C, MUC4; TRUE or FALSE), DaystoLastFollowup,
+  Status, Age, Gender, HistGrade and Stage, and the imaging columns: AxisLength (tumour size),
+  MultipleTumors, NumberLeftTumors, NumberRightTumors, Side, WellDefinedMargin,
+  SolidComposition, Necrosis, Calcification and GrowthPattern. NA marks a value not assessed.
+  The images are the TCGA-KIRC collection's DICOM series, listed in the page's manifest.
+citation: >-
+  Shinagare AB, Vikram R, Jaffe C, Akin O, Kirby J, Huang E, Freymann J, Sainani NI, Sadow CA,
+  Bathala TK, Rubin DL, Oto A, Heller MT, Surabhi VR, Katabathina V, Silverman SG. (2014).
+  Radiogenomics of Clear Cell Renal Cell Carcinoma: Preliminary Findings of The Cancer Genome
+  Atlas-Renal Cell Carcinoma (TCGA-RCC) Research Group. The Cancer Imaging Archive.
+  doi:10.7937/K9/TCIA.2014.K6M61GDW. Paper: Abdominal Imaging 40(6):1684–1692 (2015),
+  doi:10.1007/s00261-015-0386-z.
+limitations:
+  - Each feature is one summary value of three readers; the individual scores are not released, and agreement was low for margin and inconclusive for composition, necrosis, growth pattern and calcification.
+  - The table does not say which study or series was scored. TCIA's image list has both CT and MR series for 10 patients, while the paper reports both for 3.
+  - Small cohort for genotype work, from the first patients on the TCGA portal rather than a random sample. Five patients have a BAP1 mutation and six KDM5C, and none of the paper's associations remained significant after correction for multiple testing.
+  - Status, Side, MultipleTumors and the two tumour-count columns are not defined by the provider.
+  - Not independent of TCGA-KIRC; its counts must not be added to the collection's.
+eligibility:
+  publicAccess:
+    status: pass
+    note: The table downloads from the analysis-result page without registration.
+    evidence:
+      sources: [tcia-tcga-kirc-radiogenomics]
+      status: verified
+      verifiedOn: 2026-10-09
+  deidentification:
+    status: pass
+    note: The archive states that it de-identifies what it hosts, and the table holds only TCGA barcodes, no dates.
+    evidence:
+      sources: [tcia-tcga-kirc-radiogenomics, tcia-tcga-kirc-radiogenomics-csv]
+      status: verified
+      verifiedOn: 2026-10-09
+  noPhiHosted:
+    status: pass
+    note: This record hosts descriptions only; the table is not mirrored.
+  termsPermitUse:
+    status: pass
+    note: CC BY 3.0 permits reuse with attribution.
+    evidence:
+      sources: [tcia-tcga-kirc-radiogenomics]
+      status: verified
+      verifiedOn: 2026-10-09
+  samplePermission:
+    status: pass
+    note: No preview images are shown for this release, so no per-image permission was needed.
+catalogStatus: draft
+verifiedOn: 2026-10-09
+researchedBy: agent
+approvedBy: null
+approvedOn: null
+sources:
+  - tcia-tcga-kirc-radiogenomics
+  - tcia-tcga-kirc-radiogenomics-csv
+  - tcia-tcga-kirc-radiogenomics-manifest
+  - shinagare-2015
+  - tcia-tcga-kirc-series

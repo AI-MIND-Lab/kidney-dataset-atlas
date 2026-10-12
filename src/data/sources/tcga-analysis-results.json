@@ -1,0 +1,72 @@
+[
+	{
+		"id": "tcia-tcga-kirc-radiogenomics",
+		"url": "https://www.cancerimagingarchive.net/analysis-result/tcga-kirc-radiogenomics/",
+		"title": "TCGA-KIRC-Radiogenomics analysis result on The Cancer Imaging Archive (Version 1, updated 2015-05-28)",
+		"locator": "Snapshot, summary, data access table, collections used, data citation and related publications",
+		"accessedOn": "2026-10-09"
+	},
+	{
+		"id": "tcia-tcga-kirc-radiogenomics-csv",
+		"url": "https://www.cancerimagingarchive.net/wp-content/uploads/FullDataforAnalysis071714.csv",
+		"title": "TCGA-KIRC-Radiogenomics table FullDataforAnalysis071714.csv",
+		"locator": "All 23 columns and 103 rows; sha256 11d705c56219641575d13bac29c00f89bdfbe55a67fc3c2c86ce5199ae38c3b6",
+		"accessedOn": "2026-10-09"
+	},
+	{
+		"id": "tcia-tcga-kirc-radiogenomics-manifest",
+		"url": "https://www.cancerimagingarchive.net/wp-content/uploads/doiJNLP-DG2Mvxzc.tcia",
+		"title": "TCIA image list for TCGA-KIRC-Radiogenomics (TCIA Data Retriever manifest)",
+		"locator": "All 738 series UIDs, matched against the TCIA API series list for TCGA-KIRC",
+		"accessedOn": "2026-10-09"
+	},
+	{
+		"id": "shinagare-2015",
+		"url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4534327/",
+		"title": "Shinagare AB, Vikram R, Jaffe C, et al. Radiogenomics of clear cell renal cell carcinoma: preliminary findings of The Cancer Genome Atlas–Renal Cell Carcinoma (TCGA–RCC) Imaging Research Group. Abdominal Imaging 40(6):1684–1692, 2015. doi:10.1007/s00261-015-0386-z (author manuscript in PMC)",
+		"locator": "Methods (patient cohort, image feature set, image review, mutational status, statistical analysis), Results, Table 1 and the limitations paragraph",
+		"accessedOn": "2026-10-09"
+	},
+	{
+		"id": "tcia-crowds-cure-2017",
+		"url": "https://www.cancerimagingarchive.net/analysis-result/crowds-cure-2017/",
+		"title": "Crowds-Cure-2017 analysis result on The Cancer Imaging Archive (Version 1, updated 2018-05-17)",
+		"locator": "Snapshot, summary, data access table, collections used, data citation and detailed description",
+		"accessedOn": "2026-10-09"
+	},
+	{
+		"id": "tcia-crowds-cure-2017-csv",
+		"url": "https://www.cancerimagingarchive.net/wp-content/uploads/CrowdsCureCancer2017Annotations.csv",
+		"title": "Crowds-Cure-2017 measurements CrowdsCureCancer2017Annotations.csv",
+		"locator": "All 20 columns and 2,345 rows, of which the 1,282 rows with anatomy Renal were profiled; sha256 bf410b38813e55bc0cda6ff2b36ca1d7a993d6046ef04411a6e7beb0d2c77493",
+		"accessedOn": "2026-10-09"
+	},
+	{
+		"id": "tcia-crowds-cure-2017-clinical",
+		"url": "https://www.cancerimagingarchive.net/wp-content/uploads/ccc2017clinical.csv",
+		"title": "Crowds-Cure-2017 clinical data snapshot ccc2017clinical.csv",
+		"locator": "All 17 columns and 352 rows, of which the 159 TCGA-KIRC rows were profiled; sha256 f599c7003a8967cf938c9bac126c36c943dbdf235b893f097ca02226e92612fc",
+		"accessedOn": "2026-10-09"
+	},
+	{
+		"id": "tcia-crowds-cure-2017-sr",
+		"url": "https://www.cancerimagingarchive.net/wp-content/uploads/CrowdsCureCancer-dicomsrfiles_20180830.zip",
+		"title": "Crowds-Cure-2017 DICOM structured reports (CrowdsCureCancer-dicomsrfiles_20180830.zip)",
+		"locator": "File list (2,334 .dcm files) and the TCGA barcodes each file names; the reports were not otherwise parsed",
+		"accessedOn": "2026-10-09"
+	},
+	{
+		"id": "tcia-crowds-cure-2017-manifest",
+		"url": "https://www.cancerimagingarchive.net/wp-content/uploads/RSNA2017CCC-doiJNLP-e8nBWDCC.tcia",
+		"title": "TCIA image list for Crowds-Cure-2017 (TCIA Data Retriever manifest)",
+		"locator": "All 443 series UIDs, matched against the TCIA API series list for TCGA-KIRC",
+		"accessedOn": "2026-10-09"
+	},
+	{
+		"id": "tcia-crowds-cure-2018",
+		"url": "https://www.cancerimagingarchive.net/analysis-result/crowds-cure-2018/",
+		"title": "Crowds-Cure-2018 analysis result on The Cancer Imaging Archive (Version 1, updated 2019-05-30)",
+		"locator": "Summary, which describes how the 2017 measurements were collected",
+		"accessedOn": "2026-10-09"
+	}
+]

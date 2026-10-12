@@ -9,7 +9,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import type { z } from 'astro/zod';
 import { count, overlap, qualityFinding, relation, sample, source, studyUse, variable } from './schemas.mjs';
 import type { CompareCell, CompareEntry } from './compare';
-import { accessLabel, completenessLabel, countLabel, dateLabel, humanize, stateLabel } from './display';
+import { accessLabel, completenessLabel, countLabel, dateLabel, facetValueLabel, humanize, stateLabel } from './display';
 import { combineFacets, FACET_KEYS, type ExplorerEntry, type FacetKey } from './explorer';
 import { collectSourceIds } from './records';
 import { datasetPath, releasePath, SITE } from './site';
@@ -290,12 +290,24 @@ export async function compareEntries(): Promise<CompareEntry[]> {
 					images: countCell(data.counts.images),
 					patches: countCell(data.counts.patches),
 					records: countCell(data.counts.records),
-					disease: listCell(dataset.data.diseaseTags.map(humanize), 'Not documented'),
-					modalities: listCell(data.modalities.map(humanize), 'Not documented'),
-					annotations: listCell(
-						data.annotations.filter((value) => value !== 'not_documented').map(humanize),
+					disease: listCell(
+						dataset.data.diseaseTags.map((value) => facetValueLabel('disease', value)),
 						'Not documented',
 					),
+					modalities: listCell(
+						data.modalities.map((value) => facetValueLabel('modality', value)),
+						'Not documented',
+					),
+					annotations: listCell(
+						data.annotations
+							.filter((value) => value !== 'not_documented')
+							.map((value) => facetValueLabel('annotations', value)),
+						provenance?.kind === 'none' ? 'None' : 'Not documented',
+					),
+					annotationTerms:
+						data.annotationTerms.length > 0
+							? KNOWN_CELL(data.annotationTerms.map((term) => `“${term.value}”`).join(' · '))
+							: UNKNOWN_CELL('Not yet recorded'),
 					annotationProvenance: provenance
 						? provenance.kind === 'not_documented'
 							? UNKNOWN_CELL('Not documented')
