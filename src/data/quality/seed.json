@@ -46,15 +46,15 @@
 		"id": "kits23-annotation-method",
 		"release": "kits23",
 		"category": "potential_check",
-		"description": "Segmentations were produced by crowd workers following bounding boxes and reference pins placed by medical trainees, with three independent annotations per region of interest, rather than directly by radiologists. Anyone relying on boundary precision should check how the three annotations were combined.",
-		"inspectedScope": "The annotation method described in the KiTS21 publication. No segmentation file was examined, and this description may not hold for cases added after KiTS21.",
+		"description": "The KiTS23 process uses one trainee delineation per region of interest, followed by trainee review and revisions. Experts further review cases as needed when reference labels have low agreement with a baseline nnU-Net's cross-validation predictions. This differs from KiTS21's three-delineation process; inherited cases require separate consideration. The number of cases receiving this additional expert review was not established.",
+		"inspectedScope": "Official KiTS23 Data Annotation Process and KiTS21 publication, section 2.2. No segmentation volumes were inspected for this note; no case-level error rate was measured.",
 		"affected": {
 			"value": null,
 			"status": "not_verified"
 		},
-		"detection": "Described by the dataset's own publication.",
+		"detection": "Annotation and review procedures documented by the challenge organizers.",
 		"impact": "Unclear without inspection; it is a property of the annotation process, not a known error.",
-		"handling": "Inspect the per-case annotation instances in the repository before treating boundaries as a gold standard.",
-		"sources": ["kits21-paper", "kits23-case-listing"]
+		"handling": "Check annotation provenance and mask aggregation for the cases used, and visually review boundaries relevant to the study.",
+		"sources": ["kits23-challenge-page", "kits21-paper", "kits23-case-listing"]
 	}
 ]

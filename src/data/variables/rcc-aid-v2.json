@@ -151,5 +151,1166 @@
 			"status": "verified",
 			"verifiedOn": "2026-09-26"
 		}
+	},
+	{
+		"id": "rcc-aid-v2-patientname",
+		"release": "rcc-aid-v2",
+		"originalName": "PatientName",
+		"file": "metadata.csv",
+		"definition": "Deidentified patient-name field containing TCGA identifiers.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "identifier",
+		"group": "clinical",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: 91 distinct nonblank values. Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, PatientName column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-ethnicgroup",
+		"release": "rcc-aid-v2",
+		"originalName": "EthnicGroup",
+		"file": "metadata.csv",
+		"definition": "Ethnicity field; meanings of numeric codes are not documented in the inspected release.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "1.0",
+				"meaning": "Source value; no additional code definition verified (5 of 129 series records)"
+			},
+			{
+				"code": "2.0",
+				"meaning": "Source value; no additional code definition verified (4 of 129 series records)"
+			}
+		],
+		"missingValues": [
+			"Blank (120 of 129 series records); reason not documented"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: \"1.0\" (5 series), \"2.0\" (4 series). Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, EthnicGroup column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-phantom",
+		"release": "rcc-aid-v2",
+		"originalName": "Phantom",
+		"file": "metadata.csv",
+		"definition": "Source metadata phantom flag; the release does not document its coding further.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "NO",
+				"meaning": "Source value; no additional code definition verified (129 of 129 series records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: \"NO\" (129 series). Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, Phantom column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-speciescode",
+		"release": "rcc-aid-v2",
+		"originalName": "SpeciesCode",
+		"file": "metadata.csv",
+		"definition": "Source species code; the metadata pairs 337915000 with Homo sapiens.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "337915000",
+				"meaning": "Source value; no additional code definition verified (129 of 129 series records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: \"337915000\" (129 series). Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, SpeciesCode column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-speciesdescription",
+		"release": "rcc-aid-v2",
+		"originalName": "SpeciesDescription",
+		"file": "metadata.csv",
+		"definition": "Species description in the source metadata.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Homo sapiens",
+				"meaning": "Source value; no additional code definition verified (129 of 129 series records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: \"Homo sapiens\" (129 series). Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, SpeciesDescription column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-studyinstanceuid",
+		"release": "rcc-aid-v2",
+		"originalName": "StudyInstanceUID",
+		"file": "metadata.csv",
+		"definition": "DICOM study identifier; several series can belong to one study.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "identifier",
+		"group": "administrative",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: 106 distinct nonblank values. Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, StudyInstanceUID column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-studydate",
+		"release": "rcc-aid-v2",
+		"originalName": "StudyDate",
+		"file": "metadata.csv",
+		"definition": "Date recorded for the source study; this does not establish an unshifted clinical date.",
+		"type": "date",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: 106 distinct nonblank values. Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, StudyDate column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-studydesc",
+		"release": "rcc-aid-v2",
+		"originalName": "StudyDesc",
+		"file": "metadata.csv",
+		"definition": "Free-text study description from source metadata, rather than a radiology report.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: 52 distinct nonblank values. Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, StudyDesc column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-admittingdiagnosisdescription",
+		"release": "rcc-aid-v2",
+		"originalName": "AdmittingDiagnosisDescription",
+		"file": "metadata.csv",
+		"definition": "Source admitting-diagnosis description; predominantly blank.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"Blank (127 of 129 series records); reason not documented"
+		],
+		"observationLevel": "patient",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "clinical",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: \"PAIN\" (1 series), \"ABDOMINAL PAIN\" (1 series). Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, AdmittingDiagnosisDescription column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-studyid",
+		"release": "rcc-aid-v2",
+		"originalName": "StudyID",
+		"file": "metadata.csv",
+		"definition": "Source study-ID field; blank in the inspected release.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"Blank (129 of 129 series records); reason not documented"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: none. Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, StudyID column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-longitudinaltemporaleventtype",
+		"release": "rcc-aid-v2",
+		"originalName": "LongitudinalTemporalEventType",
+		"file": "metadata.csv",
+		"definition": "Source longitudinal-event field; blank in the inspected release.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"Blank (129 of 129 series records); reason not documented"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: none. Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, LongitudinalTemporalEventType column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-longitudinaltemporaloffsetfromevent",
+		"release": "rcc-aid-v2",
+		"originalName": "LongitudinalTemporalOffsetFromEvent",
+		"file": "metadata.csv",
+		"definition": "Source longitudinal-offset field; blank in the inspected release. Units and clinical meaning are not documented.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"Blank (129 of 129 series records); reason not documented"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: none. Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, LongitudinalTemporalOffsetFromEvent column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-collection",
+		"release": "rcc-aid-v2",
+		"originalName": "Collection",
+		"file": "metadata.csv",
+		"definition": "TCGA source collection identifying the renal carcinoma cohort.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "TCGA-KIRC",
+				"meaning": "Clear cell RCC (85 of 129 series records)"
+			},
+			{
+				"code": "TCGA-KIRP",
+				"meaning": "Papillary RCC (26 of 129 series records)"
+			},
+			{
+				"code": "TCGA-KICH",
+				"meaning": "Chromophobe RCC (18 of 129 series records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: \"TCGA-KIRC\" (85 series), \"TCGA-KIRP\" (26 series), \"TCGA-KICH\" (18 series). Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, Collection column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-site",
+		"release": "rcc-aid-v2",
+		"originalName": "Site",
+		"file": "metadata.csv",
+		"definition": "Source institution/site code; code expansions are not documented in the inspected metadata.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "UPMC",
+				"meaning": "Source value; no additional code definition verified (2 of 129 series records)"
+			},
+			{
+				"code": "UNC",
+				"meaning": "Source value; no additional code definition verified (22 of 129 series records)"
+			},
+			{
+				"code": "MSKCC",
+				"meaning": "Source value; no additional code definition verified (29 of 129 series records)"
+			},
+			{
+				"code": "MDA",
+				"meaning": "Source value; no additional code definition verified (9 of 129 series records)"
+			},
+			{
+				"code": "Mayo",
+				"meaning": "Source value; no additional code definition verified (19 of 129 series records)"
+			},
+			{
+				"code": "BWH",
+				"meaning": "Source value; no additional code definition verified (12 of 129 series records)"
+			},
+			{
+				"code": "NCIUOB",
+				"meaning": "Source value; no additional code definition verified (21 of 129 series records)"
+			},
+			{
+				"code": "Roswell Park",
+				"meaning": "Source value; no additional code definition verified (15 of 129 series records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: \"UPMC\" (2 series), \"UNC\" (22 series), \"MSKCC\" (29 series), \"MDA\" (9 series), \"Mayo\" (19 series), \"BWH\" (12 series), \"NCIUOB\" (21 series), \"Roswell Park\" (15 series). Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, Site column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-modality",
+		"release": "rcc-aid-v2",
+		"originalName": "Modality",
+		"file": "metadata.csv",
+		"definition": "Imaging modality recorded for the source series.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "CT",
+				"meaning": "Source value; no additional code definition verified (129 of 129 series records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: \"CT\" (129 series). Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, Modality column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-protocolname",
+		"release": "rcc-aid-v2",
+		"originalName": "ProtocolName",
+		"file": "metadata.csv",
+		"definition": "Scanner protocol name from source metadata.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"Blank (1 of 129 series records); reason not documented"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: 68 distinct nonblank values. Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, ProtocolName column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-seriesdate",
+		"release": "rcc-aid-v2",
+		"originalName": "SeriesDate",
+		"file": "metadata.csv",
+		"definition": "Date recorded for the source series.",
+		"type": "date",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"Blank (9 of 129 series records); reason not documented"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: 99 distinct nonblank values. Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, SeriesDate column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-seriesdescription",
+		"release": "rcc-aid-v2",
+		"originalName": "SeriesDescription",
+		"file": "metadata.csv",
+		"definition": "Free-text source-series description; this is not a free-text radiology report.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: 89 distinct nonblank values. Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, SeriesDescription column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-bodypartexamined",
+		"release": "rcc-aid-v2",
+		"originalName": "BodyPartExamined",
+		"file": "metadata.csv",
+		"definition": "Source anatomical-region field.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "KIDNEY",
+				"meaning": "Source value; no additional code definition verified (110 of 129 series records)"
+			},
+			{
+				"code": "Kidney",
+				"meaning": "Source value; no additional code definition verified (19 of 129 series records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: \"KIDNEY\" (110 series), \"Kidney\" (19 series). Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, BodyPartExamined column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-seriesnumber",
+		"release": "rcc-aid-v2",
+		"originalName": "SeriesNumber",
+		"file": "metadata.csv",
+		"definition": "Source series number, stored with a decimal suffix in the CSV.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: 13 distinct nonblank values. Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, SeriesNumber column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-annotationsflag",
+		"release": "rcc-aid-v2",
+		"originalName": "AnnotationsFlag",
+		"file": "metadata.csv",
+		"definition": "Source annotation-status field; blank values do not imply that the released masks are missing.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"Blank (129 of 129 series records); reason not documented"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: none. Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, AnnotationsFlag column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-manufacturer",
+		"release": "rcc-aid-v2",
+		"originalName": "Manufacturer",
+		"file": "metadata.csv",
+		"definition": "Source scanner manufacturer.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "SIEMENS",
+				"meaning": "Source value; no additional code definition verified (67 of 129 series records)"
+			},
+			{
+				"code": "GE MEDICAL SYSTEMS",
+				"meaning": "Source value; no additional code definition verified (50 of 129 series records)"
+			},
+			{
+				"code": "Philips Medical Systems",
+				"meaning": "Source value; no additional code definition verified (1 of 129 series records)"
+			},
+			{
+				"code": "Philips",
+				"meaning": "Source value; no additional code definition verified (8 of 129 series records)"
+			},
+			{
+				"code": "TOSHIBA",
+				"meaning": "Source value; no additional code definition verified (3 of 129 series records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: \"SIEMENS\" (67 series), \"GE MEDICAL SYSTEMS\" (50 series), \"Philips Medical Systems\" (1 series), \"Philips\" (8 series), \"TOSHIBA\" (3 series). Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, Manufacturer column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-manufacturermodelname",
+		"release": "rcc-aid-v2",
+		"originalName": "ManufacturerModelName",
+		"file": "metadata.csv",
+		"definition": "Source scanner model name.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Sensation 16",
+				"meaning": "Source value; no additional code definition verified (15 of 129 series records)"
+			},
+			{
+				"code": "LightSpeed Ultra",
+				"meaning": "Source value; no additional code definition verified (5 of 129 series records)"
+			},
+			{
+				"code": "Emotion 6",
+				"meaning": "Source value; no additional code definition verified (2 of 129 series records)"
+			},
+			{
+				"code": "Sensation 64",
+				"meaning": "Source value; no additional code definition verified (25 of 129 series records)"
+			},
+			{
+				"code": "Definition",
+				"meaning": "Source value; no additional code definition verified (13 of 129 series records)"
+			},
+			{
+				"code": "Definition AS+",
+				"meaning": "Source value; no additional code definition verified (6 of 129 series records)"
+			},
+			{
+				"code": "LightSpeed Plus",
+				"meaning": "Source value; no additional code definition verified (4 of 129 series records)"
+			},
+			{
+				"code": "LightSpeed16",
+				"meaning": "Source value; no additional code definition verified (30 of 129 series records)"
+			},
+			{
+				"code": "Emotion 16",
+				"meaning": "Source value; no additional code definition verified (1 of 129 series records)"
+			},
+			{
+				"code": "LightSpeed VCT",
+				"meaning": "Source value; no additional code definition verified (7 of 129 series records)"
+			},
+			{
+				"code": "Philips CT Aura",
+				"meaning": "Source value; no additional code definition verified (1 of 129 series records)"
+			},
+			{
+				"code": "LightSpeed QX/i",
+				"meaning": "Source value; no additional code definition verified (1 of 129 series records)"
+			},
+			{
+				"code": "Volume Zoom",
+				"meaning": "Source value; no additional code definition verified (1 of 129 series records)"
+			},
+			{
+				"code": "Mx8000 IDT 16",
+				"meaning": "Source value; no additional code definition verified (1 of 129 series records)"
+			},
+			{
+				"code": "Brilliance 64",
+				"meaning": "Source value; no additional code definition verified (7 of 129 series records)"
+			},
+			{
+				"code": "Aquilion",
+				"meaning": "Source value; no additional code definition verified (3 of 129 series records)"
+			},
+			{
+				"code": "Sensation 40",
+				"meaning": "Source value; no additional code definition verified (1 of 129 series records)"
+			},
+			{
+				"code": "LightSpeed Pro 32",
+				"meaning": "Source value; no additional code definition verified (1 of 129 series records)"
+			},
+			{
+				"code": "Optima CT660",
+				"meaning": "Source value; no additional code definition verified (2 of 129 series records)"
+			},
+			{
+				"code": "SOMATOM Definition",
+				"meaning": "Source value; no additional code definition verified (1 of 129 series records)"
+			},
+			{
+				"code": "Sensation 4",
+				"meaning": "Source value; no additional code definition verified (2 of 129 series records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: 21 distinct nonblank values. Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, ManufacturerModelName column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-pixelspacing-mm-row",
+		"release": "rcc-aid-v2",
+		"originalName": "PixelSpacing(mm)-Row",
+		"file": "metadata.csv",
+		"definition": "Row pixel spacing in millimeters as recorded in the column header; values are preserved as text.",
+		"type": "text",
+		"unit": "mm",
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: 58 distinct nonblank values. Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, PixelSpacing(mm)-Row column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-slicethickness-mm",
+		"release": "rcc-aid-v2",
+		"originalName": "SliceThickness(mm)",
+		"file": "metadata.csv",
+		"definition": "Slice thickness in millimeters. A combined-value string occurs, so this field is not uniformly scalar numeric data.",
+		"type": "text",
+		"unit": "mm",
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: \"5.000000\" (78 series), \"1.250000\" (2 series), \"2.500000, 5.000000\" (13 series), \"2.500000\" (23 series), \"0.625000\" (1 series), \"2.000000\" (7 series), \"1.000000\" (2 series), \"3.000000\" (3 series). Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, SliceThickness(mm) column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-softwareversions",
+		"release": "rcc-aid-v2",
+		"originalName": "SoftwareVersions",
+		"file": "metadata.csv",
+		"definition": "Source scanner software-version strings.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"Blank (1 of 129 series records); reason not documented"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: 33 distinct nonblank values. Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, SoftwareVersions column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-imagecount",
+		"release": "rcc-aid-v2",
+		"originalName": "ImageCount",
+		"file": "metadata.csv",
+		"definition": "Image count recorded for a source series; this is not independently verified as the converted NIfTI slice count.",
+		"type": "integer",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "imaging",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: 89 distinct nonblank values. Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, ImageCount column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-maxsubmissiontimestamp",
+		"release": "rcc-aid-v2",
+		"originalName": "MaxSubmissionTimestamp",
+		"file": "metadata.csv",
+		"definition": "Latest submission date recorded in source metadata.",
+		"type": "date",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: 16 distinct nonblank values. Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, MaxSubmissionTimestamp column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-licensename",
+		"release": "rcc-aid-v2",
+		"originalName": "LicenseName",
+		"file": "metadata.csv",
+		"definition": "Licence name recorded for the TCIA source imaging.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "Creative Commons Attribution 3.0 Unported License",
+				"meaning": "Source value; no additional code definition verified (129 of 129 series records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: \"Creative Commons Attribution 3.0 Unported License\" (129 series). Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, LicenseName column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-licenseuri",
+		"release": "rcc-aid-v2",
+		"originalName": "LicenseURI",
+		"file": "metadata.csv",
+		"definition": "Source-image licence link; the segmentation annotations have a separate licence.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: \"http://creativecommons.org/licenses/by/3.0/\" (129 series). Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, LicenseURI column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-datadescriptionuri",
+		"release": "rcc-aid-v2",
+		"originalName": "DataDescriptionURI",
+		"file": "metadata.csv",
+		"definition": "TCIA source-collection DOI link.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: \"https://doi.org/10.7937/K9/TCIA.2016.V6PBVTDR\" (85 series), \"https://doi.org/10.7937/K9/TCIA.2016.ACWOGBEF\" (26 series), \"https://doi.org/10.7937/K9/TCIA.2016.YU3RBCZN\" (18 series). Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, DataDescriptionURI column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-filesize",
+		"release": "rcc-aid-v2",
+		"originalName": "FileSize",
+		"file": "metadata.csv",
+		"definition": "Source series file-size value; the unit is not specified in the inspected CSV.",
+		"type": "integer",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: 127 distinct nonblank values. Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, FileSize column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-releasedstatus",
+		"release": "rcc-aid-v2",
+		"originalName": "ReleasedStatus",
+		"file": "metadata.csv",
+		"definition": "Source release-status field; blank in the inspected release.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"Blank (129 of 129 series records); reason not documented"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: none. Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, ReleasedStatus column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-datereleased",
+		"release": "rcc-aid-v2",
+		"originalName": "DateReleased",
+		"file": "metadata.csv",
+		"definition": "Release date recorded in source metadata.",
+		"type": "date",
+		"unit": null,
+		"coding": [],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: 16 distinct nonblank values. Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, DateReleased column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-thirdpartyanalysis",
+		"release": "rcc-aid-v2",
+		"originalName": "ThirdPartyAnalysis",
+		"file": "metadata.csv",
+		"definition": "Source third-party-analysis field; blank in the inspected release.",
+		"type": "text",
+		"unit": null,
+		"coding": [],
+		"missingValues": [
+			"Blank (129 of 129 series records); reason not documented"
+		],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: none. Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, ThirdPartyAnalysis column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-authorized",
+		"release": "rcc-aid-v2",
+		"originalName": "Authorized",
+		"file": "metadata.csv",
+		"definition": "Source authorization field with observed code 1; its operational meaning is not documented.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "1",
+				"meaning": "Source value; no additional code definition verified (129 of 129 series records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "descriptor",
+		"group": "administrative",
+		"derivation": "raw",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: \"1\" (129 series). Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008"
+			],
+			"locator": "metadata.csv, Authorized column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-phase-name",
+		"release": "rcc-aid-v2",
+		"originalName": "phase_name",
+		"file": "metadata.csv",
+		"definition": "Radiologist-annotated CT contrast phase: arterial, venous, or delayed.",
+		"type": "categorical",
+		"unit": null,
+		"coding": [
+			{
+				"code": "arterial",
+				"meaning": "Arterial phase (26 of 129 series records)"
+			},
+			{
+				"code": "delayed",
+				"meaning": "Delayed phase (53 of 129 series records)"
+			},
+			{
+				"code": "venous",
+				"meaning": "Venous phase (50 of 129 series records)"
+			}
+		],
+		"missingValues": [],
+		"observationLevel": "examination",
+		"timePoint": null,
+		"role": "annotation",
+		"group": "imaging",
+		"derivation": "derived",
+		"provenance": "RCC-AID v2 metadata.csv inspected on 2026-10-08. Observed nonblank values: \"arterial\" (26 series), \"delayed\" (53 series), \"venous\" (50 series). Frequencies count scan/series records, not unique patients. Provider descriptions beyond the documented release fields remain unverified.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-v2-metadata-20261008",
+				"rcc-aid-paper"
+			],
+			"locator": "metadata.csv, phase_name column, all 129 records",
+			"status": "verified",
+			"verifiedOn": "2026-10-08"
+		}
 	}
 ]

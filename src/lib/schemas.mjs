@@ -183,6 +183,8 @@ export const release = z.object({
 	annotationProvenance: z
 		.object({
 			kind: z.enum(ANNOTATION_PROVENANCE),
+			/** Display wording that distinguishes annotation authorship from subsequent review. */
+			label: z.string().optional(),
 			note: z.string().optional(),
 			evidence: evidence.optional(),
 		})
@@ -493,11 +495,14 @@ export const relation = z.object({
 
 export const overlap = z.object({
 	id: recordId,
-	releases: z.array(recordId).min(2),
+	releases: z.array(recordId).min(1),
+	externalCollection: z.object({ name: z.string(), url: z.url().optional() }).nullable().default(null),
 	type: z.enum(['same_cohort', 'partial_cohort', 'superset', 'unknown']),
 	count: count.optional(),
 	explanation: z.string(),
 	evidence: evidence.optional(),
+}).refine((entry) => entry.releases.length >= 2 || entry.externalCollection !== null, {
+	message: 'An overlap requires two catalogued releases or a release and an external collection',
 });
 
 /** Collections keyed by the directory they live in. */

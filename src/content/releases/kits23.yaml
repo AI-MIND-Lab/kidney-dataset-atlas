@@ -31,22 +31,28 @@ counts:
 modalities:
   - ct
 cohort: >-
-  Patients who underwent partial or radical nephrectomy for suspected renal malignancy, with
-  pre-operative CT available. The KiTS21 publication describes the training cohort as
-  University of Minnesota patients treated between January 2011 and June 2019, with the test
-  set contributed by the Cleveland Clinic.
+  KiTS19 / C4KC-KiTS: University of Minnesota patients who underwent partial or radical
+  nephrectomy for renal tumours. KiTS21: the same 300 University of Minnesota patients as the full KiTS19 cohort,
+  with new annotations, plus a separate 100-case test cohort from Cleveland Clinic.
+  The papers report conflicting treatment periods for the shared Minnesota cohort
+  (2010–mid-2018 in KiTS19 versus January 2011–June 2019 in KiTS21); this remains unresolved.
+  KiTS23: M Health Fairview patients treated by cryoablation, partial nephrectomy or radical
+  nephrectomy for suspected renal malignancy between 2010 and 2022, with contrast-enhanced
+  preoperative CT covering all kidneys. 
 tasks:
   - segmentation
 annotations:
   - segmentation_masks
 annotationProvenance:
   kind: trainee
+  label: Trainee annotations, expert-reviewed as needed after baseline nnU-Net quality checks
   note: >-
     Trainees (residents, medical students and pre-medical undergraduates, trained by the experts)
     placed 3D bounding boxes and then 2D contours around each region, consulting experts when in
     doubt; the contours were post-processed into segmentations and reviewed by trainees. Unlike
     KiTS21, each region was annotated once. Experts (attending radiologists, urologic oncologists
-    and fellows) reviewed cases where a baseline nnU-Net disagreed with the labels.
+    and fellows) further reviewed cases as needed when agreement between the reference labels
+    and a baseline nnU-Net's cross-validation predictions was low.
   evidence:
     sources: [kits23-challenge-page]
     locator: Annotation section
@@ -65,8 +71,13 @@ features:
       status: verified
       verifiedOn: 2026-09-19
   clinicalData:
-    status: not_documented
-    note: No clinical table for the KiTS23 release was located in the repository or on the challenge page. Earlier KiTS editions released clinical context; that was not verified for this release.
+    status: present
+    note: Case-level clinical metadata are provided in dataset/kits23.json and linked to images by case_id.
+    evidence:
+      sources: [kits23-clinical-metadata]
+      locator: Top-level fields in dataset/kits23.json
+      status: verified
+      verifiedOn: 2026-10-07
   followUp:
     status: not_documented
 access:
@@ -110,23 +121,21 @@ dictionary:
   completeness: partial
   inspectedScope: >-
     The label configuration file in the dataset repository (kits23/configuration/labels.py) and
-    the challenge page. The imaging itself was not downloaded, and no clinical table was located.
+    the challenge page. The imaging itself was not downloaded.
     Subsequent additions use field names and encodings checked in dataset/kits23.json,
     with descriptions adapted from the supplied KiTS21 dictionary. Clinical meanings
     remain unverified; KiTS21 missing-instance counts were not cross-referenced and are omitted.
 notes:
   - title: Additional KiTS23 information
     text: >-
-      A later review located clinical metadata in dataset/kits23.json: 40 top-level fields
-      covering demographics, treatment, pathology, renal function and outcomes. This
-      updates the earlier statement that no clinical table was located. Public case IDs
-      are case_00000 to case_00299 and case_00400 to case_00588; the gap is intentional.
+      Public case IDs
+      are case_00000 to case_00299 and case_00400 to case_00588.
+      IDs case_00300 to case_00399 are absent from the public release; the reason for
+      this numbering gap was not established from the sources checked.
       Before preprocessing, check every expected case for imaging.nii.gz and
       segmentation.nii.gz. If images are missing, retry the download or use the official
       Hugging Face imaging source linked in the README. Tumor label 2 indicates a mass
-      suspected of malignancy, not a confirmed malignant diagnosis. The official KiTS23
-      cohort also includes cryoablation cases treated at M Health Fairview between 2010
-      and 2022; this adds to the earlier KiTS21 cohort description. The newer KiTS23
+      suspected of malignancy, not a confirmed malignant diagnosis. The newer KiTS23
       annotation procedure differs from the inherited KiTS21 procedure; the precise
       aggregation of inherited masks requires case-level review.
     evidence:

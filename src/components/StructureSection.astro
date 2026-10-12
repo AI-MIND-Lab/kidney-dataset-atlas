@@ -105,6 +105,10 @@ const relationTarget = (entry: Relation) =>
 						{overlaps.map((entry) => (
 							<tr>
 								<th scope="row">
+									{entry.externalCollection && (
+										entry.externalCollection.url ? <a href={entry.externalCollection.url}>{entry.externalCollection.name}</a> : entry.externalCollection.name
+									)}
+									{entry.externalCollection && entry.releases.some((id) => id !== data.id) && ', '}
 									{entry.releases
 										.filter((id) => id !== data.id)
 										.map((id) => releaseLabel(id))

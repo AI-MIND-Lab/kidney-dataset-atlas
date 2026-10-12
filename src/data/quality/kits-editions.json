@@ -1,0 +1,90 @@
+[
+	{
+		"id": "kits19-repeated-annotation-agreement",
+		"release": "kits19",
+		"category": "published_report",
+		"description": "The KiTS19 authors repeated annotation on 30 randomly selected training cases. Mean Dice agreement was 0.983 for kidney plus tumour and 0.923 for tumour alone. These are repeat-annotation agreement scores, not model performance or a guarantee that every mask is correct.",
+		"inspectedScope": "KiTS19 data paper, section 4 Technical Validation and Table 1. The study covered 30 of the 210 public training cases; no images or masks were independently inspected for this note.",
+		"sources": [
+			"kits19-data-paper"
+		],
+		"affected": {
+			"value": null,
+			"status": "not_verified"
+		}
+	},
+	{
+		"id": "c4kc-kits-inherited-label-quality",
+		"release": "c4kc-kits",
+		"category": "published_report",
+		"description": "C4KC-KiTS archives the 210 KiTS19 public training cases rather than a newly annotated cohort. The KiTS19 paper reports repeat-annotation agreement on 30 training cases: mean Dice 0.983 for kidney plus tumour and 0.923 for tumour alone. That study does not validate the DICOM conversion or establish a separate archive-wide error rate.",
+		"inspectedScope": "KiTS19 data paper, sections 3 Data Records and 4 Technical Validation, plus the TCIA collection summary. No archived DICOM images or DICOM SEG masks were inspected.",
+		"sources": [
+			"kits19-data-paper",
+			"c4kc-kits-tcia"
+		],
+		"affected": {
+			"value": null,
+			"status": "not_verified"
+		}
+	},
+	{
+		"id": "kits21-mask-aggregation-check",
+		"release": "kits21",
+		"category": "potential_check",
+		"description": "KiTS21 provides three independent delineations per region of interest and aggregated masks made by union, intersection and majority vote. These alternatives define different reference boundaries; record which aggregation is used when comparing training or evaluation results.",
+		"inspectedScope": "KiTS21 repository README, Folder Structure, and challenge paper section 2.2. No masks were downloaded or compared for this note.",
+		"sources": [
+			"kits21-repo",
+			"kits21-paper"
+		],
+		"affected": {
+			"value": null,
+			"status": "not_verified"
+		}
+	},
+	{
+		"id": "kits21-cohort-representativeness",
+		"release": "kits21",
+		"category": "published_report",
+		"description": "The KiTS21 paper reports roughly twice as many men as women in both training and test cohorts. Training patients were treated at one academic center, although their scans came from multiple referring institutions; the test cohort came from Cleveland Clinic. These cohort differences should be considered when assessing generalization.",
+		"inspectedScope": "KiTS21 challenge paper, sections 2.1.1–2.1.3 and Table 1. Published cohort summaries were reviewed; no patient-level demographic analysis was performed.",
+		"sources": [
+			"kits21-paper"
+		],
+		"affected": {
+			"value": null,
+			"status": "not_verified"
+		}
+	},
+	{
+		"id": "kits23-download-completeness-check",
+		"release": "kits23",
+		"category": "potential_check",
+		"description": "KiTS23 segmentations are stored in the repository, while CT images are downloaded separately. Before preprocessing, confirm that every expected public case contains both imaging.nii.gz and segmentation.nii.gz. This is a completeness check, not evidence of a provider-wide missing-image defect.",
+		"inspectedScope": "Official KiTS23 README, Data Download, and challenge page download instructions. No local download was audited and no missing-file count was established.",
+		"sources": [
+			"kits23-readme",
+			"kits23-challenge-page"
+		],
+		"affected": {
+			"value": null,
+			"status": "not_verified"
+		}
+	},
+	{
+		"id": "kits23-metadata-definition-check",
+		"release": "kits23",
+		"category": "potential_check",
+		"description": "The catalog's clinical descriptions were adapted from the supplied KiTS21 dictionary, while field names and storage encodings were checked against KiTS23 metadata. Clinical definitions and KiTS21 missing-instance counts have not been verified for KiTS23. Check release-specific definitions and calculate missingness from KiTS23 before analysis.",
+		"inspectedScope": "KiTS23 dataset/kits23.json field audit and this catalog's metadata provenance notes. No comparison of patient-level missingness between editions was performed.",
+		"sources": [
+			"kits23-clinical-metadata",
+			"kits21-paper"
+		],
+		"affected": {
+			"value": null,
+			"status": "not_verified"
+		}
+	}
+]

@@ -1,0 +1,16 @@
+[
+	{
+		"id": "rcc-aid-v2-metadata-20261008",
+		"url": "https://zenodo.org/records/20719257/files/metadata.csv?download=1",
+		"title": "RCC-AID version 2.0.0 metadata.csv",
+		"locator": "All 41 header fields and 129 series records; no scans or masks downloaded",
+		"accessedOn": "2026-10-08"
+	},
+	{
+		"id": "rcc-aid-v2-version-log-20261008",
+		"url": "https://zenodo.org/records/20719257",
+		"title": "RCC-AID version 2.0.0 release log",
+		"locator": "Version log; dataset contents and download sizes",
+		"accessedOn": "2026-10-08"
+	}
+]
