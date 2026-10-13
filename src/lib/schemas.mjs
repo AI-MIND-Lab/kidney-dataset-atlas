@@ -252,6 +252,8 @@ export const release = z.object({
 		.default({}),
 	/** Files, formats, identifiers, joins and observation levels, in prose. */
 	structure: z.string().optional(),
+	/** Additional release context without replacing existing catalogue text. */
+	notes: z.array(z.object({ title: z.string(), text: z.string(), evidence: evidence })).default([]),
 	citation: z.string().optional(),
 	limitations: z.array(z.string()).default([]),
 	eligibility,

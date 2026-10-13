@@ -111,6 +111,29 @@ dictionary:
   inspectedScope: >-
     The label configuration file in the dataset repository (kits23/configuration/labels.py) and
     the challenge page. The imaging itself was not downloaded, and no clinical table was located.
+    Subsequent additions use field names and encodings checked in dataset/kits23.json,
+    with descriptions adapted from the supplied KiTS21 dictionary. Clinical meanings
+    remain unverified; KiTS21 missing-instance counts were not cross-referenced and are omitted.
+notes:
+  - title: Additional KiTS23 information
+    text: >-
+      A later review located clinical metadata in dataset/kits23.json: 40 top-level fields
+      covering demographics, treatment, pathology, renal function and outcomes. This
+      updates the earlier statement that no clinical table was located. Public case IDs
+      are case_00000 to case_00299 and case_00400 to case_00588; the gap is intentional.
+      Before preprocessing, check every expected case for imaging.nii.gz and
+      segmentation.nii.gz. If images are missing, retry the download or use the official
+      Hugging Face imaging source linked in the README. Tumor label 2 indicates a mass
+      suspected of malignancy, not a confirmed malignant diagnosis. The official KiTS23
+      cohort also includes cryoablation cases treated at M Health Fairview between 2010
+      and 2022; this adds to the earlier KiTS21 cohort description. The newer KiTS23
+      annotation procedure differs from the inherited KiTS21 procedure; the precise
+      aggregation of inherited masks requires case-level review.
+    evidence:
+      sources: [kits23-clinical-metadata, kits23-readme, kits23-challenge-page]
+      locator: Metadata field names; README download instructions; The Data and annotation sections
+      status: verified
+      verifiedOn: 2026-10-07
 structure: >-
   Each case directory in the repository holds segmentation.nii.gz together with an instances
   directory of individual annotation instances; the imaging volume is fetched separately by the
@@ -163,7 +186,7 @@ eligibility:
       sources: [kits23-challenge-page]
       status: not_verified
 catalogStatus: draft
-verifiedOn: 2026-09-19
+verifiedOn: 2026-10-07
 researchedBy: agent
 approvedBy: null
 approvedOn: null
@@ -172,3 +195,4 @@ sources:
   - kits23-readme
   - kits21-paper
   - kits23-case-listing
+  - kits23-clinical-metadata

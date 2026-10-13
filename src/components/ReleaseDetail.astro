@@ -282,6 +282,13 @@ const isHuman = dataset.data.species === 'human';
 		<h2>Overview</h2>
 		<div class="prose"><slot /></div>
 		{data.cohort && <p><strong>Cohort:</strong> {data.cohort}</p>}
+		{data.notes.map((note) => (
+			<div class="stack">
+				<h3>{note.title}</h3>
+				<p>{note.text}</p>
+				{note.evidence.status === 'not_verified' && <p><small>Research note — not independently verified.</small></p>}
+			</div>
+		))}
 		{
 			data.tasks.length > 0 && (
 				<p>
