@@ -7,7 +7,7 @@
 			"name": "AMOS22"
 		},
 		"type": "derived_from",
-		"explanation": "The design document calls AMOS-MM an extension of AMOS22 (p. 2). 228 of its CT files (152 training and 76 validation, all named amos_0xxx) are AMOS22 labelled CT images: their size and CRC32 match amos22.zip. AMOS22 has organ masks for these scans; AMOS-MM itself releases none. The other CT files are not AMOS22 images, although most reuse AMOS22 file names (see the quality findings).",
+		"explanation": "The design document calls AMOS-MM an extension of AMOS22 (p. 2). 228 of its CT files (152 training and 76 validation, all named amos_0xxx) are AMOS22 labelled CT images. Their size and CRC32 match the files in amos22.zip. AMOS22 has organ masks for these scans, but AMOS-MM itself releases none. The other CT files are not AMOS22 images, although most reuse AMOS22 file names (see the quality findings).",
 		"evidence": {
 			"sources": [
 				"amos-mm-design-doc",

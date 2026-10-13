@@ -5,7 +5,7 @@
 		"to": "kits23",
 		"toExternal": null,
 		"type": "derived_from",
-		"explanation": "AbdomenAtlas 3.0 includes CT scans from KiTS'23: Table 1 lists 489, the same number as the public KiTS23 training cases in this catalogue, although its per-dataset counts sum to more than the 9,262 total. They are the same scans, not additional patients. AbdomenAtlas adds organ masks (from AbdomenAtlas 1.1), organ sub-region and blood-vessel masks, and generated reports. Table 1 counts 452 of these scans with kidney tumour annotations both in KiTS'23 and in AbdomenAtlas 3.0, and the paper says source datasets' ground truth was used where available. Whether the kidney lesion masks of these scans are KiTS'23's own labels, and whether KiTS'23 cysts are in them, is not stated. The release has no column naming the source dataset, but DeepTumorVQA's ID mapping gives it: 489 KiTS cases under 665 BDMAP IDs, 176 of which look like second copies (see the overlap record).",
+		"explanation": "AbdomenAtlas 3.0 includes CT scans from KiTS'23. Table 1 lists 489, the same number as the public KiTS23 training cases in this catalogue, although its per-dataset counts add up to more than the 9,262 total. They are the same scans, not additional patients. AbdomenAtlas adds organ masks (from AbdomenAtlas 1.1), organ sub-region and blood-vessel masks, and generated reports. Table 1 counts 452 of these scans with kidney tumour annotations both in KiTS'23 and in AbdomenAtlas 3.0. The paper says the source datasets' ground truth was used where available. Whether the kidney lesion masks of these scans are KiTS'23's own labels, and whether KiTS'23 cysts are in them, is not stated. The release has no column naming the source dataset, but DeepTumorVQA's ID mapping gives it. The mapping puts 489 KiTS cases under 665 BDMAP IDs, 176 of which look like second copies (see the overlap record).",
 		"evidence": {
 			"sources": [
 				"radgpt-paper",
@@ -29,7 +29,7 @@
 		"to": "ct-org-tcia",
 		"toExternal": null,
 		"type": "derived_from",
-		"explanation": "AbdomenAtlas 3.0 includes CT scans from CT-ORG: Table 1 lists 140, the same number as the CT-ORG release in this catalogue, although its per-dataset counts sum to more than the 9,262 total. They are the same scans, not additional patients. AbdomenAtlas adds lesion masks (Table 1: scans with liver tumour annotations 0 → 44, with kidney tumour annotations 0 → 21), organ sub-region and blood-vessel masks, and generated reports; its organ masks come from AbdomenAtlas 1.1. The release has no column naming the source dataset; DeepTumorVQA's ID mapping names 64 CT-ORG scans among the 9,262.",
+		"explanation": "AbdomenAtlas 3.0 includes CT scans from CT-ORG. Table 1 lists 140, the same number as the CT-ORG release in this catalogue, although its per-dataset counts add up to more than the 9,262 total. They are the same scans, not additional patients. AbdomenAtlas adds lesion masks, organ sub-region and blood-vessel masks, and generated reports. Table 1 counts 44 of these scans with liver tumour annotations and 21 with kidney tumour annotations in AbdomenAtlas 3.0, and 0 for both in CT-ORG itself. The organ masks come from AbdomenAtlas 1.1. The release has no column naming the source dataset, but DeepTumorVQA's ID mapping names 64 CT-ORG scans among the 9,262.",
 		"evidence": {
 			"sources": [
 				"radgpt-paper",
@@ -53,7 +53,7 @@
 		"to": "totalsegmentator-ct-v3",
 		"toExternal": null,
 		"type": "derived_from",
-		"explanation": "AbdomenAtlas 3.0 includes CT scans from TotalSegmentator: the paper's Table 1 does not list it, but DeepTumorVQA's ID mapping names 485 TotalSegmentator scans (s0004 to s1405) among the 9,262. They are the same scans, not additional patients.",
+		"explanation": "AbdomenAtlas 3.0 includes CT scans from TotalSegmentator. The paper's Table 1 does not list it, but DeepTumorVQA's ID mapping names 485 TotalSegmentator scans (s0004 to s1405) among the 9,262. They are the same scans, not additional patients.",
 		"evidence": {
 			"sources": [
 				"deeptumorvqa-id-mapping"
@@ -73,7 +73,7 @@
 		"to": "cptac-ccrcc-v14",
 		"toExternal": null,
 		"type": "derived_from",
-		"explanation": "AbdomenAtlas 3.0 includes CT scans from CPTAC-CCRCC: the paper's Table 1 does not list it, but DeepTumorVQA's ID mapping names 62 CPTAC-CCRCC CT scans from 24 patients among the 9,262. They are the same scans, not additional patients.",
+		"explanation": "AbdomenAtlas 3.0 includes CT scans from CPTAC-CCRCC. The paper's Table 1 does not list it, but DeepTumorVQA's ID mapping names 62 CPTAC-CCRCC CT scans from 24 patients among the 9,262. They are the same scans, not additional patients.",
 		"evidence": {
 			"sources": [
 				"deeptumorvqa-id-mapping"
@@ -95,7 +95,7 @@
 			"name": "FLARE'23"
 		},
 		"type": "derived_from",
-		"explanation": "AbdomenAtlas 3.0 includes CT scans from FLARE'23: the paper's Table 1 lists 4,100, although its per-dataset counts sum to 11,998 against the 9,262 total.",
+		"explanation": "AbdomenAtlas 3.0 includes CT scans from FLARE'23. The paper's Table 1 lists 4,100, although its per-dataset counts add up to 11,998, more than the 9,262 total.",
 		"evidence": {
 			"sources": [
 				"radgpt-paper"
@@ -116,7 +116,7 @@
 			"name": "LiTS"
 		},
 		"type": "derived_from",
-		"explanation": "AbdomenAtlas 3.0 includes CT scans from LiTS: the paper's Table 1 lists 131, although its per-dataset counts sum to 11,998 against the 9,262 total.",
+		"explanation": "AbdomenAtlas 3.0 includes CT scans from LiTS. The paper's Table 1 lists 131, although its per-dataset counts add up to 11,998, more than the 9,262 total.",
 		"evidence": {
 			"sources": [
 				"radgpt-paper"
@@ -137,7 +137,7 @@
 			"name": "TCIA-Pancreas-CT"
 		},
 		"type": "derived_from",
-		"explanation": "AbdomenAtlas 3.0 includes CT scans from TCIA-Pancreas-CT: the paper's Table 1 lists 42, although its per-dataset counts sum to 11,998 against the 9,262 total.",
+		"explanation": "AbdomenAtlas 3.0 includes CT scans from TCIA-Pancreas-CT. The paper's Table 1 lists 42, although its per-dataset counts add up to 11,998, more than the 9,262 total.",
 		"evidence": {
 			"sources": [
 				"radgpt-paper"
@@ -158,7 +158,7 @@
 			"name": "RSNA 2023 Abdominal Trauma Detection"
 		},
 		"type": "derived_from",
-		"explanation": "AbdomenAtlas 3.0 includes CT scans from RSNA 2023 Abdominal Trauma Detection: the paper's Table 1 lists 4,714, although its per-dataset counts sum to 11,998 against the 9,262 total.",
+		"explanation": "AbdomenAtlas 3.0 includes CT scans from RSNA 2023 Abdominal Trauma Detection. The paper's Table 1 lists 4,714, although its per-dataset counts add up to 11,998, more than the 9,262 total.",
 		"evidence": {
 			"sources": [
 				"radgpt-paper"
@@ -179,7 +179,7 @@
 			"name": "BTCV"
 		},
 		"type": "derived_from",
-		"explanation": "AbdomenAtlas 3.0 includes CT scans from BTCV: the paper's Table 1 lists 47, although its per-dataset counts sum to 11,998 against the 9,262 total.",
+		"explanation": "AbdomenAtlas 3.0 includes CT scans from BTCV. The paper's Table 1 lists 47, although its per-dataset counts add up to 11,998, more than the 9,262 total.",
 		"evidence": {
 			"sources": [
 				"radgpt-paper"
@@ -200,7 +200,7 @@
 			"name": "CHAOS"
 		},
 		"type": "derived_from",
-		"explanation": "AbdomenAtlas 3.0 includes CT scans from CHAOS: the paper's Table 1 lists 20, although its per-dataset counts sum to 11,998 against the 9,262 total.",
+		"explanation": "AbdomenAtlas 3.0 includes CT scans from CHAOS. The paper's Table 1 lists 20, although its per-dataset counts add up to 11,998, more than the 9,262 total.",
 		"evidence": {
 			"sources": [
 				"radgpt-paper"
@@ -221,7 +221,7 @@
 			"name": "AbdomenCT-1K"
 		},
 		"type": "derived_from",
-		"explanation": "AbdomenAtlas 3.0 includes CT scans from AbdomenCT-1K: the paper's Table 1 lists 1,050, although its per-dataset counts sum to 11,998 against the 9,262 total.",
+		"explanation": "AbdomenAtlas 3.0 includes CT scans from AbdomenCT-1K. The paper's Table 1 lists 1,050, although its per-dataset counts add up to 11,998, more than the 9,262 total.",
 		"evidence": {
 			"sources": [
 				"radgpt-paper"
@@ -242,7 +242,7 @@
 			"name": "Medical Segmentation Decathlon, six CT tasks"
 		},
 		"type": "derived_from",
-		"explanation": "AbdomenAtlas 3.0 includes CT scans from Medical Segmentation Decathlon, six CT tasks: the paper's Table 1 lists 945, although its per-dataset counts sum to 11,998 against the 9,262 total.",
+		"explanation": "AbdomenAtlas 3.0 includes CT scans from six Medical Segmentation Decathlon CT tasks. The paper's Table 1 lists 945, although its per-dataset counts add up to 11,998, more than the 9,262 total.",
 		"evidence": {
 			"sources": [
 				"radgpt-paper"
@@ -263,7 +263,7 @@
 			"name": "WORD"
 		},
 		"type": "derived_from",
-		"explanation": "AbdomenAtlas 3.0 includes CT scans from WORD: the paper's Table 1 lists 120, although its per-dataset counts sum to 11,998 against the 9,262 total.",
+		"explanation": "AbdomenAtlas 3.0 includes CT scans from WORD. The paper's Table 1 lists 120, although its per-dataset counts add up to 11,998, more than the 9,262 total.",
 		"evidence": {
 			"sources": [
 				"radgpt-paper"
@@ -284,7 +284,7 @@
 			"name": "AMOS"
 		},
 		"type": "derived_from",
-		"explanation": "AbdomenAtlas 3.0 includes CT scans from AMOS: the paper's Table 1 lists 200, although its per-dataset counts sum to 11,998 against the 9,262 total.",
+		"explanation": "AbdomenAtlas 3.0 includes CT scans from AMOS. The paper's Table 1 lists 200, although its per-dataset counts add up to 11,998, more than the 9,262 total.",
 		"evidence": {
 			"sources": [
 				"radgpt-paper"

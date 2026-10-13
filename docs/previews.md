@@ -38,18 +38,18 @@ whose conversion script is not in this repository. Its pinned packages are in
 FreeType build changes text anti-aliasing. The CPTAC-CCRCC and RCC-AID rendering code belongs to the Kidney-VLM
 project and is not part of this repository.
 
-The AbdomenAtlas 3.0 preview was made later and differently. The Kidney-VLM project rendered it with a separate script
-(`RadGPT/tools/render_preview.py` in the project's dataset folder, also not in this repository), written to follow the
-four-panel conventions below. It reads the release's own CT and mask files directly.
+The AbdomenAtlas 3.0 preview was made later and differently. The Kidney-VLM project rendered it with a separate script,
+`RadGPT/tools/render_preview.py`, written to follow the four-panel conventions below. This script is in the project's
+dataset folder and is also not in this repository. It reads the release's own CT and mask files directly.
 
-The DeepTumorVQA 2.0 preview is different again: it is not a rendering by the Kidney-VLM project but one of
-DeepTumorVQA's own released images (an organ PNG of five axial slices), downloaded from the release and only
-compressed to WebP. It carries no outlines.
+The DeepTumorVQA 2.0 preview is different again. It is not a rendering by the Kidney-VLM project but one of
+DeepTumorVQA's own released images (an organ PNG of five axial slices). The image was downloaded from the release and
+only compressed to WebP. It carries no outlines.
 
-The AMOS-MM preview was rendered by the Kidney-VLM project with `AMOS-MM/tools/render_preview.py` (in the project's
-dataset folder, not in this repository), adapted from the AbdomenAtlas script. AMOS-MM releases no masks: the scan
-shown, amos_0088, is one of its 228 CTs that are AMOS22 files, so it is drawn with AMOS22's kidney labels. It was
-picked because its report describes a kidney finding.
+The Kidney-VLM project rendered the AMOS-MM preview with `AMOS-MM/tools/render_preview.py`, adapted from the
+AbdomenAtlas script. The AMOS-MM script is in the project's dataset folder, not in this repository. AMOS-MM releases no
+masks. The scan shown, amos_0088, is one of its 228 CTs that are AMOS22 files, so it is drawn with AMOS22's kidney
+labels. It was picked because its report describes a kidney finding.
 
 The TCGA-KIRC previews show the project's own conversion of the TCIA scans with BAMF or RCC-AID masks placed on
 them; the RCC-AID previews show RCC-AID's released images and labels directly. In TCGA-KIRC title lines, the phase
@@ -79,8 +79,8 @@ zoomed, and the mask drawn as outlines. Nothing was added to or removed from the
 - **Scale:** coronal and sagittal views are shown at true physical proportions, so scans with 5 mm slices look
   blocky in those views.
 - **Title line inside the image:** dataset and case, contrast phase where known, scanner manufacturer, voxel size
-  (x × y × slice, in mm), and the mask source. The AbdomenAtlas 3.0 preview labels the voxel size mm only when the
-  CT header states that unit, and otherwise says "unit not stated".
+  (x × y × slice, in mm), and the mask source. The AbdomenAtlas 3.0 preview marks the voxel size as mm only when the CT
+  header states that unit. Otherwise it says "unit not stated".
 
 ## How to read a multi-phase preview (UCSF RMaC)
 
@@ -99,7 +99,7 @@ The line under every image names the mask source ("Mask: …"). The sources diff
 | **UCSF RMaC annotations** | A radiology resident with three years' experience annotated each lesion in MD.ai, mostly as bounding boxes (53%) or a centre-slice box with end-slice points (41%), with polygons for 6%; an attending abdominal radiologist with over 15 years' experience reviewed every annotation | [Sahin et al. 2026, preprint](https://doi.org/10.64898/2026.02.11.26346096) |
 | **BAMF (AIMI Annotations)** | AI-generated segmentations released for NCI Imaging Data Commons collections, including CPTAC-CCRCC and the TCGA kidney collections. A portion was reviewed and corrected by a radiologist; the line under each image says whether a mask was corrected by a radiologist, reviewed by a radiologist and rated acceptable, or is uncorrected AI output, which can contain small stray regions (BAMF's review file, qa-results.csv, records each rating) | [Murugesan et al. 2024](https://doi.org/10.1038/s41597-024-03977-8); [Zenodo release, CC BY 4.0](https://doi.org/10.5281/zenodo.8345959) |
 | **AbdomenAtlas 3.0** | Kidney masks from AbdomenAtlas 1.1, made by AI with radiologists in the loop. The kidney lesion mask was drawn by AI (DiffTumor and nnU-Net) and then checked and corrected by radiologists one by one, using the source datasets' ground truth where it existed. It does not say whether a lesion is a tumour or a cyst | [Bassi et al. 2025, ICCV](https://doi.org/10.1109/ICCV51701.2025.02202); [Hugging Face release, CC BY-NC-SA 4.0 on the dataset card](https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas3.0Mini) |
-| **AMOS22 (shown on AMOS-MM)** | AMOS22's organ masks, which are not part of AMOS-MM. 50 CT and 20 MRI scans were annotated by hand; the rest were pre-labelled by models (3D-UNet, VNet), checked case by case by five junior radiologists and then reviewed by three senior radiologists. The kidneys are labelled as right and left kidney; there are no lesion labels | [Ji et al. 2022, AMOS paper](https://arxiv.org/abs/2206.08023); [Zenodo release](https://doi.org/10.5281/zenodo.7262581) |
+| **AMOS22 (shown on AMOS-MM)** | AMOS22's organ masks, which are not part of AMOS-MM. 50 CT and 20 MRI scans were annotated by hand. The rest were pre-labelled by models (3D-UNet, VNet), checked case by case by five junior radiologists and then reviewed by three senior radiologists. The kidneys are labelled as right and left kidney. There are no lesion labels | [Ji et al. 2022, AMOS paper](https://arxiv.org/abs/2206.08023); [Zenodo release](https://doi.org/10.5281/zenodo.7262581) |
 | **RCC-AID** | An automated segmentation model produced initial kidney and lesion masks on TCGA-KIRC, -KIRP and -KICH CT; two trained students checked and corrected them and added tumours and cysts, and a board-certified radiologist reviewed uncertain cases | [de Boer et al. 2026](https://doi.org/10.59275/j.melba.2026-2dg2); [Zenodo release, CC BY 4.0](https://doi.org/10.5281/zenodo.20719257) |
 
 None of these is a mask drawn from scratch by a radiologist for every case. A problem visible in a preview's mask
@@ -112,12 +112,11 @@ A preview is an adaptation of its source dataset and carries that dataset's lice
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/); UCSF RMaC and CPTAC-CCRCC (with BAMF masks)
 previews are [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). TCGA-KIRC and RCC-AID previews combine
 [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) images from TCIA with CC BY 4.0 masks, so they need
-attribution to both. The AbdomenAtlas 3.0 preview carries CC BY-NC-SA 4.0, the licence on its dataset card; the
-RadGPT repository's own LICENSE says CC BY-NC-ND 4.0, and a curator has to settle which applies before approving it.
-The DeepTumorVQA 2.0 preview falls under the same source CT licence, according to the DeepTumorVQA card; by
-DeepTumorVQA's ID mapping its scan is a KiTS case, so KiTS23's CC BY-NC-SA 4.0 applies as well.
-The AMOS-MM preview's licence is unresolved: its CT is an AMOS22 file (AMOS22's Zenodo record says CC BY 4.0, its
-dataset.json CC-BY-SA 4.0 and the AMOS paper CC BY-NC-SA), AMOS-MM's own files say CC BY-ND 4.0, which does not
-allow adaptations, and the challenge's application form asked applicants not to share the dataset. A curator has to
-settle it before approving the preview.
-See [LICENSE](../LICENSE).
+attribution to both. The AbdomenAtlas 3.0 preview carries CC BY-NC-SA 4.0, the licence on its dataset card. The RadGPT
+repository's own LICENSE says CC BY-NC-ND 4.0, and a curator has to settle which applies before approving the
+AbdomenAtlas 3.0 preview. The DeepTumorVQA 2.0 preview falls under the same source CT licence, according to the
+DeepTumorVQA card. By DeepTumorVQA's ID mapping, its scan is a KiTS case, so KiTS23's CC BY-NC-SA 4.0 applies as well.
+The AMOS-MM preview's licence is unresolved. Its CT is an AMOS22 file. AMOS22's Zenodo record says CC BY 4.0, its
+dataset.json CC-BY-SA 4.0 and the AMOS paper CC BY-NC-SA. AMOS-MM's own files say CC BY-ND 4.0, which does not allow
+adaptations. The challenge's application form also asked applicants not to share the dataset. A curator has to settle it
+before approving the preview. See [LICENSE](../LICENSE).

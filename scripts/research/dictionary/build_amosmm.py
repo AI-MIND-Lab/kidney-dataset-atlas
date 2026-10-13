@@ -93,13 +93,18 @@ def counts(values, meanings=None, total=None):
     return [{'code': v, 'meaning': ((meanings or {}).get(v, '') + ' ').lstrip() + f'({n:,} of {total:,})'} for v, n in c.most_common()]
 
 
+def and_list(parts, noun):
+    return ', '.join([f'{parts[0]} {noun}'] + parts[1:-1]) + ' and ' + parts[-1]
+
+
 # ---- header
 h = REP
 add('header', ('File-level fields at the top of both JSON files: name ("AMOS-MM"), description, author, reference ("HKU"), '
                f'licence ("{h["licence"]}"), release ("{h["release"]}"), contact (an e-mail address), tensorImageSize '
-               f'("{h["tensorImageSize"]}"), modality ({{"0": "CT"}}) and the number of cases per split (numTraining '
-               f'{h["numTraining"]:,}, numValidation {h["numValidation"]:,}, numTest {h["numTest"]:,}). The "testing" list is '
-               'empty, so the test cases announced here are not in the release. The values are the same in both files.'),
+               f'("{h["tensorImageSize"]}"), modality ({{"0": "CT"}}) and the number of cases per split. The split counts are '
+               f'numTraining {h["numTraining"]:,}, numValidation {h["numValidation"]:,} and numTest {h["numTest"]:,}. The '
+               '"testing" list is empty, so the test cases announced here are not in the release. The values are the same in '
+               'both files.'),
     'other', 'administrative', 'descriptor', BOTH, level='record',
     evidence={**ALL, 'locator': 'Header fields of both JSON files'})
 
@@ -108,7 +113,7 @@ names = [x['image'] for x in CASES]
 assert len(set(names)) == N
 add('image', (f'Relative path of the case\'s CT in the image archives (./imagesTr/amos_xxxx.nii.gz for the '
               f'{len(REP["training"]):,} training cases, ./imagesVa/... for the {len(REP["validation"]):,} validation cases). '
-              'It is the case key; the file name, without folder, matches the name inside the zip. Three validation files '
+              'It is the case key. The file name, without the folder, matches the name inside the zip. Three validation files '
               '(amos_7008, amos_7312, amos_7333) are also in imagesTr.zip.'),
     'text', 'administrative', 'identifier', BOTH,
     evidence={**ALL, 'sources': ALL['sources'] + ['amos-mm-zip-listings'], 'locator': ALL['locator'] + '; member names of both zips'})
@@ -116,26 +121,27 @@ SITES = {'A': 'Longgang District Central Hospital, Shenzhen', 'B': "Longgang Dis
 add('meta.site', 'Hospital the scan comes from, as a one-letter code. The site names are from the Codabench "Dataset" page.',
     'categorical', 'administrative', 'descriptor', BOTH, coding=counts([x['meta']['site'] for x in CASES], SITES), evidence=CODA)
 sc = [x['meta']['scanner'] for x in CASES]
-add('meta.scanner', ('CT scanner model. Seven values; two of them, Prisma and SIGNA HDe, are MRI scanner models although '
-                     'these 4 cases are listed as CT and the 2 checked hold CT values (see the quality findings).'),
+add('meta.scanner', ('CT scanner model, with seven values. Two of them, Prisma and SIGNA HDe, are MRI scanner models, although '
+                     'the 4 cases with these values are listed as CT. The 2 that were checked hold CT values '
+                     '(see the quality findings).'),
     'categorical', 'imaging', 'descriptor', BOTH, coding=counts(sc))
 inplane = collections.Counter('x'.join(map(str, x['meta']['shape'][:2])) for x in CASES)
 sl = [x['meta']['shape'][2] for x in CASES]
 add('meta.shape', ('Size of the CT voxel grid, three integers in the file\'s axis order. In-plane: '
-                   + ', '.join(f'{k.replace("x", " × ")} in {v:,}' for k, v in inplane.most_common())
-                   + f'. Third value {min(sl)} to {max(sl)} (median {statistics.median(sl):g}); it is the number of axial slices '
-                   'except in amos_5553 and amos_5693, which are stored as sagittal and coronal slices. In the 16 files checked, '
-                   'it equals the NIfTI header.'),
+                   + and_list([f'{k.replace("x", " × ")} in {v:,}' for k, v in inplane.most_common()], 'cases')
+                   + f'. The third value ranges from {min(sl)} to {max(sl)} (median {statistics.median(sl):g}). It is the '
+                   'number of axial slices, except in amos_5553 and amos_5693, which are stored as sagittal and coronal slices. '
+                   'In the 16 files checked, the shape matches the NIfTI header.'),
     'other', 'imaging', 'descriptor', BOTH, evidence=SAMPLE)
 ip = [x['meta']['spacing'][0] for x in CASES]
 z = collections.Counter(round(x['meta']['spacing'][2], 3) for x in CASES)
 main = [5.0, 2.0, 1.25, 2.5]
 assert all(x['meta']['spacing'][0] == x['meta']['spacing'][1] for x in CASES)
-add('meta.spacing', ('Voxel size, three numbers in the file\'s axis order; the first two are equal in every case. In-plane '
-                     f'{min(ip):.3f} to {max(ip):.3f} (median {statistics.median(ip):.3f}); third value '
-                     + ', '.join(f'{k:g} in {z[k]:,}' for k in main)
-                     + f', other values in {N - sum(z[k] for k in main)}. The JSON states no unit; the 16 NIfTI headers checked '
-                     'give millimetres and the same values.'),
+add('meta.spacing', ('Voxel size, three numbers in the file\'s axis order. The first two are equal in every case. In-plane '
+                     f'values range from {min(ip):.3f} to {max(ip):.3f} (median {statistics.median(ip):.3f}). The third value is '
+                     + and_list([f'{k:g} in {z[k]:,}' for k in main], 'cases')
+                     + f', with other values in {N - sum(z[k] for k in main)}. The JSON states no unit, but the 16 NIfTI headers '
+                     'checked give millimetres and the same values.'),
     'decimal', 'imaging', 'descriptor', BOTH, evidence=SAMPLE)
 
 # ---- report fields
@@ -147,7 +153,7 @@ for part in ('findings', 'impression'):
         full = N - absent - empty
         if part == 'findings':
             d = (f'Findings for the {region}: one English text describing what the radiologist saw. Filled in {full:,} of '
-                 f'{N:,} cases; empty when the region was not reported.')
+                 f'{N:,} cases, and empty when the region was not reported.')
             vt = 'text'
         else:
             d = (f'Impression for the {region}: a list of English sentences with the radiologist\'s conclusions. Non-empty in '
@@ -165,7 +171,7 @@ for part in ('findings', 'impression'):
 types = collections.Counter(q['type'] for q in QS)
 med = statistics.median([p for p in PER_CASE if p])
 add('labels.qa', (f'List of multiple-choice questions about the case: {NQ:,} questions on {WITH_Q:,} of {N:,} cases, '
-                  f'{min(p for p in PER_CASE if p)} to {max(PER_CASE)} per case (median {med:g}); {N - WITH_Q} cases have none. '
+                  f'{min(p for p in PER_CASE if p)} to {max(PER_CASE)} per case (median {med:g}). {N - WITH_Q} cases have none. '
                   'Each question has the five fields below.'),
     'other', 'clinical', 'annotation', VF, level='record', evidence=QUEST, derivation='derived',
     provenance='Generated by GPT-4 from the reports and reviewed by a senior radiologist and a clinical physician (design document p. 26).')
@@ -178,9 +184,9 @@ add('answer', 'Letter of the correct option.', 'categorical', 'outcome', 'outcom
     coding=counts([q['answer'] for q in QS]), evidence=QUEST, derivation='derived', key='qa-answer')
 rl = [len(q['reasoning']) for q in QS]
 add('reasoning', (f'Short English justification of the answer, written with the question (median {statistics.median(rl):g} '
-                  'characters; none empty). The design document calls it the rationale.'),
+                  'characters, none empty). The design document calls it the rationale.'),
     'text', 'clinical', 'annotation', VF, level='record', evidence=QUEST, derivation='derived', key='qa-reasoning')
-add('type', ('Question category; 6 values, matching the 6 skills on the Codabench page. One is spelled '
+add('type', ('Question category, with 6 values that match the 6 skills on the Codabench page. One is spelled '
              '"anaotomical_identification" in the file. The design document describes 8 skills.'),
     'categorical', 'clinical', 'descriptor', VF, level='record', coding=counts(list(q['type'] for q in QS)),
     evidence=QUEST, derivation='derived', key='qa-type')

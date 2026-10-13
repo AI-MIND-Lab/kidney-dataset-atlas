@@ -19,10 +19,10 @@ sources:
 ---
 
 AbdomenAtlas is a collection of abdominal CT scans published by a group at Johns Hopkins University. The scans were
-not acquired for it: they come from 17 public datasets, among them KiTS'23, CT-ORG, AMOS, WORD, FLARE'23 and six
-Medical Segmentation Decathlon CT tasks, and span 138 institutions (RadGPT paper, Table 1). Earlier versions added
-organ masks (AbdomenAtlas 1.1); version 3.0 keeps the same 9,262 CT scans and adds masks of liver, kidney and pancreatic
-lesions, liver and pancreas sub-regions, and blood vessels, together with a radiology report for each scan.
+not acquired for it. They come from 17 public datasets, among them KiTS'23, CT-ORG, AMOS, WORD, FLARE'23 and six Medical
+Segmentation Decathlon CT tasks, and from 138 institutions (RadGPT paper, Table 1). Earlier versions added organ masks
+(AbdomenAtlas 1.1). Version 3.0 keeps the same 9,262 CT scans and adds masks of liver, kidney and pancreatic lesions,
+liver and pancreas sub-regions, and blood vessels. It also adds a radiology report for each scan.
 
 One case is one CT scan, identified as `BDMAP_` followed by eight digits. It has the CT volume, one mask file per
 structure, a row in the metadata table, and structured and narrative reports. The reports were not written by the
@@ -33,6 +33,6 @@ Appendix C).
 
 Three things are easy to misread. The kidney lesion mask does not say whether a lesion is a tumour or a cyst, although
 KiTS'23, one of the sources, labels the two separately. Counts must never be added to those of
-the source datasets, because the same scans appear in both; this catalogue records that overlap for KiTS23,
-CT-ORG, TotalSegmentator and CPTAC-CCRCC. And the numbers in the metadata table were read back out of the report
-text, not measured from the masks (see the quality findings on the release page).
+the source datasets, because the same scans appear in both. This catalogue records that overlap for KiTS23, CT-ORG,
+TotalSegmentator and CPTAC-CCRCC. And the numbers in the metadata table were read back out of the report text, not
+measured from the masks (see the quality findings on the release page).
