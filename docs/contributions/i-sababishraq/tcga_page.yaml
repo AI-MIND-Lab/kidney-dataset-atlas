@@ -1,0 +1,366 @@
+# Config for tcga_data_dictionary.html. Build it with:
+#
+#   python scripts/research/dictionary/build_tcga_gdc.py
+#   python scripts/research/pages/tcga_extras.py
+#   python scripts/research/pages/fetch_texts.py docs/contributions/i-sababishraq/tcga_page.yaml
+#   python scripts/research/pages/build_page.py docs/contributions/i-sababishraq/tcga_page.yaml
+#
+# docs/contributions/README.md explains every key.
+
+title: TCGA Kidney|Data Dictionary
+brand: TCGA Kidney
+description: TCGA kidney (KIRC, KIRP, KICH) fields, codes, slides, radiology, annotations, previews and analysis results.
+slug: tcga_kidney_data_dictionary
+output: tcga_data_dictionary.html
+style: docs/contributions/ghazal/rmac_data_dictionary.html
+extras: .research-cache/pages/tcga_extras.json
+embed_images: true
+
+# Field definitions and code meanings come from the GDC data dictionary (the extras file), not from atlas wording.
+definitions: extras
+# Values that are record IDs containing a TCGA patient barcode are not listed.
+hide_codes_matching: 'TCGA-[A-Z0-9]{2}-[A-Z0-9]{4}'
+field_layer: GDC field
+labels: {column: Project, all_columns: All projects, absent: not in project, entity: GDC entity, entity_prefix: 'GDC ', meaning: GDC meaning}
+
+columns:
+  - {label: KIRC, title: TCGA-KIRC, release: tcga-kirc-gdc-open, sources: [gdc-kirc-case-records]}
+  - {label: KIRP, title: TCGA-KIRP, release: tcga-kirp-gdc-open, sources: [gdc-kirp-case-records]}
+  - {label: KICH, title: TCGA-KICH, release: tcga-kich-gdc-open, sources: [gdc-kich-case-records]}
+
+# Releases whose overlaps and study uses are shown.
+family: [tcga-kirc-gdc-open, tcga-kirp-gdc-open, tcga-kich-gdc-open, tcga-kirc-tcia, tcga-kirp-tcia, tcga-kich-tcia,
+         tcga-kirc-radiogenomics-v1, crowds-cure-2017-v1, rcc-aid-v2]
+
+# Short release names for tables; otherwise "<dataset name> (<version label>)" from the atlas.
+names:
+  tcga-kirc-gdc-open: TCGA-KIRC (GDC)
+  tcga-kirp-gdc-open: TCGA-KIRP (GDC)
+  tcga-kich-gdc-open: TCGA-KICH (GDC)
+  tcga-kirc-tcia: TCGA-KIRC (TCIA)
+  tcga-kirp-tcia: TCGA-KIRP (TCIA)
+  tcga-kich-tcia: TCGA-KICH (TCIA)
+  tcga-kirc-radiogenomics-v1: TCGA-KIRC-Radiogenomics
+  crowds-cure-2017-v1: Crowds-Cure-2017
+  rcc-aid-v2: RCC-AID v2.0.0
+
+# Every source a quote is cut from. The key names the saved text; `source` is the atlas source record it is cited as.
+# The URL is the record's URL unless `url` is given.
+texts:
+  page_tcga-kirc: {source: tcia-tcga-kirc, cite: 'TCIA, TCGA-KIRC collection page'}
+  page_tcga-kirp: {source: tcia-tcga-kirp, cite: 'TCIA, TCGA-KIRP collection page'}
+  page_tcga-kich: {source: tcia-tcga-kich, cite: 'TCIA, TCGA-KICH collection page'}
+  gdc_access: {source: gdc-access-processes, cite: 'GDC, Data Access Processes and Tools'}
+  ar_crowds-cure-2017: {source: tcia-crowds-cure-2017, cite: 'TCIA, Crowds-Cure-2017 page'}
+  ar_crowds-cure-2018: {source: tcia-crowds-cure-2018, cite: 'TCIA, Crowds-Cure-2018 page'}
+  ar_tcga-kirc-radiogenomics: {source: tcia-tcga-kirc-radiogenomics, cite: 'TCIA, TCGA-KIRC-Radiogenomics page'}
+  cooper: {source: cooper-2018-tcga-pathology, cite: 'Cooper et al., 2018'}
+  shinagare: {source: shinagare-2015, cite: 'Shinagare et al., 2015'}
+  bamf: {source: bamf-aimi-paper, cite: 'Murugesan et al., 2024 (BAMF, AIMI)', url: 'https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11500357/fullTextXML'}
+  rccaid: {source: rcc-aid-paper, cite: 'de Boer et al., 2026 (RCC-AID)', url: 'https://melba-journal.org/pdf/2026:039.pdf'}
+  tabibu: {source: tabibu-2019, url: 'https://www.ebi.ac.uk/europepmc/webservices/rest/PMC6642160/fullTextXML'}
+  clam: {source: clam-2021, cite: 'Lu et al., 2021, Nature Biomedical Engineering (PMC8711640)', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC8711640/'}
+  transmil: {source: transmil-2021, url: 'https://arxiv.org/pdf/2106.00908'}
+  uni: {source: uni-2024, url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11403354/'}
+  wessels: {source: wessels-2022, url: 'https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9385058/fullTextXML'}
+  jasti: {source: jasti-2025, url: 'https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11914575/fullTextXML'}
+  uhm: {source: uhm-2021, url: 'https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8213852/fullTextXML'}
+  renalnet: {source: deboer-2026-renal-net, url: 'https://melba-journal.org/pdf/2026:012.pdf'}
+  nature2013: {source: tcga-kirc-nature-2013, url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3771322/'}
+
+lede: {text: rccaid, first: 'For RCC, TCGA in', last: '2016a).', loc: Section 1}
+links:
+  - {label: Look up a field, to: fields}
+  - {label: Look up a code, to: codebooks}
+  - {label: Preview images, to: previews}
+  - {label: Reported limitations, to: limitations}
+
+# Columns of analysis-result tables, with definitions quoted from the paper or page that describes them.
+analysis_tables:
+  - label: Radiogenomics table
+    release: tcga-kirc-radiogenomics-v1
+    definitions:
+      BAP1: &mutation {text: shinagare, first: 'The presence of mutations in VHL', last: 'using the cBioPortal.', loc: 'Methods, Mutational status'}
+      PBRM1: *mutation
+      VHL: *mutation
+      SETD2: *mutation
+      KDM5C: *mutation
+      MUC4: *mutation
+      AxisLength: {text: shinagare, phrase: 'Size was recorded as the maximum tumor dimension', loc: 'Methods, Image feature set development'}
+      WellDefinedMargin: {text: shinagare, phrase: 'Margin was considered to be well-defined if', loc: 'Methods, Image feature set development'}
+      SolidComposition: {text: shinagare, phrase: 'Regarding composition, a tumor was considered to be cystic', loc: 'Methods, Image feature set development'}
+      Necrosis: {text: shinagare, phrase: 'Among solid tumors, the proportion of necrosis', loc: 'Methods, Image feature set development'}
+      GrowthPattern: &features {text: shinagare, first: 'The following features were evaluated for each tumor', last: 'or indeterminate].', loc: 'Methods, Image feature set development'}
+      Calcification: *features
+  - label: Crowds-Cure measurements
+    release: crowds-cure-2017-v1
+    files_matching: '^CrowdsCure'
+    definitions:
+      length: &measure {text: ar_crowds-cure-2018, phrase: 'Participants were asked to make a uni-dimensional measurement of the largest lesion', loc: Summary}
+      start_x: *measure
+      start_y: *measure
+      end_x: *measure
+      end_y: *measure
+  # Definitions for this table come from the GDC data dictionary, through analysis_overrides in the extras file.
+  - label: Crowds-Cure clinical snapshot
+    release: crowds-cure-2017-v1
+    files_matching: '^(?!CrowdsCure)'
+
+sections:
+  - id: dataset
+    title: Dataset overview
+    group: Dataset
+    blocks:
+      - evidence: DOCUMENTED
+      - quote_table:
+          columns: [Item, From the provider]
+          rows:
+            - {label: TCGA-KIRC, text: page_tcga-kirc, first: 'The Cancer Genome Atlas Kidney Renal Clear Cell Carcinoma (TCGA-KIRC) data collection', last: '(TCGA).', loc: Summary}
+            - {label: TCGA-KIRP, text: page_tcga-kirp, first: 'The Cancer Genome Atlas Cervical Kidney renal papillary', last: '(TCGA).', loc: Summary}
+            - {label: TCGA-KICH, text: page_tcga-kich, first: 'The Cancer Genome Atlas Kidney Chromophobe (TCGA-KICH) data collection', last: '(TCGA).', loc: Summary}
+            - {label: Patient ID, text: page_tcga-kirc, phrase: 'is identified with a Patient ID that is identical', loc: Detailed Description}
+            - {label: Imaging time point, text: page_tcga-kirc, phrase: 'the baseline TCGA imaging studies found on TCIA are pre-surgical', loc: Detailed Description}
+            - {label: Sites, text: page_tcga-kirc, phrase: 'Tissues for TCGA were collected from many sites', loc: Detailed Description}
+            - {label: Open access (GDC), text: gdc_access, phrase: 'Open access data generally includes'}
+            - {label: Controlled access (GDC), text: gdc_access, phrase: 'Controlled data generally includes'}
+            - {label: Download (TCIA), text: page_tcga-kirc, value: 'Download requires TCIA Data Retriever', loc: Data Access}
+            - {label: Licence (TCIA), text: page_tcga-kirc, value: 'CC BY 3.0', loc: Data Access}
+            - {label: Data release (GDC), extras: data_release}
+
+  - id: organization
+    title: Data sources and file organization
+    group: Dataset
+    blocks:
+      - h3: GDC records
+      - extras_table: gdc_entities
+      - h3: TCIA images
+      - quote: {text: page_tcga-kirc, phrase: 'DICOM is the primary file format used by TCIA', loc: About TCIA}
+      - quote: {text: page_tcga-kirc, phrase: 'is identified with a Patient ID that is identical', loc: Detailed Description}
+
+  - id: fields
+    title: Master field dictionary
+    group: Field lookup
+    layer: [GDC records, source]
+    blocks:
+      - evidence: DOCUMENTED
+        sources: [gdc-data-dictionary, gdc-kirc-case-records, gdc-kirp-case-records, gdc-kich-case-records]
+      - field_dictionary: {}
+
+  - id: analysis
+    title: Analysis-result tables
+    group: Field lookup
+    layer: [Derived tables, profile]
+    blocks:
+      - quotes:
+          - {text: ar_tcga-kirc-radiogenomics, first: 'Radiologist annotations, mutation status, and clinical variables', last: 'Classification CSV', loc: Data Access}
+          - {text: shinagare, phrase: 'For tumor size and ordinal features', loc: 'Methods, Statistical analysis'}
+          - {text: shinagare, phrase: 'For binary features such as composition', loc: 'Methods, Statistical analysis'}
+          - {text: ar_crowds-cure-2017, phrase: 'A CSV dump of that data is provided here for convenience', loc: Detailed Description}
+      - analysis_columns: {}
+
+  - id: codebooks
+    title: Codes and categories
+    group: Field lookup
+    layer: [GDC records, source]
+    blocks:
+      - codebooks: [demographic.sex_at_birth, demographic.race, demographic.ethnicity, demographic.vital_status, diagnoses.primary_diagnosis,
+                    diagnoses.ajcc_pathologic_stage, diagnoses.ajcc_pathologic_t, diagnoses.ajcc_pathologic_n, diagnoses.ajcc_pathologic_m,
+                    diagnoses.tumor_grade, diagnoses.laterality, diagnoses.classification_of_tumor, cases.samples.sample_type,
+                    experimental_strategy, exposures.tobacco_smoking_status, follow_ups.progression_or_recurrence, lost_to_followup]
+
+  - id: slides
+    title: Whole-slide images
+    group: Images and annotations
+    layer: [GDC files, source]
+    blocks:
+      - extras_table: slides
+      - h3: Tissue Slide
+      - quote: {text: cooper, phrase: 'top and bottom frozen sections were obtained'}
+      - h3: Diagnostic Slide
+      - quote: {text: cooper, phrase: 'slides are submitted to the BCR by the TSS for confirmation'}
+      - quote: {text: cooper, phrase: 'These diagnostic slides originate from the same tumour'}
+
+  - id: radiology
+    title: Radiology (TCIA)
+    group: Images and annotations
+    layer: [TCIA series lists, source]
+    blocks:
+      - extras_table: radiology
+      - extras_bars: radiology
+      - quote: {text: page_tcga-kirc, phrase: 'the baseline TCGA imaging studies found on TCIA are pre-surgical', loc: Detailed Description}
+      - quote: {text: page_tcga-kirc, phrase: 'while still meeting HIPAA requirements', loc: Detailed Description}
+      - quote: {text: rccaid, phrase: 'Since TCGA metadata does not provide sufficiently', loc: Section 5.2.2}
+
+  - id: masks
+    title: Masks and annotations
+    group: Images and annotations
+    layer: [Derived sets, profile]
+    blocks:
+      - h3: BAMF AI annotations (AIMI)
+      - quote: {text: bamf, phrase: 'The goal of this project, in the context of the AIMI initiative', loc: Background & Summary}
+      - quote: {text: bamf, phrase: 'A portion of the AI annotations were reviewed and corrected by a radiologist', loc: Abstract}
+      - extras_table: bamf
+      - h3: RCC-AID
+      - quote: {text: rccaid, phrase: 'RCC-AID provides publicly available voxel-level annotations', loc: Section 3}
+      - quote: {text: rccaid, phrase: 'one corresponding multi-label segmentation mask', loc: Section 5.2.6}
+      - quote: {text: rccaid, phrase: 'As formal inter-observer variability', loc: Section 3}
+      - quote: {text: rccaid, phrase: 'The annotations provided in this work are licensed', loc: Section 4.3}
+      - extras_table: rccaid
+      - h3: TCGA-KIRC-Radiogenomics
+      - quote: {text: shinagare, first: 'Each case was reviewed by three radiologists', last: 'experience).', loc: 'Methods, Image review'}
+      - quote: {text: shinagare, phrase: 'The readers were blinded to the clinical and mutational data', loc: 'Methods, Image review'}
+      - h3: Crowds-Cure-2017
+      - quote: {text: ar_crowds-cure-2018, phrase: 'Participants were asked to make a uni-dimensional measurement of the largest lesion', loc: Summary}
+      - quote: {text: ar_crowds-cure-2017, phrase: 'Data sets annotated included CT scans from 352 subjects', loc: Summary}
+      - h3: "In the provider's words"
+      - terms:
+          - {label: GDC (TCGA-KIRC), release: tcga-kirc-gdc-open}
+          - {label: RCC-AID, release: rcc-aid-v2}
+          - {label: TCGA-KIRC-Radiogenomics, release: tcga-kirc-radiogenomics-v1}
+          - {label: Crowds-Cure-2017, release: crowds-cure-2017-v1}
+
+  - id: previews
+    title: Preview images
+    group: Images and annotations
+    layer: [Atlas previews, profile]
+    blocks:
+      - previews:
+          - {release: tcga-kirc-tcia, title: TCGA-KIRC (TCIA) with BAMF and RCC-AID masks}
+          - {release: rcc-aid-v2, title: RCC-AID v2.0.0}
+
+  - id: clinical
+    title: Pathology and clinical labels
+    group: Cohort
+    layer: [GDC records, source]
+    blocks:
+      - evidence: CALCULATED
+        sources: [gdc-kirc-case-records, gdc-kirp-case-records, gdc-kich-case-records]
+      - code_bars: [diagnoses.primary_diagnosis, diagnoses.ajcc_pathologic_stage, diagnoses.tumor_grade, demographic.vital_status]
+
+  - id: profile
+    title: Cohort summary
+    group: Cohort
+    layer: [GDC records, source]
+    blocks:
+      - extras_table: cohort
+      - extras_bars: cohort
+
+  - id: linking
+    title: Shared patients across sources
+    group: Cohort
+    blocks:
+      - overlaps: {}
+
+  - id: missingness
+    title: Missing data
+    group: Data checks
+    layer: [GDC records, source]
+    blocks:
+      - evidence: CALCULATED
+        sources: [gdc-kirc-case-records, gdc-kirp-case-records, gdc-kich-case-records]
+      - missing: {}
+
+  - id: limitations
+    title: Reported limitations
+    group: Data checks
+    layer: [Provider and paper statements, source]
+    blocks:
+      - evidence: DOCUMENTED
+      - h3: TCGA and TCIA
+      - quote: {text: page_tcga-kirc, phrase: 'Tissues for TCGA were collected from many sites', loc: Detailed Description}
+      - quote: {text: cooper, phrase: 'These diagnostic slides originate from the same tumour'}
+      - quote: {text: rccaid, phrase: 'Since TCGA metadata does not provide sufficiently', loc: Section 5.2.2}
+      - h3: BAMF AI annotations
+      - quote: {text: bamf, phrase: 'This trained model was then used to generate annotations for 64 cases', loc: 'CT Kidneys, tumors, and cysts annotation'}
+      - quote: {text: bamf, phrase: 'An additional 45 cases from the TCGA-KIRC', loc: 'CT Kidneys, tumors, and cysts annotation'}
+      - h3: RCC-AID
+      - quote: {text: rccaid, phrase: 'As formal inter-observer variability', loc: Section 3}
+      - h3: TCGA-KIRC-Radiogenomics
+      - quote: {text: shinagare, phrase: 'The imaging examinations were performed at multiple academic institutions', loc: 'Discussion, limitations'}
+      - quote: {text: shinagare, phrase: 'The inter-observer agreement for margin', loc: Results}
+      - quote: {text: shinagare, phrase: 'However, none of these associations remained significant', loc: Results}
+      - h3: Crowds-Cure-2017
+      - quote: {text: ar_crowds-cure-2018, phrase: 'There were no options to provide details regarding imaging quality', loc: Summary}
+
+  - id: ml
+    title: Research use
+    group: Research use
+    blocks:
+      - evidence: DOCUMENTED
+      - quotes:
+          - {text: rccaid, phrase: 'Voxel-level annotations enable training and evaluation', loc: Section 4.2}
+          - {text: rccaid, phrase: 'Voxel-level annotations allow for training and evaluating detection', loc: Section 4.2}
+          - {text: rccaid, phrase: 'Histologic subtype labels', loc: Section 4.2}
+          - {text: rccaid, phrase: 'Radiomics and survival analysis', loc: Section 4.2}
+          - {text: ar_crowds-cure-2017, phrase: 'Their research can greatly benefit from labeling', loc: Summary}
+          - {text: shinagare, phrase: 'these results support using radiogenomics', loc: Conclusions}
+      - h3: Papers that used the data
+      - papers:
+          # What each paper's authors write about their use of the data, keyed by atlas study-use id.
+          quotes:
+            use-tcga-kirc-nature-2013: [{text: nature2013, phrase: 'A data freeze representing 446 samples'}]
+            use-tabibu-kirc: [&tabibu-n {text: tabibu, phrase: 'We selected 1027 (KIRC)'}, &tabibu-acc {text: tabibu, phrase: 'We obtained 93.39% and 87.34%'},
+                              {text: tabibu, phrase: 'We achieved a best Area Under Curve'}]
+            use-tabibu-kirp: [*tabibu-n, {text: tabibu, phrase: 'achieves a classification accuracy of 94.07%'}]
+            use-tabibu-kich: [*tabibu-n, *tabibu-acc]
+            use-clam-kirc: [&clam-n {text: clam, phrase: 'There are 111 CRCC slides from 99 cases'},
+                            {text: clam, phrase: 'the model achieved a 10-fold macro-averaged one-versus-rest mean test area under the curve'}]
+            use-clam-kirp: [*clam-n]
+            use-clam-kich: [*clam-n]
+            use-transmil-kirc: &transmil [{text: transmil, first: 'for a total of 884 diagnostic WSIs', last: '284 KIRP slides from 264 cases'}]
+            use-transmil-kirp: *transmil
+            use-transmil-kich: *transmil
+            use-uni-kirc: &uni [{text: uni, phrase: 'which resulted in 922 slides'}]
+            use-uni-kirp: *uni
+            use-uni-kich: *uni
+            use-wessels-kirc: [{text: wessels, phrase: 'A mean balanced accuracy of 72.0%'}]
+            use-jasti-kirc: [{text: jasti, phrase: 'consists of 519 whole slide images'}, {text: jasti, phrase: 'found a correlation of 0.68'}]
+            use-uhm-kirc-tcia: &uhm [{text: uhm, phrase: 'We collected 184 multi-phase CT scans'}, {text: uhm, phrase: 'The model achieved the average AUC of 0.855'}]
+            use-uhm-kirp-tcia: *uhm
+            use-uhm-kich-tcia: *uhm
+            use-deboer-renal-net-kirc-tcia: [{text: renalnet, phrase: 'This set contains 28 valid imaging-mask pairs'},
+                                             {text: renalnet, phrase: 'The proposed model achieved the highest mean Dice scores on both the TCGA-KIRC'}]
+            use-shinagare-2015-radiogenomics: [{text: shinagare, phrase: 'All the imaging studies evaluated in this research project are available online'}]
+
+  - id: glossary
+    title: Medical & technical glossary
+    group: Research use
+    blocks:
+      - glossary:
+          - {extras: gdc}
+          - {term: Tissue Slide, category: Medical, quote: {text: cooper, phrase: 'top and bottom frozen sections were obtained'}}
+          - {term: Diagnostic Slide, category: Medical, quote: {text: cooper, phrase: 'slides are submitted to the BCR by the TSS for confirmation'}}
+          - {term: TCIA, quote: {text: page_tcga-kirc, first: 'TCIA is a service which de-identifies and hosts', last: 'accessible for public download.'}}
+          - {term: Patient ID, quote: {text: page_tcga-kirc, phrase: 'is identified with a Patient ID that is identical'}}
+          - {term: DICOM, quote: {text: page_tcga-kirc, phrase: 'DICOM is the primary file format used by TCIA'}}
+          - {term: Open access data (GDC), quote: {text: gdc_access, phrase: 'Open access data generally includes'}}
+          - {term: Controlled data (GDC), quote: {text: gdc_access, phrase: 'Controlled data generally includes'}}
+          - {term: AIMI initiative, quote: {text: bamf, phrase: 'The Artificial Intelligence (AI) in Medical Imaging (AIMI) initiative strives'}}
+          - {term: NIfTI, quote: {text: rccaid, first: 'Images are provided in NIfTI format', last: '2021).'}}
+          - {term: Contrast phase, category: Medical, quote: {text: rccaid, phrase: 'Contrast phases were additionally annotated'}}
+          - {term: Radiogenomics, category: Medical, quote: {text: shinagare, phrase: 'known as ‘radiogenomics’'}}
+          - {term: Crowds Cure Cancer, quote: {text: ar_crowds-cure-2018, phrase: 'Crowds Cure Cancer (https://www.crowds-cure.org) first exhibited at RSNA 2017'}}
+
+  - id: methodology
+    title: Analysis notes
+    group: Research use
+    blocks:
+      - notes:
+          - {input: GDC case records, what: '{data_release}; GDC API, all cases of the three projects', sources: [gdc-kirc-case-records, gdc-kirp-case-records, gdc-kich-case-records]}
+          - {input: GDC data dictionary, what: 'field definitions and code meanings, verbatim', sources: [gdc-data-dictionary]}
+          - {input: GDC slide files, what: 'experimental_strategy, data_format and access facets', sources: [gdc-kirc-slides]}
+          - {input: TCIA series lists, what: 'TCIA API getSeries for the three collections; PatientID, StudyInstanceUID, Modality, Manufacturer, ImageCount',
+             sources: [tcia-tcga-kirc-series, tcia-tcga-kirp-series, tcia-tcga-kich-series]}
+          - {input: TCIA pages, what: 'collection and analysis-result pages, quoted verbatim', sources: [tcia-tcga-kirc, tcia-tcga-kirc-radiogenomics, tcia-crowds-cure-2017, tcia-crowds-cure-2018]}
+          - {input: BAMF, what: qa-results.csv from the Zenodo record, sources: [bamf-aimi-zenodo]}
+          - {input: RCC-AID, what: metadata.csv from the Zenodo record, sources: [rcc-aid-zenodo]}
+          - {input: Analysis-result tables, what: TCGA-KIRC-Radiogenomics and Crowds-Cure-2017 CSV files, sources: [tcia-tcga-kirc-radiogenomics-csv, tcia-crowds-cure-2017-csv, tcia-crowds-cure-2017-clinical]}
+          - {input: Papers, what: 'full texts, quoted verbatim; line-break hyphens of PDF text are joined', sources: [rcc-aid-paper, bamf-aimi-paper, shinagare-2015, cooper-2018-tcga-pathology]}
+          - {input: Preview images, what: 'atlas preview records and images (main), with their captions', sources: [tcia-tcga-kirc, rcc-aid-zenodo]}
+          - {input: Counts, what: 'calculated from the records above; no patient-level record is copied to this page'}
+
+  - id: sources
+    title: Sources
+    group: Research use
+    blocks:
+      - sources: {}
