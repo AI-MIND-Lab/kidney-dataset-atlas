@@ -142,6 +142,9 @@ pairing:
 dictionary:
   completeness: partial
   inspectedScope: >-
+    Variable descriptions are AI-researched and compiled for this atlas from the cited
+    paper, code and metadata; this is not an official RCC-AID variable dictionary.
+    Some field meanings remain unverified.
     The Zenodo label map and file layout, the authors' analysis code, and all 41 columns
     across 129 series records in version-2.0.0 metadata.csv (inspected 2026-10-08).
     Clinical field meanings are not fully documented; imaging volumes and masks were
