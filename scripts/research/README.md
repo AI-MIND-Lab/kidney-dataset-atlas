@@ -37,6 +37,15 @@ folder in it to force a fresh download, for example after a provider publishes a
 A new dictionary builder belongs here too, so the dictionary can be regenerated; see "Building a dictionary from
 the released files" in [docs/authoring.md](../../docs/authoring.md).
 
+### Data dictionary pages (`pages/`)
+
+Build standalone data dictionary pages in the format of the RMaC page in `docs/contributions/`. A YAML config
+says which releases a page covers and which sentences it quotes. `fetch_texts.py` saves the text of every quoted
+source in the cache. `build_page.py` builds the page from the config, the atlas records and those texts, and stops if
+a quote is not found word for word. `tcga_extras.py` adds counts from provider files and wording from the GDC data
+dictionary for the TCGA page. See [docs/contributions/README.md](../../docs/contributions/README.md) for the steps and
+the config.
+
 ### Preview images (`previews/`)
 
 `render_previews.py` draws the KiTS23, UCSF RMaC and TCGA-KIRC renderings from the datasets' volumes and masks, at
