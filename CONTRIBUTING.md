@@ -21,7 +21,7 @@ hand.
 
 ## Finding something to work on
 
-Open tasks are [GitHub issues](https://github.com/i-sababishraq/kidney-dataset-atlas/issues). Issues labelled
+Open tasks are [GitHub issues](https://github.com/AI-MIND-Lab/kidney-dataset-atlas/issues). Issues labelled
 `good first issue` are small and self-contained. A map of every document is in [docs/README.md](docs/README.md),
 and the research tools (dictionary builders, preview and figure tools, literature pipeline) are described in
 [scripts/research/README.md](scripts/research/README.md).

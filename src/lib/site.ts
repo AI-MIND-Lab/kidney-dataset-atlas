@@ -13,7 +13,7 @@ export const SITE = {
 	 * and the output check refuses a build carrying that mark without this flag.
 	 */
 	showingDrafts: import.meta.env.ATLAS_DRAFTS === '1',
-	repoUrl: 'https://github.com/i-sababishraq/kidney-dataset-atlas',
+	repoUrl: 'https://github.com/AI-MIND-Lab/kidney-dataset-atlas',
 };
 
 export const NAV = [

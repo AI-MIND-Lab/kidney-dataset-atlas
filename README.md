@@ -14,7 +14,7 @@ files, but they never appear on the built site, in its search index or in its ex
 You need [Node.js](https://nodejs.org) 22.12 or newer (the project uses 24, pinned in `.nvmrc`) and git. Then:
 
 ```bash
-git clone https://github.com/i-sababishraq/kidney-dataset-atlas.git
+git clone https://github.com/AI-MIND-Lab/kidney-dataset-atlas.git
 cd kidney-dataset-atlas
 npm ci
 npm run preview:drafts
