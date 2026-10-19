@@ -202,11 +202,11 @@ ATLAS = {
                     'display, windowed, cropped and outlined.'),
     'reuseTerms': ('CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/), the licence on the dataset card. '
                    'This preview is an adaptation and is shared under the same licence. The RadGPT repository\'s LICENSE '
-                   'states CC BY-NC-ND 4.0, which does not allow adaptations; a curator has to settle which applies before '
+                   'states CC BY-NC-ND 4.0, which does not allow adaptations. A curator has to decide which applies before '
                    'approving this preview.'),
     'sources': ['abdomenatlas3-metadata-csv', 'abdomenatlas3-image-files', 'abdomenatlas3-hf-card', 'radgpt-paper',
                 'radgpt-repo-license'],
-    'alignment': ("The release's own CT and mask files; in this case they share one voxel grid and header (checked). "
+    'alignment': ("The release's own CT and mask files. In this case they share one voxel grid and header (checked). "
                   'Nothing was re-registered.'),
     'mask': "AbdomenAtlas 3.0's own masks, drawn by AI and corrected by radiologists",
     'view': 'atlas',
@@ -224,16 +224,16 @@ ATLAS = {
 DTV = {
     'release': 'deeptumorvqa-2-0', 'folder': 'deeptumorvqa',
     'attribution': ('Image: DeepTumorVQA 2.0 (Chen et al. 2026, arXiv:2605.09679), Hugging Face tumor-vqa/DeepTumorVQA_2.0, '
-                    'revision a8b9db5, benchmark/images_2d/organ/BDMAP_00000162_kidney.png, rendered by DeepTumorVQA from the '
+                    'revision a8b9db5, benchmark/images_2d/organ/BDMAP_00000162_kidney.png. Rendered by DeepTumorVQA from the '
                     'AbdomenAtlas 3.0 scan BDMAP_00000162, which DeepTumorVQA\'s ID mapping gives as KiTS21_img0205 (KiTS, Heller et al.). '
-                    'Compressed to WebP for the atlas; nothing else was changed.'),
+                    'Compressed to WebP for the atlas, with nothing else changed.'),
     'reuseTerms': ('Governed by the source CT licence, according to the DeepTumorVQA card, which points to AbdomenAtlas3.0Mini. '
                    'That dataset\'s card states CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/) and its '
                    'repository CC BY-NC-ND 4.0. By DeepTumorVQA\'s ID mapping the scan is a KiTS case, and KiTS23 is CC BY-NC-SA 4.0. '
                    'A curator has to settle which applies before approving this preview.'),
     'sources': ['deeptumorvqa-image-files', 'deeptumorvqa-hf-card', 'deeptumorvqa-paper', 'deeptumorvqa-question-files',
                 'deeptumorvqa-metadata-files', 'deeptumorvqa-id-mapping'],
-    'alignment': 'No mask is drawn; the image is shown as released.',
+    'alignment': 'No mask is drawn. The image is shown as released.',
     'mask': None,
     'view': 'dtv',
     # Two of the benchmark questions asked about this kidney image, with their answers.
@@ -260,13 +260,14 @@ AMOS = {
                     'Google Drive release, which matches amos_0088 of AMOS22 in size and CRC32 (Ji et al., NeurIPS 2022; '
                     'doi:10.5281/zenodo.7262581). Kidney mask: AMOS22 labelsTr/amos_0088.nii.gz. Rendered by the Kidney-VLM '
                     'project: reoriented for display, windowed, cropped and outlined.'),
-    'reuseTerms': ('Unresolved. The CT matches an AMOS22 file in size and CRC32, and AMOS22\'s own statements differ: its Zenodo '
-                   'record says CC BY 4.0, its dataset.json "CC-BY-SA 4.0" and the AMOS paper CC BY-NC-SA. AMOS-MM\'s JSON '
-                   'files state CC BY-ND 4.0, which does not allow adaptations, and its design document CC BY-SA. A curator '
-                   'has to settle which applies before approving this preview.'),
+    'reuseTerms': ('Unresolved. The CT matches an AMOS22 file in size and CRC32, and AMOS22\'s own statements differ. The AMOS22 '
+                   'Zenodo record says CC BY 4.0, its dataset.json "CC-BY-SA 4.0" and the AMOS paper CC BY-NC-SA. AMOS-MM\'s '
+                   'JSON files state CC BY-ND 4.0, which does not allow adaptations, while its design document says CC BY-SA. '
+                   'A curator has to settle which applies before approving this preview.'),
     'sources': ['amos-mm-image-files', 'amos-mm-report-json', 'amos-mm-vqa-json', 'amos-mm-zip-listings', 'amos22-zenodo',
                 'amos-paper', 'amos-mm-design-doc', 'deeptumorvqa-id-mapping', 'abdomenatlas3-metadata-csv'],
-    'alignment': 'The AMOS22 mask and the AMOS-MM CT share one voxel grid and affine (checked). Nothing was re-registered.',
+    'alignment': ('The AMOS22 mask and the AMOS-MM CT have the same voxel grid, and the same position, orientation and spacing '
+                  'in their headers (checked). Nothing was re-registered.'),
     'mask': "AMOS22 organ masks (not part of AMOS-MM), pre-labelled by models and checked by radiologists",
     'view': 'amos',
     'items': [

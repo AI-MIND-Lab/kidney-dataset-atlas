@@ -27,13 +27,13 @@ kidney?" to "Identify whether the largest kidney lesion is a cyst or tumor." (pa
 The questions are not written by people. A program for each kind of question reads a table of values measured on
 each scan (organ volumes, lesion counts, sizes, attenuation) and fills one of up to 10 sentence templates. For organ
 volume and organ aggregation questions, the wrong options of a multiple-choice question lie between 0.7 and 1.3 times
-the true value, and almost always for organ HU questions; for lesion counts, diameters and volumes they often do not. The scans are the 9,262 AbdomenAtlas 3.0
-CTs, under the same `BDMAP_` IDs, and the release also holds per-scan PNG slices, videos, pre-computed tool
-outputs and training conversations for tool-using agents.
+the true value. For organ HU questions they almost always do, and for lesion counts, diameters and volumes they often do
+not. The scans are the 9,262 AbdomenAtlas 3.0 CTs, under the same `BDMAP_` IDs. The release also holds per-scan PNG
+slices, videos, pre-computed tool outputs and training conversations for tool-using agents.
 
-Two things are easy to misread. DeepTumorVQA adds questions to existing scans rather than new patients: its PNGs
-and videos are renderings of those scans, the release re-hosts CT volumes only for the 991 benchmark scans (the others
-are on AbdomenAtlas), and its counts must never be added to AbdomenAtlas's. And its sources disagree on
-where the underlying masks came from: the dataset card says the questions are generated from the AbdomenAtlas
-masks and reports, while the paper says all masks were redrawn in-house by 23 radiologists (see the quality
-findings on the release page).
+Two things are easy to misread. First, DeepTumorVQA adds questions to existing scans rather than new patients. Its PNGs
+and videos are renderings of those scans, and the release re-hosts CT volumes only for the 991 benchmark scans. The CT
+volumes of the other scans are on AbdomenAtlas. DeepTumorVQA's counts must never be added to AbdomenAtlas's. Second, its
+sources disagree on where the underlying masks came from. The dataset card says the questions are generated from the
+AbdomenAtlas masks and reports. The paper instead says all masks were drawn again in-house by 23 radiologists (see the
+quality findings on the release page).

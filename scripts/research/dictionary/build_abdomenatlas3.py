@@ -133,18 +133,18 @@ add('BDMAP ID', f'Scan identifier: "BDMAP_" followed by eight digits, unique per
     evidence=TABLE, derivation='raw', key='bdmap-id', provenance='Joins the table to ct.nii.gz, the mask files and TrainTestIDS/.')
 add('spacing', 'Voxel size of the CT, three numbers written like a NumPy array (for example "[0.8222656 0.8222656 2.5]"), in the '
     f'file\'s own axis order. In {spacing_first():,} rows the largest value comes first, so the slice axis is not always the last axis. '
-    'No source states the unit; in the 232 CT headers checked, 170 give millimetres and 62 give no unit.',
+    'No source states the unit. In the 232 CT headers checked, 170 give millimetres and 62 give no unit.',
     'other', 'imaging', 'descriptor', evidence=ORIGIN,
     provenance='Copied by the metadata script from an input table that is not part of the release. Matched the NIfTI header in all 232 cases checked (BDMAP_00000001 to BDMAP_00000232).')
-add('shape', 'Voxel grid size, three numbers (for example "(512, 512, 339)"). It does not describe the released CT files: in '
-    'all 232 cases checked the released volume is smaller along at least one axis (see the quality findings).',
+add('shape', 'Voxel grid size, three numbers, for example "(512, 512, 339)". It does not describe the released CT files. In '
+    'all 232 cases checked, the released volume is smaller along at least one axis (see the quality findings).',
     'other', 'imaging', 'descriptor', evidence=ORIGIN,
-    provenance='Copied by the metadata script from an input table that is not part of the release; which processing step it describes is not documented.')
+    provenance='Copied by the metadata script from an input table that is not part of the release. Which processing step it describes is not documented.')
 add('sex', 'Patient sex.', 'categorical', 'clinical', 'predictor', level='patient', coding=codes('sex', {'M': 'Male', 'F': 'Female'}),
     missing=blank_note('sex', 'not available'), evidence=ORIGIN, derivation='raw', concept='sex',
     provenance='Taken by the metadata script from two input tables that are not part of the release (a "dap atlas" table and a TotalSegmentator table).')
 lo, hi = value_range('age')
-add('age', f'Patient age. The unit is not stated; the metadata script removes a leading zero and a trailing "Y" from the '
+add('age', f'Patient age. The unit is not stated. The metadata script removes a leading zero and a trailing "Y" from the '
     f'source value. Observed range {fmt(lo)} to {fmt(hi)}.', 'decimal', 'clinical', 'predictor', level='patient',
     missing=blank_note('age', 'not available'), evidence=ORIGIN, derivation='raw', concept='age',
     provenance='Taken by the metadata script from the same two input tables as sex.')
@@ -154,33 +154,34 @@ add('scanner', 'CT scanner manufacturer.', 'categorical', 'imaging', 'descriptor
 add('contrast', f'Contrast phase of the scan. The structured report\'s first line names a phase for more scans ({PHASE_IN_REPORT:,}) '
     'than this column does.', 'categorical', 'imaging', 'descriptor', coding=codes('contrast'),
     missing=blank_note('contrast', 'not recorded'), evidence=ORIGIN, derivation='raw', concept='contrast phase',
-    provenance='Copied by the metadata script from an input table that is not part of the release; how the phase was determined is not documented.')
+    provenance='Copied by the metadata script from an input table that is not part of the release. How the phase was determined is not documented.')
 
 # --- organ volumes, read from the report text
 ORGAN_VOL = {
-    'liver volume (cm^3)': ('liver', 'the "(volume: ... cc)" text in the Liver section of the structured report'),
-    'pancreas volume (cm^3)': ('pancreas', 'the "(volume: ... cc)" text in the Pancreas section of the structured report'),
-    'spleen volume (cm^3)': ('spleen', 'the "(volume: ... cc)" text in the Spleen section of the structured report'),
-    'left kidney volume (cm^3)': ('left kidney', 'the "left kidney volume:" text in the Kidney section of the structured report'),
-    'right kidney volume (cm^3)': ('right kidney', 'the "right kidney volume:" text in the Kidney section of the structured report'),
+    'liver volume (cm^3)': ('the liver', 'the "(volume: ... cc)" text in the Liver section of the structured report'),
+    'pancreas volume (cm^3)': ('the pancreas', 'the "(volume: ... cc)" text in the Pancreas section of the structured report'),
+    'spleen volume (cm^3)': ('the spleen', 'the "(volume: ... cc)" text in the Spleen section of the structured report'),
+    'left kidney volume (cm^3)': ('the left kidney', 'the "left kidney volume:" text in the Kidney section of the structured report'),
+    'right kidney volume (cm^3)': ('the right kidney', 'the "right kidney volume:" text in the Kidney section of the structured report'),
     'kidney volume (cm^3)': ('both kidneys together', 'the "total kidney volume:" text in the Kidney section of the structured report'),
 }
 for col, (organ, where) in ORGAN_VOL.items():
     zeros = sum(1 for v in filled(col) if num(v) == 0)
     lo, hi = value_range(col)
     add(col, f'Volume of {organ}, read from {where}. The report computes it from the mask. Observed range {fmt(lo)} to {fmt(hi)}'
-        + (f'; {zeros} rows are 0.' if zeros else '.'), 'decimal', 'imaging', 'descriptor', unit='cm³',
+        + (f', with {zeros} rows at 0.' if zeros else '.'), 'decimal', 'imaging', 'descriptor', unit='cm³',
         missing=blank_note(col, 'no value in the report'), concept='organ volume',
-        provenance='The metadata script parsed the report while its volumes still read "cm^3"; its main() then rewrote them as "cc" in the released report text.',
+        provenance='The metadata script parsed the report while its volumes still read "cm^3". The script\'s main() then rewrote them as "cc" in the released report text.',
         evidence={**SCRIPT, 'sources': SCRIPT['sources'] + ['radgpt-paper'], 'locator': SCRIPT['locator'] + ' and main() (cm^3 rewritten as cc); paper section 3.1.2'})
 
 # --- lesion columns, read from the numbered lesions in the report text
 ORGANS = {'liver': 'Liver', 'pancreatic': 'Pancreas', 'kidney': 'Kidney', 'colon': 'Colon'}
 LOC = {'liver': ('largest liver lesion location (1-8)', 'liver segment numbers 1 to 8, joined by commas when the lesion spans several'),
-       'pancreatic': ('largest pancreatic lesion location (head, body, tail)', 'pancreas part: head, body or tail, joined by commas'),
-       'kidney': ('largest kidney lesion location (left, right)', 'kidney side')}
+       'pancreatic': ('largest pancreatic lesion location (head, body, tail)',
+                      'the pancreas part (head, body or tail), with several parts joined by commas'),
+       'kidney': ('largest kidney lesion location (left, right)', 'the side, left or right')}
 NO_LESION = 'no lesion in the report, or no report at all (BDMAP_00005266)'
-ZERO = '0: no numbered lesion in the report\'s {s} section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)'
+ZERO = '0: no numbered lesion in the report\'s {s} section, or no report at all. The script writes 0 when a lesion count, size or volume is missing.'
 for organ, section in ORGANS.items():
     c_vol = f'total {organ} lesion volume (cm^3)'
     c_n = f'number of {organ} lesion instances'
@@ -189,22 +190,22 @@ for organ, section in ORGANS.items():
     pos_n = sum(1 for v in filled(c_n) if num(v) > 0)
     lo, hi = value_range(c_n)
     add(c_n, f'Number of numbered lesion entries ("{section} lesion N:" or "{section} tumor N:") in the report\'s {section} '
-        f'section. Above 0 in {pos_n:,} rows; maximum {fmt(hi)}.', 'integer', 'imaging', 'descriptor',
+        f'section. Above 0 in {pos_n:,} rows, with a maximum of {fmt(hi)}.', 'integer', 'imaging', 'descriptor',
         missing=[ZERO.format(s=section)], level='examination', concept='lesion count')
     pos_v = sum(1 for v in filled(c_vol) if num(v) > 0)
     lo, hi = value_range(c_vol)
     add(c_vol, f'Sum of the "Volume:" values of all numbered lesions in the report\'s {section} section. Above 0 in {pos_v:,} '
-        f'rows; maximum {fmt(hi)}.', 'decimal', 'imaging', 'descriptor', unit='cm³', missing=[ZERO.format(s=section)],
+        f'rows, with a maximum of {fmt(hi)}.', 'decimal', 'imaging', 'descriptor', unit='cm³', missing=[ZERO.format(s=section)],
         concept='lesion volume')
     lo, hi = value_range(c_d)
-    add(c_d, f'Longest diameter of lesion 1, the first lesion the report lists (the column name calls it the largest): the first '
-        f'number of its first "A x B cm" measurement. Maximum {fmt(hi)}.', 'decimal', 'imaging', 'descriptor', unit='cm',
-        missing=[ZERO.format(s=section)], level='lesion', concept='lesion diameter')
+    add(c_d, f'Longest diameter of lesion 1, the first lesion the report lists. The column name calls this lesion the largest. '
+        f'The value is the first number of its first "A x B cm" measurement. Maximum {fmt(hi)}.', 'decimal', 'imaging', 'descriptor',
+        unit='cm', missing=[ZERO.format(s=section)], level='lesion', concept='lesion diameter')
     if organ in LOC:
         c_loc, what = LOC[organ]
         nan_text = sum(1 for v in filled(c_loc) if v == 'nan')
-        add(c_loc, f'Where lesion 1 lies ({what}), taken from its "Location:" line in the report.', 'categorical', 'imaging',
-            'descriptor', coding=[c for c in codes(c_loc) if c['code'] != 'nan'],
+        add(c_loc, f'Where lesion 1 lies, taken from its "Location:" line in the report. It is given as {what}.',
+            'categorical', 'imaging', 'descriptor', coding=[c for c in codes(c_loc) if c['code'] != 'nan'],
             missing=blank_note(c_loc, NO_LESION) + ([f'"nan" (text): lesion 1 has no readable location ({nan_text:,} of {N:,} rows)'] if nan_text else []),
             level='lesion', concept='lesion location')
     add(c_att, 'Attenuation of lesion 1 relative to its organ: the first of "hyperattenuating", "hypoattenuating" or '
@@ -229,19 +230,19 @@ assert sorted(v['originalName'] for v in V) == sorted(COLUMNS), set(COLUMNS) ^ {
 MASK_EVIDENCE = {'sources': ['abdomenatlas3-mask-files', 'abdomenatlas3-image-files', 'radgpt-paper', 'radgpt-staging-script'],
                  'locator': 'mask_only tarballs (file names); paper Figure 2 caption, sections 3.1.1 and 3.1.3, footnote 1 and Appendix C (how each group was made); staging.py type2name (vessel names)',
                  'status': 'verified', 'verifiedOn': ON,
-                 'note': ('File names and stored values were checked for every case by the Kidney-VLM project on 2026-09-23 '
-                          '(43 files per case, 44 where colon_lesion is present; the log was not kept) and re-checked on the '
-                          'first 232 cases on 2026-09-30.')}
+                 'note': ('The Kidney-VLM project checked the file names and stored values for every case on 2026-09-23, and '
+                          're-checked them on the first 232 cases on 2026-09-30. Each case has 43 files, or 44 where '
+                          'colon_lesion is present. The log of the first check was not kept.')}
 BINARY = ('Each file is one binary mask, and masks of different files can overlap. In the 232 cases checked, every mask '
-          'has the same array shape as its CT, but in 56 of them some mask headers differ from the CT header (see the '
+          'has the same array shape as its CT. But in 56 of them, some mask headers differ from the CT header (see the '
           'quality findings).')
-STORE = ('Stored as 0/1, 0/255, or signed bytes -128/127 with a NIfTI scale that maps them to 0/1; read with a loader that '
-         'applies the scale and threshold at 0.5.')
+STORE = ('Masks are stored as 0/1, 0/255, or signed bytes -128/127 with a NIfTI scale that maps them to 0/1. Read them with a '
+         'loader that applies the scale, then threshold at 0.5.')
 MASKS = [
     ('lesion masks', 'lesion', [
         ('kidney_lesion', 'Kidney lesions; the file does not say whether a lesion is a tumour or a cyst'), ('liver_lesion', 'Liver lesions'),
         ('pancreatic_lesion', 'Pancreatic lesions'), ('colon_lesion', 'Colon lesions; present only in the cases that have one')],
-     'Drawn by AI (DiffTumor and nnU-Net), then checked and corrected one by one by radiologists, using source-dataset ground truth where it existed. The paper does not say how colon lesions were annotated.'),
+     'Drawn by AI (DiffTumor and nnU-Net), then checked and corrected by radiologists one by one, using source-dataset ground truth where it existed. The paper does not say how colon lesions were annotated.'),
     ('organ masks', 'organ', [(n, n.replace('_', ' ')) for n in (
         'liver', 'kidney_left', 'kidney_right', 'pancreas', 'spleen', 'stomach', 'gall_bladder', 'adrenal_gland_left',
         'adrenal_gland_right', 'bladder', 'colon', 'duodenum', 'esophagus', 'femur_left', 'femur_right', 'intestine',
@@ -249,7 +250,7 @@ MASKS = [
      'From AbdomenAtlas 1.1, made by AI with radiologists in the loop (paper, Appendix C).'),
     ('sub-region masks', 'subregion', [(f'liver_segment_{i}', f'Liver segment {i}') for i in range(1, 9)] +
      [('pancreas_head', 'Pancreas head'), ('pancreas_body', 'Pancreas body'), ('pancreas_tail', 'Pancreas tail')],
-     'Liver segments from an nnU-Net fine-tuned on 131 LiTS scans; pancreas parts split by a fixed rule from a superior mesenteric artery segmentation, judged only qualitatively by radiologists (paper, sections 3.1.1 and 4.2).'),
+     'Liver segments came from an nnU-Net fine-tuned on 131 LiTS scans. Pancreas parts were split by a fixed rule from a superior mesenteric artery segmentation, and radiologists judged them only qualitatively. The paper describes both in sections 3.1.1 and 4.2.'),
     ('vessel masks', 'vessel', [
         ('aorta', 'Aorta'), ('postcava', 'Inferior vena cava (IVC in the RadGPT code)'),
         ('superior_mesenteric_artery', 'Superior mesenteric artery'),
@@ -257,7 +258,7 @@ MASKS = [
         ('veins', 'Portal vein and superior mesenteric vein ("portal vein and SMV" in the RadGPT code)'),
         ('celiac_trunk', 'Celiac trunk'), ('portal_vein_and_splenic_vein', 'Portal vein and splenic vein'),
         ('hepatic_vessel', 'Hepatic vessels')],
-     'The vessels used for pancreatic tumour staging came from an nnU-Net trained on private data and were revised by radiologists (paper, footnote 1); the origin of each other vessel file is not stated.'),
+     'The vessels used for pancreatic tumour staging came from an nnU-Net trained on private data and were revised by radiologists (paper, footnote 1). Where the other vessel files came from is not stated.'),
 ]
 for group, key, files, how in MASKS:
     add(f'segmentations/<structure>.nii.gz ({group})', f'One mask file per structure in each case folder. {BINARY} {STORE}',
@@ -269,7 +270,7 @@ add('ct.nii.gz', 'The CT volume of the case, one NIfTI file per BDMAP ID, stored
     evidence={'sources': ['abdomenatlas3-hf-files', 'abdomenatlas3-image-files', 'radgpt-generate-readme'], 'locator': 'image_only listing; the 232 ct.nii.gz headers in the first image tarball; generate_reports README, "Dataset Format"',
               'status': 'verified', 'verifiedOn': ON, 'note': 'Headers opened for the first 232 cases only.'}, concept='CT image')
 add('TrainTestIDS split membership', 'Which part of each split a scan belongs to, from four ID lists. IID is a random 90/10 split '
-    'and the one the paper used; OOD keeps hospitals apart and was not used in the paper. Each split covers all 9,262 scans with no overlap.',
+    'and the one the paper used. OOD keeps hospitals apart and was not used in the paper. Each split covers all 9,262 scans with no overlap.',
     'categorical', 'administrative', 'other', file='TrainTestIDS/IID_train.csv, IID_test.csv, OOD_train.csv, OOD_test.csv',
     coding=[{'code': 'IID_train', 'meaning': '(8,336 scans)'}, {'code': 'IID_test', 'meaning': '(926 scans)'},
             {'code': 'OOD_train', 'meaning': '(4,696 scans)'}, {'code': 'OOD_test', 'meaning': '(4,566 scans)'}],

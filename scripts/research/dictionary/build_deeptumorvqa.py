@@ -146,11 +146,11 @@ add('Question ID', f'Question identifier: an integer, unique across the training
     f'{qids[-1]:,}, no gaps). Benchmark questions use "bench_00000" to "bench_09999" instead.' + jn('Question ID'),
     'integer', 'administrative', 'identifier', QFILE, evidence=CARD, derivation='raw', concept='question identifier')
 per = collections.Counter(r['Image ID'] for r in train)
-add('Image ID', f'BDMAP ID of the CT scan the question is about; the same IDs as AbdomenAtlas 3.0. The training file covers '
+add('Image ID', f'BDMAP ID of the CT scan the question is about. AbdomenAtlas 3.0 uses the same IDs. The training file covers '
     f'{len(per):,} scans ({min(per.values())} to {max(per.values())} questions each, median {statistics.median(per.values()):g}).' + jn('Image ID'),
     'text', 'administrative', 'identifier', QFILE, evidence=CARD, derivation='raw', concept='scan identifier')
 for col, what in [('spacing', 'Voxel size of the scan, three numbers written like a NumPy array, repeated from the metadata table'),
-                  ('shape', 'Voxel grid of the scan, repeated from the metadata table; it matches the AbdomenAtlas 3.0 shape column, not the released AbdomenAtlas3.0Mini files (see the quality findings)')]:
+                  ('shape', 'Voxel grid of the scan, repeated from the metadata table. It matches the AbdomenAtlas 3.0 shape column, not the released AbdomenAtlas3.0Mini files (see the quality findings)')]:
     add(col, what + '.', 'other', 'imaging', 'descriptor', QFILE, evidence=CARD, derivation='raw')
 add('sex', 'Patient sex, repeated in each question about the scan.', 'categorical', 'clinical', 'predictor', QFILE,
     coding=codes(QA, 'sex', meanings={'M': 'Male', 'F': 'Female'}), missing=blank(QA, 'sex', 'not available'), level='patient',
@@ -162,31 +162,34 @@ add('age', f'Patient age, repeated in each question about the scan. No unit is s
 add('scanner', 'CT scanner manufacturer, repeated in each question about the scan.', 'categorical', 'imaging', 'descriptor',
     QFILE, coding=codes(QA, 'scanner'), missing=blank(QA, 'scanner', 'not available'), evidence=FILEONLY, derivation='raw',
     concept='scanner manufacturer')
-add('contrast', f'Contrast phase. Empty in every row. The phase is given only in the report text: the first line of the '
-    f'structured report in the metadata table names it for {PHASE_IN_REPORT:,} scans. The paper says it was read from DICOM headers.',
+add('contrast', f'Contrast phase. Empty in every row. The phase is given only in the report text. In the metadata table, the '
+    f'first line of the structured report names it for {PHASE_IN_REPORT:,} scans. The paper says it was read from DICOM headers.',
     'categorical', 'imaging', 'descriptor', QFILE, missing=[f'blank in all {NQ:,} rows (NaN in the benchmark files)'],
     evidence={**PAPER_Q, 'locator': PAPER_Q['locator'] + '; paper Appendix b'}, derivation='raw', concept='contrast phase')
-add('question', f'The question text, without options. {len(set(r["question"] for r in QA)):,} distinct texts; each subtype has 10 '
-    'templates filled from the metadata (paper).', 'text', 'other', 'other', QFILE, evidence=PAPER_Q)
+add('question', f'The question text, without options. There are {len(set(r["question"] for r in QA)):,} distinct texts. '
+    'Each subtype has 10 templates filled from the metadata (paper).', 'text', 'other', 'other', QFILE, evidence=PAPER_Q)
 add('answer', f'The correct answer as text: a number or a label, computed by the subtype\'s program from the metadata table '
-    f'(paper). {len(set(r["answer"] for r in QA)):,} distinct values.', 'text', 'outcome', 'outcome', QFILE, evidence=PAPER_Q)
+    f'(paper). There are {len(set(r["answer"] for r in QA)):,} distinct values.', 'text', 'outcome', 'outcome', QFILE,
+    evidence=PAPER_Q)
 nopt = collections.Counter(len(re.findall(r'(?:^|\s)[A-D]:\s', r['multiple-choice question'])) for r in train)
-add('multiple-choice question', 'The question followed by its options written as "A: ... B: ...". The paper says wrong options for '
-    'volume and HU questions are drawn between 0.7 and 1.3 times the true value; in the files this holds for organ volume and '
-    'organ aggregation questions and for all but 58 of the 106,476 wrong options of organ HU questions, but not for lesion '
-    'volume, diameter, count, HU ratio or HU difference questions. Options per question in the training file: '
-    + ', '.join(f'{k} in {v:,}' for k, v in sorted(nopt.items(), reverse=True)) + '.' + jn('multiple-choice question'),
+opts = [f'{k} in {v:,}' for k, v in sorted(nopt.items(), reverse=True)]
+opts[0] += ' questions'
+add('multiple-choice question', 'The question followed by its options, written as "A: ... B: ...". The paper says wrong options '
+    'for volume and HU questions are drawn between 0.7 and 1.3 times the true value. In the files, this holds for organ volume '
+    'and organ aggregation questions, and for all but 58 of the 106,476 wrong options of organ HU questions. It does not hold '
+    'for lesion volume, diameter, count, HU ratio or HU difference questions. Options per question in the training file: '
+    + ', '.join(opts[:-1]) + ' and ' + opts[-1] + '.' + jn('multiple-choice question'),
     'text', 'other', 'other', QFILE, evidence=PAPER_Q)
 multi = sum(1 for r in QA if ',' in r['correct option'])
-add('correct option', f'Letter of the correct option; {multi:,} rows give several letters separated by commas.' + jn('correct option'),
-    'categorical', 'outcome', 'outcome', QFILE, coding=codes(QA, 'correct option', top=6), evidence=CARD)
-add('organ', 'Organ, or pair of organs joined by a comma, that the question is about. The organ is written both "pancreas" and '
-    '"pancreatic".', 'categorical', 'imaging', 'descriptor', QFILE, coding=codes(QA, 'organ', top=12), evidence=CARD)
-add('lesion', 'Kind of lesion the question is about; the text "False" when it asks about no lesion.', 'categorical', 'imaging',
-    'descriptor', QFILE, coding=codes(QA, 'lesion'), evidence=CARD)
+add('correct option', f'Letter of the correct option. In {multi:,} rows, the field gives several letters separated by commas.'
+    + jn('correct option'), 'categorical', 'outcome', 'outcome', QFILE, coding=codes(QA, 'correct option', top=6), evidence=CARD)
+add('organ', 'Organ, or pair of organs joined by a comma, that the question is about. The pancreas is written both as "pancreas" '
+    'and as "pancreatic".', 'categorical', 'imaging', 'descriptor', QFILE, coding=codes(QA, 'organ', top=12), evidence=CARD)
+add('lesion', 'Kind of lesion the question is about. The value is the text "False" when the question asks about no lesion.',
+    'categorical', 'imaging', 'descriptor', QFILE, coding=codes(QA, 'lesion'), evidence=CARD)
 add('question type', 'The stage the question tests (paper, section 3.1).' + jn('question type'), 'categorical', 'other', 'other',
     QFILE, coding=codes(QA, 'question type'), evidence=PAPER_Q)
-add('question subtype', f'One of {len(set(r["question subtype"] for r in QA))} clinical subtypes; the 12 most frequent are listed with '
+add('question subtype', f'One of {len(set(r["question subtype"] for r in QA))} clinical subtypes. The 12 most frequent are listed with '
     'counts, and all 42 are in subtype_schema.csv.' + jn('question subtype'), 'categorical', 'other', 'other', QFILE,
     coding=codes(QA, 'question subtype', top=12), evidence=PAPER_Q)
 add('split', 'Name of the file\'s split: "train" in train_qa.csv, "val" in val_qa_pool.csv. The benchmark files have no split field.',
@@ -200,12 +203,16 @@ add('requires_tools', 'Tools an agent needs to answer the question.', 'other', '
 PATHS = {'slice_path': ('organ PNG', 'benchmark/images_2d/organ/'), 'whole_slice_path': ('whole-scan PNG', 'benchmark/images_2d/whole/'),
          'video_path': ('organ-level video', None), 'whole_video_path': ('whole-scan video', 'benchmark/videos/whole/')}
 for col, (what, where) in PATHS.items():
-    found = (f'the files exist under {where} with the same file name' if where else 'no such videos are in the release')
-    add(col, f'Path of the {what} for the question. The folder written here is not in the release; {found} (see the quality findings).',
+    found = (f'The folder written here is not in the release, but the files exist under {where} with the same file name'
+             if where else 'These videos are not in the release. The folder benchmark/videos/ exists, but it holds only the '
+             'whole-scan videos, in its whole/ subfolder')
+    add(col, f'Path of the {what} for the question. {found} (see the quality findings).',
         'text', 'imaging', 'other', 'benchmark/test_qa.jsonl, test_qa.json', evidence=BENCH, key=col.replace('_', '-'))
 
 # --- metadata table
 ORG = {'liver': 'liver', 'pancreatic': 'pancreas', 'kidney': 'kidneys', 'colon': 'colon', 'esophagus': 'oesophagus', 'uterus': 'uterus'}
+LESION = {'lesion': ('lesion', 'lesions'), 'tumor': ('tumour', 'tumours'), 'cyst': ('cyst', 'cysts'),
+          'PDAC': ('PDAC', 'PDAC lesions'), 'PNET': ('PNET', 'PNET lesions')}
 TYPED = {'tumor', 'cyst', 'PDAC', 'PNET'}
 MFILE = 'metadata/reports_and_metadata.csv'
 
@@ -219,7 +226,7 @@ def not_given(col, count_col):
     if not b:
         return []
     with_lesion = sum(1 for r in b if count_col in r and num(r[count_col]) > 0)
-    return [f'blank: not given ({len(b):,} of {NM:,} rows' + (f'; {with_lesion:,} of them have such a lesion)' if with_lesion else ')')]
+    return [f'blank: not given ({len(b):,} of {NM:,} rows' + (f', including {with_lesion:,} with such a lesion)' if with_lesion else ')')]
 
 
 def zero_all(col):
@@ -231,40 +238,43 @@ AXIS_FIRST = sum(1 for r in meta if (lambda s: abs(s[1] - s[2]) < 1e-6 and s[0] 
 for col in meta[0].keys():
     m = re.match(r'(total|number of|largest) (\w+) (lesion|tumor|cyst|PDAC|PNET) (volume|instances|diameter|location|attenuation)', col)
     if col == 'BDMAP ID':
-        add(col, f'Scan identifier; {NM:,} rows, one per scan. Five scans that have questions (BDMAP_00001253, 00002505, 00003582, '
-            '00003757, 00004545) have no row.', 'text', 'administrative', 'identifier', MFILE, level='examination', evidence=META,
-            derivation='raw', key='meta-bdmap-id')
+        add(col, f'Scan identifier. The table has {NM:,} rows, one per scan. Five scans that have questions (BDMAP_00001253, '
+            '00002505, 00003582, 00003757, 00004545) have no row.', 'text', 'administrative', 'identifier', MFILE,
+            level='examination', evidence=META, derivation='raw', key='meta-bdmap-id')
     elif col in ('spacing', 'shape', 'sex', 'age', 'scanner'):
         add(col, f'Same values as the AbdomenAtlas 3.0 metadata column of the same name in all {NM:,} rows.', 'other' if col in ('spacing', 'shape') else ('decimal' if col == 'age' else 'categorical'),
             'imaging' if col in ('spacing', 'shape', 'scanner') else 'clinical', 'descriptor', MFILE, level='examination',
             missing=blank(meta, col, 'not available'), evidence={**META, 'sources': META['sources'] + ['abdomenatlas3-metadata-csv']},
             derivation='raw', key=f'meta-{col}')
     elif col == 'contrast':
-        add(col, f'Contrast phase. Empty in every row; the first line of the structured report names the phase for {PHASE_IN_REPORT:,} scans.', 'categorical', 'imaging', 'descriptor', MFILE, level='examination',
+        add(col, f'Contrast phase. Empty in every row. The first line of the structured report names the phase for {PHASE_IN_REPORT:,} scans.', 'categorical', 'imaging', 'descriptor', MFILE, level='examination',
             missing=[f'blank in all {NM:,} rows'], evidence=META, derivation='raw', key='meta-contrast')
     elif col.endswith('volume (cm^3)') and not m:
         vals = [num(v) for v in filled(meta, col)]
-        add(col, f'Organ volume. Observed range {min(vals):g} to {max(vals):g}; {sum(1 for v in vals if v == 0):,} rows are 0.',
+        add(col, f'Organ volume. Observed range {min(vals):g} to {max(vals):g}, with a value of 0 in '
+            f'{sum(1 for v in vals if v == 0):,} rows.',
             'decimal', 'imaging', 'descriptor', MFILE, unit='cm³', level='examination', missing=blank(meta, col, 'no value'),
             evidence=META, key='meta-' + re.sub(r'[^a-z0-9]+', '-', col.lower()).strip('-'))
     elif m:
         kind, organ, lesion, what = m.groups()
+        word, words = LESION[lesion]
         typed = lesion in TYPED
         zero = zero_all(col) if what in ('volume', 'instances', 'diameter') else not filled(meta, col)
-        base = {'volume': f'Sum of the volumes of all {lesion} instances in the {ORG.get(organ, organ)}',
-                'instances': f'Number of {lesion} instances in the {ORG.get(organ, organ)} (connected components of the mask, per the paper)',
-                'diameter': f'Largest axial diameter of the largest {lesion} in the {ORG.get(organ, organ)}',
-                'location': f'Where the largest {lesion} in the {ORG.get(organ, organ)} lies',
-                'attenuation': f'Attenuation of the largest {lesion} relative to its organ'}[what]
+        base = {'volume': f'Sum of the volumes of all {words} in the {ORG.get(organ, organ)}',
+                'instances': f'Number of {words} in the {ORG.get(organ, organ)} (connected components of the mask, per the paper)',
+                'diameter': f'Largest axial diameter of the largest {word} in the {ORG.get(organ, organ)}',
+                'location': f'Where the largest {word} in the {ORG.get(organ, organ)} lies',
+                'attenuation': f'Attenuation of the largest {word} relative to its organ'}[what]
         if zero:
             note = ' Empty or 0 in every row.'
         elif what in ('volume', 'instances', 'diameter'):
             pos = sum(1 for r in meta if num(r[col]) > 0)
-            note = f' Above 0 in {pos:,} rows; maximum {max(num(r[col]) for r in meta):g}.'
+            note = f' Above 0 in {pos:,} rows, with a maximum of {max(num(r[col]) for r in meta):g}.'
         else:
             note = f' Filled in {len(filled(meta, col)):,} rows.'
         if typed and what == 'diameter' and not zero:
-            note += f' Implausibly large on the {AXIS_FIRST} scans whose spacing lists the thick slice axis first (see the quality findings).'
+            note += (f' Values are far too large on the {AXIS_FIRST} scans whose spacing lists the thick slice axis first '
+                     '(see the quality findings).')
         typed_note = ' The lesion type is a radiologist\'s label (paper, Appendix b).' if typed else ''
         add(col, base + '.' + note + typed_note, {'volume': 'decimal', 'instances': 'integer', 'diameter': 'decimal',
                                                    'location': 'categorical', 'attenuation': 'categorical'}[what],
@@ -276,11 +286,11 @@ for col in meta[0].keys():
     elif col == 'pancreatic tumor staging (T1-T4)':
         add(col, 'T stage of the pancreatic tumour, derived by a program from its diameter and contact with nearby vessels (paper, '
             'Appendix b).', 'categorical', 'imaging', 'descriptor', MFILE, coding=codes(meta, col), level='lesion',
-            missing=[f'blank: not given ({sum(1 for r in meta if not r[col].strip()):,} of {NM:,} rows; '
+            missing=[f'blank: not given ({sum(1 for r in meta if not r[col].strip()):,} of {NM:,} rows, including '
                      f'{sum(1 for r in meta if not r[col].strip() and num(r["number of pancreatic PDAC instances"]) + num(r["number of pancreatic PNET instances"]) > 0):,} '
-                     'of them have a PDAC or PNET instance)'], evidence=META, key='meta-pancreatic-staging')
+                     'with a PDAC or PNET lesion)'], evidence=META, key='meta-pancreatic-staging')
     elif col in ('radiologist note', 'structured report', 'narrative report', 'fusion structured report', 'fusion narrative report'):
-        add(col, f'Report text, in the same column as the AbdomenAtlas 3.0 metadata table; it differs from AbdomenAtlas\'s in '
+        add(col, f'Report text. The AbdomenAtlas 3.0 metadata table has a column of the same name, and the two differ in '
             f'{sum(1 for r in meta if r[col] != AA[r["BDMAP ID"]][col]):,} of {NM:,} rows.', 'text', 'imaging', 'annotation', MFILE, level='examination',
             missing=blank(meta, col, 'no text'), evidence={**META, 'sources': META['sources'] + ['abdomenatlas3-metadata-csv']},
             key='meta-' + re.sub(r'[^a-z0-9]+', '-', col.lower()).strip('-'))
@@ -298,16 +308,16 @@ for col in schema[0].keys():
     elif col == 'task_group':
         d = 'Question type the subtype belongs to.'
     elif col == 'gt_trace_steps':
-        d = 'An integer from 1 to 5; the release does not document it beyond its name.'
+        d = 'An integer from 1 to 5. The release does not document it beyond its name.'
     elif col == 'required_primitives':
         d = 'The subtype\'s ground-truth tool sequence, written with arrows.'
     elif col == 'n_benchmark':
-        d = 'Number of benchmark questions of the subtype; equals the benchmark count for all 42 subtypes (sum 10,000).'
+        d = 'Number of benchmark questions of the subtype. It equals the benchmark count for all 42 subtypes (10,000 in total).'
     elif col == 'n_full_dataset':
-        d = ('Number of validation-pool questions of the subtype, despite the name: it equals the validation-pool count for all 42 '
-             'subtypes (sum 47,933), not the full dataset.')
+        d = ('Number of validation-pool questions of the subtype, despite the name. It equals the validation-pool count for all 42 '
+             'subtypes (47,933 in total), not the count in the full dataset.')
     else:
-        d = 'True/False flag; the release does not document it beyond its name.'
+        d = 'True/False flag. The release does not document it beyond its name.'
     kind = 'integer' if col.startswith('n_') or col == 'gt_trace_steps' else ('boolean' if col.startswith('requires_') else 'categorical' if col == 'task_group' else 'text')
     add(col, d, kind, 'other', 'other', SFILE, coding=codes(schema, col) if kind in ('categorical', 'boolean') or col == 'gt_trace_steps' else [],
         evidence=SCHEMA, key='schema-' + col.replace('_', '-'))
@@ -320,11 +330,11 @@ LB = {'model': 'Name of the evaluated configuration (model plus input or agent m
       'overall': 'Overall accuracy on the 10,000-question benchmark (multiple choice).', 'recog': 'Accuracy on recognition questions.',
       'meas': 'Accuracy on measurement questions.', 'visr': 'Accuracy on visual reasoning questions.',
       'medr': 'Accuracy on medical reasoning questions.',
-      'source': ('Where the provider says the row comes from. It cites "paper Table 1" and "Table 2"; in arXiv v1 these results '
+      'source': ('Where the provider says the row comes from. It cites "paper Table 1" and "Table 2". In arXiv v1, these results '
                  'are Tables 3 and 4.')}
 for col in board[0].keys():
     score = col in ('overall', 'recog', 'meas', 'visr', 'medr')
-    add(col, LB[col] + (' All 38 rows equal paper Tables 3 and 4. The two radiologist rows are on a 200-question subset, and the '
+    add(col, LB[col] + (' All 38 rows match paper Tables 3 and 4. The two radiologist rows are on a 200-question subset, and the '
                         'senior radiologist answered free-form.' if score else ''), 'decimal' if score else 'text', 'other',
         'outcome' if score else 'descriptor', LFILE, unit='%' if score else None,
         coding=codes(board, col) if col in ('input', 'mode', 'source') else [], evidence=BOARD, key='leaderboard-' + col)
@@ -338,17 +348,19 @@ for name in ('agent_sft/train.jsonl', 'agent_sft/holdout.jsonl'):
         ids.update(re.findall(r'BDMAP_\d{8}', json.dumps(conv)))
 empty_images = all(not json.loads(line)['images'] for n in ('agent_sft/train.jsonl', 'agent_sft/holdout.jsonl') for line in open(path(n)))
 add('agent_sft conversations', f'20,000 training and 20,000 held-out conversations of a tool-using agent, on {len(ids)} training scans named '
-    'in the text. Each is a list of turns ("from": ' + ', '.join(sorted(roles)) + '; "value": text) with the system prompt '
-    'and tool definitions. They were built by running each subtype\'s ground-truth tool trace against the tool cache (paper, '
+    'in the text. Each is a list of turns, with the system prompt and tool definitions. A turn has a "from" field ('
+    + ', '.join(sorted(roles)[:-1]) + ' or ' + sorted(roles)[-1] + ') and a "value" field that holds the text. The conversations '
+    'were built by running each subtype\'s ground-truth tool trace against the tool cache (paper, '
     'Appendix e.4).' + (' The "images" field is empty in every conversation, although the paper describes a 2D image in the first turn.' if empty_images else ''),
     'text', 'other', 'other', 'agent_sft/train.jsonl, agent_sft/holdout.jsonl', evidence=AGENT, key='agent-sft')
 caches = {n: json.load(open(path(f'tool_cache/{n}.json'))) for n in ('benchmark_oracle_tool_cache', 'benchmark_totalsegmentator_cache', 'training_oracle_tool_cache')}
-add('tool_cache entries', 'Pre-computed tool outputs per scan: for each BDMAP ID, "segment" (per structure: mask found, voxel count, '
-    'bounding box) and "measure" values. '
-    f'benchmark_oracle_tool_cache.json covers {len(caches["benchmark_oracle_tool_cache"]["cache"])} benchmark scans from the ground-truth masks; '
-    f'benchmark_totalsegmentator_cache.json the same {len(caches["benchmark_totalsegmentator_cache"]["cache"])} from TotalSegmentator; '
-    f'training_oracle_tool_cache.json {len(caches["training_oracle_tool_cache"]["cache"])} training scans. The two latter files also hold a '
-    f'"knowledge" section with {len(caches["benchmark_totalsegmentator_cache"]["knowledge"])} entries.',
+add('tool_cache entries', 'Pre-computed tool outputs per scan. Each BDMAP ID has "segment" values (mask found, voxel count and '
+    'bounding box for each structure) and "measure" values. The file benchmark_oracle_tool_cache.json covers '
+    f'{len(caches["benchmark_oracle_tool_cache"]["cache"])} benchmark scans, with values from the ground-truth masks. The file '
+    f'benchmark_totalsegmentator_cache.json covers the same {len(caches["benchmark_totalsegmentator_cache"]["cache"])} scans, '
+    'with values from TotalSegmentator. The file training_oracle_tool_cache.json covers '
+    f'{len(caches["training_oracle_tool_cache"]["cache"])} training scans. The last two files also hold a "knowledge" section '
+    f'with {len(caches["benchmark_totalsegmentator_cache"]["knowledge"])} entries.',
     'other', 'imaging', 'other', 'tool_cache/*.json', evidence=AGENT, key='tool-cache')
 
 write_json(OUT, V, tabs=True)
