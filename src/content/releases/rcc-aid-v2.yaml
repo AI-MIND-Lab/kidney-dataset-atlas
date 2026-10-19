@@ -50,10 +50,7 @@ cohort: >-
   chromophobe candidates were annotated, and a random 200 of 676 eligible clear cell series;
   scans of the chest, post-operative scans, scans without contrast and scans with several solid
   tumours were excluded.
-tasks:
-  - segmentation
-  - detection
-  - classification
+tasks: []
 annotations:
   - segmentation_masks
   - classification_labels
@@ -112,7 +109,7 @@ features:
   clinicalData:
     status: present
     note: >-
-      metadata.csv gives each scan's histologic subtype, patient sex and age, tumour size,
+      metadata.csv gives each scan's histologic subtype, patient sex and age,
       contrast phase and TCIA series identifiers. Further clinical data join from the GDC by
       TCGA barcode.
     evidence:
@@ -170,10 +167,13 @@ pairing:
 dictionary:
   completeness: partial
   inspectedScope: >-
-    The label map and file layout from the Zenodo record, and the metadata.csv columns that the
-    authors' analysis code reads (PatientID, SeriesInstanceUID, PatientSex, PatientAge). The
-    record could not be downloaded (Zenodo refused automated requests), so the remaining
-    metadata columns, including tumour size and contrast phase, are not listed by name.
+    Variable descriptions are AI-researched and compiled for this atlas from the cited
+    paper, code and metadata; this is not an official RCC-AID variable dictionary.
+    Some field meanings remain unverified.
+    The Zenodo label map and file layout, the authors' analysis code, and all 41 columns
+    across 129 series records in version-2.0.0 metadata.csv (inspected 2026-10-08).
+    Clinical field meanings are not fully documented; imaging volumes and masks were
+    not inspected.
 structure: >-
   images/ holds one NIfTI CT volume per scan and labels/ one matching mask (file name plus
   _seg). File names begin with the collection code (KIRC, KIRP or KICH), which gives the

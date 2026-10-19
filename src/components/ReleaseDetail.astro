@@ -337,7 +337,7 @@ const isHuman = dataset.data.species === 'human';
 		}
 		<p>
 			<strong>Annotations made by:</strong>{' '}
-			{data.annotationProvenance ? humanize(data.annotationProvenance.kind) : 'Not documented'}
+			{data.annotationProvenance ? (data.annotationProvenance.label ?? humanize(data.annotationProvenance.kind)) : 'Not documented'}
 			{data.annotationProvenance?.note && <>. {data.annotationProvenance.note}</>}
 		</p>
 		<h3>Counts</h3>

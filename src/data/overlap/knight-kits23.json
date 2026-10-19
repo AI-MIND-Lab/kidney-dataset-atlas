@@ -1,0 +1,19 @@
+[
+	{
+		"id": "knight-kits23-overlap",
+		"releases": ["kits23"],
+		"externalCollection": {
+			"name": "KNIGHT (classification)",
+			"url": "https://kits-challenge.org/kits23/"
+		},
+		"type": "partial_cohort",
+		"count": { "value": 400, "status": "present" },
+		"explanation": "KNIGHT used case_00000–case_00299 as its 300 training cases and case_00400–case_00499 as its 100 test cases. All 400 are within the KiTS23 training set, which contains another 89 cases. These KNIGHT test cases are distinct from the separate KiTS21 and KiTS23 challenge test sets. The first 300 also appear in the KiTS19/KiTS21 overlap rows, so shared-case counts must not be summed.",
+		"evidence": {
+			"sources": ["kits23-challenge-page"],
+			"locator": "The Data: KNIGHT classification training/test case ranges",
+			"status": "verified",
+			"verifiedOn": "2026-10-07"
+		}
+	}
+]

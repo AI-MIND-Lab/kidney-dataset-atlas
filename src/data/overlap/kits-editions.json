@@ -1,17 +1,100 @@
 [
 	{
-		"id": "kits-editions-overlap",
-		"releases": ["kits19", "kits21", "kits23", "c4kc-kits"],
+		"id": "kits19-kits21-public-overlap",
+		"releases": [
+			"kits19",
+			"kits21"
+		],
 		"type": "partial_cohort",
 		"count": {
-			"value": null,
-			"status": "not_verified"
+			"value": 210,
+			"status": "present"
 		},
-		"explanation": "The KiTS editions draw on the same institutional cohort, and the TCIA archive republishes the KiTS19 public cases. Patients appear in more than one of these releases, so their case counts describe overlapping groups and must not be summed. The number of shared patients was not established here.",
+		"explanation": "All 210 public KiTS19 training cases, case_00000–case_00209, occur in KiTS21. Across the full KiTS19 challenge, all 300 cases (210 training plus 90 test, case_00210–case_00299) became KiTS21 training cases.",
 		"evidence": {
-			"sources": ["kits19-data-paper", "kits21-paper", "kits23-challenge-page", "c4kc-kits-tcia"],
-			"status": "not_verified",
-			"note": "Each edition documents the same institution and overlapping years; no case-level mapping between editions was found."
+			"sources": [
+				"kits19-data-paper",
+				"kits21-paper",
+				"kits23-challenge-page",
+				"c4kc-kits-tcia"
+			],
+			"status": "verified",
+			"verifiedOn": "2026-10-07",
+			"locator": "KiTS23 The Data: case ranges; KiTS21 section 2.1.1: shared 300 cases; TCIA collection summary"
+		}
+	},
+	{
+		"id": "kits19-kits23-public-overlap",
+		"releases": [
+			"kits19",
+			"kits23"
+		],
+		"type": "partial_cohort",
+		"count": {
+			"value": 210,
+			"status": "present"
+		},
+		"explanation": "All 210 public KiTS19 training cases, case_00000–case_00209, occur in KiTS23 training. KiTS23 also includes the 90 former KiTS19 test cases, case_00210–case_00299: 300 reused cases from the full KiTS19 challenge.",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits21-paper",
+				"kits23-challenge-page",
+				"c4kc-kits-tcia"
+			],
+			"status": "verified",
+			"verifiedOn": "2026-10-07",
+			"locator": "KiTS23 The Data: case ranges; KiTS21 section 2.1.1: shared 300 cases; TCIA collection summary"
+		}
+	},
+	{
+		"id": "kits21-kits23-training-overlap",
+		"releases": [
+			"kits21",
+			"kits23"
+		],
+		"type": "partial_cohort",
+		"count": {
+			"value": 300,
+			"status": "present"
+		},
+		"explanation": "KiTS21 training cases case_00000–case_00299 are the same 300 cases as the full KiTS19 challenge. KiTS23 training contains these 300 plus 189 additional cases (489 minus 300), with a separate 110-case challenge test set. The separate 100-case Cleveland Clinic KiTS21 test set is not documented here as part of KiTS23 training.",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits21-paper",
+				"kits23-challenge-page",
+				"c4kc-kits-tcia"
+			],
+			"status": "verified",
+			"verifiedOn": "2026-10-07",
+			"locator": "KiTS23 The Data: case ranges; KiTS21 section 2.1.1: shared 300 cases; TCIA collection summary"
+		}
+	},
+	{
+		"id": "c4kc-kits-editions-overlap",
+		"releases": [
+			"c4kc-kits",
+			"kits19",
+			"kits21",
+			"kits23"
+		],
+		"type": "partial_cohort",
+		"count": {
+			"value": 210,
+			"status": "present"
+		},
+		"explanation": "C4KC-KiTS archives the 210 KiTS19 public training cases, case_00000–case_00209, also reused in KiTS21 and KiTS23 training. These are the same patients as the other KiTS19 overlap rows; overlap counts must not be summed.",
+		"evidence": {
+			"sources": [
+				"kits19-data-paper",
+				"kits21-paper",
+				"kits23-challenge-page",
+				"c4kc-kits-tcia"
+			],
+			"status": "verified",
+			"verifiedOn": "2026-10-07",
+			"locator": "KiTS23 The Data: case ranges; KiTS21 section 2.1.1: shared 300 cases; TCIA collection summary"
 		}
 	}
 ]

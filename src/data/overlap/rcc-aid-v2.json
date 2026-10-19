@@ -1,0 +1,74 @@
+[
+	{
+		"id": "rcc-aid-v2-tcga-kirc-overlap",
+		"releases": [
+			"rcc-aid-v2"
+		],
+		"externalCollection": {
+			"name": "TCGA-KIRC (TCIA)",
+			"url": "https://www.cancerimagingarchive.net/collection/tcga-kirc/"
+		},
+		"type": "partial_cohort",
+		"count": {
+			"value": 65,
+			"status": "present"
+		},
+		"explanation": "65 shared patients contributing 85 CT scans (clear cell RCC). RCC-AID adds masks to this subset; these are not additional patients.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-paper"
+			],
+			"locator": "Section 5.1 (source collections); Table 3 (patients and scans by subtype)",
+			"status": "verified",
+			"verifiedOn": "2026-10-19"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-tcga-kirp-overlap",
+		"releases": [
+			"rcc-aid-v2"
+		],
+		"externalCollection": {
+			"name": "TCGA-KIRP (TCIA)",
+			"url": "https://www.cancerimagingarchive.net/collection/tcga-kirp/"
+		},
+		"type": "partial_cohort",
+		"count": {
+			"value": 16,
+			"status": "present"
+		},
+		"explanation": "16 shared patients contributing 26 CT scans (papillary RCC). RCC-AID adds masks to this subset; these are not additional patients.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-paper"
+			],
+			"locator": "Section 5.1 (source collections); Table 3 (patients and scans by subtype)",
+			"status": "verified",
+			"verifiedOn": "2026-10-19"
+		}
+	},
+	{
+		"id": "rcc-aid-v2-tcga-kich-overlap",
+		"releases": [
+			"rcc-aid-v2"
+		],
+		"externalCollection": {
+			"name": "TCGA-KICH (TCIA)",
+			"url": "https://www.cancerimagingarchive.net/collection/tcga-kich/"
+		},
+		"type": "partial_cohort",
+		"count": {
+			"value": 10,
+			"status": "present"
+		},
+		"explanation": "10 shared patients contributing 18 CT scans (chromophobe RCC). RCC-AID adds masks to this subset; these are not additional patients.",
+		"evidence": {
+			"sources": [
+				"rcc-aid-paper"
+			],
+			"locator": "Section 5.1 (source collections); Table 3 (patients and scans by subtype)",
+			"status": "verified",
+			"verifiedOn": "2026-10-19"
+		}
+	}
+]

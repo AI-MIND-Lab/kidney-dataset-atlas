@@ -18,17 +18,22 @@ sources:
   - rcc-aid-code
 ---
 
-RCC-AID is an annotation set for the CT scans that The Cancer Imaging Archive holds for the
-TCGA kidney cancer projects: clear cell (TCGA-KIRC), papillary (TCGA-KIRP) and chromophobe
-(TCGA-KICH). The Radboudumc group behind it screened every CT series in the three collections,
-generated kidney and lesion masks with their own segmentation model, and had trained students
-correct them and pick out the primary tumour and any cysts, with a radiologist deciding
-uncertain cases. A radiologist also labelled each scan's contrast phase.
+RCC-AID provides contrast-enhanced CT and kidney, primary tumour and cyst masks for
+renal cell carcinoma research. Its source images come from the TCGA-KIRC (clear cell),
+TCGA-KIRP (papillary) and TCGA-KICH (chromophobe) collections on The Cancer Imaging Archive.
+The released cohort includes 129 scans from 91 patients; some patients contribute more
+than one scan. The overlap table below lists the contribution from each source collection.
+[Dataset paper, sections 5.1 and 6.1, Table 3](https://www.melba-journal.org/pdf/2026:039.pdf)
 
-**It is derived data, not new patients.** Every scan comes from the TCGA collections catalogued
-on the TCGA-KIRC, TCGA-KIRP and TCGA-KICH pages, and each patient joins back to the TCGA
-clinical records and slides by barcode. Counts from RCC-AID must never be added to counts from
-those collections.
+The Radboudumc team screened the source CT series, generated initial kidney and renal-mass
+masks with a segmentation model, and had trained students correct them and identify the
+primary tumour and cysts. Uncertain cases were referred to a radiologist, and a second
+radiologist assigned contrast phases. The Quality section describes the review outcomes
+and the limits of these annotations.
+[Dataset paper, sections 5.2.2-5.2.4](https://www.melba-journal.org/pdf/2026:039.pdf)
 
-The images are redistributed under the TCIA collections' CC BY 3.0 licence and the masks under
-CC BY 4.0, so both sources need attribution.
+Version 2.0.0 was released on June 16, 2026. It repairs conversion errors, removes
+irreparable files and adds contrast-phase annotations to the earlier release, which
+contained 142 scans from 101 patients. The download includes converted NIfTI volumes,
+matching masks, scan-level metadata and a manifest for retrieving the original TCIA DICOM.
+[Zenodo release and version log](https://zenodo.org/records/20719257)
