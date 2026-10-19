@@ -1,0 +1,46 @@
+[
+	{
+		"id": "rcc-aid-expert-review",
+		"release": "rcc-aid-v2",
+		"category": "published_report",
+		"description": "Of 283 initially selected series, 31 required radiologist review: 25 were flagged by students and six had ambiguous click-to-mask mapping. Sixteen were retained; 15 were excluded for postoperative uncertainty (6), unidentifiable tumour (5), click/mask spatial mismatch (2), multiple tumours (1), or substantial segmentation errors (1). These are screening outcomes, not error rates for the final release.",
+		"inspectedScope": "Paper section 5.2.2: expert-review outcomes; source report only, no independent image review.",
+		"affected": {
+			"value": 31,
+			"status": "present",
+			"evidence": {
+				"sources": [
+					"rcc-aid-paper"
+				],
+				"locator": "Section 5.2.2",
+				"status": "verified",
+				"verifiedOn": "2026-10-19"
+			}
+		},
+		"sources": [
+			"rcc-aid-paper"
+		]
+	},
+	{
+		"id": "rcc-aid-acquisition-heterogeneity",
+		"release": "rcc-aid-v2",
+		"category": "published_report",
+		"description": "Multi-site scanner and protocol variation includes slice thickness from 0.6 to 5.0 mm. Table 2 reports mean slice thickness of 4.1 mm overall, distinct from mean pixel spacing of 0.8 mm. The authors recommend resampling to common voxel spacing and reporting results by acquisition parameters where feasible.",
+		"inspectedScope": "Paper section 3, section 5.2.5 and Table 2; acquisition summaries, not independently measured volumes.",
+		"affected": {
+			"value": null,
+			"status": "not_documented",
+			"evidence": {
+				"sources": [
+					"rcc-aid-paper"
+				],
+				"locator": "Section 3; section 5.2.5; Table 2",
+				"status": "verified",
+				"verifiedOn": "2026-10-19"
+			}
+		},
+		"sources": [
+			"rcc-aid-paper"
+		]
+	}
+]

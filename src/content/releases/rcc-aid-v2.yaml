@@ -50,10 +50,7 @@ cohort: >-
   chromophobe candidates were annotated, and a random 200 of 676 eligible clear cell series;
   scans of the chest, post-operative scans, scans without contrast and scans with several solid
   tumours were excluded.
-tasks:
-  - segmentation
-  - detection
-  - classification
+tasks: []
 annotations:
   - segmentation_masks
   - classification_labels
@@ -87,7 +84,7 @@ features:
   clinicalData:
     status: present
     note: >-
-      metadata.csv gives each scan's histologic subtype, patient sex and age, tumour size,
+      metadata.csv gives each scan's histologic subtype, patient sex and age,
       contrast phase and TCIA series identifiers. Further clinical data join from the GDC by
       TCGA barcode.
     evidence:
@@ -145,109 +142,10 @@ pairing:
 dictionary:
   completeness: partial
   inspectedScope: >-
-    The label map and file layout from the Zenodo record, and the metadata.csv columns that the
-    authors' analysis code reads (PatientID, SeriesInstanceUID, PatientSex, PatientAge). The
-    record could not be downloaded (Zenodo refused automated requests), so the remaining
-    metadata columns, including tumour size and contrast phase, are not listed by name.
-    Addendum (2026-10-08): the version-2.0.0 metadata.csv was subsequently downloaded
-    to temporary storage and all 41 columns across 129 series records were inspected.
-    Missing dictionary entries were appended without replacing the original six entries.
-    The earlier scope statement describes the original inspection; it is retained for provenance.
-    The dictionary remains partial because source-field clinical meanings are not fully
-    documented and the imaging volumes and masks were not inspected in this update.
-notes:
-  - title: Version 2.0.0 scope and changes from version 1.0.0
-    text: >-
-      These counts and metadata additions describe RCC-AID v2 (2.0.0, released 2026-06-16).
-      The provider lists DICOM-to-NIfTI conversion fixes, removal of irreparably broken
-      files, and added contrast-phase annotations as the v2 updates. This is a cleaned
-      and supplemented release of the same TCGA-derived resource, not a newly recruited
-      cohort. Version 1 had 142 scans from 101 patients; v2 has 129 scans from 91 patients:
-      13 fewer scans and 10 fewer unique patients. Figure 1's excluded-patient counts
-      refer to patients represented in excluded scans, not necessarily patients removed
-      completely from the cohort.
-    evidence:
-      sources: [rcc-aid-v2-version-log-20261008, rcc-aid-paper]
-      locator: Zenodo Version log; paper Figure 1 and caption
-      status: verified
-      verifiedOn: 2026-10-08
-  - title: Metadata inspection addendum for v2
-    text: >-
-      The inspected CSV contains 129 series records and 41 fields, including patient,
-      study and series identifiers; collection and site; source acquisition and licence
-      fields; and phase_name. The phase counts are 26 arterial, 50 venous and 53 delayed.
-      Summing ImageCount yields 16,055 source-series images; this is not an independently
-      verified count of converted NIfTI slices or patients. EthnicGroup codes are
-      undocumented; FileSize units are not stated; several administrative fields are
-      entirely blank. Blank AnnotationsFlag values do not establish absent masks.
-      Metadata study/series descriptions are not radiology reports. Tumour measurements
-      reported by the paper or derived by the analysis code are not additional columns
-      in this inspected metadata.csv. Existing dictionary entries retain their original
-      descriptions and inspection dates.
-    evidence:
-      sources: [rcc-aid-v2-metadata-20261008]
-      locator: Entire metadata.csv header and 129 series rows; ImageCount and phase_name aggregates
-      status: verified
-      verifiedOn: 2026-10-08
-  - title: Splits and external evaluation
-    text: >-
-      The authors do not prescribe an official reference train/validation/test split.
-      Split by patient because one patient may contribute multiple series. When used
-      as a frozen external evaluation cohort, keep RCC-AID out of model training and
-      model selection, and check overlap with all upstream training and pretraining
-      collections. RCC-AID is a subset of TCGA-KIRC/KIRP/KICH; using those collections
-      elsewhere does not create independent patients. These evaluation practices are
-      methodological guidance, not an official RCC-AID benchmark protocol.
-    evidence:
-      sources: [rcc-aid-paper]
-      locator: Section 3, recommendation for patient-level splits and no single reference split; section 5.1
-      status: verified
-      verifiedOn: 2026-10-08
-  - title: Acquisition-table clarification
-    text: >-
-      In paper Table 2, mean slice thickness is 4.0, 4.7 and 3.8 mm for clear cell,
-      papillary and chromophobe RCC respectively, and 4.1 mm overall. The separate
-      pixel-spacing row is 0.8, 0.8 and 0.7 mm, and 0.8 mm overall; those values must
-      not be labelled slice thickness. The repository README separately reports a
-      3.8 mm average slice thickness, so cite the source used rather than treating
-      these summaries as interchangeable.
-    evidence:
-      sources: [rcc-aid-paper, rcc-aid-code]
-      locator: Paper Table 2, Slice thickness and Pixel spacing rows; README Scan geometry
-      status: verified
-      verifiedOn: 2026-10-08
-  - title: Additional screening and quality-assurance detail
-    text: >-
-      Screening covered 1,915 CT series from 272 patients and retained 759 eligible
-      series from 247 patients. Filters required axial scans, at least 10 slices,
-      thickness at most 5 mm, a series description, and the first study acquisition
-      date per patient; scout/reconstruction series were excluded. From 676 eligible
-      clear cell series, 200 were randomly selected, alongside all 56 papillary and
-      27 chromophobe candidates, giving 283 initially annotated series. Each case was
-      reviewed by one of two trained students, not a formal two-reader consensus.
-      Final manual QA excluded six thoracic scans and seven scans with affine
-      corruption causing image-mask mismatch.
-    evidence:
-      sources: [rcc-aid-paper]
-      locator: Sections 5.2.1, 5.2.4 and 6.2; Figure 1
-      status: verified
-      verifiedOn: 2026-10-08
-  - title: Published lesion and acquisition summaries
-    text: >-
-      Section 6.1 reports mean tumour volume 167 mL and axial diameter 54 mm; cyst
-      means are 17 mL and 21 mm. Table 3 gives mean volume/diameter by subtype:
-      clear cell 131 mL/51 mm, papillary 209 mL/51 mm, and chromophobe 272 mL/71 mm.
-      Cyst-bearing scans represent 33 patients and 38 scans, with 118 cyst instances;
-      cysts are not additional patients. The README reports an average 112 slices
-      per scan (range 31-820). The paper reports scanner manufacturers as SIEMENS
-      52%, GE 39%, Philips 6%, Toshiba 3%, and recommends common voxel spacing for
-      training and stratified acquisition reporting where feasible. These are
-      published summaries, not measurements from imaging inspected for this update.
-    evidence:
-      sources: [rcc-aid-paper, rcc-aid-code]
-      locator: Paper sections 5.2.5 and 6.1, Table 3; repository README Scan geometry
-      status: verified
-      verifiedOn: 2026-10-08
+    The Zenodo label map and file layout, the authors' analysis code, and all 41 columns
+    across 129 series records in version-2.0.0 metadata.csv (inspected 2026-10-08).
+    Clinical field meanings are not fully documented; imaging volumes and masks were
+    not inspected.
 structure: >-
   images/ holds one NIfTI CT volume per scan and labels/ one matching mask (file name plus
   _seg). File names begin with the collection code (KIRC, KIRP or KICH), which gives the
