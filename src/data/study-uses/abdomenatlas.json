@@ -13,10 +13,10 @@
 			"locator": "Section 4 (\"We randomly selected 10% of AbdomenAtlas 3.0 as a test set\"), Appendix B.1 (training on AbdomenAtlas 3.0), Table 2; README \"Train/Test Splits\"",
 			"status": "verified",
 			"verifiedOn": "2026-09-30",
-			"note": "The paper introduces the release and evaluates six report generation models on its test set; three of them were trained on the rest."
+			"note": "The paper introduces the release and evaluates six report generation models on its test set. Three of them were trained on the remaining scans."
 		},
-		"subset": "All 9,262 scans; IID split, 926 test scans (IID_test.csv), the partition the README says the paper used",
-		"preprocessing": "CT2Rep, CT-CHAT and Merlin were trained on the CT scans and structured reports only, without the masks; CT2Rep and CT-CHAT used CT resampled to 1.5 mm isotropic voxels (Appendix B.1).",
+		"subset": "All 9,262 scans, using the IID split with 926 test scans (IID_test.csv). The README says the paper used this split.",
+		"preprocessing": "CT2Rep, CT-CHAT and Merlin were trained on the CT scans and structured reports only, without the masks. CT2Rep and CT-CHAT used CT resampled to 1.5 mm isotropic voxels (Appendix B.1).",
 		"task": "report_generation",
 		"trainTestRole": "train_and_test",
 		"split": "IID: random 90% train (8,336) / 10% test (926). The paper also tests on a private UCSF set, not part of this release.",
@@ -27,9 +27,9 @@
 				"value": 66.7,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 9 small and 27 large tumours and 890 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -46,9 +46,9 @@
 				"value": 81.5,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 9 small and 27 large tumours and 890 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -65,9 +65,9 @@
 				"value": 93.2,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 9 small and 27 large tumours and 890 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -84,9 +84,9 @@
 				"value": 54.8,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 74 small and 61 large tumours and 791 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -103,9 +103,9 @@
 				"value": 93.3,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 74 small and 61 large tumours and 791 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -122,9 +122,9 @@
 				"value": 51.8,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 74 small and 61 large tumours and 791 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -141,9 +141,9 @@
 				"value": 39.6,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 53 small and 63 large tumours and 810 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -160,9 +160,9 @@
 				"value": 96.8,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 53 small and 63 large tumours and 810 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -179,9 +179,9 @@
 				"value": 64.4,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 53 small and 63 large tumours and 810 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -198,9 +198,9 @@
 				"value": 66.7,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 9 small and 27 large tumours and 890 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -217,9 +217,9 @@
 				"value": 51.9,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 9 small and 27 large tumours and 890 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -236,9 +236,9 @@
 				"value": 61.2,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 9 small and 27 large tumours and 890 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -255,9 +255,9 @@
 				"value": 31.1,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 74 small and 61 large tumours and 791 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -274,9 +274,9 @@
 				"value": 32.8,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 74 small and 61 large tumours and 791 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -293,9 +293,9 @@
 				"value": 74.2,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 74 small and 61 large tumours and 791 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -312,9 +312,9 @@
 				"value": 5.7,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 53 small and 63 large tumours and 810 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -331,9 +331,9 @@
 				"value": 3.2,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 53 small and 63 large tumours and 810 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -350,9 +350,9 @@
 				"value": 94.7,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 53 small and 63 large tumours and 810 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -369,9 +369,9 @@
 				"value": 0.0,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 9 small and 27 large tumours and 890 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -388,9 +388,9 @@
 				"value": 0.0,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 9 small and 27 large tumours and 890 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -407,9 +407,9 @@
 				"value": 92.5,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 9 small and 27 large tumours and 890 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -426,9 +426,9 @@
 				"value": 36.5,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 74 small and 61 large tumours and 791 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -445,9 +445,9 @@
 				"value": 39.3,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 74 small and 61 large tumours and 791 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -464,9 +464,9 @@
 				"value": 70.4,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 74 small and 61 large tumours and 791 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -483,9 +483,9 @@
 				"value": 35.8,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 53 small and 63 large tumours and 810 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -502,9 +502,9 @@
 				"value": 49.2,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 53 small and 63 large tumours and 810 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -521,9 +521,9 @@
 				"value": 70.4,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 53 small and 63 large tumours and 810 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -540,9 +540,9 @@
 				"value": 0.0,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 9 small and 27 large tumours and 890 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -559,9 +559,9 @@
 				"value": 7.4,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 9 small and 27 large tumours and 890 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -578,9 +578,9 @@
 				"value": 97.2,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 9 small and 27 large tumours and 890 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -597,9 +597,9 @@
 				"value": 8.1,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 74 small and 61 large tumours and 791 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -616,9 +616,9 @@
 				"value": 16.4,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 74 small and 61 large tumours and 791 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -635,9 +635,9 @@
 				"value": 84.1,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 74 small and 61 large tumours and 791 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -654,9 +654,9 @@
 				"value": 9.4,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 53 small and 63 large tumours and 810 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -673,9 +673,9 @@
 				"value": 12.7,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 53 small and 63 large tumours and 810 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -692,9 +692,9 @@
 				"value": 86.0,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 53 small and 63 large tumours and 810 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -711,9 +711,9 @@
 				"value": 33.3,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 9 small and 27 large tumours and 890 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -730,9 +730,9 @@
 				"value": 51.9,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 9 small and 27 large tumours and 890 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -749,9 +749,9 @@
 				"value": 71.8,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 9 small and 27 large tumours and 890 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -768,9 +768,9 @@
 				"value": 28.4,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 74 small and 61 large tumours and 791 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -787,9 +787,9 @@
 				"value": 45.9,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 74 small and 61 large tumours and 791 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -806,9 +806,9 @@
 				"value": 86.6,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 74 small and 61 large tumours and 791 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -825,9 +825,9 @@
 				"value": 30.2,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 53 small and 63 large tumours and 810 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -844,9 +844,9 @@
 				"value": 41.3,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 53 small and 63 large tumours and 810 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -863,9 +863,9 @@
 				"value": 95.9,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 53 small and 63 large tumours and 810 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -882,9 +882,9 @@
 				"value": 0.0,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 9 small and 27 large tumours and 890 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -901,9 +901,9 @@
 				"value": 0.0,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 9 small and 27 large tumours and 890 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -920,9 +920,9 @@
 				"value": 99.9,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 9 small and 27 large tumours, 890 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 9 small and 27 large tumours and 890 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -939,9 +939,9 @@
 				"value": 3.7,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 74 small and 61 large tumours and 791 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -958,9 +958,9 @@
 				"value": 6.3,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 74 small and 61 large tumours and 791 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -977,9 +977,9 @@
 				"value": 95.6,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 74 small and 61 large tumours, 791 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 74 small and 61 large tumours and 791 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -996,9 +996,9 @@
 				"value": 3.3,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 53 small and 63 large tumours and 810 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -1015,9 +1015,9 @@
 				"value": 5.7,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 53 small and 63 large tumours and 810 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [
@@ -1034,9 +1034,9 @@
 				"value": 93.9,
 				"units": "%",
 				"confidenceInterval": null,
-				"subset": "AbdomenAtlas 3.0 IID test set; ground truth 53 small and 63 large tumours, 810 negatives",
+				"subset": "AbdomenAtlas 3.0 IID test set, where the ground truth has 53 small and 63 large tumours and 810 negatives",
 				"split": "IID: random 10% test set",
-				"patientLevelHandling": "Not documented; the split is by CT scan (BDMAP ID)",
+				"patientLevelHandling": "Not documented. The split is by CT scan (BDMAP ID).",
 				"evaluation": "internal",
 				"evidence": {
 					"sources": [

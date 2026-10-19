@@ -30,7 +30,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "spacing",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Voxel size of the CT, three numbers written like a NumPy array (for example \"[0.8222656 0.8222656 2.5]\"), in the file's own axis order. In 450 rows the largest value comes first, so the slice axis is not always the last axis. No source states the unit; in the 232 CT headers checked, 170 give millimetres and 62 give no unit.",
+		"definition": "Voxel size of the CT, three numbers written like a NumPy array (for example \"[0.8222656 0.8222656 2.5]\"), in the file's own axis order. In 450 rows the largest value comes first, so the slice axis is not always the last axis. No source states the unit. In the 232 CT headers checked, 170 give millimetres and 62 give no unit.",
 		"type": "other",
 		"unit": null,
 		"coding": [],
@@ -57,7 +57,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "shape",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Voxel grid size, three numbers (for example \"(512, 512, 339)\"). It does not describe the released CT files: in all 232 cases checked the released volume is smaller along at least one axis (see the quality findings).",
+		"definition": "Voxel grid size, three numbers, for example \"(512, 512, 339)\". It does not describe the released CT files. In all 232 cases checked, the released volume is smaller along at least one axis (see the quality findings).",
 		"type": "other",
 		"unit": null,
 		"coding": [],
@@ -68,7 +68,7 @@
 		"group": "imaging",
 		"derivation": "derived",
 		"normalizedConcept": null,
-		"provenance": "Copied by the metadata script from an input table that is not part of the release; which processing step it describes is not documented.",
+		"provenance": "Copied by the metadata script from an input table that is not part of the release. Which processing step it describes is not documented.",
 		"evidence": {
 			"sources": [
 				"abdomenatlas3-metadata-csv",
@@ -122,7 +122,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "age",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Patient age. The unit is not stated; the metadata script removes a leading zero and a trailing \"Y\" from the source value. Observed range 11 to 95.",
+		"definition": "Patient age. The unit is not stated. The metadata script removes a leading zero and a trailing \"Y\" from the source value. Observed range 11 to 95.",
 		"type": "decimal",
 		"unit": null,
 		"coding": [],
@@ -223,7 +223,7 @@
 		"group": "imaging",
 		"derivation": "raw",
 		"normalizedConcept": "contrast phase",
-		"provenance": "Copied by the metadata script from an input table that is not part of the release; how the phase was determined is not documented.",
+		"provenance": "Copied by the metadata script from an input table that is not part of the release. How the phase was determined is not documented.",
 		"evidence": {
 			"sources": [
 				"abdomenatlas3-metadata-csv",
@@ -239,7 +239,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "liver volume (cm^3)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Volume of liver, read from the \"(volume: ... cc)\" text in the Liver section of the structured report. The report computes it from the mask. Observed range 0 to 8562.3; 13 rows are 0.",
+		"definition": "Volume of the liver, read from the \"(volume: ... cc)\" text in the Liver section of the structured report. The report computes it from the mask. Observed range 0 to 8562.3, with 13 rows at 0.",
 		"type": "decimal",
 		"unit": "cm³",
 		"coding": [],
@@ -252,7 +252,7 @@
 		"group": "imaging",
 		"derivation": "derived",
 		"normalizedConcept": "organ volume",
-		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\"; its main() then rewrote them as \"cc\" in the released report text.",
+		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\". The script's main() then rewrote them as \"cc\" in the released report text.",
 		"evidence": {
 			"sources": [
 				"abdomenatlas3-metadata-csv",
@@ -269,7 +269,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "pancreas volume (cm^3)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Volume of pancreas, read from the \"(volume: ... cc)\" text in the Pancreas section of the structured report. The report computes it from the mask. Observed range 0 to 428.7; 46 rows are 0.",
+		"definition": "Volume of the pancreas, read from the \"(volume: ... cc)\" text in the Pancreas section of the structured report. The report computes it from the mask. Observed range 0 to 428.7, with 46 rows at 0.",
 		"type": "decimal",
 		"unit": "cm³",
 		"coding": [],
@@ -282,7 +282,7 @@
 		"group": "imaging",
 		"derivation": "derived",
 		"normalizedConcept": "organ volume",
-		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\"; its main() then rewrote them as \"cc\" in the released report text.",
+		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\". The script's main() then rewrote them as \"cc\" in the released report text.",
 		"evidence": {
 			"sources": [
 				"abdomenatlas3-metadata-csv",
@@ -299,7 +299,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "spleen volume (cm^3)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Volume of spleen, read from the \"(volume: ... cc)\" text in the Spleen section of the structured report. The report computes it from the mask. Observed range 0 to 3087.9; 38 rows are 0.",
+		"definition": "Volume of the spleen, read from the \"(volume: ... cc)\" text in the Spleen section of the structured report. The report computes it from the mask. Observed range 0 to 3087.9, with 38 rows at 0.",
 		"type": "decimal",
 		"unit": "cm³",
 		"coding": [],
@@ -312,7 +312,7 @@
 		"group": "imaging",
 		"derivation": "derived",
 		"normalizedConcept": "organ volume",
-		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\"; its main() then rewrote them as \"cc\" in the released report text.",
+		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\". The script's main() then rewrote them as \"cc\" in the released report text.",
 		"evidence": {
 			"sources": [
 				"abdomenatlas3-metadata-csv",
@@ -329,7 +329,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "left kidney volume (cm^3)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Volume of left kidney, read from the \"left kidney volume:\" text in the Kidney section of the structured report. The report computes it from the mask. Observed range 0 to 1986; 136 rows are 0.",
+		"definition": "Volume of the left kidney, read from the \"left kidney volume:\" text in the Kidney section of the structured report. The report computes it from the mask. Observed range 0 to 1986, with 136 rows at 0.",
 		"type": "decimal",
 		"unit": "cm³",
 		"coding": [],
@@ -342,7 +342,7 @@
 		"group": "imaging",
 		"derivation": "derived",
 		"normalizedConcept": "organ volume",
-		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\"; its main() then rewrote them as \"cc\" in the released report text.",
+		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\". The script's main() then rewrote them as \"cc\" in the released report text.",
 		"evidence": {
 			"sources": [
 				"abdomenatlas3-metadata-csv",
@@ -359,7 +359,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "right kidney volume (cm^3)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Volume of right kidney, read from the \"right kidney volume:\" text in the Kidney section of the structured report. The report computes it from the mask. Observed range 0 to 1927.1; 96 rows are 0.",
+		"definition": "Volume of the right kidney, read from the \"right kidney volume:\" text in the Kidney section of the structured report. The report computes it from the mask. Observed range 0 to 1927.1, with 96 rows at 0.",
 		"type": "decimal",
 		"unit": "cm³",
 		"coding": [],
@@ -372,7 +372,7 @@
 		"group": "imaging",
 		"derivation": "derived",
 		"normalizedConcept": "organ volume",
-		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\"; its main() then rewrote them as \"cc\" in the released report text.",
+		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\". The script's main() then rewrote them as \"cc\" in the released report text.",
 		"evidence": {
 			"sources": [
 				"abdomenatlas3-metadata-csv",
@@ -389,7 +389,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "kidney volume (cm^3)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Volume of both kidneys together, read from the \"total kidney volume:\" text in the Kidney section of the structured report. The report computes it from the mask. Observed range 0 to 2211.8; 58 rows are 0.",
+		"definition": "Volume of both kidneys together, read from the \"total kidney volume:\" text in the Kidney section of the structured report. The report computes it from the mask. Observed range 0 to 2211.8, with 58 rows at 0.",
 		"type": "decimal",
 		"unit": "cm³",
 		"coding": [],
@@ -402,7 +402,7 @@
 		"group": "imaging",
 		"derivation": "derived",
 		"normalizedConcept": "organ volume",
-		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\"; its main() then rewrote them as \"cc\" in the released report text.",
+		"provenance": "The metadata script parsed the report while its volumes still read \"cm^3\". The script's main() then rewrote them as \"cc\" in the released report text.",
 		"evidence": {
 			"sources": [
 				"abdomenatlas3-metadata-csv",
@@ -419,12 +419,12 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "number of liver lesion instances",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Number of numbered lesion entries (\"Liver lesion N:\" or \"Liver tumor N:\") in the report's Liver section. Above 0 in 1,470 rows; maximum 176.",
+		"definition": "Number of numbered lesion entries (\"Liver lesion N:\" or \"Liver tumor N:\") in the report's Liver section. Above 0 in 1,470 rows, with a maximum of 176.",
 		"type": "integer",
 		"unit": null,
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Liver section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+			"0: no numbered lesion in the report's Liver section, or no report at all. The script writes 0 when a lesion count, size or volume is missing."
 		],
 		"observationLevel": "examination",
 		"timePoint": null,
@@ -447,12 +447,12 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "total liver lesion volume (cm^3)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Sum of the \"Volume:\" values of all numbered lesions in the report's Liver section. Above 0 in 1,469 rows; maximum 2964.",
+		"definition": "Sum of the \"Volume:\" values of all numbered lesions in the report's Liver section. Above 0 in 1,469 rows, with a maximum of 2964.",
 		"type": "decimal",
 		"unit": "cm³",
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Liver section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+			"0: no numbered lesion in the report's Liver section, or no report at all. The script writes 0 when a lesion count, size or volume is missing."
 		],
 		"observationLevel": "examination",
 		"timePoint": null,
@@ -475,12 +475,12 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "largest liver lesion diameter (cm)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Longest diameter of lesion 1, the first lesion the report lists (the column name calls it the largest): the first number of its first \"A x B cm\" measurement. Maximum 24.",
+		"definition": "Longest diameter of lesion 1, the first lesion the report lists. The column name calls this lesion the largest. The value is the first number of its first \"A x B cm\" measurement. Maximum 24.",
 		"type": "decimal",
 		"unit": "cm",
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Liver section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+			"0: no numbered lesion in the report's Liver section, or no report at all. The script writes 0 when a lesion count, size or volume is missing."
 		],
 		"observationLevel": "lesion",
 		"timePoint": null,
@@ -503,7 +503,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "largest liver lesion location (1-8)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Where lesion 1 lies (liver segment numbers 1 to 8, joined by commas when the lesion spans several), taken from its \"Location:\" line in the report.",
+		"definition": "Where lesion 1 lies, taken from its \"Location:\" line in the report. It is given as liver segment numbers 1 to 8, joined by commas when the lesion spans several.",
 		"type": "categorical",
 		"unit": null,
 		"coding": [
@@ -814,12 +814,12 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "number of pancreatic lesion instances",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Number of numbered lesion entries (\"Pancreas lesion N:\" or \"Pancreas tumor N:\") in the report's Pancreas section. Above 0 in 1,111 rows; maximum 7.",
+		"definition": "Number of numbered lesion entries (\"Pancreas lesion N:\" or \"Pancreas tumor N:\") in the report's Pancreas section. Above 0 in 1,111 rows, with a maximum of 7.",
 		"type": "integer",
 		"unit": null,
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Pancreas section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+			"0: no numbered lesion in the report's Pancreas section, or no report at all. The script writes 0 when a lesion count, size or volume is missing."
 		],
 		"observationLevel": "examination",
 		"timePoint": null,
@@ -842,12 +842,12 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "total pancreatic lesion volume (cm^3)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Sum of the \"Volume:\" values of all numbered lesions in the report's Pancreas section. Above 0 in 1,110 rows; maximum 741.9.",
+		"definition": "Sum of the \"Volume:\" values of all numbered lesions in the report's Pancreas section. Above 0 in 1,110 rows, with a maximum of 741.9.",
 		"type": "decimal",
 		"unit": "cm³",
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Pancreas section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+			"0: no numbered lesion in the report's Pancreas section, or no report at all. The script writes 0 when a lesion count, size or volume is missing."
 		],
 		"observationLevel": "examination",
 		"timePoint": null,
@@ -870,12 +870,12 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "largest pancreatic lesion diameter (cm)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Longest diameter of lesion 1, the first lesion the report lists (the column name calls it the largest): the first number of its first \"A x B cm\" measurement. Maximum 13.4.",
+		"definition": "Longest diameter of lesion 1, the first lesion the report lists. The column name calls this lesion the largest. The value is the first number of its first \"A x B cm\" measurement. Maximum 13.4.",
 		"type": "decimal",
 		"unit": "cm",
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Pancreas section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+			"0: no numbered lesion in the report's Pancreas section, or no report at all. The script writes 0 when a lesion count, size or volume is missing."
 		],
 		"observationLevel": "lesion",
 		"timePoint": null,
@@ -898,7 +898,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "largest pancreatic lesion location (head, body, tail)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Where lesion 1 lies (pancreas part: head, body or tail, joined by commas), taken from its \"Location:\" line in the report.",
+		"definition": "Where lesion 1 lies, taken from its \"Location:\" line in the report. It is given as the pancreas part (head, body or tail), with several parts joined by commas.",
 		"type": "categorical",
 		"unit": null,
 		"coding": [
@@ -993,12 +993,12 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "number of kidney lesion instances",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Number of numbered lesion entries (\"Kidney lesion N:\" or \"Kidney tumor N:\") in the report's Kidney section. Above 0 in 2,144 rows; maximum 51.",
+		"definition": "Number of numbered lesion entries (\"Kidney lesion N:\" or \"Kidney tumor N:\") in the report's Kidney section. Above 0 in 2,144 rows, with a maximum of 51.",
 		"type": "integer",
 		"unit": null,
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Kidney section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+			"0: no numbered lesion in the report's Kidney section, or no report at all. The script writes 0 when a lesion count, size or volume is missing."
 		],
 		"observationLevel": "examination",
 		"timePoint": null,
@@ -1021,12 +1021,12 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "total kidney lesion volume (cm^3)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Sum of the \"Volume:\" values of all numbered lesions in the report's Kidney section. Above 0 in 2,125 rows; maximum 2618.4.",
+		"definition": "Sum of the \"Volume:\" values of all numbered lesions in the report's Kidney section. Above 0 in 2,125 rows, with a maximum of 2618.4.",
 		"type": "decimal",
 		"unit": "cm³",
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Kidney section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+			"0: no numbered lesion in the report's Kidney section, or no report at all. The script writes 0 when a lesion count, size or volume is missing."
 		],
 		"observationLevel": "examination",
 		"timePoint": null,
@@ -1049,12 +1049,12 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "largest kidney lesion diameter (cm)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Longest diameter of lesion 1, the first lesion the report lists (the column name calls it the largest): the first number of its first \"A x B cm\" measurement. Maximum 18.2.",
+		"definition": "Longest diameter of lesion 1, the first lesion the report lists. The column name calls this lesion the largest. The value is the first number of its first \"A x B cm\" measurement. Maximum 18.2.",
 		"type": "decimal",
 		"unit": "cm",
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Kidney section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+			"0: no numbered lesion in the report's Kidney section, or no report at all. The script writes 0 when a lesion count, size or volume is missing."
 		],
 		"observationLevel": "lesion",
 		"timePoint": null,
@@ -1077,7 +1077,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "largest kidney lesion location (left, right)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Where lesion 1 lies (kidney side), taken from its \"Location:\" line in the report.",
+		"definition": "Where lesion 1 lies, taken from its \"Location:\" line in the report. It is given as the side, left or right.",
 		"type": "categorical",
 		"unit": null,
 		"coding": [
@@ -1156,12 +1156,12 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "number of colon lesion instances",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Number of numbered lesion entries (\"Colon lesion N:\" or \"Colon tumor N:\") in the report's Colon section. Above 0 in 182 rows; maximum 2.",
+		"definition": "Number of numbered lesion entries (\"Colon lesion N:\" or \"Colon tumor N:\") in the report's Colon section. Above 0 in 182 rows, with a maximum of 2.",
 		"type": "integer",
 		"unit": null,
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Colon section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+			"0: no numbered lesion in the report's Colon section, or no report at all. The script writes 0 when a lesion count, size or volume is missing."
 		],
 		"observationLevel": "examination",
 		"timePoint": null,
@@ -1184,12 +1184,12 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "total colon lesion volume (cm^3)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Sum of the \"Volume:\" values of all numbered lesions in the report's Colon section. Above 0 in 182 rows; maximum 471.7.",
+		"definition": "Sum of the \"Volume:\" values of all numbered lesions in the report's Colon section. Above 0 in 182 rows, with a maximum of 471.7.",
 		"type": "decimal",
 		"unit": "cm³",
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Colon section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+			"0: no numbered lesion in the report's Colon section, or no report at all. The script writes 0 when a lesion count, size or volume is missing."
 		],
 		"observationLevel": "examination",
 		"timePoint": null,
@@ -1212,12 +1212,12 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "largest colon lesion diameter (cm)",
 		"file": "AbdomenAtlas3.0MiniWithMeta.csv",
-		"definition": "Longest diameter of lesion 1, the first lesion the report lists (the column name calls it the largest): the first number of its first \"A x B cm\" measurement. Maximum 11.6.",
+		"definition": "Longest diameter of lesion 1, the first lesion the report lists. The column name calls this lesion the largest. The value is the first number of its first \"A x B cm\" measurement. Maximum 11.6.",
 		"type": "decimal",
 		"unit": "cm",
 		"coding": [],
 		"missingValues": [
-			"0: no numbered lesion in the report's Colon section, or no report at all (the script writes 0 when a lesion count, size or volume is missing)"
+			"0: no numbered lesion in the report's Colon section, or no report at all. The script writes 0 when a lesion count, size or volume is missing."
 		],
 		"observationLevel": "lesion",
 		"timePoint": null,
@@ -1421,7 +1421,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "segmentations/<structure>.nii.gz (lesion masks)",
 		"file": "mask_only tarballs, BDMAP_xxxxxxxx/segmentations/",
-		"definition": "One mask file per structure in each case folder. Each file is one binary mask, and masks of different files can overlap. In the 232 cases checked, every mask has the same array shape as its CT, but in 56 of them some mask headers differ from the CT header (see the quality findings). Stored as 0/1, 0/255, or signed bytes -128/127 with a NIfTI scale that maps them to 0/1; read with a loader that applies the scale and threshold at 0.5.",
+		"definition": "One mask file per structure in each case folder. Each file is one binary mask, and masks of different files can overlap. In the 232 cases checked, every mask has the same array shape as its CT. But in 56 of them, some mask headers differ from the CT header (see the quality findings). Masks are stored as 0/1, 0/255, or signed bytes -128/127 with a NIfTI scale that maps them to 0/1. Read them with a loader that applies the scale, then threshold at 0.5.",
 		"type": "image",
 		"unit": null,
 		"coding": [
@@ -1449,7 +1449,7 @@
 		"group": "imaging",
 		"derivation": "derived",
 		"normalizedConcept": "segmentation mask",
-		"provenance": "Drawn by AI (DiffTumor and nnU-Net), then checked and corrected one by one by radiologists, using source-dataset ground truth where it existed. The paper does not say how colon lesions were annotated.",
+		"provenance": "Drawn by AI (DiffTumor and nnU-Net), then checked and corrected by radiologists one by one, using source-dataset ground truth where it existed. The paper does not say how colon lesions were annotated.",
 		"evidence": {
 			"sources": [
 				"abdomenatlas3-mask-files",
@@ -1460,7 +1460,7 @@
 			"locator": "mask_only tarballs (file names); paper Figure 2 caption, sections 3.1.1 and 3.1.3, footnote 1 and Appendix C (how each group was made); staging.py type2name (vessel names)",
 			"status": "verified",
 			"verifiedOn": "2026-09-30",
-			"note": "File names and stored values were checked for every case by the Kidney-VLM project on 2026-09-23 (43 files per case, 44 where colon_lesion is present; the log was not kept) and re-checked on the first 232 cases on 2026-09-30."
+			"note": "The Kidney-VLM project checked the file names and stored values for every case on 2026-09-23, and re-checked them on the first 232 cases on 2026-09-30. Each case has 43 files, or 44 where colon_lesion is present. The log of the first check was not kept."
 		}
 	},
 	{
@@ -1468,7 +1468,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "segmentations/<structure>.nii.gz (organ masks)",
 		"file": "mask_only tarballs, BDMAP_xxxxxxxx/segmentations/",
-		"definition": "One mask file per structure in each case folder. Each file is one binary mask, and masks of different files can overlap. In the 232 cases checked, every mask has the same array shape as its CT, but in 56 of them some mask headers differ from the CT header (see the quality findings). Stored as 0/1, 0/255, or signed bytes -128/127 with a NIfTI scale that maps them to 0/1; read with a loader that applies the scale and threshold at 0.5.",
+		"definition": "One mask file per structure in each case folder. Each file is one binary mask, and masks of different files can overlap. In the 232 cases checked, every mask has the same array shape as its CT. But in 56 of them, some mask headers differ from the CT header (see the quality findings). Masks are stored as 0/1, 0/255, or signed bytes -128/127 with a NIfTI scale that maps them to 0/1. Read them with a loader that applies the scale, then threshold at 0.5.",
 		"type": "image",
 		"unit": null,
 		"coding": [
@@ -1575,7 +1575,7 @@
 			"locator": "mask_only tarballs (file names); paper Figure 2 caption, sections 3.1.1 and 3.1.3, footnote 1 and Appendix C (how each group was made); staging.py type2name (vessel names)",
 			"status": "verified",
 			"verifiedOn": "2026-09-30",
-			"note": "File names and stored values were checked for every case by the Kidney-VLM project on 2026-09-23 (43 files per case, 44 where colon_lesion is present; the log was not kept) and re-checked on the first 232 cases on 2026-09-30."
+			"note": "The Kidney-VLM project checked the file names and stored values for every case on 2026-09-23, and re-checked them on the first 232 cases on 2026-09-30. Each case has 43 files, or 44 where colon_lesion is present. The log of the first check was not kept."
 		}
 	},
 	{
@@ -1583,7 +1583,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "segmentations/<structure>.nii.gz (sub-region masks)",
 		"file": "mask_only tarballs, BDMAP_xxxxxxxx/segmentations/",
-		"definition": "One mask file per structure in each case folder. Each file is one binary mask, and masks of different files can overlap. In the 232 cases checked, every mask has the same array shape as its CT, but in 56 of them some mask headers differ from the CT header (see the quality findings). Stored as 0/1, 0/255, or signed bytes -128/127 with a NIfTI scale that maps them to 0/1; read with a loader that applies the scale and threshold at 0.5.",
+		"definition": "One mask file per structure in each case folder. Each file is one binary mask, and masks of different files can overlap. In the 232 cases checked, every mask has the same array shape as its CT. But in 56 of them, some mask headers differ from the CT header (see the quality findings). Masks are stored as 0/1, 0/255, or signed bytes -128/127 with a NIfTI scale that maps them to 0/1. Read them with a loader that applies the scale, then threshold at 0.5.",
 		"type": "image",
 		"unit": null,
 		"coding": [
@@ -1639,7 +1639,7 @@
 		"group": "imaging",
 		"derivation": "derived",
 		"normalizedConcept": "segmentation mask",
-		"provenance": "Liver segments from an nnU-Net fine-tuned on 131 LiTS scans; pancreas parts split by a fixed rule from a superior mesenteric artery segmentation, judged only qualitatively by radiologists (paper, sections 3.1.1 and 4.2).",
+		"provenance": "Liver segments came from an nnU-Net fine-tuned on 131 LiTS scans. Pancreas parts were split by a fixed rule from a superior mesenteric artery segmentation, and radiologists judged them only qualitatively. The paper describes both in sections 3.1.1 and 4.2.",
 		"evidence": {
 			"sources": [
 				"abdomenatlas3-mask-files",
@@ -1650,7 +1650,7 @@
 			"locator": "mask_only tarballs (file names); paper Figure 2 caption, sections 3.1.1 and 3.1.3, footnote 1 and Appendix C (how each group was made); staging.py type2name (vessel names)",
 			"status": "verified",
 			"verifiedOn": "2026-09-30",
-			"note": "File names and stored values were checked for every case by the Kidney-VLM project on 2026-09-23 (43 files per case, 44 where colon_lesion is present; the log was not kept) and re-checked on the first 232 cases on 2026-09-30."
+			"note": "The Kidney-VLM project checked the file names and stored values for every case on 2026-09-23, and re-checked them on the first 232 cases on 2026-09-30. Each case has 43 files, or 44 where colon_lesion is present. The log of the first check was not kept."
 		}
 	},
 	{
@@ -1658,7 +1658,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "segmentations/<structure>.nii.gz (vessel masks)",
 		"file": "mask_only tarballs, BDMAP_xxxxxxxx/segmentations/",
-		"definition": "One mask file per structure in each case folder. Each file is one binary mask, and masks of different files can overlap. In the 232 cases checked, every mask has the same array shape as its CT, but in 56 of them some mask headers differ from the CT header (see the quality findings). Stored as 0/1, 0/255, or signed bytes -128/127 with a NIfTI scale that maps them to 0/1; read with a loader that applies the scale and threshold at 0.5.",
+		"definition": "One mask file per structure in each case folder. Each file is one binary mask, and masks of different files can overlap. In the 232 cases checked, every mask has the same array shape as its CT. But in 56 of them, some mask headers differ from the CT header (see the quality findings). Masks are stored as 0/1, 0/255, or signed bytes -128/127 with a NIfTI scale that maps them to 0/1. Read them with a loader that applies the scale, then threshold at 0.5.",
 		"type": "image",
 		"unit": null,
 		"coding": [
@@ -1702,7 +1702,7 @@
 		"group": "imaging",
 		"derivation": "derived",
 		"normalizedConcept": "segmentation mask",
-		"provenance": "The vessels used for pancreatic tumour staging came from an nnU-Net trained on private data and were revised by radiologists (paper, footnote 1); the origin of each other vessel file is not stated.",
+		"provenance": "The vessels used for pancreatic tumour staging came from an nnU-Net trained on private data and were revised by radiologists (paper, footnote 1). Where the other vessel files came from is not stated.",
 		"evidence": {
 			"sources": [
 				"abdomenatlas3-mask-files",
@@ -1713,7 +1713,7 @@
 			"locator": "mask_only tarballs (file names); paper Figure 2 caption, sections 3.1.1 and 3.1.3, footnote 1 and Appendix C (how each group was made); staging.py type2name (vessel names)",
 			"status": "verified",
 			"verifiedOn": "2026-09-30",
-			"note": "File names and stored values were checked for every case by the Kidney-VLM project on 2026-09-23 (43 files per case, 44 where colon_lesion is present; the log was not kept) and re-checked on the first 232 cases on 2026-09-30."
+			"note": "The Kidney-VLM project checked the file names and stored values for every case on 2026-09-23, and re-checked them on the first 232 cases on 2026-09-30. Each case has 43 files, or 44 where colon_lesion is present. The log of the first check was not kept."
 		}
 	},
 	{
@@ -1749,7 +1749,7 @@
 		"release": "abdomenatlas-3-0-mini",
 		"originalName": "TrainTestIDS split membership",
 		"file": "TrainTestIDS/IID_train.csv, IID_test.csv, OOD_train.csv, OOD_test.csv",
-		"definition": "Which part of each split a scan belongs to, from four ID lists. IID is a random 90/10 split and the one the paper used; OOD keeps hospitals apart and was not used in the paper. Each split covers all 9,262 scans with no overlap.",
+		"definition": "Which part of each split a scan belongs to, from four ID lists. IID is a random 90/10 split and the one the paper used. OOD keeps hospitals apart and was not used in the paper. Each split covers all 9,262 scans with no overlap.",
 		"type": "categorical",
 		"unit": null,
 		"coding": [
