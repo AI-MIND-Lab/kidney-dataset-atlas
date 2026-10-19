@@ -165,3 +165,7 @@ are **not** openly licensed: all rights reserved. Preview images in `public/prev
 dataset they come from, stated in each sample record, and paper figures in `public/figures/` carry their paper's
 CC BY or CC0 licence, credited under each figure. See [LICENSE](LICENSE) for the exact scope and for the
 attribution required for third-party material.
+
+## Funding acknowledgment
+
+This work was supported by the Florida Department of Health, Public Health Research, Biomedical Research Program, through the Florida Cancer Innovation Fund, Grant No. 26C36.
